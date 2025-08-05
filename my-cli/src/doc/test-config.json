@@ -1,0 +1,480 @@
+{
+  "projectName": "test",
+  "path": "I:\\cli\\cli-local\\my-cli",
+  "starUml": "I:\\cli\\cli-local\\my-cli\\src\\features\\parsersMdj\\ressource\\shopify.mdj",
+  "version": "1.0.0",
+  "frameWorks": [
+    {
+      "type": "frontend",
+      "name": "angular",
+      "version": "19.3.*",
+      "port": 4200,
+      "app": "--api",
+      "cliCmd": "ng",
+      "gitBranch": [
+        "main",
+        "dev",
+        "release",
+        "hotfix"
+      ],
+      "gitBranchCheckout": "dev",
+      "initialCommit": "Install angular",
+      "installOptions": {
+        "name": "frontend",
+        "directory": "./nom-du-projet",
+        "skipGit": false,
+        "packageManager": "npm",
+        "language": "typeScript",
+        "commit": true,
+        "force": true,
+        "newProjectRoot": "./",
+        "skipInstall": false,
+        "skipTests": false,
+        "style": "css"
+      },
+      "architecture": [
+        {
+          "_type": "directory",
+          "name": ".doc",
+          "gitIgnore": true,
+          "pathInProject": "./",
+          "children": []
+        },
+        {
+          "_type": "directory",
+          "name": "src",
+          "gitIgnore": true,
+          "pathInProject": "./",
+          "children": [
+            {
+              "_type": "directory",
+              "name": "pages",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "services",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "interfaces",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "components",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            }
+          ]
+        }
+      ],
+      "dependencies": {
+        "packageManager": "composer",
+        "prod": [],
+        "dev": []
+      },
+      "environments": [
+        {
+          "mode": ".env",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        },
+        {
+          "mode": ".env.local",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        },
+        {
+          "mode": "production",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        },
+        {
+          "mode": ".env.test",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        }
+      ],
+      "script": " \n    \"modules\": \"clinode nest:mdj:all gest-project .docs/mcd.mdj --force\",\n    \"fixtures\": \"clinode create:mdj:fixtures gest-project .docs/mcd.mdj src/fixtures --force\",\n    \"seed\": \"ts-node -r tsconfig-paths/register src/seeds/main.seed.ts\",\n    \"plan\": \"clinode create:plan gest-project\"\n  }"
+    },
+    {
+      "type": "backend",
+      "name": "NESTJS",
+      "version": "11",
+      "port": 3000,
+      "app": "--api",
+      "cliCmd": "nest",
+      "gitBranch": [
+        "main",
+        "dev",
+        "release",
+        "hotfix"
+      ],
+      "gitBranchCheckout": "dev",
+      "initialCommit": "Install NESTJS",
+      "installOptions": {
+        "name": "backend",
+        "directory": "./nom-du-projet",
+        "skipGit": false,
+        "packageManager": "npm",
+        "language": "typeScript",
+        "commit": true,
+        "force": true,
+        "newProjectRoot": "./",
+        "skipInstall": false,
+        "skipTests": false,
+        "style": "css"
+      },
+      "architecture": [
+        {
+          "_type": "directory",
+          "name": ".doc",
+          "gitIgnore": true,
+          "pathInProject": "./",
+          "createdAt": "2025-07-08T15:22:38.164Z",
+          "updatedAt": "2025-07-08T15:22:38.164Z",
+          "children": []
+        },
+        {
+          "_type": "directory",
+          "name": "src",
+          "gitIgnore": true,
+          "pathInProject": "./",
+          "createdAt": "2025-07-08T15:22:38.164Z",
+          "updatedAt": "2025-07-08T15:22:38.164Z",
+          "children": [
+            {
+              "_type": "directory",
+              "name": "auth",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "config",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "modules",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "guards",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "interceptors",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "seeds",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "services",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "createdAt": "2025-07-08T15:22:38.164Z",
+              "updatedAt": "2025-07-08T15:22:38.164Z",
+              "children": [
+                {
+                  "_type": "directory",
+                  "name": "mailer",
+                  "gitIgnore": false,
+                  "pathInProject": "services",
+                  "createdAt": "2025-07-08T15:22:38.164Z",
+                  "updatedAt": "2025-07-08T15:22:38.164Z",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": {
+        "packageManager": "npm",
+        "prod": [
+          "@nestjs/swagger",
+          "@nestjs/config",
+          "@nestjs/typeorm",
+          "@nestjs/jwt",
+          "@nestjs/passport",
+          "class-validator",
+          "class-transformer",
+          "passport",
+          "passport-jwt",
+          "bcrypt",
+          "mysql2"
+        ],
+        "dev": [
+          "ts-node",
+          "typescript",
+          "@types/node",
+          "@types/express",
+          "@nestjs/testing",
+          "@types/jsonwebtoken",
+          "typeorm-seeding faker",
+          "@types/bcrypt",
+          "@types/passport-jwt"
+        ]
+      },
+      "environments": [
+        {
+          "mode": "env",
+          "debug": false,
+          "logLevel": "string",
+          "variables": {
+            "appPort": 3000,
+            "corsOrigine": "http://localhost:4200",
+            "databaseConfig": {
+              "type": "mysql",
+              "host": "localhost",
+              "port": 3306,
+              "user": "string",
+              "password": "string",
+              "database": "string",
+              "entities": "dist/**/*.entity{.ts,.js}",
+              "synchronize": true
+            },
+            "mailer": {
+              "MAIL_host": "smtp.gmail.com",
+              "MAIL_port": "587",
+              "MAIL_USER": "ton-email@gmail.com",
+              "MAIL_PASS": "ton-mot-de-passe"
+            },
+            "jwt": {
+              "JWT_SECRET": "super_secret_key",
+              "JWT_EXPIRES_IN": "3600",
+              "JWT_REFRESH_SECRET": "another_secret_key",
+              "JWT_REFRESH_EXPIRES_IN": "86400"
+            }
+          }
+        },
+        {
+          "mode": "development",
+          "debug": false,
+          "logLevel": "string",
+          "variables": {
+            "appPort": 3000,
+            "corsOrigine": "string",
+            "databaseConfig": {
+              "type": "mysql",
+              "host": "localhost",
+              "port": 3306,
+              "user": "string",
+              "password": "string",
+              "database": "string",
+              "entities": "dist/**/*.entity{.ts,.js}",
+              "synchronize": true
+            }
+          }
+        },
+        {
+          "mode": "production",
+          "debug": false,
+          "logLevel": "string",
+          "variables": {
+            "appPort": 3000,
+            "corsOrigine": "string",
+            "databaseConfig": {
+              "type": "mysql",
+              "host": "localhost",
+              "port": 3306,
+              "user": "string",
+              "password": "string",
+              "database": "string",
+              "entities": "dist/**/*.entity{.ts,.js}",
+              "synchronize": true
+            }
+          }
+        },
+        {
+          "mode": "test",
+          "debug": false,
+          "logLevel": "string",
+          "variables": {
+            "appPort": 3000,
+            "corsOrigine": "string",
+            "databaseConfig": {
+              "type": "mysql",
+              "host": "localhost",
+              "port": 3306,
+              "user": "string",
+              "password": "string",
+              "database": "string",
+              "entities": "dist/**/*.entity{.ts,.js}",
+              "synchronize": true
+            }
+          }
+        }
+      ],
+      "script": " \n    \"modules\": \"clinode nest:mdj:all gest-project .docs/mcd.mdj --force\",\n    \"fixtures\": \"clinode create:mdj:fixtures gest-project .docs/mcd.mdj src/fixtures --force\",\n    \"seed\": \"ts-node -r tsconfig-paths/register src/seeds/main.seed.ts\",\n    \"plan\": \"clinode create:plan gest-project\"\n  }"
+    },
+    {
+      "type": "backend",
+      "name": "symfony",
+      "version": "6.4.*",
+      "port": 8001,
+      "app": "--api",
+      "cliCmd": "symfony",
+      "gitBranch": [
+        "main",
+        "dev",
+        "release",
+        "hotfix"
+      ],
+      "gitBranchCheckout": "dev",
+      "initialCommit": "Install symfony",
+      "installOptions": {
+        "name": "backend",
+        "directory": "./nom-du-projet",
+        "skipGit": false,
+        "packageManager": "composer",
+        "language": "php",
+        "commit": true,
+        "force": true,
+        "newProjectRoot": "./",
+        "skipInstall": false,
+        "skipTests": false,
+        "style": "css"
+      },
+      "architecture": [
+        {
+          "_type": "directory",
+          "name": ".doc",
+          "gitIgnore": true,
+          "pathInProject": "./",
+          "children": []
+        },
+        {
+          "_type": "directory",
+          "name": "src",
+          "gitIgnore": true,
+          "pathInProject": "./",
+          "children": [
+            {
+              "_type": "directory",
+              "name": "Dto",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "Service",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "EventListener",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "EventSubscriber",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            },
+            {
+              "_type": "directory",
+              "name": "State",
+              "gitIgnore": false,
+              "pathInProject": "src",
+              "children": []
+            }
+          ]
+        }
+      ],
+      "dependencies": {
+        "packageManager": "composer",
+        "prod": [
+          "doctrine/orm",
+          "symfony/framework-bundle"
+        ],
+        "dev": [
+          "symfony/maker-bundle",
+          "phpunit/phpunit",
+          "symfony/http-client",
+          "symfony/webpack-encore-bundle",
+          "symfony/profiler-pack",
+          "doctrine/doctrine-fixtures-bundle"
+        ]
+      },
+      "environments": [
+        {
+          "mode": ".env",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        },
+        {
+          "mode": ".env.local",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        },
+        {
+          "mode": "production",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        },
+        {
+          "mode": ".env.test",
+          "debug": false,
+          "dataUrl": "http://localhost:3000"
+        }
+      ],
+      "script": " \n    \"modules\": \"clinode nest:mdj:all gest-project .docs/mcd.mdj --force\",\n    \"fixtures\": \"clinode create:mdj:fixtures gest-project .docs/mcd.mdj src/fixtures --force\",\n    \"seed\": \"ts-node -r tsconfig-paths/register src/seeds/main.seed.ts\",\n    \"plan\": \"clinode create:plan gest-project\"\n  }"
+    }
+  ],
+  "databases": [
+    {
+      "type": "mysql",
+      "host": "localhost",
+      "port": 3306,
+      "user": "root",
+      "password": "",
+      "database": "my_database"
+    }
+  ]
+}

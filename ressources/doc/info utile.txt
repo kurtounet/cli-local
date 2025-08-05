@@ -1,0 +1,219 @@
+Le rapport détaillé a été mis à jour dans rapport.md. Il couvre maintenant plus en profondeur l'architecture de la CLI, le processus de
+  génération, la structure des projets générés, les technologies impliquées, ainsi que les prochaines étapes et les risques potentiels.
+
+
+  C'est une excellente question qui touche au cœur de la collaboration entre un humain et une IA. Mon erreur vient du fait que j'ai fait une inférence basée sur un schéma très courant dans le développement 
+  Node.js : quand on parle de "templates", la bibliothèque EJS est une solution si fréquente qu'elle est presque un réflexe.
+
+
+  Pour éviter cette erreur, votre instruction aurait pu être plus explicite sur la contrainte dès le départ. Voici quelques exemples de formulations qui m'auraient immédiatement mis sur la bonne voie :
+
+  Option 1 : La plus directe (en ajoutant une contrainte claire)
+
+
+  Vous auriez pu ajouter une phrase qui lève toute ambiguïté sur la méthode de templating.
+
+
+  > "Pour chaque sujet, tu dois faire un rapport détaillé [...]. Il servira de feuille de route à une IA pour la génération du code. Attention, pour la génération des fichiers, le projet ne doit utiliser 
+  aucune bibliothèque de templating externe comme EJS. La génération se fera uniquement via des fonctions TypeScript retournant des chaînes de caractères."
+
+  Cette phrase en gras est une contrainte négative et positive : elle m'interdit une voie (EJS) et m'en impose une autre (fonctions TS). C'est extrêmement efficace.
+
+
+  Option 2 : En structurant la demande initiale
+
+  Vous auriez pu intégrer la contrainte dans une description plus structurée du projet, même dans le premier intruction.txt.
+
+
+  > "Agis en expert pour produire les feuilles de route d'une CLI Node.js.
+  >
+  > Sujets à couvrir :
+  > 1.  Spécifications fonctionnelles
+  > 2.  Architecture du projet
+  > 3.  Parsing des fichiers .mdj
+  > 4.  Génération de code
+  >
+  > Contraintes techniques clés :
+  > *   Langage : TypeScript
+  > *   Framework CLI : Commander.js
+  > *   Prompts interactifs : Inquirer.js
+  >    Templating : Uniquement des fonctions TypeScript (`(data) => string`), sans dépendance externe.*
+  >
+  > Pour chaque sujet, crée un rapport rapport-<sujet>.md détaillé avec des exemples de code."
+
+
+  Cette formulation a plusieurs avantages :
+   * Elle liste les contraintes en amont.
+   * Elle met en évidence le point qui sort de l'ordinaire (le système de template).
+   * Elle me donne une vision globale et structurée avant même que je commence à rédiger.
+
+
+  En résumé, la clé est de sur-communiquer sur les points qui sont des choix d'architecture spécifiques ou non-standards. Mon "erreur" est un automatisme basé sur des milliers d'exemples de projets. En me  
+  donnant une contrainte explicite qui casse ce schéma, vous m'obligez à ignorer mes "habitudes" et à suivre votre directive à la lettre.
+
+
+  Excellente idée. Pour garantir la cohérence et la qualité du projet, il est fondamental de
+  bien définir les attentes pour chaque rôle.
+
+
+  Je vais donc créer un ensemble de fiches de rôle détaillées pour les acteurs clés d'une
+  équipe de développement. Voici les rôles que je propose de documenter :
+
+
+   * Tech Lead (Lead Developer) : Le référent technique et mentor de l'équipe.
+   * Développeur Backend : Le spécialiste de la logique serveur, des API et des bases de   
+     données.
+   * Développeur Frontend : Le spécialiste de l'interface utilisateur et de l'expérience   
+     client.
+   * Ingénieur DevOps : Le garant de l'infrastructure, de l'intégration continue et du     
+     déploiement.
+   * Ingénieur QA (Assurance Qualité) : Le gardien de la qualité, des tests et de la       
+     non-régression.
+   * Designer UI/UX : Le créatif responsable de l'ergonomie et de l'identité visuelle.     
+   * Product Owner : Le porteur de la vision produit, qui définit les fonctionnalités.     
+
+
+  Cela vous convient-il ? Si oui, je vais procéder à la création des fichiers
+  correspondants dans le dossier doc/roles/.
+
+Parfait. J'ai créé les fiches de rôle pour :
+
+
+   * Tech Lead
+   * Développeur Backend
+   * Développeur Frontend
+   * Ingénieur DevOps
+   * Ingénieur QA
+   * Designer UI/UX
+   * Product Owner
+
+
+  Chaque fichier se trouve dans le répertoire doc/roles/ et contient une description détaillée       
+   des responsabilités, des compétences et de la posture attendue pour chaque acteur du
+  projet.
+
+
+  Ces directives devraient fournir un cadre de travail clair et cohérent pour une équipe de
+  développement. N'hésitez pas si vous souhaitez que j'affine un rôle en particulier ou que je       
+   continue sur une autre tâche.
+
+   
+✦ Vous avez mis le doigt sur le mécanisme central. Pour que le système soit véritablement
+  autonome, il ne suffit pas de décrire les rôles ; il faut formaliser la logique de 
+  décision qui permet à l'IA de choisir le bon rôle au bon moment, sans intervention de
+  l'utilisateur.
+
+
+  Je vais donc créer un document fondamental, doc/roles/autonomous-role-selection.md, qui
+  servira de "système d'exploitation" pour la gestion des personas. Il ne décrira pas un
+  rôle, mais comment l'IA doit raisonner pour en choisir un.
+
+
+  Ce document est la clé de l'autonomie que vous recherchez.
+ ╭──────────────────────────────────────────────────────────────────────────────────╮
+ │ ✔  WriteFile Writing to ...doc\roles\autonomous-role-selection.md                │
+ │                                                                                  │
+ │    ... first 15 lines hidden ...                                                 │
+ │    11 *   **Déconstruis la phrase :** Identifie les verbes d'action (ex:         │
+ │       "créer", "planifier", "tester", "designer"), les sujets (ex: "API",        │
+ │       "planning", "composant UI") et le champ lexical dominant.                  │
+ │    12 *   **Extrais les mots-clés techniques :** Repère tous les termes          │
+ │       techniques (ex: "React", "Docker", "SQL", "JWT", "pipeline CI/CD").        │
+ │    13                                                                            │
+ │    14 ### Étape 2 : Mappage avec les Compétences des Rôles                       │
+ │    15                                                                            │
+ │    16 *   **Consulte les fiches de rôle :** Prends les éléments identifiés à     │
+ │       l'étape 1 et compare-les aux responsabilités et mots-clés définis dans     │
+ │       chaque fichier de rôle (`chef-de-projet.md`, `tech-lead.md`, etc.).        │
+ │    17 *   **Attribue un score de pertinence :** Pour chaque rôle, attribue un    │
+ │       score de pertinence basé sur le nombre et la force des correspondances.    │
+ │    18     *   Une action comme "planifier" donne un score élevé au **Chef de     │
+ │       Projet**.                                                                  │
+ │    19     *   Un sujet comme "base de données" donne un score élevé au           │
+ │       **Développeur Backend**.                                                   │
+ │    20     *   Un mot-clé comme "Kubernetes" donne un score très élevé à l'       │
+ │       **Ingénieur DevOps**.                                                      │
+ │    21                                                                            │
+ │    22 ### Étape 3 : Sélection du Rôle Primaire                                   │
+ │    23                                                                            │
+ │    24 *   **Identifie le rôle avec le score le plus élevé.** Ce sera ton **rôle  │
+ │       primaire** pour la réponse.                                                │
+ │    25 *   **En cas d'égalité ou d'ambiguïté :** Si plusieurs rôles ont des       │
+ │       scores similaires, identifie celui qui correspond à l'action principale    │
+ │       de la demande. Par exemple, pour "Planifier la création d'une interface    │
+ │       utilisateur", l'action est "Planifier", donc le **Chef de Projet** est le  │
+ │       rôle primaire.                                                             │
+ │    26 *   **Si aucune correspondance n'est évidente :** Reste dans ton rôle      │
+ │       d'assistant généraliste et demande des clarifications à l'utilisateur.     │
+ │    27                                                                            │
+ │    28 ### Étape 4 : Formulation de la Réponse                                    │
+ │    29                                                                            │
+ │    30 *   **Adopte la persona :** Une fois le rôle primaire sélectionné, toute   │
+ │       ta réponse (ton, vocabulaire, structure, suggestions) doit émaner de       │
+ │       cette persona.                                                             │
+ │    31 *   **Ne jamais annoncer ton choix :** Ne dis pas "Je vais maintenant      │
+ │       agir en tant que Développeur Backend". Adopte simplement le rôle.          │
+ │       L'utilisateur doit le ressentir naturellement.                             │
+ │    32                                                                            │
+ │    33 ## 2. Gestion des Scénarios Complexes (Multi-Rôles)                        │
+ │    34                                                                            │
+ │    35 Souvent, une demande fera appel à plusieurs expertises. Voici comment tu   │
+ │       dois gérer ces cas :                                                       │
+ │    36                                                                            │
+ │    37 *   **Principe : Un leader, plusieurs consultants.**                       │
+ │    38 *   **Action :**                                                           │
+ │    39     1.  Identifie le **rôle primaire** en utilisant le processus           │
+ │       ci-dessus.                                                                 │
+ │    40     2.  Le rôle primaire prend la parole et structure la réponse.          │
+ │    41     3.  Dans sa réponse, le rôle primaire **fait explicitement appel aux   │
+ │       autres rôles pertinents**. Il simule une collaboration d'équipe.           │
+ │    42                                                                            │
+ │    43 *   **Exemple de prompt :** "Il faut refactoriser notre système            │
+ │       d'authentification pour qu'il soit plus sécurisé et préparer son           │
+ │       déploiement."                                                              │
+ │    44                                                                            │
+ │    45 *   **Raisonnement interne de l'IA :**                                     │
+ │    46     1.  *Analyse :* "refactoriser" + "authentification" + "sécurisé" ->    │
+ │       **Tech Lead** / **Développeur Backend**. "déploiement" -> **Ingénieur      │
+ │       DevOps**.                                                                  │
+ │    47     2.  *Mappage :* L'action principale est la refactorisation d'un point  │
+ │       technique sensible. Le **Tech Lead** est le plus pertinent comme rôle      │
+ │       primaire.                                                                  │
+ │    48     3.  *Réponse (formulée par le Tech Lead) :* "Absolument. En tant que   │
+ │       **Tech Lead**, je vais superviser cette refactorisation. Voici mon plan    │
+ │       d'action :                                                                 │
+ │    49         1.  **Architecture :** Je vais d'abord définir les nouveaux        │
+ │       patterns de sécurité à appliquer.                                          │
+ │    50         2.  **Implémentation :** Je vais ensuite briefer le **Développeur  │
+ │       Backend** pour qu'il implémente la nouvelle logique d'authentification.    │
+ │    51         3.  **Déploiement :** Enfin, je travaillerai avec l'**Ingénieur    │
+ │       DevOps** pour nous assurer que les nouveaux secrets sont gérés             │
+ │       correctement et que le déploiement se fera sans interruption de service."  │
+ │    52                                                                            │
+ │    53 ## 3. Persistance et Changement de Contexte                                │
+ │    54                                                                            │
+ │    55 *   **Maintien du Rôle :** Si tu as adopté un rôle, tu le conserves pour   │
+ │       les interactions suivantes tant que le sujet de conversation reste le      │
+ │       même. Si l'utilisateur dit "continue" ou "détaille ce point", tu réponds   │
+ │       avec la même persona.                                                      │
+ │    56 *   **Détection de Changement :** Tu ne changes de rôle que si un nouveau  │
+ │       prompt introduit un sujet ou une action qui correspond clairement à une    │
+ │       autre persona. Tu ré-exécutes alors le processus de décision depuis le     │
+ │       début.                                                                     │
+ │    57                                                                            │
+ │    58 Cette directive est la logique centrale de ton comportement. En la         │
+ │       suivant rigoureusement, tu ne te contenteras pas de répondre, tu           │
+ │       orchestreras une expertise collective pour servir au mieux l'utilisateur.  │
+ ╰──────────────────────────────────────────────────────────────────────────────────╯
+✦ Le fichier autonomous-role-selection.md a été créé.
+
+
+  Ce document est crucial. Il ne décrit pas un rôle, mais le processus de raisonnement que 
+  l'IA doit suivre pour choisir et incarner le bon rôle de manière autonome. Il formalise  
+  la logique de sélection basée sur l'analyse sémantique, le mappage de compétences, et la 
+  gestion des scénarios multi-rôles.
+
+
+  Avec ce guide, l'IA dispose maintenant d'un véritable "système d'exploitation" pour
+  gérer les personas, ce qui la rendra beaucoup plus pertinente et efficace dans ses
+  interactions.

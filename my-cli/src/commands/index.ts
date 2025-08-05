@@ -20,6 +20,9 @@ import { registerSfSingleCommand } from "./framework/symfony/sf-single.command";
 import { registerSfAllCommand } from "./framework/symfony/sf-all.command";
 import { registerAddPerfixSuffixFileCommand } from "./global/prefix-file.commande";
 import { codeCommand } from "./global/code.command";
+import { registerNitroCommand } from "./framework/nitro/nitro.command";
+import { registerNitroAllCommand } from "./framework/nitro/nitro-all.command";
+import { registerNitroSingleCommand } from "./framework/nitro/nitro-single.command";
 
 /**
  * Registers all commands with the Commander program.
@@ -42,6 +45,10 @@ export function registerAllCommands(program: Command) {
   registerRenameCommand(program);
   registerAddPerfixSuffixFileCommand(program);
 
+  // Nitro
+  registerNitroCommand(program);
+  registerNitroAllCommand(program);
+  registerNitroSingleCommand(program);
   // Nest
   registerNestCommand(program);
   registerNestAllCommand(program);

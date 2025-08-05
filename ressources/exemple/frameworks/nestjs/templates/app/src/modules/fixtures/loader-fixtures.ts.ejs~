@@ -1,0 +1,17 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from '../app.module';
+import { FixturesService } from './fixtures.service';
+
+async function bootstrap() {
+  const app = await NestFactory.createApplicationContext(AppModule);
+  
+  const fixturesService = app.get(FixturesService);
+  await fixturesService.loadAllFixtures();
+
+  await app.close();
+}
+
+bootstrap().catch((error) => {
+  console.error('Error loading fixtures:', error);
+  process.exit(1);
+});

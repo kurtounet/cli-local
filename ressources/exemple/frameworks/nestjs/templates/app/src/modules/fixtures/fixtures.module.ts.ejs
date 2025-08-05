@@ -1,0 +1,18 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { FixturesService } from './fixtures.service';
+<% let entities = new Set(); %>
+<% imports.forEach(module => {
+    let moduleName = module.replace(/,\n?/g, '').trim().replace('Module', '');
+    entities.add(moduleName);
+    let folder = ejsHelpers.pascalToKebab(moduleName);
+_%>
+import { <%= moduleName %> } from '../modules/<%= folder %>/entities/<%= folder %>.entity';
+<% }); %>
+
+@Module({
+imports: [TypeOrmModule.forFeature([ <%= [...entities].join(',\n ') %> ])], // Ajouter toutes les entités concernées
+providers: [FixturesService],
+exports: [FixturesService],
+})
+export class FixturesModule {}

@@ -1,0 +1,94 @@
+[
+    {
+        "_type": "directory",
+        "name": ".clinode",
+        "gitIgnore": true,
+        "pathInProject": "./",
+        "createdAt": "2025-03-26T16:30:07.807Z",
+        "updatedAt": "2025-03-26T16:30:07.807Z",
+        "children": []
+    },
+    {
+        "_type": "directory",
+        "name": ".doc",
+        "gitIgnore": true,
+        "pathInProject": "./",
+        "createdAt": "2025-03-26T16:30:07.807Z",
+        "updatedAt": "2025-03-26T16:30:07.807Z",
+        "children": []
+    },
+    {
+        "_type": "directory",
+        "name": "src",
+        "gitIgnore": true,
+        "pathInProject": "./",
+        "createdAt": "2025-03-26T16:30:07.807Z",
+        "updatedAt": "2025-03-26T16:30:07.807Z",
+        "children": [
+            {
+                "_type": "directory",
+                "name": "config",
+                "gitIgnore": false,
+                "pathInProject": "src",
+                "createdAt": "2025-03-26T16:30:07.807Z",
+                "updatedAt": "2025-03-26T16:30:07.807Z",
+                "children": []
+            },
+            {
+                "_type": "directory",
+                "name": "modules",
+                "gitIgnore": false,
+                "pathInProject": "src",
+                "createdAt": "2025-03-26T16:30:07.807Z",
+                "updatedAt": "2025-03-26T16:30:07.807Z",
+                "children": []
+            },
+            {
+                "_type": "directory",
+                "name": "guards",
+                "gitIgnore": false,
+                "pathInProject": "src",
+                "createdAt": "2025-03-26T16:30:07.807Z",
+                "updatedAt": "2025-03-26T16:30:07.807Z",
+                "children": []
+            },
+            {
+                "_type": "directory",
+                "name": "interceptors",
+                "gitIgnore": false,
+                "pathInProject": "src",
+                "createdAt": "2025-03-26T16:30:07.807Z",
+                "updatedAt": "2025-03-26T16:30:07.807Z",
+                "children": []
+            },
+            {
+                "_type": "directory",
+                "name": "seeds",
+                "gitIgnore": false,
+                "pathInProject": "src",
+                "createdAt": "2025-03-26T16:30:07.807Z",
+                "updatedAt": "2025-03-26T16:30:07.807Z",
+                "children": []
+            },
+            {
+                "_type": "directory",
+                "name": "services",
+                "gitIgnore": false,
+                "pathInProject": "src",
+                "createdAt": "2025-03-26T16:30:07.807Z",
+                "updatedAt": "2025-03-26T16:30:07.807Z",
+                "children": [
+                    {
+                        "_type": "directory",
+                        "name": "mailer",
+                        "gitIgnore": false,
+                        "pathInProject": "services",
+                        "createdAt": "2025-03-26T16:30:07.807Z",
+                        "updatedAt": "2025-03-26T16:30:07.807Z",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    }
+]

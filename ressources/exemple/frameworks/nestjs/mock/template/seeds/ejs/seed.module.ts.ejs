@@ -1,0 +1,28 @@
+// src/seeds/seed.module.ts
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { PrioritySeed } from './priority.seed';
+import { ContextSeed } from './context.seed';
+import { ContextModule } from '@modules/context/context.module';
+import { PriorityModule } from '@modules/priority/priority.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { getTypeOrmConfig } from 'src/config/typeorm.config';
+import { TaskModule } from '@modules/task/task.module';
+import { TaskSeed } from './task.seed';
+
+@Module({
+imports: [
+ConfigModule.forRoot({
+isGlobal: true,
+}),
+TypeOrmModule.forRootAsync({
+inject: [ConfigService],
+useFactory: getTypeOrmConfig,
+}),
+ContextModule,
+PriorityModule,
+TaskModule,
+],
+providers: [ContextSeed, PrioritySeed, TaskSeed],
+})
+export class SeedModule {}

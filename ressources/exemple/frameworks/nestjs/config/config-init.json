@@ -1,0 +1,300 @@
+{
+    "type": "backend",
+    "name": "NestJS",
+    "version": "11.0.0",
+    "cliCmd": "nest",
+    "gitBranch": ["main", "dev", "release", "hotfix"],
+    "gitBranchCheckout": "dev",
+    "installOptions": {
+        "name": "backend",
+        "directory": "./nestjs-app",
+        "skipGit": false,
+        "strict": true,
+        "packageManager": "npm",
+        "language": "TypeScript",
+        "commit": true,
+        "createApplication": true,
+        "defaults": false,
+        "dryRun": false,
+        "experimentalZoneless": false,
+        "force": true,
+        "inlineStyle": false,
+        "inlineTemplate": false,
+        "interactive": true,
+        "minimal": false,
+        "newProjectRoot": "./",
+        "prefix": "app",
+        "routing": true,
+        "serverRouting": false,
+        "skipInstall": false,
+        "skipTests": false,
+        "ssr": true,
+        "standalone": false,
+        "style": "scss",
+        "viewEncapsulation": "None"
+    },
+    "architecture": {
+        "folders": [
+            {
+                "name": "",
+                "files": [
+                    {
+                        "type": "md",
+                        "name": "TODO.md",
+                        "pathTemplate": "I:/labo/clinode/templates/project/todo.md.ejs",
+                        "content": "## TODO\n"
+                    },
+                    {
+                        "type": "environment",
+                        "name": ".env.development",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/dot-env.ejs"
+                    },
+                    {
+                        "type": "enviroment",
+                        "name": ".env.development",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/dot-env.development.ejs"
+                    },
+                    {
+                        "type": "enviroment",
+                        "name": ".env.production",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/dot-env.production.ejs"
+                    },
+                    {
+                        "type": "enviroment",
+                        "name": ".env.test",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/dot-env.test.ejs"
+                    },
+                    {
+                        "type": "app",
+                        "name": "package.json",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/package.json.ejs"
+                    },
+                    {
+                        "type": "app",
+                        "name": "tsconfig.json",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/tsconfig.json.ejs"
+                    }
+                ]
+            },
+            {
+                "name": ".docs",
+                "files": [
+                    {
+                        "type": "md",
+                        "name": "TODO.md",
+                        "pathTemplate": "I:/labo/clinode/templates/project/todo.md.ejs",
+                        "content": "## TODO\n"
+                    }
+                ]
+            },
+            {
+                "name": "src",
+                "files": [
+                    {
+                        "type": "app",
+                        "name": "main.ts",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/main.ts.ejs"
+                    },
+                    {
+                        "type": "app",
+                        "name": "app.module.ts",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/module/app.module.ts.ejs"
+                    },
+                    {
+                        "type": "app",
+                        "name": ".env.development",
+                        "pathTemplate": "I:/labo/clinode/templates/nest/config/dot-env.development.ejs"
+                    }
+                ],
+                "subFolders": [
+                    {
+                        "name": "config",
+                        "files": [
+                            {
+                                "type": "ts",
+                                "name": "typeorm.config.ts",
+                                "pathTemplate": "I:/labo/clinode/templates/nest/type-orm/typeorm.config.ts.ejs"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "modules",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "constants",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "fixtures",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "services",
+                        "files": [],
+                        "subFolders": []
+                    },
+                    {
+                        "name": "authentication",
+                        "files": [],
+                        "subFolders": []
+                    },
+                    {
+                        "name": "mocks",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "pipes",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "security",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "interceptors",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "guards",
+                        "subFolders": []
+                    },
+                    {
+                        "name": "utils",
+                        "subFolders": []
+                    }
+                ]
+            }
+        ]
+    },
+    "dependencies": {
+        "packageManager": "npm",
+        "prod": [
+            "@nestjs/swagger",
+            "@nestjs/typeorm",
+            "@nestjs/config",
+            "@nestjs/mapped-types",
+            "class-transformer",
+            "class-validator",
+            "mysql2"
+        ],
+        "dev": ["typescript", "jest", "@faker-js/faker --save-dev"]
+    },
+    "script": [
+        {
+            "name": "modules",
+            "command": "clinode nest:mdj:all gest-project .docs/mcd.mdj --force"
+        },
+        {
+            "name": "fixtures",
+            "command": "clinode create:mdj:fixtures gest-project .docs/mcd.mdj src/fixtures --force"
+        },
+        {
+            "name": "seed",
+            "command": "ts-node -r tsconfig-paths/register src/seeds/main.seed.ts"
+        },
+        {
+            "name": "plan",
+            "command": "clinode create:plan gest-project"
+        }
+    ],
+    "database": {
+        "type": "mysql",
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "",
+        "database": "my_database",
+        "entities": "./entities/*.ts"
+    },
+    "environments": [
+        {
+            "mode": "env",
+            "debug": false,
+            "logLevel": "string",
+            "variables": {
+                "appPort": "3000",
+                "corsOrigine": "http://localhost:4200",
+                "databaseConfig": {
+                    "dbType": "mysql",
+                    "dbHost": "localhost",
+                    "dbPort": 3306,
+                    "dbUserName": "string",
+                    "dbPassword": "string",
+                    "dbName": "string",
+                    "dbEnities": "dist/**/*.entity{.ts,.js}",
+                    "dbSynchronize": true
+                },
+                "mailer": {
+                    "MAIL_HOST": "smtp.gmail.com",
+                    "MAIL_PORT": "587",
+                    "MAIL_USER": "ton-email@gmail.com",
+                    "MAIL_PASS": "ton-mot-de-passe"
+                },
+                "jwt": {
+                    "JWT_SECRET": "super_secret_key",
+                    "JWT_EXPIRES_IN": "3600",
+                    "JWT_REFRESH_SECRET": "another_secret_key",
+                    "JWT_REFRESH_EXPIRES_IN": "86400"
+                }
+            }
+        },
+        {
+            "mode": "development",
+            "debug": "boolean",
+            "logLevel": "string",
+            "variables": {
+                "appPort": 3000,
+                "corsOrigine": "string",
+                "databaseConfig": {
+                    "dbType": "mysql",
+                    "dbHost": "localhost",
+                    "dbPort": 3306,
+                    "dbUserName": "string",
+                    "dbPassword": "string",
+                    "dbName": "string",
+                    "dbEnities": "dist/**/*.entity{.ts,.js}",
+                    "dbSynchronize": true
+                }
+            }
+        },
+        {
+            "mode": "production",
+            "debug": "boolean",
+            "logLevel": "string",
+            "variables": {
+                "appPort": 3000,
+                "corsOrigine": "string",
+                "databaseConfig": {
+                    "dbType": "mysql",
+                    "dbHost": "localhost",
+                    "dbPort": 3306,
+                    "dbUserName": "string",
+                    "dbPassword": "string",
+                    "dbName": "string",
+                    "dbEnities": "dist/**/*.entity{.ts,.js}",
+                    "dbSynchronize": true
+                }
+            }
+        },
+        {
+            "mode": "test",
+            "debug": "boolean",
+            "logLevel": "string",
+            "variables": {
+                "appPort": 3000,
+                "corsOrigine": "string",
+                "databaseConfig": {
+                    "dbType": "mysql",
+                    "dbHost": "localhost",
+                    "dbPort": 3306,
+                    "dbUserName": "string",
+                    "dbPassword": "string",
+                    "dbName": "string",
+                    "dbEnities": "dist/**/*.entity{.ts,.js}",
+                    "dbSynchronize": true
+                }
+            }
+        }
+    ]
+}

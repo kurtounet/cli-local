@@ -1,0 +1,25 @@
+import { IEntityJson } from '@interfaces/entityJson.interface';
+
+export function testControllerSpecNestjsMock(entity: IEntityJson): string {
+    return `import { Test, TestingModule } from '@nestjs/testing';
+import { ${entity.namePascalCase}Controller } from './${entity.nameKebabCase}.controller';
+import { ${entity.namePascalCase}Service } from './${entity.nameKebabCase}.service';
+
+describe('${entity.namePascalCase}Controller', () => {
+  let controller: ${entity.namePascalCase}Controller;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [${entity.namePascalCase}Controller],
+      providers: [${entity.namePascalCase}Service],
+    }).compile();
+
+    controller = module.get<${entity.namePascalCase}Controller>(${entity.namePascalCase}Controller);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
+`;
+}

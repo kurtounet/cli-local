@@ -1,0 +1,24 @@
+import { ApiProperty } from '@nestjs/swagger';
+<%_
+let imports = new Set();
+entity.columns.forEach(column => {
+  column.validations.forEach(decorators => { 
+    if(decorators!='' && decorators!='@ApiProperty()'){
+     imports.add(decorators.split('(')[0].replace("@", "")); 
+     }     
+  }); 
+}); 
+_%>
+import { <%= Array.from(imports).join(", ") %> } from 'class-validator';
+export class Create<%= entity.namePascalCase %>Dto {
+
+  <% entity.columns.forEach(column => { %>
+    <% if(column.validations.length>0){ %>
+      <% column.validations.forEach(decorators => { %>
+        <%= decorators %> 
+       <% }); %>
+       readonly <%= column.name %>:<%= column.typeTypeScript %>
+      <% }; %>
+  <% }); %> 
+}
+

@@ -1,0 +1,35 @@
+import { Controller, Post, Body, UseGuards, Get, Request } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { ThrottlerGuard } from '@nestjs/throttler';
+@Controller('auth')
+export class AuthController {
+constructor(private readonly authService: AuthService) {}
+
+// Appliquer le Rate Limiting uniquement sur cette route
+@UseGuards(ThrottlerGuard)
+@Post('register')
+async registerUser(@Body() body: { email: string; username: string; password: string }) {
+return this.authService.registerUser(body.email, body.username, body.password);
+}
+
+// Appliquer le Rate Limiting uniquement sur cette route
+@UseGuards(ThrottlerGuard)
+@Post('login')
+async login(@Body() body: { email: string; password: string }) {
+return this.authService.login(body.email, body.password);
+}
+
+// Route pour rafraîchir le token d'accès
+@Post('refresh')
+async refresh(@Body() body: { refreshToken: string }) {
+return this.authService.refreshTokens(body.refreshToken);
+}
+
+// Route protégée
+@UseGuards(JwtAuthGuard)
+@Get('profile')
+getProfile(@Request() req) {
+return req.user;
+}
+}

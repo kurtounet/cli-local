@@ -1,0 +1,57 @@
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from '../users/entities/user.entity';
+import { Product } from '../products/entities/product.entity';
+import { Order } from '../orders/entities/order.entity';
+import * as fs from 'fs';
+import * as path from 'path';
+
+@Injectable()
+export class FixturesService {
+constructor(
+@InjectRepository(User) private readonly userRepository: Repository
+<User>,
+    @InjectRepository(Product) private readonly productRepository: Repository
+    <Product>,
+        @InjectRepository(Order) private readonly orderRepository: Repository
+        <Order>,
+            ) {}
+
+            private loadJSON
+            <T>(fileName: string): T {
+                const filePath = path.join(__dirname, 'mocks', fileName);
+                return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+                }
+
+                async loadUsers() {
+                const users = this.loadJSON
+                <User
+                []>('users.json');
+                await this.userRepository.save(users);
+                console.log('Users loaded');
+                }
+
+                async loadProducts() {
+                const products = this.loadJSON
+                <Product
+                []>('products.json');
+                await this.productRepository.save(products);
+                console.log('Products loaded');
+                }
+
+                async loadOrders() {
+                const orders = this.loadJSON
+                <Order
+                []>('orders.json');
+                await this.orderRepository.save(orders);
+                console.log('Orders loaded');
+                }
+
+                async loadAllFixtures() {
+                await this.loadUsers();
+                await this.loadProducts();
+                await this.loadOrders();
+                console.log('All fixtures loaded successfully.');
+                }
+                }

@@ -1,0 +1,77 @@
+{
+  "name": "ressource",
+  "subFolders": [
+    {
+      "name": "ressource",
+      "subFolders": [
+        {
+          "name": "entities",
+          "files": [
+            {
+              "type": "entity",
+              "name": "ressource.entity.ts",
+              "pathTemplate": "templates/nestjs/entities/ressource.entity.ts.ejs"
+            }
+          ]
+        },
+        {
+          "name": "dto",
+          "files": [
+            {
+              "type": "dto",
+              "name": "ressource.dto.ts",
+              "pathTemplate": "templates/nestjs/dto/ressource.dto.ts.ejs"
+            },
+            {
+              "type": "dto",
+              "name": "create-ressource.dto.ts",
+              "pathTemplate": "templates/nestjs/dto/create-ressource.dto.ts.ejs"
+            },
+            {
+              "type": "dto",
+              "name": "update-ressource.dto.ts",
+              "pathTemplate": "templates/nestjs/dto/update-ressource.dto.ts.ejs"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "type": "module",
+          "name": "ressource.module.ts",
+          "pathTemplate": "templates/nestjs/module/ressource.module.ts.ejs"
+        },
+        {
+          "type": "controller",
+          "name": "ressource.controller.ts",
+          "pathTemplate": "templates/nestjs/controller/ressource.controller.ts.ejs"
+        },
+        {
+          "type": "controller.spec.ts",
+          "name": "ressource.controller.spec.ts",
+          "pathTemplate": "templates/nestjs/controller/ressource.controller.spec.ts.ejs"
+        },
+        {
+          "type": "service",
+          "name": "ressource.service.ts",
+          "pathTemplate": "templates/nestjs/service/ressource.service.ts.ejs"
+        },
+        {
+          "type": "service.spec.ts",
+          "name": "ressource.service.spec.ts",
+          "pathTemplate": "templates/nestjs/service/ressource.service.spec.ts.ejs"
+        },
+        {
+          "type": "mock",
+          "name": "ressource.mock.ts",
+          "pathTemplate": "templates/nestjs/mock/ressource.mock.ts.ejs"
+        },
+        {
+          "type": "fixtures",
+          "name": "ressource.fixtures.ts",
+          "pathTemplate": "templates/nestjs/fixtures/ressource.fixtures.ts.ejs"
+        }
+      ]
+    }
+  ]
+}

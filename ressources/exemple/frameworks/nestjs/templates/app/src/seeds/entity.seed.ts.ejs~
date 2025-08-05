@@ -1,0 +1,18 @@
+
+import { PriorityService } from '@modules/priority/priority.service';
+import { Injectable } from '@nestjs/common';
+import { PRIORITY_DATA } from './data/priority.data';
+
+@Injectable()
+export class PrioritySeed {
+  constructor(private readonly priorityService: PriorityService) {}
+  async run() {
+    const priorities = PRIORITY_DATA;
+
+    for (const priority of priorities) {
+      await this.priorityService.create(priority);
+    }
+
+    console.log('✅ priority seeded');
+  }
+}

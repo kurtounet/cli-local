@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "baseUrl": "./src",
+        "paths": {
+            "@commands/*": ["./commands/*"],
+            "@features/*": ["./features/*"],
+            "@frameworks/*": ["./frameworks/*"],
+            "@constants/*": ["constants/*"],
+            "@helpers/*": ["./helpers/*"],
+            "@mocks/*": ["./mocks/*"],
+            "@interfaces/*": ["./features/parsersMdj/interfaces/*"],
+            "@templates/*": ["./templates/*"],
+            "@services/*": ["./services/*"],
+            "@utils/*": ["./utils/*"],
+            "@utils/file-utils": ["./utils/file-utils"],
+            "@utils/stringUtils": ["./utils/string-utils"],
+            "@utils/execute-command": ["./utils/execute-command"]
+        }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

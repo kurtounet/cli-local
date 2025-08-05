@@ -1,0 +1,98 @@
+import { IDirectory } from "@features/project/interfaces/project.models";
+
+export function ARCHITECTURE_NESTJS_MOCK(): IDirectory[] {
+  return [
+    {
+      _type: "directory",
+      name: ".doc",
+      gitIgnore: true,
+      pathInProject: "./",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      children: [],
+    },
+    {
+      _type: "directory",
+      name: "src",
+      gitIgnore: true,
+      pathInProject: "./",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      children: [
+        {
+          _type: "directory",
+          name: "auth",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [],
+        },
+        {
+          _type: "directory",
+          name: "config",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [],
+        },
+        {
+          _type: "directory",
+          name: "modules",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [],
+        },
+        {
+          _type: "directory",
+          name: "guards",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [],
+        },
+        {
+          _type: "directory",
+          name: "interceptors",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [],
+        },
+        {
+          _type: "directory",
+          name: "seeds",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [],
+        },
+        {
+          _type: "directory",
+          name: "services",
+          gitIgnore: false,
+          pathInProject: "src",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          children: [
+            {
+              _type: "directory",
+              name: "mailer",
+              gitIgnore: false,
+              pathInProject: "services",
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              children: [],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+}

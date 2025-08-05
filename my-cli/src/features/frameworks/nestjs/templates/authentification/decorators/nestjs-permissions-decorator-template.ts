@@ -1,0 +1,36 @@
+export function nestjsAuthPermissionsDecoratorTemplate() {
+  return `import { SetMetadata } from '@nestjs/common';
+
+export const PERMISSIONS_KEY = 'permissions';
+export const RequirePermissions = (...permissions: string[]) => 
+  SetMetadata(PERMISSIONS_KEY, permissions);
+
+// src/auth/guards/permissions.guard.ts
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { PERMISSIONS_KEY } from '../decorators/permissions.decorator';
+
+@Injectable()
+export class PermissionsGuard implements CanActivate {
+  constructor(private reflector: Reflector) {}
+
+  canActivate(context: ExecutionContext): boolean {
+    const requiredPermissions = this.reflector.getAllAndOverride<string[]>(PERMISSIONS_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    
+    if (!requiredPermissions) {
+      return true;
+    }
+    
+    const { user } = context.switchToHttp().getRequest();
+    
+    // Vérifier si l'utilisateur a les permissions requises
+    return requiredPermissions.every((permission) => 
+      user.permissions && user.permissions[permission] === true
+    );
+  }
+}
+`;
+}

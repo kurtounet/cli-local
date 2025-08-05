@@ -1,0 +1,7 @@
+export function symfonyEnvNelmioTemplate() {
+  return `
+###> nelmio/cors-bundle ###
+CORS_ALLOW_ORIGIN='^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'
+###< nelmio/cors-bundle ###
+`;
+}

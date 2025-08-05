@@ -1,0 +1,23 @@
+import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+
+export function nestTestServiceSpecTemplate(entity: IEntityJson): string {
+  return `import { Test, TestingModule } from '@nestjs/testing';
+import { ${entity.namePascalCase}Service } from './${entity.nameKebabCase}.service';
+
+describe('${entity.namePascalCase}Service', () => {
+  let service: ${entity.namePascalCase}Service;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [${entity.namePascalCase}Service],
+    }).compile();
+
+    service = module.get<${entity.namePascalCase}Service>(${entity.namePascalCase}Service);
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
+  });
+});
+`;
+}

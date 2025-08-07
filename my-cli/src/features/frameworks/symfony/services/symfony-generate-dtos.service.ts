@@ -69,7 +69,7 @@ export function getProperty(
   propName: string,
   type: string,
 ) {
-  console.log(entityName, propName, type);
+  // console.log(entityName, propName, type);
   const typeProperty = symfonyGetPropertyType(type);
   return `${INDENT}${INDENT}#[Groups(['${entityName}:read', '${entityName}:write'])]
     private ?${typeProperty} $${snakeToCamel(propName)} = null;

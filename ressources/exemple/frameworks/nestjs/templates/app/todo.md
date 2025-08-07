@@ -60,7 +60,7 @@
   - JavaScript : ⚡📜
   - Angular : 🚀🅰️
   - Vue.js : 🟢🔺
-  - React : ⚛️🔵
+  -react : ⚛️🔵
 - **Backend :** 🏗️🔧⚙️
   - Node.js : 🟢🌱
   - NestJS : 🔥🐦

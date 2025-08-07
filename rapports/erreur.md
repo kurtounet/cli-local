@@ -72,9 +72,9 @@ module '@interfaces/entityJson.model' or its corresponding type declarations.
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/services/generate-files-framework-nest-js.service.ts:2:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/services/generate-files-framework-nest-js.service.ts:2:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-2 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+2 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/frameworks/nestjs/services/generate-files-framework-nest-js.service.ts:11:5 - error TS2304: Cannot find name 'generateTestsNestjs'.
@@ -133,9 +133,9 @@ src/features/frameworks/nestjs/services/generate-test.service.ts:1:29 - error TS
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/services/module-nestjs.service.ts:5:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.     
+src/features/frameworks/nestjs/services/module-nestjs.service.ts:5:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.     
 
-5 import { IEntityJson } from '@features/parsersMdj/interfaces/entityJson.model';
+5 import { IEntityJson } from '@parsersMdj/interfaces/entityJson.model';
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/frameworks/nestjs/services/module-nestjs.service.ts:6:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
@@ -153,67 +153,67 @@ src/features/frameworks/nestjs/services/nest.command.ts:10:32 - error TS2307: Ca
 10 import { executeCommand } from '@utils/execute-command';
                                   ~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/services/nest.command.ts:11:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/services/nest.command.ts:11:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-11 import { IEntityJson } from '@features/parsersMdj/interfaces/entityJson.model';
+11 import { IEntityJson } from '@parsersMdj/interfaces/entityJson.model';
                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/services/relationship-type-orm-nestjs.service.ts:1:48 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/services/relationship-type-orm-nestjs.service.ts:1:48 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson, IRelationshipJson } from "@features/parsersMdj/interfaces/entityJson.model";                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+1 import { IEntityJson, IRelationshipJson } from "@parsersMdj/interfaces/entityJson.model";                                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-src/features/frameworks/nestjs/services/tests-nestjs.service.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.      
+src/features/frameworks/nestjs/services/tests-nestjs.service.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.      
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/account/account.entity.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/account/account.entity.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/controller/controller-nestjs.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/controller/controller-nestjs.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/controller/restfull-controller-nestjs.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/controller/restfull-controller-nestjs.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/controller/test.controller.spec.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/controller/test.controller.spec.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/dto/create-dto.template.ts:1:42 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.  
+src/features/frameworks/nestjs/templates/dto/create-dto.template.ts:1:42 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.  
 
-1 import { IColumnJson, IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";      
+1 import { IColumnJson, IEntityJson } from "@parsersMdj/interfaces/entityJson.model";      
                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
 
-src/features/frameworks/nestjs/templates/dto/entity-dto.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.  
+src/features/frameworks/nestjs/templates/dto/entity-dto.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.  
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/dto/response-dto.template.ts:1:42 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
-1 import { IColumnJson, IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";      
+src/features/frameworks/nestjs/templates/dto/response-dto.template.ts:1:42 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+1 import { IColumnJson, IEntityJson } from "@parsersMdj/interfaces/entityJson.model";      
                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
 
-src/features/frameworks/nestjs/templates/dto/update-dto.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.  
+src/features/frameworks/nestjs/templates/dto/update-dto.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.  
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/entities/entity.template.ts:1:53 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations. 
+src/features/frameworks/nestjs/templates/entities/entity.template.ts:1:53 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations. 
 
-1 import { IColumnJson, IEntityJson, IRelation } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IColumnJson, IEntityJson, IRelation } from "@parsersMdj/interfaces/entityJson.model";
                                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/entities/repository.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/entities/repository.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/frameworks/nestjs/templates/get-nestjs-controller-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.      
@@ -252,44 +252,44 @@ src/features/frameworks/nestjs/templates/get-nestjs-test-template.template.ts:2:
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/frameworks/nestjs/templates/module/entity-module-nest.template.ts:1:29 - error TS2307: 
-Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/seeds/entity-seed-nest.template.ts:1:42 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/seeds/entity-seed-nest.template.ts:1:42 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IColumnJson, IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";      
+1 import { IColumnJson, IEntityJson } from "@parsersMdj/interfaces/entityJson.model";      
                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
 
-src/features/frameworks/nestjs/templates/seeds/seed-nest.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations. 
+src/features/frameworks/nestjs/templates/seeds/seed-nest.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations. 
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/seeds/seed.module.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/seeds/seed.module.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/service/complet-service-nest.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/service/complet-service-nest.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/service/service-nest.template.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+src/features/frameworks/nestjs/templates/service/service-nest.template.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/frameworks/nestjs/templates/service/test.service.spec.template.ts:1:29 - error TS2307: 
-Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/nestjs/templates/service/user-service-nest.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+src/features/frameworks/nestjs/templates/service/user-service-nest.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/frameworks/nuxt/config/nuxt-config-generator.ts:1:27 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
@@ -413,197 +413,197 @@ src/features/frameworks/nuxt/templates/get-nuxt-test-template.template.ts:2:29 -
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-component.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/services/generate-component.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-controller.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/services/generate-controller.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-dto.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/services/generate-dto.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-entity.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/services/generate-entity.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-interface.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/services/generate-interface.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-service.service.ts:1:29 - error TS2307: Cannot find 
+src/react/services/generate-service.service.ts:1:29 - error TS2307: Cannot find 
 module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/services/generate-test.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/services/generate-test.service.ts:1:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 1 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-component-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/templates/get-react-component-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-controller-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.        
+src/react/templates/get-react-controller-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.        
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-dto-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/templates/get-react-dto-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-entity-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/templates/get-react-entity-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-interface-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/templates/get-react-interface-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-service-template.template.ts:2:29 - error TS2307: 
+src/react/templates/get-react-service-template.template.ts:2:29 - error TS2307: 
 Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/react/templates/get-react-test-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+src/react/templates/get-react-test-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/dtos.service.ts:2:42 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+@symfony/services/dtos.service.ts:2:42 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-2 import { IColumnJson, IEntityJson } from '@features/parsersMdj/interfaces/entityJson.model';      
+2 import { IColumnJson, IEntityJson } from '@parsersMdj/interfaces/entityJson.model';      
                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
 
-src/features/frameworks/symfony/services/dtos.service.ts:5:33 - error TS2307: Cannot find module './accessors.service' or its corresponding type declarations.
+@symfony/services/dtos.service.ts:5:33 - error TS2307: Cannot find module './accessors.service' or its corresponding type declarations.
 
 5 import { createAccessors } from './accessors.service';
                                   ~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/dtos.service.ts:6:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
+@symfony/services/dtos.service.ts:6:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
 
 6 import { buildAndsaveFile } from '@utils/file-utils';
                                    ~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/entities.service.ts:4:33 - error TS2307: Cannot find module './accessors.service' or its corresponding type declarations.
+@symfony/services/entities.service.ts:4:33 - error TS2307: Cannot find module './accessors.service' or its corresponding type declarations.
 
 4 import { createAccessors } from './accessors.service';
                                   ~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/entities.service.ts:5:42 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+@symfony/services/entities.service.ts:5:42 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-5 import { IColumnJson, IEntityJson } from '@features/parsersMdj/interfaces/entityJson.model';      
+5 import { IColumnJson, IEntityJson } from '@parsersMdj/interfaces/entityJson.model';      
                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~       
 
-src/features/frameworks/symfony/services/entities.service.ts:6:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
+@symfony/services/entities.service.ts:6:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
 
 6 import { buildAndsaveFile } from '@utils/file-utils';
                                    ~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/fixtures.service.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+@symfony/services/fixtures.service.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-1 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+1 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-databases.service.ts:2:32 - error TS2307: Cannot find module '@utils/execute-command' or its corresponding type declarations.
+@symfony/services/generate-databases.service.ts:2:32 - error TS2307: Cannot find module '@utils/execute-command' or its corresponding type declarations.
 
 2 import { executeCommand } from "@utils/execute-command";
                                  ~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-files-framework-symfony.service.ts:2:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+@symfony/services/generate-files-framework-symfony.service.ts:2:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-2 import { IEntityJson } from "@features/parsersMdj/interfaces/entityJson.model";
+2 import { IEntityJson } from "@parsersMdj/interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-files-framework-symfony.service.ts:11:5 - error TS2304: Cannot find name 'generateTestsNestjs'.
+@symfony/services/generate-files-framework-symfony.service.ts:11:5 - error TS2304: Cannot find name 'generateTestsNestjs'.
 
 11     generateTestsNestjs(framework,  frameworkProjectPath);
        ~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-files-framework-symfony.service.ts:12:5 - error TS2304: Cannot find name 'generateDatabasesNestjs'.
+@symfony/services/generate-files-framework-symfony.service.ts:12:5 - error TS2304: Cannot find name 'generateDatabasesNestjs'.
 
 12     generateDatabasesNestjs(framework, frameworkProjectPath);
        ~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-files-framework-symfony.service.ts:13:5 - error TS2304: Cannot find name 'generateFixturesNestjs'.
+@symfony/services/generate-files-framework-symfony.service.ts:13:5 - error TS2304: Cannot find name 'generateFixturesNestjs'.
 
 13     generateFixturesNestjs(framework,  frameworkProjectPath);
        ~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-files-framework-symfony.service.ts:14:5 - error TS2304: Cannot find name 'loadFixturesNestjs'.
+@symfony/services/generate-files-framework-symfony.service.ts:14:5 - error TS2304: Cannot find name 'loadFixturesNestjs'.
 
 14     loadFixturesNestjs(framework,  frameworkProjectPath);
        ~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-state-proccessor.service.ts:2:29 - error TS2307: Cannot find module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
+@symfony/services/generate-state-proccessor.service.ts:2:29 - error TS2307: Cannot find module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.
 
-2 import { IEntityJson } from '@features/parsersMdj/interfaces/entityJson.model';
+2 import { IEntityJson } from '@parsersMdj/interfaces/entityJson.model';
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/generate-state-proccessor.service.ts:3:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
+@symfony/services/generate-state-proccessor.service.ts:3:34 - error TS2307: Cannot find module '@utils/file-utils' or its corresponding type declarations.
 
 3 import { buildAndsaveFile } from '@utils/file-utils';
                                    ~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/state-provider.service.ts:2:29 - error TS2307: Cannot find 
-module '@features/parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.   
+@symfony/services/state-provider.service.ts:2:29 - error TS2307: Cannot find 
+module '@parsersMdj/interfaces/entityJson.model' or its corresponding type declarations.   
 
-2 import { IEntityJson } from '@features/parsersMdj/interfaces/entityJson.model';
+2 import { IEntityJson } from '@parsersMdj/interfaces/entityJson.model';
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/state-provider.service.ts:3:34 - error TS2307: Cannot find 
+@symfony/services/state-provider.service.ts:3:34 - error TS2307: Cannot find 
 module '@utils/file-utils' or its corresponding type declarations.
 
 3 import { buildAndsaveFile } from '@utils/file-utils';
                                    ~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/services/test.service.ts:2:32 - error TS2307: Cannot find module '@utils/execute-command' or its corresponding type declarations.
+@symfony/services/test.service.ts:2:32 - error TS2307: Cannot find module '@utils/execute-command' or its corresponding type declarations.
 
 2 import { executeCommand } from "@utils/execute-command";
                                  ~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/templates/get-symfony-controller-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.    
+@symfony/templates/get-symfony-controller-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.    
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/templates/get-symfony-dto-template.template.ts:2:29 - error TS2307: 
+@symfony/templates/get-symfony-dto-template.template.ts:2:29 - error TS2307: 
 Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/templates/get-symfony-entity-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.        
+@symfony/templates/get-symfony-entity-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.        
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/templates/get-symfony-interface-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.     
+@symfony/templates/get-symfony-interface-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.     
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/templates/get-symfony-service-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.       
+@symfony/templates/get-symfony-service-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.       
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/frameworks/symfony/templates/get-symfony-test-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
+@symfony/templates/get-symfony-test-template.template.ts:2:29 - error TS2307: Cannot find module '@interfaces/entityJson.model' or its corresponding type declarations.
 
 2 import { IEntityJson } from "@interfaces/entityJson.model";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -706,9 +706,9 @@ src/features/parsersMdj/services/get-relationships.service.ts:7:8 - error TS2307
 7 } from '../interfaces/entityJson.model';
          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/project/services/cli-local-directory.service.ts:4:29 - error TS2307: Cannot find module '@features/parsersMdj/services/getEntities.service' or its corresponding type declarations.        
+src/features/project/services/cli-local-directory.service.ts:4:29 - error TS2307: Cannot find module '@parsersMdj/services/getEntities.service' or its corresponding type declarations.        
 
-4 import { getEntities } from '@features/parsersMdj/services/getEntities.service';
+4 import { getEntities } from '@parsersMdj/services/getEntities.service';
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 src/features/project/services/generate-framework.ts:3:32 - error TS2307: Cannot find module '@utils/execute-command' or its corresponding type declarations.
@@ -721,14 +721,14 @@ src/features/project/services/generate-git-branch.service.ts:2:32 - error TS2307
 2 import { executeCommand } from "@utils/execute-command";
                                  ~~~~~~~~~~~~~~~~~~~~~~~
 
-src/features/project/services/get-files-entities-json.service.ts:1:29 - error TS2307: Cannot find module '@features/parsersMdj/services/getEntities.service' or its corresponding type declarations.    
+src/features/project/services/get-files-entities-json.service.ts:1:29 - error TS2307: Cannot find module '@parsersMdj/services/getEntities.service' or its corresponding type declarations.    
 
-1 import { getEntities } from "@features/parsersMdj/services/getEntities.service";
+1 import { getEntities } from "@parsersMdj/services/getEntities.service";
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-src/services/cli-conf/services/cli-local-directory.service.ts:3:29 - error TS2307: Cannot find module '@features/parsersMdj/services/getEntities.service' or its corresponding type declarations.       
+src/services/cli-conf/services/cli-local-directory.service.ts:3:29 - error TS2307: Cannot find module '@parsersMdj/services/getEntities.service' or its corresponding type declarations.       
 
-3 import { getEntities } from '@features/parsersMdj/services/getEntities.service';
+3 import { getEntities } from '@parsersMdj/services/getEntities.service';
                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -832,34 +832,34 @@ Errors  Files
      1  src/features/frameworks/nuxt/templates/get-nuxt-module-template.template.ts:2
      1  src/features/frameworks/nuxt/templates/get-nuxt-service-template.template.ts:2
      1  src/features/frameworks/nuxt/templates/get-nuxt-test-template.template.ts:2
-     1  src/features/frameworks/react/services/generate-component.service.ts:1
-     1  src/features/frameworks/react/services/generate-controller.service.ts:1
-     1  src/features/frameworks/react/services/generate-dto.service.ts:1
-     1  src/features/frameworks/react/services/generate-entity.service.ts:1
-     1  src/features/frameworks/react/services/generate-interface.service.ts:1
-     1  src/features/frameworks/react/services/generate-service.service.ts:1
-     1  src/features/frameworks/react/services/generate-test.service.ts:1
-     1  src/features/frameworks/react/templates/get-react-component-template.template.ts:2
-     1  src/features/frameworks/react/templates/get-react-controller-template.template.ts:2
-     1  src/features/frameworks/react/templates/get-react-dto-template.template.ts:2
-     1  src/features/frameworks/react/templates/get-react-entity-template.template.ts:2
-     1  src/features/frameworks/react/templates/get-react-interface-template.template.ts:2
-     1  src/features/frameworks/react/templates/get-react-service-template.template.ts:2
-     1  src/features/frameworks/react/templates/get-react-test-template.template.ts:2
-     3  src/features/frameworks/symfony/services/dtos.service.ts:2
-     3  src/features/frameworks/symfony/services/entities.service.ts:4
-     1  src/features/frameworks/symfony/services/fixtures.service.ts:1
-     1  src/features/frameworks/symfony/services/generate-databases.service.ts:2
-     5  src/features/frameworks/symfony/services/generate-files-framework-symfony.service.ts:2      
-     2  src/features/frameworks/symfony/services/generate-state-proccessor.service.ts:2
-     2  src/features/frameworks/symfony/services/state-provider.service.ts:2
-     1  src/features/frameworks/symfony/services/test.service.ts:2
-     1  src/features/frameworks/symfony/templates/get-symfony-controller-template.template.ts:2     
-     1  src/features/frameworks/symfony/templates/get-symfony-dto-template.template.ts:2
-     1  src/features/frameworks/symfony/templates/get-symfony-entity-template.template.ts:2
-     1  src/features/frameworks/symfony/templates/get-symfony-interface-template.template.ts:2      
-     1  src/features/frameworks/symfony/templates/get-symfony-service-template.template.ts:2        
-     1  src/features/frameworks/symfony/templates/get-symfony-test-template.template.ts:2
+     1  src/react/services/generate-component.service.ts:1
+     1  src/react/services/generate-controller.service.ts:1
+     1  src/react/services/generate-dto.service.ts:1
+     1  src/react/services/generate-entity.service.ts:1
+     1  src/react/services/generate-interface.service.ts:1
+     1  src/react/services/generate-service.service.ts:1
+     1  src/react/services/generate-test.service.ts:1
+     1  src/react/templates/get-react-component-template.template.ts:2
+     1  src/react/templates/get-react-controller-template.template.ts:2
+     1  src/react/templates/get-react-dto-template.template.ts:2
+     1  src/react/templates/get-react-entity-template.template.ts:2
+     1  src/react/templates/get-react-interface-template.template.ts:2
+     1  src/react/templates/get-react-service-template.template.ts:2
+     1  src/react/templates/get-react-test-template.template.ts:2
+     3  @symfony/services/dtos.service.ts:2
+     3  @symfony/services/entities.service.ts:4
+     1  @symfony/services/fixtures.service.ts:1
+     1  @symfony/services/generate-databases.service.ts:2
+     5  @symfony/services/generate-files-framework-symfony.service.ts:2      
+     2  @symfony/services/generate-state-proccessor.service.ts:2
+     2  @symfony/services/state-provider.service.ts:2
+     1  @symfony/services/test.service.ts:2
+     1  @symfony/templates/get-symfony-controller-template.template.ts:2     
+     1  @symfony/templates/get-symfony-dto-template.template.ts:2
+     1  @symfony/templates/get-symfony-entity-template.template.ts:2
+     1  @symfony/templates/get-symfony-interface-template.template.ts:2      
+     1  @symfony/templates/get-symfony-service-template.template.ts:2        
+     1  @symfony/templates/get-symfony-test-template.template.ts:2
      1  src/features/frameworks/vue/services/generate-component.service.ts:1
      1  src/features/frameworks/vue/services/generate-dto.service.ts:1
      1  src/features/frameworks/vue/services/generate-entity.service.ts:1

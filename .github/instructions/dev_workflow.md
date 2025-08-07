@@ -177,10 +177,10 @@ Actions:
 
 **Example 3: Existing Project → Strategic Planning**
 ```
-User: "I just initialized Taskmaster on my existing React app. It's getting messy and I want to improve it."
+User: "I just initialized Taskmaster on my existingreact app. It's getting messy and I want to improve it."
 Your Response: "Let me research your codebase to understand the current architecture, then we can create a strategic plan for improvements."
 Actions:
-1. research "Current React app architecture and improvement opportunities" --tree --files=src/
+1. research "Currentreact app architecture and improvement opportunities" --tree --files=src/
 2. Collaborate on improvement PRD based on findings
 3. Create tags for different improvement areas (refactor-components, improve-state-management, etc.)
 4. Keep only major improvement initiatives in master

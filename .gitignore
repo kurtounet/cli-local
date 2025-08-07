@@ -30,4 +30,5 @@ node_modules/
 
 nest-backend/*
 sf-backend/*
+nitro/*
 txt/

@@ -1,8 +1,8 @@
-Alors rédige moi le fichier gmini.md pour que gmini génère une CLI qui va me permettre d'automatiser la création de projets Angular, React, Vue, NestJS, Symfony, Nuxt, Electron
+Alors rédige moi le fichier gmini.md pour que gmini génère une CLI qui va me permettre d'automatiser la création de projets Angular,react, Vue, NestJS, Symfony, Nuxt, Electron
 
 
 ChatGPT a dit :
-Voici un exemple complet de fichier gmini.md (spécialement formaté pour un générateur type Gmini ou similaire) qui décrit une CLI destinée à automatiser la création de projets pour les frameworks Angular, React, Vue, NestJS, Symfony, Nuxt et Electron.
+Voici un exemple complet de fichier gmini.md (spécialement formaté pour un générateur type Gmini ou similaire) qui décrit une CLI destinée à automatiser la création de projets pour les frameworks Angular,react, Vue, NestJS, Symfony, Nuxt et Electron.
 
 Le but est que ce document serve de spécification fonctionnelle + template d’input pour Gmini afin qu’il puisse générer automatiquement la CLI.
 
@@ -15,7 +15,7 @@ Modifier
 name: create-fullstack-project
 description: >
   CLI permettant de générer automatiquement des projets frontend et backend
-  pour Angular, React, Vue, Nuxt, Electron et pour NestJS, Symfony.
+  pour Angular,react, Vue, Nuxt, Electron et pour NestJS, Symfony.
   Elle automatise l'initialisation du projet, la création des dossiers
   et fichiers, la configuration initiale, l'installation des dépendances
   et l'ouverture dans l'éditeur.
@@ -38,7 +38,7 @@ commands:
       - name: --frontend
         alias: -f
         description: >
-          Framework frontend à utiliser (angular, react, vue, nuxt, electron)
+          Framework frontend à utiliser (angular,react, vue, nuxt, electron)
         required: false
       - name: --backend
         alias: -b
@@ -76,7 +76,7 @@ frameworks:
   frontend:
     - name: angular
       init: npx -p @angular/cli ng new {{projectName}} --directory={{path}}/{{projectName}} --style=scss --routing
-    - name: react
+    - name:react
       init: npx create-react-app {{projectName}} --template typescript
     - name: vue
       init: npm create vue@latest {{projectName}}
@@ -160,7 +160,7 @@ Modifier
 name: create-fullstack-project
 description: >
   CLI développée en Node.js avec CommanderJS et InCryer, permettant d'automatiser
-  la création de projets frontend et backend pour Angular, React, Vue, Nuxt, Electron
+  la création de projets frontend et backend pour Angular,react, Vue, Nuxt, Electron
   ainsi que pour NestJS et Symfony. Elle gère l'initialisation, la configuration,
   l'installation des dépendances et l'ouverture dans VSCode.
 
@@ -185,7 +185,7 @@ commands:
         required: true
       - name: --frontend
         alias: -f
-        description: Framework frontend (angular, react, vue, nuxt, electron)
+        description: Framework frontend (angular,react, vue, nuxt, electron)
         required: false
       - name: --backend
         alias: -b
@@ -225,7 +225,7 @@ frameworks:
   frontend:
     - name: angular
       init: npx -p @angular/cli ng new {{projectName}} --directory={{path}}/{{projectName}} --style=scss --routing
-    - name: react
+    - name:react
       init: npx create-react-app {{projectName}} --template typescript
     - name: vue
       init: npm create vue@latest {{projectName}}
@@ -321,7 +321,7 @@ description: >
   CLI développée en Node.js utilisant CommanderJS pour les commandes/options
   et Inquirer pour poser des questions interactives à l'utilisateur.
   Elle permet d'automatiser la création de projets frontend et backend
-  pour Angular, React, Vue, Nuxt, Electron ainsi que pour NestJS et Symfony.
+  pour Angular,react, Vue, Nuxt, Electron ainsi que pour NestJS et Symfony.
   Elle gère l'initialisation, la configuration, l'installation des dépendances
   et l'ouverture dans VSCode.
 
@@ -347,7 +347,7 @@ commands:
         required: false
       - name: --frontend
         alias: -f
-        description: Framework frontend (angular, react, vue, nuxt, electron)
+        description: Framework frontend (angular,react, vue, nuxt, electron)
         required: false
       - name: --backend
         alias: -b
@@ -393,7 +393,7 @@ frameworks:
   frontend:
     - name: angular
       init: npx -p @angular/cli ng new {{projectName}} --directory={{path}}/{{projectName}} --style=scss --routing
-    - name: react
+    - name:react
       init: npx create-react-app {{projectName}} --template typescript
     - name: vue
       init: npm create vue@latest {{projectName}}
@@ -468,7 +468,7 @@ Ce fichier .mdg sera lu par la CLI, et utilisé pour :
 
 générer les entités backend (NestJS ou Symfony),
 
-éventuellement créer les interfaces TypeScript frontend (Angular, React, Vue, Nuxt, Electron),
+éventuellement créer les interfaces TypeScript frontend (Angular,react, Vue, Nuxt, Electron),
 
 générer des fichiers .env, des services, des formulaires, etc.
 
@@ -483,7 +483,7 @@ description: >
   CLI développée en Node.js utilisant CommanderJS pour les commandes/options
   et Inquirer pour poser des questions interactives à l'utilisateur.
   Elle permet d'automatiser la création de projets frontend et backend
-  (Angular, React, Vue, Nuxt, Electron, NestJS, Symfony).
+  (Angular,react, Vue, Nuxt, Electron, NestJS, Symfony).
   Elle s'appuie sur un fichier .mdg pour générer automatiquement
   les entités de base de données.
 
@@ -510,7 +510,7 @@ commands:
         required: false
       - name: --frontend
         alias: -f
-        description: Framework frontend (angular, react, vue, nuxt, electron)
+        description: Framework frontend (angular,react, vue, nuxt, electron)
         required: false
       - name: --backend
         alias: -b
@@ -559,7 +559,7 @@ frameworks:
   frontend:
     - name: angular
       init: npx -p @angular/cli ng new {{projectName}} --directory={{path}}/{{projectName}} --style=scss --routing
-    - name: react
+    - name:react
       init: npx create-react-app {{projectName}} --template typescript
     - name: vue
       init: npm create vue@latest {{projectName}}
@@ -649,7 +649,7 @@ Donc il s’agit d’un fichier .mdj (STAR-UML) — en réalité un fichier JSON
 
 les entités backend (NestJS avec TypeORM ou Symfony avec Doctrine),
 
-les interfaces frontend (Angular, React, Vue, Nuxt, Electron),
+les interfaces frontend (Angular,react, Vue, Nuxt, Electron),
 
 et tout le squelette du CRUD.
 
@@ -688,7 +688,7 @@ commands:
         required: false
       - name: --frontend
         alias: -f
-        description: Framework frontend (angular, react, vue, nuxt, electron)
+        description: Framework frontend (angular,react, vue, nuxt, electron)
         required: false
       - name: --backend
         alias: -b
@@ -739,7 +739,7 @@ frameworks:
   frontend:
     - name: angular
       init: npx -p @angular/cli ng new {{projectName}} --directory={{path}}/{{projectName}} --style=scss --routing
-    - name: react
+    - name:react
       init: npx create-react-app {{projectName}} --template typescript
     - name: vue
       init: npm create vue@latest {{projectName}}
@@ -767,7 +767,7 @@ features:
   - README.md, .env, docker-compose.yml adaptés
   - Initialisation Git
   - Utilisation d’Inquirer pour guider l’utilisateur
-  - Support multi-framework (Angular, React, Vue, Nuxt, Electron + NestJS, Symfony)
+  - Support multi-framework (Angular,react, Vue, Nuxt, Electron + NestJS, Symfony)
 
 examples:
   - cli new -n myapp -f angular -b nestjs -d postgres -s ./schema.mdj -p ./workspace -i -o
@@ -851,7 +851,7 @@ projectStructure:
         description: Contient un sous-dossier par framework frontend ou backend.
         children:
           - angular/
-          - react/
+          -react/
           - vue/
           - nuxt/
           - electron/
@@ -887,7 +887,7 @@ commands:
         required: false
       - name: --frontend
         alias: -f
-        description: Framework frontend (angular, react, vue, nuxt, electron)
+        description: Framework frontend (angular,react, vue, nuxt, electron)
         required: false
       - name: --backend
         alias: -b

@@ -1,11 +1,11 @@
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 
 export function reactGenerateFilesFramework(
   framework: IFramework,
   frameworkProjectPath: string,
   entitiesJsonFile: object,
 ) {
-  // Logique de génération de fichiers react ici
+  // Logique de génération de fichiersreact ici
   // createDependencies(framework, frameworkProjectPath)
-  console.log("Génération de fichiers react");
+  console.log("Génération de fichiersreact");
 }

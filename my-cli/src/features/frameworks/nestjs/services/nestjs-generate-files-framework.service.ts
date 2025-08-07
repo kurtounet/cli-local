@@ -1,6 +1,6 @@
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
-import { installTSDependencies } from "@features/frameworks/_global/service/install-dependencies.service";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
+import { installTSDependencies } from "@features/frameworks/services/install-dependencies.service";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { executeCommand } from "@utils/execute-command";
 
 export function nestjsGenerateFilesFramework(

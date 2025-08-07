@@ -163,7 +163,7 @@ import {
   IColumnJson,
   IEntityJson,
   IRelation,
-} from '@features/parsersMdj/interfaces/entity-json.model';
+} from '@parsersMdj/interfaces/entity-json.model';
 import { snakeToCamel, snakeToKebab, snakeToPascal } from '@utils/convert';
 
 const NEWLINE = '\n';

@@ -1,6 +1,6 @@
-import { IColumnJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 import { DtoType } from "../../constant/nestjs-constants.constant";
-import { DtoProperty } from "../../interfaces/nestjs-dto-property.model";
+import { DtoProperty } from "../../models/nestjs-dto-property.model";
 import { nestjsShouldExcludeColumn } from "./nestjs-should-exclude-column.service";
 import { nestjsGetColumnDecorators } from "./nestjs-get-column-decorators.service";
 import { nestjsGetColumnOptionalStatus } from "./nestjs-get-column-optional-status.service";

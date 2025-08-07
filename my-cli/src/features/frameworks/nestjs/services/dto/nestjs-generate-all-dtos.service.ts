@@ -1,6 +1,6 @@
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { nestjsGenerateDto } from "./nestjs-generate-dto.service";
-import { DtoGeneratorResult } from "../../interfaces/nestjs-dto-generator-result.model";
+import { DtoGeneratorResult } from "../../models/nestjs-dto-generator-result.model";
 import { DtoType } from "../../constant/nestjs-constants.constant";
 
 /**

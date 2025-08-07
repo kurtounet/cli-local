@@ -3,7 +3,7 @@ import { DEPENDENCIES_SYMFONY_MOCK } from "./symfony-dependencies.mock";
 import { ENVIRONMENTS_SYMFONY_MOCK } from "./symfony-environments.mock";
 import { ARCHITECTURE_SYMFONY_MOCK } from "./symfony-architecture.mock";
 import { INSTALL_OPTIONS_SYMFONY_MOCK } from "./symfony-install-options.mock";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 
 export const CONFIG_INIT_SYMFONY: IFramework = {
   type: "backend",

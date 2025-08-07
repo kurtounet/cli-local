@@ -1,4 +1,4 @@
-import { angularServiceGenerator } from '@src/features/angular/services/angularServiceGenerator';
+import { angularServiceGenerator } from '@angular/services/angularServiceGenerator';
 import * as fileUtils from '@src/utils/fileUtils';
 
 describe('Angular Service Generator', () => {

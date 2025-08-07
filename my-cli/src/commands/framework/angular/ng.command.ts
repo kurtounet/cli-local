@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import {  logInfo } from "@utils/logger";
+import { logInfo } from "@utils/logger";
 
 import { pascalCase } from "@utils/stringUtils";
 
@@ -11,6 +11,6 @@ export function registerNgCommand(program: Command) {
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
     .action(async (type: string, name: string, options: { path?: string }) => {
-     logInfo(`Génération d\'un ${type} Angular nommé ${name}...`);       
+      logInfo(`Génération d\'un ${type} Angular nommé ${name}...`);
     });
 }

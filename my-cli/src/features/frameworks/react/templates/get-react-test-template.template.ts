@@ -1,5 +1,5 @@
-// Template pour un test React
-import { IEntityJson } from "@interfaces/entity-json.model";
+// Template pour un testreact
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getReactTestTemplate(entity: IEntityJson) {
   return `import { render, screen } from '@testing-library/react';

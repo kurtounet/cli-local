@@ -1,9 +1,9 @@
 import {
   IFramework,
   IProjectConfig,
-} from "@features/frameworks/_global/interface/framework-commun.model";
-import { updateGitIgnore } from "@features/frameworks/_global/service/git.service";
-import { getEntities } from "@features/parsersMdj/services/get-entities.service";
+} from "@frameworks-models/framework-commun.model";
+import { updateGitIgnore } from "@features/frameworks/services/git.service";
+import { getEntities } from "@parsersMdj/services/get-entities.service";
 import { generateTreeJson } from "@features/tools/tree/services/generate-tree-json.service";
 import * as fs from "fs-extra";
 import * as path from "path";

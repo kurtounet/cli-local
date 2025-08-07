@@ -1,12 +1,12 @@
 import {
   IEntityJson,
   IRelationshipJson,
-} from "@features/parsersMdj/interfaces/entity-json.model";
+} from "@parsersMdj/models/entity-json.model";
 import {
   Iend,
   IERDEntity,
   IERDRelationship,
-} from "@features/parsersMdj/interfaces/mdj.model";
+} from "@parsersMdj/models/mdj.model";
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
 
 export function getRelation(

@@ -2,7 +2,7 @@ import {
   IEntityJson,
   IColumnJson,
   IRelation,
-} from "../interfaces/entity-json.model";
+} from "../models/entity-json.model";
 
 function pluralize(name: string): string {
   if (name.endsWith("y")) {

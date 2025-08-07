@@ -4,7 +4,7 @@ import {
   IColumnJson,
   IEntityJson,
   IRelation,
-} from "@features/parsersMdj/interfaces/entity-json.model";
+} from "@parsersMdj/models/entity-json.model";
 import { buildAndsaveFile } from "@utils/file-utils";
 
 import { snakeToCamel } from "@utils/convert";

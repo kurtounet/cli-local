@@ -1,5 +1,5 @@
 // Template pour un IpcRendere Electron
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Electron IpcRendere template string.

@@ -1,4 +1,4 @@
-import { IRelation } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IRelation } from "@parsersMdj/models/entity-json.model";
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
 
 export function symfonyGenerateRelationShipsService(relationships: IRelation) {

@@ -1,5 +1,5 @@
 // Template pour une interface Nuxt
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getNuxtInterfaceTemplate(entity: IEntityJson) {
   const properties =

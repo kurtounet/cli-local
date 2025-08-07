@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { logInfo  } from "../../utils/logger";
+import { logInfo } from "../../utils/logger";
 /**
  * Registers the 'help' command with the Commander program.
  * This command displays help information for the CLI or a specific command.

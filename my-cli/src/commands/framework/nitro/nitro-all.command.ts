@@ -1,17 +1,17 @@
 import { Command } from "commander";
 import inquirer from "inquirer";
-import {  logInfo } from "@utils/logger";
+import { logInfo } from "@utils/logger";
 
 import { executeCommand } from "@utils/execute-command";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 import {
   getCliLocalConfigFile,
   getCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
- 
+import { IFramework } from "@frameworks-models/framework-commun.model";
+import { nitroGenerateFilesFramework } from "@nitro/services/nitro-generate-files-framework.service";
 
 export function registerNitroAllCommand(program: Command) {
   program
@@ -60,16 +60,12 @@ export function registerNitroAllCommand(program: Command) {
       ]);
       cmd.options.forEach((option: string) => {
         if (option === "Account/Anthentication") {
-           
         }
         if (option === "Anthentication") {
-           
         }
         if (option === "Account") {
-         
         }
         if (option === "Anthentication") {
-         
         }
         if (option === "Bdd") {
           // databaseConfigNitro(frameworkPath, thisProjectConfig);
@@ -116,7 +112,11 @@ export function registerNitroAllCommand(program: Command) {
           }
         }
         if (option === "ALL") {
-          // createEnvironmentsNitro(frameworkPath, thisProjectConfig);
+          nitroGenerateFilesFramework(
+            thisProjectConfig,
+            frameworkPath, 
+            entitiesJsonFile,);
+          /*
           let entitiesModule: Array<{
             entityNamePascalCase: string;
             entityNameKebabCase: string;
@@ -128,9 +128,9 @@ export function registerNitroAllCommand(program: Command) {
                 entityNameKebabCase: `${entity.nameKebabCase}`,
               };
               entitiesModule.push(entityModule);
-              // NitroGenerateFeature(frameworkPath, entity);
+              NitroGenerateFeature(frameworkPath, entity);
             });
-          }
+          }*/
           // createSeederNitro(frameworkPath, entitiesJsonFile);
           // appModuleNitro(frameworkPath, entitiesModule);
           // mainFileNitro(frameworkPath);

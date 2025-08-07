@@ -1,5 +1,5 @@
 // Template pour un DTO Electron
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getElectronDtoTemplate(entity: IEntityJson) {
   const properties =

@@ -1,4 +1,4 @@
-import { IEntityJson, IRelation } from "../interfaces/entity-json.model";
+import { IEntityJson, IRelation } from "../models/entity-json.model";
 
 function getInterfaceImports(
   entity: IEntityJson,

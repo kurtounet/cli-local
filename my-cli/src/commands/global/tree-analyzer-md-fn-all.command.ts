@@ -744,7 +744,7 @@ I can see this is a TypeScript file that implements a CLI command for generating
 
 ### 1. **Expanded Icon Support**
 - Added icons for 50+ file types including programming languages, web technologies, data formats, images, archives, and more
-- Better visual representation with specific icons for React (.tsx/.jsx), Rust (.rs), Swift (.swift), etc.
+- Better visual representation with specific icons forreact (.tsx/.jsx), Rust (.rs), Swift (.swift), etc.
 
 ### 2. **Improved Function Extraction**
 - Enhanced regex patterns for better function detection

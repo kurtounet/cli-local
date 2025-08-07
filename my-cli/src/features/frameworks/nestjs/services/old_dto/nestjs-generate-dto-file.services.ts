@@ -1,4 +1,4 @@
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 import {
   DtoType,
@@ -6,7 +6,7 @@ import {
   NEWLINE,
 } from "../../constant/nestjs-constants.constant";
 import { nestjsGetDtoSuffix } from "./nestjs-get-dto-suffix.service";
-import { DtoProperty } from "../../interfaces/nestjs-dto-property.model";
+import { DtoProperty } from "../../models/nestjs-dto-property.model";
 
 /**
  * Génère le contenu final du fichier DTO.

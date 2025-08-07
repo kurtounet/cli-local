@@ -1,13 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import {
-  IDatabase,
+import {   
   IFramework,
-} from "@features/frameworks/_global/interface/framework-commun.model";
-import { updateGitIgnore } from "@features/frameworks/_global/service/git.service";
+} from "@frameworks-models/framework-commun.model";
+import { updateGitIgnore } from "@features/frameworks/services/git.service";
 import { envLocal, envTest } from "../templates/symfony-environment.template";
 import { buildAndsaveFile } from "@utils/file-utils";
+import { IDatabase } from "@frameworks-models/database.model";
 export function symfonyGenerateEnvironmentsService(
   framework: IFramework,
   frameworkProjectPath: string,

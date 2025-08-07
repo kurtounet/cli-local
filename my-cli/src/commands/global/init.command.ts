@@ -3,11 +3,9 @@ import inquirer from "inquirer";
 import * as fs from "fs-extra";
 import * as path from "path";
 import { logError, logInfo, logSuccess } from "../../utils/logger";
-import {
-  IProjectCommand,
-  IProjectConfig,
-} from "@features/project/interfaces/project.models";
-import { createConfigProject } from "@features/frameworks/_global/service/get-config-frameworks.service";
+ 
+import { createConfigProject } from "@features/frameworks/services/get-config-frameworks.service";
+import { IProjectCommand } from "@models/project-command.model";
 
 /**
  * Registers the 'init' command with the Commander program.
@@ -22,8 +20,8 @@ export function registerInitCommand(program: Command) {
     )
     .action(async () => {
       logInfo("Initialisation d'un nouveau projet...");
-      const frontend = ["Angular", "React", "Vuejs", " no"];
-      const backend = ["Nestjs", "Symfony", "Electron", "FastAPI", " no"];
+      const frontend = ["Angular", "Nuxtjs", "Vuejs", " no"];
+      const backend = ["Nitro", "Nestjs", "Symfony", "Electron", "FastAPI", " no"];
       const database = ["Mysql", "Postgres", "Mongodb", "Sqlite", "no"];
       const answers = await inquirer.prompt<IProjectCommand>([
         {

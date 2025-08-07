@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs";
-import { verifyInGitIgnoreFile } from "@features/frameworks/_global/service/git.service";
+import { verifyInGitIgnoreFile } from "@features/frameworks/services/git.service";
 
 const DEFAULT_IGNORED_FOLDERS = [
   ".angular",

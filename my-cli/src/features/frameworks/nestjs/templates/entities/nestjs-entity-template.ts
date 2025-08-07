@@ -2,9 +2,9 @@ import {
   IColumnJson,
   IEntityJson,
   IRelation,
-} from "@features/parsersMdj/interfaces/entity-json.model";
+} from "@parsersMdj/models/entity-json.model";
 import { nestjsGetColumnsDecoratorsEntity } from "../../services/entity/nestjs-get-columns-decorators-entity-service";
-import { EntityProperty } from "../../interfaces/nestjs-entity-property.model";
+import { EntityProperty } from "../../models/nestjs-entity-property.model";
 import { TYPEORM_DECORATORS } from "../../constant/nestjs-constants.constant";
 import { nestjsGetRelationshipsEntity } from "../../services/entity/nestjs-get-relationships-entity-service";
 import { buildImportStatements } from "../../services/entity/nestjs-build-import-statements-service";

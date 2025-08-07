@@ -1,5 +1,5 @@
 // Template pour un DTO Vue.js
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getVueDtoTemplate(entity: IEntityJson) {
   const properties =

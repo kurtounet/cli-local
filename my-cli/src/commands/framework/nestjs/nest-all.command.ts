@@ -1,34 +1,34 @@
 import { Command } from "commander";
 import inquirer from "inquirer";
-import {  logInfo } from "@utils/logger";
+import { logInfo } from "@utils/logger";
 
 import { executeCommand } from "@utils/execute-command";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 import {
   getCliLocalConfigFile,
   getCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
-import { nestjsCreateAccountModule } from "@features/frameworks/nestjs/services/nestjs-account-service.service";
-import { createAuthNestjs } from "@features/frameworks/nestjs/services/nestjs-auth.service";
+import { IFramework } from "@frameworks-models/framework-commun.model";
+import { nestjsCreateAccountModule } from "@nestjs/services/nestjs-account-service.service";
+import { createAuthNestjs } from "@nestjs/services/nestjs-auth.service";
 import {
   createControllerNestjs,
   createDtoNestjs,
   createEntityNestjs,
-  createModuleEntityNestjs,
+ 
   createSeederNestjs,
   createServiceNestjs,
   nestjsGenerateFeature,
-} from "@features/frameworks/nestjs/services/nestjs-generate-feature.service";
+} from "@nestjs/services/nestjs-generate-feature.service";
 import {
   appModuleNestjs,
   createConfigProjectNestjs,
   createEnvironmentsNestjs,
   databaseConfigNestjs,
   mainFileNestjs,
-} from "@features/frameworks/nestjs/services/nestjs-config-project.service";
+} from "@nestjs/services/nestjs-config-project.service";
 
 export function registerNestAllCommand(program: Command) {
   program

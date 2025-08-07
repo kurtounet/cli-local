@@ -1,11 +1,11 @@
 import {
   IFramework,
   IProjectConfig,
-} from "@features/frameworks/_global/interface/framework-commun.model";
-import { installComposerDependencies } from "@features/frameworks/_global/service/install-dependencies.service";
+} from "@frameworks-models/framework-commun.model";
+import { installComposerDependencies } from "@features/frameworks/services/install-dependencies.service";
 import { symfonyGenerateEnvironmentsService } from "./symfony-generate-environments.service";
 import { symfonyGenerateDtoService } from "./symfony-generate-dtos.service";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { symfonyGenerateEntityService } from "./symfony-generate-entities.service";
 import { executeCommand } from "@utils/execute-command";
 

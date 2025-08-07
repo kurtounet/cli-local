@@ -479,7 +479,7 @@ Tips for getting started:
 
     1 import { snakeToCamel, snakeToPascal } from '@utils/convert';
     2 import { DtoProperty } from '../../interfaces/nestjs-dto-property.model';
-    3 import { IRelation } from '@features/parsersMdj/interfaces/entity-json.model';
+    3 import { IRelation } from '@parsersMdj/interfaces/entity-json.model';
     4 import { nestjsGetRelationDecorators } from './nestjs-get-relation-decorators.service';
     5 
     6 /**
@@ -557,7 +557,7 @@ Tips for getting started:
 
 
 
-    1 import { IEntityJson } from '@features/parsersMdj/interfaces/entity-json.model';        
+    1 import { IEntityJson } from '@parsersMdj/interfaces/entity-json.model';        
     2 import { DtoType } from '../../constant/nestjs-constants.constant';
     3 import { nestjsProcessColumnForDto } from './nestjs-process-column-for-dto.service';    
     4 import { nestjsProcessRelationForDto } from './nestjs-process-relation-for-dto.service';
@@ -612,7 +612,7 @@ Tips for getting started:
 
 
 
-    1 import { IEntityJson } from '@features/parsersMdj/interfaces/entity-json.model';
+    1 import { IEntityJson } from '@parsersMdj/interfaces/entity-json.model';
     2 import { DtoType, INDENT, NEWLINE } from '../../constant/nestjs-constants.constant';
     3 import { nestjsGetDtoSuffix } from './nestjs-get-dto-suffix.service';
     4 import { DtoProperty } from '../../interfaces/nestjs-dto-property.model';

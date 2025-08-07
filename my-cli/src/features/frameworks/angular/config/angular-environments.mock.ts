@@ -1,4 +1,4 @@
-import { IEnvironment } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IEnvironment } from "@frameworks-models/framework-commun.model";
 
 export function ENVIRONMENTS_ANGULAR_MOCK(): IEnvironment[] {
   return [

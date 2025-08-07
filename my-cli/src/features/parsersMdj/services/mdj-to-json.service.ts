@@ -4,7 +4,7 @@ import {
   Entity,
   Property,
   IRelationship,
-} from "../interfaces/schema.model";
+} from "../models/schema.model";
 import { sqlToTypeScript } from "@utils/mapping";
 
 export class MdjToJsonService {

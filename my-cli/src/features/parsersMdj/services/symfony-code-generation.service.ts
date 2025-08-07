@@ -1,4 +1,4 @@
-import { IEntityJson } from "../interfaces/entity-json.model";
+import { IEntityJson } from "../models/entity-json.model";
 import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { generateEntityFileContent } from "./symfony-generate-entity.service";

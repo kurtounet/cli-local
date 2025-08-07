@@ -1,9 +1,9 @@
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
-import { installTSDependencies } from "@features/frameworks/_global/service/install-dependencies.service";
+import { IFramework } from "@frameworks-models/framework-commun.model";
+import { installTSDependencies } from "@features/frameworks/services/install-dependencies.service";
 import {
   updatePackageJson,
   updateTsConfig,
-} from "@features/frameworks/_global/utils";
+} from "@features/frameworks/utils";
 
 export function vueGenerateFilesFramework(
   framework: IFramework,

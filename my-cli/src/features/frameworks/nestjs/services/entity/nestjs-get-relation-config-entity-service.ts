@@ -1,5 +1,5 @@
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
-import { RelationConfig } from "../../interfaces/nestjs-relation-config.model";
+import { RelationConfig } from "../../models/nestjs-relation-config.model";
 
 /**
  * Obtient la configuration pour une relation.

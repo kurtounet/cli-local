@@ -19,4 +19,3 @@ export function logError(message: string) {
 export function logDebug(message: string) {
   console.debug(chalk.magenta`DEBUG -> ${message}`);
 }
- 

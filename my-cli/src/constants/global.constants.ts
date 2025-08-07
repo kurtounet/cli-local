@@ -1,5 +1,17 @@
 // Frameworks list
-export const FRAMEWORKS_LIST = ["angular", "symfony", "electron", "nestjs"];
+export const FRAMEWORKS_LIST_ALL = [
+  "angular",
+  "symfony",
+  "electron",
+  "nestjs",
+  "nitro",
+  "react",
+  "vue",
+  "fastapi",
+  "nuxtjs",
+  "nextjs",
+]
+export const FRAMEWORKS_LIST = ["angular", "symfony", "electron", "nestjs", "nitro", "react", "vue", "fastapi", "nuxtjs", "nextjs"];
 export const FRAMEWORKS_LIST_BACKEND: string[] = ["Angular", "Vuejs"];
 export const FRAMEWORKS_LIST_FRONTEND: string[] = [
   "Nestjs",
@@ -8,12 +20,18 @@ export const FRAMEWORKS_LIST_FRONTEND: string[] = [
   "FastAPI",
 ];
 export const SGBD_LIST = ["Mysql", "Postgres", "Mongodb", "Sqlite"];
-
-export const COMMAND_NESTJS = ["nest", "nestjs"];
+// Frontend
 export const COMMAND_ANGULAR = ["ng", "angular"];
-export const COMMAND_SYMFONY = ["sf", "symfony"];
-export const COMMAND_ELECTRON = ["elec", "electron"];
 export const COMMAND_VUE = ["vue", "vuejs"];
+// Meta
+export const COMMAND_NEXTJS = ["nextjs", "nextjs"];
+export const COMMAND_NUXT = ["nuxt", "nuxtjs"];
+// Backend
+export const COMMAND_NITRO = ["nitro", "nitro"];
+export const COMMAND_ELECTRON = ["elec", "electron"];
+export const COMMAND_SYMFONY = ["sf", "symfony"];
+export const COMMAND_NESTJS = ["nest", "nestjs"];
+export const COMMAND_FASTAPI = ["nest", "nestjs"];
 
 export const ARCHITECTURE_CLI_LOCAL_MOCK: Record<string, string> = {
   dirCliLocal: ".cli-local",

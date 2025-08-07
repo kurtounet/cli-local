@@ -1,4 +1,4 @@
-import { IColumnJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 import { DtoType } from "../../constant/nestjs-constants.constant";
 import { nestjsBuildApiPropertyDecorator } from "./nestjs-build-api-property-decorator.service";
 import { nestjsGetValidationDecorators } from "./nestjs-get-validation-decorators.service";

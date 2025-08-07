@@ -1,8 +1,9 @@
-import { IDatabase } from "@features/frameworks/_global/interface/framework-commun.model";
+ 
 import { symfonyEnvDatabaseUrlTemplate } from "./symfony-env-database-url.template";
 import { symfonyEnvLexikJwtAuthenticationTemplate } from "./bundles/symfony-env-lexik-jwt-authentication.template";
 import { symfonyEnvNelmioTemplate } from "./bundles/symfony-env-nelmio.template";
 import { symfonyEnvMailerTemplate } from "./bundles/symfony-env-mailer.template";
+import { IDatabase } from "@frameworks-models/database.model";
 
 export function env(db: IDatabase) {
   return `

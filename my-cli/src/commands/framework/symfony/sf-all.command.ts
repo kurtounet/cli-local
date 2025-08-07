@@ -1,19 +1,19 @@
 import { Command } from "commander";
- 
+
 import { pascalCase } from "@utils/string-utils";
 import {
   getCliLocalConfigFile,
   getCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import {
   IFramework,
   IProjectConfig,
-} from "@features/frameworks/_global/interface/framework-commun.model";
+} from "@frameworks-models/framework-commun.model";
 import inquirer from "inquirer";
 import { executeCommand } from "@utils/execute-command";
-import { symfonyGenerateFilesFramework } from "@features/frameworks/symfony/services/symfony-generate-files-framework.service";
+import { symfonyGenerateFilesFramework } from "@symfony/services/symfony-generate-files-framework.service";
 import { logInfo } from "@utils/logger";
 
 export function registerSfAllCommand(program: Command) {

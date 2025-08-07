@@ -1,32 +1,29 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
-
-import {
-  IDatabase,
-  IFramework,
-  IProjectConfig,
-} from "@features/frameworks/_global/interface/framework-commun.model";
-import { generateFramework } from "@features/project/services/generate-framework";
-import { generateGitBranch } from "@features/project/services/generate-git-branch.service";
+import { generateFramework } from "@project/services/generate-framework";
+import { generateGitBranch } from "@project/services/generate-git-branch.service";
 import {
   createCliLocalDirectoryNewProject,
   getTreeArchitectureCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
-import { createArchitecture } from "@features/frameworks/_global/service/create-architecture.service";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
-import {
-  updatePackageJson,
-  updateTsConfig,
-} from "@features/frameworks/_global/utils";
+import { createArchitecture } from "@frameworks-services/create-architecture.service";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+
 import { verifiedFileConfig } from "@features/project/services/verify-file-config";
-import { nestjsGenerateFilesFramework } from "@features/frameworks/nestjs/services/nestjs-generate-files-framework.service";
-import { angularGenerateFilesFramework } from "@features/frameworks/angular/services/angular-generate-files-framework.service";
-import { vueGenerateFilesFramework } from "@features/frameworks/vue/services/vue-generate-files-framework.service";
-import { nuxtGenerateFilesFramework } from "@features/frameworks/nuxt/services/nuxt-generate-files-framework.service";
-import { reactGenerateFilesFramework } from "@features/frameworks/react/services/react-generate-files-framework.service";
-import { electronGenerateFilesFramework } from "@features/frameworks/electron/services/electron-generate-files-framework.service";
-import { symfonyGenerateFilesFramework } from "@features/frameworks/symfony/services/symfony-generate-files-framework.service";
+import { nestjsGenerateFilesFramework } from "@nestjs/services/nestjs-generate-files-framework.service";
+
+import { vueGenerateFilesFramework } from "@vue/services/vue-generate-files-framework.service";
+
+
+
+import { symfonyGenerateFilesFramework } from "@symfony/services/symfony-generate-files-framework.service";
+import { nitroGenerateFilesFramework } from "@nitro/services/nitro-generate-files-framework.service";
+import { IDatabase } from "@frameworks-models/database.model";
+import { angularGenerateFilesFramework } from "@angular/services/angular-generate-files-framework.service";
+import { nuxtGenerateFilesFramework } from "@nuxt/services/nuxt-generate-files-framework.service";
+import { electronGenerateFilesFramework } from "@electron/services/electron-generate-files-framework.service";
+import { IFramework, IProjectConfig } from "@frameworks-models/framework-commun.model";
 
 export function registerCreateProjectCommand(program: Command) {
   program
@@ -95,11 +92,7 @@ export function registerCreateProjectCommand(program: Command) {
         if (framework.name) {
           if (!fs.existsSync(`${frameworkProjectPath}`)) {
             //📌 Création du framework
-            generateFramework(
-              framework,
-              frameworkProjectPath,
-              frameworkProjectName,
-            );
+            generateFramework(framework, frameworkProjectPath, frameworkProjectName,);
             //📌 Création des branch Git
             generateGitBranch(framework, frameworkProjectPath);
             //📌 Création du dossier pour la cli locale
@@ -137,11 +130,11 @@ export function registerCreateProjectCommand(program: Command) {
               );
               break;
             case "react":
-              reactGenerateFilesFramework(
-                framework,
-                frameworkProjectPath,
-                entitiesJsonFile,
-              );
+              //  reactGenerateFilesFramework(
+              //     framework,
+              //     frameworkProjectPath,
+              //     entitiesJsonFile,
+              //   );
               break;
             case "nestjs":
               nestjsGenerateFilesFramework(
@@ -160,6 +153,13 @@ export function registerCreateProjectCommand(program: Command) {
             case "symfony":
               symfonyGenerateFilesFramework(
                 configFile,
+                frameworkProjectPath,
+                entitiesJsonFile,
+              );
+              break;
+            case "nitro":
+              nitroGenerateFilesFramework(
+                framework,//configFile,
                 frameworkProjectPath,
                 entitiesJsonFile,
               );

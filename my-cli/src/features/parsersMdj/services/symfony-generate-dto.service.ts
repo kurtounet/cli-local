@@ -1,4 +1,4 @@
-import { IColumnJson, IEntityJson } from "../interfaces/entity-json.model";
+import { IColumnJson, IEntityJson } from "../models/entity-json.model";
 import { getPhpType } from "./symfony-mapping";
 
 function getValidationAssertions(column: IColumnJson): string {

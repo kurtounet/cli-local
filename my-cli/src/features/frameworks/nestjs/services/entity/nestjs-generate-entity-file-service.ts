@@ -1,6 +1,6 @@
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { INDENT, NEWLINE } from "../../constant/nestjs-constants.constant";
-import { EntityProperty } from "../../interfaces/nestjs-entity-property.model";
+import { EntityProperty } from "../../models/nestjs-entity-property.model";
 
 /**
  * Génère le contenu final du fichier d'entité.

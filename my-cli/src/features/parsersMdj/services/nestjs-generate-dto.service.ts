@@ -1,4 +1,4 @@
-import { IColumnJson, IEntityJson } from "../interfaces/entity-json.model";
+import { IColumnJson, IEntityJson } from "../models/entity-json.model";
 
 /**
  * Generates the content for a CreateDTO file.

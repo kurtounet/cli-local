@@ -1,9 +1,8 @@
 import { Command } from "commander";
 
 import { logSuccess, logError, logInfo } from "../../utils/logger";
-import { getEntities } from "@features/parsersMdj/services/get-entities.service";
+import { getEntities } from "@parsersMdj/services/get-entities.service";
 import * as fs from "fs";
- 
 
 /**
  * Registers the 'mdj' command with the Commander program.

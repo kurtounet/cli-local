@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Angular",
+        "type": "frontend",
+        "version": "19.3.*"
+    },
+    {
+        "name": "NestJS",
+        "value": "nestjs"
+    }
+]

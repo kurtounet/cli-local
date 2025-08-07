@@ -1,6 +1,6 @@
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
 import { INDENT, NEWLINE } from "../../constant/nestjs-constants.constant";
-import { IRelation } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IRelation } from "@parsersMdj/models/entity-json.model";
 import { nestjsBuildRelationDecoratorEntity } from "./nestjs-build-relation-decorator-entity-service";
 import { nestjsGetRelationConfigEntity } from "./nestjs-get-relation-config-entity-service";
 /**

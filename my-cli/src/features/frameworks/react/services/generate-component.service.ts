@@ -1,5 +1,5 @@
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function generateReactComponent(entity: IEntityJson) {
-  console.log(`Génération du composant React pour: ${entity.namePascalCase}`);
+  console.log(`Génération du composantreact pour: ${entity.namePascalCase}`);
 }

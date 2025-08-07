@@ -1,6 +1,6 @@
 import path from "path";
 import { symfonyGenerateAccessorsService } from "./symfony-generate-accessors.service";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { buildAndsaveFile } from "@utils/file-utils";
 import { snakeToCamel } from "@utils/convert";
 import { symfonyEntityRepositoryTemplate } from "../templates/symfony-repository.template";

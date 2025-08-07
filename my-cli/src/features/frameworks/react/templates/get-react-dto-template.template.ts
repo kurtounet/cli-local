@@ -1,5 +1,8 @@
-// Template pour un DTO React
-import { IEntityJson } from "@interfaces/entity-json.model";
+// Template pour un DTOreact
+
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+
+ 
 
 export function getReactDtoTemplate(entity: IEntityJson) {
   const properties =

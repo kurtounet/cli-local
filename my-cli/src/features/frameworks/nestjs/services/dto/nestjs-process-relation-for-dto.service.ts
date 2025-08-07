@@ -1,6 +1,6 @@
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
-import { DtoProperty } from "../../interfaces/nestjs-dto-property.model";
-import { IRelation } from "@features/parsersMdj/interfaces/entity-json.model";
+import { DtoProperty } from "../../models/nestjs-dto-property.model";
+import { IRelation } from "@parsersMdj/models/entity-json.model";
 import { nestjsGetRelationDecorators } from "./nestjs-get-relation-decorators.service";
 
 /**

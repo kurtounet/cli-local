@@ -34,7 +34,7 @@ Cette structure vous permet d'utiliser les fonctions individuellement selon vos 
 
 import path from 'path';
 import { symfonyGenerateAccessorsService } from './symfony-generate-accessors.service';
-import { IColumnJson, IEntityJson, IRelation, IRelationshipJson } from '@features/parsersMdj/interfaces/entity-json.model';
+import { IColumnJson, IEntityJson, IRelation, IRelationshipJson } from '@parsersMdj/interfaces/entity-json.model';
 import { buildAndsaveFile } from '@utils/file-utils';
 import { snakeToCamel } from '@utils/convert';
 import { symfonyEntityRepositoryTemplate } from '../templates/symfony-repository.template';

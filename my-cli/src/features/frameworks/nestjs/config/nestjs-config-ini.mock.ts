@@ -3,7 +3,7 @@ import { DEPENDENCIES_NESTJS_MOCK } from "./nestjs-dependencies.mock";
 import { ENVIRONMENTS_NESTJS_MOCK } from "./nestjs-environments.mock";
 import { ARCHITECTURE_NESTJS_MOCK } from "./nestjs-architecture.mock";
 import { INSTALL_OPTIONS_NESTJS_MOCK } from "./nestjs-install-options.mock";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 
 export const CONFIG_INIT_NESTJS: IFramework = {
   type: "backend",

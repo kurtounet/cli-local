@@ -1,5 +1,5 @@
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
-import { RelationshipResult } from "../../interfaces/nestjs-relationship-result.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { RelationshipResult } from "../../models/nestjs-relationship-result.model";
 import { nestjsProcessRelationshipEntity } from "./nestjs-process-relationship-entity-service";
 
 /**

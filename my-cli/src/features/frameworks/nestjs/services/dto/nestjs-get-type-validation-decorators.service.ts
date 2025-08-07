@@ -1,4 +1,4 @@
-import { IColumnJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 import { VALIDATION_DECORATORS } from "../../constant/nestjs-constants.constant";
 
 /**

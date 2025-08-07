@@ -1,5 +1,5 @@
-import { IColumnJson } from "@features/parsersMdj/interfaces/entity-json.model";
-import { ColumnDecoratorsResult } from "../../interfaces/nestjs-column-decorators-result.model";
+import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+import { ColumnDecoratorsResult } from "../../models/nestjs-column-decorators-result.model";
 import { nestjsGetColumnDecoratorEntity } from "./nestjs-get-column-decorator-entity-service";
 
 /**

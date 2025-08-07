@@ -1,5 +1,5 @@
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function generateReactTest(entity: IEntityJson) {
-  console.log(`Génération des tests React pour: ${entity.namePascalCase}`);
+  console.log(`Génération des testsreact pour: ${entity.namePascalCase}`);
 }

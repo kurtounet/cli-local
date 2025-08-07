@@ -1,5 +1,5 @@
 // Template pour une interface Vue.js
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getVueInterfaceTemplate(entity: IEntityJson) {
   const properties =

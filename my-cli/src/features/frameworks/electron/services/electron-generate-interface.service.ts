@@ -1,4 +1,4 @@
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Electron interface.

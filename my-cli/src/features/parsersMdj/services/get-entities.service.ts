@@ -5,8 +5,8 @@ import {
   IRelation,
   IRelationsEntity,
   IRelationshipJson,
-} from "../interfaces/entity-json.model";
-import { IERDEntity, IERDModel, IERDProject } from "../interfaces/mdj.model";
+} from "../models/entity-json.model";
+import { IERDEntity, IERDModel, IERDProject } from "../models/mdj.model";
 import { getColumns } from "./get-colums.service";
 import { getRelationships } from "./get-relationships.service";
 import { IGetEntityJson } from "types/common";

@@ -1,4 +1,6 @@
-import { IDatabase } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IDatabase } from "@frameworks-models/database.model";
+
+ 
 
 export function symfonyEnvDatabaseUrlTemplate(db: IDatabase): string {
   let DATABASE_URL = "";

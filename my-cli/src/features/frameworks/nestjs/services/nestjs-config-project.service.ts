@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 import { buildAndsaveFile } from "@utils/file-utils";
 import { nestjsDatabaseSourceTemplate } from "../templates/database/nestjs-data-source-template";
 import { nestjsAppModuleTemplate } from "../templates/config/nestjs-app-module-template";

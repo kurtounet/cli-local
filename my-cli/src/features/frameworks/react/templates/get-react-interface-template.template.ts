@@ -1,5 +1,5 @@
-// Template pour une interface React
-import { IEntityJson } from "@interfaces/entity-json.model";
+// Template pour une interfacereact
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getReactInterfaceTemplate(entity: IEntityJson) {
   const properties =

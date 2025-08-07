@@ -1,5 +1,5 @@
 // Template pour un service Angular
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Angular service template.

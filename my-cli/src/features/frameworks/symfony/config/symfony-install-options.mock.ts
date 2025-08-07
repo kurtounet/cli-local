@@ -1,4 +1,4 @@
-import { IInstallOptions } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IInstallOptions } from "@frameworks-models/framework-commun.model";
 
 export function INSTALL_OPTIONS_SYMFONY_MOCK(): IInstallOptions {
   return {

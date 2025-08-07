@@ -8,7 +8,7 @@
 // // import { generateEntity } from '@features/nestjs/services/generateEntity.service';
 // import { pascalCase } from '@utils/stringUtils';
 // import { executeCommand } from '@utils/execute-command';
-// import { IEntityJson } from '@features/parsersMdj/interfaces/entity-json.model';
+// import { IEntityJson } from '@parsersMdj/interfaces/entity-json.model';
 // import { createAccountModuleNestjs } from './account-service-nestjs.service';
 // import { createAuthNestjs } from './auth-nestjs.service';
 // import { appModuleNestjs, createConfigProjectNestjs, createEnvironmentsNestjs, databaseConfigNestjs, mainFileNestjs } from './config-project-nestjs.service';

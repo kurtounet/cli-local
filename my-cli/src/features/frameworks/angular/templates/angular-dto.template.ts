@@ -1,5 +1,5 @@
 // Template pour un DTO Angular
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Angular DTO template.

@@ -1,7 +1,7 @@
 export function DEPENDENCIES_ANGULAR_MOCK() {
   return {
-    packageManager: "composer",
+    packageManager: "npm",
     prod: [],
-    dev: [],
+    dev: ["prettier-eslint"],
   };
 }

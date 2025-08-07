@@ -1,4 +1,4 @@
-import { IRelation } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IRelation } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Détermine si un JoinColumn doit être ajouté pour une relation.

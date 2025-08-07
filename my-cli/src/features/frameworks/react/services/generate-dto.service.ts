@@ -1,5 +1,5 @@
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function generateReactDto(entity: IEntityJson) {
-  console.log(`Génération du DTO React pour: ${entity.namePascalCase}`);
+  console.log(`Génération du DTOreact pour: ${entity.namePascalCase}`);
 }

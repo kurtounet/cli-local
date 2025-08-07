@@ -1,4 +1,4 @@
-import { getEntities } from "@features/parsersMdj/services/get-entities.service";
+import { getEntities } from "@parsersMdj/services/get-entities.service";
 import { IGetEntityJson } from "types/common";
 
 export function getFilesEntitiesJson(mdjFile: string): IGetEntityJson | string {

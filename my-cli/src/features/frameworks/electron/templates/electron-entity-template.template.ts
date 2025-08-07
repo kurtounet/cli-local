@@ -1,5 +1,5 @@
 // Template pour une entité Electron
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getElectronEntityTemplate(entity: IEntityJson) {
   const properties =

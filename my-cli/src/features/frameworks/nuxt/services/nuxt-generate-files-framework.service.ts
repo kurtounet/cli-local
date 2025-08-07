@@ -1,4 +1,4 @@
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 
 export function nuxtGenerateFilesFramework(
   framework: IFramework,

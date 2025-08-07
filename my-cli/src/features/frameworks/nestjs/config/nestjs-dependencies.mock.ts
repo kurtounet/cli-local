@@ -1,4 +1,4 @@
-import { IDependencies } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IDependencies } from "@frameworks-models/framework-commun.model";
 
 export function DEPENDENCIES_NESTJS_MOCK(): IDependencies {
   return {

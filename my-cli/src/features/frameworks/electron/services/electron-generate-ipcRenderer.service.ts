@@ -1,7 +1,7 @@
 import { writeFile } from "@utils/file-utils";
 import { pascalCase, slugify } from "@utils/stringUtils";
 import { electronIpcRendererTemplate } from "../templates/electron-ipc-renderer.template";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Electron component.

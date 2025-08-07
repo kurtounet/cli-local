@@ -1,5 +1,5 @@
 // Template pour un test NestJS
-import { IEntityJson } from "@interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function getNestjsTestTemplate(entity: IEntityJson) {
   return `import { Test, TestingModule } from '@nestjs/testing';

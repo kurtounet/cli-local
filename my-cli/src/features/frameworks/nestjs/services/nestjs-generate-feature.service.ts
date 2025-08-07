@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { buildAndsaveFile } from "@utils/file-utils";
 import { nestjsRepositoryTemplate } from "../templates/entities/nestjs-repository-template";
 import { nestjsEntityTemplate } from "../templates/entities/nestjs-entity-template-copy";

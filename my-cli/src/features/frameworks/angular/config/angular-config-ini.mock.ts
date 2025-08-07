@@ -3,7 +3,7 @@ import { DEPENDENCIES_ANGULAR_MOCK } from "./angular-dependencies.mock";
 import { ENVIRONMENTS_ANGULAR_MOCK } from "./angular-environments.mock";
 import { ARCHITECTURE_ANGULAR_MOCK } from "./angular-architecture.mock";
 import { INSTALL_OPTIONS_ANGULAR_MOCK } from "./angular-install-options.mock";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 
 export const CONFIG_INIT_ANGULAR: IFramework = {
   type: "frontend",

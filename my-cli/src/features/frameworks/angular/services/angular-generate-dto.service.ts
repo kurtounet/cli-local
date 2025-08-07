@@ -1,4 +1,4 @@
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { saveFileSync } from "@utils/file-utils";
 /**
  * Generates an Angular DTO (Data Transfer Object).

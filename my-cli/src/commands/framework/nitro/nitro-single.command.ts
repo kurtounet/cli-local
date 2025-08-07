@@ -3,15 +3,14 @@ import inquirer from "inquirer";
 import { logInfo } from "@utils/logger";
 
 import { executeCommand } from "@utils/execute-command";
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 import {
   getCliLocalConfigFile,
   getCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
- 
+import { IFramework } from "@frameworks-models/framework-commun.model";
 
 export function registerNitroSingleCommand(program: Command) {
   program

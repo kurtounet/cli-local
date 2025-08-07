@@ -1,11 +1,11 @@
-import { IEntityJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import {
   DtoType,
   INDENT,
   NEWLINE,
 } from "../../constant/nestjs-constants.constant";
 import { nestjsGetDtoSuffix } from "./nestjs-get-dto-suffix.service";
-import { DtoProperty } from "../../interfaces/nestjs-dto-property.model";
+import { DtoProperty } from "../../models/nestjs-dto-property.model";
 import { pascalToKebab, snakeToKebab } from "@utils/convert";
 
 /**

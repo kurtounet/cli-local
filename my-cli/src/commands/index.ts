@@ -23,13 +23,20 @@ import { codeCommand } from "./global/code.command";
 import { registerNitroCommand } from "./framework/nitro/nitro.command";
 import { registerNitroAllCommand } from "./framework/nitro/nitro-all.command";
 import { registerNitroSingleCommand } from "./framework/nitro/nitro-single.command";
+import { testCommand } from "./global/test.command";
+import { createFrameworkCommand } from "./global/create-framework.command";
+import { createCommandCommand } from "./global/create-command.command";
 
 /**
  * Registers all commands with the Commander program.
  * @param program The Commander program instance.
  */
 export function registerAllCommands(program: Command) {
+  // command for tested
+  testCommand(program);
   // Global
+  createCommandCommand(program);
+  createFrameworkCommand(program);
   registerInitCommand(program);
   registerCreateProjectCommand(program);
   registerHelpCommand(program);

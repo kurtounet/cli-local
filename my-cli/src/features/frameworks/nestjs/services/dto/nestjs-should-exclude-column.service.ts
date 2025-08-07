@@ -1,4 +1,4 @@
-import { IColumnJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Détermine si une colonne doit être exclue du DTO.

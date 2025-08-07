@@ -18,6 +18,5 @@ export function registerNuxtCommand(program: Command) {
 
       const targetPath = options.path || process.cwd();
       const pascalName = pascalCase(name);
- 
     });
 }

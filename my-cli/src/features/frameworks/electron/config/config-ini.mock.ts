@@ -3,7 +3,7 @@ import { DEPENDENCIES_ELECTRON_MOCK } from "./dependencies.mock";
 import { ENVIRONMENTS_ELECTRON_MOCK } from "./environments.mock";
 import { ARCHITECTURE_ELECTRON_MOCK } from "./architecture.mock";
 import { INSTALL_OPTIONS_ELECTRON_MOCK } from "./install-options.mock";
-import { IFramework } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IFramework } from "@frameworks-models/framework-commun.model";
 // const BASE_TEMPLATES = path.resolve(__dirname, '../../ELECTRON/config/');
 export const CONFIG_INIT_ELECTRON: IFramework = {
   type: "backend",

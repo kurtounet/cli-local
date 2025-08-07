@@ -1,6 +1,6 @@
 import { sqlToTypeScript } from "@utils/mapping";
-import type { IColumnJson } from "../interfaces/entity-json.model";
-import type { IERDColumn, IERDEntity } from "../interfaces/mdj.model";
+import type { IColumnJson } from "../models/entity-json.model";
+import type { IERDColumn, IERDEntity } from "../models/mdj.model";
 
 export function getColumns(entity: IERDEntity) {
   if (!Array.isArray(entity.columns)) {

@@ -2,7 +2,7 @@ import {
   IEntityJson,
   IColumnJson,
   IRelation,
-} from "../interfaces/entity-json.model";
+} from "../models/entity-json.model";
 import { snakeToPascal, snakeToCamel } from "@utils/convert";
 import { getPhpType, getDoctrineColumnType } from "./symfony-mapping";
 

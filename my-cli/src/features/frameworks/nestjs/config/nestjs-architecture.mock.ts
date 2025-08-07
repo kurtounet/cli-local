@@ -1,4 +1,4 @@
-import { IDirectory } from "@features/project/interfaces/project.models";
+import { IDirectory } from "@features/project/models/project.models";
 
 export function ARCHITECTURE_NESTJS_MOCK(): IDirectory[] {
   return [

@@ -1,4 +1,4 @@
-import { IColumnJson } from "@features/parsersMdj/interfaces/entity-json.model";
+import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 import {
   SPECIAL_COLUMN_NAMES,
   TYPEORM_DECORATORS,

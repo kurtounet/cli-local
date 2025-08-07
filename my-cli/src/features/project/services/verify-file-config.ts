@@ -1,4 +1,4 @@
-import { IProjectConfig } from "@features/frameworks/_global/interface/framework-commun.model";
+import { IProjectConfig } from "@frameworks-models/framework-commun.model";
 
 export function verifiedFileConfig(config: IProjectConfig): string | boolean {
   // try {

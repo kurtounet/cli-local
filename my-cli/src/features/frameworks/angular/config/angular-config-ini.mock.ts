@@ -19,5 +19,5 @@ export const CONFIG_INIT_ANGULAR: IFramework = {
   architecture: ARCHITECTURE_ANGULAR_MOCK(),
   dependencies: DEPENDENCIES_ANGULAR_MOCK(),
   environments: ENVIRONMENTS_ANGULAR_MOCK(),
-  script: SCRIPTS_ANGULAR_MOCK(),
+  scripts: SCRIPTS_ANGULAR_MOCK(),
 };

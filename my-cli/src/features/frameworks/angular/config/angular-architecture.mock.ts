@@ -3,8 +3,8 @@ export function ARCHITECTURE_ANGULAR_MOCK() {
     {
       _type: "directory",
       name: ".doc",
-      gitIgnore: true,
       pathInProject: "./",
+      gitIgnore: true,
       children: [],
     },
     {
@@ -33,26 +33,22 @@ export function ARCHITECTURE_ANGULAR_MOCK() {
           gitIgnore: false,
           pathInProject: "src",
           children: [...ARCHITECTURE_ANGULAR_DIR_SHARED_MOCK()],
-        }
+        },
       ],
     },
   ];
 }
 export function ARCHITECTURE_ANGULAR_CORE_MOCK() {
-  return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK(),
-  ];
+  return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK()];
 }
 export function ARCHITECTURE_ANGULAR_DIR_SHARED_MOCK() {
-  return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK(),
-  ];
+  return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK()];
 }
 export function ARCHITECTURE_ANGULAR_DIR_FEATURE_MOCK() {
-  return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK(),
-  ];
+  return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK()];
 }
 export function ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK() {
   return [
-
     {
       _type: "directory",
       name: "pages",
@@ -97,4 +93,3 @@ export function ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK() {
     },
   ];
 }
-

@@ -1,12 +1,13 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { saveFileSync } from "@utils/file-utils";
+import { logInfo } from "@utils/logger";
 /**
  * Generates an Angular DTO (Data Transfer Object).
  * @param entity The entity JSON object.
  */
 export function angularGenerateDto(entity: IEntityJson) {
   // Logique de génération de DTO Angular ici
-  console.log(`Génération du DTO Angular pour: ${entity.namePascalCase}`);
+  logInfo(`Génération du DTO Angular pour: ${entity.namePascalCase}`);
   // Exemple: Écrire le contenu du DTO dans un fichier
   //
   //

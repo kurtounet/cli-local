@@ -58,7 +58,7 @@ export function verifyInGitIgnoreFile(
   dir: string,
 ): boolean {
   if (!fs.existsSync(pathGitIgnore)) {
-    // console.log(`Le fichier .gitignore est introuvable dans le dossier du projet !`);
+    // logInfo(`Le fichier .gitignore est introuvable dans le dossier du projet !`);
     return false;
   }
 

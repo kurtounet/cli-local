@@ -52,7 +52,7 @@ export function getCommandFramework(
   } else if (
     COMMAND_NEXTJS.some((cmd) => frameWork.name.toLowerCase().includes(cmd))
   ) {
-    return `npx create-next-app ${projectName}`
+    return `npx create-next-app ${projectName}`;
   } else {
     logError(`❌ Framework frameWork non reconnu.`);
     return `not-found`;

@@ -1,8 +1,6 @@
 import { IDirectory } from "@project/models/project.models";
 import { IDatabase } from "@frameworks-models/database.model";
 
-
-
 export interface IInstallOptions {
   name: string;
   directory?: string;
@@ -71,7 +69,7 @@ export interface IScripts {
 }
 
 export interface IFramework {
-  type: string; // Front | Api | Backend  
+  type: string; // Front | Api | Backend
   name: string;
   version?: string;
   port: number;
@@ -84,7 +82,7 @@ export interface IFramework {
   architecture: IDirectory[];
   dependencies: IDependencies;
   environments: IEnvironment[];
-  script: string;
+  scripts: Record<string, string>;
   databases?: IDatabase[];
 }
 
@@ -107,8 +105,6 @@ export interface IProjectConfig {
   databases?: IDatabase[];
   // environments: IEnvironment[];
 }
-
-
 
 export interface IVariables {
   appPort: number;

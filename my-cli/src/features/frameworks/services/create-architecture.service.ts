@@ -2,11 +2,11 @@ import * as fs from "fs";
 import * as path from "path";
 import { IFramework } from "../models/framework-commun.model";
 import { IDirectory } from "@features/project/models/project.models";
-import { logError } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
 
 export function createFolder(pathFolder: string) {
   if (!fs.existsSync(pathFolder)) {
-    console.log(`📌 Dossier créer : ${pathFolder}`);
+    logInfo(`📌 Dossier créer : ${pathFolder}`);
     fs.mkdirSync(pathFolder);
   }
 }

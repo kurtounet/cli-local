@@ -1,15 +1,16 @@
 import { executeCommand } from "@utils/execute-command";
 import { IDependencies, IFramework } from "../models/framework-commun.model";
+import { logInfo } from "@utils/logger";
 
 export async function installTSDependencies(
   framework: IFramework,
   path: string,
 ) {
   const dependencies: IDependencies = framework.dependencies;
-  console.log(dependencies);
-  console.log("📦 Début de l'installation des dépendances...");
+  logInfo(`npm install ${dependencies}`);
+  logInfo("📦 Début de l'installation des dépendances...");
   framework.dependencies.prod.forEach((dep: string) => {
-    console.log(`npm install ${dep}`);
+    logInfo(`npm install ${dep}`);
     executeCommand(
       `npm install ${dep}`,
       { cwd: path, stdio: "inherit" },
@@ -19,7 +20,7 @@ export async function installTSDependencies(
     );
   });
   framework.dependencies.dev.forEach((dep: string) => {
-    console.log(`npm install --save-dev ${dep}`);
+    logInfo(`npm install --save-dev ${dep}`);
     executeCommand(
       `npm install --save-dev ${dep}`,
       { cwd: path, stdio: "inherit" },
@@ -36,7 +37,7 @@ export async function installTSDependencies(
             installDependencies(dependencies: IDependencies, path: string)
             break;
         case "composer ":
-            console.log("Composer n'est pas supporté pour l'installation des dépendances.");
+            logInfo("Composer n'est pas supporté pour l'installation des dépendances.");
             installComposerDependencies(dependencies: IDependencies, path: string)
             break;
 
@@ -94,7 +95,7 @@ export async function installTSDependencies(
         );
     }
 
-    console.log("✅ Toutes les dépendances ont été installées et commit !");
+    logInfo("✅ Toutes les dépendances ont été installées et commit !");
     */
 }
 
@@ -108,7 +109,7 @@ export function installComposerDependencies(
   path: string,
 ) {
   framework.dependencies.prod.forEach((dep: string) => {
-    console.log(`composer require ${dep}`);
+    logInfo(`composer require ${dep}`);
     executeCommand(
       `composer require ${dep}`,
       { cwd: path, stdio: "inherit" },
@@ -118,7 +119,7 @@ export function installComposerDependencies(
     );
   });
   framework.dependencies.dev.forEach((dep: string) => {
-    console.log(`composer require --dev ${dep}`);
+    logInfo(`composer require --dev ${dep}`);
     executeCommand(
       `composer require --dev ${dep}`,
       { cwd: path, stdio: "inherit" },

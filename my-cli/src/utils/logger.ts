@@ -5,7 +5,7 @@ export function logInfo(message: string) {
 }
 
 export function logSuccess(message: string) {
-  console.log(chalk.green(`SUCCESS -> ${message}`));
+  logInfo(chalk.green(`SUCCESS -> ${message}`));
 }
 
 export function logWarning(message: string) {

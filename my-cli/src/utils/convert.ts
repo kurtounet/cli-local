@@ -62,18 +62,22 @@ export function pascalToCamel(str: string): string {
   if (!str) return str;
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
+export function camelToPascal(str: string): string {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase + str.slice(1);
+}
 
 // 🔥 Exemples d'utilisation
 
-// console.log(snakeToCamel("snake_case_example")); // "snakeCaseExample"
-// console.log(snakeToKebab("snake_case_example")); // "snake-case-example"
-// console.log(snakeToPascal("snake_case_example")); // "SnakeCaseExample"
+// logInfo(snakeToCamel("snake_case_example")); // "snakeCaseExample"
+// logInfo(snakeToKebab("snake_case_example")); // "snake-case-example"
+// logInfo(snakeToPascal("snake_case_example")); // "SnakeCaseExample"
 
-// console.log(camelToSnake("camelCaseExample")); // "camel_case_example"
-// console.log(camelToKebab("camelCaseExample")); // "camel-case-example"
+// logInfo(camelToSnake("camelCaseExample")); // "camel_case_example"
+// logInfo(camelToKebab("camelCaseExample")); // "camel-case-example"
 
-// console.log(kebabToCamel("kebab-case-example")); // "kebabCaseExample"
-// console.log(kebabToPascal("kebab-case-example")); // "KebabCaseExample"
+// logInfo(kebabToCamel("kebab-case-example")); // "kebabCaseExample"
+// logInfo(kebabToPascal("kebab-case-example")); // "KebabCaseExample"
 
-// console.log(pascalToSnake("PascalCaseExample")); // "pascal_case_example"
-// console.log(pascalToKebab("PascalCaseExample")); // "pascal-case-example"
+// logInfo(pascalToSnake("PascalCaseExample")); // "pascal_case_example"
+// logInfo(pascalToKebab("PascalCaseExample")); // "pascal-case-example"

@@ -1,5 +1,6 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import { logError, logInfo, logSuccess } from "./logger";
 
 export async function copyDirectory(src: string, dest: string): Promise<void> {
   try {
@@ -14,15 +15,29 @@ export async function copyDirectory(src: string, dest: string): Promise<void> {
 export async function writeFile(
   filePath: string,
   content: string,
+  successMessage?: string,
+  errorMessage?: string
 ): Promise<void> {
   try {
     await fs.ensureDir(path.dirname(filePath));
-    await fs.writeFile(filePath, content, "utf8");
+    await fs.writeFile(filePath, content, { encoding: "utf8" });
+    //fs.ensureDir(path.dirname(filePath));
+    //fs.writeFile(filePath, content, { encoding: "utf8" });
+    logSuccess(successMessage || `File ${filePath} written successfully`);
   } catch (err: unknown) {
-    console.error(`Error writing file ${filePath}: ${(err as Error).message}`);
+    logError(errorMessage || `Error writing file ${filePath}: ${(err as Error).message}`);
   }
 }
 
+export async function deleteFile(Path: string): Promise<void> {
+  try {
+    await fs.remove(Path);
+  } catch (err: unknown) {
+    throw new Error(
+      `Erreur lors de la suppression du répertoire ${Path}: ${(err as Error).message}`,
+    );
+  }
+}
 export async function deleteDirectory(dirPath: string): Promise<void> {
   try {
     await fs.remove(dirPath);
@@ -93,15 +108,40 @@ export function saveFileSync(filePath: string, content: string): boolean {
   return true;
 }
 
-export function readFileSync(filePath: string): string | null {
+export function readFile(filePath: string): string | null {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Fichier introuvable : ${filePath}`);
+  }
   return fs.readFileSync(filePath, "utf-8");
 }
 
 export function buildAndsaveFile(filePath: string, content: string) {
   try {
     saveFileSync(filePath, content);
-    console.log(filePath);
+    logInfo(filePath);
   } catch (err) {
     console.error("❌ Échec lors de la sauvegarde :", err);
+  }
+}
+/**
+ * Vérifie si un fichier existe.
+ * @param filePath - Chemin du fichier à vérifier.
+ * @returns true si le fichier existe, false sinon.
+ */
+
+export function existFile(filePath: string): boolean {
+  try {
+    return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
+  } catch (err) {
+    console.error("❌  Erreur lors de la vérification du fichier :", err);
+    return false;
+  }
+}
+export function ensureDir(filePath: string) {
+  try {
+    fs.ensureDirSync(filePath);
+  } catch (err) {
+    console.error("❌  Erreur lors de la vérification du fichier :", err);
+    return false;
   }
 }

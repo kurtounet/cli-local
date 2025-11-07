@@ -1,5 +1,12 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import {
+  IFramework,
+  IProjectConfig,
+  IScript,
+} from "./models/framework-commun.model";
+import { IpackageJson } from "./models/package-json.model";
+import { fr } from "zod/v4/locales/index.cjs";
 
 export function getConfigFile(pathFile: string) {
   return JSON.parse(fs.readFileSync(pathFile, "utf8"));
@@ -11,19 +18,14 @@ export function getRandomInt(min: number, max: number) {
 
 export function updateTsConfig(frameworkProjectPath: string): string {
   const tsConfigPath = path.join(frameworkProjectPath, "tsconfig.json");
-
   if (!fs.existsSync(tsConfigPath)) {
     return `Erreur : Aucun fichier tsconfig.json trouvé dans ${frameworkProjectPath}`;
   }
-
   try {
     const tsConfigData = JSON.parse(fs.readFileSync(tsConfigPath, "utf8"));
-
     tsConfigData.compilerOptions = tsConfigData.compilerOptions || {};
-
     // Ajoute ou met à jour baseUrl
     tsConfigData.compilerOptions.baseUrl = ".";
-
     // Ajoute ou met à jour paths
     tsConfigData.compilerOptions.paths =
       tsConfigData.compilerOptions.paths || {};
@@ -44,21 +46,24 @@ export function updateTsConfig(frameworkProjectPath: string): string {
   }
 }
 
-export function updatePackageJson(frameworkProjectPath: string): string {
-  const packageJsonPath = path.join(frameworkProjectPath, "package.json");
+export function updatePackageJson(
+  configFile: IProjectConfig,
+  framework: IFramework,
+  rootPathProjectFramework: string,
+  entitiesJsonFile: object,
+): string {
+  const packageJsonPath = path.join(rootPathProjectFramework, "package.json");
 
   if (!fs.existsSync(packageJsonPath)) {
-    return `Erreur: Aucun fichier package.json trouvé dans ${frameworkProjectPath}`;
+    return `Erreur: Aucun fichier package.json trouvé dans ${rootPathProjectFramework}`;
   }
 
   try {
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
-
-    // Exemple : ajout d'un script personnalisé s'il n'existe pas
-    packageJson.scripts = packageJson.scripts || {};
-    if (!packageJson.scripts["start:custom"]) {
-      packageJson.scripts["start:custom"] = "echo 'Custom start script'";
-    }
+    const packageJson: IpackageJson = JSON.parse(
+      fs.readFileSync(packageJsonPath, "utf8"),
+    );
+    // Ajout des script personnalisé
+    packageJson.scripts = framework.scripts;
 
     fs.writeFileSync(
       packageJsonPath,
@@ -66,7 +71,7 @@ export function updatePackageJson(frameworkProjectPath: string): string {
       "utf8",
     );
 
-    return `${frameworkProjectPath} : package.json mis à jour ✅`;
+    return `${rootPathProjectFramework} : package.json mis à jour ✅`;
   } catch (error) {
     return `Erreur lors de la mise à jour de package.json : ${error}`;
   }
@@ -87,7 +92,6 @@ export function addPropertyToJsonFile(
   if (!fs.existsSync(filePath)) {
     return `Erreur : Le fichier ${filePath} est introuvable.`;
   }
-
   try {
     const jsonData = JSON.parse(fs.readFileSync(filePath, "utf8"));
 

@@ -19,5 +19,5 @@ export const CONFIG_INIT_NITRO: IFramework = {
   architecture: ARCHITECTURE_NITRO_MOCK(),
   dependencies: DEPENDENCIES_NITRO_MOCK(),
   environments: ENVIRONMENTS_NITRO_MOCK(),
-  script: SCRIPTS_NITRO_MOCK(),
+  scripts: SCRIPTS_NITRO_MOCK(),
 };

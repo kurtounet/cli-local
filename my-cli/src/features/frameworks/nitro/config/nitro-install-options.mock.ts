@@ -6,12 +6,11 @@ export function INSTALL_OPTIONS_NITRO_MOCK(): IInstallOptions {
     directory: "./nom-du-projet",
     skipGit: false,
     packageManager: "composer",
-    language: "php",
+    language: "ts",
     commit: true,
     force: true,
     newProjectRoot: "./",
     skipInstall: false,
     skipTests: false,
-    style: "css",
   };
 }

@@ -1,17 +1,24 @@
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import { IFramework, IProjectConfig } from "@frameworks-models/framework-commun.model";
 
 import { logSuccess } from "@utils/logger";
 import { writeFile } from "@utils/file-utils";
-import { nitroConnectionDrizzleTemplate } from "../templates/db/nitro-connection-drizzle-template";
- 
+import { nitroConnectionDrizzleTemplate } from "@features/frameworks/drizzle/templates/nitro-connection-drizzle-template";
+import { drizzleConfigUrlTemplate } from "@features/frameworks/drizzle/templates/drizzle-config-url-template";
 
 export function nitroGenerateConnectionDrizzleService(
   rootServer: string,
-  framework: IFramework,
+  configFile: IProjectConfig,
+  url: boolean = false
 ) {
+  // writeFile(
+  //   `${rootServer}/database/db.ts`,
+  //   drizzleConfigUrlTemplate(configFile),
+  //   `Création de ./server/database/db.ts`
+  // );
+ 
   writeFile(
-    `${rootServer}/utils/db.ts`,
-    nitroConnectionDrizzleTemplate(framework),
-  );
-  logSuccess("./server/utils/db.ts created");
+    `${rootServer}/database/db.ts`,
+    nitroConnectionDrizzleTemplate(configFile),
+    `Création de ./server/database/db.ts`
+  ); 
 }

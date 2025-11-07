@@ -1,0 +1,15 @@
+import { IFramework } from "@frameworks-models/framework-commun.model";
+ 
+import { writeFile } from "@utils/file-utils";
+import { drizzleConfigTemplate } from "../templates/db/drizzle-config-template";
+
+export function drizzleGenerateConfigService(
+  projectPath: string,
+  framework: IFramework,
+) {
+  writeFile(
+    `${projectPath}/drizzle.config.ts`,
+    drizzleConfigTemplate(framework),
+  ); 
+  return "generate Config Drizzle fileService";
+}

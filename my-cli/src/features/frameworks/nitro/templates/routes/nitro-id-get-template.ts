@@ -1,47 +1,34 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function nitroIdGetTemplate(entity: IEntityJson): string {
-  return `// server/api/tasks/[id].get.ts
- 
-import { task} from '~~/server/database/schemas/schema'
-import { eq } from 'drizzle-orm'
-
-import { db } from '~~/server/utils/db';
+  return `//server/api/${entity.nameCamelCase}s/[id].get.ts
+import { defineEventHandler, getRouterParam, } from 'h3'
+import { ${entity.namePascalCase}Service } from './${entity.nameKebabCase}.service'
+import { handleApiError } from '~~/server/utils/handle-api-error.utils'
 
 export default defineEventHandler(async (event) => {
+  const ${entity.nameCamelCase}Service = new ${entity.namePascalCase}Service()
+
+  const idParam = getRouterParam(event, 'id')
+  const id = Number(idParam)
+
+  if (!idParam || id <= 0 || Number.isNaN(id)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Bad Request',
+      message: 'The provided ID is invalid.',
+    })    
+  }
   try {
-    const id = getRouterParam(event, 'id')
-    
-    if (!id || isNaN(Number(id))) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'ID invalide'
-      })
-    }
-
-    const existingTask = await db.select().from(task)
-      .where(eq(task.id, Number(id)))
-      .limit(1)
-
-    if (existingTask.length === 0) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: 'Tâche non trouvée'
-      })
-    }
-
+    const ${entity.nameCamelCase} = await ${entity.nameCamelCase}Service.findById(id)
+    // Evite d’exposer des champs sensibles
+    // const { password, ...safeUser } = ${entity.nameCamelCase} as any
     return {
       success: true,
-      data: existingTask[0]
+      data: ${entity.nameCamelCase},
     }
-  } catch (error) {
-console.error('Erreur lors de la récupération la tâche:', error);
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Erreur lors de la  récupération la tâche'
-    });
-
-     
+  } catch (error: unknown) {
+    handleApiError(error)
   }
 })
 `;

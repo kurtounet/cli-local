@@ -14,29 +14,25 @@ export function nitroGenerateRoutesEntityService(
 ) {
   logInfo(`Génération des routes pour: ${entity.namePascalCase}`);
   writeFile(
-    `${rootServerApi}/${entity.nameKebabCase}/index.get.ts`,
+    `${rootServerApi}/${entity.nameKebabCase}s/index.get.ts`,
     nitroIndexGetTemplate(entity),
   );
   writeFile(
-    `${rootServerApi}/${entity.nameKebabCase}/index.post.ts`,
+    `${rootServerApi}/${entity.nameKebabCase}s/index.post.ts`,
     nitroIndexPostTemplate(entity),
   );
   writeFile(
-    `${rootServerApi}/${entity.nameKebabCase}/[id].get.ts`,
+    `${rootServerApi}/${entity.nameKebabCase}s/[id].get.ts`,
     nitroIdGetTemplate(entity),
-  );
+  );  
   writeFile(
-    `${rootServerApi}/${entity.nameKebabCase}/[id].put.ts`,
-    nitroIdPutTemplate(entity),
-  );
-  writeFile(
-    `${rootServerApi}/${entity.nameKebabCase}/[id].patch.ts`,
+    `${rootServerApi}/${entity.nameKebabCase}s/[id].patch.ts`,
     nitroIdPatchTemplate(entity),
   );
   writeFile(
-    `${rootServerApi}/${entity.nameKebabCase}/[id].delete.ts`,
+    `${rootServerApi}/${entity.nameKebabCase}s/[id].delete.ts`,
     nitroIdDeleteTemplate(entity),
   );
 
-  console.log(`Génération du contrôleur Nitro pour: ${entity.namePascalCase}`);
+  logInfo(`Génération du contrôleur Nitro pour: ${entity.namePascalCase}`);
 }

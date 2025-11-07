@@ -1,5 +1,5 @@
-import { SCRIPTS_NUXT_MOCK } from "./nuxt-scripts.mock"; 
-import { ARCHITECTURE_NUXT_MOCK } from "./nuxt-architecture.mock"; 
+import { SCRIPTS_NUXT_MOCK } from "./nuxt-scripts.mock";
+import { ARCHITECTURE_NUXT_MOCK } from "./nuxt-architecture.mock";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { INSTALL_OPTIONS_NUXT_MOCK } from "./nuxt-install-options.mock";
 import { ENVIRONMENTS_NUXT_MOCK } from "./nuxt-environments.mock";
@@ -19,5 +19,5 @@ export const CONFIG_INIT_NUXT: IFramework = {
   architecture: ARCHITECTURE_NUXT_MOCK(),
   dependencies: DEPENDENCIES_NUXT_MOCK(),
   environments: ENVIRONMENTS_NUXT_MOCK(),
-  script: SCRIPTS_NUXT_MOCK(),
+  scripts: SCRIPTS_NUXT_MOCK(),
 };

@@ -5,7 +5,7 @@ export function getPageComponentTemplate(name: string): string {
   </div>
 </template>
 
-<script lang="ts">
+<script setuplang="ts">
 import Vue from 'vue';
 
 export default Vue.extend({

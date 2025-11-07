@@ -1,0 +1,8 @@
+// layers/core-ui/nuxt.config.ts
+// export default defineNuxtConfig({
+//   extends: [],
+//   css: ['~/assets/css/main.css'],
+//   modules: ['@pinia/nuxt'],
+//   components: [{ path: './components', pathPrefix: false }],
+//   plugins: [{ src: './plugins/dayjs' }],
+// });

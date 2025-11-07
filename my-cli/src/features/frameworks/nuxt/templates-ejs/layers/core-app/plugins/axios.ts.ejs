@@ -1,0 +1,21 @@
+import axios from 'axios';
+
+export default defineNuxtPlugin((nuxtApp) => {
+  const config = useRuntimeConfig();
+  const instance = axios.create({ baseURL: config.public.apiBase });
+
+  instance.interceptors.request.use((req) => {
+    const token = useCookie('token').value;
+    if (token) req.headers.Authorization = `Bearer ${token}`;
+    return req;
+  });
+
+  return { provide: { axios: instance } };
+});
+
+declare module '#app' {
+  interface NuxtApp { $axios: ReturnType<typeof axios.create>; }
+}
+declare module 'vue' {
+  interface ComponentCustomProperties { $axios: ReturnType<typeof axios.create>; }
+}

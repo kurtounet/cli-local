@@ -1,0 +1,13 @@
+export default defineNuxtConfig({
+  extends: [
+    '../../layers/core-ui',
+    '../../layers/core-app',
+    '../../layers/auth',
+  ],
+  runtimeConfig: {
+    public: {
+      appName: 'My SaaS',
+      apiBase: '/api',
+    },
+  },
+});

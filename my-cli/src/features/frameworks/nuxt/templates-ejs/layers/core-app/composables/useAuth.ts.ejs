@@ -1,0 +1,24 @@
+interface Credentials { email: string; password: string; }
+interface Me { id: number; email: string; role?: string; }
+
+export function useAuth() {
+  const { post, get } = useFetchApi();
+  const user = useState<Me | null>('user', () => null);
+  const token = useCookie<string | null>('token');
+
+  async function login(data: Credentials) {
+    const res = await post<{ token: string; me: Me }>('/auth/login', data);
+    token.value = res.token;
+    user.value = res.me;
+  }
+  async function logout() {
+    token.value = null;
+    user.value = null;
+    await post('/auth/logout');
+  }
+  async function fetchMe() {
+    user.value = await get<Me>('/auth/me');
+  }
+
+  return { user, token, login, logout, fetchMe, isLoggedIn: computed(() => !!token.value) };
+}

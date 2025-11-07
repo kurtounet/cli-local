@@ -1,0 +1,14 @@
+<script setup lang="ts">
+const { login } = useAuth();
+const form = reactive({ email: '', password: '' });
+async function submit() { await login(form); return navigateTo('/admin'); }
+</script>
+
+<template>
+  <div style="padding:2rem;max-width:420px;margin:auto">
+    <h1>Login</h1>
+    <input v-model="form.email" placeholder="Email" />
+    <input v-model="form.password" type="password" placeholder="Password" />
+    <button @click="submit">Sign in</button>
+  </div>
+</template>

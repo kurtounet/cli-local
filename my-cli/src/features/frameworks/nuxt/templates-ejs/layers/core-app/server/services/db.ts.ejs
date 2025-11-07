@@ -1,0 +1,10 @@
+// Example: simple in-memory DB stub. Replace with real DB client.
+type User = { id: number; email: string; role?: string };
+const users: User[] = [{ id: 1, email: 'admin@example.com', role: 'admin' }];
+
+export const db = {
+  user: {
+    findByEmail(email: string) { return users.find(u => u.email === email) || null; },
+    findById(id: number) { return users.find(u => u.id === id) || null; },
+  },
+};

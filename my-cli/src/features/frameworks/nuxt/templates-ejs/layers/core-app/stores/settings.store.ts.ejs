@@ -1,0 +1,7 @@
+import { defineStore } from 'pinia';
+
+export const useSettingsStore = defineStore('settings', () => {
+  const sidebar = ref(true);
+  function toggleSidebar() { sidebar.value = !sidebar.value; }
+  return { sidebar, toggleSidebar };
+});

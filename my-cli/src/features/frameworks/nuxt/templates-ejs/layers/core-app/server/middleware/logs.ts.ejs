@@ -1,0 +1,9 @@
+export default defineEventHandler((event) => {
+  const start = Date.now();
+  addResponseHeader(event, 'x-powered-by', 'nuxt-nitro');
+  setResponseHeader(event, 'x-request-id', crypto.randomUUID());
+  event.node.res.on('finish', () => {
+    const ms = Date.now() - start;
+    console.info(`${getRequestURL(event).pathname} - ${event.node.res.statusCode} - ${ms}ms`);
+  });
+});

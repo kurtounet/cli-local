@@ -1,4 +1,0 @@
-export interface I<%= entity.namePascalCase %> {
-  id: number;
-  name: string;
-}

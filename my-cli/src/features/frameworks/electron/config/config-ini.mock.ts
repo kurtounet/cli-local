@@ -19,5 +19,5 @@ export const CONFIG_INIT_ELECTRON: IFramework = {
   architecture: ARCHITECTURE_ELECTRON_MOCK(),
   dependencies: DEPENDENCIES_ELECTRON_MOCK(),
   environments: ENVIRONMENTS_ELECTRON_MOCK(),
-  script: SCRIPTS_ELECTRON_MOCK(),
+  scripts: SCRIPTS_ELECTRON_MOCK(),
 };

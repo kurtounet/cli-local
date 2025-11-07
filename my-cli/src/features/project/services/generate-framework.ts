@@ -4,12 +4,12 @@ import { executeCommand } from "@utils/execute-command";
 import { logError, logInfo, logSuccess } from "@utils/logger";
 import * as fs from "fs-extra";
 
-export function generateFramework(
+export function installFramework(
   frameWork: IFramework,
   frameWorkPath: string,
   projetName: string,
 ) {
-  if (frameWork && frameWork.name) {
+  if (frameWork?.name) {
     if (!fs.existsSync(`${frameWorkPath}`)) {
       let command = getCommandFramework(frameWork, projetName);
 
@@ -38,15 +38,13 @@ export function generateFramework(
               );
             }
           }
-
         }
-
       } catch (error) {
         logError(`❌ Erreur lors de la création du ${frameWork.type} !`);
         process.exit(1);
       }
     } else {
-      console.log(`✅ le ${frameWork.type} existe déjas !`);
+      logInfo(`✅ le ${frameWork.type} existe déjas !`);
     }
   }
 }

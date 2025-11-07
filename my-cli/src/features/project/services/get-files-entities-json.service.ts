@@ -13,8 +13,8 @@ export function getFilesEntitiesJson(mdjFile: string): IGetEntityJson | string {
   // //fs.writeFileSync(path.join(cliNodePath, 'mcd.mdj'), JSON.stringify(mdjFile, null, 2));
 
   // if (configFile.starUml) {
-  //     console.log(configFile.starUml);
-  //     console.log(cliNodePath);
+  //     logInfo(configFile.starUml);
+  //     logInfo(cliNodePath);
   //     // fs.copyFileSync(configFile.starUml, cliNodePath);
   // }
 
@@ -31,8 +31,8 @@ export function getFilesEntitiesJson(mdjFile: string): IGetEntityJson | string {
   // if (frameWork.architecture.folders.length > 0) {
   //   try {
   //     let [frameWorkFolders, frameWorkFiles] = createStructure(frameWorkPath, frameWork.architecture);
-  //     console.log(frameWorkFolders);
-  //     console.log(frameWorkFiles);
+  //     logInfo(frameWorkFolders);
+  //     logInfo(frameWorkFiles);
   //     executeCommand(
   //       `git add . && git commit -m "creation structure"`,
   //       { cwd: `${frameWorkPath}`, stdio: "inherit" },

@@ -1,5 +1,6 @@
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { executeCommand } from "@utils/execute-command";
+import { logInfo } from "@utils/logger";
 
 export function generateGitBranch(
   frameWork: IFramework,
@@ -15,7 +16,7 @@ export function generateGitBranch(
       }
     });
     command += ` && git checkout ${frameWork.gitBranchCheckout}`;
-    console.log(`🚀 ${command}`);
+    logInfo(`🚀 ${command}`);
     executeCommand(
       command,
       { cwd: `${frameWorkPath}`, stdio: "inherit" },

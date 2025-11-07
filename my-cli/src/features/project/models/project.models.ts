@@ -1,8 +1,6 @@
 import { IDatabase } from "@frameworks-models/database.model";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 
- 
-
 export interface IProjectConfig {
   projectName: string;
   description?: string;
@@ -11,7 +9,6 @@ export interface IProjectConfig {
   version?: string;
   frameWorks: IFramework[];
   databases?: IDatabase[];
-
 }
 
 export interface IArchitecture {
@@ -30,11 +27,13 @@ export interface IFile {
 export interface IDirectory {
   _type: string;
   name: string;
-  pathInProject?: string;
-  gitIgnore: boolean;
+  pathInProject: string;
+  gitIgnore?: boolean;
+  content?: string;
   createdAt?: Date;
   updatedAt?: Date;
   children: IDirectory[];
+  varsTemplate?: Record<string, any>;
 }
 
 export interface IFolder {
@@ -42,5 +41,3 @@ export interface IFolder {
   files?: IFile[];
   subFolders?: IFolder[];
 }
-
-

@@ -6,31 +6,33 @@ import { generateTreeJson } from "@features/tools/tree/services/generate-tree-js
 import * as fs from "fs-extra";
 import * as path from "path";
 import { ICliLocalPathFile, IGetEntityJson } from "types/common";
+import { logDebug,   logInfo } from "@utils/logger";
+import { writeFile } from "@utils/file-utils";
 
 let cliLocalDiPath = path.join(process.cwd(), `.cli-local`);
 
-const dirCliLocal = ".cli-local";
+const DIRECTORY_CLI_LOCAL = ".cli-local";
 const CONFIG_FILE_CLI_LOCAL_NAME = `cli-local-config.json`;
 const FILE_CLI_LOCAL = {
-  dirCliLocal: `${dirCliLocal}`,
-  mdj: `${dirCliLocal}/mcd.mdj`,
-  globalConfig: `${dirCliLocal}/global-config.json`,
-  thisProjectConfig: `${dirCliLocal}/this-project-config.json`,
-  thisProjectArchitecture: `${dirCliLocal}/this-project-architecture.json`,
-  toDo: `${dirCliLocal}/to-do.json`,
-  entities: `${dirCliLocal}/entities.json`,
-  dictionaryColumns: `${dirCliLocal}/dictionary-columns.json`,
-  dictionaryEntitiesJson: `${dirCliLocal}/dictionary-entities-json.json`,
-  dictionaryEntitiesPivot: `${dirCliLocal}/dictionary-entities-pivot.json`,
-  dictionaryEntitiesRelationships: `${dirCliLocal}/dictionary-entities-relationships.json`,
-  dictionaryRelationships: `${dirCliLocal}/dictionary-relationships.json`,
+  DIRECTORY_CLI_LOCAL: `${DIRECTORY_CLI_LOCAL}`,
+  mdj: `${DIRECTORY_CLI_LOCAL}/mcd.mdj`,
+  globalConfig: `${DIRECTORY_CLI_LOCAL}/global-config.json`,
+  thisProjectConfig: `${DIRECTORY_CLI_LOCAL}/this-project-config.json`,
+  thisProjectArchitecture: `${DIRECTORY_CLI_LOCAL}/this-project-architecture.json`,
+  toDo: `${DIRECTORY_CLI_LOCAL}/to-do.json`,
+  entities: `${DIRECTORY_CLI_LOCAL}/entities.json`,
+  dictionaryColumns: `${DIRECTORY_CLI_LOCAL}/dictionary-columns.json`,
+  dictionaryEntitiesJson: `${DIRECTORY_CLI_LOCAL}/dictionary-entities-json.json`,
+  dictionaryEntitiesPivot: `${DIRECTORY_CLI_LOCAL}/dictionary-entities-pivot.json`,
+  dictionaryEntitiesRelationships: `${DIRECTORY_CLI_LOCAL}/dictionary-entities-relationships.json`,
+  dictionaryRelationships: `${DIRECTORY_CLI_LOCAL}/dictionary-relationships.json`,
 };
 
 export function createCliLocalDirectoryNewProject(
   configFile: IProjectConfig,
   mdjFile: string,
   framework: IFramework,
-  frameworkPath: string,
+  rootPathProjectFramework: string,
 ): any {
   let files = {
     "global-config": configFile,
@@ -39,17 +41,18 @@ export function createCliLocalDirectoryNewProject(
     "to-do": `to-do.json`,
   };
   //création du fichier cli-local-config.json
-  console.log("🗄️ Création du fichier : cli-local-config.json");
-  fs.writeFileSync(
-    path.join(frameworkPath, CONFIG_FILE_CLI_LOCAL_NAME),
+  let dirDotCliLocal = path.join(rootPathProjectFramework, DIRECTORY_CLI_LOCAL);
+  logDebug(`🗄️ Création du dossier .cli-local ${dirDotCliLocal}`);
+  if (!fs.existsSync(dirDotCliLocal)) {
+    logInfo("🗄️ Création du dossier .cli-local...");
+    fs.mkdirSync(dirDotCliLocal, { recursive: true });
+  }
+  //création du fichier cli-local-config.json
+  logInfo("🗄️ Création du fichier : cli-local-config.json");
+  writeFile(
+    `${dirDotCliLocal}/${CONFIG_FILE_CLI_LOCAL_NAME}`,
     JSON.stringify(FILE_CLI_LOCAL, null, 2),
   );
-
-  let cliNodePath = path.join(frameworkPath, `.cli-local`);
-  if (!fs.existsSync(cliNodePath)) {
-    console.log("🗄️ Création du dossier .cli-local...");
-    fs.mkdirSync(cliNodePath);
-  }
 
   let dictionaries: IGetEntityJson | {} = {};
   const error = "Erreur";
@@ -60,29 +63,30 @@ export function createCliLocalDirectoryNewProject(
     }
   }
 
-  console.log("🗄️ Création des fichier dans .cli-local ");
+  logInfo("🗄️ Création des fichier dans .cli-local ");
   files = { ...files, ...dictionaries };
-  Object.entries(files).map(([key, value]) => {
+  Object.entries(files).forEach(([key, value]) => {
     try {
-      let filePath = path.join(cliNodePath, `${key}.json`);
-      fs.writeFileSync(filePath, JSON.stringify(value, null, 2));
-      console.log(`🗄️ Fichier créer: ${filePath}`);
+      let filePath = path.join(dirDotCliLocal, `${key}.json`);
+      writeFile(filePath, JSON.stringify(value, null, 2));
+      logInfo(`🗄️ Fichier créer: ${filePath}`);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+       
     }
   });
 
   // creation du fichier mcd.mdj
   if (configFile.starUml) {
-    console.log("🗄️ Copy du fichier mcd.mdj ");
+    logInfo("🗄️ Copy du fichier mcd.mdj ");
     const result = fs.readFileSync(configFile.starUml, "utf8");
-    fs.writeFileSync(path.join(cliNodePath, "mcd.mdj"), result, "utf8");
+    writeFile(path.join(dirDotCliLocal, "mcd.mdj"), result);
   }
 
   const ingnore = "###cli-local\n/.cli-local\n/cli-local-config.json\n";
-  updateGitIgnore(frameworkPath, ingnore);
+  updateGitIgnore(rootPathProjectFramework, ingnore);
 
-  console.log`✅ .cli-local directory créée avec succès !`;
+  logInfo(`✅ .cli-local directory créée avec succès !`);
   return dictionaries;
 }
 
@@ -90,16 +94,12 @@ export function getCliLocalFile(file: string, projectPath?: string): any {
   let json;
   if (!fs.existsSync(file)) {
     return `le fichier ${file} introuvable `;
-    process.exit(1);
   }
   try {
-    json = JSON.parse(fs.readFileSync(file, "utf8"));
+    return JSON.parse(fs.readFileSync(file, "utf8"));
   } catch (e) {
-    return `le fichier ${file} introuvable `;
-    process.exit(1);
+    return `le fichier ${file} introuvable`;
   }
-
-  return json;
 }
 export function createCliLocalConfigFile(projectPath: string) {
   if (!fs.existsSync(path.join(projectPath, `cli-local-config.json`))) {
@@ -107,15 +107,16 @@ export function createCliLocalConfigFile(projectPath: string) {
   }
 }
 export function getCliLocalConfigFile(projectPath: string): ICliLocalPathFile {
+ 
   let json: any;
-  let configFile = path.join(projectPath, `cli-local-config.json`);
-  if (!fs.existsSync(configFile)) {
+  let configFilePath = path.join(projectPath, DIRECTORY_CLI_LOCAL ,`cli-local-config.json`);
+  if (!fs.existsSync(configFilePath)) {
     createCliLocalConfigFile(projectPath);
   }
   try {
-    json = JSON.parse(fs.readFileSync(configFile, "utf8"));
+    json = JSON.parse(fs.readFileSync(configFilePath, "utf8"));
   } catch (e) {
-    console.log(`Erreur lors de la lecture du fichier cli-local-config.json`);
+    console.error(`Erreur lors de la lecture du fichier cli-local-config.json`);
     process.exit(1);
   }
 
@@ -123,10 +124,10 @@ export function getCliLocalConfigFile(projectPath: string): ICliLocalPathFile {
 }
 
 export function getTreeArchitectureCliLocalFile(projectPath: string): any {
-  const cliNodePath = path.join(projectPath, `.cli-local`);
+  const dirDotCliLocal = path.join(projectPath, `.cli-local`);
   const tree = generateTreeJson(projectPath, Infinity);
-  fs.writeFileSync(
-    path.join(cliNodePath, "architecture-initial.json"),
+  writeFile(
+    path.join(dirDotCliLocal, "architecture-initial.json"),
     JSON.stringify(tree, null, 2),
   );
   return tree;
@@ -137,7 +138,7 @@ export function updateCliLocalFile(
   cliLocalPath: string,
   content: any,
 ): string {
-  fs.writeFileSync(
+  writeFile(
     path.join(cliLocalPath, fileName),
     JSON.stringify(content, null, 2),
   );

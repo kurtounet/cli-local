@@ -1,4 +1,5 @@
 import { IProjectConfig } from "@frameworks-models/framework-commun.model";
+import { logInfo } from "@utils/logger";
 
 export function verifiedFileConfig(config: IProjectConfig): string | boolean {
   // try {
@@ -31,6 +32,6 @@ export function verifiedFileConfig(config: IProjectConfig): string | boolean {
   //     return "❌ Le fichier de configuration doit contenir moin 1 environnements.";
   //     // process.exit(1);
   // }
-  console.log("🗄️ Vérification du fichier config.json... OK !!!!!!!");
+  logInfo("🗄️ Vérification du fichier config.json... OK !!!!!!!");
   return true;
 }

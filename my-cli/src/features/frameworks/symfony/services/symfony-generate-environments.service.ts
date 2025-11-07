@@ -1,25 +1,26 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import {   
-  IFramework,
-} from "@frameworks-models/framework-commun.model";
-import { updateGitIgnore } from "@features/frameworks/services/git.service";
-import { envLocal, envTest } from "../templates/symfony-environment.template";
-import { buildAndsaveFile } from "@utils/file-utils";
-import { IDatabase } from "@frameworks-models/database.model";
-export function symfonyGenerateEnvironmentsService(
-  framework: IFramework,
-  frameworkProjectPath: string,
-) {
-  let db!: IDatabase;
-  if (framework?.databases) {
-    db = framework?.databases[0];
-  }
 
-  buildAndsaveFile(path.join(frameworkProjectPath, ".env.local"), envLocal(db));
-  console.log(".env.local créer");
-  buildAndsaveFile(path.join(frameworkProjectPath, ".env.test"), envTest(db));
-  console.log(".env.test créer");
+import { updateGitIgnore } from "@features/frameworks/services/git.service";
+import { SymfonyDotEnvLocal, SymfonyDotEnvTest } from "../templates/symfony-environment.template";
+import { writeFile } from "@utils/file-utils";
+import { IProjectConfig } from "@features/project/models/project.models";
+export function symfonyGenerateEnvironmentsService(
+  frameworkProjectPath: string,
+  configFile: IProjectConfig,
+) {
+   
+   writeFile(
+    path.join(frameworkProjectPath, ".env.local"), 
+    SymfonyDotEnvLocal(configFile),
+    `Création de .env.local`
+   );
+ 
+   writeFile(
+     path.join(frameworkProjectPath, ".env.test"), 
+     SymfonyDotEnvTest(configFile),
+     `Création de .env.test`
+   ); 
   updateGitIgnore(frameworkProjectPath, ".env.local\n.env.test");
 }

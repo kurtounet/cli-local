@@ -8,7 +8,7 @@ import { IFramework } from "@frameworks-models/framework-commun.model";
 export const CONFIG_INIT_SYMFONY: IFramework = {
   type: "backend",
   name: "symfony",
-  version: "6.4.*",
+  version: "7.3.*",
   port: 8001,
   app: "--api",
   cliCmd: "symfony",
@@ -19,5 +19,5 @@ export const CONFIG_INIT_SYMFONY: IFramework = {
   architecture: ARCHITECTURE_SYMFONY_MOCK(),
   dependencies: DEPENDENCIES_SYMFONY_MOCK(),
   environments: ENVIRONMENTS_SYMFONY_MOCK(),
-  script: SCRIPTS_SYMFONY_MOCK(),
+  scripts: SCRIPTS_SYMFONY_MOCK(),
 };

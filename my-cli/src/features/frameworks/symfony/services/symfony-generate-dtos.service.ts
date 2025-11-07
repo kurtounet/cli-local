@@ -1,11 +1,8 @@
-import {
-  IColumnJson,
-  IEntityJson,
-} from "@parsersMdj/models/entity-json.model";
+import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 import fs from "fs";
 import path from "path";
 
-import { buildAndsaveFile } from "@utils/file-utils";
+import { buildAndsaveFile, writeFile } from "@utils/file-utils";
 
 import { snakeToCamel } from "@utils/convert";
 
@@ -15,6 +12,7 @@ import { symfonyResponseDtoTemplate } from "../templates/dto/symfony-response-dt
 import { symfonyGenerateAccessorsService } from "./symfony-generate-accessors.service";
 import { INDENT, NEWLINE } from "../constant/symfony-constants.constant";
 import { symfonyGetPropertyType } from "../utils/mapping";
+import { logDebug, logInfo } from "@utils/logger";
 
 export function symfonyGenerateDtoService(
   frameworkPath: string,
@@ -46,19 +44,23 @@ export function symfonyGenerateDtoService(
       accessors += symfonyGenerateAccessorsService(column.name, column.typeSql);
     }
   });
-  buildAndsaveFile(
+  writeFile(
     pathDtoEntity + `/${entity.namePascalCase}CreateDto.php`,
+    // logInfo(`${properties}`),
     symfonyCreateDtoTemplate(entity, properties, accessors),
+    `Création du DTO ${entity.namePascalCase}CreateDto.php`,
   );
 
-  buildAndsaveFile(
+  writeFile(
     pathDtoEntity + `/${entity.namePascalCase}UpdateDto.php`,
     symfonyUpdateDtoTemplate(entity, properties, accessors),
+    `Création du DTO ${entity.namePascalCase}UpdateDto.php`,
   );
 
-  buildAndsaveFile(
+  writeFile(
     pathDtoEntity + `/${entity.namePascalCase}ResponseDto.php`,
     symfonyResponseDtoTemplate(entity, properties, accessors),
+    `Création du DTO ${entity.namePascalCase}ResponseDto.php`,
   );
 
   // gitCommit(frameworkPath,`add dtos ${entity.namePascalCase}`);
@@ -69,7 +71,7 @@ export function getProperty(
   propName: string,
   type: string,
 ) {
-  // console.log(entityName, propName, type);
+  // logInfo(entityName, propName, type);
   const typeProperty = symfonyGetPropertyType(type);
   return `${INDENT}${INDENT}#[Groups(['${entityName}:read', '${entityName}:write'])]
     private ?${typeProperty} $${snakeToCamel(propName)} = null;

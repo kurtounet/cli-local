@@ -15,7 +15,7 @@ use Symfony\\Component\\Validator\\Constraints as Assert;
 final class ${entity.namePascalCase}CreateDto
 {
     public function __construct() {}
-    ${properties}
+    ${properties.replace(`, '${entity.nameCamelCase}:write'`, ``)}
     ${accessors}
 }`;
 }

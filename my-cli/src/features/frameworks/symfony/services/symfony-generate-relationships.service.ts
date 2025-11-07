@@ -1,5 +1,6 @@
 import { IRelation } from "@parsersMdj/models/entity-json.model";
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
+import { logInfo } from "@utils/logger";
 
 export function symfonyGenerateRelationShipsService(relationships: IRelation) {
   return generatePhpAttribute(relationships);
@@ -303,28 +304,29 @@ const relations: IRelation[] = [
 ];
 
 // Valider les relations
+/*
 const errors = validateRelations(relations);
 if (errors.length > 0) {
   console.error("Erreurs de validation:", errors);
 } else {
-  console.log("Relations valides ✓");
+  logInfo("Symfony Relations valides ✓");
 }
-
+*/
 // Générer une entité complète
-// console.log("=== Entité User ===");
-// console.log(generateCompleteEntity("User", relations));
+// logInfo("=== Entité User ===");
+// logInfo(generateCompleteEntity("User", relations));
 
-// console.log("\n=== Entité Article ===");
-// console.log(generateCompleteEntity("Article", relations));
+// logInfo("\n=== Entité Article ===");
+// logInfo(generateCompleteEntity("Article", relations));
 
 // Générer toutes les entités
-// console.log("\n=== Toutes les entités ===");
+// logInfo("\n=== Toutes les entités ===");
 // const allEntities = generateAllEntities(relations);
 // Object.entries(allEntities).forEach(([entityName, entityCode]) => {
-//   console.log(`\n--- ${entityName} ---`);
-//   console.log(entityCode);
+//   logInfo(`\n--- ${entityName} ---`);
+//   logInfo(entityCode);
 // });
 
 // Générer une relation spécifique
-// console.log("\n=== Relation spécifique ===");
-// console.log(generatePhpAttribute(relations[0]));
+// logInfo("\n=== Relation spécifique ===");
+// logInfo(generatePhpAttribute(relations[0]));

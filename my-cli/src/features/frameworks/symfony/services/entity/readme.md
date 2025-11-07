@@ -186,7 +186,7 @@ export function symfonyGenerateMultipleEntitiesService(
     
     try {
       symfonyGenerateEntityService(frameworkPath, entity);
-      console.log(`Entité ${entity.namePascalCase} générée avec succès`);
+      logInfo(`Entité ${entity.namePascalCase} générée avec succès`);
     } catch (error) {
       console.error(`Erreur lors de la génération de l'entité ${entity.namePascalCase}:`, error);
     }
@@ -249,11 +249,11 @@ export function generateEntityWithValidation(frameworkPath: string, entity: IEnt
   }
   
   const stats = getEntityStats(entity);
-  console.log(`Génération de l'entité ${entity.namePascalCase}:`, stats);
+  logInfo(`Génération de l'entité ${entity.namePascalCase}:`, stats);
   
   try {
     symfonyGenerateEntityService(frameworkPath, entity);
-    console.log('Entité générée avec succès');
+    logInfo('Entité générée avec succès');
     return true;
   } catch (error) {
     console.error('Erreur lors de la génération:', error);

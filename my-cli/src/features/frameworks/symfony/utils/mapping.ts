@@ -1,3 +1,5 @@
+import { logInfo } from "@utils/logger";
+
 export function sqlToTypeScript(sqlType: string): string {
   const mapping: Record<string, string> = {
     // Types numériques
@@ -100,11 +102,12 @@ export function symfonyGetAttributeTypeORM(
   typeProperty: string | undefined | null,
 ): string {
   // Debug logging - remove after fixing
-  console.log("symfonyGetPropertyType called with:", {
+  /*
+  logInfo(`"symfonyGetPropertyType called with:", ${
     typeProperty,
     typeOf: typeof typeProperty,
-  });
-
+  }`, );
+*/
   // Handle undefined, null, or empty string cases
   if (!typeProperty || typeProperty === null || typeProperty === undefined) {
     console.warn("Type is undefined/null, defaulting to string");
@@ -135,20 +138,22 @@ export function symfonyGetAttributeTypeORM(
     // simple_array: 'SIMPLE_ARRAY',
     smallint: "SMALLINT",
     string: "STRING",
-    varchar: "length:",
+    varchar: "STRING",
+    // varchar: "length:",
     text: "TEXT",
     time: "TIME_MUTABLE",
     time_immutable: "TIME_IMMUTABLE",
   };
   // Safely convert to string and lowercase
   const normalizedType = String(typeProperty).toLowerCase();
-  console.log(
+  /*
+  logInfo(
     "Normalized type:",
     normalizedType,
     "Mapped to:",
     Mapping[normalizedType] || "string",
   );
-
+*/
   return Mapping[normalizedType] || "STRING";
 }
 
@@ -156,11 +161,12 @@ export function symfonyGetPropertyType(
   typeProperty: string | undefined | null,
 ): string {
   // Debug logging - remove after fixing
-  console.log("symfonyGetPropertyType called with:", {
+  /*
+  logInfo("symfonyGetPropertyType called with:", {
     typeProperty,
     typeOf: typeof typeProperty,
   });
-
+*/
   // Handle undefined, null, or empty string cases
   if (!typeProperty || typeProperty === null || typeProperty === undefined) {
     console.warn("Type is undefined/null, defaulting to string");
@@ -202,12 +208,13 @@ export function symfonyGetPropertyType(
   };
   // Safely convert to string and lowercase
   const normalizedType = String(typeProperty).toLowerCase();
-  console.log(
+  /*
+  logInfo(
     "Normalized type:",
     normalizedType,
     "Mapped to:",
     Mapping[normalizedType] || "string",
   );
-
+*/
   return Mapping[normalizedType] || "string";
 }

@@ -1,8 +1,5 @@
 import { Iend, IERDEntity, IERDRelationship } from "../models/mdj.model";
-import {
-  IEntityJson,
-  IRelationshipJson,
-} from "../models/entity-json.model";
+import { IEntityJson, IRelationshipJson } from "../models/entity-json.model";
 
 export function getRelationType(
   source_cardinality: string,

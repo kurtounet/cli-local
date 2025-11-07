@@ -3,7 +3,7 @@ import type { IColumnJson } from "../models/entity-json.model";
 import type { IERDColumn, IERDEntity } from "../models/mdj.model";
 import { logInfo } from "@utils/logger";
 
-export function getColumns(entity: IERDEntity) {
+export function mdjHandleColumsService(entity: IERDEntity) {
   if (!Array.isArray(entity.columns)) {
     logInfo(`⏩ ${entity.name} n'a pas de colonnes. Ignoré.`);
     return [];
@@ -12,11 +12,6 @@ export function getColumns(entity: IERDEntity) {
   let columnsJson: Array<IColumnJson> = [];
 
   entity.columns.forEach((column: IERDColumn) => {
-    // vérifier si le type de la colonne n'est pas undifined ou null avant de l'ajouter à la relation
-    if(column.type === undefined || column.type === null) {
-      logInfo(`⏩ ${column.name} n'a pas de type. Ignoré.`);
-      column.type = "VARCHAR(255)";
-    }
     columnsJson.push({
       id: column._id,
       name: column.name,

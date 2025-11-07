@@ -3,6 +3,7 @@ import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { generateEntityFileContent } from "./symfony-generate-entity.service";
 import { generateDtoFileContent } from "./symfony-generate-dto.service";
+import { logInfo } from "@utils/logger";
 
 const OUTPUT_BASE_PATH = join(process.cwd(), "dist", "generated-symfony");
 
@@ -12,11 +13,11 @@ export function generateSymfonyModules(entities: IEntityJson[]): void {
     return;
   }
 
-  console.log(`🚀 Starting Symfony module generation...`);
+  logInfo(`🚀 Starting Symfony module generation...`);
 
   for (const entity of entities) {
     if (entity.typeEntity === "pivot") {
-      console.log(`⏩ Skipping pivot entity: ${entity.namePascalCase}`);
+      logInfo(`⏩ Skipping pivot entity: ${entity.namePascalCase}`);
       continue;
     }
 
@@ -33,7 +34,7 @@ export function generateSymfonyModules(entities: IEntityJson[]): void {
         join(entityPath, `${entity.namePascalCase}.php`),
         entityContent,
       );
-      console.log(`✅  Generated entity for ${entity.namePascalCase}`);
+      logInfo(`✅  Generated entity for ${entity.namePascalCase}`);
 
       const dtoContent = generateDtoFileContent(entity);
       writeFileSync(
@@ -44,7 +45,7 @@ export function generateSymfonyModules(entities: IEntityJson[]): void {
         join(dtoPath, `Update${entity.namePascalCase}Dto.php`),
         dtoContent.updateDto,
       );
-      console.log(`✅  Generated DTOs for ${entity.namePascalCase}`);
+      logInfo(`✅  Generated DTOs for ${entity.namePascalCase}`);
     } catch (error) {
       console.error(
         `❌ Error generating files for entity ${entity.namePascalCase}:`,
@@ -53,7 +54,7 @@ export function generateSymfonyModules(entities: IEntityJson[]): void {
     }
   }
 
-  console.log("🎉 Symfony module generation complete!");
+  logInfo("🎉 Symfony module generation complete!");
 }
 
 export function generateSymfonyModulesFromFile(jsonFilePath: string): void {

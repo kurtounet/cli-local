@@ -10,6 +10,7 @@ import { IERDEntity, IERDModel, IERDProject } from "../models/mdj.model";
 import { getColumns } from "./get-colums.service";
 import { getRelationships } from "./get-relationships.service";
 import { IGetEntityJson } from "types/common";
+import { logInfo } from "@utils/logger";
 
 /**
  * Parses the provided MDJ file to extract and return a dictionary of entities.
@@ -24,6 +25,7 @@ import { IGetEntityJson } from "types/common";
 export function getEntities(mdjFile: string): IGetEntityJson {
   let dictionaries!: IGetEntityJson;
   const project: IERDProject = JSON.parse(mdjFile);
+   
   try {
     let erdModel: IERDModel | undefined;
     for (const model of project.ownedElements) {
@@ -104,12 +106,14 @@ export function createdDictionaries(
             relationship.target.inEntity,
           );
           const relSource: IRelation = {
+            relationName: `${relationship.source.inEntity}`,
             relationType: relationship.source.relationType,
             source: relationship.source.inEntity,
             target: relationship.source.inverseSide,
             owner: false,
           };
           const relTarget: IRelation = {
+            relationName: `${relationship.target.inEntity}`,
             relationType: relationship.target.relationType,
             source: relationship.target.inEntity,
             target: relationship.target.inverseSide,

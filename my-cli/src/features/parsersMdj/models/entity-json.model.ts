@@ -37,7 +37,7 @@ export interface IRelationsEntity {
 }
 
 export interface IRelation {
-  relationName?: string;
+  relationName: string;
   relationType: string;
   source: string;
   target: string;

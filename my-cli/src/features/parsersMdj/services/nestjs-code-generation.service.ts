@@ -4,6 +4,7 @@ import { join } from "path";
 import { generateEntityFileContent } from "./nestjs-generate-entity.service";
 import { generateDtoFileContent } from "./nestjs-generate-dto.service";
 import { generateInterfaceFileContent } from "./nestjs-generate-interface.service";
+import { logInfo } from "@utils/logger";
 
 const OUTPUT_BASE_PATH = join(process.cwd(), "dist", "generated-nestjs");
 
@@ -65,7 +66,7 @@ export function generateNestJsModules(entities: IEntityJson[]): void {
         join(interfacesPath, `${entity.nameKebabCase}.interface.ts`),
         interfaceContent,
       );
-      console.log(`✅  Generated interface for ${entity.namePascalCase}`);
+      logInfo(`✅  Generated interface for ${entity.namePascalCase}`);
     } catch (error) {
       console.error(
         `❌ Error generating files for entity ${entity.namePascalCase}:`,
@@ -74,7 +75,7 @@ export function generateNestJsModules(entities: IEntityJson[]): void {
     }
   }
 
-  console.log("🎉 NestJS module generation complete!");
+  logInfo("🎉 NestJS module generation complete!");
 }
 
 /**

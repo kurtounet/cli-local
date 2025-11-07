@@ -1,0 +1,572 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "_type": {
+      "type": "string"
+    },
+    "_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "ownedElements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_type": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "_parent": {
+            "type": "object",
+            "properties": {
+              "$ref": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "$ref"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "ownedElements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_type": {
+                  "type": "string"
+                },
+                "_id": {
+                  "type": "string"
+                },
+                "_parent": {
+                  "type": "object",
+                  "properties": {
+                    "$ref": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "$ref"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "defaultDiagram": {
+                  "type": "boolean"
+                },
+                "columns": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_type": {
+                        "type": "string"
+                      },
+                      "_id": {
+                        "type": "string"
+                      },
+                      "_parent": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "unique": {
+                        "type": "boolean"
+                      },
+                      "primaryKey": {
+                        "type": "boolean"
+                      },
+                      "length": {
+                        "type": "string"
+                      },
+                      "nullable": {
+                        "type": "boolean"
+                      },
+                      "foreignKey": {
+                        "type": "boolean"
+                      },
+                      "referenceTo": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "_type",
+                      "_id",
+                      "_parent",
+                      "name",
+                      "type"
+                    ]
+                  }
+                },
+                "ownedElements": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_type": {
+                        "type": "string"
+                      },
+                      "_id": {
+                        "type": "string"
+                      },
+                      "_parent": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "end1": {
+                        "type": "object",
+                        "properties": {
+                          "_type": {
+                            "type": "string"
+                          },
+                          "_id": {
+                            "type": "string"
+                          },
+                          "_parent": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "$ref"
+                            ]
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "$ref"
+                            ]
+                          },
+                          "cardinality": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "_type",
+                          "_id",
+                          "_parent",
+                          "reference"
+                        ]
+                      },
+                      "end2": {
+                        "type": "object",
+                        "properties": {
+                          "_type": {
+                            "type": "string"
+                          },
+                          "_id": {
+                            "type": "string"
+                          },
+                          "_parent": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "$ref"
+                            ]
+                          },
+                          "reference": {
+                            "type": "object",
+                            "properties": {
+                              "$ref": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "$ref"
+                            ]
+                          },
+                          "cardinality": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "_type",
+                          "_id",
+                          "_parent",
+                          "reference"
+                        ]
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "_type",
+                      "_id",
+                      "_parent",
+                      "end1",
+                      "end2"
+                    ]
+                  }
+                },
+                "ownedViews": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_type": {
+                        "type": "string"
+                      },
+                      "_id": {
+                        "type": "string"
+                      },
+                      "_parent": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "model": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "subViews": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "_type": {
+                              "type": "string"
+                            },
+                            "_id": {
+                              "type": "string"
+                            },
+                            "_parent": {
+                              "type": "object",
+                              "properties": {
+                                "$ref": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "$ref"
+                              ]
+                            },
+                            "font": {
+                              "type": "string"
+                            },
+                            "parentStyle": {
+                              "type": "boolean"
+                            },
+                            "left": {
+                              "type": "number"
+                            },
+                            "top": {
+                              "type": "number"
+                            },
+                            "width": {
+                              "type": "number"
+                            },
+                            "height": {
+                              "type": "number"
+                            },
+                            "text": {
+                              "type": "string"
+                            },
+                            "model": {
+                              "type": "object",
+                              "properties": {
+                                "$ref": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "$ref"
+                              ]
+                            },
+                            "subViews": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "_type": {
+                                    "type": "string"
+                                  },
+                                  "_id": {
+                                    "type": "string"
+                                  },
+                                  "_parent": {
+                                    "type": "object",
+                                    "properties": {
+                                      "$ref": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "$ref"
+                                    ]
+                                  },
+                                  "model": {
+                                    "type": "object",
+                                    "properties": {
+                                      "$ref": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "$ref"
+                                    ]
+                                  },
+                                  "font": {
+                                    "type": "string"
+                                  },
+                                  "parentStyle": {
+                                    "type": "boolean"
+                                  },
+                                  "left": {
+                                    "type": "number"
+                                  },
+                                  "top": {
+                                    "type": "number"
+                                  },
+                                  "width": {
+                                    "type": "number"
+                                  },
+                                  "height": {
+                                    "type": "number"
+                                  }
+                                },
+                                "required": [
+                                  "_type",
+                                  "_id",
+                                  "_parent",
+                                  "model",
+                                  "font",
+                                  "parentStyle",
+                                  "left",
+                                  "top",
+                                  "width",
+                                  "height"
+                                ]
+                              }
+                            },
+                            "alpha": {
+                              "type": "number"
+                            },
+                            "distance": {
+                              "type": "number"
+                            },
+                            "hostEdge": {
+                              "type": "object",
+                              "properties": {
+                                "$ref": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "$ref"
+                              ]
+                            },
+                            "edgePosition": {
+                              "type": "number"
+                            },
+                            "visible": {
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "_type",
+                            "_id",
+                            "_parent",
+                            "font",
+                            "parentStyle",
+                            "left",
+                            "top",
+                            "height"
+                          ]
+                        }
+                      },
+                      "font": {
+                        "type": "string"
+                      },
+                      "parentStyle": {
+                        "type": "boolean"
+                      },
+                      "left": {
+                        "type": "number"
+                      },
+                      "top": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      },
+                      "height": {
+                        "type": "number"
+                      },
+                      "nameLabel": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "columnCompartment": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "head": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "tail": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "lineStyle": {
+                        "type": "number"
+                      },
+                      "points": {
+                        "type": "string"
+                      },
+                      "tailNameLabel": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      },
+                      "headNameLabel": {
+                        "type": "object",
+                        "properties": {
+                          "$ref": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "$ref"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "_type",
+                      "_id",
+                      "_parent",
+                      "model",
+                      "subViews",
+                      "font",
+                      "parentStyle",
+                      "nameLabel"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "_type",
+                "_id",
+                "_parent",
+                "name"
+              ]
+            }
+          }
+        },
+        "required": [
+          "_type",
+          "_id",
+          "_parent",
+          "name",
+          "ownedElements"
+        ]
+      }
+    }
+  },
+  "required": [
+    "_type",
+    "_id",
+    "name",
+    "ownedElements"
+  ]
+}

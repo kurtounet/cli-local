@@ -15,7 +15,7 @@ export function configInitFramework(initFramework: IFramework): IFramework {
     architecture: initFramework.architecture,
     dependencies: initFramework.dependencies,
     environments: initFramework.environments,
-    script: initFramework.script,
+    scripts: initFramework.scripts,
     databases: initFramework.databases,
   };
 }

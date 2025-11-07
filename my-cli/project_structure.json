@@ -9221,13 +9221,13 @@
                       "functions": [
                         {
                           "type": "function",
-                          "name": "generateFramework",
+                          "name": "installFramework",
                           "args": [],
                           "line": 8
                         },
                         {
                           "type": "function",
-                          "name": "generateFramework",
+                          "name": "installFramework",
                           "args": [],
                           "line": 8
                         },

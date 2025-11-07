@@ -27,8 +27,10 @@ node_modules/
 # Task files
 # tasks.json
 # tasks/ 
-
+doc/*
 nest-backend/*
 sf-backend/*
 nitro/*
 txt/
+test/*
+server/.docs/*

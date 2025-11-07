@@ -1,7 +1,4 @@
-import {
-  IColumnJson,
-  IEntityJson,
-} from "@parsersMdj/models/entity-json.model";
+import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { snakeToCamel, snakeToKebab, snakeToPascal } from "@utils/convert";
 
 const n = "\n";

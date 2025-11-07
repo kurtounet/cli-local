@@ -136,7 +136,7 @@ export class WebhooksService {
       updatedAt: new Date(),
     };
     this.webhooks.push(newWebhook);
-    console.log('Webhook créé:', newWebhook);
+    logInfo('Webhook créé:', newWebhook);
     return this.mapToResponseDto(newWebhook);
   }
 
@@ -158,7 +158,7 @@ export class WebhooksService {
       throw new NotFoundException(`Webhook avec l'ID ${id} non trouvé.`);
     }
     Object.assign(webhook, updateWebhooksDto, { updatedAt: new Date() });
-    console.log('Webhook mis à jour:', webhook);
+    logInfo('Webhook mis à jour:', webhook);
     return this.mapToResponseDto(webhook);
   }
 
@@ -168,7 +168,7 @@ export class WebhooksService {
     if (this.webhooks.length === initialLength) {
       throw new NotFoundException(`Webhook avec l'ID ${id} non trouvé.`);
     }
-    console.log(`Webhook avec l'ID ${id} supprimé.`);
+    logInfo(`Webhook avec l'ID ${id} supprimé.`);
   }
 
   private mapToResponseDto(webhook: Webhook): ResponseWebhooksDto {

@@ -1,7 +1,4 @@
-import {
-  IColumnJson,
-  IEntityJson,
-} from "@parsersMdj/models/entity-json.model";
+import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function nestjsSeederEntityTemplate(entity: IEntityJson): string {
   const seeder = generateSeeder(entity);
@@ -22,14 +19,14 @@ export class ${entity.namePascalCase}Seeder {
     // Vérifiez s'il y a déjà des données
     const count = await this.${entity.nameCamelCase}Repository.count();
     if (count > 0) {
-      console.log('${entity.namePascalCase}s table already has data, skipping seeding');
+      logInfo('${entity.namePascalCase}s table already has data, skipping seeding');
       return;
     }
 
     const ${entity.nameCamelCase}s: any[] = [${seeder}];
 
     await this.${entity.nameCamelCase}Repository.save(${entity.nameCamelCase}s);
-    console.log(\`Seeded ${entities} ${entity.nameCamelCase}s\`);
+    logInfo(\`Seeded ${entities} ${entity.nameCamelCase}s\`);
   }
 }
 `;

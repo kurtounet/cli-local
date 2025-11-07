@@ -1,7 +1,5 @@
-import {
-  IColumnJson,
-  IEntityJson,
-} from "@parsersMdj/models/entity-json.model";
+import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { logInfo } from "@utils/logger";
 
 const n = "\n";
 const indent = "  ";
@@ -17,7 +15,7 @@ type Validators = {
   decorators: string[];
 };
 export function nestjsresponseDtoTemplate(entity: IEntityJson): string {
-  console.log("ResponseDto", entity.namePascalCase);
+  logInfo(`"ResponseDto", ${entity.namePascalCase}`);
 
   let dtoProperties: Validators[] = [];
   const importClassValidators = new Set<string>();

@@ -1,5 +1,7 @@
+import { logInfo } from "@utils/logger";
+
 export function nestjsAuthRolesDecoratorTemplate() {
-  console.log("Auth");
+  logInfo("Auth");
   return `import { SetMetadata } from '@nestjs/common';
 
 export const ROLES_KEY = 'roles';

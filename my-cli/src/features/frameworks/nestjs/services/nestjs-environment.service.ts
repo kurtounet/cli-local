@@ -1,3 +1,5 @@
+import { logInfo } from "@utils/logger";
+
 export function createEnvironmentNestjs(projectPath: string) {
-  console.log("Environment du projet");
+  logInfo("Environment du projet");
 }

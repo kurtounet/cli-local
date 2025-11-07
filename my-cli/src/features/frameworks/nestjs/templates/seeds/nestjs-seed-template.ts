@@ -33,7 +33,7 @@ async function bootstrap() {
   ${awaitSeeder.join("\n ")}
   // Ajoutez d'autres seeders ici
 
-  console.log('Seeds completed!');
+  logInfo('Seeds completed!');
   await app.close();
 }
 bootstrap();

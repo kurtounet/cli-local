@@ -1,7 +1,4 @@
-import {
-  IColumnJson,
-  IEntityJson,
-} from "@parsersMdj/models/entity-json.model";
+import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 const n = "\n";
 const indent = "  ";

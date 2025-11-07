@@ -19,5 +19,5 @@ export const CONFIG_INIT_NESTJS: IFramework = {
   architecture: ARCHITECTURE_NESTJS_MOCK(),
   dependencies: DEPENDENCIES_NESTJS_MOCK(),
   environments: ENVIRONMENTS_NESTJS_MOCK(),
-  script: SCRIPTS_NESTJS_MOCK(),
+  scripts: SCRIPTS_NESTJS_MOCK(),
 };

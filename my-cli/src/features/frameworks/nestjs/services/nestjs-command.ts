@@ -24,7 +24,7 @@
 //       'Gère la génération de modules, contrôleurs, services, entités, etc., spécifiques à NestJS.',
 //     )
 //     .option('-p, --path <path>', 'Spécifie le répertoire de destination.')
-//     .action(async (type: string, name: string, options: { path?: string }) => {
+//     .action(async () => {
 //       info(`Génération d'un ${type} NestJS nommé ${name}...`);
 
 //       const processPath = process.cwd();
@@ -37,8 +37,8 @@
 //         const thisProjectConfig: IFramework = getCliLocalFile(
 //             allpathFileCliLocal.thisProjectConfig,
 //         );
-//         //  console.log('entitiesJsonFile', entitiesJsonFile);
-//         // console.log('thisProjectConfig', thisProjectConfig);
+//         //  logInfo('entitiesJsonFile', entitiesJsonFile);
+//         // logInfo('thisProjectConfig', thisProjectConfig);
 
 //         const actions = [
 //             'ALL',

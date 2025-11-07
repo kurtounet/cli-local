@@ -1,51 +1,54 @@
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 import { installTSDependencies } from "@features/frameworks/services/install-dependencies.service";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { executeCommand } from "@utils/execute-command";
 
 export function nestjsGenerateFilesFramework(
+  configFile: IProjectConfig,
   framework: IFramework,
-  frameworkProjectPath: string,
+  rootPathProjectFramework: string,
   entitiesJsonFile: object,
 ) {
-  installTSDependencies(framework, frameworkProjectPath);
+  installTSDependencies(framework, rootPathProjectFramework);
   /*
    executeCommand(
-           `cl nest new ${frameworkProjectPath} --package-manager=npm`,
-           { cwd: `${frameworkProjectPath}`, stdio: 'inherit' },
+           `cl nest new ${rootPathProjectFramework} --package-manager=npm`,
+           { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
            `🚀 Génération des fichier`,
            `✅ Génération des fichier avec succès !`,
            `❌ Erreur lors de la Génération des fichier !`,
        );
 
-       createDependencies(framework, frameworkProjectPath)
+       createDependencies(framework, rootPathProjectFramework)
    
        executeCommand(
            `code .`,
-           { cwd: `${frameworkProjectPath}`, stdio: 'inherit' },
+           { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
            `🚀 Lancement de VSCode`,
            `✅ VSCode lancé avec succès !`,
            `❌ Erreur lors du lancement de VSCode !`,
        );
        executeCommand(
            `npm run start:dev`,
-           { cwd: `${frameworkProjectPath}`, stdio: 'inherit' },
+           { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
            `🚀 Lancement du serveur`,
            `✅ Serveur lancé avec succès !`,
            `❌ Erreur lors du lancement du serveur !`,
        );
        */
-  // updateFiles(frameworkProjectPath);
+  // updateFiles(rootPathProjectFramework);
   /*
-    //  nestjsGenerateEnvironments(databases, framework, frameworkProjectPath);*/
+    //  nestjsGenerateEnvironments(databases, framework, rootPathProjectFramework);*/
   if (Array.isArray(entitiesJsonFile)) {
     entitiesJsonFile.forEach((entity: IEntityJson) => {
-      /* // nestjsGenerateModuleNestjs(frameworkProjectPath,entity);*/
+      /* // nestjsGenerateModuleNestjs(rootPathProjectFramework,entity);*/
     });
   }
   /*
-    //  nestjsGenerateTests(framework,  frameworkProjectPath);
-    //  nestjsGenerateDatabases(framework, frameworkProjectPath);
-    //  nestjsGenerateFixtures(framework,  frameworkProjectPath);
-    // loadFixturesNestjs(framework,  frameworkProjectPath);*/
+    //  nestjsGenerateTests(framework,  rootPathProjectFramework);
+    //  nestjsGenerateDatabases(framework, rootPathProjectFramework);
+    //  nestjsGenerateFixtures(framework,  rootPathProjectFramework);
+    // loadFixturesNestjs(framework,  rootPathProjectFramework);*/
 }

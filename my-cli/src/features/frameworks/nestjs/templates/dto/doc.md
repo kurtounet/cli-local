@@ -31,9 +31,9 @@ import { generateAllDtos, generateCreateDto, generateUpdateDto, generateResponse
 
 // Générer tous les DTOs en une fois
 const allDtos = generateAllDtos(entityJson);
-console.log(allDtos.createDto);
-console.log(allDtos.updateDto);
-console.log(allDtos.responseDto);
+logInfo(allDtos.createDto);
+logInfo(allDtos.updateDto);
+logInfo(allDtos.responseDto);
 
 // Ou générer individuellement
 const createDto = generateCreateDto(entityJson);

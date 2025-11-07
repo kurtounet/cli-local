@@ -1,5 +1,7 @@
+import { logInfo } from "@utils/logger";
+
 export function nestjsDatabaseConfigTemplate(projectPath: string): string {
-  console.log("databaseConfig.ts du projet");
+  logInfo("databaseConfig.ts du projet");
   return `import { TypeOrmModuleOptions } from '@nestjs/typeorm';
     import { ConfigService } from '@nestjs/config';
 

@@ -32,8 +32,8 @@ export function nestjsMainTemplate(): string {
   
     // Démarrage du serveur
     await app.listen(port);
-    console.log(\`🚀 Application is running on: http://localhost:\${port}\`);
-    console.log(\`📜 Swagger is available at: http://localhost:\${port}/api\`);
+    logInfo(\`🚀 Application is running on: http://localhost:\${port}\`);
+    logInfo(\`📜 Swagger is available at: http://localhost:\${port}/api\`);
   }
   
   bootstrap();`;

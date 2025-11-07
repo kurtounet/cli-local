@@ -93,7 +93,7 @@ export function getRelationShips(
   dictionaryEntitiesJson: Map<string, IEntityJson>,
 ): Array<IRelationshipJson> {
   if (!Array.isArray(entity.ownedElements)) {
-    // console.log(`⏩ ${entity.name} n'a pas de relations. Ignoré.`);
+    // logInfo(`⏩ ${entity.name} n'a pas de relations. Ignoré.`);
     return [];
   }
   // let relationships: IERDRelationship[] = entity.ownedElements;

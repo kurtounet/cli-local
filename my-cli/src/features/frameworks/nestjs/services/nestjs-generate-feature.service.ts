@@ -12,12 +12,13 @@ import { nestjsSeedModuleTemplate } from "../templates/seeds/nestjs-seed-module-
 import { nestjsSeedTemplate } from "../templates/seeds/nestjs-seed-template";
 import { nestjsEntityModuleTemplate } from "../templates/module/nestjs-entity-module-template";
 import { nestjsGenerateAllDtos } from "./dto/nestjs-generate-all-dtos.service";
+import { logInfo } from "@utils/logger";
 
 export function nestjsGenerateFeature(
   frameworkPath: string,
   entity: IEntityJson,
 ) {
-  console.log("Feature", entity.nameCamelCase);
+  logInfo(`Feature ${entity.nameCamelCase}`);
   const folders = [
     "dto",
     "entity",
@@ -35,12 +36,12 @@ export function nestjsGenerateFeature(
       folder,
     );
     if (!fs.existsSync(pathFolder)) {
-      console.log(`📌 Dossier créer : ${pathFolder}`);
+      logInfo(`📌 Dossier créer : ${pathFolder}`);
       fs.mkdirSync(pathFolder, { recursive: true });
     }
   });
 
-  console.log("Module", entity.nameCamelCase);
+  logInfo(`"Module : ${entity.nameCamelCase}`);
   createEntityNestjs(frameworkPath, entity);
   createDtoNestjs(frameworkPath, entity);
   createModuleEntityNestjs(frameworkPath, entity);

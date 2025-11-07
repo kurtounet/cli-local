@@ -8,7 +8,7 @@ import { nestjsMainTemplate } from "../templates/config/nestjs-main-template";
 import { nestjsEnvironmentsTemplate } from "../templates/config/nestjs-environments-template";
 
 export function createConfigProjectNestjs(projectPath: string) {
-  // console.log('Config du projet');
+  // logInfo('Config du projet');
   // databaseConfigNestjs(projectPath);
   // appModuleNestjs(projectPath);
   // mainFileNestjs(projectPath);

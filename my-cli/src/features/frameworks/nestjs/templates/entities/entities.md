@@ -51,7 +51,7 @@
      simple.
 
 
-   * Problème : Des console.log de débogage sont présents dans le code.
+   * Problème : Des logInfo de débogage sont présents dans le code.
    * Solution : Les supprimer pour avoir un code de production propre.
 
 

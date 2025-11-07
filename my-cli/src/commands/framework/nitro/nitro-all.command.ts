@@ -12,6 +12,7 @@ import {
 import { ICliLocalPathFile } from "types/common";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { nitroGenerateFilesFramework } from "@nitro/services/nitro-generate-files-framework.service";
+import { IProjectConfig } from "@features/project/models/project.models";
 
 export function registerNitroAllCommand(program: Command) {
   program
@@ -20,17 +21,20 @@ export function registerNitroAllCommand(program: Command) {
       "Gère la génération de modules, contrôleurs, services, entités, etc., spécifiques à Nitro.",
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
-    .action(async (type: string, name: string, options: { path?: string }) => {
-      logInfo(`Génération d'un ${type} Nitro nommé ${name}...`);
+    .action(async () => {
+
 
       const processPath = process.cwd();
-      const frameworkPath: string = processPath;
+      const rootPathProjectFramework: string = processPath;
       const allpathFileCliLocal: ICliLocalPathFile =
         getCliLocalConfigFile(processPath);
       const entitiesJsonFile: IEntityJson[] = getCliLocalFile(
         allpathFileCliLocal.entities,
       );
-      const thisProjectConfig: IFramework = getCliLocalFile(
+      const ProjectConfig: IProjectConfig = getCliLocalFile(
+        allpathFileCliLocal.globalConfig,
+      );
+      const framework: IFramework = getCliLocalFile(
         allpathFileCliLocal.thisProjectConfig,
       );
 
@@ -68,85 +72,72 @@ export function registerNitroAllCommand(program: Command) {
         if (option === "Anthentication") {
         }
         if (option === "Bdd") {
-          // databaseConfigNitro(frameworkPath, thisProjectConfig);
+          // databaseConfigNitro(rootPathProjectFramework, thisProjectConfig);
         }
         if (option === "Environments") {
-          // createEnvironmentsNitro(frameworkPath, thisProjectConfig);
+          // createEnvironmentsNitro(rootPathProjectFramework, thisProjectConfig);
         }
         if (option === "Config") {
-          // createConfigProjectNitro(frameworkPath);
+          // createConfigProjectNitro(rootPathProjectFramework);
         }
         if (option === "Dependencies") {
         }
         if (option === "Entity") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // createEntityNitro(frameworkPath, entity);
+              // createEntityNitro(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Dto") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // createDtoNitro(frameworkPath, entity);
+              // createDtoNitro(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Controller") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // createControllerNitro(frameworkPath, entity);
+              // createControllerNitro(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Service") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // createServiceNitro(frameworkPath, entity);
+              // createServiceNitro(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Seeder") {
           if (Array.isArray(entitiesJsonFile)) {
-            // createSeederNitro(frameworkPath, entitiesJsonFile);
+            // createSeederNitro(rootPathProjectFramework, entitiesJsonFile);
           }
         }
         if (option === "ALL") {
           nitroGenerateFilesFramework(
-            thisProjectConfig,
-            frameworkPath, 
-            entitiesJsonFile,);
-          /*
-          let entitiesModule: Array<{
-            entityNamePascalCase: string;
-            entityNameKebabCase: string;
-          }> = [];
-          if (Array.isArray(entitiesJsonFile)) {
-            entitiesJsonFile.forEach((entity: IEntityJson) => {
-              let entityModule = {
-                entityNamePascalCase: `${entity.namePascalCase}`,
-                entityNameKebabCase: `${entity.nameKebabCase}`,
-              };
-              entitiesModule.push(entityModule);
-              NitroGenerateFeature(frameworkPath, entity);
-            });
-          }*/
-          // createSeederNitro(frameworkPath, entitiesJsonFile);
-          // appModuleNitro(frameworkPath, entitiesModule);
-          // mainFileNitro(frameworkPath);
-          // databaseConfigNitro(frameworkPath, thisProjectConfig);
-          /* 
-                    createFixturesNitro(frameworkPath);
-                      loadFixturesNitro(frameworkPath);
-          */
+            rootPathProjectFramework,
+            ProjectConfig,
+            framework,
+            entitiesJsonFile,
+            "all"
+          );
         }
       });
       executeCommand(
         "npm run format",
-        { cwd: `${frameworkPath}`, stdio: "inherit" },
+        { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
         `🚀 Lancement du Formatage`,
         `✅ Formatage lancé avec succès !`,
         `❌ Erreur lors du Formatage !`,
+      );
+      executeCommand(
+        `npm run db:cp`,
+        { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
+        `🚀 Génération de la base de données`,
+        `✅ Génération de la base de données avec succès !`,
+        `❌ Erreur lors de laGénération de la base de données !`,
       );
 
       // const targetPath = options.path || process.cwd();

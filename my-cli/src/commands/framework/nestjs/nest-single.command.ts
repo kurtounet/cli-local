@@ -36,8 +36,8 @@ export function registerNestSingleCommand(program: Command) {
       "Gère la génération de modules, contrôleurs, services, entités, etc., spécifiques à NestJS.",
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
-    .action(async (type: string, name: string, options: { path?: string }) => {
-      logInfo(`Génération d'un ${type} NestJS nommé ${name}...`);
+    .action(async () => {
+      
 
       const processPath = process.cwd();
       const frameworkPath: string = processPath;

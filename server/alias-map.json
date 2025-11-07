@@ -1,0 +1,8 @@
+{
+  "#db": "./server/db",
+  "#core": "./server/core",
+  "#project": "./server/features/project",
+  "#task": "./server/features/task",
+  "#tests": "./server/features/tests",
+  "#users": "./server/features/users"
+}

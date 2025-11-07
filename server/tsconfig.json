@@ -1,0 +1,58 @@
+{
+  "extends": "./.nitro/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "#db": [
+        "./server/db"
+      ],
+      "#db/*": [
+        "./server/db/*"
+      ],
+      "#core": [
+        "./server/core"
+      ],
+      "#core/*": [
+        "./server/core/*"
+      ],
+      "#project": [
+        "./server/features/project"
+      ],
+      "#project/*": [
+        "./server/features/project/*"
+      ],
+      "#task": [
+        "./server/features/task"
+      ],
+      "#task/*": [
+        "./server/features/task/*"
+      ],
+      "#tests": [
+        "./server/features/tests"
+      ],
+      "#tests/*": [
+        "./server/features/tests/*"
+      ],
+      "#users": [
+        "./server/features/users"
+      ],
+      "#users/*": [
+        "./server/features/users/*"
+      ]
+    },
+    "baseUrl": "."
+  },
+  "include": [
+    "server",
+    "scripts",
+    "nitro.config.ts",
+    "drizzle.config.ts",
+    "aliases.generated.ts"
+  ]
+}

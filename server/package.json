@@ -1,0 +1,48 @@
+{
+  "name": "nitro-drizzle-zod-crud",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "alias:gen": "tsx scripts/alias-sync-all.ts",
+    "alias:watch": "chokidar \"server/core\" \"server/db\" \"server/features/*\" -i \"**/*.ts\" -c \"npm run alias:gen\"",
+    "dev": "npm run alias:gen && concurrently \"npm run alias:watch\" \"nitro dev\"",
+    "build": "nitro build",
+    "start": "node .output/server/index.mjs",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx server/db/migrate.ts",
+    "db:reset": "tsx server/db/reset.ts",
+    "db:seed": "tsx server/db/seed.ts",
+    "db:push": "tsx server/db/push.ts",
+    "db:pull": "tsx server/db/pull.ts"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.9.0",
+    "drizzle-orm": "^0.33.0",
+    "mysql2": "^3.9.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.10",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.2.0",
+    "drizzle-kit": "^0.24.0",
+    "nitropack": "^2.9.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  },
+  "imports": {
+    "#db": "./server/db",
+    "#db/*": "./server/db/*",
+    "#core": "./server/core",
+    "#core/*": "./server/core/*",
+    "#project": "./server/features/project",
+    "#project/*": "./server/features/project/*",
+    "#task": "./server/features/task",
+    "#task/*": "./server/features/task/*",
+    "#tests": "./server/features/tests",
+    "#tests/*": "./server/features/tests/*",
+    "#users": "./server/features/users",
+    "#users/*": "./server/features/users/*"
+  }
+}

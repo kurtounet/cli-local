@@ -13,10 +13,7 @@ export function registerNuxtCommand(program: Command) {
       "Gère la génération de pages, composants, layouts, etc., spécifiques à Nuxt.js.",
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
-    .action(async (type: string, name: string, options: { path?: string }) => {
-      logInfo(`Génération d\'un ${type} Nuxt.js nommé ${name}...`);
-
-      const targetPath = options.path || process.cwd();
-      const pascalName = pascalCase(name);
+    .action(async () => {
+      
     });
 }

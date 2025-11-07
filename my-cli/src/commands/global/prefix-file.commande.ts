@@ -35,11 +35,11 @@
 //         const files = await getFilesRecursively(directory, options.depth);
 
 //         if (files.length === 0) {
-//           console.log("📂 Aucun fichier trouvé dans ce dossier.");
+//           logInfo("📂 Aucun fichier trouvé dans ce dossier.");
 //           return;
 //         }
 
-//         console.log(
+//         logInfo(
 //           `📁 ${files.length} fichier(s) trouvé(s) dans "${directory}"`,
 //         );
 
@@ -59,7 +59,7 @@
 //         ]);
 
 //         if (answers.action === "cancel") {
-//           console.log("🚫 Opération annulée.");
+//           logInfo("🚫 Opération annulée.");
 //           return;
 //         }
 
@@ -83,7 +83,7 @@
 //         ]);
 
 //         // Aperçu des changements
-//         console.log("\n📋 Aperçu des changements :");
+//         logInfo("\n📋 Aperçu des changements :");
 //         const changes = files.map((file) => {
 //           const dir = path.dirname(file);
 //           const ext = path.extname(file);
@@ -108,9 +108,9 @@
 //         // Vérifier les conflits
 //         const conflicts = await checkForConflicts(changes);
 //         if (conflicts.length > 0) {
-//           console.log("\n⚠️  Conflits détectés :");
+//           logInfo("\n⚠️  Conflits détectés :");
 //           conflicts.forEach((conflict) => {
-//             console.log(`   - "${conflict.newName}" existe déjà`);
+//             logInfo(`   - "${conflict.newName}" existe déjà`);
 //           });
 
 //           const conflictAnswer = await inquirer.prompt([
@@ -124,18 +124,18 @@
 //           ]);
 
 //           if (!conflictAnswer.proceed) {
-//             console.log("🚫 Opération annulée.");
+//             logInfo("🚫 Opération annulée.");
 //             return;
 //           }
 //         }
 
 //         // Afficher l'aperçu
 //         changes.slice(0, 10).forEach((change) => {
-//           console.log(`   📄 "${change.oldName}" → "${change.newName}"`);
+//           logInfo(`   📄 "${change.oldName}" → "${change.newName}"`);
 //         });
 
 //         if (changes.length > 10) {
-//           console.log(`   ... et ${changes.length - 10} autre(s) fichier(s)`);
+//           logInfo(`   ... et ${changes.length - 10} autre(s) fichier(s)`);
 //         }
 
 //         // Confirmation finale
@@ -149,12 +149,12 @@
 //         ]);
 
 //         if (!confirmAnswer.confirm) {
-//           console.log("🚫 Opération annulée.");
+//           logInfo("🚫 Opération annulée.");
 //           return;
 //         }
 
 //         // Effectuer les changements
-//         console.log("\n🔄 Renommage en cours...");
+//         logInfo("\n🔄 Renommage en cours...");
 //         let successCount = 0;
 //         let errorCount = 0;
 
@@ -170,10 +170,10 @@
 //           }
 //         }
 
-//         console.log(`\n✅ Opération terminée :`);
-//         console.log(`   - ${successCount} fichier(s) renommé(s) avec succès`);
+//         logInfo(`\n✅ Opération terminée :`);
+//         logInfo(`   - ${successCount} fichier(s) renommé(s) avec succès`);
 //         if (errorCount > 0) {
-//           console.log(`   - ${errorCount} erreur(s)`);
+//           logInfo(`   - ${errorCount} erreur(s)`);
 //         }
 //       } catch (error) {
 //         console.error("❌ Erreur lors de l'exécution :", error);
@@ -249,6 +249,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
 import inquirer from "inquirer";
+import { logInfo } from "@utils/logger";
 
 export function registerAddPerfixSuffixFileCommand(program: Command) {
   program
@@ -282,11 +283,11 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         const files = await getFilesRecursively(directory, options.depth);
 
         if (files.length === 0) {
-          console.log("📂 Aucun fichier trouvé dans ce dossier.");
+          logInfo("📂 Aucun fichier trouvé dans ce dossier.");
           return;
         }
 
-        console.log(
+        logInfo(
           `📁 ${files.length} fichier(s) trouvé(s) dans "${directory}"`,
         );
 
@@ -306,7 +307,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         ]);
 
         if (answers.action === "cancel") {
-          console.log("🚫 Opération annulée.");
+          logInfo("🚫 Opération annulée.");
           return;
         }
 
@@ -332,7 +333,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         ]);
 
         // Aperçu des changements
-        console.log("\n📋 Aperçu des changements :");
+        logInfo("\n📋 Aperçu des changements :");
         const changes = files.map((file) => {
           const dir = path.dirname(file);
           const ext = path.extname(file);
@@ -369,7 +370,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         );
 
         if (actualChanges.length === 0) {
-          console.log(
+          logInfo(
             `📂 Aucun fichier ne contient le mot "${textAnswer.text}" à supprimer.`,
           );
           return;
@@ -378,9 +379,9 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         // Vérifier les conflits
         const conflicts = await checkForConflicts(actualChanges);
         if (conflicts.length > 0) {
-          console.log("\n⚠️  Conflits détectés :");
+          logInfo("\n⚠️  Conflits détectés :");
           conflicts.forEach((conflict) => {
-            console.log(`   - "${conflict.newName}" existe déjà`);
+            logInfo(`   - "${conflict.newName}" existe déjà`);
           });
 
           const conflictAnswer = await inquirer.prompt([
@@ -394,18 +395,18 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
           ]);
 
           if (!conflictAnswer.proceed) {
-            console.log("🚫 Opération annulée.");
+            logInfo("🚫 Opération annulée.");
             return;
           }
         }
 
         // Afficher l'aperçu
         actualChanges.slice(0, 10).forEach((change) => {
-          console.log(`   📄 "${change.oldName}" → "${change.newName}"`);
+          logInfo(`   📄 "${change.oldName}" → "${change.newName}"`);
         });
 
         if (actualChanges.length > 10) {
-          console.log(
+          logInfo(
             `   ... et ${actualChanges.length - 10} autre(s) fichier(s)`,
           );
         }
@@ -421,12 +422,12 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         ]);
 
         if (!confirmAnswer.confirm) {
-          console.log("🚫 Opération annulée.");
+          logInfo("🚫 Opération annulée.");
           return;
         }
 
         // Effectuer les changements
-        console.log("\n🔄 Renommage en cours...");
+        logInfo("\n🔄 Renommage en cours...");
         let successCount = 0;
         let errorCount = 0;
 
@@ -442,10 +443,10 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
           }
         }
 
-        console.log(`\n✅ Opération terminée :`);
-        console.log(`   - ${successCount} fichier(s) renommé(s) avec succès`);
+        logInfo(`\n✅ Opération terminée :`);
+        logInfo(`   - ${successCount} fichier(s) renommé(s) avec succès`);
         if (errorCount > 0) {
-          console.log(`   - ${errorCount} erreur(s)`);
+          logInfo(`   - ${errorCount} erreur(s)`);
         }
       } catch (error) {
         console.error("❌ Erreur lors de l'exécution :", error);

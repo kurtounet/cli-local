@@ -3,8 +3,8 @@ import inquirer from "inquirer";
 import * as fs from "fs-extra";
 import * as path from "path";
 import { logError, logInfo, logSuccess } from "../../utils/logger";
- 
-import { createConfigProject } from "@features/frameworks/services/get-config-frameworks.service";
+
+import { createConfigProject, createConfigProjectExisting } from "@features/frameworks/services/get-config-frameworks.service";
 import { IProjectCommand } from "@models/project-command.model";
 
 /**
@@ -15,15 +15,30 @@ import { IProjectCommand } from "@models/project-command.model";
 export function registerInitCommand(program: Command) {
   program
     .command("init")
+    .option("-e, --existence <existence>", "si le projet existe")
     .description(
       "Initialise un nouveau projet et crée un fichier de configuration.",
     )
     .action(async () => {
       logInfo("Initialisation d'un nouveau projet...");
       const frontend = ["Angular", "Nuxtjs", "Vuejs", " no"];
-      const backend = ["Nitro", "Nestjs", "Symfony", "Electron", "FastAPI", " no"];
+      const backend = [
+        "Nitro",
+        "Nestjs",
+        "Symfony",
+        "Electron",
+        "FastAPI",
+        " no",
+      ];
       const database = ["Mysql", "Postgres", "Mongodb", "Sqlite", "no"];
       const answers = await inquirer.prompt<IProjectCommand>([
+        {
+          type: "input",
+          name: "existence",
+          message: "Projet existant y/yes | n/no:",
+          validate: (input: string) =>
+            input.trim() !== "" ? true : "Le nom du projet est requis.",
+        },
         {
           type: "input",
           name: "name",
@@ -80,9 +95,15 @@ export function registerInitCommand(program: Command) {
       }
 
       try {
+        if (answers.existence === "y" || answers.existence === "yes") {
+           await fs.writeJson(configFilePath, createConfigProjectExisting(answers), {
+          spaces: 2,
+        });
+        } else {        
         await fs.writeJson(configFilePath, createConfigProject(answers), {
           spaces: 2,
         });
+      }
         logSuccess(`✅ Fichier de configuration créé : ${configFilePath}`);
         logSuccess(`🚀 Le fichier de configuration a été généré avec succès !`);
       } catch (err: unknown) {

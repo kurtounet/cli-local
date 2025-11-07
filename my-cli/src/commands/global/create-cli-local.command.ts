@@ -17,16 +17,18 @@ import {
 } from "@frameworks-models/framework-commun.model";
 import { switchGenerateFileFrameworkService } from "@features/frameworks/services/switch-generate-file-framework.service";
 import { logInfo } from "@utils/logger";
+import { log } from "console";
 
-export function registerCreateProjectCommand(program: Command) {
+export function registerCreateCliLocalCommand(program: Command) {
   program
-    .command("create-project")
-    .argument("<name>", "Nom du projet")    
+    .command("cli-local")
+    .argument("<directory>", "Répertoire du projet")
     .description(
-      "🚀 Création du projets Frontend et Backend a partir du fichier de configuration . ",
+      "🚀 Création du répertoire .cli-local pour le projet.",
     )
-    .action((name: string, opts) => {
-      logInfo("🗄️ Vérification du fichier config.json...");
+    .action((directory: string) => {
+     
+      logInfo("🚀 Création du répetoire .cli-local");
 
       // Vérifier si le fichier config.json existe
       const configPath = path.join(process.cwd(), `${name}-config.json`);

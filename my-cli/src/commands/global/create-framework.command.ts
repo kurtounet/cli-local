@@ -1,9 +1,9 @@
 import { executeCommand } from "@utils/execute-command";
 import { Command } from "commander";
 
-export function createFrameworkCommand(program: Command) {
+export function registerCreateFrameworkCommand(program: Command) {
   program
-    .command("new framework")
+    .command("framework")
     .argument("[arg]", "Argument de la commande")
     .description('Description de la commande "code"')
     .option("-o, --option", "Option de la commande")

@@ -1,7 +1,7 @@
 import { executeCommand } from "@utils/execute-command";
 import { Command } from "commander";
 
-export function codeCommand(program: Command) {
+export function registercodeCommand(program: Command) {
   program
     .command("code")
     .argument("[arg]", "Argument de la commande")

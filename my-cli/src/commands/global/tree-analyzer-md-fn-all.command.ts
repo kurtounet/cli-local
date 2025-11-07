@@ -1,6 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
+import { logInfo } from "@utils/logger";
 
 const DEFAULT_IGNORED_FOLDERS = [
   "node_modules",
@@ -228,23 +229,23 @@ export function registerTreeMarkdownFnAllCommand(program: Command): void {
         maxFunctionLines = 10,
       } = options;
 
-      console.log(
+      logInfo(
         `🌳 Generating Markdown tree for directory: ${resolvedDirectory}`,
       );
-      console.log(
+      logInfo(
         `📏 Maximum depth: ${depth === Infinity ? "unlimited" : depth}`,
       );
-      console.log(`📝 Output file: ${output}`);
+      logInfo(`📝 Output file: ${output}`);
       if (fileExtensions.length > 0) {
-        console.log(
+        logInfo(
           `🔍 File extensions to analyze: ${fileExtensions.join(", ")}`,
         );
       }
       if (showHidden) {
-        console.log(`👁️  Including hidden files`);
+        logInfo(`👁️  Including hidden files`);
       }
       if (includeSize) {
-        console.log(`📊 Including file sizes`);
+        logInfo(`📊 Including file sizes`);
       }
 
       try {
@@ -276,7 +277,7 @@ export function registerTreeMarkdownFnAllCommand(program: Command): void {
         const fullMarkdown = header + markdown;
 
         await fs.writeFile(output, fullMarkdown, "utf-8");
-        console.log(`\n✅ Markdown tree generated and saved to '${output}'.`);
+        logInfo(`\n✅ Markdown tree generated and saved to '${output}'.`);
       } catch (error: any) {
         console.error(
           `\n❌ Error occurred while generating tree: ${error.message}`,

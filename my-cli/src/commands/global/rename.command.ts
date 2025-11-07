@@ -2,6 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
 import inquirer from "inquirer";
+import { logInfo } from "@utils/logger";
 
 // Types pour les options de casse
 type CaseType =
@@ -126,7 +127,7 @@ async function renameFiles(
   let renamed = 0;
   let skipped = 0;
 
-  console.log(
+  logInfo(
     `\n🔄 ${options.dryRun ? "Simulation" : "Renommage"} des fichiers en ${options.caseType}...\n`,
   );
 
@@ -150,7 +151,7 @@ async function renameFiles(
     // Vérifier si le nom change
     if (path.basename(filePath) !== newFileName) {
       if (options.dryRun) {
-        console.log(
+        logInfo(
           `📝 ${path.relative(process.cwd(), filePath)} → ${newFileName}`,
         );
       } else {
@@ -163,7 +164,7 @@ async function renameFiles(
           }
 
           await fs.rename(filePath, newFilePath);
-          console.log(
+          logInfo(
             `✅ ${path.relative(process.cwd(), filePath)} → ${newFileName}`,
           );
           renamed++;
@@ -176,12 +177,12 @@ async function renameFiles(
   }
 
   if (!options.dryRun) {
-    console.log(
+    logInfo(
       `\n📊 Résumé: ${renamed} fichiers renommés, ${skipped} ignorés`,
     );
   } else {
-    console.log("\n📋 Mode simulation - aucun fichier n'a été renommé");
-    console.log("💡 Relancez sans --dry-run pour appliquer les changements");
+    logInfo("\n📋 Mode simulation - aucun fichier n'a été renommé");
+    logInfo("💡 Relancez sans --dry-run pour appliquer les changements");
   }
 }
 
@@ -201,11 +202,11 @@ async function runRenameCommand(
     const allFiles = await getFilesRecursively(directory, options.depth);
 
     if (allFiles.length === 0) {
-      console.log("📭 Aucun fichier trouvé dans le répertoire spécifié");
+      logInfo("📭 Aucun fichier trouvé dans le répertoire spécifié");
       return;
     }
 
-    console.log(`📁 ${allFiles.length} fichiers trouvés dans "${directory}"`);
+    logInfo(`📁 ${allFiles.length} fichiers trouvés dans "${directory}"`);
 
     // Questions Inquirer
     const answers = await inquirer.prompt([
@@ -255,27 +256,27 @@ async function runRenameCommand(
     );
 
     if (filteredFiles.length === 0) {
-      console.log("📭 Aucun fichier ne correspond au pattern spécifié");
+      logInfo("📭 Aucun fichier ne correspond au pattern spécifié");
       return;
     }
 
     if (answers.filePattern) {
-      console.log(
+      logInfo(
         `🔍 ${filteredFiles.length} fichiers correspondent au pattern "${answers.filePattern}"`,
       );
     }
 
     // Aperçu des conversions
-    console.log("\n📋 Aperçu des conversions:");
+    logInfo("\n📋 Aperçu des conversions:");
     const converter = caseConverters[answers.caseType as CaseType];
     const examples = filteredFiles.slice(0, 5).map((file) => {
       const name = path.basename(file, path.extname(file));
       return `  ${name} → ${converter(name)}`;
     });
-    console.log(examples.join("\n"));
+    logInfo(examples.join("\n"));
 
     if (filteredFiles.length > 5) {
-      console.log(`  ... et ${filteredFiles.length - 5} autres fichiers`);
+      logInfo(`  ... et ${filteredFiles.length - 5} autres fichiers`);
     }
 
     // Confirmation finale si ce n'est pas un dry run
@@ -290,7 +291,7 @@ async function runRenameCommand(
       ]);
 
       if (!confirm.proceed) {
-        console.log("❌ Opération annulée");
+        logInfo("❌ Opération annulée");
         return;
       }
     }

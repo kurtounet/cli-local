@@ -19,29 +19,41 @@ import { registerRenameCommand } from "./global/rename.command";
 import { registerSfSingleCommand } from "./framework/symfony/sf-single.command";
 import { registerSfAllCommand } from "./framework/symfony/sf-all.command";
 import { registerAddPerfixSuffixFileCommand } from "./global/prefix-file.commande";
-import { codeCommand } from "./global/code.command";
+import { registercodeCommand } from "./global/code.command";
 import { registerNitroCommand } from "./framework/nitro/nitro.command";
 import { registerNitroAllCommand } from "./framework/nitro/nitro-all.command";
 import { registerNitroSingleCommand } from "./framework/nitro/nitro-single.command";
 import { testCommand } from "./global/test.command";
-import { createFrameworkCommand } from "./global/create-framework.command";
-import { createCommandCommand } from "./global/create-command.command";
+import { registerCreateFrameworkCommand } from "./global/create-framework.command";
+import { registerCreateCommandCommand } from "./global/create-command.command";
+import { registerZodCommand } from "./global/zod.command";
+import { registerApiCommand } from "./global/api.command";
+import { registerScaffoldCommand } from "./global/scaffold.command";
+import { registerNuxtAllCommand } from "./framework/nuxt/nuxt-all.command";
+import { registerNuxtSingleCommand } from "./framework/nuxt/nuxt-single.command";
+import { registerMdjNewCommand } from "./framework/mdj/mdj-create.command";
+import { registerMdjUpdateCommand } from "./framework/mdj/mdj-update.command";
+import { registerCreateCliLocalCommand } from "./global/create-cli-local.command";
+import { registerGeminiCommand } from "./framework/gemini/gemini.command";
 
 /**
  * Registers all commands with the Commander program.
  * @param program The Commander program instance.
  */
 export function registerAllCommands(program: Command) {
+  registerScaffoldCommand(program);
   // command for tested
   testCommand(program);
   // Global
-  createCommandCommand(program);
-  createFrameworkCommand(program);
+  registerCreateCliLocalCommand(program); 
+  registerCreateCommandCommand(program);
+  registerCreateFrameworkCommand(program);
   registerInitCommand(program);
   registerCreateProjectCommand(program);
   registerHelpCommand(program);
-  codeCommand(program);
+  registercodeCommand(program);
   /* Tools */
+  registerZodCommand(program);
   // Tree
   registerTreeMdCommand(program);
   registerTreeJsonCommand(program);
@@ -60,12 +72,25 @@ export function registerAllCommands(program: Command) {
   registerNestCommand(program);
   registerNestAllCommand(program);
   registerNestSingleCommand(program);
+  // Angular
   registerNgCommand(program);
+  // registerNgSingleCommand(program);
+  // registerNgAllCommand(program);
   // Symfony
   registerSfCommand(program);
   registerSfSingleCommand(program);
   registerSfAllCommand(program);
   // Nuxt
   registerNuxtCommand(program);
+  registerNuxtSingleCommand(program);
+  registerNuxtAllCommand(program);
+  // MDJ
   registerMdjCommand(program);
+  registerMdjNewCommand(program);
+  registerMdjUpdateCommand(program);
+
+  // API
+  registerApiCommand(program);
+
+  registerGeminiCommand(program);
 }

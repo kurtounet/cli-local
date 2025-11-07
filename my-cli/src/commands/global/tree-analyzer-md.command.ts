@@ -1,6 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
+import { logInfo } from "@utils/logger";
 
 const DEFAULT_IGNORED_FOLDERS = [
   "node_modules",
@@ -74,18 +75,18 @@ export function registerTreeMarkdownCommand(program: Command) {
         const depth = options.depth ?? Infinity;
         const outputFile = options.output;
 
-        console.log(
+        logInfo(
           `Génération de l'arborescence Markdown pour le dossier: ${resolvedDirectory}`,
         );
-        console.log(
+        logInfo(
           `Profondeur maximale: ${depth === Infinity ? "illimitée" : depth}`,
         );
-        console.log(`Fichier de sortie: ${outputFile}`);
+        logInfo(`Fichier de sortie: ${outputFile}`);
 
         try {
           const markdown = await generateTreeMarkdown(resolvedDirectory, depth);
           await fs.writeFile(outputFile, markdown, "utf-8");
-          console.log(
+          logInfo(
             `\n✅ Arborescence Markdown générée et sauvegardée dans '${outputFile}'.`,
           );
         } catch (error: any) {

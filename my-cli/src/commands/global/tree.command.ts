@@ -2,6 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
 import { saveFileAsync } from "@utils/file-utils";
+import { logInfo } from "@utils/logger";
 
 const DEFAULT_IGNORED_FOLDERS = [
   "node_modules",
@@ -25,7 +26,7 @@ export function registerTreeMdCommand(program: Command) {
       const depth = options.depth ?? Infinity;
       const markdown = generateTreeMarkdown(directory, depth);
       saveFileAsync("arborescence.md", markdown);
-      console.log("✅ ###### Arborescence Markdown ######");
+      logInfo("✅ ###### Arborescence Markdown ######");
     });
 }
 /**

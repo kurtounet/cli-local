@@ -10,8 +10,19 @@ export const FRAMEWORKS_LIST_ALL = [
   "fastapi",
   "nuxtjs",
   "nextjs",
-]
-export const FRAMEWORKS_LIST = ["angular", "symfony", "electron", "nestjs", "nitro", "react", "vue", "fastapi", "nuxtjs", "nextjs"];
+];
+export const FRAMEWORKS_LIST = [
+  "angular",
+  "symfony",
+  "electron",
+  "nestjs",
+  "nitro",
+  "react",
+  "vue",
+  "fastapi",
+  "nuxtjs",
+  "nextjs",
+];
 export const FRAMEWORKS_LIST_BACKEND: string[] = ["Angular", "Vuejs"];
 export const FRAMEWORKS_LIST_FRONTEND: string[] = [
   "Nestjs",

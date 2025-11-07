@@ -1,6 +1,7 @@
 import * as fs from "fs-extra"; // Utilisation de fs-extra comme demandé
 import * as path from "path";
 import { Command } from "commander";
+import { logInfo } from "@utils/logger";
 
 // Assurez-vous que cette classe TreeAnalyzerJson est dans un fichier séparé
 // par exemple, 'src/treeAnalyzer.ts' et que vous l'exportez.
@@ -337,8 +338,8 @@ class TreeAnalyzerJson {
   }
 
   public async run(): Promise<void> {
-    console.log(`Analyse du répertoire: ${this.rootPath}`);
-    console.log(`Fichier de sortie: ${this.outputFile}`);
+    logInfo(`Analyse du répertoire: ${this.rootPath}`);
+    logInfo(`Fichier de sortie: ${this.outputFile}`);
 
     try {
       const stats = await fs.stat(this.rootPath);
@@ -372,13 +373,13 @@ class TreeAnalyzerJson {
         JSON.stringify(outputData, null, 2),
         "utf-8",
       );
-      console.log(
+      logInfo(
         `\n✅ Analyse terminée ! Consultez le fichier '${this.outputFile}'`,
       );
 
       const totalFiles = this.countFiles(structure);
       const totalFunctions = this.countFunctions(structure);
-      console.log(
+      logInfo(
         `📊 Résumé: ${totalFiles} fichiers analysés, ${totalFunctions} fonctions et classes trouvées.`,
       );
     } catch (e: any) {
@@ -407,8 +408,8 @@ export function registerTreeJsonCommand(program: Command) {
       "Analyse l'arborescence d'un dossier et génère un fichier JSON détaillé avec les fonctions/classes.",
     )
     .action(async (directory: string, options: { output: string }) => {
-      console.log(`Lancement de l'analyse JSON pour le dossier: ${directory}`);
-      console.log(`Fichier de sortie: ${options.output}`);
+      logInfo(`Lancement de l'analyse JSON pour le dossier: ${directory}`);
+      logInfo(`Fichier de sortie: ${options.output}`);
 
       try {
         const analyzer = new TreeAnalyzerJson(directory, options.output);

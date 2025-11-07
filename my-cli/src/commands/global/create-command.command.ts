@@ -1,9 +1,9 @@
 import { executeCommand } from "@utils/execute-command";
 import { Command } from "commander";
 
-export function createCommandCommand(program: Command) {
+export function registerCreateCommandCommand(program: Command) {
   program
-    .command("new command")
+    .command("new:command", "Create a new command")
     .argument("[arg]", "Argument de la commande")
     .description('Description de la commande "code"')
     .option("-o, --option", "Option de la commande")

@@ -23,8 +23,8 @@ export function registerSfAllCommand(program: Command) {
       "Gère la génération de modules, contrôleurs, services, entités, etc., spécifiques à symfony.",
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
-    .action(async (type: string, name: string, options: { path?: string }) => {
-      logInfo(`Génération d'un ${type} symfony nommé ${name}...`);
+    .action(async () => {
+       
 
       const frameworkPath: string = process.cwd();
       const allpathFileCliLocal: ICliLocalPathFile =
@@ -34,6 +34,9 @@ export function registerSfAllCommand(program: Command) {
       );
       const globalConfig: IProjectConfig = getCliLocalFile(
         allpathFileCliLocal.globalConfig,
+      );
+      const framework: IFramework = getCliLocalFile(
+        allpathFileCliLocal.thisProjectConfig,
       );
 
       const actions = [
@@ -121,6 +124,7 @@ export function registerSfAllCommand(program: Command) {
         if (option === "ALL") {
           symfonyGenerateFilesFramework(
             globalConfig,
+            framework,
             frameworkPath,
             entitiesJsonFile,
           );

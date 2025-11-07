@@ -10,6 +10,7 @@ import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import inquirer from "inquirer";
 import { executeCommand } from "@utils/execute-command";
+import { IProjectConfig } from "@features/project/models/project.models";
 
 export function registerSfSingleCommand(program: Command) {
   program
@@ -18,17 +19,20 @@ export function registerSfSingleCommand(program: Command) {
       "Gère la génération de modules, contrôleurs, services, entités, etc., spécifiques à symfony.",
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
-    .action(async (type: string, name: string, options: { path?: string }) => {
-      logInfo(`Génération d'un ${type} symfony nommé ${name}...`);
+    .action(async () => {
+       
 
-      const processPath = process.cwd();
-      const frameworkPath: string = processPath;
-      const allpathFileCliLocal: ICliLocalPathFile =
-        getCliLocalConfigFile(processPath);
+      const rootPathProjectFramework: string = process.cwd();
+      const allpathFileCliLocal: ICliLocalPathFile = getCliLocalConfigFile(
+        rootPathProjectFramework,
+      );
       const entitiesJsonFile: IEntityJson[] = getCliLocalFile(
         allpathFileCliLocal.entities,
       );
-      const thisProjectConfig: IFramework = getCliLocalFile(
+      const ProjectConfig: IProjectConfig = getCliLocalFile(
+        allpathFileCliLocal.thisProjectConfig,
+      );
+      const ProjectFramework: IFramework = getCliLocalFile(
         allpathFileCliLocal.thisProjectConfig,
       );
 
@@ -58,64 +62,64 @@ export function registerSfSingleCommand(program: Command) {
       ]);
       cmd.options.forEach((option: string) => {
         if (option === "Account/Anthentication") {
-          // symfonysymfonyCreateAccountModule(frameworkPath);
-          // symfonysymfonyCreateAuths(frameworkPath);
+          // symfonysymfonyCreateAccountModule(rootPathProjectFramework);
+          // symfonysymfonyCreateAuths(rootPathProjectFramework);
         }
         if (option === "Anthentication") {
-          // symfonyCreateAuthsymfony(frameworkPath);
+          // symfonyCreateAuthsymfony(rootPathProjectFramework);
         }
         if (option === "Account") {
-          // symfonysymfonyCreateAccountModule(frameworkPath);
+          // symfonysymfonyCreateAccountModule(rootPathProjectFramework);
         }
         if (option === "Anthentication") {
-          // symfonyCreateAuthsymfony(frameworkPath);
+          // symfonyCreateAuthsymfony(rootPathProjectFramework);
         }
         if (option === "Bdd") {
-          // databaseConfigsymfony(frameworkPath, thisProjectConfig);
+          // databaseConfigsymfony(rootPathProjectFramework, thisProjectConfig);
         }
         if (option === "Environments") {
-          // symfonyCreateEnvironmentssymfony(frameworkPath, thisProjectConfig);
+          // symfonyCreateEnvironmentssymfony(rootPathProjectFramework, thisProjectConfig);
         }
         if (option === "Config") {
-          // symfonyCreateConfigProjectsymfony(frameworkPath);
+          // symfonyCreateConfigProjectsymfony(rootPathProjectFramework);
         }
         if (option === "Dependencies") {
         }
         if (option === "Entity") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // symfonyCreateEntitysymfony(frameworkPath, entity);
+              // symfonyCreateEntitysymfony(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Dto") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // symfonyCreateDtosymfony(frameworkPath, entity);
+              // symfonyCreateDtosymfony(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Controller") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // symfonyCreateControllersymfony(frameworkPath, entity);
+              // symfonyCreateControllersymfony(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Service") {
           if (Array.isArray(entitiesJsonFile)) {
             entitiesJsonFile.forEach((entity: IEntityJson) => {
-              // symfonyCreateServicesymfony(frameworkPath, entity);
+              // symfonyCreateServicesymfony(rootPathProjectFramework, entity);
             });
           }
         }
         if (option === "Seeder") {
           if (Array.isArray(entitiesJsonFile)) {
-            // symfonyCreateSeedersymfony(frameworkPath, entitiesJsonFile);
+            // symfonyCreateSeedersymfony(rootPathProjectFramework, entitiesJsonFile);
           }
         }
         if (option === "ALL") {
-          // symfonyCreateEnvironment(frameworkPath, thisProjectConfig);
+          // symfonyCreateEnvironment(rootPathProjectFramework, thisProjectConfig);
           let entitiesModule: Array<{
             entityNamePascalCase: string;
             entityNameKebabCase: string;
@@ -127,27 +131,40 @@ export function registerSfSingleCommand(program: Command) {
                 entityNameKebabCase: `${entity.nameKebabCase}`,
               };
               entitiesModule.push(entityModule);
-              // symfonyGenerateFeature(frameworkPath, entity);
+              // symfonyGenerateFeature(rootPathProjectFramework, entity);
             });
           }
-          // symfonyCreateFixtures(frameworkPath, entitiesJsonFile);
-          // symfonyCreateAuth(frameworkPath);
-          // symfonyCreateAccoun(frameworkPath);
-          // symfonyCreateDto(frameworkPath, entitiesJsonFile);
-          // symfonyCreateController(frameworkPath, entitiesJsonFile);
-          // symfonyCreateService(frameworkPath, entitiesJsonFile);
-          // symfonyCreateSeeder(frameworkPath, entitiesJsonFile);
-          // symfonyCreateEntity(frameworkPath, entitiesJsonFile);
-          // symfonyCreateConfigProject(frameworkPath);
-          // symfonyCreateEnvironments(frameworkPath, thisProjectConfig);
+          // symfonyCreateFixtures(rootPathProjectFramework, entitiesJsonFile);
+          // symfonyCreateAuth(rootPathProjectFramework);
+          // symfonyCreateAccoun(rootPathProjectFramework);
+          // symfonyCreateDto(rootPathProjectFramework, entitiesJsonFile);
+          // symfonyCreateController(rootPathProjectFramework, entitiesJsonFile);
+          // symfonyCreateService(rootPathProjectFramework, entitiesJsonFile);
+          // symfonyCreateSeeder(rootPathProjectFramework, entitiesJsonFile);
+          // symfonyCreateEntity(rootPathProjectFramework, entitiesJsonFile);
+          // symfonyCreateConfigProject(rootPathProjectFramework);
+          // symfonyCreateEnvironments(rootPathProjectFramework, thisProjectConfig);
         }
       });
       executeCommand(
         "npm run format",
-        { cwd: `${frameworkPath}`, stdio: "inherit" },
+        { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
         `🚀 Lancement du Formatage`,
         `✅ Formatage lancé avec succès !`,
         `❌ Erreur lors du Formatage !`,
       );
     });
 }
+
+// type EntityHandler = (rootPathProjectFramework: string, entity: IEntityJson) => void | Promise<void>;
+
+// function forEachEntity(
+//   entities: IEntityJson[] | undefined,
+//   rootPathProjectFramework: string,
+//   handler: EntityHandler
+// ): void | Promise<void> {
+//   if (!Array.isArray(entities)) return;
+//   for (const entity of entities) {
+//     handler(rootPathProjectFramework, entity);
+//   }
+// }

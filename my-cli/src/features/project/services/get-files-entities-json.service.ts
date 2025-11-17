@@ -38,10 +38,10 @@ export function getFilesEntitiesJson(mdjFile: string): IGetEntityJson | string {
   //       { cwd: `${frameWorkPath}`, stdio: "inherit" },
   //       `🚀 Création du commit Initiale`,
   //       `✅ Commit créé avec succès !`,
-  //       `❌ Erreur lors du commit !`
+  //       `${EMOJI.error} Erreur lors du commit !`
   //     );
   //   } catch (error) {
-  //     return `❌ Erreur lors de la création de l'architecture !`;
+  //     return `${EMOJI.error} Erreur lors de la création de l'architecture !`;
   //   }
   // } else {
   //   return `✅ Aucune architecture à créer !`;

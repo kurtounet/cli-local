@@ -152,7 +152,7 @@
 //             { cwd: `${frameworkPath}`, stdio: 'inherit' },
 //             `🚀 Lancement du Formatage`,
 //             `✅ Formatage lancé avec succès !`,
-//             `❌ Erreur lors du Formatage !`,
+//             `${EMOJI.error} Erreur lors du Formatage !`,
 //         );
 
 //       // const targetPath = options.path || process.cwd();

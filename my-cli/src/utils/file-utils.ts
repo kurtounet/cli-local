@@ -120,7 +120,7 @@ export function buildAndsaveFile(filePath: string, content: string) {
     saveFileSync(filePath, content);
     logInfo(filePath);
   } catch (err) {
-    console.error("❌ Échec lors de la sauvegarde :", err);
+    console.error("${EMOJI.error} Échec lors de la sauvegarde :", err);
   }
 }
 /**
@@ -133,7 +133,7 @@ export function existFile(filePath: string): boolean {
   try {
     return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
   } catch (err) {
-    console.error("❌  Erreur lors de la vérification du fichier :", err);
+    console.error("${EMOJI.error}  Erreur lors de la vérification du fichier :", err);
     return false;
   }
 }
@@ -141,7 +141,7 @@ export function ensureDir(filePath: string) {
   try {
     fs.ensureDirSync(filePath);
   } catch (err) {
-    console.error("❌  Erreur lors de la vérification du fichier :", err);
+    console.error("${EMOJI.error}  Erreur lors de la vérification du fichier :", err);
     return false;
   }
 }

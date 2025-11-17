@@ -1,7 +1,8 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 const DEFAULT_IGNORED_FOLDERS = [
   "node_modules",
@@ -90,8 +91,8 @@ export function registerTreeMarkdownCommand(program: Command) {
             `\n✅ Arborescence Markdown générée et sauvegardée dans '${outputFile}'.`,
           );
         } catch (error: any) {
-          console.error(
-            `\n❌ Une erreur est survenue lors de la génération de l'arborescence : ${error.message}`,
+          logError(
+            `\n${EMOJI.error} Une erreur est survenue lors de la génération de l'arborescence : ${error.message}`,
           );
           process.exit(1);
         }

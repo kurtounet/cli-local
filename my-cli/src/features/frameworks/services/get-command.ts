@@ -9,6 +9,7 @@ import {
 } from "@constants/global.constants";
 import { IFramework } from "../models/framework-commun.model";
 import { logError } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 /**
  * Generates the appropriate command string for creating a new framework project.
@@ -22,7 +23,7 @@ export function getCommandFramework(
 ) {
   let options = ``;
   if (!frameWork) {
-    console.error("❌ Framework non renseigné.");
+    console.error("${EMOJI.error} Framework non renseigné.");
     process.exit(1);
   }
   if (
@@ -54,7 +55,7 @@ export function getCommandFramework(
   ) {
     return `npx create-next-app ${projectName}`;
   } else {
-    logError(`❌ Framework frameWork non reconnu.`);
+    logError(`${EMOJI.error} Framework frameWork non reconnu.`);
     return `not-found`;
     //process.exit(1);
   }

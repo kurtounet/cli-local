@@ -8,6 +8,7 @@ import { symfonyGenerateDtoService } from "./symfony-generate-dtos.service";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { symfonyGenerateEntityService } from "./symfony-generate-entities.service";
 import { logInfo } from "@utils/logger";
+import { messageInstallationFramework } from "@constants/messages";
 
 export function symfonyGenerateFilesFramework(
   configFile: IProjectConfig,
@@ -16,6 +17,7 @@ export function symfonyGenerateFilesFramework(
   entitiesJsonFile: object,
   //  symfonyGenerateFilesFramework(thisProjectConfig, frameworkPath, entitiesJsonFile);
 ) {
+  logInfo(messageInstallationFramework(framework.name));
   // const framework = globalConfig.frameWorks.filter(
   //   (framework) => framework.name === "symfony",
   // )[0];
@@ -30,8 +32,12 @@ export function symfonyGenerateFilesFramework(
       symfonyGenerateEntityService(rootPathProjectFramework, entity);
     });
   }
-  // Logique de génération de fichiers symfony ici
+  /* Logique de génération de fichiers symfony ici */
   // symfonyGenerateFixturesService(frameworkPath, entitiesJsonFile){};
+  // symfonyGenerateLoginService(frameworkPath){};
+  // symfonyGenerateRegisterService(frameworkPath){};
+  // symfonyGeneratePasswordResetService(frameworkPath){};
+  // symfonyGenerateLoginService(frameworkPath){};
   // symfonyGenerateAuthService(frameworkPath){};
   // symfonyGenerateAccounService(frameworkPath){};
 
@@ -41,14 +47,14 @@ export function symfonyGenerateFilesFramework(
         { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
         `🚀 Lancement de VSCode`,
         `✅ VSCode lancé avec succès !`,
-        `❌ Erreur lors du lancement de VSCode !`,
+        `${EMOJI.error} Erreur lors du lancement de VSCode !`,
     );
   executeCommand(
       `symfony server:start --no-tls`,
       { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
       `🚀 Lancement du serveur`,
       `✅ Serveur lancé avec succès !`,
-      `❌ Erreur lors du lancement du serveur !`,
+      `${EMOJI.error} Erreur lors du lancement du serveur !`,
   );*/
   logInfo("Génération de fichiers symfony");
 }

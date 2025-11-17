@@ -11,6 +11,7 @@ import { IFramework } from "@frameworks-models/framework-commun.model";
 import inquirer from "inquirer";
 import { executeCommand } from "@utils/execute-command";
 import { IProjectConfig } from "@features/project/models/project.models";
+import { EMOJI } from "@constants/messages";
 
 export function registerSfSingleCommand(program: Command) {
   program
@@ -151,7 +152,7 @@ export function registerSfSingleCommand(program: Command) {
         { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
         `🚀 Lancement du Formatage`,
         `✅ Formatage lancé avec succès !`,
-        `❌ Erreur lors du Formatage !`,
+        `${EMOJI.error} Erreur lors du Formatage !`,
       );
     });
 }

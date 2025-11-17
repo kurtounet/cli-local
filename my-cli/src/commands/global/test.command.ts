@@ -13,7 +13,7 @@ export function testCommand(program: Command) {
       //   { stdio: "inherit" },
       //   `Ouverture de Visual Studio test`,
       //   `✅ Visual Studio test ouvert !`,
-      //   `❌ Erreur lors de l'ouverture de Visual Studio test !`,
+      //   `${EMOJI.error} Erreur lors de l'ouverture de Visual Studio test !`,
       // );
     });
 }

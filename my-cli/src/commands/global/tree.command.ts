@@ -2,7 +2,8 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
 import { saveFileAsync } from "@utils/file-utils";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 const DEFAULT_IGNORED_FOLDERS = [
   "node_modules",
@@ -76,11 +77,11 @@ function generateTreeMarkdown(
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error(
-        `❌ Erreur lors de la lecture du dossier : ${error.message}`,
+      logError(
+        `${EMOJI.error} Erreur lors de la lecture du dossier : ${error.message}`,
       );
     } else {
-      console.error(" ❌ Une erreur inconnue est survenue.");
+      console.error(" ${EMOJI.error} Une erreur inconnue est survenue.");
     }
   }
 

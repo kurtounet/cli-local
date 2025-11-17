@@ -1,3 +1,4 @@
+import { EMOJI } from "@constants/messages";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { executeCommand } from "@utils/execute-command";
 
@@ -23,6 +24,6 @@ export function launchTests(frameworkProjectPath: string) {
     { cwd: `${frameworkProjectPath}`, stdio: "inherit" },
     `🚀 Lancement des test`,
     `✅ Tests lancé avec succès !`,
-    `❌ Erreur lors des tests !`,
+    `${EMOJI.error} Erreur lors des tests !`,
   );
 }

@@ -13,6 +13,7 @@ import { ICliLocalPathFile } from "types/common";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { nitroGenerateFilesFramework } from "@nitro/services/nitro-generate-files-framework.service";
 import { IProjectConfig } from "@features/project/models/project.models";
+import { EMOJI } from "@constants/messages";
 
 export function registerNitroAllCommand(program: Command) {
   program
@@ -130,14 +131,14 @@ export function registerNitroAllCommand(program: Command) {
         { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
         `🚀 Lancement du Formatage`,
         `✅ Formatage lancé avec succès !`,
-        `❌ Erreur lors du Formatage !`,
+        `${EMOJI.error} Erreur lors du Formatage !`,
       );
       executeCommand(
         `npm run db:cp`,
         { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
         `🚀 Génération de la base de données`,
         `✅ Génération de la base de données avec succès !`,
-        `❌ Erreur lors de laGénération de la base de données !`,
+        `${EMOJI.error} Erreur lors de laGénération de la base de données !`,
       );
 
       // const targetPath = options.path || process.cwd();

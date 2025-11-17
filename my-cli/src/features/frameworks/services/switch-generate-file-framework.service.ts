@@ -56,7 +56,7 @@ export function switchGenerateFileFrameworkService(
       //   { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
       //   `🚀 Génération de la base de données`,
       //   `✅ Génération de la base de données avec succès !`,
-      //   `❌ Erreur lors de laGénération de la base de données !`,
+      //   `${EMOJI.error} Erreur lors de laGénération de la base de données !`,
       // );
  
       break;

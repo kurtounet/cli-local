@@ -80,14 +80,14 @@ export function nitroGenerateFilesFramework(
        { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
        `🚀 Lancement de VSCode`,
        `✅ VSCode lancé avec succès !`,
-       `❌ Erreur lors du lancement de VSCode !`,
+       `${EMOJI.error} Erreur lors du lancement de VSCode !`,
    );
    executeCommand(
        `npm run start:dev`,
        { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
        `🚀 Lancement du serveur`,
        `✅ Serveur lancé avec succès !`,
-       `❌ Erreur lors du lancement du serveur !`,
+       `${EMOJI.error} Erreur lors du lancement du serveur !`,
    );
    */
 // updateFiles(rootPathProjectFramework);

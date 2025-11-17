@@ -1,6 +1,7 @@
 import path from "path";
 import * as fs from "fs";
 import { executeCommand } from "@utils/execute-command";
+import { EMOJI } from "@constants/messages";
 
 export function updateGitIgnore(
   frameworkProjectPath: string,
@@ -32,7 +33,7 @@ export function gitCommit(frameworkPath: string, message: string): boolean {
     { cwd: `${frameworkPath}`, stdio: "inherit" },
     `🚀 Création du commit ${message}`,
     `✅ Commit création avec succès !`,
-    `❌ Erreur lors du commit !`,
+    `${EMOJI.error} Erreur lors du commit !`,
   );
   return true;
 }
@@ -43,7 +44,7 @@ export function gitCommitAndPush(message: string): boolean {
     { stdio: "inherit" },
     `🚀 Création du commit Initiale`,
     `✅ Commit création avec succès !`,
-    `❌ Erreur lors du commit !`,
+    `${EMOJI.error} Erreur lors du commit !`,
   );
   return true;
 }

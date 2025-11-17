@@ -1,6 +1,7 @@
 import { executeCommand } from "@utils/execute-command";
 import { IDependencies, IFramework } from "../models/framework-commun.model";
 import { logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 export async function installTSDependencies(
   framework: IFramework,
@@ -16,7 +17,7 @@ export async function installTSDependencies(
       { cwd: path, stdio: "inherit" },
       `📦 Installation de ${dep}`,
       `✅ Dépendances de production installées avec succès !`,
-      `❌ Erreur lors de l'installation des dépendances de production !`,
+      `${EMOJI.error} Erreur lors de l'installation des dépendances de production !`,
     );
   });
   framework.dependencies.dev.forEach((dep: string) => {
@@ -26,7 +27,7 @@ export async function installTSDependencies(
       { cwd: path, stdio: "inherit" },
       `📦 Installation de ${dep}`,
       `✅ Dépendances de production installées avec succès !`,
-      `❌ Erreur lors de l'installation des dépendances de production !`,
+      `${EMOJI.error} Erreur lors de l'installation des dépendances de production !`,
     );
   });
   /*
@@ -54,7 +55,7 @@ export async function installTSDependencies(
                 { cwd: path, stdio: "inherit" },
                 "📦 Installation des dépendances de production...",
                 "✅ Dépendances de production installées avec succès !",
-                "❌ Erreur lors de l'installation des dépendances de production !"
+                "${EMOJI.error} Erreur lors de l'installation des dépendances de production !"
             )
         );
     }
@@ -66,7 +67,7 @@ export async function installTSDependencies(
                 { cwd: path, stdio: "inherit" },
                 "📦 Installation des dépendances de développement...",
                 "✅ Dépendances de développement installées avec succès !",
-                "❌ Erreur lors de l'installation des dépendances de développement !"
+                "${EMOJI.error} Erreur lors de l'installation des dépendances de développement !"
             )
         );
     }
@@ -81,7 +82,7 @@ export async function installTSDependencies(
             { cwd: path, stdio: "inherit" },
             "📌 Commit des dépendances de production...",
             "✅ Commit des dépendances de production créé avec succès !",
-            "❌ Erreur lors du commit des dépendances de production !"
+            "${EMOJI.error} Erreur lors du commit des dépendances de production !"
         );
     }
 
@@ -91,7 +92,7 @@ export async function installTSDependencies(
             { cwd: path, stdio: "inherit" },
             "📌 Commit des dépendances de développement...",
             "✅ Commit des dépendances de développement créé avec succès !",
-            "❌ Erreur lors du commit des dépendances de développement !"
+            "${EMOJI.error} Erreur lors du commit des dépendances de développement !"
         );
     }
 
@@ -115,7 +116,7 @@ export function installComposerDependencies(
       { cwd: path, stdio: "inherit" },
       `📦 Installation de ${dep}`,
       `✅ Dépendances de production installées avec succès !`,
-      `❌ Erreur lors de l'installation des dépendances de production !`,
+      `${EMOJI.error} Erreur lors de l'installation des dépendances de production !`,
     );
   });
   framework.dependencies.dev.forEach((dep: string) => {
@@ -125,7 +126,7 @@ export function installComposerDependencies(
       { cwd: path, stdio: "inherit" },
       `📦 Installation de ${dep}`,
       `✅ Dépendances de production installées avec succès !`,
-      `❌ Erreur lors de l'installation des dépendances de production !`,
+      `${EMOJI.error} Erreur lors de l'installation des dépendances de production !`,
     );
   });
 }

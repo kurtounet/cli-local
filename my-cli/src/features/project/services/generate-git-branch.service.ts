@@ -1,3 +1,5 @@
+ 
+import { EMOJI, messageCreateBranch } from "@constants/messages";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { executeCommand } from "@utils/execute-command";
 import { logInfo } from "@utils/logger";
@@ -6,6 +8,7 @@ export function generateGitBranch(
   frameWork: IFramework,
   frameWorkPath: string,
 ): string {
+  logInfo(messageCreateBranch());
   if (frameWork?.gitBranch) {
     let command = "";
     frameWork.gitBranch.forEach((branchName, index) => {
@@ -22,10 +25,10 @@ export function generateGitBranch(
       { cwd: `${frameWorkPath}`, stdio: "inherit" },
       `🚀 Création des branches`,
       `✅ Création des branches avec succès !`,
-      `❌ Erreur lors création des branches !`,
+      `${EMOJI.error} Erreur lors création des branches !`,
     );
   } else {
-    return `❌ Erreur lors de la création des branches !`;
+    return `${EMOJI.error} Erreur lors de la création des branches !`;
   }
   return `✅ Branch git créée avec succès !`;
 }

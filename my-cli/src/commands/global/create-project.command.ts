@@ -17,6 +17,7 @@ import {
 } from "@frameworks-models/framework-commun.model";
 import { switchGenerateFileFrameworkService } from "@features/frameworks/services/switch-generate-file-framework.service";
 import { logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 export function registerCreateProjectCommand(program: Command) {
   program
@@ -31,33 +32,33 @@ export function registerCreateProjectCommand(program: Command) {
       // Vérifier si le fichier config.json existe
       const configPath = path.join(process.cwd(), `${name}-config.json`);
       if (!fs.existsSync(configPath)) {
-        console.error(`❌ Le fichier ${name}-config.json est introuvable !`);
+        console.error(`${EMOJI.error} Le fichier ${name}-config.json est introuvable !`);
         process.exit(1);
       }
 
       const configFile: IProjectConfig = fs.readJsonSync(configPath);
       if (!configFile) {
         console.error(
-          `❌ Erreur lors de la lecture du fichier ${name}-config.json!`,
+          `${EMOJI.error} Erreur lors de la lecture du fichier ${name}-config.json!`,
         );
         process.exit(1);
       }
 
       const verifiedFile = verifiedFileConfig(configFile);
       if (typeof verifiedFile === "string") {
-        console.error(`❌ ${verifiedFile} !`);
+        console.error(`${EMOJI.error} ${verifiedFile} !`);
         process.exit(1);
       }
       // ok
       if (!configFile.starUml || configFile.starUml.length === 0) {
         console.error(
-          `❌ Le fichier starUml n'est pas renseigné dans le fichier de configuration.`,
+          `${EMOJI.error} Le fichier starUml n'est pas renseigné dans le fichier de configuration.`,
         );
         process.exit(1);
       }
       const mdjFile = fs.readFileSync(configFile.starUml, "utf-8");
       if (!mdjFile) {
-        console.error(`❌ Le fichier MDJ "${mdjFile}" non trouvé.`);
+        console.error(`${EMOJI.error} Le fichier MDJ "${mdjFile}" non trouvé.`);
         process.exit(1);
       }
       logInfo("🗄️ Vérification du fichier MDJ...");
@@ -71,18 +72,17 @@ export function registerCreateProjectCommand(program: Command) {
       }
 
       //*******************   Installation des frameworks **********************
-      logInfo("🚀 Création des frameworks...");
+      logInfo("🚀🚀🚀🚀🚀 START GENERATION DES FRAMEWORKS 🚀🚀🚀🚀");
       frameworksList.forEach((framework) => {
         // const frameworkProjectName = framework?.installOptions?.name
         //   ? framework?.installOptions?.name
         //   : `${configFile.projectName}-${framework.type}`;
         const frameworkProjectName = `${configFile.projectName}-${framework.name}`;
-
         const frameworkProjectPath = path.join(
           dirGlobalProjectPath,
           frameworkProjectName,
         );
-
+         
         let cliLocalDictionaries: any = {};
         if (framework.name) {
           if (!fs.existsSync(`${frameworkProjectPath}`)) {

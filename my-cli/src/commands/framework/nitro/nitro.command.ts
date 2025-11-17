@@ -11,6 +11,7 @@ import {
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
 import { IFramework } from "@frameworks-models/framework-commun.model";
+import { EMOJI } from "@constants/messages";
 
 export function registerNitroCommand(program: Command) {
   program
@@ -146,7 +147,7 @@ export function registerNitroCommand(program: Command) {
         { cwd: `${frameworkPath}`, stdio: "inherit" },
         `🚀 Lancement du Formatage`,
         `✅ Formatage lancé avec succès !`,
-        `❌ Erreur lors du Formatage !`,
+        `${EMOJI.error} Erreur lors du Formatage !`,
       );
 
       // const targetPath = options.path || process.cwd();

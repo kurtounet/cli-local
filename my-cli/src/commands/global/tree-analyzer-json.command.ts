@@ -1,7 +1,8 @@
 import * as fs from "fs-extra"; // Utilisation de fs-extra comme demandé
 import * as path from "path";
 import { Command } from "commander";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 // Assurez-vous que cette classe TreeAnalyzerJson est dans un fichier séparé
 // par exemple, 'src/treeAnalyzer.ts' et que vous l'exportez.
@@ -415,8 +416,8 @@ export function registerTreeJsonCommand(program: Command) {
         const analyzer = new TreeAnalyzerJson(directory, options.output);
         await analyzer.run();
       } catch (error: any) {
-        console.error(
-          `❌ Une erreur est survenue lors de l'analyse : ${error.message}`,
+        logError(
+          `${EMOJI.error} Une erreur est survenue lors de l'analyse : ${error.message}`,
         );
         process.exit(1); // Sortir avec un code d'erreur
       }

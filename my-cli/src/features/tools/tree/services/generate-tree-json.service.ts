@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { verifyInGitIgnoreFile } from "@features/frameworks/services/git.service";
+import { EMOJI } from "@constants/messages";
 
 const DEFAULT_IGNORED_FOLDERS = [
   ".angular",
@@ -87,10 +88,10 @@ export function generateTreeJson(
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(
-        `❌ Erreur lors de la lecture du dossier : ${error.message}`,
+        `${EMOJI.error} Erreur lors de la lecture du dossier : ${error.message}`,
       );
     } else {
-      console.error("❌ Une erreur inconnue est survenue.");
+      console.error("${EMOJI.error} Une erreur inconnue est survenue.");
     }
     return null;
   }

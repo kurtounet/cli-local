@@ -20,14 +20,14 @@
 //       try {
 //         // Vérifier si le dossier existe
 //         if (!(await fs.pathExists(directory))) {
-//           console.error(`❌ Le dossier "${directory}" n'existe pas.`);
+//           console.error(`${EMOJI.error} Le dossier "${directory}" n'existe pas.`);
 //           return;
 //         }
 
 //         // Vérifier si c'est bien un dossier
 //         const stats = await fs.stat(directory);
 //         if (!stats.isDirectory()) {
-//           console.error(`❌ "${directory}" n'est pas un dossier.`);
+//           console.error(`${EMOJI.error} "${directory}" n'est pas un dossier.`);
 //           return;
 //         }
 
@@ -164,7 +164,7 @@
 //             successCount++;
 //           } catch (error) {
 //             console.error(
-//               `❌ Erreur lors du renommage de "${change.oldName}" : ${error}`,
+//               `${EMOJI.error} Erreur lors du renommage de "${change.oldName}" : ${error}`,
 //             );
 //             errorCount++;
 //           }
@@ -176,7 +176,7 @@
 //           logInfo(`   - ${errorCount} erreur(s)`);
 //         }
 //       } catch (error) {
-//         console.error("❌ Erreur lors de l'exécution :", error);
+//         console.error("${EMOJI.error} Erreur lors de l'exécution :", error);
 //       }
 //     });
 // }
@@ -212,7 +212,7 @@
 //     }
 //   } catch (error) {
 //     console.error(
-//       `❌ Erreur lors de la lecture du dossier "${dir}" : ${error}`,
+//       `${EMOJI.error} Erreur lors de la lecture du dossier "${dir}" : ${error}`,
 //     );
 //   }
 
@@ -239,7 +239,7 @@
 //         conflicts.push({ newName: change.newName, newPath: change.newPath });
 //       }
 //     } catch (error) {
-//       console.error(`❌ Ignorer les erreurs de vérification`);
+//       console.error(`${EMOJI.error} Ignorer les erreurs de vérification`);
 //     }
 //   }
 
@@ -250,6 +250,7 @@ import * as path from "path";
 import { Command } from "commander";
 import inquirer from "inquirer";
 import { logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 export function registerAddPerfixSuffixFileCommand(program: Command) {
   program
@@ -268,14 +269,14 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
       try {
         // Vérifier si le dossier existe
         if (!(await fs.pathExists(directory))) {
-          console.error(`❌ Le dossier "${directory}" n'existe pas.`);
+          console.error(`${EMOJI.error} Le dossier "${directory}" n'existe pas.`);
           return;
         }
 
         // Vérifier si c'est bien un dossier
         const stats = await fs.stat(directory);
         if (!stats.isDirectory()) {
-          console.error(`❌ "${directory}" n'est pas un dossier.`);
+          console.error(`${EMOJI.error} "${directory}" n'est pas un dossier.`);
           return;
         }
 
@@ -437,7 +438,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
             successCount++;
           } catch (error) {
             console.error(
-              `❌ Erreur lors du renommage de "${change.oldName}" : ${error}`,
+              `${EMOJI.error} Erreur lors du renommage de "${change.oldName}" : ${error}`,
             );
             errorCount++;
           }
@@ -449,7 +450,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
           logInfo(`   - ${errorCount} erreur(s)`);
         }
       } catch (error) {
-        console.error("❌ Erreur lors de l'exécution :", error);
+        console.error("${EMOJI.error} Erreur lors de l'exécution :", error);
       }
     });
 }
@@ -503,7 +504,7 @@ async function getFilesRecursively(
     }
   } catch (error) {
     console.error(
-      `❌ Erreur lors de la lecture du dossier "${dir}" : ${error}`,
+      `${EMOJI.error} Erreur lors de la lecture du dossier "${dir}" : ${error}`,
     );
   }
 
@@ -530,7 +531,7 @@ async function checkForConflicts(
         conflicts.push({ newName: change.newName, newPath: change.newPath });
       }
     } catch (error) {
-      console.error(`❌ Ignorer les erreurs de vérification`);
+      console.error(`${EMOJI.error} Ignorer les erreurs de vérification`);
     }
   }
 

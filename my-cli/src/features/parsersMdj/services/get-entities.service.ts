@@ -11,6 +11,7 @@ import { getColumns } from "./get-colums.service";
 import { getRelationships } from "./get-relationships.service";
 import { IGetEntityJson } from "types/common";
 import { logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 /**
  * Parses the provided MDJ file to extract and return a dictionary of entities.
@@ -36,7 +37,7 @@ export function getEntities(mdjFile: string): IGetEntityJson {
     }
 
     if (!erdModel) {
-      console.error(`❌ Aucun ERDDataModel trouvé dans le fichier MDJ.`);
+      console.error(`${EMOJI.error} Aucun ERDDataModel trouvé dans le fichier MDJ.`);
       process.exit(1);
     }
 
@@ -50,7 +51,7 @@ export function getEntities(mdjFile: string): IGetEntityJson {
 
     return dictionaries;
   } catch (error) {
-    console.error(`❌ Erreur lors de la récupération des entités :`, error);
+    console.error(`${EMOJI.error} Erreur lors de la récupération des entités :`, error);
     process.exit(1);
   }
 }

@@ -29,6 +29,7 @@ import {
   databaseConfigNestjs,
   mainFileNestjs,
 } from "@nestjs/services/nestjs-config-project.service";
+import { EMOJI } from "@constants/messages";
 
 export function registerNestCommand(program: Command) {
   program
@@ -164,7 +165,7 @@ export function registerNestCommand(program: Command) {
         { cwd: `${frameworkPath}`, stdio: "inherit" },
         `🚀 Lancement du Formatage`,
         `✅ Formatage lancé avec succès !`,
-        `❌ Erreur lors du Formatage !`,
+        `${EMOJI.error} Erreur lors du Formatage !`,
       );
 
       // const targetPath = options.path || process.cwd();

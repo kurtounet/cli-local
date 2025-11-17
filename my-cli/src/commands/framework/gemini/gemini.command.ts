@@ -3,6 +3,7 @@ import { logInfo } from "@utils/logger";
 
 import { pascalCase } from "@utils/stringUtils";
 import { executeCommand } from "@utils/execute-command";
+import { EMOJI } from "@constants/messages";
 
 export function registerGeminiCommand(program: Command) {
   program
@@ -17,7 +18,7 @@ export function registerGeminiCommand(program: Command) {
         { stdio: "inherit" },
         `Ouverture de Visual Studio Code`,
         `✅ Ouverture de Gemini réussie!`,
-        `❌ Erreur lors de l'ouverture de Gemini !`,
+        `${EMOJI.error} Erreur lors de l'ouverture de Gemini !`,
       );
       
     });

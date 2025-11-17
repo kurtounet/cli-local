@@ -3,6 +3,7 @@ import { getCommandFramework } from "@features/frameworks/services/get-command";
 import { executeCommand } from "@utils/execute-command";
 import { logError, logInfo, logSuccess } from "@utils/logger";
 import * as fs from "fs-extra";
+import { EMOJI } from "@constants/messages";
 
 export function installFramework(
   frameWork: IFramework,
@@ -21,7 +22,7 @@ export function installFramework(
             { stdio: "inherit" },
             `🚀 Création du ${frameWork.type}`,
             `✅ ${frameWork.type} créé avec succès !`,
-            `❌ Erreur lors de la création du ${frameWork.type} !`,
+            `${EMOJI.error} Erreur lors de la création du ${frameWork.type} !`,
           );
           if (fs.existsSync(`${frameWorkPath}`)) {
             logSuccess(`✅ Le ${frameWork.type} créé avec succès !`);
@@ -34,13 +35,13 @@ export function installFramework(
                 { cwd: `${frameWorkPath}`, stdio: "inherit" },
                 `🚀 Création du commit Initiale`,
                 `✅ Commit créé avec succès !`,
-                `❌ Erreur lors du commit !`,
+                `${EMOJI.error} Erreur lors du commit !`,
               );
             }
           }
         }
       } catch (error) {
-        logError(`❌ Erreur lors de la création du ${frameWork.type} !`);
+        logError(`${EMOJI.error} Erreur lors de la création du ${frameWork.type} !`);
         process.exit(1);
       }
     } else {

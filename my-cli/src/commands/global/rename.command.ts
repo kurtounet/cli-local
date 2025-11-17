@@ -2,7 +2,8 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
 import inquirer from "inquirer";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 // Types pour les options de casse
 type CaseType =
@@ -169,7 +170,7 @@ async function renameFiles(
           );
           renamed++;
         } catch (error) {
-          console.error(`❌ Erreur pour ${path.basename(filePath)}:`, error);
+          logError(`${EMOJI.error} Erreur pour ${path.basename(filePath)}: ${error}`);
           skipped++;
         }
       }
@@ -194,7 +195,7 @@ async function runRenameCommand(
   try {
     // Vérifier si le répertoire existe
     if (!(await fs.pathExists(directory))) {
-      console.error(`❌ Le répertoire "${directory}" n'existe pas`);
+      console.error(`${EMOJI.error} Le répertoire "${directory}" n'existe pas`);
       return;
     }
 
@@ -291,7 +292,7 @@ async function runRenameCommand(
       ]);
 
       if (!confirm.proceed) {
-        logInfo("❌ Opération annulée");
+        logInfo("${EMOJI.error} Opération annulée");
         return;
       }
     }
@@ -305,7 +306,7 @@ async function runRenameCommand(
       filePattern: answers.filePattern || undefined,
     });
   } catch (error) {
-    console.error("❌ Erreur lors du renommage:", error);
+    console.error("${EMOJI.error} Erreur lors du renommage:", error);
   }
 }
 

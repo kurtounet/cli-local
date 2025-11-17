@@ -3,6 +3,7 @@ import * as path from "path";
 import { IFramework } from "../models/framework-commun.model";
 import { IDirectory } from "@features/project/models/project.models";
 import { logError, logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 export function createFolder(pathFolder: string) {
   if (!fs.existsSync(pathFolder)) {
@@ -33,8 +34,8 @@ export function createArchitecture(
         }
       });
     } catch (error) {
-      logError(`❌ Erreur lors de la création de l'architecture !`);
-      console.error(error);
+      logError(`${EMOJI.error} Erreur lors de la création de l'architecture ! : ${error}`);
+      
     }
   } else {
     return `✅ Aucune architecture à créer !`;

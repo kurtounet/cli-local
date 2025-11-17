@@ -1,7 +1,8 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
+import { EMOJI } from "@constants/messages";
 
 const DEFAULT_IGNORED_FOLDERS = [
   "node_modules",
@@ -279,8 +280,8 @@ export function registerTreeMarkdownFnAllCommand(program: Command): void {
         await fs.writeFile(output, fullMarkdown, "utf-8");
         logInfo(`\n✅ Markdown tree generated and saved to '${output}'.`);
       } catch (error: any) {
-        console.error(
-          `\n❌ Error occurred while generating tree: ${error.message}`,
+        logError(
+          `\n${EMOJI.error} Error occurred while generating tree: ${error.message}`,
         );
         process.exit(1);
       }

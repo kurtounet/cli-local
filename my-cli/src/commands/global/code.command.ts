@@ -1,3 +1,4 @@
+import { EMOJI } from "@constants/messages";
 import { executeCommand } from "@utils/execute-command";
 import { Command } from "commander";
 
@@ -13,7 +14,7 @@ export function registercodeCommand(program: Command) {
         { stdio: "inherit" },
         `Ouverture de Visual Studio Code`,
         `✅ Visual Studio Code ouvert !`,
-        `❌ Erreur lors de l'ouverture de Visual Studio Code !`,
+        `${EMOJI.error} Erreur lors de l'ouverture de Visual Studio Code !`,
       );
     });
 }

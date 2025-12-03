@@ -1,4 +1,4 @@
 # cli-local
-Générère des scalfolder
+Génère des scalfolder
 
-ATTENTION, !!!! Toujour en cour en dévelopemment
+ATTENTION, !!!! Toujours en cour de dévelopemment et de test

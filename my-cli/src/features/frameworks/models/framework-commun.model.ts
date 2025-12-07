@@ -1,5 +1,34 @@
-import { IDirectory } from "@project/models/project.models";
 import { IDatabase } from "@frameworks-models/database.model";
+export interface IArchitecture {
+  directory: IDirectory[];
+}
+
+export interface IFile {
+  type?: string;
+  framework?: string;
+  name: string;
+  pathInProject?: string;
+  pathTemplate?: string;
+  content?: string;
+}
+
+export interface IDirectory {
+  _type: string;
+  name: string;
+  pathInProject: string;
+  gitIgnore?: boolean;
+  content?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  children: IDirectory[];
+  varsTemplate?: Record<string, any>;
+}
+
+export interface IFolder {
+  name: string;
+  files?: IFile[];
+  subFolders?: IFolder[];
+}
 
 export interface IInstallOptions {
   name: string;
@@ -74,6 +103,7 @@ export interface IFramework {
   version?: string;
   port: number;
   app?: string;
+  mode: string;
   cliCmd: string;
   gitBranch: string[];
   gitBranchCheckout: string;
@@ -101,6 +131,7 @@ export interface IProjectConfig {
   path: string;
   starUml?: string;
   version?: string;
+
   frameWorks: IFramework[];
   databases?: IDatabase[];
   // environments: IEnvironment[];

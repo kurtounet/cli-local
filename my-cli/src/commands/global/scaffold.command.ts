@@ -2,6 +2,7 @@ import path from "node:path";
 import { Command } from "commander";
 import inquirer from "inquirer";
 import { runScaffold } from "@features/project/services/generate-scaffold.service";
+import { logError } from "@utils/logger";
 
 /**
  * @typedef {object} ScaffoldOptions
@@ -30,7 +31,7 @@ export function registerScaffoldCommand(program: Command) {
     .action(async (architecture: string, cmdOpts: { templates?: string }) => {
       // 1. Get architecture path
       if (!architecture) {
-        console.error("Architecture file path is required.");
+        logError("Architecture file path is required.");
         process.exit(1);
       }
       // const architectureFilePath = path.resolve(process.cwd(), architecture);

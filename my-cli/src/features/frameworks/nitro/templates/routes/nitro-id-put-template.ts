@@ -39,7 +39,7 @@ const ${entity.nameCamelCase}Service = new ${entity.namePascalCase}Service()
       message: '${entity.namePascalCase} mise à jour avec succès',
     }
   } catch (error: any) {
-    console.error('Erreur lors de la mise à jour de la ${entity.nameCamelCase}:', error)
+    logError('Erreur lors de la mise à jour de la ${entity.nameCamelCase}:', error)
     throw createError({
       statusCode: 500,
       statusMessage: error.message || 'Erreur lors de la mise à jour de la ${entity.nameCamelCase}',

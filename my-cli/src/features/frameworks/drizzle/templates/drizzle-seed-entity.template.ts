@@ -1,7 +1,6 @@
 import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { generateValue, item } from "../utils/generate-value.utils";
 import { snakeToCamel } from "@utils/convert";
- 
 
 // export function item(entity: IEntityJson): Record<string, unknown> {
 //   return Object.fromEntries(
@@ -27,10 +26,10 @@ function indentBlock(str: string, spaces = 2) {
  */
 export function drizzleSeedEntityTemplate(entity: IEntityJson) {
   const count = 10;
-  let properties: string='';
-  const exclude =["id", "created_at", "updated_at"];
+  let properties: string = "";
+  const exclude = ["id", "created_at", "updated_at"];
 
-   /* const seeds = Array.from({ length: count }, () => item(entity, exclude));
+  /* const seeds = Array.from({ length: count }, () => item(entity, exclude));
 
   // Transforme chaque seed en objet littéral formaté
   const seedsTs = seeds
@@ -41,11 +40,14 @@ export function drizzleSeedEntityTemplate(entity: IEntityJson) {
   */
 
   if (entity.columns !== undefined) {
-        properties = entity.columns
-        .filter((column: IColumnJson) => !exclude.includes(column.name))
-        .map((column: IColumnJson) => `${snakeToCamel(column.name)}: ${generateValue(column)}`)
-        .join(",\n")
-}
+    properties = entity.columns
+      .filter((column: IColumnJson) => !exclude.includes(column.name))
+      .map(
+        (column: IColumnJson) =>
+          `${snakeToCamel(column.name)}: ${generateValue(column)}`,
+      )
+      .join(",\n");
+  }
   return `import { Z${entity.namePascalCase}Insert } from '../../../shared/schemas/${entity.nameKebabCase}.schema'
 import { db } from '../../database/db'
 import { ${entity.nameCamelCase} } from '../../../server/database/schemas/${entity.nameKebabCase}.schema'

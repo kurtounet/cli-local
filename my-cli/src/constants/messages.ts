@@ -6,31 +6,29 @@ export const WARNING = "warning";
 export const INFO = "info";
 export const DEBUG = "debug";
 
-export function messageInitProject(projectName: string): string 
-{ 
-    return `🚀🚀🚀🚀🚀 INITIALISATION DU PROJET ${projectName} 🚀🚀🚀🚀🚀`; 
-} 
-export function messageInstallationFramework(frameworkName: string): string 
-{ 
-    return `🚀🚀🚀🚀🚀 INSTALLATION DU FRAMEWORK ${frameworkName.toUpperCase} 🚀🚀🚀🚀🚀`; 
-} 
-export function messageCreateBranch(): string 
-{ 
-    return `🚀🚀🚀🚀🚀 CREATION DES BRANCHES 🚀🚀🚀🚀🚀`; 
-} 
-export function messageCreateArchitecture(): string 
-{ 
-    return `🚀🚀🚀🚀🚀 CREATION DE L'ARCHITECTURE 🚀🚀🚀🚀🚀`; 
-} 
-export function messageCreateFile(fileName: string): string 
-{ 
-    return `🚀🚀🚀🚀🚀 CREATION DES BRANCHE  ${fileName} 🚀🚀🚀🚀🚀`; 
-} 
+export function messageInitProject(projectName: string): string {
+  return `🔨🔨🔨🔨🔨 INITIALISATION DU PROJET ${projectName.toUpperCase()} 🔨🔨🔨🔨🔨`;
+}
+export function messageInstallationFramework(frameworkName: string): string {
+  return `🔨🔨🔨🔨🔨 INSTALLATION DU FRAMEWORK ${frameworkName.toUpperCase()} 🔨🔨🔨🔨🔨`;
+}
+export function messageCreateBranch(): string {
+  return `🔨🔨🔨🔨🔨 CREATION DES BRANCHES 🔨🔨🔨🔨🔨`;
+}
+export function messageCreateArchitecture(): string {
+  return `🔨🔨🔨🔨🔨 CREATION DE L'ARCHITECTURE 🔨🔨🔨🔨🔨`;
+}
+export function messageCreateFolderCli(): string {
+  return `🔨🔨🔨🔨🔨 CREATION DU DOSSIER POUR LA CLI  🔨🔨🔨🔨🔨`;
+}
+export function messageCreateFile(filename: string): string {
+  return `🔨🔨🔨🔨🔨 CREATION DU DOSSIER POUR LA CLI  🔨🔨🔨🔨🔨`;
+}
 export const EMOJI = {
   start: "🚀",
   end: "🏁",
   success: "✅",
-  error: "${EMOJI.error}",
+  error: "❌",
   warning: "⚠️",
   info: "ℹ️",
   debug: "🐛",
@@ -56,20 +54,18 @@ export const EMOJI = {
   clean: "🧹",
   refresh: "♻️",
 
- 
   compile: "🛠️",
   bundle: "📦",
   optimize: "⚙️",
   transpile: "🔨",
   generate: "🪄",
- 
+
   fail: "🔥",
   watch: "👀",
- 
+
   output: "📤",
   input: "📥",
   test: "🧪",
- 
 
   // Logs
   log: "📝",
@@ -110,5 +106,5 @@ export const EMOJI = {
   unlock: "🔓",
   settings: "🎛️",
   pinned: "📌",
-  help: "❓"
+  help: "❓",
 };

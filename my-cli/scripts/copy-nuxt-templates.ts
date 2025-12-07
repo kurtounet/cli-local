@@ -9,4 +9,4 @@ fs.ensureDirSync(path.dirname(destination));
 
 fs.copy(source, destination)
   .then(() => console.log('Successfully copied nuxt templates!'))
-  .catch(err => console.error(err));
+  .catch(err => logError(err));

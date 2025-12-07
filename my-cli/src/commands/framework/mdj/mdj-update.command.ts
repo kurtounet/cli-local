@@ -1,10 +1,9 @@
 import { Command } from "commander";
 
- 
 import { getEntities } from "@parsersMdj/services/get-entities.service";
 import * as fs from "fs";
 import { writeFile } from "@utils/file-utils";
-import { logInfo, logSuccess } from "@utils/logger";
+import { logError, logInfo, logSuccess } from "@utils/logger";
 import { writeFileSync } from "@utils/file-utils-sync";
 import { mdjUpdateHandleColumsService } from "@features/parsersMdj/services/mdj-update-handle-colums.service";
 
@@ -28,13 +27,13 @@ export function registerMdjUpdateCommand(program: Command) {
         writeFileSync(
           outputFilePath,
           JSON.stringify(updatedFileContent, null, 2),
-        )
-         
+        );
+
         logSuccess(
           `Fichier MDJ mis à jour et transformé avec succès! Output saved to ${outputFilePath}`,
         );
       } catch (err: unknown) {
-        console.error(
+        logError(
           `Failed to parse or transform MDJ file: ${(err as Error).message}`,
         );
       }

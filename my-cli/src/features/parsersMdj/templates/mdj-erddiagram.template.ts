@@ -1,5 +1,5 @@
-export function mdjERDDiagramTemplate(conten?: string):string {
-    return `{
+export function mdjERDDiagramTemplate(conten?: string): string {
+  return `{
 	"_type": "Project",
 	"_id": "AAAAAAFF+h6SjaM2Hec=",
 	"name": "Untitled",

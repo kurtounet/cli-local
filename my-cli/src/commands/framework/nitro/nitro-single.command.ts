@@ -21,8 +21,6 @@ export function registerNitroSingleCommand(program: Command) {
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
     .action(async () => {
-      
-
       const processPath = process.cwd();
       const frameworkPath: string = processPath;
       const allpathFileCliLocal: ICliLocalPathFile =
@@ -175,7 +173,7 @@ export function registerNitroSingleCommand(program: Command) {
       //   }
       //   success(`${type} Nitro ${name} généré avec succès dans ${targetPath} !`);
       // } catch (err: unknown) {
-      //   console.error(`Error generating Nitro module: ${(err as Error).message}`);
+      //   logError(`Error generating Nitro module: ${(err as Error).message}`);
       // }
     });
 }

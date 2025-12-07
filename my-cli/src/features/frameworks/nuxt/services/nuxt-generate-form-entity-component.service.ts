@@ -9,7 +9,6 @@ export function nuxtGenerateFromEntityComponentService(
   writeFile(
     `${rootPathProjectFramework}/app/components/forms/${entity.nameKebabCase}.form.vue`,
     nuxtFromEntityComponentTemplate(entity),
-    `Génération du formulaire pour: ${entity.namePascalCase}`
+    `Génération du formulaire pour: ${entity.namePascalCase}`,
   );
-   
 }

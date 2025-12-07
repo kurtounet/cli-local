@@ -6,7 +6,5 @@ import { logInfo } from "@utils/logger";
  * @param entity The entity JSON object.
  */
 export function generateElectronInterface(entity: IEntityJson) {
-  logInfo(
-    `Génération de l'interface Electron pour: ${entity.namePascalCase}`,
-  );
+  logInfo(`Génération de l'interface Electron pour: ${entity.namePascalCase}`);
 }

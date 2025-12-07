@@ -1,8 +1,9 @@
+import { installTSDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
 import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-import { installTSDependencies } from "@features/frameworks/services/install-dependencies.service";
+
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function nestjsGenerateFilesFramework(

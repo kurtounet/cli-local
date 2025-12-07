@@ -1,5 +1,5 @@
-export function nuxtAppComponentTemplate(){
-    return `
+export function nuxtAppComponentTemplate() {
+  return `
 <template>
   <div>
     <NuxtRouteAnnouncer />
@@ -9,5 +9,5 @@ export function nuxtAppComponentTemplate(){
   </div>
 </template>
 <script setup lang="ts"></script>
-`
+`;
 }

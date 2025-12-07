@@ -1,15 +1,19 @@
+import { angularGenerateFilesFramework } from "@features/frameworks/angular/services/angular-generate-files-framework.service";
+import { electronGenerateFilesFramework } from "@features/frameworks/electron/services/electron-generate-files-framework.service";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@features/frameworks/models/framework-commun.model";
+import { nestjsGenerateFilesFramework } from "@features/frameworks/nestjs/services/nestjs-generate-files-framework.service";
+import { nitroGenerateFilesFramework } from "@features/frameworks/nitro/services/nitro-generate-files-framework.service";
+import { nuxtGenerateFilesFramework } from "@features/frameworks/nuxt/services/nuxt-generate-files-framework.service";
+import { nuxtUpdateFileNuxtConfigTsService } from "@features/frameworks/nuxt/services/nuxt-update-file-nuxt-config-ts.service";
+import { symfonyGenerateFilesFramework } from "@features/frameworks/symfony/services/symfony-generate-files-framework.service";
+import { vueGenerateFilesFramework } from "@features/frameworks/vue/services/vue-generate-files-framework.service";
 import { logInfo } from "@utils/logger";
-import { angularGenerateFilesFramework } from "../angular/services/angular-generate-files-framework.service";
-import { electronGenerateFilesFramework } from "../electron/services/electron-generate-files-framework.service";
-import { IFramework, IProjectConfig } from "../models/framework-commun.model";
-import { nestjsGenerateFilesFramework } from "../nestjs/services/nestjs-generate-files-framework.service";
-import { nitroGenerateFilesFramework } from "../nitro/services/nitro-generate-files-framework.service";
-import { nuxtGenerateFilesFramework } from "../nuxt/services/nuxt-generate-files-framework.service";
-import { nuxtUpdateFileNuxtConfigTsService } from "../nuxt/services/nuxt-update-file-nuxt-config-ts.service";
-import { symfonyGenerateFilesFramework } from "../symfony/services/symfony-generate-files-framework.service";
-import { updatePackageJson } from "../utils";
-import { vueGenerateFilesFramework } from "../vue/services/vue-generate-files-framework.service";
+import { updatePackageJsonService } from "./update-package-json.service";
 import { executeCommand } from "@utils/execute-command";
+import { EMOJI } from "@constants/messages";
 
 export function switchGenerateFileFrameworkService(
   configFile: IProjectConfig,
@@ -24,7 +28,9 @@ export function switchGenerateFileFrameworkService(
         framework,
         rootPathProjectFramework,
         entitiesJsonFile,
+        "install",
       );
+      updatePackageJsonService(rootPathProjectFramework, framework);
       break;
     case "vuejs":
       vueGenerateFilesFramework(
@@ -42,15 +48,16 @@ export function switchGenerateFileFrameworkService(
         entitiesJsonFile,
         "install",
       );
+
       nitroGenerateFilesFramework(
         rootPathProjectFramework,
         configFile,
         framework,
         entitiesJsonFile,
-        "install",
+        "nuxt",
       );
       nuxtUpdateFileNuxtConfigTsService(rootPathProjectFramework);
-      
+      updatePackageJsonService(rootPathProjectFramework, framework);
       // executeCommand(
       //   `npm run db:cp`,
       //   { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
@@ -58,7 +65,7 @@ export function switchGenerateFileFrameworkService(
       //   `✅ Génération de la base de données avec succès !`,
       //   `${EMOJI.error} Erreur lors de laGénération de la base de données !`,
       // );
- 
+
       break;
     case "react":
       logInfo("React GenerateFilesFramework");
@@ -93,8 +100,9 @@ export function switchGenerateFileFrameworkService(
         configFile,
         framework,
         entitiesJsonFile,
-        "install",
+        "nitro",
       );
+      updatePackageJsonService(rootPathProjectFramework, framework);
       break;
     case "fastapi":
       logInfo("fastapiGenerateFilesFramework");
@@ -102,4 +110,12 @@ export function switchGenerateFileFrameworkService(
     default:
       break;
   }
+
+  executeCommand(
+    `npm run format`,
+    { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
+    `🚀 Formatage`,
+    `✅ Formatage avec réussit !`,
+    `${EMOJI.error} Erreur lors du Formatage !`,
+  );
 }

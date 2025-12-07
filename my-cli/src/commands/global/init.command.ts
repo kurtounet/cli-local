@@ -4,7 +4,10 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { logError, logInfo, logSuccess } from "../../utils/logger";
 
-import { createConfigProject, createConfigProjectExisting } from "@features/frameworks/services/get-config-frameworks.service";
+import {
+  createConfigProject,
+  createConfigProjectExisting,
+} from "@features/frameworks/commun/services/get-config-frameworks.service";
 import { IProjectCommand } from "@models/project-command.model";
 
 /**
@@ -96,16 +99,23 @@ export function registerInitCommand(program: Command) {
 
       try {
         if (answers.existence === "y" || answers.existence === "yes") {
-           await fs.writeJson(configFilePath, createConfigProjectExisting(answers), {
-          spaces: 2,
-        });
-        } else {        
-        await fs.writeJson(configFilePath, createConfigProject(answers), {
-          spaces: 2,
-        });
-      }
+          await fs.writeJson(
+            configFilePath,
+            createConfigProjectExisting(answers),
+            {
+              spaces: 2,
+            },
+          );
+        } else {
+          await fs.writeJson(configFilePath, createConfigProject(answers), {
+            spaces: 2,
+          });
+        }
         logSuccess(`✅ Fichier de configuration créé : ${configFilePath}`);
         logSuccess(`🚀 Le fichier de configuration a été généré avec succès !`);
+        logSuccess(
+          `🚀 commande pour généré le projet: cl create-project ${answers.name}`,
+        );
       } catch (err: unknown) {
         logError(
           `Erreur lors de la création du fichier de configuration : ${(err as Error).message}`,

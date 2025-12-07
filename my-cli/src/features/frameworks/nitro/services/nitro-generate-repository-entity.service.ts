@@ -6,6 +6,7 @@ import { drizzleEntityRepositoryTemplate } from "../templates/repositories/drizz
 export function nitroGenerateRepositoryEntityService(
   rootServerApi: string,
   entity: IEntityJson,
+  mode: string,
 ) {
   writeFile(
     `${rootServerApi}/${entity.nameKebabCase}s/${entity.nameKebabCase}.repository.ts`,

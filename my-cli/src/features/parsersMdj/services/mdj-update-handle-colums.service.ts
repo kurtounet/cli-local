@@ -4,9 +4,8 @@ import type { IERDColumn, IERDEntity, IERDProject } from "../models/mdj.model";
 import { logInfo } from "@utils/logger";
 import { getEntities } from "./get-entities.service";
 
-export function mdjUpdateHandleColumsService(fileContent: string,
-) {
+export function mdjUpdateHandleColumsService(fileContent: string) {
   const project: IERDProject = JSON.parse(fileContent);
-  // const entities = getEntities(project); 
-   return '';
+  // const entities = getEntities(project);
+  return "";
 }

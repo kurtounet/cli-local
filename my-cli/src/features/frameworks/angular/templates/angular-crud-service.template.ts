@@ -9,8 +9,8 @@ export function angularCrudServiceTemplate(entity: IEntityJson) {
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../environments/environment';
-
+import { environment } from '../../environments/environment';
+import { I${entityName} } from '../models/${entity.nameKebabCase}.model';
 export interface IHydraCollection<T> {
     'hydra:member': T[];
     'hydra:totalItems': number;
@@ -40,13 +40,13 @@ export class ${entityName}Service {
     }
 
     // Create a new ${entityName}
-    create${entityName}(body: ICreate${entityName}): Observable<I${entityName}> {
+    create${entityName}(body: I${entityName}): Observable<I${entityName}> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.httpClient.post<I${entityName}>(this.routeApi, body, { headers });
     }
 
     // Update ${entityName} by ID
-    update${entityName}(id: string, body: IUpdate${entityName}): Observable<I${entityName}> {
+    update${entityName}(id: string, body: I${entityName}): Observable<I${entityName}> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.httpClient.patch<I${entityName}>(\`\${this.routeApi}/\${id}\`, body, { headers });
     }

@@ -8,8 +8,9 @@ import { IFramework } from "@frameworks-models/framework-commun.model";
 export const CONFIG_INIT_SYMFONY: IFramework = {
   type: "backend",
   name: "symfony",
-  version: "7.3.*",
+  version: "7.4.*",
   port: 8001,
+  mode: "install",
   app: "--api",
   cliCmd: "symfony",
   gitBranch: ["main", "dev", "release", "hotfix"],

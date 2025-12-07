@@ -7,39 +7,50 @@ import { symfonyGenerateEnvironmentsService } from "./symfony-generate-environme
 import { symfonyGenerateDtoService } from "./symfony-generate-dtos.service";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { symfonyGenerateEntityService } from "./symfony-generate-entities.service";
-import { logInfo } from "@utils/logger";
+import { logInfo, logStep } from "@utils/logger";
 import { messageInstallationFramework } from "@constants/messages";
+import { symfonyGenerateCrudEntityService } from "./symfony-generate-crud-entity.service";
+import { installComposerDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
+import { symfonyGenerateCommandService } from "./symfony-generate-command.service";
 
 export function symfonyGenerateFilesFramework(
   configFile: IProjectConfig,
   framework: IFramework,
   rootPathProjectFramework: string,
   entitiesJsonFile: object,
-  //  symfonyGenerateFilesFramework(thisProjectConfig, frameworkPath, entitiesJsonFile);
 ) {
-  logInfo(messageInstallationFramework(framework.name));
-  // const framework = globalConfig.frameWorks.filter(
-  //   (framework) => framework.name === "symfony",
-  // )[0];
-  // installComposerDependencies(
-  //   framework,
-  //   rootPathProjectFramework,
-  // );
+  logStep(messageInstallationFramework(framework.name));
+
+  /* Installe les dépendances de production */
+  if (framework.mode === "install") {
+    installComposerDependencies(framework, rootPathProjectFramework);
+  }
+
+  /* Création des fichiers d'environnement .local .test */
   symfonyGenerateEnvironmentsService(rootPathProjectFramework, configFile);
+
+  /* Création des entités et DTO */
   if (Array.isArray(entitiesJsonFile)) {
     entitiesJsonFile.forEach((entity: IEntityJson) => {
       symfonyGenerateDtoService(rootPathProjectFramework, entity);
       symfonyGenerateEntityService(rootPathProjectFramework, entity);
+      // symfonyGenerateCrudEntityService(rootPathProjectFramework, entity);
     });
   }
-  /* Logique de génération de fichiers symfony ici */
-  // symfonyGenerateFixturesService(frameworkPath, entitiesJsonFile){};
-  // symfonyGenerateLoginService(frameworkPath){};
-  // symfonyGenerateRegisterService(frameworkPath){};
-  // symfonyGeneratePasswordResetService(frameworkPath){};
-  // symfonyGenerateLoginService(frameworkPath){};
-  // symfonyGenerateAuthService(frameworkPath){};
-  // symfonyGenerateAccounService(frameworkPath){};
+  // symfonyGenerateCommandService(rootPathProjectFramework );
+  /* 
+    Logique de génération de fichiers symfony 
+    symfonyGenerateFixturesService(frameworkPath, entitiesJsonFile);
+    symfonyGenerateControllerService(frameworkPath, routesJsonFile);
+    
+    symfonyGenerateLoginService(frameworkPath);
+    symfonyGenerateRegisterService(frameworkPath);
+    symfonyGeneratePasswordResetService(frameworkPath); 
+    symfonyGenerateTemplateService(frameworkPath, entitiesJsonFile);
+    symfonyGenerateAdminService(frameworkPath, entitiesJsonFile);
+    symfonyGenerateAssetsService(frameworkPath, entitiesJsonFile);
+    symfonyGenerateFormService(frameworkPath, entitiesJsonFile);
+  */
 
   /*
     executeCommand(

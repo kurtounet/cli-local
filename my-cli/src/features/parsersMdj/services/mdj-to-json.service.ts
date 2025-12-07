@@ -6,6 +6,7 @@ import {
   IRelationship,
 } from "../models/schema.model";
 import { sqlToTypeScript } from "@utils/mapping";
+import { logError } from "@utils/logger";
 
 export class MdjToJsonService {
   private allElements: any[] = [];
@@ -17,7 +18,7 @@ export class MdjToJsonService {
       this.collectAllElements(project);
       return project;
     } catch (error: unknown) {
-      console.error(
+      logError(
         `Error reading or parsing MDJ file: ${(error as Error).message}`,
       );
       throw error;

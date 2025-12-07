@@ -307,7 +307,7 @@ const relations: IRelation[] = [
 /*
 const errors = validateRelations(relations);
 if (errors.length > 0) {
-  console.error("Erreurs de validation:", errors);
+  logError("Erreurs de validation:", errors);
 } else {
   logInfo("Symfony Relations valides ✓");
 }

@@ -71,7 +71,7 @@ export function createCliLocalDirectoryNewProject(
       writeFile(filePath, JSON.stringify(value, null, 2));
       logInfo(`🗄️ Fichier créer: ${filePath}`);
     } catch (e) {
-      console.error(e);
+      logError(e);
        
     }
   });
@@ -117,7 +117,7 @@ export function getCliLocalConfigFile(projectPath: string): ICliLocalPathFile {
   try {
     json = JSON.parse(fs.readFileSync(configFilePath, "utf8"));
   } catch (e) {
-    console.error(`Erreur lors de la lecture du fichier cli-local-config.json`);
+    logError(`Erreur lors de la lecture du fichier cli-local-config.json`);
     process.exit(1);
   }
 

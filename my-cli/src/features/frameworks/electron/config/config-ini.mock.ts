@@ -8,9 +8,10 @@ import { IFramework } from "@frameworks-models/framework-commun.model";
 export const CONFIG_INIT_ELECTRON: IFramework = {
   type: "backend",
   name: "electron",
-  version: "6.4.*",
+  version: "",
   port: 0,
   app: "--api",
+  mode: "install",
   cliCmd: "electron",
   gitBranch: ["main", "dev", "release", "hotfix"],
   gitBranchCheckout: "dev",

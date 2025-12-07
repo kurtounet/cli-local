@@ -11,27 +11,28 @@ import { logInfo } from "@utils/logger";
 export function nitroGenerateRoutesEntityService(
   rootServerApi: string,
   entity: IEntityJson,
+  mode: string,
 ) {
   logInfo(`Génération des routes pour: ${entity.namePascalCase}`);
   writeFile(
     `${rootServerApi}/${entity.nameKebabCase}s/index.get.ts`,
-    nitroIndexGetTemplate(entity),
+    nitroIndexGetTemplate(entity, mode),
   );
   writeFile(
     `${rootServerApi}/${entity.nameKebabCase}s/index.post.ts`,
-    nitroIndexPostTemplate(entity),
+    nitroIndexPostTemplate(entity, mode),
   );
   writeFile(
     `${rootServerApi}/${entity.nameKebabCase}s/[id].get.ts`,
-    nitroIdGetTemplate(entity),
-  );  
+    nitroIdGetTemplate(entity, mode),
+  );
   writeFile(
     `${rootServerApi}/${entity.nameKebabCase}s/[id].patch.ts`,
-    nitroIdPatchTemplate(entity),
+    nitroIdPatchTemplate(entity, mode),
   );
   writeFile(
     `${rootServerApi}/${entity.nameKebabCase}s/[id].delete.ts`,
-    nitroIdDeleteTemplate(entity),
+    nitroIdDeleteTemplate(entity, mode),
   );
 
   logInfo(`Génération du contrôleur Nitro pour: ${entity.namePascalCase}`);

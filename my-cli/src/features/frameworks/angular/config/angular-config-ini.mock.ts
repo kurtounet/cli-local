@@ -11,6 +11,7 @@ export const CONFIG_INIT_ANGULAR: IFramework = {
   version: "19.3.*",
   port: 4200,
   app: "--api",
+  mode: "install",
   cliCmd: "ng",
   gitBranch: ["main", "dev", "release", "hotfix"],
   gitBranchCheckout: "dev",

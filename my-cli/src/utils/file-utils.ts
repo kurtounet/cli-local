@@ -1,6 +1,7 @@
 import * as fs from "fs-extra";
 import * as path from "path";
 import { logError, logInfo, logSuccess } from "./logger";
+import { EMOJI } from "@constants/messages";
 
 export async function copyDirectory(src: string, dest: string): Promise<void> {
   try {
@@ -16,7 +17,7 @@ export async function writeFile(
   filePath: string,
   content: string,
   successMessage?: string,
-  errorMessage?: string
+  errorMessage?: string,
 ): Promise<void> {
   try {
     await fs.ensureDir(path.dirname(filePath));
@@ -25,7 +26,10 @@ export async function writeFile(
     //fs.writeFile(filePath, content, { encoding: "utf8" });
     logSuccess(successMessage || `File ${filePath} written successfully`);
   } catch (err: unknown) {
-    logError(errorMessage || `Error writing file ${filePath}: ${(err as Error).message}`);
+    logError(
+      errorMessage ||
+        `Error writing file ${filePath}: ${(err as Error).message}`,
+    );
   }
 }
 
@@ -119,8 +123,8 @@ export function buildAndsaveFile(filePath: string, content: string) {
   try {
     saveFileSync(filePath, content);
     logInfo(filePath);
-  } catch (err) {
-    console.error("${EMOJI.error} Échec lors de la sauvegarde :", err);
+  } catch (error) {
+    logError(`${EMOJI.error} Échec lors de la sauvegarde :  ${error}`);
   }
 }
 /**
@@ -132,8 +136,10 @@ export function buildAndsaveFile(filePath: string, content: string) {
 export function existFile(filePath: string): boolean {
   try {
     return fs.existsSync(filePath) && fs.statSync(filePath).isFile();
-  } catch (err) {
-    console.error("${EMOJI.error}  Erreur lors de la vérification du fichier :", err);
+  } catch (error) {
+    logError(
+      `${EMOJI.error}  Erreur lors de la vérification du fichier : ${error}`,
+    );
     return false;
   }
 }
@@ -141,7 +147,9 @@ export function ensureDir(filePath: string) {
   try {
     fs.ensureDirSync(filePath);
   } catch (err) {
-    console.error("${EMOJI.error}  Erreur lors de la vérification du fichier :", err);
+    logError(
+      `${EMOJI.error} Erreur lors de la vérification du fichier : $err}`,
+    );
     return false;
   }
 }

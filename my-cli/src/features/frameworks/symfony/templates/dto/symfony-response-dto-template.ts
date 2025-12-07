@@ -9,7 +9,7 @@ export function symfonyResponseDtoTemplate(
 
 namespace App\\Dto\\${entity.namePascalCase};
 use DateTimeImmutable; 
-use Symfony\\Component\\Serializer\\Annotation\\Groups;
+use Symfony\\Component\\Serializer\\Attribute\\Groups;
 use Symfony\\Component\\Validator\\Constraints as Assert;
 
 final class ${entity.namePascalCase}ResponseDto

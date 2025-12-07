@@ -2,14 +2,15 @@ import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-import { updateGitIgnore } from "@features/frameworks/services/git.service";
+
 import { getEntities } from "@parsersMdj/services/get-entities.service";
 import { generateTreeJson } from "@features/tools/tree/services/generate-tree-json.service";
 import * as fs from "fs-extra";
 import * as path from "path";
 import { ICliLocalPathFile } from "types/common";
 import { writeFile } from "@utils/file-utils";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
+import { updateGitIgnore } from "@features/frameworks/commun/services/git.service";
 
 let cliLocalDiPath = path.join(process.cwd(), `.cli-local`);
 
@@ -72,9 +73,8 @@ export function createCliLocalDirectoryNewProject(
       writeFile(filePath, JSON.stringify(value, null, 2));
 
       logInfo(`🗄️ Fichier créer: ${filePath}`);
-    } catch (e) {
-      console.error(e);
-      // logInfo(e);
+    } catch (error) {
+      logError(`${error}`);
     }
   });
 

@@ -1,13 +1,9 @@
 export function DEPENDENCIES_NUXT_MOCK() {
   return {
     packageManager: "npm",
-    prod: [
-      "zod",
-      "pinia",
-      "@pinia/nuxt"
-    ],
+    prod: ["zod", "pinia", "@pinia/nuxt"],
     dev: [
-      'drizzle-seed',
+      "drizzle-seed",
       "prettier-eslint",
       "@nuxtjs/tailwindcss",
       "@nuxt/eslint",

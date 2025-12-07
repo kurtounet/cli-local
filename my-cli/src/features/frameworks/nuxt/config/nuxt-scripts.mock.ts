@@ -14,7 +14,7 @@ export function SCRIPTS_NUXT_MOCK() {
     "db:create": "npx tsx scripts/create-database.ts",
     "db:cp": "npx tsx scripts/create-database.ts && npm run db:push",
     lint: "npx eslint . --fix",
-    format: "npx prettier --write .",  
+    format: "npx prettier --write .",
   } as Record<string, string>;
 
   /*

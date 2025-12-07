@@ -233,14 +233,10 @@ export function registerTreeMarkdownFnAllCommand(program: Command): void {
       logInfo(
         `🌳 Generating Markdown tree for directory: ${resolvedDirectory}`,
       );
-      logInfo(
-        `📏 Maximum depth: ${depth === Infinity ? "unlimited" : depth}`,
-      );
+      logInfo(`📏 Maximum depth: ${depth === Infinity ? "unlimited" : depth}`);
       logInfo(`📝 Output file: ${output}`);
       if (fileExtensions.length > 0) {
-        logInfo(
-          `🔍 File extensions to analyze: ${fileExtensions.join(", ")}`,
-        );
+        logInfo(`🔍 File extensions to analyze: ${fileExtensions.join(", ")}`);
       }
       if (showHidden) {
         logInfo(`👁️  Including hidden files`);
@@ -548,9 +544,7 @@ async function extractFunctionsFromFile(
       debugLogPath,
       `Error extracting functions from ${filePath}: ${error.message}\n`,
     );
-    console.error(
-      `Error extracting functions from ${filePath}: ${error.message}`,
-    );
+    logError(`Error extracting functions from ${filePath}: ${error.message}`);
   }
 
   return functions;

@@ -1,8 +1,9 @@
 import { writeFile } from "@utils/file-utils";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { ZodEntityTemplate } from "@features/frameworks/templates/zod-entity.template";
-import { modelEntityTemplate } from "@features/frameworks/templates/model-entity.template";
+
 import { logInfo } from "@utils/logger";
+import { generateZodShemaEntityService } from "@features/frameworks/commun/services/generate-zod-shema-entity.service";
+import { modelEntityTemplate } from "@features/frameworks/commun/templates/model-entity.template";
 
 export function nuxtGenerateModelSchemaEntityService(
   rootPathProjectFramework: string,
@@ -15,7 +16,7 @@ export function nuxtGenerateModelSchemaEntityService(
   logInfo(`Génération du model pour: ${entity.namePascalCase}`);
   writeFile(
     `${rootPathProjectFramework}/shared/schemas/${entity.nameKebabCase}.schema.ts`,
-    ZodEntityTemplate(entity),
+    generateZodShemaEntityService(entity),
   );
   logInfo(`Génération des schemas zod pour: ${entity.namePascalCase}`);
 }

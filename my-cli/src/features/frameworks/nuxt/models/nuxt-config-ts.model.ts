@@ -1,7 +1,6 @@
-
 export interface INuxtConfigTs {
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  compatibilityDate: "2025-07-15";
+  devtools: { enabled: true };
   // Mode d’exécution
   ssr?: boolean; // Server-Side Rendering activé/désactivé
   dev?: boolean; // Mode dev

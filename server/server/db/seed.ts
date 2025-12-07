@@ -25,7 +25,7 @@ async function main() {
 }
 
 main().catch(async (err) => {
-  console.error('❌ Erreur seed:', err);
+  logError('${EMOJI.error} Erreur seed:', err);
   await pool.end();
   process.exit(1);
 });

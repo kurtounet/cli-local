@@ -4,11 +4,12 @@ import { drizzleSchemaFromEntityService } from "./drizzle-schema-from-entity.ser
 
 // ---------- table generator ----------
 export function drizzleGenerateSchemaEntityService(
-    rootServer: string,
-    entity: IEntityJson) {
-    writeFile(
-        `${rootServer}/database/schemas/${entity.nameKebabCase}.schema.ts`,
-        drizzleSchemaFromEntityService(entity),
-        `Création de ./server/database/schemas/${entity.nameKebabCase}.schema.ts` 
-    )
+  rootServer: string,
+  entity: IEntityJson,
+) {
+  writeFile(
+    `${rootServer}/database/schemas/${entity.nameKebabCase}.schema.ts`,
+    drizzleSchemaFromEntityService(entity),
+    `Création de ./server/database/schemas/${entity.nameKebabCase}.schema.ts`,
+  );
 }

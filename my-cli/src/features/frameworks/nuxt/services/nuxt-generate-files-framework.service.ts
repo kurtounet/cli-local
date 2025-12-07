@@ -1,4 +1,7 @@
-import { createDependencies, updateFiles } from "@features/frameworks/vue/services/vue-generate-files-framework.service";
+import {
+  createDependencies,
+  updateFiles,
+} from "@features/frameworks/vue/services/vue-generate-files-framework.service";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import {
   IFramework,
@@ -42,7 +45,7 @@ export function nuxtGenerateFilesFramework(
   // updateFilesTSConfigJson(rootPathProjectFramework);
   // generateFileTailwindConfig(rootPathProjectFramework);
   // generateFileESLint(rootPathProjectFramework);
-  // generateFilePrettier(rootPathProjectFramework);  
+  // generateFilePrettier(rootPathProjectFramework);
   updatePackageJson(
     configFile,
     framework,

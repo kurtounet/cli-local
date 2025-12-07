@@ -6,7 +6,13 @@
 // }
 
 // camelCase → snake_case
+export function camelCase(str: string): string {
+  return str.replace(/[-_\s](.)/g, (_, c) => c.toUpperCase());
+}
 
+export function pascalCase(str: string): string {
+  return capitalize(camelCase(str));
+}
 export function camelToSnake(str: string): string {
   return str.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
 }
@@ -64,9 +70,20 @@ export function pascalToCamel(str: string): string {
 }
 export function camelToPascal(str: string): string {
   if (!str) return str;
-  return str.charAt(0).toUpperCase + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+export function capitalize(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function slugify(str: string): string {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_-]+/g, "-")
+    .replace(/[^\w-]+/g, "");
+}
 // 🔥 Exemples d'utilisation
 
 // logInfo(snakeToCamel("snake_case_example")); // "snakeCaseExample"

@@ -7,7 +7,7 @@ import {
   createCliLocalDirectoryNewProject,
   getTreeArchitectureCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
-import { createArchitecture } from "@frameworks-services/create-architecture.service";
+
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { verifiedFileConfig } from "@features/project/services/verify-file-config";
 import { IDatabase } from "@frameworks-models/database.model";
@@ -15,32 +15,33 @@ import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-import { switchGenerateFileFrameworkService } from "@features/frameworks/services/switch-generate-file-framework.service";
-import { logInfo } from "@utils/logger";
+
+import { logError, logInfo } from "@utils/logger";
 import { log } from "console";
 import { EMOJI } from "@constants/messages";
+import { createArchitecture } from "@features/frameworks/commun/services/create-architecture.service";
+import { switchGenerateFileFrameworkService } from "@features/frameworks/commun/services/switch-generate-file-framework.service";
 
 export function registerCreateCliLocalCommand(program: Command) {
   program
     .command("cli-local")
     .argument("<directory>", "Répertoire du projet")
-    .description(
-      "🚀 Création du répertoire .cli-local pour le projet.",
-    )
+    .description("🚀 Création du répertoire .cli-local pour le projet.")
     .action((directory: string) => {
-     
       logInfo("🚀 Création du répetoire .cli-local");
 
       // Vérifier si le fichier config.json existe
       const configPath = path.join(process.cwd(), `${name}-config.json`);
       if (!fs.existsSync(configPath)) {
-        console.error(`${EMOJI.error} Le fichier ${name}-config.json est introuvable !`);
+        logError(
+          `${EMOJI.error} Le fichier ${name}-config.json est introuvable !`,
+        );
         process.exit(1);
       }
 
       const configFile: IProjectConfig = fs.readJsonSync(configPath);
       if (!configFile) {
-        console.error(
+        logError(
           `${EMOJI.error} Erreur lors de la lecture du fichier ${name}-config.json!`,
         );
         process.exit(1);
@@ -48,19 +49,19 @@ export function registerCreateCliLocalCommand(program: Command) {
 
       const verifiedFile = verifiedFileConfig(configFile);
       if (typeof verifiedFile === "string") {
-        console.error(`${EMOJI.error} ${verifiedFile} !`);
+        logError(`${EMOJI.error} ${verifiedFile} !`);
         process.exit(1);
       }
       // ok
       if (!configFile.starUml || configFile.starUml.length === 0) {
-        console.error(
+        logError(
           `${EMOJI.error} Le fichier starUml n'est pas renseigné dans le fichier de configuration.`,
         );
         process.exit(1);
       }
       const mdjFile = fs.readFileSync(configFile.starUml, "utf-8");
       if (!mdjFile) {
-        console.error(`${EMOJI.error} Le fichier MDJ "${mdjFile}" non trouvé.`);
+        logError(`${EMOJI.error} Le fichier MDJ "${mdjFile}" non trouvé.`);
         process.exit(1);
       }
       logInfo("🗄️ Vérification du fichier MDJ...");

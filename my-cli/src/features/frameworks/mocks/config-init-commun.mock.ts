@@ -7,6 +7,7 @@ export function configInitFramework(initFramework: IFramework): IFramework {
     version: initFramework.version,
     port: initFramework.port,
     app: initFramework.app,
+    mode: initFramework.mode,
     cliCmd: initFramework.cliCmd,
     gitBranch: initFramework.gitBranch,
     gitBranchCheckout: initFramework.gitBranchCheckout,

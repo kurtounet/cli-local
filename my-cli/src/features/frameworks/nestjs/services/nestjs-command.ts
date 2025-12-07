@@ -181,7 +181,7 @@
 //       //   }
 //       //   success(`${type} NestJS ${name} généré avec succès dans ${targetPath} !`);
 //       // } catch (err: unknown) {
-//       //   console.error(`Error generating NestJS module: ${(err as Error).message}`);
+//       //   logError(`Error generating NestJS module: ${(err as Error).message}`);
 //       // }
 //     });
 // }

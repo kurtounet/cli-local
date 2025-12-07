@@ -7,11 +7,16 @@ import {
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 import inquirer from "inquirer";
 import { executeCommand } from "@utils/execute-command";
-import { IProjectConfig } from "@features/project/models/project.models";
+
 import { EMOJI } from "@constants/messages";
+import { symfonyCreateAllCrudEntitiesCommandPhpTemplate } from "@features/frameworks/symfony/templates/command/symfony-create-all-crud-entities-command.php.template";
+import { symfonyGenerateCommandService } from "@features/frameworks/symfony/services/symfony-generate-command.service";
 
 export function registerSfSingleCommand(program: Command) {
   program
@@ -21,8 +26,6 @@ export function registerSfSingleCommand(program: Command) {
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
     .action(async () => {
-       
-
       const rootPathProjectFramework: string = process.cwd();
       const allpathFileCliLocal: ICliLocalPathFile = getCliLocalConfigFile(
         rootPathProjectFramework,
@@ -50,6 +53,7 @@ export function registerSfSingleCommand(program: Command) {
         "Dto",
         "Controller",
         "Service",
+        "Command",
       ];
 
       const cmd = await inquirer.prompt([
@@ -65,6 +69,9 @@ export function registerSfSingleCommand(program: Command) {
         if (option === "Account/Anthentication") {
           // symfonysymfonyCreateAccountModule(rootPathProjectFramework);
           // symfonysymfonyCreateAuths(rootPathProjectFramework);
+        }
+        if (option === "Command") {
+          symfonyGenerateCommandService(rootPathProjectFramework);
         }
         if (option === "Anthentication") {
           // symfonyCreateAuthsymfony(rootPathProjectFramework);
@@ -147,13 +154,6 @@ export function registerSfSingleCommand(program: Command) {
           // symfonyCreateEnvironments(rootPathProjectFramework, thisProjectConfig);
         }
       });
-      executeCommand(
-        "npm run format",
-        { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
-        `🚀 Lancement du Formatage`,
-        `✅ Formatage lancé avec succès !`,
-        `${EMOJI.error} Erreur lors du Formatage !`,
-      );
     });
 }
 

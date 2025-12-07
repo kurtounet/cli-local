@@ -11,6 +11,7 @@ export const CONFIG_INIT_NUXT: IFramework = {
   version: "",
   port: 3000,
   app: "--api",
+  mode: "install",
   cliCmd: "npm",
   gitBranch: ["main", "dev", "release", "hotfix"],
   gitBranchCheckout: "dev",

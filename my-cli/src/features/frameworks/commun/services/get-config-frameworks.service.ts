@@ -2,10 +2,8 @@ import * as fs from "fs";
 import path from "path";
 import { FRAMEWORKS_LIST } from "@constants/global.constants";
 
-import { IFramework, IProjectConfig } from "../models/framework-commun.model";
-
 import { logInfo } from "@utils/logger";
-import { IDatabase } from "../models/database.model";
+
 import { IProjectCommand } from "@models/project-command.model";
 import { CONFIG_INIT_NUXT } from "@nuxt/config/nuxt-config-ini.mock";
 import { CONFIG_INIT_NITRO } from "@nitro/config/nitro-config-ini.mock";
@@ -13,6 +11,12 @@ import { CONFIG_INIT_ELECTRON } from "@electron/config/config-ini.mock";
 import { CONFIG_INIT_NESTJS } from "@nestjs/config/nestjs-config-ini.mock";
 import { CONFIG_INIT_ANGULAR } from "@angular/config/angular-config-ini.mock";
 import { CONFIG_INIT_SYMFONY } from "@symfony/config/symfony-config-ini.mock";
+
+import { IDatabase } from "@features/frameworks/models/database.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@features/frameworks/models/framework-commun.model";
 
 // const BASE_TEMPLATES = path.resolve(__dirname, '../../frameworks');
 
@@ -130,7 +134,9 @@ export function createConfigProject(project: IProjectCommand) {
   return config;
 }
 export function createConfigProjectExisting(project: IProjectCommand) {
-  logInfo(` Géneration de la configuration et du .cli-local du projet existant...`);
+  logInfo(
+    ` Géneration de la configuration et du .cli-local du projet existant...`,
+  );
   // A remplacer par la lecture du .cli-local
   const frameworksList = [...project.frontends, ...project.backends];
   const config: IProjectConfig = {
@@ -141,5 +147,5 @@ export function createConfigProjectExisting(project: IProjectCommand) {
     frameWorks: getConfigFrameworks(frameworksList),
     databases: getConfigDatabases(project.databases),
   };
-   return config;
+  return config;
 }

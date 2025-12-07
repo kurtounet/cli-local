@@ -1,4 +1,4 @@
-export function nuxtPageComponentTemplate(title: string = '') {
+export function nuxtPageComponentTemplate(title: string = "") {
   return `
 <template>
   <section class="section-page">
@@ -18,5 +18,5 @@ definePageMeta({
 })
 </script>
 <style scoped lang="css"></style>
-`
+`;
 }

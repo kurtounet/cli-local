@@ -32,123 +32,139 @@ export interface IColumnJson {
   referenceTo?: string;
   propsEntiy?: string[];
   validations?: string[];
-   enumValues?: string[];
+  enumValues?: string[];
 }
 // export interface IEntityJson {
 //   name: string;
 //   columns: IColumnJson[];
 // }
-
+function formatDate(time: string) {
+  return `new Date('${time}')`;
+}
 // ------------------- Générateur de valeurs -------------------
 export function generateValue(column: IColumnJson): any {
   const { typeSql, length, minLength, maxLength, enumValues, name } = column;
-  if(name === "id") return null
+  if (name === "id") return null;
   switch (typeSql.toLowerCase()) {
-  // --- Nombres entiers ---
-  case "tinyint":
-  case "smallint":
-  case "mediumint":
-  case "int":
-  case "integer":
-  case "bigint": {
-    const minValue = minLength ?? 0;
-    const maxValue = maxLength ?? 100;
-    return faker.number.int({ min: minValue, max: maxValue });
+    // --- Nombres entiers ---
+    case "tinyint":
+    case "smallint":
+    case "mediumint":
+    case "int":
+    case "integer":
+    case "bigint": {
+      const minValue = minLength ?? 0;
+      const maxValue = maxLength ?? 100;
+      return faker.number.int({ min: minValue, max: maxValue });
+    }
+
+    // --- Nombres décimaux ---
+    case "decimal":
+    case "dec":
+    case "numeric":
+    case "fixed":
+    case "float":
+    case "double":
+    case "real": {
+      const minValue = minLength ?? -1000;
+      const maxValue = maxLength ?? 1000;
+      return faker.number.float({
+        min: minValue,
+        max: maxValue,
+        fractionDigits: 2,
+      });
+    }
+
+    // --- Booléen ---
+    case "boolean":
+    case "bool":
+      return faker.datatype.boolean();
+
+    // --- Date & temps ---
+    case "date":
+      return formatDate(faker.date.past().toISOString().split("T")[0]); //faker.date.past().toISOString().split("T")[0];
+    case "datetime":
+    case "timestamp":
+      return formatDate(faker.date.recent().toISOString());
+    case "time":
+      return formatDate(
+        faker.date.recent().toISOString().split("T")[1].split("Z")[0],
+      );
+    case "year":
+      return formatDate(faker.date.past().getFullYear().toString());
+
+    // --- Chaînes ---
+    case "char":
+    case "varchar":
+      return `'${faker.string.alpha({ length: maxLength ?? 10 })}'`;
+    case "tinytext":
+    case "text":
+    case "mediumtext":
+    case "longtext":
+      return `'${faker.lorem.sentence()}'`;
+    case "binary":
+    case "varbinary":
+    case "tinyblob":
+    case "blob":
+    case "mediumblob":
+    case "longblob":
+      // return `'${faker.string.alpha({ length: maxLength ?? 10 })}'`;
+      return faker.string.hexadecimal({ length: maxLength ?? 16 });
+    case "enum":
+      if (Array.isArray(enumValues) && enumValues.length > 0) {
+        return faker.helpers.arrayElement(enumValues);
+      }
+      return null;
+    case "set":
+      if (Array.isArray(enumValues) && enumValues.length > 0) {
+        return faker.helpers.arrayElements(enumValues);
+      }
+      return null;
+
+    // --- JSON ---
+    case "json":
+      return JSON.stringify(
+        {
+          example: faker.lorem.word(),
+          valeur: faker.lorem.word(),
+          type: faker.lorem.word(),
+        },
+        null,
+        2,
+      );
+
+    // --- Spatial (on génère du GeoJSON-like) ---
+    case "geometry":
+    case "point":
+      return {
+        type: "Point",
+        coordinates: [faker.location.longitude(), faker.location.latitude()],
+      };
+    case "linestring":
+      return {
+        type: "LineString",
+        coordinates: [
+          [faker.location.longitude(), faker.location.latitude()],
+          [faker.location.longitude(), faker.location.latitude()],
+        ],
+      };
+    case "polygon":
+      return {
+        type: "Polygon",
+        coordinates: [
+          [
+            [faker.location.longitude(), faker.location.latitude()],
+            [faker.location.longitude(), faker.location.latitude()],
+            [faker.location.longitude(), faker.location.latitude()],
+            [faker.location.longitude(), faker.location.latitude()],
+          ],
+        ],
+      };
+
+    default:
+      return null;
   }
 
-  // --- Nombres décimaux ---
-  case "decimal":
-  case "dec":
-  case "numeric":
-  case "fixed":
-  case "float":
-  case "double":
-  case "real": {
-    const minValue = minLength ?? -1000;
-    const maxValue = maxLength ?? 1000;
-    return faker.number.float({
-      min: minValue,
-      max: maxValue,
-      fractionDigits: 2,
-    });
-  }
-
-  // --- Booléen ---
-  case "boolean":
-  case "bool":
-    return faker.datatype.boolean();
-
-  // --- Date & temps ---
-  case "date":
-    return faker.date.past().toISOString().split("T")[0];
-  case "datetime":
-  case "timestamp":
-    return faker.date.recent().toISOString();
-  case "time":
-    return faker.date.recent().toISOString().split("T")[1].split("Z")[0];
-  case "year":
-    return String(faker.date.past().getFullYear());
-
-  // --- Chaînes ---
-  case "char":
-  case "varchar":
-    return `'${faker.string.alpha({ length: maxLength ?? 10 })}'`;
-  case "tinytext":
-  case "text":
-  case "mediumtext":
-  case "longtext":
-    return `'${faker.lorem.sentence()}'`;     
-  case "binary":
-  case "varbinary":
-  case "tinyblob":
-  case "blob":
-  case "mediumblob":
-  case "longblob":
-    // return `'${faker.string.alpha({ length: maxLength ?? 10 })}'`;
-    return faker.string.hexadecimal({ length: maxLength ?? 16 });
-  case "enum":
-    if (Array.isArray(enumValues) && enumValues.length > 0) {
-      return faker.helpers.arrayElement(enumValues);
-    }
-    return null;
-  case "set":
-    if (Array.isArray(enumValues) && enumValues.length > 0) {
-      return faker.helpers.arrayElements(enumValues);
-    }
-    return null;
-
-  // --- JSON ---
-  case "json":
-    return JSON.stringify({ example: faker.lorem.word() , valeur: faker.lorem.word(), type: faker.lorem.word() }, null, 2); 
-
-  // --- Spatial (on génère du GeoJSON-like) ---
-  case "geometry":
-  case "point":
-    return { type: "Point", coordinates: [faker.location.longitude(), faker.location.latitude()] };
-  case "linestring":
-    return {
-      type: "LineString",
-      coordinates: [
-        [faker.location.longitude(), faker.location.latitude()],
-        [faker.location.longitude(), faker.location.latitude()],
-      ],
-    };
-  case "polygon":
-    return {
-      type: "Polygon",
-      coordinates: [[
-        [faker.location.longitude(), faker.location.latitude()],
-        [faker.location.longitude(), faker.location.latitude()],
-        [faker.location.longitude(), faker.location.latitude()],
-        [faker.location.longitude(), faker.location.latitude()],
-      ]],
-    };
-
-  default:
-    return null;
-}
-
-   
   // switch (typeSql.toLowerCase()) {
   //   case "int":
   //   case "smallint":
@@ -210,19 +226,25 @@ export function generateValue(column: IColumnJson): any {
 }
 
 // ------------------- Générateur d'objet -------------------
-export function item(entity: IEntityJson, exclude: string[]): Record<string, any> {
-    if (!entity.columns){
-        return {};
-    }
-    const row = entity.columns.reduce((acc, column) => {
+export function item(
+  entity: IEntityJson,
+  exclude: string[],
+): Record<string, any> {
+  if (!entity.columns) {
+    return {};
+  }
+  const row = entity.columns.reduce(
+    (acc, column) => {
       if (!exclude.includes(column.name)) {
         acc[snakeToCamel(column.name)] = generateValue(column);
       }
- 
-  return acc;
-}, {} as Record<string, any>);
 
-return row;
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
+
+  return row;
 }
 /*
   return Object.fromEntries(

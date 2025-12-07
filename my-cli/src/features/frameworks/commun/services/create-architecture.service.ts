@@ -1,13 +1,16 @@
 import * as fs from "fs";
 import * as path from "path";
-import { IFramework } from "../models/framework-commun.model";
-import { IDirectory } from "@features/project/models/project.models";
-import { logError, logInfo } from "@utils/logger";
-import { EMOJI } from "@constants/messages";
+
+import { logError, logInfo, logStep } from "@utils/logger";
+import { EMOJI, messageCreateArchitecture } from "@constants/messages";
+import {
+  IDirectory,
+  IFramework,
+} from "@features/frameworks/models/framework-commun.model";
 
 export function createFolder(pathFolder: string) {
   if (!fs.existsSync(pathFolder)) {
-    logInfo(`📌 Dossier créer : ${pathFolder}`);
+    logInfo(`${EMOJI.folder} Dossier créer : ${pathFolder}`);
     fs.mkdirSync(pathFolder);
   }
 }
@@ -21,6 +24,7 @@ export function createArchitecture(
   framework: IFramework,
   frameworkPath: string,
 ) {
+  logStep(messageCreateArchitecture());
   if (framework.architecture.length > 0) {
     try {
       framework.architecture.forEach((item: IDirectory) => {
@@ -34,12 +38,13 @@ export function createArchitecture(
         }
       });
     } catch (error) {
-      logError(`${EMOJI.error} Erreur lors de la création de l'architecture ! : ${error}`);
-      
+      logError(
+        `${EMOJI.error} Erreur lors de la création de l'architecture ! : ${error}`,
+      );
     }
   } else {
-    return `✅ Aucune architecture à créer !`;
+    return `${EMOJI.error}  Aucune architecture à créer !`;
   }
 
-  return `✅ Architecture créée avec succès !`;
+  return `${EMOJI.success}  Architecture créée avec succès !`;
 }

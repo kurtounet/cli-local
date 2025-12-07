@@ -1,9 +1,21 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
-export function nitroIndexPostTemplate(entity: IEntityJson): string {
+export function nitroIndexPostTemplate(
+  entity: IEntityJson,
+  mode: string,
+): string {
+  let handleApiError = "";
+
+  if (mode === "nuxt") {
+    handleApiError = `import { handleApiError } from '~~/server/utils/handle-api-error.utils'`;
+  }
+  if (mode === "nitro") {
+    handleApiError = `import { handleApiError } from '../../utils/handle-api-error.utils'`;
+  }
   return `import { ${entity.namePascalCase}Service }  from './${entity.nameKebabCase}.service'
+${handleApiError}
+import { createError, defineEventHandler, readBody } from 'h3'
 import { insert${entity.namePascalCase}Schema } from '../../../shared/schemas/${entity.nameKebabCase}.schema'
-import { handleApiError } from '~~/server/utils/handle-api-error.utils'
 
 export default defineEventHandler(async event => {
 const ${entity.nameCamelCase}Service = new ${entity.namePascalCase}Service()

@@ -13,7 +13,7 @@ export function getColumns(entity: IERDEntity) {
 
   entity.columns.forEach((column: IERDColumn) => {
     // vérifier si le type de la colonne n'est pas undifined ou null avant de l'ajouter à la relation
-    if(column.type === undefined || column.type === null) {
+    if (column.type === undefined || column.type === null) {
       logInfo(`⏩ ${column.name} n'a pas de type. Ignoré.`);
       column.type = "VARCHAR(255)";
     }

@@ -12,6 +12,7 @@ export const CONFIG_INIT_NESTJS: IFramework = {
   port: 3000,
   app: "--api",
   cliCmd: "nest",
+  mode: "install",
   gitBranch: ["main", "dev", "release", "hotfix"],
   gitBranchCheckout: "dev",
   initialCommit: "Install NESTJS",

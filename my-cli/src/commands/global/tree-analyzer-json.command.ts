@@ -304,7 +304,7 @@ class TreeAnalyzerJson {
           `Avertissement: Accès refusé pour ${currentPath}. Ce répertoire sera ignoré.`,
         );
       } else {
-        console.error(
+        logError(
           `Erreur inattendue lors de la traversée de ${currentPath}: ${e.message}`,
         );
       }
@@ -345,13 +345,13 @@ class TreeAnalyzerJson {
     try {
       const stats = await fs.stat(this.rootPath);
       if (!stats.isDirectory()) {
-        console.error(
+        logError(
           `Erreur: Le chemin '${this.rootPath}' n'est pas un répertoire.`,
         );
         return;
       }
     } catch (e: any) {
-      console.error(
+      logError(
         `Erreur: Le répertoire '${this.rootPath}' n'existe pas ou est inaccessible: ${e.message}`,
       );
       return;
@@ -384,7 +384,7 @@ class TreeAnalyzerJson {
         `📊 Résumé: ${totalFiles} fichiers analysés, ${totalFunctions} fonctions et classes trouvées.`,
       );
     } catch (e: any) {
-      console.error(
+      logError(
         `Erreur lors de l'écriture du fichier JSON ${this.outputFile}: ${e.message}`,
       );
     }

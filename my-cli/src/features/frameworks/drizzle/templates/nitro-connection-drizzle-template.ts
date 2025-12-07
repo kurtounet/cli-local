@@ -1,9 +1,12 @@
-import { IFramework, IProjectConfig } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 
-export function nitroConnectionDrizzleTemplate(  
-  configFile: IProjectConfig
+export function nitroConnectionDrizzleTemplate(
+  configFile: IProjectConfig,
 ): string {
-  if(!configFile.databases) return '';
+  if (!configFile.databases) return "";
   return `// server/utils/db.ts
 import { drizzle } from 'drizzle-orm/mysql2';
 import mysql from 'mysql2/promise';  

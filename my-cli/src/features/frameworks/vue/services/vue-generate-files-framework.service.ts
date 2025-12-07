@@ -2,9 +2,10 @@ import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-import { installTSDependencies } from "@features/frameworks/services/install-dependencies.service";
+
 import { updatePackageJson, updateTsConfig } from "@features/frameworks/utils";
 import { logInfo } from "@utils/logger";
+import { installTSDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
 
 export function vueGenerateFilesFramework(
   configFile: IProjectConfig,

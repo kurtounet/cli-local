@@ -1,6 +1,5 @@
 import { Command } from "commander";
 
-import { pascalCase } from "@utils/string-utils";
 import {
   getCliLocalConfigFile,
   getCliLocalFile,
@@ -24,8 +23,6 @@ export function registerSfAllCommand(program: Command) {
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
     .action(async () => {
-       
-
       const frameworkPath: string = process.cwd();
       const allpathFileCliLocal: ICliLocalPathFile =
         getCliLocalConfigFile(frameworkPath);

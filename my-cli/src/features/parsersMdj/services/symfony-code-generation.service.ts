@@ -3,14 +3,14 @@ import { writeFileSync, mkdirSync, readFileSync } from "fs";
 import { join } from "path";
 import { generateEntityFileContent } from "./symfony-generate-entity.service";
 import { generateDtoFileContent } from "./symfony-generate-dto.service";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
 import { EMOJI } from "@constants/messages";
 
 const OUTPUT_BASE_PATH = join(process.cwd(), "dist", "generated-symfony");
 
 export function generateSymfonyModules(entities: IEntityJson[]): void {
   if (!entities) {
-    console.error("No entities provided.");
+    logError("No entities provided.");
     return;
   }
 
@@ -48,9 +48,8 @@ export function generateSymfonyModules(entities: IEntityJson[]): void {
       );
       logInfo(`✅  Generated DTOs for ${entity.namePascalCase}`);
     } catch (error) {
-      console.error(
-        `${EMOJI.error} Error generating files for entity ${entity.namePascalCase}:`,
-        error,
+      logError(
+        `${EMOJI.error} Error generating files for entity ${entity.namePascalCase}: ${error}`,
       );
     }
   }
@@ -65,13 +64,15 @@ export function generateSymfonyModulesFromFile(jsonFilePath: string): void {
     const entities: IEntityJson[] = jsonData.entities;
 
     if (!entities) {
-      console.error(`${EMOJI.error} No 'entities' array found in ${jsonFilePath}`);
+      logError(`${EMOJI.error} No 'entities' array found in ${jsonFilePath}`);
       return;
     }
 
     generateSymfonyModules(entities);
   } catch (error) {
-    console.error(`${EMOJI.error} Failed to load or parse ${jsonFilePath}:`, error);
+    logError(
+      `${EMOJI.error} Failed to load or parse ${jsonFilePath}: ${error}`,
+    );
     process.exit(1);
   }
 }

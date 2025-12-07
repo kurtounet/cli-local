@@ -25,7 +25,7 @@ export function handleApiError(error: any) {
     // data,
     // fatal,
   }
-  console.error('[API Error]', error)
+  logError('[API Error]', error)
   throw createError(cleanError)
 }
 `;

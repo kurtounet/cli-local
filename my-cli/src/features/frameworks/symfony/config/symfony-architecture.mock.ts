@@ -48,6 +48,13 @@ export function ARCHITECTURE_SYMFONY_MOCK() {
           pathInProject: "src",
           children: [],
         },
+        {
+          _type: "directory",
+          name: "Traits",
+          gitIgnore: false,
+          pathInProject: "src",
+          children: [],
+        },
       ],
     },
   ];

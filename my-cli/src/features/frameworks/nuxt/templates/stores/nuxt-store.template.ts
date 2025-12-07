@@ -1,11 +1,15 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
-import { nuxtStoreActionsCreateTemplate, nuxtStoreActionsDeleteTemplate, nuxtStoreActionsFindAllTemplate, nuxtStoreActionsFindByIdTemplate, nuxtStoreActionsUpdateTemplate } from "./nuxt-store-actions.template";
+import {
+  nuxtStoreActionsCreateTemplate,
+  nuxtStoreActionsDeleteTemplate,
+  nuxtStoreActionsFindAllTemplate,
+  nuxtStoreActionsFindByIdTemplate,
+  nuxtStoreActionsUpdateTemplate,
+} from "./nuxt-store-actions.template";
 import { nuxtStoreGettersTemplate } from "./nuxt-store-getters.template";
 
-export function nuxtStoreTemplate(
-    entity: IEntityJson
-): string {
+export function nuxtStoreTemplate(entity: IEntityJson): string {
   return `import { defineStore } from 'pinia'
 import type { ApiResponse } from '~~/shared/models/api-response.model'
 import type { ${entity.namePascalCase}, ${entity.namePascalCase}Insert } from '~~/shared/types/db'

@@ -81,7 +81,7 @@ function generateTreeMarkdown(
         `${EMOJI.error} Erreur lors de la lecture du dossier : ${error.message}`,
       );
     } else {
-      console.error(" ${EMOJI.error} Une erreur inconnue est survenue.");
+      logError(" ${EMOJI.error} Une erreur inconnue est survenue.");
     }
   }
 

@@ -342,7 +342,7 @@ async function extractFunctionsFromFile(
       debugLogPath,
       `Erreur lors de l'extraction des fonctions du fichier ${filePath}: ${error.message}\n`,
     );
-    console.error(
+    logError(
       `Erreur lors de l'extraction des fonctions du fichier ${filePath}: ${error.message}`,
     );
   }

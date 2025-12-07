@@ -1,9 +1,7 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
-export function nuxtStoreActionsFindAllTemplate(
-  entity: IEntityJson
-): string {
+export function nuxtStoreActionsFindAllTemplate(entity: IEntityJson): string {
   return `
     async findAll() {
       const result = await $fetch<ApiResponse<${entity.namePascalCase}[]>>(\`\${this.apiUrl}\`, {
@@ -16,9 +14,7 @@ export function nuxtStoreActionsFindAllTemplate(
     },    
 `;
 }
-export function nuxtStoreActionsFindByIdTemplate(
-  entity: IEntityJson
-): string {
+export function nuxtStoreActionsFindByIdTemplate(entity: IEntityJson): string {
   return `
     async findById(id: number) {
       try {
@@ -37,14 +33,12 @@ export function nuxtStoreActionsFindByIdTemplate(
         }
         return result.data
       } catch (error) {
-        console.error('Error finding ${entity.tableName}:', error)
+        logError('Error finding ${entity.tableName}:', error)
         throw error
       }
     },`;
 }
-export function nuxtStoreActionsCreateTemplate(
-  entity: IEntityJson
-): string {
+export function nuxtStoreActionsCreateTemplate(entity: IEntityJson): string {
   return `
     async create(body:${entity.namePascalCase}Insert) {
       try {
@@ -57,13 +51,13 @@ export function nuxtStoreActionsCreateTemplate(
         }
         return result.data
       } catch (error) {
-        console.error('Error creating ${entity.tableName}:', error)
+        logError('Error creating ${entity.tableName}:', error)
         throw error
       }
     },`;
 }
 export function nuxtStoreActionsCreateManyTemplate(
-  entity: IEntityJson
+  entity: IEntityJson,
 ): string {
   return `
     async createMany(transactions: BankTransaction[]) {
@@ -82,7 +76,7 @@ export function nuxtStoreActionsCreateManyTemplate(
         //     created.push(result.data)
         //   }
         // } catch (error) {
-        //   console.error('Error creating transaction:', error)
+        //   logError('Error creating transaction:', error)
         //   // ici tu peux décider si tu continues ou tu throw
         // }
       }
@@ -91,9 +85,7 @@ export function nuxtStoreActionsCreateManyTemplate(
     },
 `;
 }
-export function nuxtStoreActionsUpdateTemplate(
-  entity: IEntityJson
-): string {
+export function nuxtStoreActionsUpdateTemplate(entity: IEntityJson): string {
   return `
     async update(body: Partial<${entity.namePascalCase}>): Promise<${entity.namePascalCase}> {
       if (!body.id) {
@@ -114,15 +106,13 @@ export function nuxtStoreActionsUpdateTemplate(
         }
         return result.data
       } catch (error) {
-        console.error('Error updating ${entity.tableName}', error)
+        logError('Error updating ${entity.tableName}', error)
         throw error
       }
     },
 `;
 }
-export function nuxtStoreActionsDeleteTemplate(
-  entity: IEntityJson
-): string {
+export function nuxtStoreActionsDeleteTemplate(entity: IEntityJson): string {
   return `
     async delete(id: number) {
       try {
@@ -134,7 +124,7 @@ export function nuxtStoreActionsDeleteTemplate(
         }
         return result.message
       } catch (error) {
-        console.error('Error deleting ${entity.tableName}:', error)
+        logError('Error deleting ${entity.tableName}:', error)
         throw error
       }
     },
@@ -142,11 +132,10 @@ export function nuxtStoreActionsDeleteTemplate(
 `;
 }
 
-
 export function nuxtStoreActionsFindAllCacheTemplate(
-  entity: IEntityJson
+  entity: IEntityJson,
 ): string {
-  const listProp = `${entity.nameCamelCase}s`
+  const listProp = `${entity.nameCamelCase}s`;
 
   return `
     /**
@@ -198,14 +187,12 @@ export function nuxtStoreActionsFindAllCacheTemplate(
 
         return this.${listProp}
       } catch (error) {
-        console.error('Error fetching ${listProp}:', error)
+        logError('Error fetching ${listProp}:', error)
         this.error = (error as Error)?.message || 'Unknown error'
         throw error
       } finally {
         this.loading = false
       }
     },
-`
+`;
 }
-
-

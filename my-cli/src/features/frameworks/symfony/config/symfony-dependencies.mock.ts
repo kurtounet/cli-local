@@ -5,6 +5,7 @@ export function DEPENDENCIES_SYMFONY_MOCK() {
     dev: [
       "symfony/maker-bundle",
       "phpunit/phpunit",
+      "phpstan/phpstan",
       "symfony/http-client",
       "symfony/webpack-encore-bundle",
       "symfony/profiler-pack",

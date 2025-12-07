@@ -2015,3 +2015,1652 @@ export const SPECIAL_COLUMN_NAMES = {
   CONFIGURATIONS: "configurations",
   SETTINGS: "settings",
 } as const;
+export interface ConstraintMeta {
+  categorie: string;
+  type: string;
+  implantation: string;
+  attribute: string;
+  proprietes: Record<string, any>;
+}
+
+export function getContraintTypeORM(type: string): ConstraintMeta | null {
+  const Mapping: Record<string, ConstraintMeta> = {
+    // ------------- BASIC -------------
+    blank: {
+      categorie: "Basic",
+      type: "String",
+      implantation: "#[Assert\\Blank]",
+      attribute: "public ?string $internalNote = null;",
+      proprietes: {},
+    },
+    isfalse: {
+      categorie: "Basic",
+      type: "Boolean",
+      implantation:
+        '#[Assert\\IsFalse(message: "Cette valeur doit être false.")]',
+      attribute: "public ?bool $archived = null;",
+      proprietes: {
+        message: "Cette valeur doit être false.",
+      },
+    },
+    isnull: {
+      categorie: "Basic",
+      type: "Mixed",
+      implantation: '#[Assert\\IsNull(message: "La valeur doit être nulle.")]',
+      attribute: "public mixed $legacyValue = null;",
+      proprietes: {
+        message: "La valeur doit être nulle.",
+      },
+    },
+    istrue: {
+      categorie: "Basic",
+      type: "Boolean",
+      implantation:
+        '#[Assert\\IsTrue(message: "Vous devez accepter les conditions générales.")]',
+      attribute: "public ?bool $termsAccepted = null;",
+      proprietes: {
+        message: "Vous devez accepter les conditions générales.",
+      },
+    },
+    notblank: {
+      categorie: "Basic",
+      type: "String",
+      implantation:
+        '#[Assert\\NotBlank(message: "Ce champ ne doit pas être vide.")]',
+      attribute: "public ?string $name = null;",
+      proprietes: {
+        message: "Ce champ ne doit pas être vide.",
+      },
+    },
+    notnull: {
+      categorie: "Basic",
+      type: "Mixed",
+      implantation:
+        '#[Assert\\NotNull(message: "Cette valeur ne doit pas être nulle.")]',
+      attribute: "public mixed $price = null;",
+      proprietes: {
+        message: "Cette valeur ne doit pas être nulle.",
+      },
+    },
+    type: {
+      categorie: "Basic",
+      type: "Mixed",
+      implantation:
+        '#[Assert\\Type(type: "int", message: "Cette valeur doit être du type {{ type }}.")]',
+      attribute: "public mixed $quantity;",
+      proprietes: {
+        type: "int",
+        message: "Cette valeur doit être du type {{ type }}.",
+      },
+    },
+
+    // ------------- STRING -------------
+    charset: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Charset(charset: "UTF-8", message: "Cette chaîne doit être encodée en {{ charset }}.")]',
+      attribute: "public ?string $description = null;",
+      proprietes: {
+        charset: "UTF-8",
+        message: "Cette chaîne doit être encodée en {{ charset }}.",
+      },
+    },
+    cidr: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Cidr(message: "Cette valeur doit être un CIDR valide.")]',
+      attribute: "public ?string $subnet = null;",
+      proprietes: {
+        message: "Cette valeur doit être un CIDR valide.",
+      },
+    },
+    csscolor: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\CssColor(message: "Cette valeur doit être une couleur CSS valide.")]',
+      attribute: "public ?string $primaryColor = null;",
+      proprietes: {
+        message: "Cette valeur doit être une couleur CSS valide.",
+      },
+    },
+    email: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Email(mode: "html5", message: "Cette valeur n’est pas une adresse email valide.")]',
+      attribute: "public ?string $email = null;",
+      proprietes: {
+        mode: "html5",
+        message: "Cette valeur n’est pas une adresse email valide.",
+      },
+    },
+    expressionsyntax: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\ExpressionSyntax(message: "Cette expression n’est pas syntaxiquement valide.")]',
+      attribute: "public ?string $filterExpression = null;",
+      proprietes: {
+        message: "Cette expression n’est pas syntaxiquement valide.",
+      },
+    },
+    hostname: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Hostname(message: "Ce nom d’hôte n’est pas valide.")]',
+      attribute: "public ?string $domain = null;",
+      proprietes: {
+        message: "Ce nom d’hôte n’est pas valide.",
+      },
+    },
+    ip: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Ip(version: "all", message: "Cette valeur n’est pas une adresse IP valide.")]',
+      attribute: "public ?string $ip = null;",
+      proprietes: {
+        version: "all",
+        message: "Cette valeur n’est pas une adresse IP valide.",
+      },
+    },
+    json: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Json(message: "Cette valeur doit être une chaîne JSON valide.")]',
+      attribute: "public ?string $payload = null;",
+      proprietes: {
+        message: "Cette valeur doit être une chaîne JSON valide.",
+      },
+    },
+    length: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Length(min: 3, max: 50, minMessage: "Le titre doit avoir au moins {{ limit }} caractères.", maxMessage: "Le titre doit avoir au plus {{ limit }} caractères.")]',
+      attribute: "public ?string $title = null;",
+      proprietes: {
+        min: 3,
+        minMessage: "Le titre doit avoir au moins {{ limit }} caractères.",
+        max: 50,
+        maxMessage: "Le titre doit avoir au plus {{ limit }} caractères.",
+      },
+    },
+    macaddress: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\MacAddress(message: "Cette valeur doit être une adresse MAC valide.")]',
+      attribute: "public ?string $mac = null;",
+      proprietes: {
+        message: "Cette valeur doit être une adresse MAC valide.",
+      },
+    },
+    nosuspiciouscharacters: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\NoSuspiciousCharacters(message: "Cette valeur contient des caractères suspects.")]',
+      attribute: "public ?string $comment = null;",
+      proprietes: {
+        message: "Cette valeur contient des caractères suspects.",
+      },
+    },
+    notcompromisedpassword: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\NotCompromisedPassword(message: "Ce mot de passe a été compromis dans une fuite de données.")]',
+      attribute: "public ?string $plainPassword = null;",
+      proprietes: {
+        message: "Ce mot de passe a été compromis dans une fuite de données.",
+      },
+    },
+    passwordstrength: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\PasswordStrength(minScore: Assert\\PasswordStrength::STRENGTH_MEDIUM, message: "Ce mot de passe est trop faible.")]',
+      attribute: "public ?string $securePassword = null;",
+      proprietes: {
+        minScore: "medium",
+        message: "Ce mot de passe est trop faible.",
+      },
+    },
+    regex: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Regex(pattern: "/^[a-z0-9_]+$/i", htmlPattern: "^[a-zA-Z0-9_]+$", message: "Ce champ ne peut contenir que des lettres, chiffres et underscores.")]',
+      attribute: "public ?string $username = null;",
+      proprietes: {
+        pattern: "^[a-z0-9_]+$",
+        htmlPattern: "^[a-zA-Z0-9_]+$",
+        message:
+          "Ce champ ne peut contenir que des lettres, chiffres et underscores.",
+      },
+    },
+    twig: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Twig(message: "Ce template Twig n’est pas valide.")]',
+      attribute: "public ?string $twigTemplate = null;",
+      proprietes: {
+        message: "Ce template Twig n’est pas valide.",
+      },
+    },
+    ulid: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Ulid(message: "Cette valeur n’est pas un ULID valide.")]',
+      attribute: "public ?string $ulid = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas un ULID valide.",
+      },
+    },
+    url: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Url(message: "Cette valeur n’est pas une URL valide.")]',
+      attribute: "public ?string $website = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une URL valide.",
+      },
+    },
+    userpassword: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\UserPassword(message: "Le mot de passe actuel est incorrect.")]',
+      attribute: "public ?string $currentPassword = null;",
+      proprietes: {
+        message: "Le mot de passe actuel est incorrect.",
+      },
+    },
+    uuid: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Uuid(message: "Cette valeur n’est pas un UUID valide.")]',
+      attribute: "public ?string $uuid = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas un UUID valide.",
+      },
+    },
+    wordcount: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\WordCount(max: 100, maxMessage: "Ce texte doit contenir au plus {{ limit }} mots.")]',
+      attribute: "public ?string $summary = null;",
+      proprietes: {
+        max: 100,
+        maxMessage: "Ce texte doit contenir au plus {{ limit }} mots.",
+      },
+    },
+    yaml: {
+      categorie: "String",
+      type: "String",
+      implantation:
+        '#[Assert\\Yaml(message: "Cette valeur doit être un YAML valide.")]',
+      attribute: "public ?string $yamlConfig = null;",
+      proprietes: {
+        message: "Cette valeur doit être un YAML valide.",
+      },
+    },
+
+    // ------------- COMPARISON -------------
+    divisibleby: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\DivisibleBy(value: 5, message: "Cette valeur doit être un multiple de {{ value }}.")]',
+      attribute: "public ?int $packSize = null;",
+      proprietes: {
+        value: 5,
+        message: "Cette valeur doit être un multiple de {{ value }}.",
+      },
+    },
+    equalto: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\EqualTo(value: 100, message: "Cette valeur doit être égale à {{ compared_value }}.")]',
+      attribute: "public ?int $fixedScore = null;",
+      proprietes: {
+        value: 100,
+        message: "Cette valeur doit être égale à {{ compared_value }}.",
+      },
+    },
+    greaterthan: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\GreaterThan(value: 0, message: "Cette valeur doit être supérieure à {{ compared_value }}.")]',
+      attribute: "public ?float $amount = null;",
+      proprietes: {
+        value: 0,
+        message: "Cette valeur doit être supérieure à {{ compared_value }}.",
+      },
+    },
+    greaterthanorequal: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\GreaterThanOrEqual(value: 18, message: "Cette valeur doit être supérieure ou égale à {{ compared_value }}.")]',
+      attribute: "public ?int $age = null;",
+      proprietes: {
+        value: 18,
+        message:
+          "Cette valeur doit être supérieure ou égale à {{ compared_value }}.",
+      },
+    },
+    identicalto: {
+      categorie: "Comparison",
+      type: "Mixed",
+      implantation:
+        '#[Assert\\IdenticalTo(value: 1, message: "Cette valeur doit être strictement identique à {{ compared_value }}.")]',
+      attribute: "public mixed $flag;",
+      proprietes: {
+        value: 1,
+        message:
+          "Cette valeur doit être strictement identique à {{ compared_value }}.",
+      },
+    },
+    lessthan: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\LessThan(value: 100, message: "Cette valeur doit être inférieure à {{ compared_value }}.")]',
+      attribute: "public ?int $score = null;",
+      proprietes: {
+        value: 100,
+        message: "Cette valeur doit être inférieure à {{ compared_value }}.",
+      },
+    },
+    lessthanorequal: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\LessThanOrEqual(value: 1000, message: "Cette valeur doit être inférieure ou égale à {{ compared_value }}.")]',
+      attribute: "public ?float $total = null;",
+      proprietes: {
+        value: 1000,
+        message:
+          "Cette valeur doit être inférieure ou égale à {{ compared_value }}.",
+      },
+    },
+    notequalto: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\NotEqualTo(value: 0, message: "Cette valeur ne doit pas être égale à {{ compared_value }}.")]',
+      attribute: "public ?int $divider = null;",
+      proprietes: {
+        value: 0,
+        message: "Cette valeur ne doit pas être égale à {{ compared_value }}.",
+      },
+    },
+    notidenticalto: {
+      categorie: "Comparison",
+      type: "Mixed",
+      implantation:
+        '#[Assert\\NotIdenticalTo(value: "admin", message: "Cette valeur ne doit pas être strictement identique à {{ compared_value }}.")]',
+      attribute: "public ?string $login = null;",
+      proprietes: {
+        value: "admin",
+        message:
+          "Cette valeur ne doit pas être strictement identique à {{ compared_value }}.",
+      },
+    },
+    range: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation:
+        '#[Assert\\Range(min: 1, max: 5, notInRangeMessage: "Cette valeur doit être comprise entre {{ min }} et {{ max }}.")]',
+      attribute: "public ?int $rating = null;",
+      proprietes: {
+        min: 1,
+        max: 5,
+        notInRangeMessage:
+          "Cette valeur doit être comprise entre {{ min }} et {{ max }}.",
+      },
+    },
+    unique: {
+      categorie: "Comparison",
+      type: "Array",
+      implantation:
+        '#[Assert\\Unique(message: "Les éléments doivent être tous différents.")]',
+      attribute: "public array $tags = [];",
+      proprietes: {
+        message: "Les éléments doivent être tous différents.",
+      },
+    },
+
+    // ------------- NUMBER -------------
+    negative: {
+      categorie: "Number",
+      type: "Number",
+      implantation:
+        '#[Assert\\Negative(message: "Cette valeur doit être strictement négative.")]',
+      attribute: "public ?int $negativeBalance = null;",
+      proprietes: {
+        message: "Cette valeur doit être strictement négative.",
+      },
+    },
+    negativeorzero: {
+      categorie: "Number",
+      type: "Number",
+      implantation:
+        '#[Assert\\NegativeOrZero(message: "Cette valeur doit être négative ou nulle.")]',
+      attribute: "public ?float $balance = null;",
+      proprietes: {
+        message: "Cette valeur doit être négative ou nulle.",
+      },
+    },
+    positive: {
+      categorie: "Number",
+      type: "Number",
+      implantation:
+        '#[Assert\\Positive(message: "Cette valeur doit être strictement positive.")]',
+      attribute: "public ?int $itemsCount = null;",
+      proprietes: {
+        message: "Cette valeur doit être strictement positive.",
+      },
+    },
+    positiveorzero: {
+      categorie: "Number",
+      type: "Number",
+      implantation:
+        '#[Assert\\PositiveOrZero(message: "Cette valeur doit être positive ou nulle.")]',
+      attribute: "public ?int $stock = null;",
+      proprietes: {
+        message: "Cette valeur doit être positive ou nulle.",
+      },
+    },
+
+    // ------------- DATE -------------
+    date: {
+      categorie: "Date",
+      type: "String",
+      implantation:
+        '#[Assert\\Date(message: "Cette valeur n’est pas une date valide.")]',
+      attribute: "public ?string $publishDate = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une date valide.",
+      },
+    },
+    datetime: {
+      categorie: "Date",
+      type: "String",
+      implantation:
+        '#[Assert\\DateTime(message: "Cette valeur n’est pas une date/heure valide.")]',
+      attribute: "public ?string $scheduledAt = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une date/heure valide.",
+      },
+    },
+    time: {
+      categorie: "Date",
+      type: "String",
+      implantation:
+        '#[Assert\\Time(message: "Cette valeur n’est pas une heure valide.")]',
+      attribute: "public ?string $openingTime = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une heure valide.",
+      },
+    },
+    timezone: {
+      categorie: "Date",
+      type: "String",
+      implantation:
+        '#[Assert\\Timezone(message: "Ce fuseau horaire n’est pas valide.")]',
+      attribute: "public ?string $timezone = null;",
+      proprietes: {
+        message: "Ce fuseau horaire n’est pas valide.",
+      },
+    },
+    week: {
+      categorie: "Date",
+      type: "String",
+      implantation:
+        '#[Assert\\Week(message: "Cette valeur doit être une semaine ISO valide (YYYY-Www).")]',
+      attribute: "public ?string $isoWeek = null;",
+      proprietes: {
+        message: "Cette valeur doit être une semaine ISO valide (YYYY-Www).",
+      },
+    },
+
+    // ------------- CHOICE -------------
+    choice: {
+      categorie: "Choice",
+      type: "Mixed",
+      implantation:
+        '#[Assert\\Choice(choices: ["draft", "published", "archived"], message: "Cette valeur n’est pas un choix valide.")]',
+      attribute: "public ?string $status = null;",
+      proprietes: {
+        choices: ["draft", "published", "archived"],
+        message: "Cette valeur n’est pas un choix valide.",
+      },
+    },
+    country: {
+      categorie: "Choice",
+      type: "String",
+      implantation:
+        '#[Assert\\Country(message: "Ce code pays n’est pas valide.")]',
+      attribute: "public ?string $countryCode = null;",
+      proprietes: {
+        message: "Ce code pays n’est pas valide.",
+      },
+    },
+    language: {
+      categorie: "Choice",
+      type: "String",
+      implantation:
+        '#[Assert\\Language(message: "Ce code langue n’est pas valide.")]',
+      attribute: "public ?string $languageCode = null;",
+      proprietes: {
+        message: "Ce code langue n’est pas valide.",
+      },
+    },
+    locale: {
+      categorie: "Choice",
+      type: "String",
+      implantation: '#[Assert\\Locale(message: "Ce locale n’est pas valide.")]',
+      attribute: "public ?string $locale = null;",
+      proprietes: {
+        message: "Ce locale n’est pas valide.",
+      },
+    },
+
+    // ------------- FILE -------------
+    file: {
+      categorie: "File",
+      type: "File",
+      implantation:
+        '#[Assert\\File(maxSize: "5M", mimeTypes: ["application/pdf"], maxSizeMessage: "Le fichier est trop volumineux ({{ size }} {{ suffix }}). Taille maximum : {{ limit }} {{ suffix }}.", mimeTypesMessage: "Ce type de fichier n’est pas autorisé.")]',
+      attribute:
+        "public ?\\Symfony\\Component\\HttpFoundation\\File\\File $contractFile = null;",
+      proprietes: {
+        maxSize: "5M",
+        mimeTypes: ["application/pdf"],
+        maxSizeMessage:
+          "Le fichier est trop volumineux ({{ size }} {{ suffix }}). Taille maximum : {{ limit }} {{ suffix }}.",
+        mimeTypesMessage: "Ce type de fichier n’est pas autorisé.",
+      },
+    },
+    image: {
+      categorie: "File",
+      type: "File",
+      implantation:
+        '#[Assert\\Image(maxSize: "2M", mimeTypes: ["image/jpeg", "image/png"], mimeTypesMessage: "Seules les images JPEG ou PNG sont autorisées.")]',
+      attribute:
+        "public ?\\Symfony\\Component\\HttpFoundation\\File\\File $avatar = null;",
+      proprietes: {
+        maxSize: "2M",
+        mimeTypes: ["image/jpeg", "image/png"],
+        mimeTypesMessage: "Seules les images JPEG ou PNG sont autorisées.",
+      },
+    },
+    video: {
+      categorie: "File",
+      type: "File",
+      implantation:
+        '#[Assert\\Video(maxSize: "100M", maxWidth: 1920, maxHeight: 1080, mimeTypes: ["video/mp4", "video/webm"], mimeTypesMessage: "Ce type de fichier vidéo n’est pas autorisé.")]',
+      attribute:
+        "public ?\\Symfony\\Component\\HttpFoundation\\File\\File $videoFile = null;",
+      proprietes: {
+        maxSize: "100M",
+        maxWidth: 1920,
+        maxHeight: 1080,
+        mimeTypes: ["video/mp4", "video/webm"],
+        mimeTypesMessage: "Ce type de fichier vidéo n’est pas autorisé.",
+      },
+    },
+
+    // ------------- FINANCIAL -------------
+    bic: {
+      categorie: "Financial",
+      type: "String",
+      implantation: '#[Assert\\Bic(message: "Ce code BIC n’est pas valide.")]',
+      attribute: "public ?string $bic = null;",
+      proprietes: {
+        message: "Ce code BIC n’est pas valide.",
+      },
+    },
+    cardscheme: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\CardScheme(schemes: ["VISA", "MASTERCARD"], message: "Ce numéro de carte n’est pas valide ou le réseau n’est pas accepté.")]',
+      attribute: "public ?string $creditCardNumber = null;",
+      proprietes: {
+        schemes: ["VISA", "MASTERCARD"],
+        message:
+          "Ce numéro de carte n’est pas valide ou le réseau n’est pas accepté.",
+      },
+    },
+    currency: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\Currency(message: "Ce code de devise n’est pas valide.")]',
+      attribute: "public ?string $currency = null;",
+      proprietes: {
+        message: "Ce code de devise n’est pas valide.",
+      },
+    },
+    iban: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\Iban(message: "Ce numéro IBAN n’est pas valide.")]',
+      attribute: "public ?string $iban = null;",
+      proprietes: {
+        message: "Ce numéro IBAN n’est pas valide.",
+      },
+    },
+    isbn: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\Isbn(type: "isbn13", message: "Ce code ISBN n’est pas valide.")]',
+      attribute: "public ?string $isbn = null;",
+      proprietes: {
+        type: "isbn13",
+        message: "Ce code ISBN n’est pas valide.",
+      },
+    },
+    isin: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\Isin(message: "Ce code ISIN n’est pas valide.")]',
+      attribute: "public ?string $isin = null;",
+      proprietes: {
+        message: "Ce code ISIN n’est pas valide.",
+      },
+    },
+    issn: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\Issn(message: "Ce code ISSN n’est pas valide.")]',
+      attribute: "public ?string $issn = null;",
+      proprietes: {
+        message: "Ce code ISSN n’est pas valide.",
+      },
+    },
+    luhn: {
+      categorie: "Financial",
+      type: "String",
+      implantation:
+        '#[Assert\\Luhn(message: "Ce numéro n’est pas valide (échec de la vérification Luhn).")]',
+      attribute: "public ?string $luhnNumber = null;",
+      proprietes: {
+        message: "Ce numéro n’est pas valide (échec de la vérification Luhn).",
+      },
+    },
+
+    // ------------- DOCTRINE -------------
+    disableautomapping: {
+      categorie: "Doctrine",
+      type: "Class",
+      implantation:
+        "#[\\Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\DisableAutoMapping]",
+      attribute: "class LegacyDto {}",
+      proprietes: {},
+    },
+    enableautomapping: {
+      categorie: "Doctrine",
+      type: "Class",
+      implantation:
+        "#[\\Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\EnableAutoMapping]",
+      attribute: "class Product {}",
+      proprietes: {},
+    },
+    uniqueentity: {
+      categorie: "Doctrine",
+      type: "Class",
+      implantation:
+        '#[\\Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity(fields: ["email"], message: "Cet email est déjà utilisé.")]',
+      attribute: "class User {}",
+      proprietes: {
+        fields: ["email"],
+        message: "Cet email est déjà utilisé.",
+      },
+    },
+
+    // ------------- OTHER / STRUCTURE -------------
+    all: {
+      categorie: "Other",
+      type: "Array",
+      implantation:
+        "#[Assert\\All(constraints: [new Assert\\NotBlank(), new Assert\\Length(min: 2)])]",
+      attribute: "public array $labels = [];",
+      proprietes: {
+        constraints: [
+          "new Assert\\\\NotBlank()",
+          "new Assert\\\\Length(min: 2)",
+        ],
+      },
+    },
+    atleastoneof: {
+      categorie: "Other",
+      type: "Mixed",
+      implantation:
+        '#[Assert\\AtLeastOneOf(constraints: [new Assert\\Email(), new Assert\\Regex(pattern: "/^\\+?\\d+$/")], message: "Cette valeur doit être un email valide ou un numéro de téléphone.")]',
+      attribute: "public ?string $contact = null;",
+      proprietes: {
+        constraints: [
+          "new Assert\\\\Email()",
+          "new Assert\\\\Regex(pattern: '/^\\\\+?\\\\d+$/')",
+        ],
+        message:
+          "Cette valeur doit être un email valide ou un numéro de téléphone.",
+      },
+    },
+    callback: {
+      categorie: "Other",
+      type: "Class",
+      implantation: "#[Assert\\Callback]",
+      attribute:
+        "public function validate(\\Symfony\\Component\\Validator\\Context\\ExecutionContextInterface $context): void {}",
+      proprietes: {},
+    },
+    cascade: {
+      categorie: "Other",
+      type: "Object",
+      implantation: "#[Assert\\Cascade]",
+      attribute: "public ?Address $address = null;",
+      proprietes: {},
+    },
+    collection: {
+      categorie: "Other",
+      type: "Array",
+      implantation:
+        '#[Assert\\Collection(fields: ["street" => new Assert\\NotBlank(), "zipCode" => new Assert\\Length(min: 4, max: 10), "city" => new Assert\\NotBlank()], allowExtraFields: false)]',
+      attribute: "public array $addressData = [];",
+      proprietes: {
+        fields: {
+          street: "new Assert\\\\NotBlank()",
+          zipCode: "new Assert\\\\Length(min: 4, max: 10)",
+          city: "new Assert\\\\NotBlank()",
+        },
+        allowExtraFields: false,
+      },
+    },
+    compound: {
+      categorie: "Other",
+      type: "Custom",
+      implantation: "// Contrainte personnalisée étendant Assert\\\\Compound",
+      attribute: "class StrongPassword extends Assert\\\\Compound {}",
+      proprietes: {},
+    },
+    count: {
+      categorie: "Other",
+      type: "Array",
+      implantation:
+        '#[Assert\\Count(min: 1, max: 10, minMessage: "Vous devez sélectionner au moins {{ limit }} élément.", maxMessage: "Vous ne pouvez pas sélectionner plus de {{ limit }} éléments.")]',
+      attribute: "public array $items = [];",
+      proprietes: {
+        min: 1,
+        max: 10,
+        minMessage: "Vous devez sélectionner au moins {{ limit }} élément.",
+        maxMessage:
+          "Vous ne pouvez pas sélectionner plus de {{ limit }} éléments.",
+      },
+    },
+    expression: {
+      categorie: "Other",
+      type: "Class",
+      implantation:
+        '#[Assert\\Expression(expression: "this.minPrice <= this.maxPrice", message: "Le prix minimum doit être inférieur ou égal au prix maximum.")]',
+      attribute: "public bool $validPriceRange = true;",
+      proprietes: {
+        expression: "this.minPrice <= this.maxPrice",
+        message: "Le prix minimum doit être inférieur ou égal au prix maximum.",
+      },
+    },
+    groupsequence: {
+      categorie: "Other",
+      type: "Class",
+      implantation: '#[Assert\\GroupSequence(["Default", "Strict")] ]',
+      attribute: "class Registration {}",
+      proprietes: {
+        groups: ["Default", "Strict"],
+      },
+    },
+    sequentially: {
+      categorie: "Other",
+      type: "Mixed",
+      implantation:
+        "#[Assert\\Sequentially([new Assert\\NotBlank(), new Assert\\Length(min: 5)])]",
+      attribute: "public ?string $serialKey = null;",
+      proprietes: {
+        constraints: [
+          "new Assert\\\\NotBlank()",
+          "new Assert\\\\Length(min: 5)",
+        ],
+      },
+    },
+    traverse: {
+      categorie: "Other",
+      type: "Class",
+      implantation: "#[Assert\\Traverse]",
+      attribute: "public array $config = [];",
+      proprietes: {},
+    },
+    valid: {
+      categorie: "Other",
+      type: "Object",
+      implantation: "#[Assert\\Valid]",
+      attribute: "public ?Profile $profile = null;",
+      proprietes: {},
+    },
+    when: {
+      categorie: "Other",
+      type: "Mixed",
+      implantation:
+        "#[Assert\\When(expression: \"this.type === 'percent'\", constraints: [new Assert\\Range(min: 1, max: 100)], otherwise: [new Assert\\GreaterThan(0)])]",
+      attribute: "public ?int $discountValue = null;",
+      proprietes: {
+        expression: "this.type === 'percent'",
+        constraints: ["new Assert\\\\Range(min: 1, max: 100)"],
+        otherwise: ["new Assert\\\\GreaterThan(0)"],
+      },
+    },
+  };
+
+  return Mapping[type.toLowerCase()] ?? null;
+}
+
+export const SYMFONY_CONTRAINTS = [
+  {
+    Blank: {
+      categorie: "Basic",
+      type: "String",
+      implantation: "#[Assert\\Blank]",
+      attribute: "public ?string $internalNote = null;",
+      proprietes: {},
+    },
+    IsFalse: {
+      categorie: "Basic",
+      type: "Boolean",
+      implantation: "#[Assert\\IsFalse( proprietes )]",
+      attribute: "public ?bool $archived = null;",
+      proprietes: {
+        message: "Cette valeur doit être false.",
+      },
+    },
+    IsNull: {
+      categorie: "Basic",
+      type: "Mixed",
+      implantation: "#[Assert\\IsNull( proprietes )]",
+      attribute: "public mixed $legacyValue = null;",
+      proprietes: {
+        message: "La valeur doit être nulle.",
+      },
+    },
+    IsTrue: {
+      categorie: "Basic",
+      type: "Boolean",
+      implantation: "#[Assert\\IsTrue( proprietes )]",
+      attribute: "public ?bool $termsAccepted = null;",
+      proprietes: {
+        message: "Vous devez accepter les conditions générales.",
+      },
+    },
+    NotBlank: {
+      categorie: "Basic",
+      type: "String",
+      implantation: "#[Assert\\NotBlank( proprietes )]",
+      attribute: "public ?string $name = null;",
+      proprietes: {
+        message: "Ce champ ne doit pas être vide.",
+      },
+    },
+    NotNull: {
+      categorie: "Basic",
+      type: "Mixed",
+      implantation: "#[Assert\\NotNull( proprietes )]",
+      attribute: "public mixed $price = null;",
+      proprietes: {
+        message: "Cette valeur ne doit pas être nulle.",
+      },
+    },
+    Type: {
+      categorie: "Basic",
+      type: "Mixed",
+      implantation: "#[Assert\\Type( proprietes )]",
+      attribute: "public mixed $quantity;",
+      proprietes: {
+        type: "int",
+        message: "Cette valeur doit être du type {{ type }}.",
+      },
+    },
+
+    Charset: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Charset( proprietes )]",
+      attribute: "public ?string $description = null;",
+      proprietes: {
+        charset: "UTF-8",
+        message: "Cette chaîne doit être encodée en {{ charset }}.",
+      },
+    },
+    Cidr: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Cidr( proprietes )]",
+      attribute: "public ?string $subnet = null;",
+      proprietes: {
+        message: "Cette valeur doit être un CIDR valide.",
+      },
+    },
+    CssColor: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\CssColor( proprietes )]",
+      attribute: "public ?string $primaryColor = null;",
+      proprietes: {
+        message: "Cette valeur doit être une couleur CSS valide.",
+      },
+    },
+    Email: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Email( proprietes )]",
+      attribute: "public ?string $email = null;",
+      proprietes: {
+        mode: "html5",
+        message: "Cette valeur n’est pas une adresse email valide.",
+      },
+    },
+    ExpressionSyntax: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\ExpressionSyntax( proprietes )]",
+      attribute: "public ?string $filterExpression = null;",
+      proprietes: {
+        message: "Cette expression n’est pas syntaxiquement valide.",
+      },
+    },
+    Hostname: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Hostname( proprietes )]",
+      attribute: "public ?string $domain = null;",
+      proprietes: {
+        message: "Ce nom d’hôte n’est pas valide.",
+      },
+    },
+    Ip: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Ip( proprietes )]",
+      attribute: "public ?string $ip = null;",
+      proprietes: {
+        version: "all",
+        message: "Cette valeur n’est pas une adresse IP valide.",
+      },
+    },
+    Json: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Json( proprietes )]",
+      attribute: "public ?string $payload = null;",
+      proprietes: {
+        message: "Cette valeur doit être une chaîne JSON valide.",
+      },
+    },
+    Length: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Length( proprietes )]",
+      attribute: "public ?string $title = null;",
+      proprietes: {
+        min: 3,
+        minMessage: "Le titre doit avoir au moins {{ limit }} caractères.",
+        max: 50,
+        maxMessage: "Le titre doit avoir au plus {{ limit }} caractères.",
+      },
+    },
+    MacAddress: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\MacAddress( proprietes )]",
+      attribute: "public ?string $mac = null;",
+      proprietes: {
+        message: "Cette valeur doit être une adresse MAC valide.",
+      },
+    },
+    NoSuspiciousCharacters: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\NoSuspiciousCharacters( proprietes )]",
+      attribute: "public ?string $comment = null;",
+      proprietes: {
+        message: "Cette valeur contient des caractères suspects.",
+      },
+    },
+    NotCompromisedPassword: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\NotCompromisedPassword( proprietes )]",
+      attribute: "public ?string $plainPassword = null;",
+      proprietes: {
+        message: "Ce mot de passe a été compromis dans une fuite de données.",
+      },
+    },
+    PasswordStrength: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\PasswordStrength( proprietes )]",
+      attribute: "public ?string $securePassword = null;",
+      proprietes: {
+        minScore: "medium",
+        message: "Ce mot de passe est trop faible.",
+      },
+    },
+    Regex: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Regex( proprietes )]",
+      attribute: "public ?string $username = null;",
+      proprietes: {
+        pattern: "^[a-z0-9_]+$",
+        htmlPattern: "^[a-zA-Z0-9_]+$",
+        message:
+          "Ce champ ne peut contenir que des lettres, chiffres et underscores.",
+      },
+    },
+    Twig: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Twig( proprietes )]",
+      attribute: "public ?string $twigTemplate = null;",
+      proprietes: {
+        message: "Ce template Twig n’est pas valide.",
+      },
+    },
+    Ulid: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Ulid( proprietes )]",
+      attribute: "public ?string $ulid = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas un ULID valide.",
+      },
+    },
+    Url: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Url( proprietes )]",
+      attribute: "public ?string $website = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une URL valide.",
+      },
+    },
+    UserPassword: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\UserPassword( proprietes )]",
+      attribute: "public ?string $currentPassword = null;",
+      proprietes: {
+        message: "Le mot de passe actuel est incorrect.",
+      },
+    },
+    Uuid: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Uuid( proprietes )]",
+      attribute: "public ?string $uuid = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas un UUID valide.",
+      },
+    },
+    WordCount: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\WordCount( proprietes )]",
+      attribute: "public ?string $summary = null;",
+      proprietes: {
+        max: 100,
+        maxMessage: "Ce texte doit contenir au plus {{ limit }} mots.",
+      },
+    },
+    Yaml: {
+      categorie: "String",
+      type: "String",
+      implantation: "#[Assert\\Yaml( proprietes )]",
+      attribute: "public ?string $yamlConfig = null;",
+      proprietes: {
+        message: "Cette valeur doit être un YAML valide.",
+      },
+    },
+
+    DivisibleBy: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\DivisibleBy( proprietes )]",
+      attribute: "public ?int $packSize = null;",
+      proprietes: {
+        value: 5,
+        message: "Cette valeur doit être un multiple de {{ value }}.",
+      },
+    },
+    EqualTo: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\EqualTo( proprietes )]",
+      attribute: "public ?int $fixedScore = null;",
+      proprietes: {
+        value: 100,
+        message: "Cette valeur doit être égale à {{ compared_value }}.",
+      },
+    },
+    GreaterThan: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\GreaterThan( proprietes )]",
+      attribute: "public ?float $amount = null;",
+      proprietes: {
+        value: 0,
+        message: "Cette valeur doit être supérieure à {{ compared_value }}.",
+      },
+    },
+    GreaterThanOrEqual: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\GreaterThanOrEqual( proprietes )]",
+      attribute: "public ?int $age = null;",
+      proprietes: {
+        value: 18,
+        message:
+          "Cette valeur doit être supérieure ou égale à {{ compared_value }}.",
+      },
+    },
+    IdenticalTo: {
+      categorie: "Comparison",
+      type: "Mixed",
+      implantation: "#[Assert\\IdenticalTo( proprietes )]",
+      attribute: "public mixed $flag;",
+      proprietes: {
+        value: 1,
+        message:
+          "Cette valeur doit être strictement identique à {{ compared_value }}.",
+      },
+    },
+    LessThan: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\LessThan( proprietes )]",
+      attribute: "public ?int $score = null;",
+      proprietes: {
+        value: 100,
+        message: "Cette valeur doit être inférieure à {{ compared_value }}.",
+      },
+    },
+    LessThanOrEqual: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\LessThanOrEqual( proprietes )]",
+      attribute: "public ?float $total = null;",
+      proprietes: {
+        value: 1000,
+        message:
+          "Cette valeur doit être inférieure ou égale à {{ compared_value }}.",
+      },
+    },
+    NotEqualTo: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\NotEqualTo( proprietes )]",
+      attribute: "public ?int $divider = null;",
+      proprietes: {
+        value: 0,
+        message: "Cette valeur ne doit pas être égale à {{ compared_value }}.",
+      },
+    },
+    NotIdenticalTo: {
+      categorie: "Comparison",
+      type: "Mixed",
+      implantation: "#[Assert\\NotIdenticalTo( proprietes )]",
+      attribute: "public ?string $login = null;",
+      proprietes: {
+        value: "admin",
+        message:
+          "Cette valeur ne doit pas être strictement identique à {{ compared_value }}.",
+      },
+    },
+    Range: {
+      categorie: "Comparison",
+      type: "Number",
+      implantation: "#[Assert\\Range( proprietes )]",
+      attribute: "public ?int $rating = null;",
+      proprietes: {
+        min: 1,
+        max: 5,
+        notInRangeMessage:
+          "Cette valeur doit être comprise entre {{ min }} et {{ max }}.",
+      },
+    },
+    Unique: {
+      categorie: "Comparison",
+      type: "Array",
+      implantation: "#[Assert\\Unique( proprietes )]",
+      attribute: "public array $tags = [];",
+      proprietes: {
+        message: "Les éléments doivent être tous différents.",
+      },
+    },
+
+    Negative: {
+      categorie: "Number",
+      type: "Number",
+      implantation: "#[Assert\\Negative( proprietes )]",
+      attribute: "public ?int $negativeBalance = null;",
+      proprietes: {
+        message: "Cette valeur doit être strictement négative.",
+      },
+    },
+    NegativeOrZero: {
+      categorie: "Number",
+      type: "Number",
+      implantation: "#[Assert\\NegativeOrZero( proprietes )]",
+      attribute: "public ?float $balance = null;",
+      proprietes: {
+        message: "Cette valeur doit être négative ou nulle.",
+      },
+    },
+    Positive: {
+      categorie: "Number",
+      type: "Number",
+      implantation: "#[Assert\\Positive( proprietes )]",
+      attribute: "public ?int $itemsCount = null;",
+      proprietes: {
+        message: "Cette valeur doit être strictement positive.",
+      },
+    },
+    PositiveOrZero: {
+      categorie: "Number",
+      type: "Number",
+      implantation: "#[Assert\\PositiveOrZero( proprietes )]",
+      attribute: "public ?int $stock = null;",
+      proprietes: {
+        message: "Cette valeur doit être positive ou nulle.",
+      },
+    },
+
+    Date: {
+      categorie: "Date",
+      type: "String",
+      implantation: "#[Assert\\Date( proprietes )]",
+      attribute: "public ?string $publishDate = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une date valide.",
+      },
+    },
+    DateTime: {
+      categorie: "Date",
+      type: "String",
+      implantation: "#[Assert\\DateTime( proprietes )]",
+      attribute: "public ?string $scheduledAt = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une date/heure valide.",
+      },
+    },
+    Time: {
+      categorie: "Date",
+      type: "String",
+      implantation: "#[Assert\\Time( proprietes )]",
+      attribute: "public ?string $openingTime = null;",
+      proprietes: {
+        message: "Cette valeur n’est pas une heure valide.",
+      },
+    },
+    Timezone: {
+      categorie: "Date",
+      type: "String",
+      implantation: "#[Assert\\Timezone( proprietes )]",
+      attribute: "public ?string $timezone = null;",
+      proprietes: {
+        message: "Ce fuseau horaire n’est pas valide.",
+      },
+    },
+    Week: {
+      categorie: "Date",
+      type: "String",
+      implantation: "#[Assert\\Week( proprietes )]",
+      attribute: "public ?string $isoWeek = null;",
+      proprietes: {
+        message: "Cette valeur doit être une semaine ISO valide (YYYY-Www).",
+      },
+    },
+
+    Choice: {
+      categorie: "Choice",
+      type: "Mixed",
+      implantation: "#[Assert\\Choice( proprietes )]",
+      attribute: "public ?string $status = null;",
+      proprietes: {
+        choices: ["draft", "published", "archived"],
+        message: "Cette valeur n’est pas un choix valide.",
+      },
+    },
+    Country: {
+      categorie: "Choice",
+      type: "String",
+      implantation: "#[Assert\\Country( proprietes )]",
+      attribute: "public ?string $countryCode = null;",
+      proprietes: {
+        message: "Ce code pays n’est pas valide.",
+      },
+    },
+    Language: {
+      categorie: "Choice",
+      type: "String",
+      implantation: "#[Assert\\Language( proprietes )]",
+      attribute: "public ?string $languageCode = null;",
+      proprietes: {
+        message: "Ce code langue n’est pas valide.",
+      },
+    },
+    Locale: {
+      categorie: "Choice",
+      type: "String",
+      implantation: "#[Assert\\Locale( proprietes )]",
+      attribute: "public ?string $locale = null;",
+      proprietes: {
+        message: "Ce locale n’est pas valide.",
+      },
+    },
+
+    File: {
+      categorie: "File",
+      type: "File",
+      implantation: "#[Assert\\File( proprietes )]",
+      attribute:
+        "public ?\\Symfony\\Component\\HttpFoundation\\File\\File $contractFile = null;",
+      proprietes: {
+        maxSize: "5M",
+        mimeTypes: ["application/pdf"],
+        maxSizeMessage:
+          "Le fichier est trop volumineux ({{ size }} {{ suffix }}). Taille maximum : {{ limit }} {{ suffix }}.",
+        mimeTypesMessage: "Ce type de fichier n’est pas autorisé.",
+      },
+    },
+    Image: {
+      categorie: "File",
+      type: "File",
+      implantation: "#[Assert\\Image( proprietes )]",
+      attribute:
+        "public ?\\Symfony\\Component\\HttpFoundation\\File\\File $avatar = null;",
+      proprietes: {
+        maxSize: "2M",
+        mimeTypes: ["image/jpeg", "image/png"],
+        mimeTypesMessage: "Seules les images JPEG ou PNG sont autorisées.",
+      },
+    },
+    Video: {
+      categorie: "File",
+      type: "File",
+      implantation: "#[Assert\\Video( proprietes )]",
+      attribute:
+        "public ?\\Symfony\\Component\\HttpFoundation\\File\\File $videoFile = null;",
+      proprietes: {
+        maxSize: "100M",
+        maxWidth: 1920,
+        maxHeight: 1080,
+        mimeTypes: ["video/mp4", "video/webm"],
+        mimeTypesMessage: "Ce type de fichier vidéo n’est pas autorisé.",
+      },
+    },
+
+    Bic: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Bic( proprietes )]",
+      attribute: "public ?string $bic = null;",
+      proprietes: {
+        message: "Ce code BIC n’est pas valide.",
+      },
+    },
+    CardScheme: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\CardScheme( proprietes )]",
+      attribute: "public ?string $creditCardNumber = null;",
+      proprietes: {
+        schemes: ["VISA", "MASTERCARD"],
+        message:
+          "Ce numéro de carte n’est pas valide ou le réseau n’est pas accepté.",
+      },
+    },
+    Currency: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Currency( proprietes )]",
+      attribute: "public ?string $currency = null;",
+      proprietes: {
+        message: "Ce code de devise n’est pas valide.",
+      },
+    },
+    Iban: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Iban( proprietes )]",
+      attribute: "public ?string $iban = null;",
+      proprietes: {
+        message: "Ce numéro IBAN n’est pas valide.",
+      },
+    },
+    Isbn: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Isbn( proprietes )]",
+      attribute: "public ?string $isbn = null;",
+      proprietes: {
+        type: "isbn13",
+        message: "Ce code ISBN n’est pas valide.",
+      },
+    },
+    Isin: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Isin( proprietes )]",
+      attribute: "public ?string $isin = null;",
+      proprietes: {
+        message: "Ce code ISIN n’est pas valide.",
+      },
+    },
+    Issn: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Issn( proprietes )]",
+      attribute: "public ?string $issn = null;",
+      proprietes: {
+        message: "Ce code ISSN n’est pas valide.",
+      },
+    },
+    Luhn: {
+      categorie: "Financial",
+      type: "String",
+      implantation: "#[Assert\\Luhn( proprietes )]",
+      attribute: "public ?string $luhnNumber = null;",
+      proprietes: {
+        message: "Ce numéro n’est pas valide (échec de la vérification Luhn).",
+      },
+    },
+
+    DisableAutoMapping: {
+      categorie: "Doctrine",
+      type: "Class",
+      implantation:
+        "#[\\Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\DisableAutoMapping]",
+      attribute: "class LegacyDto {}",
+      proprietes: {},
+    },
+    EnableAutoMapping: {
+      categorie: "Doctrine",
+      type: "Class",
+      implantation:
+        "#[\\Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\EnableAutoMapping]",
+      attribute: "class Product {}",
+      proprietes: {},
+    },
+    UniqueEntity: {
+      categorie: "Doctrine",
+      type: "Class",
+      implantation:
+        "#[\\Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntity( proprietes )]",
+      attribute: "class User {}",
+      proprietes: {
+        fields: ["email"],
+        message: "Cet email est déjà utilisé.",
+      },
+    },
+
+    All: {
+      categorie: "Other",
+      type: "Array",
+      implantation: "#[Assert\\All( proprietes )]",
+      attribute: "public array $labels = [];",
+      proprietes: {
+        constraints: [
+          "new Assert\\\\NotBlank()",
+          "new Assert\\\\Length(min: 2)",
+        ],
+      },
+    },
+    AtLeastOneOf: {
+      categorie: "Other",
+      type: "Mixed",
+      implantation: "#[Assert\\AtLeastOneOf( proprietes )]",
+      attribute: "public ?string $contact = null;",
+      proprietes: {
+        constraints: [
+          "new Assert\\\\Email()",
+          "new Assert\\\\Regex(pattern: '/^\\\\+?\\\\d+$/')",
+        ],
+        message:
+          "Cette valeur doit être un email valide ou un numéro de téléphone.",
+      },
+    },
+    Callback: {
+      categorie: "Other",
+      type: "Class",
+      implantation: "#[Assert\\Callback]",
+      attribute:
+        "public function validate(\\Symfony\\Component\\Validator\\Context\\ExecutionContextInterface $context): void {}",
+      proprietes: {},
+    },
+    Cascade: {
+      categorie: "Other",
+      type: "Object",
+      implantation: "#[Assert\\Cascade]",
+      attribute: "public ?Address $address = null;",
+      proprietes: {},
+    },
+    Collection: {
+      categorie: "Other",
+      type: "Array",
+      implantation: "#[Assert\\Collection( proprietes )]",
+      attribute: "public array $addressData = [];",
+      proprietes: {
+        fields: {
+          street: "new Assert\\\\NotBlank()",
+          zipCode: "new Assert\\\\Length(min: 4, max: 10)",
+          city: "new Assert\\\\NotBlank()",
+        },
+        allowExtraFields: false,
+      },
+    },
+    Compound: {
+      categorie: "Other",
+      type: "Custom",
+      implantation: "// Contrainte personnalisée étendant Assert\\\\Compound",
+      attribute: "class StrongPassword extends Assert\\\\Compound {}",
+      proprietes: {},
+    },
+    Count: {
+      categorie: "Other",
+      type: "Array",
+      implantation: "#[Assert\\Count( proprietes )]",
+      attribute: "public array $items = [];",
+      proprietes: {
+        min: 1,
+        max: 10,
+        minMessage: "Vous devez sélectionner au moins {{ limit }} élément.",
+        maxMessage:
+          "Vous ne pouvez pas sélectionner plus de {{ limit }} éléments.",
+      },
+    },
+    Expression: {
+      categorie: "Other",
+      type: "Class",
+      implantation: "#[Assert\\Expression( proprietes )]",
+      attribute: "public bool $validPriceRange = true;",
+      proprietes: {
+        expression: "this.minPrice <= this.maxPrice",
+        message: "Le prix minimum doit être inférieur ou égal au prix maximum.",
+      },
+    },
+    GroupSequence: {
+      categorie: "Other",
+      type: "Class",
+      implantation: "#[Assert\\GroupSequence( proprietes )]",
+      attribute: "class Registration {}",
+      proprietes: {
+        groups: ["Default", "Strict"],
+      },
+    },
+    Sequentially: {
+      categorie: "Other",
+      type: "Mixed",
+      implantation: "#[Assert\\Sequentially( proprietes )]",
+      attribute: "public ?string $serialKey = null;",
+      proprietes: {
+        constraints: [
+          "new Assert\\\\NotBlank()",
+          "new Assert\\\\Length(min: 5)",
+        ],
+      },
+    },
+    Traverse: {
+      categorie: "Other",
+      type: "Class",
+      implantation: "#[Assert\\Traverse]",
+      attribute: "public array $config = [];",
+      proprietes: {},
+    },
+    Valid: {
+      categorie: "Other",
+      type: "Object",
+      implantation: "#[Assert\\Valid]",
+      attribute: "public ?Profile $profile = null;",
+      proprietes: {},
+    },
+    When: {
+      categorie: "Other",
+      type: "Mixed",
+      implantation: "#[Assert\\When( proprietes )]",
+      attribute: "public ?int $discountValue = null;",
+      proprietes: {
+        expression: "this.type === 'percent'",
+        constraints: ["new Assert\\\\Range(min: 1, max: 100)"],
+        otherwise: ["new Assert\\\\GreaterThan(0)"],
+      },
+    },
+  },
+];

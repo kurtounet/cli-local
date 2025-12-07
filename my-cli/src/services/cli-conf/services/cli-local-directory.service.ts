@@ -1,13 +1,29 @@
-import { IFramework } from "@frameworks-models/framework-commun.model";
-import { updateGitIgnore } from "@features/frameworks/services/git.service";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
+
 import { getEntities } from "@parsersMdj/services/get-entities.service";
-import { IProjectConfig } from "@features/project/models/project.models";
+
 import { generateTreeJson } from "@features/tools/tree/services/generate-tree-json.service";
 import * as fs from "fs-extra";
 import * as path from "path";
 import { ICliLocalPathFile, IGetEntityJson } from "types/common";
-import { logDebug,   logInfo } from "@utils/logger";
+import {
+  logDebug,
+  logError,
+  logInfo,
+  logStep,
+  logSuccess,
+} from "@utils/logger";
 import { writeFile } from "@utils/file-utils";
+import {
+  EMOJI,
+  messageCreateFile,
+  messageCreateFolderCli,
+} from "@constants/messages";
+import { log } from "console";
+import { updateGitIgnore } from "@features/frameworks/commun/services/git.service";
 
 let cliLocalDiPath = path.join(process.cwd(), `.cli-local`);
 
@@ -34,6 +50,7 @@ export function createCliLocalDirectoryNewProject(
   framework: IFramework,
   rootPathProjectFramework: string,
 ): any {
+  logStep(messageCreateFolderCli());
   let files = {
     "global-config": configFile,
     "this-project-config": framework,
@@ -42,13 +59,13 @@ export function createCliLocalDirectoryNewProject(
   };
   //création du fichier cli-local-config.json
   let dirDotCliLocal = path.join(rootPathProjectFramework, DIRECTORY_CLI_LOCAL);
-  logDebug(`🗄️ Création du dossier .cli-local ${dirDotCliLocal}`);
+  logDebug(`${EMOJI.folder} Création du dossier .cli-local ${dirDotCliLocal}`);
   if (!fs.existsSync(dirDotCliLocal)) {
-    logInfo("🗄️ Création du dossier .cli-local...");
+    logInfo(`${EMOJI.folder} Création du dossier .cli-local...`);
     fs.mkdirSync(dirDotCliLocal, { recursive: true });
   }
   //création du fichier cli-local-config.json
-  logInfo("🗄️ Création du fichier : cli-local-config.json");
+  logInfo(`${EMOJI.folder} Création du fichier : cli-local-config.json`);
   writeFile(
     `${dirDotCliLocal}/${CONFIG_FILE_CLI_LOCAL_NAME}`,
     JSON.stringify(FILE_CLI_LOCAL, null, 2),
@@ -69,10 +86,11 @@ export function createCliLocalDirectoryNewProject(
     try {
       let filePath = path.join(dirDotCliLocal, `${key}.json`);
       writeFile(filePath, JSON.stringify(value, null, 2));
-      logInfo(`🗄️ Fichier créer: ${filePath}`);
-    } catch (e) {
-      console.error(e);
-       
+      logSuccess(`${EMOJI.file} Fichier créer: ${filePath}`);
+    } catch (error) {
+      logError(
+        `${EMOJI.error} Erreur lors de la création du fichier : ${error}`,
+      );
     }
   });
 
@@ -86,7 +104,7 @@ export function createCliLocalDirectoryNewProject(
   const ingnore = "###cli-local\n/.cli-local\n/cli-local-config.json\n";
   updateGitIgnore(rootPathProjectFramework, ingnore);
 
-  logInfo(`✅ .cli-local directory créée avec succès !`);
+  logSuccess(`✅ .cli-local directory créée avec succès !`);
   return dictionaries;
 }
 
@@ -107,16 +125,19 @@ export function createCliLocalConfigFile(projectPath: string) {
   }
 }
 export function getCliLocalConfigFile(projectPath: string): ICliLocalPathFile {
- 
   let json: any;
-  let configFilePath = path.join(projectPath, DIRECTORY_CLI_LOCAL ,`cli-local-config.json`);
+  let configFilePath = path.join(
+    projectPath,
+    DIRECTORY_CLI_LOCAL,
+    `cli-local-config.json`,
+  );
   if (!fs.existsSync(configFilePath)) {
     createCliLocalConfigFile(projectPath);
   }
   try {
     json = JSON.parse(fs.readFileSync(configFilePath, "utf8"));
   } catch (e) {
-    console.error(`Erreur lors de la lecture du fichier cli-local-config.json`);
+    logError(`Erreur lors de la lecture du fichier cli-local-config.json`);
     process.exit(1);
   }
 
@@ -124,6 +145,7 @@ export function getCliLocalConfigFile(projectPath: string): ICliLocalPathFile {
 }
 
 export function getTreeArchitectureCliLocalFile(projectPath: string): any {
+  logStep(messageCreateFile("architecture-initial.json"));
   const dirDotCliLocal = path.join(projectPath, `.cli-local`);
   const tree = generateTreeJson(projectPath, Infinity);
   writeFile(

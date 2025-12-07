@@ -6,7 +6,7 @@ import { IEntityJson } from "@parsersMdj/models/entity-json.model";
  * @param entity The entity JSON object.
  * @returns The Angular entity template string.
  */
-export function angularEntityTemplate(entity: IEntityJson) {
+export function angularFormEntityTemplate(entity: IEntityJson): string {
   const properties =
     entity.columns
       ?.map((col: any) => `  ${col.name}: ${col.typeTypeScript};`)

@@ -2,9 +2,10 @@ import path from "node:path";
 import fs from "fs-extra";
 import ejs from "ejs";
 import { ScaffoldOptions } from "@commands/global/scaffold.command";
-import { IDirectory } from "../models/project.models";
+
 import { ARCHITECTURE_NUXT_EJS_MOCK } from "@features/frameworks/nuxt/config/nuxt-architecture.mock";
 import { logDebug, logInfo } from "@utils/logger";
+import { IDirectory } from "@features/frameworks/models/framework-commun.model";
 
 /**
  * @const {string} DEFAULT_TEMPLATES_ROOT
@@ -108,11 +109,9 @@ async function processItem(
 export async function runScaffold(opts: ScaffoldOptions) {
   logInfo("--- scaffold start ---");
   logInfo(`rootDirProject: ${opts.rootDirProject}`);
-  logInfo(
-    `templatesRoot: ${opts.templatesRoot} ?? ${DEFAULT_TEMPLATES_ROOT}`,
-  );
+  logInfo(`templatesRoot: ${opts.templatesRoot} ?? ${DEFAULT_TEMPLATES_ROOT}`);
   logInfo(`overwrite: ${opts.overwrite} | dryRun: ${opts.dryRun}`);
-  logInfo(`variables:", ${ opts.variables }`);
+  logInfo(`variables:", ${opts.variables}`);
 
   // const architecture = await fs.readJson(architectureFilePath);
   const architecture: IDirectory[] = ARCHITECTURE_NUXT_EJS_MOCK;

@@ -1,7 +1,8 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 export function nitroEntityServiceTemplate(entity: IEntityJson): string {
-  return `import { ${entity.namePascalCase}Repository } from "./${entity.nameKebabCase}.repository";
+  return `import { createError } from "h3";
+import { ${entity.namePascalCase}Repository } from "./${entity.nameKebabCase}.repository";
 import type { ${entity.namePascalCase}Insert, ${entity.namePascalCase}Update } from "./${entity.nameKebabCase}.repository";
 
 export class ${entity.namePascalCase}Service {

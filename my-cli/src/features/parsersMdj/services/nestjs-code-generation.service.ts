@@ -4,7 +4,7 @@ import { join } from "path";
 import { generateEntityFileContent } from "./nestjs-generate-entity.service";
 import { generateDtoFileContent } from "./nestjs-generate-dto.service";
 import { generateInterfaceFileContent } from "./nestjs-generate-interface.service";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
 import { EMOJI } from "@constants/messages";
 
 const OUTPUT_BASE_PATH = join(process.cwd(), "dist", "generated-nestjs");
@@ -15,7 +15,7 @@ const OUTPUT_BASE_PATH = join(process.cwd(), "dist", "generated-nestjs");
  */
 export function generateNestJsModules(entities: IEntityJson[]): void {
   if (!entities) {
-    console.error("No entities provided.");
+    logError("No entities provided.");
     return;
   }
 
@@ -69,9 +69,8 @@ export function generateNestJsModules(entities: IEntityJson[]): void {
       );
       logInfo(`✅  Generated interface for ${entity.namePascalCase}`);
     } catch (error) {
-      console.error(
-        `${EMOJI.error} Error generating files for entity ${entity.namePascalCase}:`,
-        error,
+      logError(
+        `${EMOJI.error} Error generating files for entity ${entity.namePascalCase}: ${error}`,
       );
     }
   }
@@ -91,13 +90,15 @@ export function generateNestJsModulesFromFile(jsonFilePath: string): void {
     const entities: IEntityJson[] = jsonData.entities;
 
     if (!entities) {
-      console.error(`${EMOJI.error} No 'entities' array found in ${jsonFilePath}`);
+      logError(`${EMOJI.error} No 'entities' array found in ${jsonFilePath}`);
       return;
     }
 
     generateNestJsModules(entities);
   } catch (error) {
-    console.error(`${EMOJI.error} Failed to load or parse ${jsonFilePath}:`, error);
+    logError(
+      `${EMOJI.error} Failed to load or parse ${jsonFilePath}: ${error}`,
+    );
     process.exit(1);
   }
 }

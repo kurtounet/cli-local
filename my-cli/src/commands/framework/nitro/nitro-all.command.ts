@@ -10,9 +10,12 @@ import {
   getCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 import { nitroGenerateFilesFramework } from "@nitro/services/nitro-generate-files-framework.service";
-import { IProjectConfig } from "@features/project/models/project.models";
+
 import { EMOJI } from "@constants/messages";
 
 export function registerNitroAllCommand(program: Command) {
@@ -23,8 +26,6 @@ export function registerNitroAllCommand(program: Command) {
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
     .action(async () => {
-
-
       const processPath = process.cwd();
       const rootPathProjectFramework: string = processPath;
       const allpathFileCliLocal: ICliLocalPathFile =
@@ -113,7 +114,7 @@ export function registerNitroAllCommand(program: Command) {
         }
         if (option === "Seeder") {
           if (Array.isArray(entitiesJsonFile)) {
-            // createSeederNitro(rootPathProjectFramework, entitiesJsonFile);
+            //createSeederNitro(rootPathProjectFramework, entitiesJsonFile);
           }
         }
         if (option === "ALL") {
@@ -122,7 +123,7 @@ export function registerNitroAllCommand(program: Command) {
             ProjectConfig,
             framework,
             entitiesJsonFile,
-            "all"
+            "all",
           );
         }
       });
@@ -135,7 +136,7 @@ export function registerNitroAllCommand(program: Command) {
       );
       executeCommand(
         `npm run db:cp`,
-        { cwd: `${rootPathProjectFramework}`, stdio: 'inherit' },
+        { cwd: `${rootPathProjectFramework}`, stdio: "inherit" },
         `🚀 Génération de la base de données`,
         `✅ Génération de la base de données avec succès !`,
         `${EMOJI.error} Erreur lors de laGénération de la base de données !`,
@@ -167,7 +168,7 @@ export function registerNitroAllCommand(program: Command) {
       //   }
       //   success(`${type} Nitro ${name} généré avec succès dans ${targetPath} !`);
       // } catch (err: unknown) {
-      //   console.error(`Error generating Nitro module: ${(err as Error).message}`);
+      //   logError(`Error generating Nitro module: ${(err as Error).message}`);
       // }
     });
 }

@@ -2,10 +2,10 @@ import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
 export function nuxtStoreGettersTemplate(
-    entity: IEntityJson,
-    isActive: boolean
+  entity: IEntityJson,
+  isActive: boolean,
 ): string {
-  if(!isActive) return '';
+  if (!isActive) return "";
   return `
   getters: {
     /** count derive, pas besoin dans le state */

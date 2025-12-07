@@ -1,52 +1,146 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
-import { Server } from 'node:http';
-import { resolve, dirname, join } from 'node:path';
-import nodeCrypto from 'node:crypto';
-import { parentPort, threadId } from 'node:worker_threads';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestURL, getRequestHeader, getResponseHeader, getRequestHeaders, setResponseHeaders, setResponseStatus, send, appendResponseHeader, removeResponseHeader, createError, setResponseHeader, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, readBody, getQuery as getQuery$1, isError, sendError } from 'file://I:/cli/cli-local/server/node_modules/h3/dist/index.mjs';
-import destr from 'file://I:/cli/cli-local/server/node_modules/destr/dist/index.mjs';
-import { createHooks } from 'file://I:/cli/cli-local/server/node_modules/hookable/dist/index.mjs';
-import { createFetch, Headers as Headers$1 } from 'file://I:/cli/cli-local/server/node_modules/ofetch/dist/node.mjs';
-import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://I:/cli/cli-local/server/node_modules/node-mock-http/dist/index.mjs';
-import { parseURL, withoutBase, joinURL, getQuery, withQuery, decodePath, withLeadingSlash, withoutTrailingSlash } from 'file://I:/cli/cli-local/server/node_modules/ufo/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://I:/cli/cli-local/server/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://I:/cli/cli-local/server/node_modules/unstorage/drivers/fs.mjs';
-import { digest } from 'file://I:/cli/cli-local/server/node_modules/ohash/dist/index.mjs';
-import { klona } from 'file://I:/cli/cli-local/server/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file://I:/cli/cli-local/server/node_modules/defu/dist/defu.mjs';
-import { snakeCase } from 'file://I:/cli/cli-local/server/node_modules/scule/dist/index.mjs';
-import { toRouteMatcher, createRouter } from 'file://I:/cli/cli-local/server/node_modules/radix3/dist/index.mjs';
-import { readFile } from 'node:fs/promises';
-import consola from 'file://I:/cli/cli-local/server/node_modules/consola/dist/index.mjs';
-import { ErrorParser } from 'file://I:/cli/cli-local/server/node_modules/youch-core/build/index.js';
-import { Youch } from 'file://I:/cli/cli-local/server/node_modules/youch/build/index.js';
-import { SourceMapConsumer } from 'file://I:/cli/cli-local/server/node_modules/source-map/source-map.js';
-import { promises } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { dirname as dirname$1, resolve as resolve$1 } from 'file://I:/cli/cli-local/server/node_modules/pathe/dist/index.mjs';
-import { createPool } from 'file://I:/cli/cli-local/server/node_modules/mysql2/promise.js';
-import { drizzle } from 'file://I:/cli/cli-local/server/node_modules/drizzle-orm/mysql2/index.js';
-import { mysqlTable, timestamp, varchar, serial, uniqueIndex } from 'file://I:/cli/cli-local/server/node_modules/drizzle-orm/mysql-core/index.js';
-import { desc, eq, and, asc } from 'file://I:/cli/cli-local/server/node_modules/drizzle-orm/index.js';
-import { z } from 'file://I:/cli/cli-local/server/node_modules/zod/index.js';
+import process from "node:process";
+globalThis._importMeta_ = { url: import.meta.url, env: process.env };
+import { tmpdir } from "node:os";
+import { Server } from "node:http";
+import { resolve, dirname, join } from "node:path";
+import nodeCrypto from "node:crypto";
+import { parentPort, threadId } from "node:worker_threads";
+import {
+  defineEventHandler,
+  handleCacheHeaders,
+  splitCookiesString,
+  createEvent,
+  fetchWithEvent,
+  isEvent,
+  eventHandler,
+  setHeaders,
+  sendRedirect,
+  proxyRequest,
+  getRequestURL,
+  getRequestHeader,
+  getResponseHeader,
+  getRequestHeaders,
+  setResponseHeaders,
+  setResponseStatus,
+  send,
+  appendResponseHeader,
+  removeResponseHeader,
+  createError,
+  setResponseHeader,
+  createApp,
+  createRouter as createRouter$1,
+  toNodeListener,
+  lazyEventHandler,
+  getRouterParam,
+  readBody,
+  getQuery as getQuery$1,
+  isError,
+  sendError,
+} from "file://I:/cli/cli-local/server/node_modules/h3/dist/index.mjs";
+import destr from "file://I:/cli/cli-local/server/node_modules/destr/dist/index.mjs";
+import { createHooks } from "file://I:/cli/cli-local/server/node_modules/hookable/dist/index.mjs";
+import {
+  createFetch,
+  Headers as Headers$1,
+} from "file://I:/cli/cli-local/server/node_modules/ofetch/dist/node.mjs";
+import {
+  fetchNodeRequestHandler,
+  callNodeRequestHandler,
+} from "file://I:/cli/cli-local/server/node_modules/node-mock-http/dist/index.mjs";
+import {
+  parseURL,
+  withoutBase,
+  joinURL,
+  getQuery,
+  withQuery,
+  decodePath,
+  withLeadingSlash,
+  withoutTrailingSlash,
+} from "file://I:/cli/cli-local/server/node_modules/ufo/dist/index.mjs";
+import {
+  createStorage,
+  prefixStorage,
+} from "file://I:/cli/cli-local/server/node_modules/unstorage/dist/index.mjs";
+import unstorage_47drivers_47fs from "file://I:/cli/cli-local/server/node_modules/unstorage/drivers/fs.mjs";
+import { digest } from "file://I:/cli/cli-local/server/node_modules/ohash/dist/index.mjs";
+import { klona } from "file://I:/cli/cli-local/server/node_modules/klona/dist/index.mjs";
+import defu, { defuFn } from "file://I:/cli/cli-local/server/node_modules/defu/dist/defu.mjs";
+import { snakeCase } from "file://I:/cli/cli-local/server/node_modules/scule/dist/index.mjs";
+import {
+  toRouteMatcher,
+  createRouter,
+} from "file://I:/cli/cli-local/server/node_modules/radix3/dist/index.mjs";
+import { readFile } from "node:fs/promises";
+import consola from "file://I:/cli/cli-local/server/node_modules/consola/dist/index.mjs";
+import { ErrorParser } from "file://I:/cli/cli-local/server/node_modules/youch-core/build/index.js";
+import { Youch } from "file://I:/cli/cli-local/server/node_modules/youch/build/index.js";
+import { SourceMapConsumer } from "file://I:/cli/cli-local/server/node_modules/source-map/source-map.js";
+import { promises } from "node:fs";
+import { fileURLToPath } from "node:url";
+import {
+  dirname as dirname$1,
+  resolve as resolve$1,
+} from "file://I:/cli/cli-local/server/node_modules/pathe/dist/index.mjs";
+import { createPool } from "file://I:/cli/cli-local/server/node_modules/mysql2/promise.js";
+import { drizzle } from "file://I:/cli/cli-local/server/node_modules/drizzle-orm/mysql2/index.js";
+import {
+  mysqlTable,
+  timestamp,
+  varchar,
+  serial,
+  uniqueIndex,
+} from "file://I:/cli/cli-local/server/node_modules/drizzle-orm/mysql-core/index.js";
+import {
+  desc,
+  eq,
+  and,
+  asc,
+} from "file://I:/cli/cli-local/server/node_modules/drizzle-orm/index.js";
+import { z } from "file://I:/cli/cli-local/server/node_modules/zod/index.js";
 
-const serverAssets = [{"baseName":"server","dir":"I:/cli/cli-local/server/assets"}];
+const serverAssets = [{ baseName: "server", dir: "I:/cli/cli-local/server/assets" }];
 
 const assets$1 = createStorage();
 
 for (const asset of serverAssets) {
-  assets$1.mount(asset.baseName, unstorage_47drivers_47fs({ base: asset.dir, ignore: (asset?.ignore || []) }));
+  assets$1.mount(
+    asset.baseName,
+    unstorage_47drivers_47fs({ base: asset.dir, ignore: asset?.ignore || [] }),
+  );
 }
 
 const storage = createStorage({});
 
-storage.mount('/assets', assets$1);
+storage.mount("/assets", assets$1);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"I:/cli/cli-local/server"}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"I:/cli/cli-local/server"}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"I:/cli/cli-local/server/.nitro"}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"I:/cli/cli-local/server/.nitro/cache"}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"I:/cli/cli-local/server/.data/kv"}));
+storage.mount(
+  "root",
+  unstorage_47drivers_47fs({ driver: "fs", readOnly: true, base: "I:/cli/cli-local/server" }),
+);
+storage.mount(
+  "src",
+  unstorage_47drivers_47fs({ driver: "fs", readOnly: true, base: "I:/cli/cli-local/server" }),
+);
+storage.mount(
+  "build",
+  unstorage_47drivers_47fs({
+    driver: "fs",
+    readOnly: false,
+    base: "I:/cli/cli-local/server/.nitro",
+  }),
+);
+storage.mount(
+  "cache",
+  unstorage_47drivers_47fs({
+    driver: "fs",
+    readOnly: false,
+    base: "I:/cli/cli-local/server/.nitro/cache",
+  }),
+);
+storage.mount(
+  "data",
+  unstorage_47drivers_47fs({ driver: "fs", base: "I:/cli/cli-local/server/.data/kv" }),
+);
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -70,7 +164,8 @@ const Hasher = /* @__PURE__ */ (() => {
       const objString = Object.prototype.toString.call(object);
       let objType = "";
       const objectLength = objString.length;
-      objType = objectLength < 10 ? "unknown:[" + objString + "]" : objString.slice(8, objectLength - 1);
+      objType =
+        objectLength < 10 ? "unknown:[" + objString + "]" : objString.slice(8, objectLength - 1);
       objType = objType.toLowerCase();
       let objectNumber = null;
       if ((objectNumber = this.#context.get(object)) === void 0) {
@@ -143,7 +238,7 @@ const Hasher = /* @__PURE__ */ (() => {
       if (value && typeof value.entries === "function") {
         return this.array(
           [...value.entries()],
-          true
+          true,
           /* ordered */
         );
       }
@@ -208,9 +303,9 @@ const Hasher = /* @__PURE__ */ (() => {
     "uint32array",
     "unt32array",
     "float32array",
-    "float64array"
+    "float64array",
   ]) {
-    Hasher2.prototype[type] = function(arr) {
+    Hasher2.prototype[type] = function (arr) {
       this.write(type + ":");
       return this.array([...arr], false);
     };
@@ -219,10 +314,12 @@ const Hasher = /* @__PURE__ */ (() => {
     if (typeof f !== "function") {
       return false;
     }
-    return Function.prototype.toString.call(f).slice(
-      -15
-      /* "[native code] }".length */
-    ) === "[native code] }";
+    return (
+      Function.prototype.toString.call(f).slice(
+        -15,
+        /* "[native code] }".length */
+      ) === "[native code] }"
+    );
   }
   return Hasher2;
 })();
@@ -232,7 +329,9 @@ function serialize(object) {
   return hasher.buff;
 }
 function hash(value) {
-  return digest(typeof value === "string" ? value : serialize(value)).replace(/[-_]/g, "").slice(0, 10);
+  return digest(typeof value === "string" ? value : serialize(value))
+    .replace(/[-_]/g, "")
+    .slice(0, 10);
 }
 
 function defaultCacheOptions() {
@@ -240,7 +339,7 @@ function defaultCacheOptions() {
     name: "_",
     base: "/cache",
     swr: true,
-    maxAge: 1
+    maxAge: 1,
   };
 }
 function defineCachedFunction(fn, opts = {}) {
@@ -251,22 +350,32 @@ function defineCachedFunction(fn, opts = {}) {
   const integrity = opts.integrity || hash([fn, opts]);
   const validate = opts.validate || ((entry) => entry.value !== void 0);
   async function get(key, resolver, shouldInvalidateCache, event) {
-    const cacheKey = [opts.base, group, name, key + ".json"].filter(Boolean).join(":").replace(/:\/$/, ":index");
-    let entry = await useStorage().getItem(cacheKey).catch((error) => {
-      console.error(`[cache] Cache read error.`, error);
-      useNitroApp().captureError(error, { event, tags: ["cache"] });
-    }) || {};
+    const cacheKey = [opts.base, group, name, key + ".json"]
+      .filter(Boolean)
+      .join(":")
+      .replace(/:\/$/, ":index");
+    let entry =
+      (await useStorage()
+        .getItem(cacheKey)
+        .catch((error) => {
+          logError(`[cache] Cache read error.`, error);
+          useNitroApp().captureError(error, { event, tags: ["cache"] });
+        })) || {};
     if (typeof entry !== "object") {
       entry = {};
       const error = new Error("Malformed data read from cache.");
-      console.error("[cache]", error);
+      logError("[cache]", error);
       useNitroApp().captureError(error, { event, tags: ["cache"] });
     }
     const ttl = (opts.maxAge ?? 0) * 1e3;
     if (ttl) {
       entry.expires = Date.now() + ttl;
     }
-    const expired = shouldInvalidateCache || entry.integrity !== integrity || ttl && Date.now() - (entry.mtime || 0) > ttl || validate(entry) === false;
+    const expired =
+      shouldInvalidateCache ||
+      entry.integrity !== integrity ||
+      (ttl && Date.now() - (entry.mtime || 0) > ttl) ||
+      validate(entry) === false;
     const _resolve = async () => {
       const isPending = pending[key];
       if (!isPending) {
@@ -295,10 +404,12 @@ function defineCachedFunction(fn, opts = {}) {
           if (opts.maxAge && !opts.swr) {
             setOpts = { ttl: opts.maxAge };
           }
-          const promise = useStorage().setItem(cacheKey, entry, setOpts).catch((error) => {
-            console.error(`[cache] Cache write error.`, error);
-            useNitroApp().captureError(error, { event, tags: ["cache"] });
-          });
+          const promise = useStorage()
+            .setItem(cacheKey, entry, setOpts)
+            .catch((error) => {
+              logError(`[cache] Cache write error.`, error);
+              useNitroApp().captureError(error, { event, tags: ["cache"] });
+            });
           if (event?.waitUntil) {
             event.waitUntil(promise);
           }
@@ -313,7 +424,7 @@ function defineCachedFunction(fn, opts = {}) {
     }
     if (opts.swr && validate(entry) !== false) {
       _resolvePromise.catch((error) => {
-        console.error(`[cache] SWR handler error.`, error);
+        logError(`[cache] SWR handler error.`, error);
         useNitroApp().captureError(error, { event, tags: ["cache"] });
       });
       return entry;
@@ -331,11 +442,11 @@ function defineCachedFunction(fn, opts = {}) {
       key,
       () => fn(...args),
       shouldInvalidateCache,
-      args[0] && isEvent(args[0]) ? args[0] : void 0
+      args[0] && isEvent(args[0]) ? args[0] : void 0,
     );
     let value = entry.value;
     if (opts.transform) {
-      value = await opts.transform(entry, ...args) || value;
+      value = (await opts.transform(entry, ...args)) || value;
     }
     return value;
   };
@@ -350,7 +461,10 @@ function escapeKey(key) {
   return String(key).replace(/\W/g, "");
 }
 function defineCachedEventHandler(handler, opts = defaultCacheOptions()) {
-  const variableHeaderNames = (opts.varies || []).filter(Boolean).map((h) => h.toLowerCase()).sort();
+  const variableHeaderNames = (opts.varies || [])
+    .filter(Boolean)
+    .map((h) => h.toLowerCase())
+    .sort();
   const _opts = {
     ...opts,
     getKey: async (event) => {
@@ -366,7 +480,9 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions()) {
         _pathname = "-";
       }
       const _hashedPath = `${_pathname}.${hash(_path)}`;
-      const _headers = variableHeaderNames.map((header) => [header, event.node.req.headers[header]]).map(([name, value]) => `${escapeKey(name)}.${hash(value)}`);
+      const _headers = variableHeaderNames
+        .map((header) => [header, event.node.req.headers[header]])
+        .map(([name, value]) => `${escapeKey(name)}.${hash(value)}`);
       return [_hashedPath, ..._headers].join(":");
     },
     validate: (entry) => {
@@ -379,141 +495,140 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions()) {
       if (entry.value.body === void 0) {
         return false;
       }
-      if (entry.value.headers.etag === "undefined" || entry.value.headers["last-modified"] === "undefined") {
+      if (
+        entry.value.headers.etag === "undefined" ||
+        entry.value.headers["last-modified"] === "undefined"
+      ) {
         return false;
       }
       return true;
     },
     group: opts.group || "nitro/handlers",
-    integrity: opts.integrity || hash([handler, opts])
+    integrity: opts.integrity || hash([handler, opts]),
   };
-  const _cachedHandler = cachedFunction(
-    async (incomingEvent) => {
-      const variableHeaders = {};
-      for (const header of variableHeaderNames) {
-        const value = incomingEvent.node.req.headers[header];
-        if (value !== void 0) {
-          variableHeaders[header] = value;
-        }
+  const _cachedHandler = cachedFunction(async (incomingEvent) => {
+    const variableHeaders = {};
+    for (const header of variableHeaderNames) {
+      const value = incomingEvent.node.req.headers[header];
+      if (value !== void 0) {
+        variableHeaders[header] = value;
       }
-      const reqProxy = cloneWithProxy(incomingEvent.node.req, {
-        headers: variableHeaders
-      });
-      const resHeaders = {};
-      let _resSendBody;
-      const resProxy = cloneWithProxy(incomingEvent.node.res, {
-        statusCode: 200,
-        writableEnded: false,
-        writableFinished: false,
-        headersSent: false,
-        closed: false,
-        getHeader(name) {
-          return resHeaders[name];
-        },
-        setHeader(name, value) {
-          resHeaders[name] = value;
-          return this;
-        },
-        getHeaderNames() {
-          return Object.keys(resHeaders);
-        },
-        hasHeader(name) {
-          return name in resHeaders;
-        },
-        removeHeader(name) {
-          delete resHeaders[name];
-        },
-        getHeaders() {
-          return resHeaders;
-        },
-        end(chunk, arg2, arg3) {
-          if (typeof chunk === "string") {
-            _resSendBody = chunk;
+    }
+    const reqProxy = cloneWithProxy(incomingEvent.node.req, {
+      headers: variableHeaders,
+    });
+    const resHeaders = {};
+    let _resSendBody;
+    const resProxy = cloneWithProxy(incomingEvent.node.res, {
+      statusCode: 200,
+      writableEnded: false,
+      writableFinished: false,
+      headersSent: false,
+      closed: false,
+      getHeader(name) {
+        return resHeaders[name];
+      },
+      setHeader(name, value) {
+        resHeaders[name] = value;
+        return this;
+      },
+      getHeaderNames() {
+        return Object.keys(resHeaders);
+      },
+      hasHeader(name) {
+        return name in resHeaders;
+      },
+      removeHeader(name) {
+        delete resHeaders[name];
+      },
+      getHeaders() {
+        return resHeaders;
+      },
+      end(chunk, arg2, arg3) {
+        if (typeof chunk === "string") {
+          _resSendBody = chunk;
+        }
+        if (typeof arg2 === "function") {
+          arg2();
+        }
+        if (typeof arg3 === "function") {
+          arg3();
+        }
+        return this;
+      },
+      write(chunk, arg2, arg3) {
+        if (typeof chunk === "string") {
+          _resSendBody = chunk;
+        }
+        if (typeof arg2 === "function") {
+          arg2(void 0);
+        }
+        if (typeof arg3 === "function") {
+          arg3();
+        }
+        return true;
+      },
+      writeHead(statusCode, headers2) {
+        this.statusCode = statusCode;
+        if (headers2) {
+          if (Array.isArray(headers2) || typeof headers2 === "string") {
+            throw new TypeError("Raw headers  is not supported.");
           }
-          if (typeof arg2 === "function") {
-            arg2();
-          }
-          if (typeof arg3 === "function") {
-            arg3();
-          }
-          return this;
-        },
-        write(chunk, arg2, arg3) {
-          if (typeof chunk === "string") {
-            _resSendBody = chunk;
-          }
-          if (typeof arg2 === "function") {
-            arg2(void 0);
-          }
-          if (typeof arg3 === "function") {
-            arg3();
-          }
-          return true;
-        },
-        writeHead(statusCode, headers2) {
-          this.statusCode = statusCode;
-          if (headers2) {
-            if (Array.isArray(headers2) || typeof headers2 === "string") {
-              throw new TypeError("Raw headers  is not supported.");
-            }
-            for (const header in headers2) {
-              const value = headers2[header];
-              if (value !== void 0) {
-                this.setHeader(
-                  header,
-                  value
-                );
-              }
+          for (const header in headers2) {
+            const value = headers2[header];
+            if (value !== void 0) {
+              this.setHeader(header, value);
             }
           }
-          return this;
         }
+        return this;
+      },
+    });
+    const event = createEvent(reqProxy, resProxy);
+    event.fetch = (url, fetchOptions) =>
+      fetchWithEvent(event, url, fetchOptions, {
+        fetch: useNitroApp().localFetch,
       });
-      const event = createEvent(reqProxy, resProxy);
-      event.fetch = (url, fetchOptions) => fetchWithEvent(event, url, fetchOptions, {
-        fetch: useNitroApp().localFetch
+    event.$fetch = (url, fetchOptions) =>
+      fetchWithEvent(event, url, fetchOptions, {
+        fetch: globalThis.$fetch,
       });
-      event.$fetch = (url, fetchOptions) => fetchWithEvent(event, url, fetchOptions, {
-        fetch: globalThis.$fetch
-      });
-      event.waitUntil = incomingEvent.waitUntil;
-      event.context = incomingEvent.context;
-      event.context.cache = {
-        options: _opts
-      };
-      const body = await handler(event) || _resSendBody;
-      const headers = event.node.res.getHeaders();
-      headers.etag = String(
-        headers.Etag || headers.etag || `W/"${hash(body)}"`
-      );
-      headers["last-modified"] = String(
-        headers["Last-Modified"] || headers["last-modified"] || (/* @__PURE__ */ new Date()).toUTCString()
-      );
-      const cacheControl = [];
-      if (opts.swr) {
-        if (opts.maxAge) {
-          cacheControl.push(`s-maxage=${opts.maxAge}`);
-        }
-        if (opts.staleMaxAge) {
-          cacheControl.push(`stale-while-revalidate=${opts.staleMaxAge}`);
-        } else {
-          cacheControl.push("stale-while-revalidate");
-        }
-      } else if (opts.maxAge) {
-        cacheControl.push(`max-age=${opts.maxAge}`);
+    event.waitUntil = incomingEvent.waitUntil;
+    event.context = incomingEvent.context;
+    event.context.cache = {
+      options: _opts,
+    };
+    const body = (await handler(event)) || _resSendBody;
+    const headers = event.node.res.getHeaders();
+    headers.etag = String(headers.Etag || headers.etag || `W/"${hash(body)}"`);
+    headers["last-modified"] = String(
+      headers["Last-Modified"] ||
+        headers["last-modified"] ||
+        /* @__PURE__ */ new Date().toUTCString(),
+    );
+    const cacheControl = [];
+    if (opts.swr) {
+      if (opts.maxAge) {
+        cacheControl.push(`s-maxage=${opts.maxAge}`);
       }
-      if (cacheControl.length > 0) {
-        headers["cache-control"] = cacheControl.join(", ");
+      if (opts.staleMaxAge) {
+        cacheControl.push(`stale-while-revalidate=${opts.staleMaxAge}`);
+      } else {
+        cacheControl.push("stale-while-revalidate");
       }
-      const cacheEntry = {
-        code: event.node.res.statusCode,
-        headers,
-        body
-      };
-      return cacheEntry;
-    },
-    _opts
-  );
+    } else if (opts.maxAge) {
+      cacheControl.push(`max-age=${opts.maxAge}`);
+    }
+    if (cacheControl.length > 0) {
+      headers["cache-control"] = cacheControl.join(", ");
+    }
+    const cacheEntry = {
+      code: event.node.res.statusCode,
+      headers,
+      body,
+    };
+    return cacheEntry;
+  }, _opts);
   return defineEventHandler(async (event) => {
     if (opts.headersOnly) {
       if (handleCacheHeaders(event, { maxAge: opts.maxAge })) {
@@ -521,27 +636,24 @@ function defineCachedEventHandler(handler, opts = defaultCacheOptions()) {
       }
       return handler(event);
     }
-    const response = await _cachedHandler(
-      event
-    );
+    const response = await _cachedHandler(event);
     if (event.node.res.headersSent || event.node.res.writableEnded) {
       return response.body;
     }
-    if (handleCacheHeaders(event, {
-      modifiedTime: new Date(response.headers["last-modified"]),
-      etag: response.headers.etag,
-      maxAge: opts.maxAge
-    })) {
+    if (
+      handleCacheHeaders(event, {
+        modifiedTime: new Date(response.headers["last-modified"]),
+        etag: response.headers.etag,
+        maxAge: opts.maxAge,
+      })
+    ) {
       return;
     }
     event.node.res.statusCode = response.code;
     for (const name in response.headers) {
       const value = response.headers[name];
       if (name === "set-cookie") {
-        event.node.res.appendHeader(
-          name,
-          splitCookiesString(value)
-        );
+        event.node.res.appendHeader(name, splitCookiesString(value));
       } else {
         if (value !== void 0) {
           event.node.res.setHeader(name, value);
@@ -565,22 +677,18 @@ function cloneWithProxy(obj, overrides) {
         return true;
       }
       return Reflect.set(target, property, value, receiver);
-    }
+    },
   });
 }
 const cachedEventHandler = defineCachedEventHandler;
 
 const inlineAppConfig = {};
 
-
-
 const appConfig = defuFn(inlineAppConfig);
 
 function getEnv(key, opts) {
   const envKey = snakeCase(key).toUpperCase();
-  return destr(
-    process.env[opts.prefix + envKey] ?? process.env[opts.altPrefix + envKey]
-  );
+  return destr(process.env[opts.prefix + envKey] ?? process.env[opts.altPrefix + envKey]);
 }
 function _isObject(input) {
   return typeof input === "object" && !Array.isArray(input);
@@ -615,22 +723,20 @@ function _expandFromEnv(value) {
 }
 
 const _inlineRuntimeConfig = {
-  "app": {
-    "baseURL": "/"
+  app: {
+    baseURL: "/",
   },
-  "nitro": {
-    "routeRules": {}
+  nitro: {
+    routeRules: {},
   },
-  "DATABASE_URL": ""
+  DATABASE_URL: "",
 };
 const envOptions = {
   prefix: "NITRO_",
   altPrefix: _inlineRuntimeConfig.nitro.envPrefix ?? process.env.NITRO_ENV_PREFIX ?? "_",
-  envExpansion: _inlineRuntimeConfig.nitro.envExpansion ?? process.env.NITRO_ENV_EXPANSION ?? false
+  envExpansion: _inlineRuntimeConfig.nitro.envExpansion ?? process.env.NITRO_ENV_EXPANSION ?? false,
 };
-const _sharedRuntimeConfig = _deepFreeze(
-  applyEnv(klona(_inlineRuntimeConfig), envOptions)
-);
+const _sharedRuntimeConfig = _deepFreeze(applyEnv(klona(_inlineRuntimeConfig), envOptions));
 function useRuntimeConfig(event) {
   {
     return _sharedRuntimeConfig;
@@ -649,21 +755,17 @@ function _deepFreeze(object) {
 }
 new Proxy(/* @__PURE__ */ Object.create(null), {
   get: (_, prop) => {
-    console.warn(
-      "Please use `useRuntimeConfig()` instead of accessing config directly."
-    );
+    console.warn("Please use `useRuntimeConfig()` instead of accessing config directly.");
     const runtimeConfig = useRuntimeConfig();
     if (prop in runtimeConfig) {
       return runtimeConfig[prop];
     }
     return void 0;
-  }
+  },
 });
 
 const config = useRuntimeConfig();
-const _routeRulesMatcher = toRouteMatcher(
-  createRouter({ routes: config.nitro.routeRules })
-);
+const _routeRulesMatcher = toRouteMatcher(createRouter({ routes: config.nitro.routeRules }));
 function createRouteRulesHandler(ctx) {
   return eventHandler((event) => {
     const routeRules = getRouteRules(event);
@@ -700,7 +802,7 @@ function createRouteRulesHandler(ctx) {
       }
       return proxyRequest(event, target, {
         fetch: ctx.localFetch,
-        ...routeRules.proxy
+        ...routeRules.proxy,
       });
     }
   });
@@ -709,7 +811,7 @@ function getRouteRules(event) {
   event.context._nitro = event.context._nitro || {};
   if (!event.context._nitro.routeRules) {
     event.context._nitro.routeRules = getRouteRulesForPath(
-      withoutBase(event.path.split("?")[0], useRuntimeConfig().app.baseURL)
+      withoutBase(event.path.split("?")[0], useRuntimeConfig().app.baseURL),
     );
   }
   return event.context._nitro.routeRules;
@@ -719,18 +821,12 @@ function getRouteRulesForPath(path) {
 }
 
 function _captureError(error, type) {
-  console.error(`[${type}]`, error);
+  logError(`[${type}]`, error);
   useNitroApp().captureError(error, { tags: [type] });
 }
 function trapUnhandledNodeErrors() {
-  process.on(
-    "unhandledRejection",
-    (error) => _captureError(error, "unhandledRejection")
-  );
-  process.on(
-    "uncaughtException",
-    (error) => _captureError(error, "uncaughtException")
-  );
+  process.on("unhandledRejection", (error) => _captureError(error, "unhandledRejection"));
+  process.on("uncaughtException", (error) => _captureError(error, "uncaughtException"));
 }
 function joinHeaders(value) {
   return Array.isArray(value) ? value.join(", ") : String(value);
@@ -742,7 +838,7 @@ function normalizeFetchResponse(response) {
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
-    headers: normalizeCookieHeaders(response.headers)
+    headers: normalizeCookieHeaders(response.headers),
   });
 }
 function normalizeCookieHeader(header = "") {
@@ -766,19 +862,17 @@ function defineNitroErrorHandler(handler) {
   return handler;
 }
 
-const errorHandler$0 = defineNitroErrorHandler(
-  async function defaultNitroErrorHandler(error, event) {
-    const res = await defaultHandler(error, event);
-    if (!event.node?.res.headersSent) {
-      setResponseHeaders(event, res.headers);
-    }
-    setResponseStatus(event, res.status, res.statusText);
-    return send(
-      event,
-      typeof res.body === "string" ? res.body : JSON.stringify(res.body, null, 2)
-    );
+const errorHandler$0 = defineNitroErrorHandler(async function defaultNitroErrorHandler(
+  error,
+  event,
+) {
+  const res = await defaultHandler(error, event);
+  if (!event.node?.res.headersSent) {
+    setResponseHeaders(event, res.headers);
   }
-);
+  setResponseStatus(event, res.status, res.statusText);
+  return send(event, typeof res.body === "string" ? res.body : JSON.stringify(res.body, null, 2));
+});
 async function defaultHandler(error, event, opts) {
   const isSensitive = error.unhandled || error.fatal;
   const statusCode = error.statusCode || 500;
@@ -792,20 +886,22 @@ async function defaultHandler(error, event, opts) {
         status: 302,
         statusText: "Found",
         headers: { location: redirectTo },
-        body: `Redirecting...`
+        body: `Redirecting...`,
       };
     }
   }
   await loadStackTrace(error).catch(consola.error);
   const youch = new Youch();
   if (isSensitive && !opts?.silent) {
-    const tags = [error.unhandled && "[unhandled]", error.fatal && "[fatal]"].filter(Boolean).join(" ");
+    const tags = [error.unhandled && "[unhandled]", error.fatal && "[fatal]"]
+      .filter(Boolean)
+      .join(" ");
     const ansiError = await (await youch.toANSI(error)).replaceAll(process.cwd(), ".");
     consola.error(
       `[request error] ${tags} [${event.method}] ${url}
 
 `,
-      ansiError
+      ansiError,
     );
   }
   const useJSON = opts?.json || !getRequestHeader(event, "accept")?.includes("text/html");
@@ -818,31 +914,34 @@ async function defaultHandler(error, event, opts) {
     // Prevent browsers from sending the Referer header
     "referrer-policy": "no-referrer",
     // Disable the execution of any js
-    "content-security-policy": "script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';"
+    "content-security-policy":
+      "script-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';",
   };
   if (statusCode === 404 || !getResponseHeader(event, "cache-control")) {
     headers["cache-control"] = "no-cache";
   }
-  const body = useJSON ? {
-    error: true,
-    url,
-    statusCode,
-    statusMessage,
-    message: error.message,
-    data: error.data,
-    stack: error.stack?.split("\n").map((line) => line.trim())
-  } : await youch.toHTML(error, {
-    request: {
-      url: url.href,
-      method: event.method,
-      headers: getRequestHeaders(event)
-    }
-  });
+  const body = useJSON
+    ? {
+        error: true,
+        url,
+        statusCode,
+        statusMessage,
+        message: error.message,
+        data: error.data,
+        stack: error.stack?.split("\n").map((line) => line.trim()),
+      }
+    : await youch.toHTML(error, {
+        request: {
+          url: url.href,
+          method: event.method,
+          headers: getRequestHeaders(event),
+        },
+      });
   return {
     status: statusCode,
     statusText: statusMessage,
     headers,
-    body
+    body,
   };
 }
 async function loadStackTrace(error) {
@@ -861,11 +960,13 @@ async function sourceLoader(frame) {
     return;
   }
   if (frame.type === "app") {
-    const rawSourceMap = await readFile(`${frame.fileName}.map`, "utf8").catch(() => {
-    });
+    const rawSourceMap = await readFile(`${frame.fileName}.map`, "utf8").catch(() => {});
     if (rawSourceMap) {
       const consumer = await new SourceMapConsumer(rawSourceMap);
-      const originalPosition = consumer.originalPositionFor({ line: frame.lineNumber, column: frame.columnNumber });
+      const originalPosition = consumer.originalPositionFor({
+        line: frame.lineNumber,
+        column: frame.columnNumber,
+      });
       if (originalPosition.source && originalPosition.line) {
         frame.fileName = resolve(dirname(frame.fileName), originalPosition.source);
         frame.lineNumber = originalPosition.line;
@@ -873,8 +974,7 @@ async function sourceLoader(frame) {
       }
     }
   }
-  const contents = await readFile(frame.fileName, "utf8").catch(() => {
-  });
+  const contents = await readFile(frame.fileName, "utf8").catch(() => {});
   return contents ? { contents } : void 0;
 }
 function fmtFrame(frame) {
@@ -894,54 +994,54 @@ async function errorHandler(error, event) {
       if (event.handled) {
         return; // Response handled
       }
-    } catch(error) {
+    } catch (error) {
       // Handler itself thrown, log and continue
-      console.error(error);
+      logError(error);
     }
   }
   // H3 will handle fallback
 }
 
-const plugins = [
-  
-];
+const plugins = [];
 
 const assets = {
   "/index.mjs": {
-    "type": "text/javascript; charset=utf-8",
-    "etag": "\"d34f-5ySI+7yvuF5u+zM7TeNQbRQbWC8\"",
-    "mtime": "2025-08-10T08:16:46.911Z",
-    "size": 54095,
-    "path": "index.mjs"
+    type: "text/javascript; charset=utf-8",
+    etag: '"d34f-5ySI+7yvuF5u+zM7TeNQbRQbWC8"',
+    mtime: "2025-08-10T08:16:46.911Z",
+    size: 54095,
+    path: "index.mjs",
   },
   "/index.mjs.map": {
-    "type": "application/json",
-    "etag": "\"2e99a-GsinxStdhTRJYzxi2xkWpHwWIpY\"",
-    "mtime": "2025-08-10T08:16:46.911Z",
-    "size": 190874,
-    "path": "index.mjs.map"
-  }
+    type: "application/json",
+    etag: '"2e99a-GsinxStdhTRJYzxi2xkWpHwWIpY"',
+    mtime: "2025-08-10T08:16:46.911Z",
+    size: 190874,
+    path: "index.mjs.map",
+  },
 };
 
-function readAsset (id) {
+function readAsset(id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
-  return promises.readFile(resolve$1(serverDir, assets[id].path))
+  return promises.readFile(resolve$1(serverDir, assets[id].path));
 }
 
 const publicAssetBases = {};
 
-function isPublicAssetURL(id = '') {
+function isPublicAssetURL(id = "") {
   if (assets[id]) {
-    return true
+    return true;
   }
   for (const base in publicAssetBases) {
-    if (id.startsWith(base)) { return true }
+    if (id.startsWith(base)) {
+      return true;
+    }
   }
-  return false
+  return false;
 }
 
-function getAsset (id) {
-  return assets[id]
+function getAsset(id) {
+  return assets[id];
 }
 
 const METHODS = /* @__PURE__ */ new Set(["HEAD", "GET"]);
@@ -950,16 +1050,16 @@ const _6EkgMU = eventHandler((event) => {
   if (event.method && !METHODS.has(event.method)) {
     return;
   }
-  let id = decodePath(
-    withLeadingSlash(withoutTrailingSlash(parseURL(event.path).pathname))
-  );
+  let id = decodePath(withLeadingSlash(withoutTrailingSlash(parseURL(event.path).pathname)));
   let asset;
-  const encodingHeader = String(
-    getRequestHeader(event, "accept-encoding") || ""
-  );
+  const encodingHeader = String(getRequestHeader(event, "accept-encoding") || "");
   const encodings = [
-    ...encodingHeader.split(",").map((e) => EncodingMap[e.trim()]).filter(Boolean).sort(),
-    ""
+    ...encodingHeader
+      .split(",")
+      .map((e) => EncodingMap[e.trim()])
+      .filter(Boolean)
+      .sort(),
+    "",
   ];
   if (encodings.length > 1) {
     appendResponseHeader(event, "Vary", "Accept-Encoding");
@@ -1010,25 +1110,73 @@ const _6EkgMU = eventHandler((event) => {
   return readAsset(id);
 });
 
-const _lazy_ZSOt8A = () => Promise.resolve().then(function () { return _ctx; });
-const _lazy_EUOPxB = () => Promise.resolve().then(function () { return _errors; });
-const _lazy_LiklCP = () => Promise.resolve().then(function () { return _id__delete$1; });
-const _lazy_CyNraS = () => Promise.resolve().then(function () { return _id__get$1; });
-const _lazy_8iGzpS = () => Promise.resolve().then(function () { return _id__patch$1; });
-const _lazy_FWIew8 = () => Promise.resolve().then(function () { return index_get$3; });
-const _lazy_Dr4uHI = () => Promise.resolve().then(function () { return index_post$1; });
-const _lazy_UTXLZc = () => Promise.resolve().then(function () { return index_get$1; });
+const _lazy_ZSOt8A = () =>
+  Promise.resolve().then(function () {
+    return _ctx;
+  });
+const _lazy_EUOPxB = () =>
+  Promise.resolve().then(function () {
+    return _errors;
+  });
+const _lazy_LiklCP = () =>
+  Promise.resolve().then(function () {
+    return _id__delete$1;
+  });
+const _lazy_CyNraS = () =>
+  Promise.resolve().then(function () {
+    return _id__get$1;
+  });
+const _lazy_8iGzpS = () =>
+  Promise.resolve().then(function () {
+    return _id__patch$1;
+  });
+const _lazy_FWIew8 = () =>
+  Promise.resolve().then(function () {
+    return index_get$3;
+  });
+const _lazy_Dr4uHI = () =>
+  Promise.resolve().then(function () {
+    return index_post$1;
+  });
+const _lazy_UTXLZc = () =>
+  Promise.resolve().then(function () {
+    return index_get$1;
+  });
 
 const handlers = [
-  { route: '', handler: _6EkgMU, lazy: false, middleware: true, method: undefined },
-  { route: '/api/users/_ctx', handler: _lazy_ZSOt8A, lazy: true, middleware: false, method: undefined },
-  { route: '/api/users/_errors', handler: _lazy_EUOPxB, lazy: true, middleware: false, method: undefined },
-  { route: '/api/users/:id', handler: _lazy_LiklCP, lazy: true, middleware: false, method: "delete" },
-  { route: '/api/users/:id', handler: _lazy_CyNraS, lazy: true, middleware: false, method: "get" },
-  { route: '/api/users/:id', handler: _lazy_8iGzpS, lazy: true, middleware: false, method: "patch" },
-  { route: '/api/users', handler: _lazy_FWIew8, lazy: true, middleware: false, method: "get" },
-  { route: '/api/users', handler: _lazy_Dr4uHI, lazy: true, middleware: false, method: "post" },
-  { route: '/', handler: _lazy_UTXLZc, lazy: true, middleware: false, method: "get" }
+  { route: "", handler: _6EkgMU, lazy: false, middleware: true, method: undefined },
+  {
+    route: "/api/users/_ctx",
+    handler: _lazy_ZSOt8A,
+    lazy: true,
+    middleware: false,
+    method: undefined,
+  },
+  {
+    route: "/api/users/_errors",
+    handler: _lazy_EUOPxB,
+    lazy: true,
+    middleware: false,
+    method: undefined,
+  },
+  {
+    route: "/api/users/:id",
+    handler: _lazy_LiklCP,
+    lazy: true,
+    middleware: false,
+    method: "delete",
+  },
+  { route: "/api/users/:id", handler: _lazy_CyNraS, lazy: true, middleware: false, method: "get" },
+  {
+    route: "/api/users/:id",
+    handler: _lazy_8iGzpS,
+    lazy: true,
+    middleware: false,
+    method: "patch",
+  },
+  { route: "/api/users", handler: _lazy_FWIew8, lazy: true, middleware: false, method: "get" },
+  { route: "/api/users", handler: _lazy_Dr4uHI, lazy: true, middleware: false, method: "post" },
+  { route: "/", handler: _lazy_UTXLZc, lazy: true, middleware: false, method: "get" },
 ];
 
 function createNitroApp() {
@@ -1036,7 +1184,7 @@ function createNitroApp() {
   const hooks = createHooks();
   const captureError = (error, context = {}) => {
     const promise = hooks.callHookParallel("error", error, context).catch((error_) => {
-      console.error("Error while capturing another error", error_);
+      logError("Error while capturing another error", error_);
     });
     if (context.event && isEvent(context.event)) {
       const errors = context.event.context.nitro?.errors;
@@ -1062,16 +1210,17 @@ function createNitroApp() {
           _platform: fetchContext?._platform,
           // #3335
           ...fetchContext._platform,
-          ...event.context
+          ...event.context,
         };
       }
       if (!event.context.waitUntil && fetchContext?.waitUntil) {
         event.context.waitUntil = fetchContext.waitUntil;
       }
       event.fetch = (req, init) => fetchWithEvent(event, req, init, { fetch: localFetch });
-      event.$fetch = (req, init) => fetchWithEvent(event, req, init, {
-        fetch: $fetch
-      });
+      event.$fetch = (req, init) =>
+        fetchWithEvent(event, req, init, {
+          fetch: $fetch,
+        });
       event.waitUntil = (promise) => {
         if (!event.context.nitro._waitUntilPromises) {
           event.context.nitro._waitUntilPromises = [];
@@ -1097,10 +1246,10 @@ function createNitroApp() {
       await nitroApp$1.hooks.callHook("afterResponse", event, response).catch((error) => {
         captureError(error, { event, tags: ["request", "response"] });
       });
-    }
+    },
   });
   const router = createRouter$1({
-    preemptive: true
+    preemptive: true,
   });
   const nodeHandler = toNodeListener(h3App);
   const localCall = (aRequest) => callNodeRequestHandler(nodeHandler, aRequest);
@@ -1108,35 +1257,28 @@ function createNitroApp() {
     if (!input.toString().startsWith("/")) {
       return globalThis.fetch(input, init);
     }
-    return fetchNodeRequestHandler(
-      nodeHandler,
-      input,
-      init
-    ).then((response) => normalizeFetchResponse(response));
+    return fetchNodeRequestHandler(nodeHandler, input, init).then((response) =>
+      normalizeFetchResponse(response),
+    );
   };
   const $fetch = createFetch({
     fetch: localFetch,
     Headers: Headers$1,
-    defaults: { baseURL: config.app.baseURL }
+    defaults: { baseURL: config.app.baseURL },
   });
   globalThis.$fetch = $fetch;
   h3App.use(createRouteRulesHandler({ localFetch }));
   for (const h of handlers) {
     let handler = h.lazy ? lazyEventHandler(h.handler) : h.handler;
     if (h.middleware || !h.route) {
-      const middlewareBase = (config.app.baseURL + (h.route || "/")).replace(
-        /\/+/g,
-        "/"
-      );
+      const middlewareBase = (config.app.baseURL + (h.route || "/")).replace(/\/+/g, "/");
       h3App.use(middlewareBase, handler);
     } else {
-      const routeRules = getRouteRulesForPath(
-        h.route.replace(/:\w+|\*\*/g, "_")
-      );
+      const routeRules = getRouteRulesForPath(h.route.replace(/:\w+|\*\*/g, "_"));
       if (routeRules.cache) {
         handler = cachedEventHandler(handler, {
           group: "nitro/routes",
-          ...routeRules.cache
+          ...routeRules.cache,
         });
       }
       router.use(h.route, handler, h.method);
@@ -1149,7 +1291,7 @@ function createNitroApp() {
     router,
     localCall,
     localFetch,
-    captureError
+    captureError,
   };
   return app;
 }
@@ -1171,28 +1313,23 @@ runNitroPlugins(nitroApp$1);
 
 const scheduledTasks = false;
 
-const tasks = {
-  
-};
+const tasks = {};
 
 const __runningTasks__ = {};
-async function runTask(name, {
-  payload = {},
-  context = {}
-} = {}) {
+async function runTask(name, { payload = {}, context = {} } = {}) {
   if (__runningTasks__[name]) {
     return __runningTasks__[name];
   }
   if (!(name in tasks)) {
     throw createError({
       message: `Task \`${name}\` is not available!`,
-      statusCode: 404
+      statusCode: 404,
     });
   }
   if (!tasks[name].resolve) {
     throw createError({
       message: `Task \`${name}\` is not implemented!`,
-      statusCode: 501
+      statusCode: 501,
     });
   }
   const handler = await tasks[name].resolve();
@@ -1219,13 +1356,17 @@ parentPort?.on("message", (msg) => {
 const nitroApp = useNitroApp();
 const server = new Server(toNodeListener(nitroApp.h3App));
 let listener;
-listen().catch(() => listen(
-  true
-  /* use random port */
-)).catch((error) => {
-  console.error("Dev worker failed to listen:", error);
-  return shutdown();
-});
+listen()
+  .catch(() =>
+    listen(
+      true,
+      /* use random port */
+    ),
+  )
+  .catch((error) => {
+    logError("Dev worker failed to listen:", error);
+    return shutdown();
+  });
 nitroApp.router.get(
   "/_nitro/tasks",
   defineEventHandler(async (event) => {
@@ -1233,13 +1374,13 @@ nitroApp.router.get(
       Object.entries(tasks).map(async ([name, task]) => {
         const _task = await task.resolve?.();
         return [name, { description: _task?.meta?.description }];
-      })
+      }),
     );
     return {
       tasks: Object.fromEntries(_tasks),
-      scheduledTasks
+      scheduledTasks,
     };
-  })
+  }),
 );
 nitroApp.router.use(
   "/_nitro/tasks/:name",
@@ -1247,21 +1388,30 @@ nitroApp.router.use(
     const name = getRouterParam(event, "name");
     const payload = {
       ...getQuery$1(event),
-      ...await readBody(event).then((r) => r?.payload).catch(() => ({}))
+      ...(await readBody(event)
+        .then((r) => r?.payload)
+        .catch(() => ({}))),
     };
     return await runTask(name, { payload });
-  })
+  }),
 );
-function listen(useRandomPort = Boolean(
-  NITRO_NO_UNIX_SOCKET || process.versions.webcontainer || "Bun" in globalThis && process.platform === "win32"
-)) {
+function listen(
+  useRandomPort = Boolean(
+    NITRO_NO_UNIX_SOCKET ||
+      process.versions.webcontainer ||
+      ("Bun" in globalThis && process.platform === "win32"),
+  ),
+) {
   return new Promise((resolve, reject) => {
     try {
       listener = server.listen(useRandomPort ? 0 : getSocketAddress(), () => {
         const address = server.address();
         parentPort?.postMessage({
           event: "listen",
-          address: typeof address === "string" ? { socketPath: address } : { host: "localhost", port: address?.port }
+          address:
+            typeof address === "string"
+              ? { socketPath: address }
+              : { host: "localhost", port: address?.port },
         });
         resolve();
       });
@@ -1271,7 +1421,9 @@ function listen(useRandomPort = Boolean(
   });
 }
 function getSocketAddress() {
-  const socketName = `nitro-worker-${process.pid}-${threadId}-${NITRO_DEV_WORKER_ID}-${Math.round(Math.random() * 1e4)}.sock`;
+  const socketName = `nitro-worker-${process.pid}-${threadId}-${NITRO_DEV_WORKER_ID}-${Math.round(
+    Math.random() * 1e4,
+  )}.sock`;
   if (process.platform === "win32") {
     return join(String.raw`\\.\pipe`, socketName);
   }
@@ -1287,24 +1439,28 @@ async function shutdown() {
   server.closeAllConnections?.();
   await Promise.all([
     new Promise((resolve) => listener?.close(resolve)),
-    nitroApp.hooks.callHook("close").catch(console.error)
+    nitroApp.hooks.callHook("close").catch(logError),
   ]);
   parentPort?.postMessage({ event: "exit" });
 }
 
-const users = mysqlTable("users", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 120 }).notNull(),
-  email: varchar("email", { length: 190 }).notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull()
-}, (t) => ({
-  emailUnique: uniqueIndex("users_email_unique").on(t.email)
-}));
+const users = mysqlTable(
+  "users",
+  {
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 120 }).notNull(),
+    email: varchar("email", { length: 190 }).notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().onUpdateNow().notNull(),
+  },
+  (t) => ({
+    emailUnique: uniqueIndex("users_email_unique").on(t.email),
+  }),
+);
 
-const schema = /*#__PURE__*/Object.freeze({
+const schema = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  users: users
+  users: users,
 });
 
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -1316,13 +1472,17 @@ const pool = createPool({
   queueLimit: 0,
   // pas de limite (ou mets une valeur)
   enableKeepAlive: true,
-  keepAliveInitialDelay: 0
+  keepAliveInitialDelay: 0,
 });
 const db = drizzle(pool, { schema, mode: "default" });
 
 var __defProp$3 = Object.defineProperty;
-var __defNormalProp$3 = (obj, key, value) => key in obj ? __defProp$3(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField$3 = (obj, key, value) => __defNormalProp$3(obj, typeof key !== "symbol" ? key + "" : key, value);
+var __defNormalProp$3 = (obj, key, value) =>
+  key in obj
+    ? __defProp$3(obj, key, { enumerable: true, configurable: true, writable: true, value })
+    : (obj[key] = value);
+var __publicField$3 = (obj, key, value) =>
+  __defNormalProp$3(obj, typeof key !== "symbol" ? key + "" : key, value);
 class BaseRepository {
   constructor(db, table, idColumn) {
     __publicField$3(this, "db");
@@ -1339,7 +1499,11 @@ class BaseRepository {
       const [row] = await this.db.select().from(this.table).orderBy(desc(this.idCol)).limit(1);
       return row;
     }
-    const [created] = await this.db.select().from(this.table).where(eq(this.idCol, insertId)).limit(1);
+    const [created] = await this.db
+      .select()
+      .from(this.table)
+      .where(eq(this.idCol, insertId))
+      .limit(1);
     return created;
   }
   async findById(id) {
@@ -1363,7 +1527,7 @@ class BaseRepository {
         ...orders.map((o) => {
           const col = typeof o.column === "function" ? o.column(this.table) : o.column;
           return o.direction === "desc" ? desc(col) : asc(col);
-        })
+        }),
       );
     }
     if (typeof offset === "number") qb.offset(offset);
@@ -1397,8 +1561,12 @@ class UserRepository extends BaseRepository {
 }
 
 var __defProp$2 = Object.defineProperty;
-var __defNormalProp$2 = (obj, key, value) => key in obj ? __defProp$2(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField$2 = (obj, key, value) => __defNormalProp$2(obj, typeof key !== "symbol" ? key + "" : key, value);
+var __defNormalProp$2 = (obj, key, value) =>
+  key in obj
+    ? __defProp$2(obj, key, { enumerable: true, configurable: true, writable: true, value })
+    : (obj[key] = value);
+var __publicField$2 = (obj, key, value) =>
+  __defNormalProp$2(obj, typeof key !== "symbol" ? key + "" : key, value);
 class AppError extends Error {
   constructor(message, status = 400, code, details) {
     super(message);
@@ -1427,8 +1595,11 @@ class ValidationError extends AppError {
 }
 
 var __defProp$1 = Object.defineProperty;
-var __defNormalProp$1 = (obj, key, value) => key in obj ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField$1 = (obj, key, value) => __defNormalProp$1(obj, key + "" , value);
+var __defNormalProp$1 = (obj, key, value) =>
+  key in obj
+    ? __defProp$1(obj, key, { enumerable: true, configurable: true, writable: true, value })
+    : (obj[key] = value);
+var __publicField$1 = (obj, key, value) => __defNormalProp$1(obj, key + "", value);
 class BaseService {
   constructor(deps) {
     this.deps = deps;
@@ -1454,7 +1625,7 @@ class BaseService {
     const offset = (page - 1) * pageSize;
     const [data, total] = await Promise.all([
       this.repo.findAll({ ...options, offset, limit: pageSize }),
-      this.repo.count(options == null ? void 0 : options.where)
+      this.repo.count(options == null ? void 0 : options.where),
     ]);
     return { data, page, pageSize, total, totalPages: Math.max(1, Math.ceil(total / pageSize)) };
   }
@@ -1479,16 +1650,18 @@ class BaseService {
 
 const createUserSchema = z.object({
   name: z.string().min(1, "Le nom est requis").max(120),
-  email: z.string().email("Email invalide").max(190)
+  email: z.string().email("Email invalide").max(190),
 });
-const updateUserSchema = createUserSchema.partial().refine(
-  (d) => Object.keys(d).length > 0,
-  { message: "Fournissez au moins un champ" }
-);
+const updateUserSchema = createUserSchema
+  .partial()
+  .refine((d) => Object.keys(d).length > 0, { message: "Fournissez au moins un champ" });
 
 var __defProp = Object.defineProperty;
-var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-var __publicField = (obj, key, value) => __defNormalProp(obj, key + "" , value);
+var __defNormalProp = (obj, key, value) =>
+  key in obj
+    ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value })
+    : (obj[key] = value);
+var __publicField = (obj, key, value) => __defNormalProp(obj, key + "", value);
 class UserService extends BaseService {
   constructor(repo) {
     super({ repo, createSchema: createUserSchema, updateSchema: updateUserSchema });
@@ -1497,7 +1670,8 @@ class UserService extends BaseService {
   }
   async ensureEmailFree(email, excludeId) {
     const existing = await this.repoImpl.findByEmail(email);
-    if (existing && existing.id !== excludeId) throw new ConflictError("Email d\xE9j\xE0 utilis\xE9");
+    if (existing && existing.id !== excludeId)
+      throw new ConflictError("Email d\xE9j\xE0 utilis\xE9");
   }
   async create(payload) {
     const parsed = createUserSchema.parse(payload);
@@ -1515,9 +1689,9 @@ class UserService extends BaseService {
 const repo = new UserRepository(db);
 const userService = new UserService(repo);
 
-const _ctx = /*#__PURE__*/Object.freeze({
+const _ctx = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  userService: userService
+  userService: userService,
 });
 
 function toHttp(err) {
@@ -1527,7 +1701,7 @@ function toHttp(err) {
     return createError({
       statusCode: 500,
       statusMessage: "Internal Server Error",
-      data: { message: err }
+      data: { message: err },
     });
   }
   if (err && typeof err === "object") {
@@ -1536,27 +1710,27 @@ function toHttp(err) {
       return createError({
         statusCode: anyErr.statusCode,
         statusMessage: (_a = anyErr.statusMessage) != null ? _a : "Error",
-        data: (_b = anyErr.data) != null ? _b : { message: anyErr.message }
+        data: (_b = anyErr.data) != null ? _b : { message: anyErr.message },
       });
     }
     if (typeof anyErr.message === "string") {
       return createError({
         statusCode: 500,
         statusMessage: "Internal Server Error",
-        data: { message: anyErr.message }
+        data: { message: anyErr.message },
       });
     }
   }
   return createError({
     statusCode: 500,
     statusMessage: "Internal Server Error",
-    data: { message: "Unknown error" }
+    data: { message: "Unknown error" },
   });
 }
 
-const _errors = /*#__PURE__*/Object.freeze({
+const _errors = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  toHttp: toHttp
+  toHttp: toHttp,
 });
 
 const _id__delete = defineEventHandler(async (event) => {
@@ -1569,9 +1743,9 @@ const _id__delete = defineEventHandler(async (event) => {
   }
 });
 
-const _id__delete$1 = /*#__PURE__*/Object.freeze({
+const _id__delete$1 = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  default: _id__delete
+  default: _id__delete,
 });
 
 const _id__get = defineEventHandler(async (event) => {
@@ -1584,9 +1758,9 @@ const _id__get = defineEventHandler(async (event) => {
   }
 });
 
-const _id__get$1 = /*#__PURE__*/Object.freeze({
+const _id__get$1 = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  default: _id__get
+  default: _id__get,
 });
 
 const _id__patch = defineEventHandler(async (event) => {
@@ -1600,9 +1774,9 @@ const _id__patch = defineEventHandler(async (event) => {
   }
 });
 
-const _id__patch$1 = /*#__PURE__*/Object.freeze({
+const _id__patch$1 = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  default: _id__patch
+  default: _id__patch,
 });
 
 const index_get$2 = defineEventHandler(async (event) => {
@@ -1615,7 +1789,7 @@ const index_get$2 = defineEventHandler(async (event) => {
     const pageSize = Number.isFinite(pageSizeRaw) && pageSizeRaw > 0 ? pageSizeRaw : 20;
     const result = await userService.list(
       { page, pageSize },
-      { orderBy: { column: (t) => t.id, direction: "asc" } }
+      { orderBy: { column: (t) => t.id, direction: "asc" } },
     );
     return result;
   } catch (err) {
@@ -1624,9 +1798,9 @@ const index_get$2 = defineEventHandler(async (event) => {
   }
 });
 
-const index_get$3 = /*#__PURE__*/Object.freeze({
+const index_get$3 = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  default: index_get$2
+  default: index_get$2,
 });
 
 const index_post = defineEventHandler(async (event) => {
@@ -1640,19 +1814,19 @@ const index_post = defineEventHandler(async (event) => {
   }
 });
 
-const index_post$1 = /*#__PURE__*/Object.freeze({
+const index_post$1 = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  default: index_post
+  default: index_post,
 });
 
 const index_get = defineEventHandler(async (event) => {
   return {
-    message: "Hello World"
+    message: "Hello World",
   };
 });
 
-const index_get$1 = /*#__PURE__*/Object.freeze({
+const index_get$1 = /*#__PURE__*/ Object.freeze({
   __proto__: null,
-  default: index_get
+  default: index_get,
 });
 //# sourceMappingURL=index.mjs.map

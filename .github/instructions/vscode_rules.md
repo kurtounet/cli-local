@@ -28,7 +28,7 @@ alwaysApply: true
   // ✅ DO: Show good examples
   const goodExample = true;
   
-  // ❌ DON'T: Show anti-patterns
+  // ${EMOJI.error} DON'T: Show anti-patterns
   const badExample = false;
   ```
 

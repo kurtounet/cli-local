@@ -1,12 +1,16 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
-import { IColumnJson, IEntityJson } from "@features/parsersMdj/models/entity-json.model";
+import {
+  IColumnJson,
+  IEntityJson,
+} from "@features/parsersMdj/models/entity-json.model";
 import { snakeToCamel } from "@utils/convert";
 
-export function ZodEntityTemplate(entity: IEntityJson) {
+export function generateZodShemaEntityService(entity: IEntityJson) {
   const properties =
     entity.columns
-      ?.map((col: IColumnJson) =>
-        `  ${snakeToCamel(col.name)}: z${ZodProperty(col)}`,
+      ?.map(
+        (col: IColumnJson) =>
+          `  ${snakeToCamel(col.name)}: z${ZodProperty(col)}`,
       )
       .join("\n") || "";
   return `import z from "zod";
@@ -18,8 +22,8 @@ export const ${entity.namePascalCase}Schema = z.object({
 export const insert${entity.namePascalCase}Schema = ${entity.namePascalCase}Schema.omit(
     {
         id: true,
-        createdAt: true,
-        updatedAt: true
+        //createdAt: true,
+        //updatedAt: true
     }
 )
 export const update${entity.namePascalCase}Schema = ${entity.namePascalCase}Schema.partial()
@@ -28,12 +32,9 @@ export type Z${entity.namePascalCase} = z.infer<typeof ${entity.namePascalCase}S
 export type Z${entity.namePascalCase}Insert = z.infer<typeof insert${entity.namePascalCase}Schema>;
 export type Z${entity.namePascalCase}Update = z.infer<typeof update${entity.namePascalCase}Schema>;
 `;
-
- 
 }
 export function ZodProperty(col: IColumnJson) {
- 
-  let zodProperty = '';
+  let zodProperty = "";
   const colTypeTypeScript = col.typeTypeScript.toLowerCase();
   // Base type mapping
   if (colTypeTypeScript === "number") {
@@ -54,18 +55,22 @@ export function ZodProperty(col: IColumnJson) {
     zodProperty += `.string()`; // Fixed: was z.number()
   } else if (colTypeTypeScript === "boolean") {
     zodProperty += `.boolean()`; // Fixed: was z.number()
-  } else if (colTypeTypeScript === "record<string, any>"){
+  } else if (colTypeTypeScript === "record<string, any>") {
     zodProperty += `.record(z.string(), z.string())`; // https://zod.dev/api#records
   } else {
     // Default fallback for unknown types
     zodProperty += `.string()`;
   }
-  
+
   // Apply constraints based on column properties
-  
+
   // Length constraints for strings
-  if (colTypeTypeScript === "string" || colTypeTypeScript === "email" || 
-      colTypeTypeScript === "url" || colTypeTypeScript === "phone") {
+  if (
+    colTypeTypeScript === "string" ||
+    colTypeTypeScript === "email" ||
+    colTypeTypeScript === "url" ||
+    colTypeTypeScript === "phone"
+  ) {
     if (col.minLength && col.minLength > 0) {
       zodProperty += `.min(${col.minLength})`;
     }
@@ -79,7 +84,7 @@ export function ZodProperty(col: IColumnJson) {
       }
     }
   }
-  
+
   // Number constraints
   if (colTypeTypeScript === "number") {
     if (col.minLength && col.minLength > 0) {
@@ -89,21 +94,21 @@ export function ZodProperty(col: IColumnJson) {
       zodProperty += `.max(${col.maxlength})`;
     }
   }
-  
+
   // Handle nullable - this should come at the end of the chain
   if (col.nullable) {
     zodProperty += `.nullable()`;
   }
-  
+
   // Optional vs required handling
   if (!col.nullable && !col.primaryKey) {
     // Field is required (non-nullable, non-primary key)
     // No additional modifier needed as z.string(), z.number() etc. are required by default
   }
-  
+
   // Add trailing comma
-  zodProperty += ',';
-  
+  zodProperty += ",";
+
   return zodProperty;
 }
 

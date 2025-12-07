@@ -35,6 +35,9 @@ import { registerMdjNewCommand } from "./framework/mdj/mdj-create.command";
 import { registerMdjUpdateCommand } from "./framework/mdj/mdj-update.command";
 import { registerCreateCliLocalCommand } from "./global/create-cli-local.command";
 import { registerGeminiCommand } from "./framework/gemini/gemini.command";
+import { registerNgAllCommand } from "./framework/angular/ng-all.command";
+import { registerNgSingleCommand } from "./framework/angular/ng-single.command";
+import { registerBrunoCommand } from "./framework/bruno/bru.command";
 
 /**
  * Registers all commands with the Commander program.
@@ -45,7 +48,7 @@ export function registerAllCommands(program: Command) {
   // command for tested
   testCommand(program);
   // Global
-  registerCreateCliLocalCommand(program); 
+  registerCreateCliLocalCommand(program);
   registerCreateCommandCommand(program);
   registerCreateFrameworkCommand(program);
   registerInitCommand(program);
@@ -74,8 +77,8 @@ export function registerAllCommands(program: Command) {
   registerNestSingleCommand(program);
   // Angular
   registerNgCommand(program);
-  // registerNgSingleCommand(program);
-  // registerNgAllCommand(program);
+  registerNgAllCommand(program);
+  registerNgSingleCommand(program);
   // Symfony
   registerSfCommand(program);
   registerSfSingleCommand(program);
@@ -88,6 +91,8 @@ export function registerAllCommands(program: Command) {
   registerMdjCommand(program);
   registerMdjNewCommand(program);
   registerMdjUpdateCommand(program);
+  // bruno
+  registerBrunoCommand(program);
 
   // API
   registerApiCommand(program);

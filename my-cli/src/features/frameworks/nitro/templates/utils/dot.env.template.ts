@@ -1,4 +1,4 @@
-import { IProjectConfig } from "@features/project/models/project.models";
+import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
 
 export function dotEnvTemplate(
   projectPath: string,

@@ -180,7 +180,7 @@ export function symfonyGenerateMultipleEntitiesService(
     const errors = validateEntity(entity);
     
     if (errors.length > 0) {
-      console.error(`Erreurs pour l'entité ${entity.namePascalCase}:`, errors);
+      logError(`Erreurs pour l'entité ${entity.namePascalCase}:`, errors);
       return;
     }
     
@@ -188,7 +188,7 @@ export function symfonyGenerateMultipleEntitiesService(
       symfonyGenerateEntityService(frameworkPath, entity);
       logInfo(`Entité ${entity.namePascalCase} générée avec succès`);
     } catch (error) {
-      console.error(`Erreur lors de la génération de l'entité ${entity.namePascalCase}:`, error);
+      logError(`Erreur lors de la génération de l'entité ${entity.namePascalCase}:`, error);
     }
   });
 }
@@ -244,7 +244,7 @@ export function generateEntityWithValidation(frameworkPath: string, entity: IEnt
   const errors = validateEntity(entity);
   
   if (errors.length > 0) {
-    console.error('Erreurs de validation:', errors);
+    logError('Erreurs de validation:', errors);
     return false;
   }
   
@@ -256,7 +256,7 @@ export function generateEntityWithValidation(frameworkPath: string, entity: IEnt
     logInfo('Entité générée avec succès');
     return true;
   } catch (error) {
-    console.error('Erreur lors de la génération:', error);
+    logError('Erreur lors de la génération:', error);
     return false;
   }
 }

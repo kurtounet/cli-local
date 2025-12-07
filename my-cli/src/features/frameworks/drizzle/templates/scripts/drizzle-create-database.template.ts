@@ -1,11 +1,15 @@
 import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
 
 export function drizzleScriptCreateDatabaseTemplate(
-    configFile: IProjectConfig
+  configFile: IProjectConfig,
 ) {
-    return `import mysql from "mysql2/promise";
+  return `import mysql from "mysql2/promise";
 import "dotenv/config";
 
+export async function logError(e: any) {
+  console.error(e);
+  process.exit(1);
+}
 async function main() {
   const conn = await mysql.createConnection({
     host: process.env.DB_HOST!,
@@ -16,6 +20,6 @@ async function main() {
   await conn.end();
   console.log("Base creee (ou deja existante).");
 }
-main().catch(console.error);
+main().catch(logError);
 `;
 }

@@ -10,9 +10,12 @@ import {
   getCliLocalFile,
 } from "@services/cli-conf/services/cli-local-directory.service";
 import { ICliLocalPathFile } from "types/common";
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 import { nuxtGenerateFilesFramework } from "@nuxt/services/nuxt-generate-files-framework.service";
-import { IProjectConfig } from "@features/project/models/project.models";
+
 import { EMOJI } from "@constants/messages";
 
 export function registerNuxtAllCommand(program: Command) {
@@ -182,7 +185,7 @@ export function registerNuxtAllCommand(program: Command) {
       //   }
       //   success(`${type} Nitro ${name} généré avec succès dans ${targetPath} !`);
       // } catch (err: unknown) {
-      //   console.error(`Error generating Nitro module: ${(err as Error).message}`);
+      //   logError(`Error generating Nitro module: ${(err as Error).message}`);
       // }
     });
 }

@@ -1,7 +1,4 @@
 import { Command } from "commander";
-import { logInfo } from "@utils/logger";
-
-import { pascalCase } from "@utils/stringUtils";
 import { executeCommand } from "@utils/execute-command";
 import { EMOJI } from "@constants/messages";
 
@@ -12,7 +9,6 @@ export function registerGeminiCommand(program: Command) {
       "Gère la génération de composants, modules, services, etc., spécifiques à Angular.",
     )
     .action(async () => {
-
       executeCommand(
         `gemini`,
         { stdio: "inherit" },
@@ -20,6 +16,5 @@ export function registerGeminiCommand(program: Command) {
         `✅ Ouverture de Gemini réussie!`,
         `${EMOJI.error} Erreur lors de l'ouverture de Gemini !`,
       );
-      
     });
 }

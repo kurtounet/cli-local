@@ -1,10 +1,9 @@
 import { Command } from "commander";
 
- 
 import { getEntities } from "@parsersMdj/services/get-entities.service";
 import * as fs from "fs";
 import { writeFile } from "@utils/file-utils";
-import { logSuccess } from "@utils/logger";
+import { logError, logSuccess } from "@utils/logger";
 import { mdjERDDiagramTemplate } from "@features/parsersMdj/templates/mdj-erddiagram.template";
 
 /**
@@ -28,14 +27,13 @@ export function registerMdjNewCommand(program: Command) {
           outputFilePath,
           JSON.stringify(content, null, 2),
           `MDJ file parsed and transformed successfully! Output saved to ${outputFilePath}`,
-          
-        )
-         
+        );
+
         logSuccess(
           `MDJ file parsed and transformed successfully! Output saved to ${outputFilePath}`,
         );
       } catch (err: unknown) {
-        console.error(
+        logError(
           `Failed to parse or transform MDJ file: ${(err as Error).message}`,
         );
       }

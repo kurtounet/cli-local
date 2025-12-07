@@ -1,4 +1,4 @@
-import { IProjectConfig } from "@features/project/models/project.models";
+import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
 import { dotEnvTemplate } from "../templates/utils/dot.env.template";
 import { writeFile } from "@utils/file-utils";
 export function dotEnvGenerateService(
@@ -6,8 +6,8 @@ export function dotEnvGenerateService(
   configFile: IProjectConfig,
 ) {
   writeFile(
-    `${projectPath}/.env`, 
+    `${projectPath}/.env`,
     dotEnvTemplate(projectPath, configFile),
-    `Création de .env`
+    `Création de .env`,
   );
 }

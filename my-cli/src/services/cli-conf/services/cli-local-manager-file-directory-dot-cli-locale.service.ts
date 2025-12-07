@@ -22,23 +22,16 @@ export function createCliLocalFile(
   cliLocalPath: string,
   content: string,
 ): string {
-  writeFile(
-    `${cliLocalPath}/${fileName}`,     
-    JSON.stringify(content, null, 2),
-  );
+  writeFile(`${cliLocalPath}/${fileName}`, JSON.stringify(content, null, 2));
   return `✅ Mise à jour du fichier ${fileName} avec succès !`;
 }
 export function deleteCliLocalFile(
   fileName: string,
   cliLocalPath: string,
-
 ): string {
-   deleteFile(
-    `${cliLocalPath}/${fileName}`,     
-  );
+  deleteFile(`${cliLocalPath}/${fileName}`);
   return `✅ Suppression du fichier ${fileName} avec succès !`;
 }
-
 
 /* 
 architecture

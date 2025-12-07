@@ -1,15 +1,17 @@
 import { IFramework } from "@frameworks-models/framework-commun.model";
-import { getCommandFramework } from "@features/frameworks/services/get-command";
+
 import { executeCommand } from "@utils/execute-command";
-import { logError, logInfo, logSuccess } from "@utils/logger";
+import { logError, logInfo, logStep, logSuccess } from "@utils/logger";
 import * as fs from "fs-extra";
-import { EMOJI } from "@constants/messages";
+import { EMOJI, messageInstallationFramework } from "@constants/messages";
+import { getCommandFramework } from "@features/frameworks/commun/services/get-command";
 
 export function installFramework(
   frameWork: IFramework,
   frameWorkPath: string,
   projetName: string,
 ) {
+  logStep(messageInstallationFramework(frameWork.name));
   if (frameWork?.name) {
     if (!fs.existsSync(`${frameWorkPath}`)) {
       let command = getCommandFramework(frameWork, projetName);
@@ -41,7 +43,9 @@ export function installFramework(
           }
         }
       } catch (error) {
-        logError(`${EMOJI.error} Erreur lors de la création du ${frameWork.type} !`);
+        logError(
+          `${EMOJI.error} Erreur lors de la création du ${frameWork.type} !`,
+        );
         process.exit(1);
       }
     } else {

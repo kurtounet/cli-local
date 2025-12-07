@@ -8,7 +8,7 @@ async function main() {
   await pool.end();
 }
 main().catch(async (e) => {
-  console.error('❌', e);
+  logError('${EMOJI.error}', e);
   await pool.end();
   process.exit(1);
 });

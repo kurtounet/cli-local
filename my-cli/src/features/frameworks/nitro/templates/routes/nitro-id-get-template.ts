@@ -1,10 +1,18 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
-export function nitroIdGetTemplate(entity: IEntityJson): string {
+export function nitroIdGetTemplate(entity: IEntityJson, mode: string): string {
+  let handleApiError = "";
+
+  if (mode === "nuxt") {
+    handleApiError = `import { handleApiError } from '~~/server/utils/handle-api-error.utils'`;
+  }
+  if (mode === "nitro") {
+    handleApiError = `import { handleApiError } from '../../utils/handle-api-error.utils'`;
+  }
   return `//server/api/${entity.nameCamelCase}s/[id].get.ts
-import { defineEventHandler, getRouterParam, } from 'h3'
+import { defineEventHandler, getRouterParam, createError } from 'h3'
 import { ${entity.namePascalCase}Service } from './${entity.nameKebabCase}.service'
-import { handleApiError } from '~~/server/utils/handle-api-error.utils'
+${handleApiError}
 
 export default defineEventHandler(async (event) => {
   const ${entity.nameCamelCase}Service = new ${entity.namePascalCase}Service()

@@ -170,7 +170,9 @@ async function renameFiles(
           );
           renamed++;
         } catch (error) {
-          logError(`${EMOJI.error} Erreur pour ${path.basename(filePath)}: ${error}`);
+          logError(
+            `${EMOJI.error} Erreur pour ${path.basename(filePath)}: ${error}`,
+          );
           skipped++;
         }
       }
@@ -178,9 +180,7 @@ async function renameFiles(
   }
 
   if (!options.dryRun) {
-    logInfo(
-      `\n📊 Résumé: ${renamed} fichiers renommés, ${skipped} ignorés`,
-    );
+    logInfo(`\n📊 Résumé: ${renamed} fichiers renommés, ${skipped} ignorés`);
   } else {
     logInfo("\n📋 Mode simulation - aucun fichier n'a été renommé");
     logInfo("💡 Relancez sans --dry-run pour appliquer les changements");
@@ -195,7 +195,7 @@ async function runRenameCommand(
   try {
     // Vérifier si le répertoire existe
     if (!(await fs.pathExists(directory))) {
-      console.error(`${EMOJI.error} Le répertoire "${directory}" n'existe pas`);
+      logError(`${EMOJI.error} Le répertoire "${directory}" n'existe pas`);
       return;
     }
 
@@ -306,7 +306,7 @@ async function runRenameCommand(
       filePattern: answers.filePattern || undefined,
     });
   } catch (error) {
-    console.error("${EMOJI.error} Erreur lors du renommage:", error);
+    logError(`${EMOJI.error} Erreur lors du renommage:, ${error}`);
   }
 }
 

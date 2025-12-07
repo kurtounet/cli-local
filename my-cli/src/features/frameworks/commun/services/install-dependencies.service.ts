@@ -1,7 +1,11 @@
 import { executeCommand } from "@utils/execute-command";
-import { IDependencies, IFramework } from "../models/framework-commun.model";
+
 import { logInfo } from "@utils/logger";
 import { EMOJI } from "@constants/messages";
+import {
+  IDependencies,
+  IFramework,
+} from "@features/frameworks/models/framework-commun.model";
 
 export async function installTSDependencies(
   framework: IFramework,

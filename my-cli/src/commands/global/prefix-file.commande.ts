@@ -20,14 +20,14 @@
 //       try {
 //         // Vérifier si le dossier existe
 //         if (!(await fs.pathExists(directory))) {
-//           console.error(`${EMOJI.error} Le dossier "${directory}" n'existe pas.`);
+//           logError(`${EMOJI.error} Le dossier "${directory}" n'existe pas.`);
 //           return;
 //         }
 
 //         // Vérifier si c'est bien un dossier
 //         const stats = await fs.stat(directory);
 //         if (!stats.isDirectory()) {
-//           console.error(`${EMOJI.error} "${directory}" n'est pas un dossier.`);
+//           logError(`${EMOJI.error} "${directory}" n'est pas un dossier.`);
 //           return;
 //         }
 
@@ -163,7 +163,7 @@
 //             await fs.rename(change.oldPath, change.newPath);
 //             successCount++;
 //           } catch (error) {
-//             console.error(
+//             logError(
 //               `${EMOJI.error} Erreur lors du renommage de "${change.oldName}" : ${error}`,
 //             );
 //             errorCount++;
@@ -176,7 +176,7 @@
 //           logInfo(`   - ${errorCount} erreur(s)`);
 //         }
 //       } catch (error) {
-//         console.error("${EMOJI.error} Erreur lors de l'exécution :", error);
+//         logError("${EMOJI.error} Erreur lors de l'exécution :", error);
 //       }
 //     });
 // }
@@ -211,7 +211,7 @@
 //       }
 //     }
 //   } catch (error) {
-//     console.error(
+//     logError(
 //       `${EMOJI.error} Erreur lors de la lecture du dossier "${dir}" : ${error}`,
 //     );
 //   }
@@ -239,7 +239,7 @@
 //         conflicts.push({ newName: change.newName, newPath: change.newPath });
 //       }
 //     } catch (error) {
-//       console.error(`${EMOJI.error} Ignorer les erreurs de vérification`);
+//       logError(`${EMOJI.error} Ignorer les erreurs de vérification`);
 //     }
 //   }
 
@@ -249,7 +249,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { Command } from "commander";
 import inquirer from "inquirer";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
 import { EMOJI } from "@constants/messages";
 
 export function registerAddPerfixSuffixFileCommand(program: Command) {
@@ -269,14 +269,14 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
       try {
         // Vérifier si le dossier existe
         if (!(await fs.pathExists(directory))) {
-          console.error(`${EMOJI.error} Le dossier "${directory}" n'existe pas.`);
+          logError(`${EMOJI.error} Le dossier "${directory}" n'existe pas.`);
           return;
         }
 
         // Vérifier si c'est bien un dossier
         const stats = await fs.stat(directory);
         if (!stats.isDirectory()) {
-          console.error(`${EMOJI.error} "${directory}" n'est pas un dossier.`);
+          logError(`${EMOJI.error} "${directory}" n'est pas un dossier.`);
           return;
         }
 
@@ -288,9 +288,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
           return;
         }
 
-        logInfo(
-          `📁 ${files.length} fichier(s) trouvé(s) dans "${directory}"`,
-        );
+        logInfo(`📁 ${files.length} fichier(s) trouvé(s) dans "${directory}"`);
 
         // Questions pour l'utilisateur
         const answers = await inquirer.prompt([
@@ -407,9 +405,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
         });
 
         if (actualChanges.length > 10) {
-          logInfo(
-            `   ... et ${actualChanges.length - 10} autre(s) fichier(s)`,
-          );
+          logInfo(`   ... et ${actualChanges.length - 10} autre(s) fichier(s)`);
         }
 
         // Confirmation finale
@@ -437,7 +433,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
             await fs.rename(change.oldPath, change.newPath);
             successCount++;
           } catch (error) {
-            console.error(
+            logError(
               `${EMOJI.error} Erreur lors du renommage de "${change.oldName}" : ${error}`,
             );
             errorCount++;
@@ -450,7 +446,7 @@ export function registerAddPerfixSuffixFileCommand(program: Command) {
           logInfo(`   - ${errorCount} erreur(s)`);
         }
       } catch (error) {
-        console.error("${EMOJI.error} Erreur lors de l'exécution :", error);
+        logError(`${EMOJI.error} Erreur lors de l'exécution : ${error}`);
       }
     });
 }
@@ -503,7 +499,7 @@ async function getFilesRecursively(
       }
     }
   } catch (error) {
-    console.error(
+    logError(
       `${EMOJI.error} Erreur lors de la lecture du dossier "${dir}" : ${error}`,
     );
   }
@@ -531,7 +527,7 @@ async function checkForConflicts(
         conflicts.push({ newName: change.newName, newPath: change.newPath });
       }
     } catch (error) {
-      console.error(`${EMOJI.error} Ignorer les erreurs de vérification`);
+      logError(`${EMOJI.error} Ignorer les erreurs de vérification`);
     }
   }
 

@@ -1,5 +1,4 @@
-export function nuxtMainCssTemplate(    
-): string {
+export function nuxtMainCssTemplate(): string {
   return `root {
   color: #f9fafb;
 }

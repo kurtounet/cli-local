@@ -10,7 +10,7 @@ import { IERDEntity, IERDModel, IERDProject } from "../models/mdj.model";
 import { getColumns } from "./get-colums.service";
 import { getRelationships } from "./get-relationships.service";
 import { IGetEntityJson } from "types/common";
-import { logInfo } from "@utils/logger";
+import { logError, logInfo } from "@utils/logger";
 import { EMOJI } from "@constants/messages";
 
 /**
@@ -26,7 +26,7 @@ import { EMOJI } from "@constants/messages";
 export function getEntities(mdjFile: string): IGetEntityJson {
   let dictionaries!: IGetEntityJson;
   const project: IERDProject = JSON.parse(mdjFile);
-   
+
   try {
     let erdModel: IERDModel | undefined;
     for (const model of project.ownedElements) {
@@ -37,13 +37,13 @@ export function getEntities(mdjFile: string): IGetEntityJson {
     }
 
     if (!erdModel) {
-      console.error(`${EMOJI.error} Aucun ERDDataModel trouvé dans le fichier MDJ.`);
+      logError(`${EMOJI.error} Aucun ERDDataModel trouvé dans le fichier MDJ.`);
       process.exit(1);
     }
 
     const entities: IERDEntity[] = erdModel.ownedElements;
     if (!Array.isArray(entities) || entities.length === 0) {
-      console.error(`⏩ Pas d'entités trouvées dans ${erdModel.name}`);
+      logError(`⏩ Pas d'entités trouvées dans ${erdModel.name}`);
       process.exit(1);
     }
     // Création du dictionnaire des entités
@@ -51,7 +51,9 @@ export function getEntities(mdjFile: string): IGetEntityJson {
 
     return dictionaries;
   } catch (error) {
-    console.error(`${EMOJI.error} Erreur lors de la récupération des entités :`, error);
+    logError(
+      `${EMOJI.error} Erreur lors de la récupération des entités : ${error}`,
+    );
     process.exit(1);
   }
 }

@@ -38,8 +38,6 @@ export function registerNestAllCommand(program: Command) {
     )
     .option("-p, --path <path>", "Spécifie le répertoire de destination.")
     .action(async () => {
-      
-
       const processPath = process.cwd();
       const frameworkPath: string = processPath;
       const allpathFileCliLocal: ICliLocalPathFile =
@@ -193,7 +191,7 @@ export function registerNestAllCommand(program: Command) {
       //   }
       //   success(`${type} NestJS ${name} généré avec succès dans ${targetPath} !`);
       // } catch (err: unknown) {
-      //   console.error(`Error generating NestJS module: ${(err as Error).message}`);
+      //   logError(`Error generating NestJS module: ${(err as Error).message}`);
       // }
     });
 }

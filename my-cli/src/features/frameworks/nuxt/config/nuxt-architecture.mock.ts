@@ -1,5 +1,3 @@
-import { IDirectory } from "@features/project/models/project.models";
-
 /*
 Directory Structure:
 .nuxt
@@ -34,6 +32,8 @@ nuxt.config.ts
 package.json
 tsconfig.json
 */
+
+import { IDirectory } from "@features/frameworks/models/framework-commun.model";
 
 export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
   path: string,

@@ -1,8 +1,7 @@
-import { camelToKebab } from "@utils/convert";
+import { camelToKebab, capitalize } from "@utils/convert";
 import { writeFile } from "@utils/file-utils";
 import { logInfo } from "@utils/logger";
-import { capitalize } from "@utils/string-utils";
- 
+
 export function drizzleGenerateIndexSeedService(
   rootServer: string,
   entities: string[],
@@ -19,7 +18,7 @@ async function main() {
   ${entities.map((entity: string) => `await seed${capitalize(entity)}()`).join("\n")}   
 }  
 main().catch(e => {
-  console.error('Error seeding database:', e)
+ console.error("Error seeding database:", e);
   process.exit(1)
 })
 `,

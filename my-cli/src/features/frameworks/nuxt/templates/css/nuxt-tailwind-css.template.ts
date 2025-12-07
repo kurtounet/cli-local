@@ -1,5 +1,4 @@
-export function nuxtTailwindCssTemplate(    
-): string {
+export function nuxtTailwindCssTemplate(): string {
   return `@tailwind base;
 @tailwind components;
 @tailwind utilities;

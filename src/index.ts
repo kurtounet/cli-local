@@ -1,14 +1,36 @@
-#!/usr/bin/env node
-import { AppContextBuilder } from "./context/context.js";
 import { App } from "./core/App.js";
+import { AppContextBuilder } from "./context/context.js";
+import { InitCommand } from "./commands/InitCommand.js";
+import { MakeCommand } from "./commands/make.command.js";
+import { GenerateCommand } from "./commands/GenerateCommand.js";
 
-async function main() {
-  const context = new AppContextBuilder().buildContext();
-  const app = new App(context);
+/**
+ * Point d'entrée principal de la CLI
+ */
+async function bootstrap() {
+  try {
+    // 1. On construit le contexte (Services, Config, Logger, etc.)
+    const builder = new AppContextBuilder();
+    const cli = builder.buildContext();
 
-  // app.registerCommand(InitCommand);
+    // 2. On initialise l'application avec ce contexte
+    const app = new App(cli);
 
-  await app.run();
+    // 3. On enregistre les commandes disponibles
+    // TODO : Tu peux automatiser ça plus tard en scannant le dossier commands
+    app.registerCommand(InitCommand);
+    app.registerCommand(GenerateCommand);
+    app.registerCommand(MakeCommand);
+
+    // 4. On lance la machine
+    await app.run();
+  } catch (error) {
+    // Sécurité ultime si le HandlerErrorService n'est pas encore prêt
+    console.error("❌ Erreur fatale lors du démarrage de la CLI :");
+    console.error(error);
+    process.exit(1);
+  }
 }
 
-main().catch(console.error);
+// Lancement du bootstrap
+bootstrap();

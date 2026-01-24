@@ -1,7 +1,10 @@
-import { CliError, ErrorCode } from "@/errors/cli-errors.js";
+import { IHandlerErrorService } from "@/types/error-handler.interface.js";
 import { BaseService } from "./base-service.service.js";
-
-export class HandlerErrorService extends BaseService {
+import { CliError, ErrorCode } from "@/errors/cli-errors.js";
+export class HandlerErrorService
+  extends BaseService
+  implements IHandlerErrorService
+{
   /**
    * Configure les écouteurs globaux pour Node.js.
    * Empêche la CLI de crash sans loguer l'erreur.
@@ -24,7 +27,9 @@ export class HandlerErrorService extends BaseService {
    */
   public handle(error: Error | CliError, contextMessage?: string): void {
     const isCliError = error instanceof CliError;
-    const message = isCliError ? error.message : `An unexpected error occurred: ${error.message}`;
+    const message = isCliError
+      ? error.message
+      : `An unexpected error occurred: ${error.message}`;
     const code = isCliError ? error.code : ErrorCode.INTERNAL_ERROR;
 
     // Log de l'erreur

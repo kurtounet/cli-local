@@ -1,7 +1,7 @@
 export interface ITemplate {
-  name: string;
-  description: string;
-  version: string;
+  name: string; // Nom du dossier (ex: "react-component")
+  path: string; // Chemin complet sur le disque
+  files: string[]; // Liste des fichiers contenus à l'intérieur
   variables: ITemplateVariable[];
   structure: ITemplateStructure[];
   hooks?: {
@@ -9,7 +9,6 @@ export interface ITemplate {
     postCreate?: string[];
   };
 }
-
 export interface ITemplateVariable {
   name: string;
   type: "string" | "number" | "boolean" | "choice";
@@ -18,12 +17,16 @@ export interface ITemplateVariable {
   default?: any;
   choices?: string[];
 }
+export interface ITemplateService {
+  getTemplates(): Promise<ITemplate[]>;
+  getTemplateByName(name: string): Promise<ITemplate | undefined>;
+}
 
 export interface ITemplateStructure {
-  path: string;
-  type: "file" | "directory";
-  template?: string; // Chemin vers un fichier .hbs
+  path: string; // Chemin vers un fichier .hbs
   content?: string; // Contenu textuel direct
+  type: "file" | "directory";
   children?: ITemplateStructure[]; // Pour le type 'directory'
   conditional?: string; // Variable de condition
+  template?: string; // Chemin vers un fichier .hbs
 }

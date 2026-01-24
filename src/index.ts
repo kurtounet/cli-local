@@ -1,6 +1,7 @@
-import { CliApp } from "./src/core/CliApp.js";
-import { InitCommand } from "./src/core/commands/InitCommand.js";
-import { LoggerService } from "./src/core/services/LoggerService.js";
+import { InitCommand } from "./commands/InitCommand.js";
+import { CliApp } from "./core/CliApp.js";
+
+import { LoggerService } from "./services/LoggerService.js";
 
 // 1. Initialiser les services
 const logger = new LoggerService();

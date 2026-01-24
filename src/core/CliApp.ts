@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { BaseCommand } from "./commands/BaseCommand.js";
+import { BaseCommand } from "../commands/BaseCommand.js";
 
 export class CliApp {
   private program: Command;

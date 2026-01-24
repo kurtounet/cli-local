@@ -1,38 +1,42 @@
-import { Command } from "commander";
-
-import ora from "ora";
-
 import { BaseCommand } from "./BaseCommand.js";
-import { LoggerService } from "@/services/logger-service.js";
-
 export class InitCommand extends BaseCommand {
-  command = "init";
-  description = "Initialise un nouveau projet";
+  public name = "init";
+  public description = "Initialise le dossier de templates de ScroFolder";
 
-  constructor(private logger: LoggerService) {
-    super();
-  }
+  public options = [
+    {
+      flags: "-f, --force",
+      description: "Force la réinitialisation même si le dossier existe",
+      defaultValue: false,
+    },
+  ];
 
-  register(program: Command) {
-    program
-      .command(this.command)
-      .description(this.description)
-      .option("-f, --force", "Écrase les fichiers existants")
-      .action(async (options) => await this.execute(options));
-  }
+  public async execute(args: string[], options: any): Promise<void> {
+    console.log("Options reçues:", options);
+    const targetDir = this.cli.config.templatesPath;
 
-  protected async execute(options: { force: boolean }) {
-    const spinner = ora("Initialisation en cours...").start();
+    this.logger.info("Vérification de l'environnement...");
 
-    try {
-      // Simulation d'une tâche asynchrone
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+    const exists = await this.cli.fileSystem.exists(targetDir);
 
-      spinner.succeed("Projet initialisé avec succès !");
-      if (options.force) this.logger.warn("Mode force activé");
-    } catch (err) {
-      spinner.fail("Échec de l’initialisation");
-      this.logger.error(err instanceof Error ? err.message : String(err));
+    if (exists && !options.force) {
+      this.logger.warn(
+        `Le dossier '${targetDir}' existe déjà. Utilisez --force pour écraser.`,
+      );
+      return;
     }
+
+    // Action : Création du dossier
+    await this.cli.fileSystem.createDirectory(targetDir);
+
+    // Exemple de création d'un fichier de config par défaut
+    await this.cli.fileSystem.writeFile(
+      `${targetDir}/example.json`,
+      JSON.stringify({ name: "template-exemple", version: "1.0.0" }, null, 2),
+    );
+
+    this.logger.success(
+      `ScroFolder initialisé avec succès dans : ${targetDir}`,
+    );
   }
 }

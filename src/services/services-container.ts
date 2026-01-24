@@ -1,4 +1,4 @@
-import { IServicesContainer } from "../types/context.interface.js";
+import { IServicesContainer } from "@/types/services-container.interface.js";
 import { BaseService } from "./base-service.service.js";
 
 export class ServicesContainer implements IServicesContainer {

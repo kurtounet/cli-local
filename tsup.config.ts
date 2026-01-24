@@ -8,7 +8,14 @@ export default defineConfig({
   sourcemap: true,
   clean: true, // Nettoie le dossier dist à chaque build
   minify: true, // Réduit la taille du fichier final
+  shims: true, // Activer les shims pour les modules externes
   banner: {
-    js: "#!/usr/bin/env node", // Crucial : rend le fichier exécutable par Node
+    js: `#!/usr/bin/env node
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+`, // Crucial : rend le fichier exécutable par Node
   },
+  platform: "node",
+  target: "node22", // Match your Node v22.15.0
+  external: ["fs", "path", "util", "url"],
 });

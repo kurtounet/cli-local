@@ -1,0 +1,29 @@
+export interface ITemplate {
+  name: string;
+  description: string;
+  version: string;
+  variables: ITemplateVariable[];
+  structure: ITemplateStructure[];
+  hooks?: {
+    preCreate?: string[];
+    postCreate?: string[];
+  };
+}
+
+export interface ITemplateVariable {
+  name: string;
+  type: "string" | "number" | "boolean" | "choice";
+  description?: string;
+  required: boolean;
+  default?: any;
+  choices?: string[];
+}
+
+export interface ITemplateStructure {
+  path: string;
+  type: "file" | "directory";
+  template?: string; // Chemin vers un fichier .hbs
+  content?: string; // Contenu textuel direct
+  children?: ITemplateStructure[]; // Pour le type 'directory'
+  conditional?: string; // Variable de condition
+}

@@ -1,17 +1,14 @@
-import { InitCommand } from "./commands/InitCommand.js";
-import { CliApp } from "./core/CliApp.js";
+#!/usr/bin/env node
+import { AppContextBuilder } from "./context/context.js";
+import { App } from "./core/App.js";
 
-import { LoggerService } from "./services/LoggerService.js";
+async function main() {
+  const context = new AppContextBuilder().buildContext();
+  const app = new App(context);
 
-// 1. Initialiser les services
-const logger = new LoggerService();
+  // app.registerCommand(InitCommand);
 
-// 2. Initialiser les commandes avec leurs dépendances
-const commands = [
-  new InitCommand(logger),
-  // Ajoutez vos futures commandes ici...
-];
+  await app.run();
+}
 
-// 3. Lancer l'application
-const app = new CliApp(commands);
-app.run();
+main().catch(console.error);

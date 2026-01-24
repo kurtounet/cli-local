@@ -1,11 +1,12 @@
 import { Command } from "commander";
 
 import ora from "ora";
-import { LoggerService } from "../services/LoggerService.js";
+
 import { BaseCommand } from "./BaseCommand.js";
+import { LoggerService } from "@/services/logger-service.js";
 
 export class InitCommand extends BaseCommand {
-  name = "init";
+  command = "init";
   description = "Initialise un nouveau projet";
 
   constructor(private logger: LoggerService) {
@@ -14,7 +15,7 @@ export class InitCommand extends BaseCommand {
 
   register(program: Command) {
     program
-      .command(this.name)
+      .command(this.command)
       .description(this.description)
       .option("-f, --force", "Écrase les fichiers existants")
       .action(async (options) => await this.execute(options));

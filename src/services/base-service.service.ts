@@ -1,14 +1,15 @@
-import { IAppContext, ICliConfig, ILoggerService } from "../types/context.interface.js";
+import { IAppContext, ICliConfig } from "@/types/context.interface.js";
+import { ILoggerService } from "@/types/logger-service.interface.js";
 
 export abstract class BaseService {
-  constructor(protected context: IAppContext) {}
+  constructor(protected cli: IAppContext) {}
 
   protected get logger(): ILoggerService {
-    return this.context.logger;
+    return this.cli.logger;
   }
 
   protected get config(): ICliConfig {
-    return this.context.config;
+    return this.cli.config;
   }
 
   public async initialize?(): Promise<void>;

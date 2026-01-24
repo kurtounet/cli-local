@@ -1,0 +1,6 @@
+export interface IStateService {
+  get<T>(key: string): T | undefined;
+  set<T>(key: string, value: T): void;
+  has(key: string): boolean;
+  clear(): void;
+}

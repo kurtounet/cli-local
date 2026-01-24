@@ -1,3 +1,4 @@
+import { IArchitectureService } from "./architecture-service.interface.js";
 import { ICaseService } from "./case-service.interface.js";
 import { IConfigService } from "./config-service.interface.js";
 import { IHandlerErrorService } from "./error-handler.interface.js";
@@ -8,6 +9,7 @@ import { IPromptService } from "./prompt-service.interface.js";
 import { IServicesContainer } from "./services-container.interface.js";
 import { IStateService } from "./state-service.interface.js";
 import { ITemplateService } from "./template.interface.js";
+import { IToolService } from "./tool-service.interface.js";
 
 export type ServiceName =
   | "LoggerService"
@@ -30,12 +32,14 @@ export interface IAppContext {
   services: IServicesContainer;
   // Services
   case: ICaseService;
+  tool: IToolService;
   state: IStateService;
   logger: ILoggerService;
   generator: IGeneratorService;
   configService: IConfigService;
   promptService: IPromptService;
   fileSystem: IFileSystemService;
+  architecture: IArchitectureService;
   templateService: ITemplateService;
   errorHandler: IHandlerErrorService;
 }

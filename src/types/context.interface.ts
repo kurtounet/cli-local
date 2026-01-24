@@ -1,17 +1,20 @@
-export interface ILoggerService {
-  info(message: string, meta?: object): void;
-  warn(message: string, meta?: object): void;
-  error(message: string, error?: Error): void;
-  success(message: string): void;
-  debug(message: string, meta?: object): void;
-}
+import { ICaseService } from "./case-service.interface.js";
+import { IConfigService } from "./config-service.interface.js";
+import { IHandlerErrorService } from "./error-handler.interface.js";
+import { IFileSystemService } from "./file-system.interface.js";
+import { IGeneratorService } from "./generator.interface.js";
+import { ILoggerService } from "./logger-service.interface.js";
+import { IPromptService } from "./prompt-service.interface.js";
+import { IServicesContainer } from "./services-container.interface.js";
+import { IStateService } from "./state-service.interface.js";
+import { ITemplateService } from "./template.interface.js";
 
-export interface IStateService {
-  get<T>(key: string): T | undefined;
-  set<T>(key: string, value: T): void;
-  has(key: string): boolean;
-  clear(): void;
-}
+export type ServiceName =
+  | "LoggerService"
+  | "StateService"
+  | "FileSystemService"
+  | "HandlerErrorService"
+  | "ConfigService";
 
 export interface ICliConfig {
   templatesPath: string;
@@ -19,18 +22,20 @@ export interface ICliConfig {
   logLevel: "debug" | "info" | "warn" | "error" | "silent";
   theme: "default" | "minimal";
 }
-
-export interface IServicesContainer {
-  register(name: string, service: any): void;
-  get<T>(name: string): T;
-  initializeAll(): Promise<void>;
-}
-
 export interface IAppContext {
-  services: IServicesContainer;
-  config: ICliConfig;
-  state: IStateService;
-  logger: ILoggerService;
+  // Propriétés de base
   version: string;
   rootPath: string;
+  config: ICliConfig;
+  services: IServicesContainer;
+  // Services
+  case: ICaseService;
+  state: IStateService;
+  logger: ILoggerService;
+  generator: IGeneratorService;
+  configService: IConfigService;
+  promptService: IPromptService;
+  fileSystem: IFileSystemService;
+  templateService: ITemplateService;
+  errorHandler: IHandlerErrorService;
 }

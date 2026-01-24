@@ -1,16 +1,26 @@
 {
   "name": "cli-local-poo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CLI extensible en TypeScript",
+  "main": "dist/index.js",
+  "bin": {
+    "mclp": "./dist/index.js"
+  },
   "scripts": {
+    "dev": "tsup --watch --onSuccess \"node dist/index.js\"",
+    "build": "tsup",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.9",
     "@types/node": "^25.0.10",
     "eslint": "^9.39.2",
     "ts-node": "^10.9.2",

@@ -9,6 +9,8 @@ import { FileSystemService } from "@/services/file-system.service.js";
 import { ServicesContainer } from "../services/services-container.js";
 import { IAppContext, ICliConfig } from "../types/context.interface.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
+import { ToolService } from "@/services/tool.service.js";
+import { ArchitectureService } from "@/services/architecture.service.js";
 
 export class AppContextBuilder {
   private services = new ServicesContainer();
@@ -20,11 +22,13 @@ export class AppContextBuilder {
       rootPath: process.cwd(),
       services: this.services,
       case: null as any,
+      tool: null as any,
       state: null as any,
       logger: null as any,
       generator: null as any,
       errorHandler: null as any,
       fileSystem: null as any,
+      architecture: null as any,
       promptService: null as any,
       configService: null as any,
       templateService: null as any,
@@ -33,17 +37,20 @@ export class AppContextBuilder {
 
     // 2. Instanciation des services (Injection du contexte dans chaque service)
     cli.case = new CaseService(cli);
+    cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
     cli.logger = new LoggerService(cli);
     cli.generator = new GeneratorService(cli);
     cli.promptService = new PromptService(cli);
     cli.configService = new ConfigService(cli);
     cli.fileSystem = new FileSystemService(cli);
+    cli.architecture = new ArchitectureService(cli);
     cli.templateService = new TemplateService(cli);
     cli.errorHandler = new HandlerErrorService(cli);
 
     // 3. Enregistrement dans le conteneur pour l'accès global via context.services.get()
     this.services.register("CaseService", cli.case as any);
+    this.services.register("ToolService", cli.tool as any);
     this.services.register("StateService", cli.state as any);
     this.services.register("LoggerService", cli.logger as any);
     this.services.register("GeneratorService", cli.generator as any);

@@ -38,7 +38,10 @@ export abstract class BaseCommand implements ICommand {
   /**
    * Méthode principale à implémenter dans chaque commande
    */
-  public abstract execute(args: string[], options: Record<string, unknown>): Promise<void>;
+  public abstract execute(
+    args: string[],
+    options: Record<string, unknown>,
+  ): Promise<void>;
 
   /**
    * Utilitaire pour récupérer un service rapidement

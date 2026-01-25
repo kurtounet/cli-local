@@ -66,4 +66,19 @@ export class TemplateService extends BaseService implements ITemplateService {
     }
     return allFiles;
   }
+
+  public compile(
+    templateContent: string,
+    data: Record<string, string>,
+  ): string {
+    let result = templateContent;
+
+    // Remplace toutes les occurrences de {{key}} par la valeur correspondante
+    for (const [key, value] of Object.entries(data)) {
+      const regex = new RegExp(`{{${key}}}`, "g");
+      result = result.replace(regex, value);
+    }
+
+    return result;
+  }
 }

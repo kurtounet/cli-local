@@ -20,6 +20,7 @@ export interface ITemplateVariable {
 export interface ITemplateService {
   getTemplates(): Promise<ITemplate[]>;
   getTemplateByName(name: string): Promise<ITemplate | undefined>;
+  compile(templateContent: string, data: Record<string, string>): string;
 }
 
 export interface ITemplateStructure {

@@ -1,9 +1,20 @@
 export interface IFileSystemService {
+  excludedDirs: string[];
+  getDirectoryTree(dirPath: string): string;
+  resolvePath(...segments: string[]): string;
+  readFile(filePath: string): Promise<string>;
   exists(targetPath: string): Promise<boolean>;
   createDirectory(dirPath: string): Promise<void>;
-  writeFile(filePath: string, content: string): Promise<void>;
-  readFile(filePath: string): Promise<string>;
   copy(source: string, destination: string): Promise<void>;
-  getDirectoryTree(dirPath: string): any;
-  resolvePath(...segments: string[]): string;
+  writeFile(filePath: string, content: string): Promise<void>;
+  createDirectoryTreeFromJson(
+    sourcePath: string,
+    targetPath: string,
+  ): Promise<void>;
+  writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): void;
 }

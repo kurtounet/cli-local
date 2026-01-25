@@ -3,6 +3,7 @@ import { AppContextBuilder } from "./context/context.js";
 import { InitCommand } from "./commands/InitCommand.js";
 import { MakeCommand } from "./commands/make.command.js";
 import { GenerateCommand } from "./commands/GenerateCommand.js";
+import { TreeCommand } from "./commands/tree.command.js";
 
 /**
  * Point d'entrée principal de la CLI
@@ -18,9 +19,10 @@ async function bootstrap() {
 
     // 3. On enregistre les commandes disponibles
     // TODO : Tu peux automatiser ça plus tard en scannant le dossier commands
+    app.registerCommand(MakeCommand);
+    app.registerCommand(TreeCommand);
     app.registerCommand(InitCommand);
     app.registerCommand(GenerateCommand);
-    app.registerCommand(MakeCommand);
 
     // 4. On lance la machine
     await app.run();

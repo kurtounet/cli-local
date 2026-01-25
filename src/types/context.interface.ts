@@ -31,6 +31,7 @@ export interface IAppContext {
   config: ICliConfig;
   services: IServicesContainer;
   // Services
+  ia: ICaseService;
   case: ICaseService;
   tool: IToolService;
   state: IStateService;

@@ -4,6 +4,7 @@ import { InitCommand } from "./commands/InitCommand.js";
 import { MakeCommand } from "./commands/make.command.js";
 import { GenerateCommand } from "./commands/GenerateCommand.js";
 import { TreeCommand } from "./commands/tree.command.js";
+import { IaCommand } from "./commands/ia.command.js";
 
 /**
  * Point d'entrée principal de la CLI
@@ -22,6 +23,7 @@ async function bootstrap() {
     app.registerCommand(MakeCommand);
     app.registerCommand(TreeCommand);
     app.registerCommand(InitCommand);
+    app.registerCommand(IaCommand);
     app.registerCommand(GenerateCommand);
 
     // 4. On lance la machine

@@ -21,6 +21,7 @@ export class AppContextBuilder {
       version: "1.0.0",
       rootPath: process.cwd(),
       services: this.services,
+      ia: null as any,
       case: null as any,
       tool: null as any,
       state: null as any,
@@ -36,6 +37,7 @@ export class AppContextBuilder {
     };
 
     // 2. Instanciation des services (Injection du contexte dans chaque service)
+    cli.ia = new CaseService(cli);
     cli.case = new CaseService(cli);
     cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
@@ -49,6 +51,7 @@ export class AppContextBuilder {
     cli.errorHandler = new HandlerErrorService(cli);
 
     // 3. Enregistrement dans le conteneur pour l'accès global via context.services.get()
+    this.services.register("IaService", cli.ia as any);
     this.services.register("CaseService", cli.case as any);
     this.services.register("ToolService", cli.tool as any);
     this.services.register("StateService", cli.state as any);

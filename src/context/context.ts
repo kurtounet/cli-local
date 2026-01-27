@@ -1,46 +1,45 @@
+import { AiService } from "@/services/ai.service.js";
+import { ToolService } from "@/services/tool.service.js";
 import { CaseService } from "@/services/case.service.js";
 import { ConfigService } from "@/services/config.service.js";
 import { StateService } from "@/services/state.service.js";
 import { LoggerService } from "@/services/logger.service.js";
 import { PromptService } from "@/services/prompt.service.js";
+import { PluginService } from "@/services/plugin.service.js";
 import { TemplateService } from "@/services/template.service.js";
 import { GeneratorService } from "@/services/generator.service.js";
 import { FileSystemService } from "@/services/file-system.service.js";
 import { ServicesContainer } from "../services/services-container.js";
 import { IAppContext, ICliConfig } from "../types/context.interface.js";
+import { DataManagerService } from "@/services/data-manager.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
-import { ToolService } from "@/services/tool.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
+import { AstService } from "@/services/ast.service.js";
 
 export class AppContextBuilder {
   private services = new ServicesContainer();
 
-  public buildContext(): IAppContext {
-    // 1. Création de l'objet context de base
-    const cli: IAppContext = {
+  public async buildContext(): Promise<IAppContext> {
+    // 1. Création de l'objet de base (sans les services encore)
+    const contextBase = {
+      name: "mclp",
       version: "1.0.0",
+      description: "CLI de génération et gestion de projet",
       rootPath: process.cwd(),
       services: this.services,
-      ia: null as any,
-      case: null as any,
-      tool: null as any,
-      state: null as any,
-      logger: null as any,
-      generator: null as any,
-      errorHandler: null as any,
-      fileSystem: null as any,
-      architecture: null as any,
-      promptService: null as any,
-      configService: null as any,
-      templateService: null as any,
       config: this.getDefaultConfig(),
     };
+    // 2. Cast contrôlé pour injecter les services
+    const cli = contextBase as unknown as IAppContext;
 
-    // 2. Instanciation des services (Injection du contexte dans chaque service)
-    cli.ia = new CaseService(cli);
+    // 3. Instanciation directement des services
+    cli.ai = new AiService(cli);
+    cli.ast = new AstService(cli);
     cli.case = new CaseService(cli);
     cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
+    cli.plugin = new PluginService(cli);
+    cli.db = new DataManagerService(cli);
     cli.logger = new LoggerService(cli);
     cli.generator = new GeneratorService(cli);
     cli.promptService = new PromptService(cli);
@@ -50,20 +49,44 @@ export class AppContextBuilder {
     cli.templateService = new TemplateService(cli);
     cli.errorHandler = new HandlerErrorService(cli);
 
-    // 3. Enregistrement dans le conteneur pour l'accès global via context.services.get()
-    this.services.register("IaService", cli.ia as any);
-    this.services.register("CaseService", cli.case as any);
-    this.services.register("ToolService", cli.tool as any);
-    this.services.register("StateService", cli.state as any);
-    this.services.register("LoggerService", cli.logger as any);
-    this.services.register("GeneratorService", cli.generator as any);
-    this.services.register("PromptService", cli.promptService as any);
-    this.services.register("ConfigService", cli.configService as any);
-    this.services.register("FileSystemService", cli.fileSystem as any);
-    this.services.register("HandlerErrorService", cli.errorHandler as any);
-    this.services.register("TemplateService", cli.templateService as any);
+    // 3. Enregistrement automatique dans le conteneur
+    this.registerAll(cli);
+
+    // 4. Initialisation de tous les services
+    await this.initializeAllServices();
 
     return cli;
+  }
+
+  private registerAll(ctx: IAppContext): void {
+    // On mappe les propriétés du contexte qui sont des services
+    const serviceEntries = [
+      ["AiService", ctx.ai],
+      ["AstService", ctx.ast],
+      ["LoggerService", ctx.logger],
+      ["FileSystemService", ctx.fileSystem],
+      ["CaseService", ctx.case],
+      ["ToolService", ctx.tool],
+      ["StateService", ctx.state],
+      ["PluginService", ctx.plugin],
+      ["DataManagerService", ctx.db],
+      ["GeneratorService", ctx.generator],
+      ["PromptService", ctx.promptService],
+      ["ConfigService", ctx.configService],
+      ["ArchitectureService", ctx.architecture],
+      ["TemplateService", ctx.templateService],
+      ["HandlerErrorService", ctx.errorHandler],
+    ] as const;
+
+    for (const [name, instance] of serviceEntries) {
+      this.services.register(name, instance);
+    }
+  }
+
+  private async initializeAllServices(): Promise<void> {
+    // On récupère tous les services enregistrés et on lance leur init()
+    const allServices = this.services.getAll();
+    await Promise.all(allServices.map((s) => s.init()));
   }
 
   private getDefaultConfig(): ICliConfig {

@@ -27,7 +27,7 @@ export class AppContextBuilder {
       rootPath: process.cwd(),
       services: this.services,
       config: this.getDefaultConfig(),
-    } as IAppContext;
+    } as unknown as IAppContext;
 
     // 2. Instanciation (Chaque service reçoit le contexte)
     // Ils implémentent tous IBaseService via leur classe parente

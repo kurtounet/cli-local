@@ -13,7 +13,7 @@ async function bootstrap() {
   try {
     // 1. On construit le contexte (Services, Config, Logger, etc.)
     const builder = new AppContextBuilder();
-    const cli = builder.buildContext();
+    const cli = await builder.buildContext();
 
     // 2. On initialise l'application avec ce contexte
     const app = new App(cli);

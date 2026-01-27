@@ -19,4 +19,10 @@ export class ServicesContainer implements IServicesContainer {
   public getAll(): IBaseService[] {
     return Array.from(this.services.values());
   }
+
+  // Tu peux supprimer le paramètre ctx
+  private async initializeAllServices(): Promise<void> {
+    const allServices = this.services.getAll();
+    await Promise.all(allServices.map((s) => s.init()));
+  }
 }

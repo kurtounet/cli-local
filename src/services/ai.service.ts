@@ -30,7 +30,7 @@ export class AiService extends BaseService implements IAiService {
     this.genAI = new GoogleGenerativeAI(apiKey);
     this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   }
-  public override async init(): Promise<void> {
+  public init(): Promise<void> {
     // Si tu n'as rien à initialiser pour l'instant :
     return Promise.resolve();
   }

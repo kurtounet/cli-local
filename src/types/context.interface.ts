@@ -11,6 +11,8 @@ import { IServicesContainer } from "./services-container.interface.js";
 import { IStateService } from "./state-service.interface.js";
 import { ITemplateService } from "./template.interface.js";
 import { IToolService } from "./tool-service.interface.js";
+import { IDataManagerService } from "./data-manager-service.interface.js";
+import { IPluginService } from "./plugin-service.interface.js";
 
 /**
  * Type définissant les noms des services principaux accessibles dans le conteneur de services.
@@ -26,21 +28,12 @@ export type ServiceName =
  * Interface pour la configuration globale de la CLI.
  */
 export interface ICliConfig {
-  /**
-   * Chemin vers le répertoire des templates utilisateur.
-   */
   templatesPath: string;
-  /**
-   * Chemin vers le répertoire des templates globaux (fournis par la CLI).
-   */
+
   globalTemplatesPath: string;
-  /**
-   * Niveau de log pour la CLI.
-   */
+
   logLevel: "debug" | "info" | "warn" | "error" | "silent";
-  /**
-   * Thème d'affichage de la CLI.
-   */
+
   theme: "default" | "minimal";
 }
 
@@ -49,70 +42,22 @@ export interface ICliConfig {
  * Il contient les propriétés de base de la CLI et toutes les instances de services disponibles.
  */
 export interface IAppContext {
-  // Propriétés de base
-  /**
-   * Version actuelle de la CLI.
-   */
   version: string;
-  /**
-   * Chemin racine du projet où la CLI est exécutée.
-   */
   rootPath: string;
-  /**
-   * Configuration globale de la CLI.
-   */
   config: ICliConfig;
-  /**
-   * Conteneur pour l'accès aux services.
-   */
   services: IServicesContainer;
-  // Services
-  /**
-   * Service d'Intelligence Artificielle.
-   */
   ai: IAiService;
-  /**
-   * Service de manipulation de chaînes de caractères (casse).
-   */
+  db: IDataManagerService;
   case: ICaseService;
-  /**
-   * Service d'outils génériques.
-   */
   tool: IToolService;
-  /**
-   * Service de gestion de l'état global.
-   */
   state: IStateService;
-  /**
-   * Service de logging.
-   */
+  plugin: IPluginService;
   logger: ILoggerService;
-  /**
-   * Service de génération de code.
-   */
   generator: IGeneratorService;
-  /**
-   * Service de configuration de la CLI.
-   */
   configService: IConfigService;
-  /**
-   * Service de gestion des invites utilisateur (prompts).
-   */
   promptService: IPromptService;
-  /**
-   * Service de gestion du système de fichiers.
-   */
   fileSystem: IFileSystemService;
-  /**
-   * Service d'analyse et de manipulation de l'architecture.
-   */
   architecture: IArchitectureService;
-  /**
-   * Service de gestion des templates.
-   */
   templateService: ITemplateService;
-  /**
-   * Service de gestion des erreurs.
-   */
   errorHandler: IHandlerErrorService;
 }

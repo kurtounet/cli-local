@@ -73,7 +73,7 @@ export class AppContextBuilder {
       ["ArchitectureService", ctx.architecture],
       ["TemplateService", ctx.templateService],
       ["HandlerErrorService", ctx.errorHandler],
-    ];
+    ] as const;
 
     for (const [name, instance] of serviceEntries) {
       this.services.register(name, instance);

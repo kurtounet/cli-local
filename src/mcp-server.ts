@@ -1,6 +1,9 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema,
+} from "@modelcontextprotocol/sdk/types.js";
 import { AiService } from "./services/ai.service.js";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -39,7 +42,12 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
     try {
       // ON VISE LE DOSSIER SOURCE (OU DIST SELON TA CONFIG)
       // Utilise process.cwd() pour être sûr de partir de la racine du projet
-      const pluginPath = path.resolve(process.cwd(), "src", "plugins", `${name}.plugin.js`);
+      const pluginPath = path.resolve(
+        process.cwd(),
+        "src",
+        "plugins",
+        `${name}.plugin.js`,
+      );
 
       const fileUrl = pathToFileURL(pluginPath).href;
       const module = await import(`${fileUrl}?update=${Date.now()}`);

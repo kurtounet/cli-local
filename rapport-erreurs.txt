@@ -1,0 +1,323 @@
+
+I:\cli\cli-local-poo\src\commands\ConfigCommand.ts
+  26:3   error  Async method 'execute' has no 'await' expression  @typescript-eslint/require-await
+  26:49  error  Unexpected any. Specify a different type          @typescript-eslint/no-explicit-any
+  32:17  error  Unsafe member access ["-i"] on an `any` value     @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\commands\GenerateCommand.ts
+   1:10  warning  'ValidationError' is defined but never used       @typescript-eslint/no-unused-vars
+  10:3   error    Async method 'execute' has no 'await' expression  @typescript-eslint/require-await
+  11:12  warning  'type' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  11:21  warning  'name' is assigned a value but never used         @typescript-eslint/no-unused-vars
+
+I:\cli\cli-local-poo\src\commands\ai.command.ts
+  10:16  error    Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+  11:20  error    Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+  14:11  error    Unsafe assignment of an `any` value                                         @typescript-eslint/no-unsafe-assignment
+  15:11  error    Unsafe assignment of an `any` value                                         @typescript-eslint/no-unsafe-assignment
+  21:42  error    Unsafe argument of type `any` assigned to a parameter of type `string`      @typescript-eslint/no-unsafe-argument
+  26:9   error    Unexpected lexical declaration in case block                                no-case-declarations
+  27:41  error    Unsafe argument of type `any` assigned to a parameter of type `string`      @typescript-eslint/no-unsafe-argument
+  32:32  error    Unsafe argument of type `any` assigned to a parameter of type `string`      @typescript-eslint/no-unsafe-argument
+  32:44  error    Unsafe argument of type `any[]` assigned to a parameter of type `string[]`  @typescript-eslint/no-unsafe-argument
+  39:3   warning  Missing JSDoc @param "method" declaration                                   jsdoc/require-param
+  39:3   warning  Missing JSDoc @param "args" declaration                                     jsdoc/require-param
+  48:11  error    Unexpected lexical declaration in case block                                no-case-declarations
+  54:11  error    Unexpected lexical declaration in case block                                no-case-declarations
+  66:11  error    Unexpected lexical declaration in case block                                no-case-declarations
+  73:21  error    Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+  74:54  error    Unsafe member access .message on an `any` value                             @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\core\App.ts
+  20:3   warning  Missing JSDoc @param "CommandClass" declaration                                                            jsdoc/require-param
+  23:40  error    Unexpected any. Specify a different type                                                                   @typescript-eslint/no-explicit-any
+  24:11  error    Unsafe assignment of an `any` value                                                                        @typescript-eslint/no-unsafe-assignment
+  24:25  error    Unsafe construction of an `any` typed value                                                                @typescript-eslint/no-unsafe-call
+  27:11  error    Unsafe assignment of an `any` value                                                                        @typescript-eslint/no-unsafe-assignment
+  27:35  error    Unsafe member access .arguments on an `any` value                                                          @typescript-eslint/no-unsafe-member-access
+  27:45  error    Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator  @typescript-eslint/prefer-nullish-coalescing
+  37:31  error    Unsafe member access .name on an `any` value                                                               @typescript-eslint/no-unsafe-member-access
+  38:20  error    Unsafe argument of type `any` assigned to a parameter of type `string`                                     @typescript-eslint/no-unsafe-argument
+  38:32  error    Unsafe member access .description on an `any` value                                                        @typescript-eslint/no-unsafe-member-access
+  41:21  error    Unsafe member access .aliases on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  41:58  error    Unsafe member access .aliases on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  42:19  error    Unsafe argument of type `any` assigned to a parameter of type `readonly string[]`                          @typescript-eslint/no-unsafe-argument
+  42:31  error    Unsafe member access .aliases on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  46:21  error    Unsafe member access .options on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  46:58  error    Unsafe member access .options on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  47:7   error    Unsafe call of an `any` typed value                                                                        @typescript-eslint/no-unsafe-call
+  47:19  error    Unsafe member access .options on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  47:41  error    Unexpected any. Specify a different type                                                                   @typescript-eslint/no-explicit-any
+  48:20  error    Unsafe argument of type `any` assigned to a parameter of type `string`                                     @typescript-eslint/no-unsafe-argument
+  48:24  error    Unsafe member access .flags on an `any` value                                                              @typescript-eslint/no-unsafe-member-access
+  48:31  error    Unsafe argument of type `any` assigned to a parameter of type `string | undefined`                         @typescript-eslint/no-unsafe-argument
+  48:35  error    Unsafe member access .description on an `any` value                                                        @typescript-eslint/no-unsafe-member-access
+  48:48  error    Unsafe argument of type `any` assigned to a parameter of type `string | boolean | string[] | undefined`    @typescript-eslint/no-unsafe-argument
+  48:52  error    Unsafe member access .defaultValue on an `any` value                                                       @typescript-eslint/no-unsafe-member-access
+  52:32  error    Unexpected any. Specify a different type                                                                   @typescript-eslint/no-explicit-any
+  68:15  error    Unsafe call of an `any` typed value                                                                        @typescript-eslint/no-unsafe-call
+  68:27  error    Unsafe member access .execute on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\index.ts
+  42:1  error  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+
+I:\cli\cli-local-poo\src\mcp-server.ts
+  53:13  error  Unsafe assignment of an `any` value              @typescript-eslint/no-unsafe-assignment
+  55:18  error  Unsafe member access .default on an `any` value  @typescript-eslint/no-unsafe-member-access
+  56:33  error  Unsafe member access .default on an `any` value  @typescript-eslint/no-unsafe-member-access
+  58:21  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  60:56  error  Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
+  78:19  error  Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  81:33  error  Unsafe assignment of an `any` value              @typescript-eslint/no-unsafe-assignment
+  81:45  error  Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\services\__tests__\case-service.test.ts
+  69:50  error  Unnecessary escape character: \@  no-useless-escape
+
+I:\cli\cli-local-poo\src\services\__tests__\services-container.test.ts
+   7:3  error  Type string trivially inferred from a string literal, remove type annotation    @typescript-eslint/no-inferrable-types
+   8:3  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   9:3  error  Async method 'init' has no 'await' expression                                   @typescript-eslint/require-await
+  15:3  error  Type string trivially inferred from a string literal, remove type annotation    @typescript-eslint/no-inferrable-types
+  16:3  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  17:3  error  Async method 'init' has no 'await' expression                                   @typescript-eslint/require-await
+
+I:\cli\cli-local-poo\src\services\ai.service.ts
+   17:1   warning  '@private' is redundant when using a type system                                           jsdoc/check-tag-names
+   17:1   warning  @private should be empty                                                                   jsdoc/empty-tags
+   17:3   warning  Missing JSDoc block description                                                            jsdoc/require-description
+   17:3   warning  Missing JSDoc @returns declaration                                                         jsdoc/require-returns
+   19:11  error    Variable name `__filename` must match one of the following formats: camelCase, UPPER_CASE  @typescript-eslint/naming-convention
+   20:11  error    Variable name `__dirname` must match one of the following formats: camelCase, UPPER_CASE   @typescript-eslint/naming-convention
+   49:11  warning  'mcpContext' is assigned a value but never used                                            @typescript-eslint/no-unused-vars
+   67:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+   68:1   warning  Prefer a more specific type to `any`                                                       jsdoc/reject-any-type
+   68:1   warning  Defaults are not permitted on @param                                                       jsdoc/no-defaults
+   68:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+   69:1   warning  Prefer a more specific type to `any`                                                       jsdoc/reject-any-type
+   69:1   warning  Types are not permitted on @returns                                                        jsdoc/no-types
+   79:13  error    Unsafe assignment of an `any` value                                                        @typescript-eslint/no-unsafe-assignment
+   85:22  error    Unsafe construction of a type that could not be resolved                                   @typescript-eslint/no-unsafe-call
+   88:1   warning  Should be no multiple asterisks on middle lines                                            jsdoc/no-multi-asterisks
+   91:20  error    Unsafe call of a type that could not be resolved                                           @typescript-eslint/no-unsafe-call
+   96:21  error    Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+   97:62  error    Unsafe member access .message on an `any` value                                            @typescript-eslint/no-unsafe-member-access
+  105:1   warning  Missing JSDoc @returns description                                                         jsdoc/require-returns-description
+  113:13  error    Unsafe assignment of an `any` value                                                        @typescript-eslint/no-unsafe-assignment
+  115:13  error    Unsafe assignment of an `any` value                                                        @typescript-eslint/no-unsafe-assignment
+  115:22  error    Unsafe construction of an `any` typed value                                                @typescript-eslint/no-unsafe-call
+  115:33  error    Unsafe member access .default on an `any` value                                            @typescript-eslint/no-unsafe-member-access
+  118:20  error    Unsafe call of an `any` typed value                                                        @typescript-eslint/no-unsafe-call
+  118:27  error    Unsafe member access .execute on an `any` value                                            @typescript-eslint/no-unsafe-member-access
+  123:21  error    Unexpected any. Specify a different type                                                   @typescript-eslint/no-explicit-any
+  124:59  error    Unsafe member access .message on an `any` value                                            @typescript-eslint/no-unsafe-member-access
+  130:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+  131:1   warning  Types are not permitted on @returns                                                        jsdoc/no-types
+  133:3   error    Async method 'generatePlugin' has no 'await' expression                                    @typescript-eslint/require-await
+  134:11  warning  'systemContext' is assigned a value but never used                                         @typescript-eslint/no-unused-vars
+  148:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+  149:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+  150:1   warning  Types are not permitted on @returns                                                        jsdoc/no-types
+  161:1   warning  Types are not permitted on @returns                                                        jsdoc/no-types
+  176:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+  177:1   warning  Types are not permitted on @returns                                                        jsdoc/no-types
+  185:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+  186:1   warning  Types are not permitted on @param                                                          jsdoc/no-types
+  187:1   warning  Types are not permitted on @returns                                                        jsdoc/no-types
+
+I:\cli\cli-local-poo\src\services\architecture.service.ts
+  18:17  warning  'path' is defined but never used. Allowed unused args must match /^_/u                                     @typescript-eslint/no-unused-vars
+  22:35  error    Unexpected any. Specify a different type                                                                   @typescript-eslint/no-explicit-any
+  24:11  error    Unsafe assignment of an `any` value                                                                        @typescript-eslint/no-unsafe-assignment
+  24:27  error    Unsafe member access .children on an `any` value                                                           @typescript-eslint/no-unsafe-member-access
+  24:36  error    Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator  @typescript-eslint/prefer-nullish-coalescing
+  27:5   error    Unsafe call of an `any` typed value                                                                        @typescript-eslint/no-unsafe-call
+  27:14  error    Unsafe member access .forEach on an `any` value                                                            @typescript-eslint/no-unsafe-member-access
+  27:30  error    Unexpected any. Specify a different type                                                                   @typescript-eslint/no-explicit-any
+  28:41  error    Unsafe member access .length on an `any` value                                                             @typescript-eslint/no-unsafe-member-access
+  32:27  error    Unsafe member access .type on an `any` value                                                               @typescript-eslint/no-unsafe-member-access
+  32:71  error    Unsafe member access .children on an `any` value                                                           @typescript-eslint/no-unsafe-member-access
+  36:50  error    Unsafe member access .name on an `any` value                                                               @typescript-eslint/no-unsafe-member-access
+  39:26  error    Unsafe member access .children on an `any` value                                                           @typescript-eslint/no-unsafe-member-access
+  48:3   warning  Missing JSDoc @param "pathsOut" declaration                                                                jsdoc/require-param
+  52:1   warning  Expected @param names to be "pathsIn, pathsOut, type, action". Got "pathsIn, pathsOutn, type, action"      jsdoc/check-param-names
+
+I:\cli\cli-local-poo\src\services\case.service.ts
+  19:3   warning  Missing JSDoc @param "str" declaration                                                                     jsdoc/require-param
+  19:3   warning  Missing JSDoc @returns declaration                                                                         jsdoc/require-returns
+  28:39  error    Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator  @typescript-eslint/prefer-nullish-coalescing
+
+I:\cli\cli-local-poo\src\services\config-project.service.ts
+  13:0  error  Parsing error: '}' expected
+
+I:\cli\cli-local-poo\src\services\config.service.ts
+  19:9   error    Unsafe call of a type that could not be resolved               @typescript-eslint/no-unsafe-call
+  19:21  error    Unsafe member access .debug on a type that cannot be resolved  @typescript-eslint/no-unsafe-member-access
+  21:14  warning  'e' is defined but never used                                  @typescript-eslint/no-unused-vars
+  22:7   error    Unsafe call of a type that could not be resolved               @typescript-eslint/no-unsafe-call
+  22:19  error    Unsafe member access .warn on a type that cannot be resolved   @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\services\data-manager.service.ts
+  19:28  warning  'params' is assigned a value but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+I:\cli\cli-local-poo\src\services\file-system.service.ts
+    7:10  warning  'CliError' is defined but never used                                                                                                                                @typescript-eslint/no-unused-vars
+   10:7   error    Variable name `__filename` must match one of the following formats: camelCase, UPPER_CASE                                                                           @typescript-eslint/naming-convention
+   11:7   error    Variable name `__dirname` must match one of the following formats: camelCase, UPPER_CASE                                                                            @typescript-eslint/naming-convention
+   44:7   error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+   44:19  error    Unsafe member access .debug on a type that cannot be resolved                                                                                                       @typescript-eslint/no-unsafe-member-access
+   45:14  warning  'error' is defined but never used                                                                                                                                   @typescript-eslint/no-unused-vars
+   58:7   error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+   58:19  error    Unsafe member access .debug on a type that cannot be resolved                                                                                                       @typescript-eslint/no-unsafe-member-access
+   81:5   error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+   81:17  error    Unsafe member access .info on a type that cannot be resolved                                                                                                        @typescript-eslint/no-unsafe-member-access
+   92:14  warning  'error' is defined but never used                                                                                                                                   @typescript-eslint/no-unused-vars
+  104:7   error    Unexpected `await` of a non-Promise (non-"Thenable") value                                                                                                          @typescript-eslint/await-thenable
+  105:7   error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+  105:19  error    Unsafe member access .debug on a type that cannot be resolved                                                                                                       @typescript-eslint/no-unsafe-member-access
+  106:14  warning  'error' is defined but never used                                                                                                                                   @typescript-eslint/no-unused-vars
+  113:1   warning  Types are not permitted on @param                                                                                                                                   jsdoc/no-types
+  114:1   warning  Types are not permitted on @returns                                                                                                                                 jsdoc/no-types
+  123:7   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  125:5   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+  130:1   warning  Types are not permitted on @param                                                                                                                                   jsdoc/no-types
+  131:1   warning  Invalid JSDoc @returns type "Object"; prefer: "object"                                                                                                              jsdoc/check-types
+  131:1   warning  Types are not permitted on @returns                                                                                                                                 jsdoc/no-types
+  135:17  error    Unexpected any. Specify a different type                                                                                                                            @typescript-eslint/no-explicit-any
+  141:12  error    Unsafe member access .type on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  143:12  error    Unsafe member access .children on an `any` value                                                                                                                    @typescript-eslint/no-unsafe-member-access
+  147:12  error    Unsafe member access .type on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  148:12  error    Unsafe member access .size on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  159:7   error    Unsafe assignment of an error typed value                                                                                                                           @typescript-eslint/no-unsafe-assignment
+  159:17  error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+  159:17  error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+  160:10  error    Unsafe member access .filter on a type that cannot be resolved                                                                                                      @typescript-eslint/no-unsafe-member-access
+  160:65  error    Unsafe argument of type error typed assigned to a parameter of type `string`                                                                                        @typescript-eslint/no-unsafe-argument
+  161:10  error    Unsafe member access .map on a type that cannot be resolved                                                                                                         @typescript-eslint/no-unsafe-member-access
+  172:13  error    Unsafe assignment of an `any` value                                                                                                                                 @typescript-eslint/no-unsafe-assignment
+  178:21  error    Unexpected any. Specify a different type                                                                                                                            @typescript-eslint/no-explicit-any
+  180:53  error    Unsafe member access .message on an `any` value                                                                                                                     @typescript-eslint/no-unsafe-member-access
+  186:11  error    Unexpected any. Specify a different type                                                                                                                            @typescript-eslint/no-explicit-any
+  189:45  error    Unsafe argument of type `any` assigned to a parameter of type `string`                                                                                              @typescript-eslint/no-unsafe-argument
+  189:50  error    Unsafe member access .name on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  191:14  error    Unsafe member access .type on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  191:40  error    Unsafe member access .children on an `any` value                                                                                                                    @typescript-eslint/no-unsafe-member-access
+  196:16  error    Unsafe member access .children on an `any` value                                                                                                                    @typescript-eslint/no-unsafe-member-access
+  196:47  error    Unsafe member access .children on an `any` value                                                                                                                    @typescript-eslint/no-unsafe-member-access
+  197:34  error    Unsafe member access .children on an `any` value                                                                                                                    @typescript-eslint/no-unsafe-member-access
+  203:11  error    Unsafe assignment of an `any` value                                                                                                                                 @typescript-eslint/no-unsafe-assignment
+  203:26  error    Unsafe member access .content on an `any` value                                                                                                                     @typescript-eslint/no-unsafe-member-access
+  203:34  error    Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator                                                           @typescript-eslint/prefer-nullish-coalescing
+  217:15  error    Unexpected `await` of a non-Promise (non-"Thenable") value                                                                                                          @typescript-eslint/await-thenable
+  222:43  error    Unsafe member access .name on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  226:15  error    Unsafe assignment of an `any` value                                                                                                                                 @typescript-eslint/no-unsafe-assignment
+  226:21  error    Unsafe call of an `any` typed value                                                                                                                                 @typescript-eslint/no-unsafe-call
+  226:26  error    Unsafe member access .name on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  230:18  warning  'error' is defined but never used                                                                                                                                   @typescript-eslint/no-unused-vars
+  230:25  error    Unexpected any. Specify a different type                                                                                                                            @typescript-eslint/no-explicit-any
+  232:46  error    Unsafe member access .name on an `any` value                                                                                                                        @typescript-eslint/no-unsafe-member-access
+  242:53  error    Unsafe argument of type `any` assigned to a parameter of type `string`                                                                                              @typescript-eslint/no-unsafe-argument
+  243:38  error    Unsafe argument of type `any` assigned to a parameter of type `string`                                                                                              @typescript-eslint/no-unsafe-argument
+
+I:\cli\cli-local-poo\src\services\generator.service.ts
+   16:3   warning  Missing JSDoc @param "type" declaration                                                                                                                             jsdoc/require-param
+   16:3   warning  Missing JSDoc @param "name" declaration                                                                                                                             jsdoc/require-param
+   16:3   warning  Missing JSDoc @param "options" declaration                                                                                                                          jsdoc/require-param
+   19:3   error    Async method 'newComponent' has no 'await' expression                                                                                                               @typescript-eslint/require-await
+   22:14  error    Unexpected any. Specify a different type                                                                                                                            @typescript-eslint/no-explicit-any
+   31:9   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+   36:9   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+   40:9   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+   44:9   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+   48:17  error    Unsafe member access .dryRun on an `any` value                                                                                                                      @typescript-eslint/no-unsafe-member-access
+   49:7   error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+   49:19  error    Unsafe member access .info on a type that cannot be resolved                                                                                                        @typescript-eslint/no-unsafe-member-access
+  125:68  error    Unexpected any. Specify a different type                                                                                                                            @typescript-eslint/no-explicit-any
+  126:20  error    Unexpected `await` of a non-Promise (non-"Thenable") value                                                                                                          @typescript-eslint/await-thenable
+  127:28  error    Unsafe member access .force on an `any` value                                                                                                                       @typescript-eslint/no-unsafe-member-access
+  128:7   error    Unsafe call of a type that could not be resolved                                                                                                                    @typescript-eslint/no-unsafe-call
+  128:19  error    Unsafe member access .warn on a type that cannot be resolved                                                                                                        @typescript-eslint/no-unsafe-member-access
+  131:5   error    Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator  @typescript-eslint/no-floating-promises
+
+I:\cli\cli-local-poo\src\services\handler-error.service.ts
+  23:47  error    Unexpected any. Specify a different type                       @typescript-eslint/no-explicit-any
+  41:11  warning  'code' is assigned a value but never used                      @typescript-eslint/no-unused-vars
+  45:7   error    Unsafe call of a type that could not be resolved               @typescript-eslint/no-unsafe-call
+  45:19  error    Unsafe member access .error on a type that cannot be resolved  @typescript-eslint/no-unsafe-member-access
+  47:7   error    Unsafe call of a type that could not be resolved               @typescript-eslint/no-unsafe-call
+  47:19  error    Unsafe member access .error on a type that cannot be resolved  @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\services\plugin.service.ts
+  12:29  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  15:3   error  Async method 'registerPlugin' has no 'await' expression                 @typescript-eslint/require-await
+  15:37  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  16:11  error  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  16:36  error  Unsafe member access .definition on an `any` value                      @typescript-eslint/no-unsafe-member-access
+  17:22  error  Unsafe argument of type `any` assigned to a parameter of type `string`  @typescript-eslint/no-unsafe-argument
+  17:33  error  Unsafe member access .name on an `any` value                            @typescript-eslint/no-unsafe-member-access
+  17:39  error  Unsafe construction of an `any` typed value                             @typescript-eslint/no-unsafe-call
+  18:63  error  Unsafe member access .name on an `any` value                            @typescript-eslint/no-unsafe-member-access
+  22:58  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  23:11  error  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  35:20  error  Unsafe call of an `any` typed value                                     @typescript-eslint/no-unsafe-call
+  35:27  error  Unsafe member access .execute on an `any` value                         @typescript-eslint/no-unsafe-member-access
+  36:21  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  38:32  error  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  38:45  error  Unsafe member access .message on an `any` value                         @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\services\prompt.service.ts
+  12:3  warning  Missing JSDoc @param "message" declaration  jsdoc/require-param
+  12:3  warning  Missing JSDoc @param "name" declaration     jsdoc/require-param
+  12:3  warning  Missing JSDoc @returns declaration          jsdoc/require-returns
+  23:5  error    Unsafe return of a value of type `any`      @typescript-eslint/no-unsafe-return
+  26:3  warning  Missing JSDoc @param "message" declaration  jsdoc/require-param
+  26:3  warning  Missing JSDoc @param "choices" declaration  jsdoc/require-param
+  26:3  warning  Missing JSDoc @returns declaration          jsdoc/require-returns
+  39:5  error    Unsafe return of a value of type `any`      @typescript-eslint/no-unsafe-return
+  41:3  warning  Missing JSDoc @param "message" declaration  jsdoc/require-param
+  41:3  warning  Missing JSDoc @param "choices" declaration  jsdoc/require-param
+  41:3  warning  Missing JSDoc @returns declaration          jsdoc/require-returns
+  54:5  error    Unsafe return of a value of type `any`      @typescript-eslint/no-unsafe-return
+  57:3  warning  Missing JSDoc @param "message" declaration  jsdoc/require-param
+  57:3  warning  Missing JSDoc @returns declaration          jsdoc/require-returns
+  70:5  error    Unsafe return of a value of type `any`      @typescript-eslint/no-unsafe-return
+
+I:\cli\cli-local-poo\src\services\shell.service.ts
+  16:3   warning  Missing JSDoc @param "command" declaration       jsdoc/require-param
+  16:3   warning  Missing JSDoc @returns declaration               jsdoc/require-returns
+  34:21  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  35:48  error    Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
+  36:65  error    Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
+  39:3   warning  Missing JSDoc @param "command" declaration       jsdoc/require-param
+  39:3   warning  Missing JSDoc @returns declaration               jsdoc/require-returns
+  52:21  error    Unexpected any. Specify a different type         @typescript-eslint/no-explicit-any
+  53:39  error    Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
+  54:65  error    Unsafe member access .message on an `any` value  @typescript-eslint/no-unsafe-member-access
+
+I:\cli\cli-local-poo\src\services\state.service.ts
+  11:37  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  14:5   error  Unsafe return of a value of type `any`    @typescript-eslint/no-unsafe-return
+
+I:\cli\cli-local-poo\src\services\task-manager.service.ts
+  13:0  error  Parsing error: '}' expected
+
+I:\cli\cli-local-poo\src\services\template.service.ts
+  13:3   warning  Missing JSDoc @returns declaration                            jsdoc/require-returns
+  22:7   error    Unsafe call of a type that could not be resolved              @typescript-eslint/no-unsafe-call
+  22:19  error    Unsafe member access .warn on a type that cannot be resolved  @typescript-eslint/no-unsafe-member-access
+  57:3   warning  Missing JSDoc @param "dir" declaration                        jsdoc/require-param
+  57:3   warning  Missing JSDoc @param "allFiles" declaration                   jsdoc/require-param
+  57:3   warning  Missing JSDoc @returns declaration                            jsdoc/require-returns
+
+I:\cli\cli-local-poo\src\services\tool.service.ts
+  12:23  error  Invalid type "string[]" of template literal expression  @typescript-eslint/restrict-template-expressions
+
+I:\cli\cli-local-poo\src\types\plugin.interface.ts
+  19:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+I:\cli\cli-local-poo\src\types\services-container.interface.ts
+  10:1  warning  Expected @param names to be "key, service". Got "name, service"  jsdoc/check-param-names
+
+✖ 267 problems (195 errors, 72 warnings)
+  4 errors and 42 warnings potentially fixable with the `--fix` option.
+

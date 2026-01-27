@@ -1,0 +1,85 @@
+{
+  "tasks": [
+    {
+      "id": 6,
+      "description": "Ajouter JSDoc à src/types/command.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 7,
+      "description": "Ajouter JSDoc à src/types/config-project-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 8,
+      "description": "Ajouter JSDoc à src/types/config-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 9,
+      "description": "Ajouter JSDoc à src/types/context.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 10,
+      "description": "Ajouter JSDoc à src/types/error-handler.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 11,
+      "description": "Ajouter JSDoc à src/types/file-system.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 12,
+      "description": "Ajouter JSDoc à src/types/generator.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 13,
+      "description": "Ajouter JSDoc à src/types/logger-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 14,
+      "description": "Ajouter JSDoc à src/types/plugin.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 15,
+      "description": "Ajouter JSDoc à src/types/prompt-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 16,
+      "description": "Ajouter JSDoc à src/types/services-container.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 17,
+      "description": "Ajouter JSDoc à src/types/shell-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 18,
+      "description": "Ajouter JSDoc à src/types/state-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 19,
+      "description": "Ajouter JSDoc à src/types/task-manager-service.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 20,
+      "description": "Ajouter JSDoc à src/types/template.interface.ts",
+      "completed": true
+    },
+    {
+      "id": 21,
+      "description": "Ajouter JSDoc à src/types/tool-service.interface.ts",
+      "completed": true
+    }
+  ],
+  "taskIdCounter": 21
+}

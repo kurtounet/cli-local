@@ -14,6 +14,7 @@ import { IAppContext, ICliConfig } from "../types/context.interface.js";
 import { DataManagerService } from "@/services/data-manager.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
+import { IBaseService } from "@/types/base-service.interface.js";
 
 export class AppContextBuilder {
   private services = new ServicesContainer();
@@ -51,7 +52,7 @@ export class AppContextBuilder {
 
     // 4. Initialisation de tous les services (puisqu'ils ont tous .init())
     // C'est ici que l'interface IBaseService devient puissante
-    await this.initializeAllServices(cli);
+    await this.initializeAllServices();
 
     return cli;
   }
@@ -76,11 +77,11 @@ export class AppContextBuilder {
     ] as const;
 
     for (const [name, instance] of serviceEntries) {
-      this.services.register(name, instance);
+      this.services.register(name, instance as IBaseService);
     }
   }
 
-  private async initializeAllServices(ctx: IAppContext): Promise<void> {
+  private async initializeAllServices(): Promise<void> {
     // On récupère tous les services enregistrés et on lance leur init()
     const allServices = this.services.getAll(); // ou this.services.getAll(); // Suppose que tu as une méthode getAll()
     await Promise.all(allServices.map((s) => s.init()));

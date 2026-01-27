@@ -37,4 +37,4 @@ async function bootstrap() {
 }
 
 // Lancement du bootstrap
-bootstrap();
+await bootstrap();

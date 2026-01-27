@@ -14,27 +14,24 @@ import { IAppContext, ICliConfig } from "../types/context.interface.js";
 import { DataManagerService } from "@/services/data-manager.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
-import { AstService } from "@/services/ast.service.js";
 
 export class AppContextBuilder {
   private services = new ServicesContainer();
 
   public async buildContext(): Promise<IAppContext> {
-    // 1. Création de l'objet de base (sans les services encore)
-    const contextBase = {
+    // 1. On prépare le shell du contexte
+    const cli = {
       name: "mclp",
       version: "1.0.0",
       description: "CLI de génération et gestion de projet",
       rootPath: process.cwd(),
       services: this.services,
       config: this.getDefaultConfig(),
-    };
-    // 2. Cast contrôlé pour injecter les services
-    const cli = contextBase as unknown as IAppContext;
+    } as IAppContext;
 
-    // 3. Instanciation directement des services
+    // 2. Instanciation (Chaque service reçoit le contexte)
+    // Ils implémentent tous IBaseService via leur classe parente
     cli.ai = new AiService(cli);
-    cli.ast = new AstService(cli);
     cli.case = new CaseService(cli);
     cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
@@ -52,8 +49,9 @@ export class AppContextBuilder {
     // 3. Enregistrement automatique dans le conteneur
     this.registerAll(cli);
 
-    // 4. Initialisation de tous les services
-    await this.initializeAllServices();
+    // 4. Initialisation de tous les services (puisqu'ils ont tous .init())
+    // C'est ici que l'interface IBaseService devient puissante
+    await this.initializeAllServices(cli);
 
     return cli;
   }
@@ -62,7 +60,6 @@ export class AppContextBuilder {
     // On mappe les propriétés du contexte qui sont des services
     const serviceEntries = [
       ["AiService", ctx.ai],
-      ["AstService", ctx.ast],
       ["LoggerService", ctx.logger],
       ["FileSystemService", ctx.fileSystem],
       ["CaseService", ctx.case],
@@ -76,16 +73,16 @@ export class AppContextBuilder {
       ["ArchitectureService", ctx.architecture],
       ["TemplateService", ctx.templateService],
       ["HandlerErrorService", ctx.errorHandler],
-    ] as const;
+    ];
 
     for (const [name, instance] of serviceEntries) {
       this.services.register(name, instance);
     }
   }
 
-  private async initializeAllServices(): Promise<void> {
+  private async initializeAllServices(ctx: IAppContext): Promise<void> {
     // On récupère tous les services enregistrés et on lance leur init()
-    const allServices = this.services.getAll();
+    const allServices = this.services.getAll(); // ou this.services.getAll(); // Suppose que tu as une méthode getAll()
     await Promise.all(allServices.map((s) => s.init()));
   }
 

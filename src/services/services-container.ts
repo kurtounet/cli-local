@@ -1,22 +1,28 @@
 import { IServicesContainer } from "@/types/services-container.interface.js";
-import { BaseService } from "./base-service.service.js";
+import { IBaseService } from "@/types/base-service.interface.js";
 
 export class ServicesContainer implements IServicesContainer {
-  private services: Map<string, BaseService> = new Map();
+  private services = new Map<string, IBaseService>();
 
-  public register(name: string, service: BaseService): void {
-    this.services.set(name, service);
+  public register<T extends IBaseService>(key: string, service: T): void {
+    this.services.set(key, service);
   }
 
-  public get<T>(name: string): T {
-    const service = this.services.get(name);
-    if (!service) throw new Error(`Service introuvable: ${name}`);
-    return service as unknown as T;
-  }
-
-  public async initializeAll(): Promise<void> {
-    for (const service of this.services.values()) {
-      if (service.initialize) await service.initialize();
+  public get<T extends IBaseService>(key: string): T {
+    const service = this.services.get(key);
+    if (!service) {
+      throw new Error(`Service ${key} non trouvé`);
     }
+    return service as T;
+  }
+
+  public getAll(): IBaseService[] {
+    return Array.from(this.services.values());
+  }
+
+  // Optionnel : Tu peux garder initializeAll ici si tu veux
+  // que le conteneur soit autonome, ou le supprimer si le Builder s'en charge.
+  public async initializeAll(): Promise<void> {
+    await Promise.all(this.getAll().map((s) => s.init()));
   }
 }

@@ -1,3 +1,4 @@
+import { IGenerateOptions } from "@/commands/GenerateCommand.js";
 import { IBaseService } from "./base-service.interface.js";
 
 /**
@@ -15,5 +16,5 @@ export interface IGeneratorService extends IBaseService {
    * @param options - Un objet d'options supplémentaires pour la génération (ex: chemin, propriétés).
    * @returns Une promesse qui se résout une fois le composant généré.
    */
-  newComponent(type: string, name: string, options: unknown): Promise<void>;
+  newComponent(type: string, name: string, options: IGenerateOptions): Promise<void>;
 }

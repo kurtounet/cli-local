@@ -56,7 +56,10 @@ export class TreeCommand extends BaseCommand {
     },
   ];
 
-  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
+  async execute(
+    args: string[],
+    options: Record<string, unknown>,
+  ): Promise<void> {
     // 1. Destructure type and the remaining path arguments
     const [type, ...pathArgs] = args;
 
@@ -73,7 +76,8 @@ export class TreeCommand extends BaseCommand {
       const pathIn = path.resolve(pathArgs[0] || ".");
 
       // 4. Handle pathOut: Default to pathIn if pathOut is missing or "."
-      const pathOut = pathArgs[1] && pathArgs[1] !== "." ? path.resolve(pathArgs[1]) : pathIn;
+      const pathOut =
+        pathArgs[1] && pathArgs[1] !== "." ? path.resolve(pathArgs[1]) : pathIn;
 
       this.cli.logger.info(`Processing: ${pathIn} -> ${pathOut} (${type})`);
 

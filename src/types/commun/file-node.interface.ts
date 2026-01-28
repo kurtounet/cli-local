@@ -1,12 +1,13 @@
 import { IMemberInfo } from "./member-info.interface.js";
 
 export interface IFileNode {
-  path: string;
   name: string;
+  path: string;
   type: "directory" | "file";
   extension: string;
   size: number;
   level: number;
+  content: string;
   metadata?: IMemberInfo[];
   children?: IFileNode[];
 }

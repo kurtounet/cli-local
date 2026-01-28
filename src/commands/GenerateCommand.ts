@@ -16,8 +16,17 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
   aliases = ["g"];
 
   options = [
-    { flags: "-f, --force", description: "Écrase si existe", type: "boolean", defaultValue: false },
-    { flags: "-o, --output <dir>", description: "Répertoire de sortie", type: "string" },
+    {
+      flags: "-f, --force",
+      description: "Écrase si existe",
+      type: "boolean",
+      defaultValue: false,
+    },
+    {
+      flags: "-o, --output <dir>",
+      description: "Répertoire de sortie",
+      type: "string",
+    },
   ] satisfies ICommandOption[];
 
   async execute(args: string[], options: IGenerateOptions): Promise<void> {
@@ -28,7 +37,7 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
     const names = args.slice(1).map(String).filter(Boolean);
 
     const force = this.hasOption(options, "force");
-    const output = this.getOption(options, "output", "./");
+    const output = this.getOption(options, "output", "./src/tests");
 
     if (!["service", "command", "template", "framework"].includes(target)) {
       throw new Error(`Target invalide "${target}". Valides: service|command|template|framework`);
@@ -37,27 +46,27 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
     for (const name of names) {
       switch (target) {
         case "service":
-          await this.generateService(name, { output, force });
+          await this.generator.newComponent(target, name, { output, force });
           break;
         case "command":
-          await this.generateCommand(name, { output, force });
+          await this.generator.newComponent(target, name, { output, force });
           break;
         case "template":
-          await this.generateTemplate(name, { output, force });
+          await this.generator.newComponent(target, name, { output, force });
           break;
         case "framework":
-          await this.generateFramework(name, { output, force });
+          await this.generator.newComponent(target, name, { output, force });
           break;
       }
 
       this.success(`${target} "${name}" généré dans ${output}`);
     }
   }
-
+  /*
   // ---- Stubs : à brancher sur tes services réels
   private async generateService(name: string, ctx: { output: string; force: boolean }) {
     this.info(`(stub) service: ${name} -> ${ctx.output} force=${ctx.force}`);
-    // await this.generator.generateService(...)
+    // await this.generatorgenerateService(...)
   }
 
   private async generateCommand(name: string, ctx: { output: string; force: boolean }) {
@@ -74,4 +83,5 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
     this.info(`(stub) framework: ${name} -> ${ctx.output} force=${ctx.force}`);
     // await this.generator.generateFramework(...)
   }
+    */
 }

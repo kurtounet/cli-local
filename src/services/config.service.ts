@@ -1,6 +1,7 @@
 import { cosmiconfig } from "cosmiconfig";
 import { BaseService } from "./base-service.service.js";
 import { IConfigService } from "@/types/services/config-service.interface.js";
+import { ICliConfig } from "@/types/context.interface.js";
 
 export class ConfigService extends BaseService implements IConfigService {
   readonly serviceName = "ConfigService";
@@ -24,5 +25,9 @@ export class ConfigService extends BaseService implements IConfigService {
         "Impossible de charger la config, utilisation des défauts.",
       );
     }
+  }
+
+  resolveLogLevel(cfg?: ICliConfig): "debug" | "info" | "warn" | "error" | "silent" {
+    return cfg?.logLevel ?? "debug";
   }
 }

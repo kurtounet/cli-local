@@ -1,11 +1,15 @@
+import { IFileNode } from "../commun/file-node.interface.js";
+
 /**
  * Interface définissant les opérations de service liées au système de fichiers.
  * Fournit des méthodes pour lire, écrire, copier, vérifier l'existence de fichiers/répertoires,
  * ainsi que pour manipuler des arborescences de répertoires.
  */
 export interface IFileSystemService {
+  /**
+   * Nom du service.
+   */
   serviceName: string;
-  init(): Promise<void>;
   /**
    * Une liste de répertoires à exclure lors de certaines opérations (ex: parcours d'arborescence).
    */
@@ -15,7 +19,7 @@ export interface IFileSystemService {
    * @param dirPath - Le chemin du répertoire dont on veut l'arborescence.
    * @returns Une chaîne de caractères représentant l'arborescence.
    */
-  getDirectoryTree(dirPath: string): string;
+  getDirectoryTree(dirPath: string): IFileNode;
   /**
    * Résout une séquence de segments de chemin en un chemin absolu ou relatif normalisé.
    * @param segments - Les segments de chemin à résoudre.
@@ -33,7 +37,7 @@ export interface IFileSystemService {
    * @param targetPath - Le chemin du fichier ou répertoire à vérifier.
    * @returns Une promesse résolue avec `true` si l'élément existe, `false` sinon.
    */
-  exists(targetPath: string): Promise<boolean>;
+  exists(targetPath: string): boolean;
   /**
    * Crée un répertoire de manière asynchrone. Inclut la création récursive des répertoires parents si nécessaire.
    * @param dirPath - Le chemin du répertoire à créer.
@@ -46,7 +50,7 @@ export interface IFileSystemService {
    * @param destination - Le chemin de destination.
    * @returns Une promesse qui se résout une fois la copie terminée.
    */
-  copy(source: string, destination: string): Promise<void>;
+  copy(source: string, destination: string): void;
   /**
    * Écrit du contenu dans un fichier de manière asynchrone. Écrase le fichier s'il existe.
    * @param filePath - Le chemin du fichier dans lequel écrire.
@@ -60,10 +64,7 @@ export interface IFileSystemService {
    * @param targetPath - Chemin cible où la structure sera créée.
    * @returns Une promesse qui se résout une fois l'arborescence créée.
    */
-  createDirectoryTreeFromJson(
-    sourcePath: string,
-    targetPath: string,
-  ): Promise<void>;
+  createDirectoryTreeFromJson(sourcePath: string, targetPath: string): Promise<void>;
   /**
    * Écrit du contenu dans un fichier dans un répertoire de sortie spécifié.
    * @param basePath - Le chemin de base du répertoire de sortie.
@@ -71,10 +72,5 @@ export interface IFileSystemService {
    * @param fileName - Le nom du fichier à écrire.
    * @param content - Le contenu à écrire dans le fichier.
    */
-  writeToOutput(
-    basePath: string,
-    subDir: string,
-    fileName: string,
-    content: string,
-  ): void;
+  writeToOutput(basePath: string, subDir: string, fileName: string, content: string): Promise<void>;
 }

@@ -9,5 +9,6 @@ export interface IConfigService extends IBaseService {
    * Charge la configuration depuis le système de fichiers
    * et fusionne avec les valeurs par défaut.
    */
+  resolveLogLevel(cfg?: CliConfig): "debug" | "info" | "warn" | "error" | "silent";
   initialize(): Promise<void>;
 }

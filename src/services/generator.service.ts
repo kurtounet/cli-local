@@ -1,6 +1,7 @@
 import path from "path";
 import { BaseService } from "./base-service.service.js";
 import { IGeneratorService } from "@/types/services/generator.interface.js";
+import { IGenerateOptions } from "@/commands/GenerateCommand.js";
 
 export class GeneratorService extends BaseService implements IGeneratorService {
   readonly serviceName = "GeneratorService";
@@ -9,10 +10,8 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   private fileName = "";
   private folder = "";
   private targetPath = "";
-  /**
-   * Génère les composant réel sur le disque
-   */
-  public async newComponent(type: string, name: string, options: any): Promise<void> {
+
+  public async newComponent(type: string, name: string, options: IGenerateOptions): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
     this.targetPath = path.join(this.cli.rootPath, this.folder, this.fileName);
@@ -71,6 +70,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
         return "src";
     }
   }
+
   private getTemplateContentCommand(name: string): string {
     const className = this.cli.case.toPascalCase(name);
     const commandName = this.cli.case.toKebabCase(name);
@@ -95,9 +95,11 @@ export class GeneratorService extends BaseService implements IGeneratorService {
       }
       `;
   }
+
   private getTemplateContentTemplate(name: string): string {
     return `import { BaseService } from "./base-service.service.js";\n\nexport class ${name}Service extends BaseService {}`;
   }
+
   private getTemplateContentService(name: string): string {
     const newName = this.cli.case.toKebabCase(name);
     const className = this.cli.case.toPascalCase(newName);
@@ -109,11 +111,17 @@ export class GeneratorService extends BaseService implements IGeneratorService {
       }
       `;
   }
+
   private getTemplateContentInterfaceService(name: string): string {
     const className = this.cli.case.toPascalCase(name);
     return `export interface I${className}Service {}`;
   }
-  private async save(targetPath: string, content: string, options: any) {
+
+  private async save(
+    targetPath: string,
+    content: string,
+    options: IGenerateOptions,
+  ): Promise<void> {
     const exists = await this.cli.fileSystem.exists(targetPath);
     if (exists && !options.force) {
       this.cli.logger.warn(`Le fichier ${targetPath} existe déjà. Saute.`);

@@ -3,6 +3,7 @@ import fs from "fs-extra";
 import { fileURLToPath } from "url";
 import { BaseService } from "./base-service.service.js";
 import { IFileSystemService } from "@/types/services/file-system.interface.js";
+import { IFileNode } from "@/types/commun/file-node.interface.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,104 +17,93 @@ export class FileSystemService extends BaseService implements IFileSystemService
     this.excludedDirs = excludedDirs.concat(this.excludedDirs);
   }
 
-  /**
-   * Vérifie si un chemin existe sur le disque
-   */
-  public exists(targetPath: string): Promise<boolean> {
+  public exists(targetPath: string): boolean {
     return fs.existsSync(targetPath);
   }
 
-  /**
-   * Crée un répertoire (et ses parents si nécessaire)
-   */
   public async createDirectory(dirPath: string): Promise<void> {
     try {
       await fs.ensureDir(dirPath);
-      this.logger.debug(`Dossier créé ou vérifié: ${dirPath}`);
+      this.cli.logger.debug(`Dossier créé ou vérifié: ${dirPath}`);
     } catch (error) {
-      throw new Error(`Impossible de créer le dossier: ${dirPath}`);
+      this.cli.errorHandler.handle(error, `Impossible de créer le dossier: ${dirPath}`);
     }
   }
 
-  /**
-   * Écrit un fichier avec du contenu
-   */
   public async writeFile(filePath: string, content: string): Promise<void> {
     try {
       await fs.outputFile(filePath, content);
-      this.logger.debug(`Fichier écrit: ${filePath}`);
+      this.cli.logger.debug(`Fichier écrit: ${filePath}`);
     } catch (error) {
-      throw new Error(` writeFile() Échec de l'écriture du fichier: ${filePath}`);
+      this.cli.errorHandler.handle(
+        error,
+        `writeFile() :Échec de l'écriture du fichier: ${filePath}`,
+      );
     }
   }
 
-  public writeToOutput(basePath: string, subDir: string, fileName: string, content: string): void {
-    // Le service gère la construction du chemin
+  public async writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): Promise<void> {
     const targetDir = path.join(basePath, subDir);
 
-    // Le service gère la sécurité (création du dossier si inexistant)
     if (!this.exists(targetDir)) {
-      this.createDirectory(targetDir); // Idéalement récursif
+      await this.createDirectory(targetDir);
     }
 
     const finalPath = path.join(targetDir, fileName);
-    this.writeFile(finalPath, content);
+    await this.writeFile(finalPath, content);
   }
 
-  /**
-   * Lit le contenu d'un fichier (ex: un template)
-   */
   public async readFile(filePath: string): Promise<string> {
     try {
       return await fs.readFile(filePath, "utf-8");
     } catch (error) {
-      throw new Error(`Impossible de lire le fichier: ${filePath}`);
+      this.cli.errorHandler.handle(error, `Impossible de lire le fichier: ${filePath}`);
+      throw error;
     }
   }
 
-  /**
-   * Copie un fichier ou un dossier complet
-   */
-  public async copy(source: string, destination: string): Promise<void> {
+  public copy(source: string, destination: string): void {
     try {
-      await fs.copyFileSync(source, destination);
-      this.logger.debug(`Copié de ${source} vers ${destination}`);
+      fs.copyFileSync(source, destination);
+      this.cli.logger.debug(`Copié de ${source} vers ${destination}`);
     } catch (error) {
-      throw new Error(`Échec de la copie: ${source} -> ${destination}`);
+      this.cli.errorHandler.handle(error, `Échec de la copie: ${source} -> ${destination}`);
+      throw new Error();
     }
   }
 
-  /**
-   * Résout un chemin par rapport à la racine du projet ou au dossier de templates.
-   * @param {...string[]} segments - Les parties du chemin à résoudre.
-   * @returns {string} - Le chemin résolu.
-   */
   public resolvePath(...segments: string[]): string {
     return path.resolve(...segments);
   }
-  public createFile(filePath: string, content: string = ""): void {
-    // On s'assure que le dossier parent existe avant de créer le fichier
+  public async createFile(filePath: string, content = ""): Promise<void> {
     const dir = path.dirname(filePath);
     if (!this.exists(dir)) {
-      this.createDirectory(dir);
+      await this.createDirectory(dir);
     }
-    this.writeFile(filePath, content);
+    await this.writeFile(filePath, content);
   }
 
-  /**
-   * Parcourt un dossier de manière récursive pour lister le contenu.
-   * @param {string} dirPath - Le chemin du dossier à scanner.
-   * @returns {Object} - La structure du dossier en format JSON.
-   */
-  public getDirectoryTree(dirPath: string): any {
+  public getDirectoryTree(dirPath: string): IFileNode {
     const stats = fs.statSync(dirPath);
-    const info: any = {
+    const info: IFileNode = {
       path: path.basename(dirPath),
       name: path.basename(dirPath),
+      level: 0,
+      type: "directory",
+      size: 0,
+      content: "",
+      extension: path.extname(dirPath),
+      metadata: [],
+      children: [],
     };
 
     if (stats.isDirectory()) {
-      info.type = "folder";
+      info.type = "directory";
       // On lit le contenu du dossier et on relance la fonction pour chaque élément
       info.children = fs.readdirSync(dirPath).map((child) => {
         return this.getDirectoryTree(path.join(dirPath, child));
@@ -126,14 +116,14 @@ export class FileSystemService extends BaseService implements IFileSystemService
     return this.filterTree(info);
   }
 
-  private filterTree(node: any): any {
+  private filterTree(node: IFileNode): IFileNode {
     if (!node.children) return node;
 
     return {
       ...node,
       children: node.children
-        .filter((child: any) => !this.excludedDirs.includes(child.name))
-        .map((child: any) => this.filterTree(child)), // On continue le filtrage récursivement
+        .filter((child: IFileNode) => !this.excludedDirs.includes(child.name))
+        .map((child: IFileNode) => this.filterTree(child)), // On continue le filtrage récursivement
     };
   }
 
@@ -142,23 +132,45 @@ export class FileSystemService extends BaseService implements IFileSystemService
     targetBaseDir: string,
   ): Promise<void> {
     try {
-      // 1. Lire le fichier une seule fois
-      const jsonString = await this.readFile(sourcePath);
-      const treeData = JSON.parse(jsonString);
-
-      // 2. Lancer la récursion sur l'objet JSON
+      // const jsonString = await this.readFile(sourcePath);
+      // const raw: unknown = JSON.parse(jsonString);
+      // if (!raw || typeof raw !== "object" || !("name" in raw)) {
+      //   throw new Error("Structure JSON invalide : IFileNode attendu");
+      // }
+      const treeData = await this.readJsonFile(sourcePath);
       await this.buildPhysicalTree(treeData, targetBaseDir);
-
       this.cli.logger.success("Arborescence recréée avec succès !");
-    } catch (error: any) {
-      this.cli.logger.error(`Erreur lors de la lecture du JSON: ${error.message}`);
+    } catch (error) {
+      this.cli.errorHandler.handle(error, `Erreur lors de la lecture/parse du JSON: ${sourcePath}`);
+      throw error;
     }
   }
+  private async readJsonFile(filePath: string): Promise<IFileNode> {
+    try {
+      const raw: unknown = await fs.readJson(filePath); // fs-extra async
 
-  private async buildPhysicalTree(node: any, currentPath: string): Promise<void> {
+      if (!this.isFileNode(raw)) {
+        throw new Error("Structure JSON invalide : IFileNode attendu");
+      }
+
+      return raw;
+    } catch (error) {
+      this.cli.errorHandler.handle(error, `Erreur lors de la lecture/parse du JSON: ${filePath}`);
+      throw error;
+    }
+  }
+  private isFileNode(value: unknown): value is IFileNode {
+    return (
+      !!value &&
+      typeof value === "object" &&
+      "name" in value &&
+      typeof (value as any).name === "string"
+    );
+  }
+  private async buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void> {
     const fullPath = path.join(currentPath, node.name);
 
-    if (node.type === "folder" || node.children) {
+    if (node.type === "directory" || node.children) {
       // On crée le dossier (fs.ensureDir ne fera rien s'il existe déjà)
       await this.createDirectory(fullPath);
       this.cli.logger.info(`📁 Dossier : ${fullPath}`);
@@ -179,7 +191,7 @@ export class FileSystemService extends BaseService implements IFileSystemService
           // const templatePath = path.resolve(__dirname, "../templates/class.ts.txt");
           const templatePath = path.resolve(__dirname, "..", "templates", "class.ts.txt");
           console.log(templatePath);
-          if (await this.cli.fileSystem.exists(templatePath)) {
+          if (this.cli.fileSystem.exists(templatePath)) {
             // const template = this.cli.fileSystem.readFile(templatePath);
             const rawTemplate = await this.cli.fileSystem.readFile(templatePath);
             console.log(`Contenu chargé pour ${node.name}:`, rawTemplate.length);
@@ -188,8 +200,9 @@ export class FileSystemService extends BaseService implements IFileSystemService
               author: "MCLP System",
             });
           }
-        } catch (error: any) {
-          this.cli.logger.warn(
+        } catch (error) {
+          this.cli.errorHandler.handle(
+            error,
             `Template non trouvé pour ${node.name}, création d'un fichier vide.`,
           );
           content = ""; // On replie sur un fichier vide au lieu de crash
@@ -199,8 +212,6 @@ export class FileSystemService extends BaseService implements IFileSystemService
       console.log("Cible:", fullPath);
       console.log("Contenu à écrire:", `"${content}"`); // Si tu vois "", c'est que la compilation a échoué
       console.log("----------------------");
-
-      await this.cli.fileSystem.writeFile(fullPath, content);
       await this.writeFile(fullPath, content);
       this.cli.logger.info(`📄 Fichier : ${fullPath}`);
     }

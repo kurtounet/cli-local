@@ -8,33 +8,71 @@ import { IaCommand } from "./commands/ia.command.js";
 
 /**
  * Point d'entrée principal de la CLI
+ *
+ * Cette fonction bootstrap orchestre le démarrage complet de l'application :
+ * 1. Construction du contexte avec tous les services
+ * 2. Initialisation de l'application
+ * 3. Enregistrement des commandes disponibles
+ * 4. Lancement de l'application
  */
-async function bootstrap() {
+async function bootstrap(): Promise<void> {
   try {
-    // 1. On construit le contexte (Services, Config, Logger, etc.)
+    // ============================================================================
+    // ÉTAPE 1 : Construction du contexte de l'application
+    // ============================================================================
+    // Le contexte contient tous les services (Logger, FileSystem, Generator, etc.)
+    // ainsi que la configuration de l'application
     const builder = new AppContextBuilder();
     const cli = await builder.buildContext();
 
-    // 2. On initialise l'application avec ce contexte
+    // ============================================================================
+    // ÉTAPE 2 : Initialisation de l'application
+    // ============================================================================
+    // L'application reçoit le contexte complet et configure Commander.js
     const app = new App(cli);
 
-    // 3. On enregistre les commandes disponibles
-    // TODO : Tu peux automatiser ça plus tard en scannant le dossier commands
+    // ============================================================================
+    // ÉTAPE 3 : Enregistrement des commandes disponibles
+    // ============================================================================
+    /**
+     * Chaque commande est enregistrée auprès de l'application
+     * Les commandes seront automatiquement disponibles via la CLI
+     *
+     * Exemples d'utilisation :
+     * - mclp make service User
+     * - mclp generate component Button
+     * - mclp tree
+     * - mclp init
+     * - mclp ia "génère un service utilisateur"
+     */
     app.registerCommand(MakeCommand);
     app.registerCommand(TreeCommand);
     app.registerCommand(InitCommand);
     app.registerCommand(IaCommand);
     app.registerCommand(GenerateCommand);
 
-    // 4. On lance la machine
+    // TODO: Automatiser l'enregistrement en scannant le dossier commands
+    // Cela permettrait d'ajouter de nouvelles commandes sans modifier ce fichier
+
+    // ============================================================================
+    // ÉTAPE 4 : Lancement de l'application
+    // ============================================================================
+    // Parse les arguments de la ligne de commande et exécute la commande appropriée
     await app.run();
   } catch (error) {
-    // Sécurité ultime si le HandlerErrorService n'est pas encore prêt
+    /**
+     * Gestion d'erreur de dernier recours
+     * Cette gestion s'active uniquement si le HandlerErrorService n'est pas encore prêt
+     * ou si une erreur se produit avant son initialisation
+     */
     console.error("❌ Erreur fatale lors du démarrage de la CLI :");
     console.error(error);
     process.exit(1);
   }
 }
 
+// ============================================================================
 // Lancement du bootstrap
+// ============================================================================
+// Note : Utilisation de top-level await (nécessite Node.js >= 14.8 avec ESM)
 await bootstrap();

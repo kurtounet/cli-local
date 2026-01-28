@@ -1,4 +1,5 @@
 import { AiService } from "@/services/ai.service.js";
+import { AstService } from "@/services/ast.service.js";
 import { ToolService } from "@/services/tool.service.js";
 import { CaseService } from "@/services/case.service.js";
 import { ConfigService } from "@/services/config.service.js";
@@ -14,13 +15,30 @@ import { IAppContext, ICliConfig } from "../types/context.interface.js";
 import { DataManagerService } from "@/services/data-manager.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
-import { IBaseService } from "@/types/base-service.interface.js";
+import { IBaseService } from "@/types/services/base-service.interface.js";
 
+/**
+ * Builder pour la construction du contexte de l'application
+ * Responsable de l'instanciation, l'enregistrement et l'initialisation de tous les services
+ */
 export class AppContextBuilder {
+  /** Conteneur de services pour l'injection de dépendances */
   private services = new ServicesContainer();
 
+  /**
+   * Construit le contexte complet de l'application
+   *
+   * Cette méthode suit un processus en 4 étapes :
+   * 1. Création de la structure de base du contexte
+   * 2. Instanciation de tous les services
+   * 3. Enregistrement des services dans le conteneur
+   * 4. Initialisation asynchrone de tous les services   *
+   * @returns Le contexte de l'application prêt à l'emploi
+   */
   public async buildContext(): Promise<IAppContext> {
-    // 1. On prépare le shell du contexte
+    // ============================================================================
+    // ÉTAPE 1 : Préparation du shell du contexte
+    // ============================================================================
     const cli = {
       name: "mclp",
       version: "1.0.0",
@@ -30,9 +48,15 @@ export class AppContextBuilder {
       config: this.getDefaultConfig(),
     } as unknown as IAppContext;
 
-    // 2. Instanciation (Chaque service reçoit le contexte)
-    // Ils implémentent tous IBaseService via leur classe parente
+    // ============================================================================
+    // ÉTAPE 2 : Instanciation de tous les services
+    // ============================================================================
+    // Chaque service reçoit le contexte complet et implémente IBaseService
+    // L'ordre d'instanciation n'est pas critique car les dépendances sont résolues
+    // via le contexte partagé
+
     cli.ai = new AiService(cli);
+    cli.ast = new AstService(cli);
     cli.case = new CaseService(cli);
     cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
@@ -47,20 +71,33 @@ export class AppContextBuilder {
     cli.templateService = new TemplateService(cli);
     cli.errorHandler = new HandlerErrorService(cli);
 
-    // 3. Enregistrement automatique dans le conteneur
-    this.registerAll(cli);
+    // ============================================================================
+    // ÉTAPE 3 : Enregistrement automatique dans le conteneur
+    // ============================================================================
+    this.registerAllServices(cli);
 
-    // 4. Initialisation de tous les services (puisqu'ils ont tous .init())
-    // C'est ici que l'interface IBaseService devient puissante
-    await this.initializeAllServices();
+    // ============================================================================
+    // ÉTAPE 4 : Initialisation asynchrone de tous les services
+    // ============================================================================
+    // Utilisation de la méthode du conteneur pour éviter la duplication de code
+    await this.services.initializeAll();
 
     return cli;
   }
 
-  private registerAll(ctx: IAppContext): void {
-    // On mappe les propriétés du contexte qui sont des services
-    const serviceEntries = [
+  /**
+   * Enregistre tous les services du contexte dans le conteneur
+   * Permet l'injection de dépendances via le pattern Service Locator   *
+   * @param ctx - Le contexte contenant tous les services instanciés
+   */
+  private registerAllServices(ctx: IAppContext): void {
+    /**
+     * Mapping entre les noms de services (clés du conteneur) et leurs instances
+     * Le nom de service est utilisé pour la récupération via services.get<T>(name)
+     */
+    const serviceEntries: readonly [string, IBaseService][] = [
       ["AiService", ctx.ai],
+      ["AstService", ctx.ast],
       ["LoggerService", ctx.logger],
       ["FileSystemService", ctx.fileSystem],
       ["CaseService", ctx.case],
@@ -74,24 +111,28 @@ export class AppContextBuilder {
       ["ArchitectureService", ctx.architecture],
       ["TemplateService", ctx.templateService],
       ["HandlerErrorService", ctx.errorHandler],
-    ] as const;
+    ];
 
+    // Enregistrement de chaque service dans le conteneur
     for (const [name, instance] of serviceEntries) {
-      this.services.register(name, instance as IBaseService);
+      this.services.register(name, instance);
     }
   }
 
-  private async initializeAllServices(): Promise<void> {
-    // On récupère tous les services enregistrés et on lance leur init()
-    const allServices = this.services.getAll(); // ou this.services.getAll(); // Suppose que tu as une méthode getAll()
-    await Promise.all(allServices.map((s) => s.init()));
-  }
-
+  /**
+   * Retourne la configuration par défaut de la CLI
+   * Ces valeurs peuvent être surchargées par un fichier de configuration   *
+   * @returns Configuration par défaut
+   */
   private getDefaultConfig(): ICliConfig {
     return {
+      /** Chemin local des templates du projet */
       templatesPath: "./templates",
+      /** Chemin global des templates partagés (home directory) */
       globalTemplatesPath: "~/.scrofolder",
+      /** Niveau de log (debug, info, warn, error) */
       logLevel: "info",
+      /** Thème de la CLI */
       theme: "default",
     };
   }

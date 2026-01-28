@@ -11,7 +11,7 @@ export class InitCommand extends BaseCommand {
     },
   ];
 
-  public async execute(args: string[], options: any): Promise<void> {
+  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
     console.log("Options reçues:", options);
     const targetDir = this.cli.config.templatesPath;
 
@@ -20,9 +20,7 @@ export class InitCommand extends BaseCommand {
     const exists = await this.cli.fileSystem.exists(targetDir);
 
     if (exists && !options.force) {
-      this.logger.warn(
-        `Le dossier '${targetDir}' existe déjà. Utilisez --force pour écraser.`,
-      );
+      this.logger.warn(`Le dossier '${targetDir}' existe déjà. Utilisez --force pour écraser.`);
       return;
     }
 
@@ -35,8 +33,6 @@ export class InitCommand extends BaseCommand {
       JSON.stringify({ name: "template-exemple", version: "1.0.0" }, null, 2),
     );
 
-    this.logger.success(
-      `ScroFolder initialisé avec succès dans : ${targetDir}`,
-    );
+    this.logger.success(`ScroFolder initialisé avec succès dans : ${targetDir}`);
   }
 }

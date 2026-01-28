@@ -1,50 +1,41 @@
+import { IAppContext } from "./context.interface.js";
+
 /**
- * Interface pour définir la structure d'une commande CLI.
- * Chaque commande doit implémenter cette interface pour être reconnue par l'application.
+ * Interface représentant une option de commande CLI
+ */
+export interface ICommandOption {
+  /** Flags de l'option (ex: "-f, --force") */
+  flags: string;
+  /** Description de l'option */
+  description: string;
+  /** Valeur par défaut optionnelle */
+  defaultValue?: unknown;
+}
+
+/**
+ * Interface pour une instance de commande
+ * Toutes les commandes doivent implémenter cette interface
  */
 export interface ICommand {
-  /**
-   * Le nom de la commande (ex: 'generate', 'make').
-   */
+  /** Nom de la commande (ex: "generate", "make") */
   name: string;
-  /**
-   * Une brève description de ce que fait la commande.
-   */
+  /** Description de la commande */
   description: string;
-  /**
-   * Des alias optionnels pour la commande, permettant de l'invoquer avec d'autres noms.
-   */
+  /** Signature des arguments (ex: "<type> <name>" ou "[args...]") */
+  arguments?: string;
+  /** Alias de la commande (ex: ["g"] pour "generate") */
   aliases?: string[];
-  /**
-   * Les options disponibles pour cette commande.
-   */
+  /** Options disponibles pour la commande */
   options?: ICommandOption[];
-  /**
-   * La méthode principale d'exécution de la commande.
-   * @param args - Un tableau de chaînes de caractères représentant les arguments positionnels passés à la commande.
-   * @param options - Un objet contenant les valeurs des options de la commande.
-   */
+  /** Méthode d'exécution de la commande */
   execute(args: string[], options: Record<string, unknown>): Promise<void>;
 }
 
 /**
- * Interface pour définir la structure d'une option de commande CLI.
+ * Interface pour une classe de commande
+ * Utilisée pour l'instanciation dynamique des commandes
  */
-export interface ICommandOption {
-  /**
-   * Les drapeaux de l'option (ex: '-v, --version').
-   */
-  flags: string;
-  /**
-   * Une description de l'option.
-   */
-  description: string;
-  /**
-   * La valeur par défaut de l'option si elle n'est pas spécifiée.
-   */
-  defaultValue?: unknown;
-  /**
-   * Indique si l'option est obligatoire.
-   */
-  required?: boolean;
+export interface ICommandClass {
+  /** Constructeur qui prend le contexte de l'application */
+  new (context: IAppContext): ICommand;
 }

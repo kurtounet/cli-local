@@ -3,8 +3,7 @@ import { ValidationError } from "@/errors/cli-errors.js";
 
 export class MakeCommand extends BaseCommand {
   public name = "make";
-  public description =
-    "Génère un nouvel élément de la CLI (Service, Command, Template)";
+  public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
   public arguments = "<type> [names...]";
   public aliases = ["m"];
 
@@ -23,16 +22,14 @@ export class MakeCommand extends BaseCommand {
 
   private readonly actions = ["service", "command", "template", "plugin"];
 
-  public async execute(args: string[], options: any): Promise<void> {
+  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
     const [type, ...names] = args;
     console.log("Arguments reçus:", args);
     console.log("Options reçues:", options);
 
     // 1. Mode interactif si aucun type
     if (!type) {
-      this.logger.info(
-        "Modes interactifs disponibles : " + this.actions.join(", "),
-      );
+      this.cli.logger.info("Modes interactifs disponibles : " + this.actions.join(", "));
       // Ici tu pourrais appeler Inquirer pour demander le type
       return;
     }
@@ -41,9 +38,7 @@ export class MakeCommand extends BaseCommand {
 
     // 2. Validation
     if (!this.actions.includes(normalizedType)) {
-      throw new ValidationError(
-        `Type invalide. Choix : ${this.actions.join(", ")}`,
-      );
+      throw new ValidationError(`Type invalide. Choix : ${this.actions.join(", ")}`);
     }
 
     // 3. Gestion multiple (noms séparés par espaces ou virgules)
@@ -53,7 +48,7 @@ export class MakeCommand extends BaseCommand {
       .filter((n) => n.length > 0);
 
     if (namesArray.length === 0) {
-      this.logger.warn("Veuillez fournir au moins un nom.");
+      this.cli.logger.warn("Veuillez fournir au moins un nom.");
       return;
     }
 
@@ -62,6 +57,6 @@ export class MakeCommand extends BaseCommand {
       await this.cli.generator.newComponent(normalizedType, name, options);
     }
 
-    this.logger.success("✅ Opération terminée.");
+    this.cli.logger.success("✅ Opération terminée.");
   }
 }

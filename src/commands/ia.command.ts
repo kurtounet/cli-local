@@ -1,9 +1,7 @@
 import { BaseCommand } from "./BaseCommand.js";
-import { ValidationError } from "@/errors/cli-errors.js";
-
 export class IaCommand extends BaseCommand {
   public name = "ia";
-  public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
+  public description = "Set pour l'IA";
   public arguments = "<type> [names...]";
   public aliases = ["i"];
 
@@ -20,8 +18,8 @@ export class IaCommand extends BaseCommand {
     },
   ];
 
-  public async execute(args: string[], options: any): Promise<void> {
+  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
     const [type, ...names] = args;
-    this.logger.success("✅ ia Création de ia : Opération terminée.");
+    this.cli.logger.success("✅ Opération terminée.");
   }
 }

@@ -28,9 +28,7 @@ export class App {
    * Cette méthode est appelée au démarrage pour intercepter toutes les erreurs non gérées
    */
   private setupErrorHandling(): void {
-    const errorHandler = this.cli.services.get<HandlerErrorService>(
-      "HandlerErrorService",
-    );
+    const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
     if (errorHandler) {
       errorHandler.setupGlobalHandlers();
     }
@@ -51,7 +49,7 @@ export class App {
 
     // Récupération de la signature des arguments (ex: "<type> <name>" ou "[args...]")
     // Par défaut, on accepte un nombre illimité d'arguments optionnels
-    const signature: string = cmdInstance.arguments || "[args...]";
+    const signature: string = cmdInstance.arguments ?? "[args...]";
 
     // Création de la commande dans Commander.js
     const cmd = this.program
@@ -82,19 +80,14 @@ export class App {
          * On filtre donc pour ne garder que les vraies valeurs
          */
         const cleanArgs = args
-          .filter(
-            (arg) =>
-              (arg !== cmd && typeof arg !== "object") || Array.isArray(arg),
-          )
+          .filter((arg) => (arg !== cmd && typeof arg !== "object") || Array.isArray(arg))
           .flat() as string[];
 
         // Exécution de la commande avec les arguments nettoyés et les options
         await cmdInstance.execute(cleanArgs, options);
       } catch (error) {
         // En cas d'erreur, on utilise le gestionnaire d'erreurs centralisé
-        this.cli.services
-          .get<HandlerErrorService>("HandlerErrorService")
-          .handle(error as Error);
+        this.cli.services.get<HandlerErrorService>("HandlerErrorService").handle(error as Error);
       }
     });
   }
@@ -109,9 +102,7 @@ export class App {
       await this.program.parseAsync(process.argv);
     } catch (error) {
       // En cas d'erreur fatale, on utilise le gestionnaire d'erreurs
-      const errorHandler = this.cli.services.get<HandlerErrorService>(
-        "HandlerErrorService",
-      );
+      const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
       if (errorHandler) {
         errorHandler.handle(error as Error);
       } else {

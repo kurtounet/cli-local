@@ -3,11 +3,10 @@ import { BaseCommand } from "./BaseCommand.js";
 
 export class GenerateCommand extends BaseCommand {
   public name = "generate";
-  public description =
-    "Génère des composants (service, command, template) pour la CLI";
+  public description = "Génère des composants (service, command, template) pour la CLI";
   public aliases = ["g"];
 
-  public async execute(args: string[]): Promise<void> {
+  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
     const [type, ...name] = args;
     /*
     if (!type || !name) {

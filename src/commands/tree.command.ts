@@ -4,13 +4,38 @@ import { ValidationError } from "@/errors/cli-errors.js";
 
 export class TreeCommand extends BaseCommand {
   public name = "tree";
-  public description = "Génère l'arborecence du dossier courant en json, md";
+  public description = "Génère l'arborecence du dossier <pathIn> en json, md";
   public arguments = "<type> <pathIn> [pathOut]";
   public aliases = ["t"];
 
   private readonly extensions = ["json", "md"];
 
   public options = [
+    {
+      flags: "-c, --code",
+      description: "Inclure les métadonnées des fichiers de code",
+      defaultValue: false,
+    },
+    {
+      flags: "-m, --metadata",
+      description: "Inclure les métadonnées des fichiers",
+      defaultValue: false,
+    },
+    {
+      flags: "-l, --level",
+      description: "Niveau de profondeur de l'arborecence",
+      defaultValue: 0,
+    },
+    {
+      flags: "-s, --save",
+      description: "Sauvegarder l'arborecence dans un fichier",
+      defaultValue: false,
+    },
+    {
+      flags: "-o, --output <path>",
+      description: "Chemin de sortie",
+      defaultValue: ".",
+    },
     {
       flags: "-f, --force",
       description: "Écraser les fichiers existants",
@@ -23,7 +48,7 @@ export class TreeCommand extends BaseCommand {
     },
   ];
 
-  public async execute(args: string[], options: any): Promise<void> {
+  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
     // 1. Destructure type and the remaining path arguments
     const [type, ...pathArgs] = args;
 
@@ -40,8 +65,7 @@ export class TreeCommand extends BaseCommand {
       const pathIn = path.resolve(pathArgs[0] || ".");
 
       // 4. Handle pathOut: Default to pathIn if pathOut is missing or "."
-      const pathOut =
-        pathArgs[1] && pathArgs[1] !== "." ? path.resolve(pathArgs[1]) : pathIn;
+      const pathOut = pathArgs[1] && pathArgs[1] !== "." ? path.resolve(pathArgs[1]) : pathIn;
 
       this.cli.logger.info(`Processing: ${pathIn} -> ${pathOut} (${type})`);
 

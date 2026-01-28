@@ -61,7 +61,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
       case "service":
         return "src/services";
       case "interface":
-        return "src/types";
+        return "src/types/services";
       case "command":
         return "src/commands";
       case "template":
@@ -105,16 +105,25 @@ export class GeneratorService extends BaseService implements IGeneratorService {
     const className = this.cli.case.toPascalCase(newName);
     const serviceName = `${this.cli.case.toKebabCase(newName)}-service`;
     return `import { BaseService } from "./base-service.service.js";      
-      import { I${className}Service } from "@/types/${serviceName}.interface.js";
-      
-      export class ${className}Service extends BaseService implements I${className}Service {
-      }
+import { I${className}Service } from "@/types/services/${serviceName}.interface.js";
+
+export class ${className}Service extends BaseService implements I${className}Service {
+  readonly serviceName = "${className}Service";
+
+  public async init(): Promise<void> {
+    // Implémentation par défaut vide
+    // return Promise.resolve();
+  }
+  }
       `;
   }
 
   private getTemplateContentInterfaceService(name: string): string {
     const className = this.cli.case.toPascalCase(name);
-    return `export interface I${className}Service {}`;
+    return `export interface I${className}Service {
+serviceName: string;
+init(): Promise<void>
+}`;
   }
 
   private async save(
@@ -122,7 +131,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
     content: string,
     options: IGenerateOptions,
   ): Promise<void> {
-    const exists = await this.cli.fileSystem.exists(targetPath);
+    const exists = this.cli.fileSystem.exists(targetPath);
     if (exists && !options.force) {
       this.cli.logger.warn(`Le fichier ${targetPath} existe déjà. Saute.`);
       return;

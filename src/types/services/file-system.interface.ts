@@ -10,6 +10,7 @@ export interface IFileSystemService {
    * Nom du service.
    */
   serviceName: string;
+  init(): Promise<void>;
   /**
    * Une liste de répertoires à exclure lors de certaines opérations (ex: parcours d'arborescence).
    */
@@ -19,7 +20,7 @@ export interface IFileSystemService {
    * @param dirPath - Le chemin du répertoire dont on veut l'arborescence.
    * @returns Une chaîne de caractères représentant l'arborescence.
    */
-  getDirectoryTree(dirPath: string): IFileNode;
+  getDirectoryTree(dirPath: string): Promise<IFileNode>;
   /**
    * Résout une séquence de segments de chemin en un chemin absolu ou relatif normalisé.
    * @param segments - Les segments de chemin à résoudre.
@@ -50,7 +51,7 @@ export interface IFileSystemService {
    * @param destination - Le chemin de destination.
    * @returns Une promesse qui se résout une fois la copie terminée.
    */
-  copy(source: string, destination: string): void;
+  copy(source: string, destination: string): Promise<void>;
   /**
    * Écrit du contenu dans un fichier de manière asynchrone. Écrase le fichier s'il existe.
    * @param filePath - Le chemin du fichier dans lequel écrire.

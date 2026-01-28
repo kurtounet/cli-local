@@ -131,7 +131,7 @@ export class AppContextBuilder {
       /** Chemin global des templates partagés (home directory) */
       globalTemplatesPath: "~/.scrofolder",
       /** Niveau de log (debug, info, warn, error) */
-      logLevel: "info",
+      logLevel: "debug",
       /** Thème de la CLI */
       theme: "default",
     };

@@ -153,36 +153,72 @@ export class FileSystemService extends BaseService implements IFileSystemService
     await this.writeFile(filePath, content);
   }
 
-  /**
-   * Generates a directory tree structure
-   * @param dirPath - Root directory path
-   * @returns File node representing the directory tree
-   */
-  public async getDirectoryTree(dirPath: string): Promise<IFileNode> {
+  public async getDirectoryTree(
+    dirPath: string,
+    level = 0,
+    maxLevel = 0, // 0 = infini
+    withMetadata = true,
+    config: { excludedDirs: string[]; analyzeExtensions: string[] },
+  ): Promise<IFileNode | null> {
     this.validatePath(dirPath, "dirPath");
+
+    const name = path.basename(dirPath);
+
+    // 1. Vérification des exclusions via le tableau du JSON
+    if (config.excludedDirs.includes(name)) {
+      return null;
+    }
+
     const stats = await fs.stat(dirPath);
+    const isDirectory = stats.isDirectory();
+    const extension = isDirectory ? "" : path.extname(name).toLowerCase();
+
     const info: IFileNode = {
-      path: path.basename(dirPath),
-      name: path.basename(dirPath),
-      level: 0,
-      type: stats.isDirectory() ? "directory" : "file",
-      size: stats.isDirectory() ? 0 : stats.size,
+      path: dirPath,
+      name: name,
+      level: level,
+      type: isDirectory ? "directory" : "file",
+      size: isDirectory ? 0 : stats.size,
       content: "",
-      extension: path.extname(dirPath),
+      extension: extension,
       metadata: [],
       children: [],
     };
 
-    if (stats.isDirectory()) {
-      const children = await fs.readdir(dirPath);
-      info.children = await Promise.all(
-        children.map((child) => this.getDirectoryTree(path.join(dirPath, child))),
+    const reachLimit = maxLevel > 0 && level >= maxLevel;
+
+    if (isDirectory && !reachLimit) {
+      const childrenNames = await fs.readdir(dirPath);
+
+      const childrenResults = await Promise.all(
+        childrenNames.map((child) =>
+          this.getDirectoryTree(
+            path.join(dirPath, child),
+            level + 1,
+            maxLevel,
+            withMetadata,
+            config,
+          ),
+        ),
       );
+
+      info.children = childrenResults.filter((child): child is IFileNode => child !== null);
+      info.size = info.children.reduce((acc, child) => acc + (child.size || 0), 0);
+    } else if (!isDirectory) {
+      // 2. Analyse Metadata si l'extension est dans la liste du JSON
+      if (withMetadata && config.analyzeExtensions.includes(extension)) {
+        try {
+          const sourceCode = await fs.readFile(dirPath, "utf-8");
+          info.content = sourceCode;
+          info.metadata = this.cli.ast.analyzeFileMetadata(dirPath, sourceCode);
+        } catch (err) {
+          console.warn(`Erreur lecture metadata: ${name}`);
+        }
+      }
     }
 
     return this.filterTree(info);
   }
-
   /**
    * Filters out excluded directories from the tree
    * @param node - File node to filter

@@ -1,3 +1,4 @@
+import { IFileNode } from "../commun/file-node.interface.js";
 import { IBaseService } from "./base-service.interface.js";
 
 /**
@@ -15,4 +16,6 @@ export interface IToolService extends IBaseService {
    * @returns Une chaîne de caractères indiquant le résultat de l'opération.
    */
   rename(paths: string[], type: string): string;
+
+  generateAsciiTree(node: IFileNode, viewContent?: boolean, prefix?: string): string;
 }

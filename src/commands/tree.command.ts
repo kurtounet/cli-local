@@ -1,11 +1,25 @@
 import path from "node:path";
 import { BaseCommand } from "./BaseCommand.js";
-import { ValidationError } from "@/errors/cli-errors.js";
+import { FilesystemError, ValidationError } from "@/errors/cli-errors.js";
+import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
-
-export class TreeCommand extends BaseCommand {
+export interface ITreeOptions extends AnyOptions {
+  code?: boolean;
+  view?: boolean;
+  metadata?: boolean;
+  level?: number;
+  save?: boolean;
+  output?: string;
+  force?: boolean;
+  dryRun?: boolean;
+}
+export class TreeCommand extends BaseCommand<ITreeOptions> {
   public name = "tree";
-  public description = "Génère l'arborecence du dossier <pathIn> en json, md";
+  public description = `Génère l'arborecence du dossier <pathIn> en json, md
+
+  Exemple: mclp tree -c -m -l 1 -s -o ./src -f ./src/tests
+
+  `;
   public arguments = "<type> <pathIn> [pathOut]";
   public aliases = ["t"];
 
@@ -15,6 +29,12 @@ export class TreeCommand extends BaseCommand {
     {
       flags: "-c, --code",
       description: "Inclure les métadonnées des fichiers de code",
+      type: "boolean",
+      defaultValue: false,
+    },
+    {
+      flags: "-v, --view",
+      description: "Voir l'arborecence dans la console",
       type: "boolean",
       defaultValue: false,
     },
@@ -56,11 +76,21 @@ export class TreeCommand extends BaseCommand {
     },
   ];
 
-  async execute(
-    args: string[],
-    options: Record<string, unknown>,
-  ): Promise<void> {
+  async execute(args: string[], options: ITreeOptions): Promise<void> {
+    const excludedDirs = ["node_modules", ".git", "dist", ".vscode", ".doc"];
+    const analyzeExtensions = [".ts", ".js"];
     // 1. Destructure type and the remaining path arguments
+    // const [type, ...pathArgs] = args;
+    this.validateArgs(args, 2, "Usage: mclp generate <target> <name...> [options]");
+
+    const save = this.hasOption(options, "save");
+    const view = this.hasOption(options, "view");
+    // const code = this.hasOption(options, "code");
+    const force = this.hasOption(options, "force");
+    const level = this.hasOption(options, "level");
+    const dryRun = this.hasOption(options, "dryRun");
+    const metadata = this.hasOption(options, "metadata");
+    const output = this.getOption(options, "output", "./");
     const [type, ...pathArgs] = args;
 
     // 2. Validation
@@ -71,26 +101,54 @@ export class TreeCommand extends BaseCommand {
     }
 
     try {
-      // 3. Extract paths from pathArgs (which starts AFTER the type)
-      // pathArgs[0] is <pathIn>, pathArgs[1] is [pathOut]
-      const pathIn = path.resolve(pathArgs[0] || ".");
+      const pathIn = path.resolve(pathArgs[0] ?? ".");
+      const argOut = pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
+      const pathOut = path.resolve(argOut ?? output ?? pathIn);
 
-      // 4. Handle pathOut: Default to pathIn if pathOut is missing or "."
-      const pathOut =
-        pathArgs[1] && pathArgs[1] !== "." ? path.resolve(pathArgs[1]) : pathIn;
+      const fileName = path.resolve(pathOut, `tree.${type}`);
 
-      this.cli.logger.info(`Processing: ${pathIn} -> ${pathOut} (${type})`);
+      this.cli.logger.info(`Processing: ${pathIn} -> ${fileName} (${type})`);
 
-      // 5. Action
-      // await this.cli.architecture.getDirectoryTree(
-      //   pathIn,
-      //   pathOut,
-      //   type,
-      //   "save",
-      // );
-      await this.cli.architecture.createDirectoryTree(pathIn, pathOut);
-    } catch (error: any) {
-      this.cli.logger.error(error.message);
+      if (!this.cli.fileSystem.exists(pathIn)) {
+        throw new FilesystemError(`Le dossier '${pathIn}' n'existe pas.`);
+      }
+
+      const tree = await this.cli.fileSystem.getDirectoryTree(pathIn, 0, 0, metadata, {
+        excludedDirs,
+        analyzeExtensions,
+      });
+      if (!tree) {
+        throw new FilesystemError(`Le dossier '${pathIn}' est vide.`);
+      }
+      if (!save) {
+        if (view) {
+          const md = this.cli.tool.generateAsciiTree(tree, true);
+          this.cli.logger.info(md);
+        }
+        return;
+      }
+
+      const content =
+        type === "json"
+          ? JSON.stringify(tree, null, 2)
+          : this.cli.tool.generateAsciiTree(tree, view);
+
+      if (this.cli.fileSystem.exists(fileName) && !force) {
+        throw new FilesystemError(
+          `Le fichier '${fileName}' existe déjà. Utilise --force pour écraser.`,
+        );
+      }
+
+      if (dryRun) {
+        this.cli.logger.info(`[dry-run] write ${fileName}`);
+        return;
+      }
+
+      await this.cli.fileSystem.writeFile(fileName, content);
+      this.cli.logger.success(`Fichier généré: ${fileName}`);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      this.cli.logger.error(message);
     }
   }
 }

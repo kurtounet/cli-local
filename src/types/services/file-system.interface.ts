@@ -16,11 +16,21 @@ export interface IFileSystemService {
    */
   excludedDirs: string[];
   /**
-   * Récupère une représentation textuelle de l'arborescence d'un répertoire.
-   * @param dirPath - Le chemin du répertoire dont on veut l'arborescence.
-   * @returns Une chaîne de caractères représentant l'arborescence.
+   * Recursively builds a directory tree from a given path
+   * @param dirPath - Path of directory to start from
+   * @param level - Current level of recursion (default: 0)
+   * @param maxLevel - Maximum level of recursion (default: 0 = infinite)
+   * @param withMetadata - Whether to include metadata in the tree (default: true)
+   * @param config - Configuration object containing excluded directories and analyze extensions
+   * @returns Root node of the directory tree
    */
-  getDirectoryTree(dirPath: string): Promise<IFileNode>;
+  getDirectoryTree(
+    dirPath: string,
+    level: number,
+    maxLevel: number, // 0 = infini
+    withMetadata: boolean,
+    config: { excludedDirs: string[]; analyzeExtensions: string[] },
+  ): Promise<IFileNode | null>;
   /**
    * Résout une séquence de segments de chemin en un chemin absolu ou relatif normalisé.
    * @param segments - Les segments de chemin à résoudre.

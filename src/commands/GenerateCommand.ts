@@ -1,80 +1,77 @@
-import { ValidationError } from "@/errors/cli-errors.js";
-import { BaseCommand } from "./BaseCommand.js";
+import { BaseCommand } from "@/commands/BaseCommand.js";
+import type { AnyOptions } from "@/types/cli-options.type.js";
+import type { ICommandOption } from "@/types/command.interface.js";
 
-export class GenerateCommand extends BaseCommand {
-  public name = "generate";
-  public description = "Génère des composants (service, command, template) pour la CLI";
-  public aliases = ["g"];
+export interface IGenerateOptions extends AnyOptions {
+  force?: boolean;
+  output?: string;
+}
 
-  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
-    const [type, ...name] = args;
-    /*
-    if (!type || !name) {
-      throw new ValidationError(
-        "Usage: mclp generate|g <type> <name1> <name2>... (ex: mclp g service Auth User Post)",
-      );
+type Target = "service" | "command" | "template" | "framework";
+
+export class GenerateCommand extends BaseCommand<IGenerateOptions> {
+  name = "generate";
+  description = "Génère des artefacts (service, command, template, framework)";
+  arguments = "<target> <name...>";
+  aliases = ["g"];
+
+  options = [
+    { flags: "-f, --force", description: "Écrase si existe", type: "boolean", defaultValue: false },
+    { flags: "-o, --output <dir>", description: "Répertoire de sortie", type: "string" },
+  ] satisfies ICommandOption[];
+
+  async execute(args: string[], options: IGenerateOptions): Promise<void> {
+    // target + au moins 1 name
+    this.validateArgs(args, 2, "Usage: mclp generate <target> <name...> [options]");
+
+    const target = String(args[0]).toLowerCase() as Target;
+    const names = args.slice(1).map(String).filter(Boolean);
+
+    const force = this.hasOption(options, "force");
+    const output = this.getOption(options, "output", "./");
+
+    if (!["service", "command", "template", "framework"].includes(target)) {
+      throw new Error(`Target invalide "${target}". Valides: service|command|template|framework`);
     }
 
-    this.cli.logger.info(`Génération d'un ${type} nommé : ${name}...`);
+    for (const name of names) {
+      switch (target) {
+        case "service":
+          await this.generateService(name, { output, force });
+          break;
+        case "command":
+          await this.generateCommand(name, { output, force });
+          break;
+        case "template":
+          await this.generateTemplate(name, { output, force });
+          break;
+        case "framework":
+          await this.generateFramework(name, { output, force });
+          break;
+      }
 
-    switch (type.toLowerCase()) {
-      case "service":
-        await this.generateService(name);
-        break;
-      case "command":
-        await this.generateCommand(name);
-        break;
-      case "template":
-        await this.generateTemplate(name);
-        break;
-      default:
-        throw new ValidationError("Types valides : service, command, template");
+      this.success(`${target} "${name}" généré dans ${output}`);
     }
   }
 
-  private async generateService(name: string[]) {
-    const fileName = `${name.toLowerCase()}.service.ts`;
-    const targetPath = `./src/services/${fileName}`;
-
-    const content = `import { BaseService } from "./base-service.service.js";
-
-export class ${name}Service extends BaseService {
-  // Ajoutez votre logique ici
-}
-`;
-    await this.cli.fileSystem.writeFile(targetPath, content);
-    this.cli.logger.success(`Service créé : ${targetPath}`);
-    this.cli.logger.warn(`N'oubliez pas de l'enregistrer dans AppContextBuilder.ts !`);
+  // ---- Stubs : à brancher sur tes services réels
+  private async generateService(name: string, ctx: { output: string; force: boolean }) {
+    this.info(`(stub) service: ${name} -> ${ctx.output} force=${ctx.force}`);
+    // await this.generator.generateService(...)
   }
 
-  private async generateCommand(name: string[]) {
-    const fileName = `${name}Command.ts`;
-    const targetPath = `./src/commands/${fileName}`;
-
-    const content = `import { BaseCommand } from "./BaseCommand.js";
-
-export class ${name}Command extends BaseCommand {
-  public name = "${name.toLowerCase()}";
-  public description = "Description pour ${name}";
-
-  public async execute(args: string[], options: any): Promise<void> {
-    this.cli.logger.info("Exécution de ${name}...");
-  }
-}
-`;
-    await this.cli.fileSystem.writeFile(targetPath, content);
-    this.cli.logger.success(`Commande créée : ${targetPath}`);
+  private async generateCommand(name: string, ctx: { output: string; force: boolean }) {
+    this.info(`(stub) command: ${name} -> ${ctx.output} force=${ctx.force}`);
+    // await this.generator.generateCommand(...)
   }
 
-  private async generateTemplate(name: string[]) {
-    const targetPath = `${this.cli.config.templatesPath}/${name}/index.json`;
-    const defaultContent = JSON.stringify({ name, version: "1.0.0", files: [] }, null, 2);
-
-    await this.cli.fileSystem.createDirectory(`${this.cli.config.templatesPath}/${name}`);
-    await this.cli.fileSystem.writeFile(targetPath, defaultContent);
-    this.cli.logger.success(`Dossier template créé : ${this.cli.config.templatesPath}/${name}`);
+  private async generateTemplate(name: string, ctx: { output: string; force: boolean }) {
+    this.info(`(stub) template: ${name} -> ${ctx.output} force=${ctx.force}`);
+    // await this.templateService.createTemplate(...)
   }
 
-  */
+  private async generateFramework(name: string, ctx: { output: string; force: boolean }) {
+    this.info(`(stub) framework: ${name} -> ${ctx.output} force=${ctx.force}`);
+    // await this.generator.generateFramework(...)
   }
 }

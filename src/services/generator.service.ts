@@ -12,7 +12,11 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   /**
    * Génère les composant réel sur le disque
    */
-  public async newComponent(type: string, name: string, options: any): Promise<void> {
+  public async newComponent(
+    type: string,
+    name: string,
+    options: any,
+  ): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
     this.targetPath = path.join(this.cli.rootPath, this.folder, this.fileName);

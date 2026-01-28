@@ -18,7 +18,10 @@ export class IaCommand extends BaseCommand {
     },
   ];
 
-  async execute(args: string[], options: Record<string, unknown>): Promise<void> {
+  async execute(
+    args: string[],
+    options: Record<string, unknown>,
+  ): Promise<void> {
     const [type, ...names] = args;
     this.cli.logger.success("✅ Opération terminée.");
   }

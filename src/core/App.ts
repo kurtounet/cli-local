@@ -1,7 +1,8 @@
 import { Command } from "commander";
 import { IAppContext } from "../types/context.interface.js";
-import { ICommandClass, ICommand } from "../types/command.interface.js";
+import { ICommandClass, ICommand, ICommandOption } from "../types/command.interface.js";
 import { HandlerErrorService } from "../services/handler-error.service.js";
+import { AnyOptions } from "@/types/cli-options.type.js";
 
 /**
  * Classe principale de l'application CLI
@@ -57,37 +58,52 @@ export class App {
       .description(cmdInstance.description);
 
     // Enregistrement des alias de la commande (ex: "g" pour "generate")
-    if (cmdInstance.aliases && Array.isArray(cmdInstance.aliases)) {
+    if (cmdInstance.aliases?.length) {
       cmd.aliases(cmdInstance.aliases);
     }
 
     // Enregistrement des options de la commande (ex: --force, --dry-run)
-    if (cmdInstance.options && Array.isArray(cmdInstance.options)) {
+    if (cmdInstance.options?.length) {
       cmdInstance.options.forEach((opt) => {
-        cmd.option(opt.flags, opt.description, opt.defaultValue);
+        if (opt.type === "boolean") {
+          cmd.option(opt.flags, opt.description, opt.defaultValue ?? false);
+        } else {
+          cmd.option(opt.flags, opt.description);
+        }
       });
     }
 
-    // Configuration de l'action à exécuter lors de l'appel de la commande
-    cmd.action(async (...args: unknown[]) => {
+    cmd.action(async (...actionArgs: unknown[]) => {
+      const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
+
       try {
-        // Récupération des options passées à la commande
-        const options = cmd.opts();
+        // Commander passe généralement l'instance Command en dernier
+        const last = actionArgs[actionArgs.length - 1];
+        const positional: unknown[] =
+          last instanceof Command ? actionArgs.slice(0, -1) : actionArgs;
 
-        /**
-         * Nettoyage des arguments pour ne garder que les arguments positionnels
-         * Commander.js ajoute l'objet Command à la fin du tableau d'arguments
-         * On filtre donc pour ne garder que les vraies valeurs
-         */
-        const cleanArgs = args
-          .filter((arg) => (arg !== cmd && typeof arg !== "object") || Array.isArray(arg))
-          .flat() as string[];
+        // Si tu utilises "[args...]" commander peut donner un tableau
+        // const cleanArgs = positional.flat().map(String);
+        const cleanArgs = positional.flatMap((a: unknown): string[] => {
+          if (Array.isArray(a)) return a.map(String);
+          return [String(a)];
+        });
 
-        // Exécution de la commande avec les arguments nettoyés et les options
-        await cmdInstance.execute(cleanArgs, options);
+        const rawOptions = cmd.opts();
+        const options = this.coerceOptions(rawOptions, cmdInstance.options);
+
+        // IMPORTANT: utilise run() si disponible (BaseCommand)
+        if (typeof cmdInstance.run === "function") {
+          await cmdInstance.run(cleanArgs, options as AnyOptions);
+        } else {
+          await cmdInstance.execute(cleanArgs, options as AnyOptions);
+        }
       } catch (error) {
-        // En cas d'erreur, on utilise le gestionnaire d'erreurs centralisé
-        this.cli.services.get<HandlerErrorService>("HandlerErrorService").handle(error as Error);
+        if (errorHandler) errorHandler.handle(error as Error);
+        else {
+          console.error("❌ Erreur commande :", error);
+          process.exitCode = 1;
+        }
       }
     });
   }
@@ -111,5 +127,39 @@ export class App {
         process.exit(1);
       }
     }
+  }
+  public coerceOptions(
+    raw: Record<string, unknown>,
+    spec?: ICommandOption[],
+  ): Record<string, unknown> {
+    if (!spec?.length) return raw;
+
+    const out: Record<string, unknown> = { ...raw };
+
+    for (const opt of spec) {
+      const long = opt.flags
+        .split(/[ ,|]+/)
+        .find((f) => f.startsWith("--"))
+        ?.replace(/^--/, "")
+        ?.replace(/^no-/, "");
+
+      if (!long) continue;
+
+      // Defaults (si non fourni)
+      if (out[long] === undefined && "defaultValue" in opt && opt.defaultValue !== undefined) {
+        out[long] = opt.defaultValue;
+      }
+
+      // Cast number
+      if (opt.type === "number") {
+        const v = out[long];
+        if (typeof v === "string") {
+          const n = Number(v);
+          if (!Number.isNaN(n)) out[long] = n;
+        }
+      }
+    }
+
+    return out;
   }
 }

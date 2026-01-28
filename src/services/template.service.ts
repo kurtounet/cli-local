@@ -1,7 +1,10 @@
 import path from "path";
 import fs from "fs-extra";
 import { BaseService } from "./base-service.service.js";
-import { ITemplate, ITemplateService } from "@/types/services/template.interface.js";
+import {
+  ITemplate,
+  ITemplateService,
+} from "@/types/services/template.interface.js";
 
 export class TemplateService extends BaseService implements ITemplateService {
   readonly serviceName = "TemplateService";
@@ -52,7 +55,10 @@ export class TemplateService extends BaseService implements ITemplateService {
   /**
    * Utilitaire interne pour lister tous les fichiers d'un template
    */
-  private async listRecursiveFiles(dir: string, allFiles: string[] = []): Promise<string[]> {
+  private async listRecursiveFiles(
+    dir: string,
+    allFiles: string[] = [],
+  ): Promise<string[]> {
     const files = await fs.readdir(dir);
     for (const file of files) {
       const name = path.join(dir, file);
@@ -65,7 +71,10 @@ export class TemplateService extends BaseService implements ITemplateService {
     return allFiles;
   }
 
-  public compile(templateContent: string, data: Record<string, string>): string {
+  public compile(
+    templateContent: string,
+    data: Record<string, string>,
+  ): string {
     let result = templateContent;
 
     // Remplace toutes les occurrences de {{key}} par la valeur correspondante

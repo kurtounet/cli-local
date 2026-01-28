@@ -1,10 +1,9 @@
 import { App } from "./core/App.js";
-import { AppContextBuilder } from "./context/context.js";
-import { InitCommand } from "./commands/InitCommand.js";
 import { MakeCommand } from "./commands/make.command.js";
-import { GenerateCommand } from "./commands/GenerateCommand.js";
 import { TreeCommand } from "./commands/tree.command.js";
-import { IaCommand } from "./commands/ia.command.js";
+import { AppContextBuilder } from "./context/context.js";
+import { GenerateCommand } from "./commands/GenerateCommand.js";
+import { HandlerErrorService } from "./services/handler-error.service.js";
 
 /**
  * Point d'entrée principal de la CLI
@@ -24,6 +23,12 @@ async function bootstrap(): Promise<void> {
     // ainsi que la configuration de l'application
     const builder = new AppContextBuilder();
     const cli = await builder.buildContext();
+
+    // 1) init services
+    await cli.services.initializeAll();
+
+    // 2) setup handlers après init
+    cli.services.get<HandlerErrorService>("HandlerErrorService").setupGlobalHandlers();
 
     // ============================================================================
     // ÉTAPE 2 : Initialisation de l'application
@@ -47,9 +52,9 @@ async function bootstrap(): Promise<void> {
      */
     app.registerCommand(MakeCommand);
     app.registerCommand(TreeCommand);
-    app.registerCommand(InitCommand);
-    app.registerCommand(IaCommand);
     app.registerCommand(GenerateCommand);
+    // app.registerCommand(InitCommand);
+    // app.registerCommand(IaCommand);
 
     // TODO: Automatiser l'enregistrement en scannant le dossier commands
     // Cela permettrait d'ajouter de nouvelles commandes sans modifier ce fichier

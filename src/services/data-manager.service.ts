@@ -1,7 +1,10 @@
 import { BaseService } from "./base-service.service.js";
 import { IDataManagerService } from "@/types/services/data-manager-service.interface.js";
 
-export class DataManagerService extends BaseService implements IDataManagerService {
+export class DataManagerService
+  extends BaseService
+  implements IDataManagerService
+{
   readonly serviceName = "DataManagerService";
 
   // Surchargez init() seulement si nécessaire

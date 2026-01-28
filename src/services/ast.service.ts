@@ -20,7 +20,10 @@ export class AstService extends BaseService implements IAstService {
    * @param sourceCode - Le contenu textuel du fichier à analyser.
    * @returns Un tableau d'objets IMemberInfo.
    */
-  public analyzeFileMetadata(filePath: string, sourceCode: string): IMemberInfo[] {
+  public analyzeFileMetadata(
+    filePath: string,
+    sourceCode: string,
+  ): IMemberInfo[] {
     const members: IMemberInfo[] = [];
 
     // Création de l'Arbre de Syntaxe Abstraite (AST)

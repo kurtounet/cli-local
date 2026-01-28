@@ -1,6 +1,7 @@
 import path from "node:path";
 import { BaseCommand } from "./BaseCommand.js";
 import { ValidationError } from "@/errors/cli-errors.js";
+import { ICommandOption } from "@/types/command.interface.js";
 
 export class TreeCommand extends BaseCommand {
   public name = "tree";
@@ -10,40 +11,47 @@ export class TreeCommand extends BaseCommand {
 
   private readonly extensions = ["json", "md"];
 
-  public options = [
+  public options: ICommandOption[] = [
     {
       flags: "-c, --code",
       description: "Inclure les métadonnées des fichiers de code",
+      type: "boolean",
       defaultValue: false,
     },
     {
       flags: "-m, --metadata",
       description: "Inclure les métadonnées des fichiers",
+      type: "boolean",
       defaultValue: false,
     },
     {
       flags: "-l, --level",
       description: "Niveau de profondeur de l'arborecence",
+      type: "number",
       defaultValue: 0,
     },
     {
       flags: "-s, --save",
       description: "Sauvegarder l'arborecence dans un fichier",
+      type: "boolean",
       defaultValue: false,
     },
     {
       flags: "-o, --output <path>",
       description: "Chemin de sortie",
+      type: "string",
       defaultValue: ".",
     },
     {
       flags: "-f, --force",
       description: "Écraser les fichiers existants",
+      type: "boolean",
       defaultValue: false,
     },
     {
       flags: "-d, --dry-run",
       description: "Simuler la création sans écrire",
+      type: "boolean",
       defaultValue: false,
     },
   ];

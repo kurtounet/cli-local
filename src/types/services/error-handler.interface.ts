@@ -12,5 +12,5 @@ export interface IHandlerErrorService extends IBaseService {
   /**
    * Traite une erreur spécifique avec un message contextuel optionnel
    */
-  handle(error: Error, contextMessage?: string): void;
+  handle(error: unknown, contextMessage?: string): void;
 }

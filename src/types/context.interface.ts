@@ -1,18 +1,19 @@
-import { IArchitectureService } from "./architecture-service.interface.js";
-import { ICaseService } from "./case-service.interface.js";
-import { IConfigService } from "./config-service.interface.js";
-import { IHandlerErrorService } from "./error-handler.interface.js";
-import { IFileSystemService } from "./file-system.interface.js";
-import { IGeneratorService } from "./generator.interface.js";
-import { IAiService } from "./ai-service.interface.js"; // Correction du nom de fichier
-import { ILoggerService } from "./logger-service.interface.js";
-import { IPromptService } from "./prompt-service.interface.js";
-import { IServicesContainer } from "./services-container.interface.js";
-import { IStateService } from "./state-service.interface.js";
-import { ITemplateService } from "./template.interface.js";
-import { IToolService } from "./tool-service.interface.js";
-import { IDataManagerService } from "./data-manager-service.interface.js";
-import { IPluginService } from "./plugin-service.interface.js";
+import { IAiService } from "./services/ai-service.interface.js";
+import { IArchitectureService } from "./services/architecture-service.interface.js";
+import { IAstService } from "./services/ast-service.interface.js";
+import { ICaseService } from "./services/case-service.interface.js";
+import { IConfigService } from "./services/config-service.interface.js";
+import { IDataManagerService } from "./services/data-manager-service.interface.js";
+import { IHandlerErrorService } from "./services/error-handler.interface.js";
+import { IFileSystemService } from "./services/file-system.interface.js";
+import { IGeneratorService } from "./services/generator.interface.js";
+import { ILoggerService } from "./services/logger-service.interface.js";
+import { IPluginService } from "./services/plugin-service.interface.js";
+import { IPromptService } from "./services/prompt-service.interface.js";
+import { IServicesContainer } from "./services/services-container.interface.js";
+import { IStateService } from "./services/state-service.interface.js";
+import { ITemplateService } from "./services/template.interface.js";
+import { IToolService } from "./services/tool-service.interface.js";
 
 /**
  * Type définissant les noms des services principaux accessibles dans le conteneur de services.
@@ -47,6 +48,7 @@ export interface IAppContext {
   config: ICliConfig;
   services: IServicesContainer;
   ai: IAiService;
+  ast: IAstService;
   db: IDataManagerService;
   case: ICaseService;
   tool: IToolService;

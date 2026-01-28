@@ -1,7 +1,7 @@
 import { IBaseService } from "./base-service.interface.js";
 
 // src/types/error-handler.interface.ts
-export interface IHandlerErrorServic extends IBaseService {
+export interface IHandlerErrorService extends IBaseService {
   serviceName: string;
   init(): Promise<void>;
   /**

@@ -1,8 +1,10 @@
-import { IGeneratorService } from "@/types/generator.interface.js";
-import { BaseService } from "./base-service.service.js";
 import path from "path";
+import { BaseService } from "./base-service.service.js";
+import { IGeneratorService } from "@/types/services/generator.interface.js";
 
 export class GeneratorService extends BaseService implements IGeneratorService {
+  readonly serviceName = "GeneratorService";
+
   private content = "";
   private fileName = "";
   private folder = "";
@@ -10,11 +12,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   /**
    * Génère les composant réel sur le disque
    */
-  public async newComponent(
-    type: string,
-    name: string,
-    options: any,
-  ): Promise<void> {
+  public async newComponent(type: string, name: string, options: any): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
     this.targetPath = path.join(this.cli.rootPath, this.folder, this.fileName);
@@ -119,7 +117,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   private async save(targetPath: string, content: string, options: any) {
     const exists = await this.cli.fileSystem.exists(targetPath);
     if (exists && !options.force) {
-      this.logger.warn(`Le fichier ${targetPath} existe déjà. Saute.`);
+      this.cli.logger.warn(`Le fichier ${targetPath} existe déjà. Saute.`);
       return;
     }
     this.cli.fileSystem.writeFile(targetPath, content);

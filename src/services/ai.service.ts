@@ -1,20 +1,18 @@
-import { IAiService } from "@/types/ai-service.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { BaseService } from "./base-service.service.js";
+import { IAiService } from "@/types/services/ai-service.interface.js";
 
 /**
  * Service gérant les interactions avec l'IA et le système de plugins dynamiques.
  * Implémente une architecture de type 'Agentic' où l'IA peut lire, écrire et exécuter du code.
  */
 export class AiService extends BaseService implements IAiService {
-  // Une propriété pour garder une trace du nom du service (utile pour le logging)
   readonly serviceName = "AiService";
 
-  /** @private Chemin vers le répertoire de stockage des plugins */
   private get pluginsPath(): string {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
@@ -43,8 +41,7 @@ export class AiService extends BaseService implements IAiService {
    */
   async chat(prompt: string): Promise<string> {
     const tools = await this.listTools(); // Récupère les noms des plugins
-    if (!process.env.GEMINI_API_KEY)
-      return "Erreur : Clé GEMINI_API_KEY manquante.";
+    if (!process.env.GEMINI_API_KEY) return "Erreur : Clé GEMINI_API_KEY manquante.";
 
     // 1. On prépare le contexte MCP pour l'IA
     const mcpContext = `
@@ -80,9 +77,7 @@ export class AiService extends BaseService implements IAiService {
       const module: string = await import(`${fileUrl}?update=${Date.now()}`);
 
       if (!module.default) {
-        throw new Error(
-          `Le plugin ${name} ne possède pas d'exportation 'default'.`,
-        );
+        throw new Error(`Le plugin ${name} ne possède pas d'exportation 'default'.`);
       }
 
       const plugin = new module.default() as unknown;
@@ -94,8 +89,7 @@ export class AiService extends BaseService implements IAiService {
       return await plugin.execute(args, {
         ai: this,
         fs: fs,
-        log: (msg: string) =>
-          console.log(`[PLUGIN:${name.toUpperCase()}] ${msg}`),
+        log: (msg: string) => console.log(`[PLUGIN:${name.toUpperCase()}] ${msg}`),
       });
     } catch (error: any) {
       throw new Error(`Erreur d'exécution [${name}]: ${error.message}`);
@@ -122,8 +116,7 @@ export class AiService extends BaseService implements IAiService {
       return await plugin.execute(args, {
         ai: this,
         fs: fs,
-        log: (msg: string) =>
-          console.log(`[MCP:TOOL:${name.toUpperCase()}] ${msg}`),
+        log: (msg: string) => console.log(`[MCP:TOOL:${name.toUpperCase()}] ${msg}`),
       });
     } catch (error: any) {
       throw new Error(`Erreur MCP Tool [${name}]: ${error.message}`);

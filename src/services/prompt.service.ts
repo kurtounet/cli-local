@@ -1,8 +1,10 @@
 import inquirer from "inquirer";
 import { BaseService } from "./base-service.service.js";
-import { IPromptService } from "@/types/prompt-service.interface.js";
+import { IPromptService } from "@/types/services/prompt-service.interface.js";
 
 export class PromptService extends BaseService implements IPromptService {
+  readonly serviceName = "PromptService";
+
   /**
    * Pose une question simple (texte)
    */

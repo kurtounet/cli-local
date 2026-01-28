@@ -1,8 +1,10 @@
-import { IStateService } from "@/types/state-service.interface.js";
 import { BaseService } from "./base-service.service.js";
+import { IStateService } from "@/types/services/state-service.interface.js";
 
 export class StateService extends BaseService implements IStateService {
-  private storage = new Map<string, any>();
+  readonly serviceName = "StateService";
+
+  private storage = new Map<string, unknown>();
 
   get<T>(key: string): T | undefined {
     return this.storage.get(key);

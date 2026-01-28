@@ -1,7 +1,7 @@
 import ts from "typescript";
 import { BaseService } from "./base-service.service.js";
-import { IAstService } from "@/types/ast-service.interface.js";
 import { IMemberInfo } from "@/types/commun/member-info.interface.js";
+import { IAstService } from "@/types/services/ast-service.interface.js";
 
 /**
  * Interface représentant les membres extraits du code source.
@@ -9,9 +9,9 @@ import { IMemberInfo } from "@/types/commun/member-info.interface.js";
 
 export class AstService extends BaseService implements IAstService {
   readonly serviceName = "AstService";
-  init(): Promise<void> {
-    return Promise.resolve();
-  }
+  // init(): Promise<void> {
+  //   return Promise.resolve();
+  // }
 
   /**
    * Analyse le code source d'un fichier TypeScript/JavaScript pour extraire
@@ -20,10 +20,7 @@ export class AstService extends BaseService implements IAstService {
    * @param sourceCode - Le contenu textuel du fichier à analyser.
    * @returns Un tableau d'objets IMemberInfo.
    */
-  public analyzeFileMetadata(
-    filePath: string,
-    sourceCode: string,
-  ): IMemberInfo[] {
+  public analyzeFileMetadata(filePath: string, sourceCode: string): IMemberInfo[] {
     const members: IMemberInfo[] = [];
 
     // Création de l'Arbre de Syntaxe Abstraite (AST)

@@ -1,17 +1,15 @@
-import fs from "fs-extra";
-
 import path from "path";
-import { BaseService } from "./base-service.service.js";
-import { IFileSystemService } from "@/types/file-system.interface.js";
+import fs from "fs-extra";
 import { fileURLToPath } from "url";
+import { BaseService } from "./base-service.service.js";
+import { IFileSystemService } from "@/types/services/file-system.interface.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export class FileSystemService
-  extends BaseService
-  implements IFileSystemService
-{
+export class FileSystemService extends BaseService implements IFileSystemService {
+  readonly serviceName = "FileSystemService";
+
   public excludedDirs = ["node_modules", ".git", "dist", ".vscode"];
 
   public setExucludedDirs(excludedDirs: string[]) {
@@ -49,12 +47,7 @@ export class FileSystemService
     }
   }
 
-  public writeToOutput(
-    basePath: string,
-    subDir: string,
-    fileName: string,
-    content: string,
-  ): void {
+  public writeToOutput(basePath: string, subDir: string, fileName: string, content: string): void {
     // Le service gère la construction du chemin
     const targetDir = path.join(basePath, subDir);
 
@@ -158,16 +151,11 @@ export class FileSystemService
 
       this.cli.logger.success("Arborescence recréée avec succès !");
     } catch (error: any) {
-      this.cli.logger.error(
-        `Erreur lors de la lecture du JSON: ${error.message}`,
-      );
+      this.cli.logger.error(`Erreur lors de la lecture du JSON: ${error.message}`);
     }
   }
 
-  private async buildPhysicalTree(
-    node: any,
-    currentPath: string,
-  ): Promise<void> {
+  private async buildPhysicalTree(node: any, currentPath: string): Promise<void> {
     const fullPath = path.join(currentPath, node.name);
 
     if (node.type === "folder" || node.children) {
@@ -189,21 +177,12 @@ export class FileSystemService
         // On construit un chemin ABSOLU vers le template
         try {
           // const templatePath = path.resolve(__dirname, "../templates/class.ts.txt");
-          const templatePath = path.resolve(
-            __dirname,
-            "..",
-            "templates",
-            "class.ts.txt",
-          );
+          const templatePath = path.resolve(__dirname, "..", "templates", "class.ts.txt");
           console.log(templatePath);
           if (await this.cli.fileSystem.exists(templatePath)) {
             // const template = this.cli.fileSystem.readFile(templatePath);
-            const rawTemplate =
-              await this.cli.fileSystem.readFile(templatePath);
-            console.log(
-              `Contenu chargé pour ${node.name}:`,
-              rawTemplate.length,
-            );
+            const rawTemplate = await this.cli.fileSystem.readFile(templatePath);
+            console.log(`Contenu chargé pour ${node.name}:`, rawTemplate.length);
             content = this.cli.templateService.compile(rawTemplate, {
               name: node.name.replace(".ts", ""),
               author: "MCLP System",

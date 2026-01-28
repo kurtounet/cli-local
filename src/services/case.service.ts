@@ -1,5 +1,5 @@
-import { ICaseService } from "@/types/case-service.interface.js";
 import { BaseService } from "./base-service.service.js";
+import { ICaseService } from "@/types/services/case-service.interface.js";
 
 /*
 Méthode	Résultat	Utilisation typique
@@ -10,15 +10,15 @@ snake_case	mon_service_v1	Bases de données (Colonnes)
 slugify	mon-service-v1	URLs propres (nettoyage inclus)
 */
 export class CaseService extends BaseService implements ICaseService {
+  readonly serviceName = "CaseService";
+
   /**
    * Méthode interne pour découper n'importe quelle chaîne en tableau de mots
    */
   private getWords(str: string): string[] {
     return (
       str
-        .match(
-          /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
-        )
+        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         ?.map((w) => w.toLowerCase()) || []
     );
   }

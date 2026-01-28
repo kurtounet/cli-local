@@ -1,14 +1,14 @@
 import chalk from "chalk";
 import { BaseService } from "./base-service.service.js";
-import { ILoggerService } from "@/types/logger-service.interface.js";
+import { ILoggerService } from "@/types/services/logger-service.interface.js";
 
 export class LoggerService extends BaseService implements ILoggerService {
+  readonly serviceName = "LoggerService";
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
   info(message: string, meta?: object): void {
-    console.log(
-      chalk.blue("ℹ"),
-      message,
-      meta ? chalk.gray(JSON.stringify(meta)) : "",
-    );
+    console.log(chalk.blue("ℹ"), message, meta ? chalk.gray(JSON.stringify(meta)) : "");
   }
 
   success(message: string): void {

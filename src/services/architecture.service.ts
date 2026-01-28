@@ -1,21 +1,11 @@
-import { IArchitectureService } from "@/types/services/architecture-service.interface.js";
 import { BaseService } from "./base-service.service.js";
 import { IFileNode } from "@/types/commun/file-node.interface.js";
+import { IArchitectureService } from "@/types/services/architecture-service.interface.js";
 
-export class ArchitectureService
-  extends BaseService
-  implements IArchitectureService
-{
-  serviceName = "architecture";
-  init(): Promise<void> {
-    return Promise.resolve();
-  }
-  getDirectoryTree(
-    pathsIn: string,
-    pathsOut: string,
-    type: string,
-    action = "save",
-  ): void {
+export class ArchitectureService extends BaseService implements IArchitectureService {
+  readonly serviceName = "ArchitectureService";
+
+  getDirectoryTree(pathsIn: string, pathsOut: string, type: string, action = "save"): void {
     this.cli.logger.info(`Traitement de : ${pathsIn}`);
 
     const tree = this.cli.fileSystem.getDirectoryTree(pathsIn);
@@ -23,9 +13,7 @@ export class ArchitectureService
     if (action === "save") {
       const fileName = `tree.${type}`;
       const content =
-        type === "json"
-          ? JSON.stringify(tree, null, 2)
-          : this.generateAsciiTree(tree);
+        type === "json" ? JSON.stringify(tree, null, 2) : this.generateAsciiTree(tree);
 
       this.cli.fileSystem.writeToOutput(pathsOut, "tree", fileName, content);
       this.cli.logger.success(`Fichier ${fileName} généré avec succès.`);

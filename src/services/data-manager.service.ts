@@ -1,15 +1,16 @@
 import { BaseService } from "./base-service.service.js";
-import { IDataManagerService } from "@/types/data-manager-service.interface.js";
+import { IDataManagerService } from "@/types/services/data-manager-service.interface.js";
 
-export class DataManagerService
-  extends BaseService
-  implements IDataManagerService
-{
+export class DataManagerService extends BaseService implements IDataManagerService {
   readonly serviceName = "DataManagerService";
-  public override async init(): Promise<void> {
-    // Logique spécifique : connexion à la base de données
+
+  // Surchargez init() seulement si nécessaire
+  async init(): Promise<void> {
+    await super.init();
+    // Logique d'initialisation spécifique
     await this.connect();
   }
+
   private async connect() {
     // ... code de connexion
   }

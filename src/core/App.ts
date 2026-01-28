@@ -17,7 +17,7 @@ export class App {
    * @param cli - Contexte de l'application contenant tous les services et configurations
    */
   constructor(private cli: IAppContext) {
-    this.setupErrorHandling();
+    // Configuration globale de l'application
     this.program
       .name("mclp")
       .version(this.cli.version || "1.0.0")
@@ -28,12 +28,12 @@ export class App {
    * Configure la gestion globale des erreurs via le HandlerErrorService
    * Cette méthode est appelée au démarrage pour intercepter toutes les erreurs non gérées
    */
-  private setupErrorHandling(): void {
-    const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
-    if (errorHandler) {
-      errorHandler.setupGlobalHandlers();
-    }
-  }
+  // private setupErrorHandling(): void {
+  //   const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
+  //   if (errorHandler) {
+  //     errorHandler.setupGlobalHandlers();
+  //   }
+  // }
 
   /**
    * Enregistre une commande dans l'application CLI
@@ -79,18 +79,18 @@ export class App {
       try {
         // Commander passe généralement l'instance Command en dernier
         const last = actionArgs[actionArgs.length - 1];
-        const positional: unknown[] =
-          last instanceof Command ? actionArgs.slice(0, -1) : actionArgs;
+        const positional = last instanceof Command ? actionArgs.slice(0, -1) : actionArgs;
 
-        // Si tu utilises "[args...]" commander peut donner un tableau
-        // const cleanArgs = positional.flat().map(String);
-        const cleanArgs = positional.flatMap((a: unknown): string[] => {
+        const cleanArgs: string[] = positional.flatMap((a: unknown): string[] => {
           if (Array.isArray(a)) return a.map(String);
-          return [String(a)];
+          if (typeof a === "string" || typeof a === "number" || typeof a === "boolean")
+            return [String(a)];
+          return []; // drop objets (Command, options internes, etc.)
         });
 
-        const rawOptions = cmd.opts();
-        const options = this.coerceOptions(rawOptions, cmdInstance.options);
+        const raw = cmd.opts();
+        const rawOptions = this.toAnyOptions(raw); // type-guard runtime (cf. plus bas)
+        const options = this.coerceOptions(rawOptions, cmdInstance.options); // (cf. plus bas)
 
         // IMPORTANT: utilise run() si disponible (BaseCommand)
         if (typeof cmdInstance.run === "function") {
@@ -113,20 +113,28 @@ export class App {
    * Point d'entrée principal après l'enregistrement de toutes les commandes
    */
   public async run(): Promise<void> {
+    const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
     try {
       // Parse les arguments du processus (process.argv)
       await this.program.parseAsync(process.argv);
     } catch (error) {
       // En cas d'erreur fatale, on utilise le gestionnaire d'erreurs
-      const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
+
       if (errorHandler) {
-        errorHandler.handle(error as Error);
+        errorHandler.handle(error as Error, "❌ Échec du démarrage de l'application :");
       } else {
         // Fallback si le gestionnaire d'erreurs n'est pas disponible
         console.error("❌ Échec du démarrage de l'application :", error);
         process.exit(1);
       }
     }
+  }
+
+  private isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === "object" && value !== null && !Array.isArray(value);
+  }
+  private toAnyOptions(value: unknown): AnyOptions {
+    return this.isRecord(value) ? value : {};
   }
   public coerceOptions(
     raw: Record<string, unknown>,

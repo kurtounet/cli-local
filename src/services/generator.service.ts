@@ -12,11 +12,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   /**
    * Génère les composant réel sur le disque
    */
-  public async newComponent(
-    type: string,
-    name: string,
-    options: any,
-  ): Promise<void> {
+  public async newComponent(type: string, name: string, options: any): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
     this.targetPath = path.join(this.cli.rootPath, this.folder, this.fileName);
@@ -24,25 +20,24 @@ export class GeneratorService extends BaseService implements IGeneratorService {
     switch (type) {
       case "service":
         this.content = this.getTemplateContentService(name);
-        this.save(this.targetPath, this.content, options);
-
+        await this.save(this.targetPath, this.content, options);
         this.fileName = this.getFileName("interface", name);
         this.targetPath = `${this.getTargetFolder("interface")}/${this.fileName}`;
         this.content = this.getTemplateContentInterfaceService(name);
-        this.save(this.targetPath, this.content, options);
+        await this.save(this.targetPath, this.content, options);
         break;
       case "command":
         this.content = this.getTemplateContentCommand(name);
-        this.save(this.targetPath, this.content, options);
+        await this.save(this.targetPath, this.content, options);
         break;
       case "template":
         this.content = this.getTemplateContentTemplate(name);
-        this.save(this.targetPath, this.content, options);
+        await this.save(this.targetPath, this.content, options);
         break;
     }
 
     if (options.dryRun) {
-      this.logger.info(`[DRY-RUN] Créerait le fichier : ${this.targetPath}`);
+      this.cli.logger.info(`[DRY-RUN] Créerait le fichier : ${this.targetPath}`);
       return;
     }
   }
@@ -124,6 +119,6 @@ export class GeneratorService extends BaseService implements IGeneratorService {
       this.cli.logger.warn(`Le fichier ${targetPath} existe déjà. Saute.`);
       return;
     }
-    this.cli.fileSystem.writeFile(targetPath, content);
+    await this.cli.fileSystem.writeFile(targetPath, content);
   }
 }

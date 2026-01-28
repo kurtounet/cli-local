@@ -30,32 +30,42 @@ export class HandlerErrorService extends BaseService implements IHandlerErrorSer
    * @param contextMessage message contextuel
    */
   public handle(error: unknown, contextMessage?: string): void {
-    const isCliError = error instanceof CliError;
-
-    const errObj: Error =
+    // 1️⃣ Normaliser unknown → Error
+    const err: Error =
       error instanceof Error
         ? error
         : new Error(typeof error === "string" ? error : JSON.stringify(error));
 
-    const message = isCliError ? errObj.message : `An unexpected error occurred: ${errObj.message}`;
+    const isCliError = err instanceof CliError;
 
-    const exitCode = isCliError ? (error as CliError).exitCode : 1;
+    const message = isCliError ? err.message : `An unexpected error occurred: ${err.message}`;
 
-    // ✅ logger fallback (si cli/logger pas prêt)
+    const exitCode = isCliError ? err.exitCode : 1;
+
+    // 2️⃣ Logger SAFE (fallback console)
     const logError = (msg: string) => {
       const logger = this.cli?.logger;
-      if (logger && typeof logger.error === "function") logger.error(msg);
-      else console.error("❌", msg);
+
+      if (logger && typeof logger.error === "function") {
+        logger.error(msg);
+      } else {
+        console.error("❌", msg);
+      }
     };
 
-    if (contextMessage) logError(`${contextMessage}: ${message}`);
-    else logError(message);
-
-    // debug stack
-    if (this.cli?.config?.logLevel === "debug" && errObj.stack) {
-      console.error(errObj.stack);
+    if (contextMessage) {
+      logError(`${contextMessage}: ${message}`);
+    } else {
+      logError(message);
     }
 
+    // 3️⃣ Stack trace en debug uniquement (safe)
+    const logLevel = this.cli?.config?.logLevel;
+    if (logLevel === "debug" && err.stack) {
+      console.error(err.stack);
+    }
+
+    // 4️⃣ Sortie propre (jamais throw ici)
     process.exit(exitCode);
   }
 }

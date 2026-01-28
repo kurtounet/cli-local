@@ -23,6 +23,7 @@ async function bootstrap(): Promise<void> {
     // ainsi que la configuration de l'application
     const builder = new AppContextBuilder();
     const cli = await builder.buildContext();
+    cli.services.get<HandlerErrorService>("HandlerErrorService").setupGlobalHandlers();
 
     // 1) init services
     await cli.services.initializeAll();

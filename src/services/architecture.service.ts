@@ -1,10 +1,15 @@
+import { IArchitectureService } from "@/types/services/architecture-service.interface.js";
 import { BaseService } from "./base-service.service.js";
-import { IArchitectureService } from "@/types/architecture-service.interface.js";
+import { IFileNode } from "@/types/commun/file-node.interface.js";
 
 export class ArchitectureService
   extends BaseService
   implements IArchitectureService
 {
+  serviceName = "architecture";
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
   getDirectoryTree(
     pathsIn: string,
     pathsOut: string,
@@ -32,7 +37,7 @@ export class ArchitectureService
   rename(paths: string[]): string {
     return `tree de ${paths}`;
   }
-  private generateAsciiTree(node: any, prefix: string = ""): string {
+  generateAsciiTree(node: IFileNode, prefix: string = ""): string {
     let md = "";
     const children = node.children || [];
 

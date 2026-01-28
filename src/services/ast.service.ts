@@ -9,6 +9,9 @@ import { IMemberInfo } from "@/types/commun/member-info.interface.js";
 
 export class AstService extends BaseService implements IAstService {
   readonly serviceName = "AstService";
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
 
   /**
    * Analyse le code source d'un fichier TypeScript/JavaScript pour extraire

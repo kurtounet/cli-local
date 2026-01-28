@@ -1,7 +1,10 @@
 import { IHandlerErrorService } from "@/types/error-handler.interface.js";
 import { BaseService } from "./base-service.service.js";
 import { CliError, ErrorCode } from "@/errors/cli-errors.js";
-export class HandlerErrorService extends BaseService implements IHandlerErrorService {
+export class HandlerErrorService
+  extends BaseService
+  implements IHandlerErrorService
+{
   readonly serviceName = "handlerError";
   public init(): Promise<void> {
     return Promise.resolve();
@@ -30,7 +33,9 @@ export class HandlerErrorService extends BaseService implements IHandlerErrorSer
    */
   public handle(error: Error | CliError, contextMessage?: string): void {
     const isCliError = error instanceof CliError;
-    const message = isCliError ? error.message : `An unexpected error occurred: ${error.message}`;
+    const message = isCliError
+      ? error.message
+      : `An unexpected error occurred: ${error.message}`;
     const code = isCliError ? error.code : ErrorCode.INTERNAL_ERROR;
 
     // Log de l'erreur

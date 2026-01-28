@@ -3,10 +3,9 @@ import { ValidationError } from "@/errors/cli-errors.js";
 
 export class IaCommand extends BaseCommand {
   public name = "ia";
-  public description =
-    "Génère un nouvel élément de la CLI (Service, Command, Template)";
+  public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
   public arguments = "<type> [names...]";
-  public aliases = ["m"];
+  public aliases = ["i"];
 
   public options = [
     {

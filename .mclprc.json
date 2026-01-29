@@ -19,7 +19,7 @@
       }
     ]
   },
-  "database": [
+  "databases": [
     {
       "type": "mysql",
       "host": "localhost",
@@ -46,6 +46,7 @@
       ".doc"
     ],
     "pathIn": "I:\\cli\\cli-local-poo",
+    "pathOut": "./tree",
     "analysis": {
       "enabled": false,
       "extensions": [
@@ -53,7 +54,7 @@
         ".js"
       ],
       "save": true,
-      "maxLevel": 0
+      "maxLevel": 32
     },
     "output": [
       {

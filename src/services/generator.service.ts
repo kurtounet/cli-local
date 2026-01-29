@@ -1,4 +1,5 @@
 import path from "path";
+import * as fs from "fs";
 import { BaseService } from "./base-service.service.js";
 import { IGeneratorService } from "@/types/services/generator.interface.js";
 import { IGenerateOptions } from "@/commands/GenerateCommand.js";
@@ -11,38 +12,36 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   private folder = "";
   private targetPath = "";
 
-  public async newComponent(
-    type: string,
-    name: string,
-    options: IGenerateOptions,
-  ): Promise<void> {
+  public async newComponent(type: string, name: string, options: IGenerateOptions): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
     this.targetPath = path.join(this.cli.rootPath, this.folder, this.fileName);
 
     switch (type) {
       case "service":
-        this.content = this.getTemplateContentService(name);
+        this.content = this.scaffoldService(name);
         await this.save(this.targetPath, this.content, options);
         this.fileName = this.getFileName("interface", name);
         this.targetPath = `${this.getTargetFolder("interface")}/${this.fileName}`;
-        this.content = this.getTemplateContentInterfaceService(name);
+        this.content = this.scaffoldInterface(name);
         await this.save(this.targetPath, this.content, options);
         break;
       case "command":
-        this.content = this.getTemplateContentCommand(name);
+        this.content = this.scaffoldCommand(name);
         await this.save(this.targetPath, this.content, options);
         break;
+      case "framework":
+        this.scaffoldFramework(name);
+        // await this.save(this.targetPath, this.content, options);
+        break;
       case "template":
-        this.content = this.getTemplateContentTemplate(name);
+        this.content = this.scaffoldTemplate(name);
         await this.save(this.targetPath, this.content, options);
         break;
     }
 
     if (options.dryRun) {
-      this.cli.logger.info(
-        `[DRY-RUN] Créerait le fichier : ${this.targetPath}`,
-      );
+      this.cli.logger.info(`[DRY-RUN] Créerait le fichier : ${this.targetPath}`);
       return;
     }
   }
@@ -77,7 +76,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
     }
   }
 
-  private getTemplateContentCommand(name: string): string {
+  private scaffoldCommand(name: string): string {
     const className = this.cli.case.toPascalCase(name);
     const commandName = this.cli.case.toKebabCase(name);
     return `import { BaseCommand } from "./BaseCommand.js";
@@ -102,11 +101,11 @@ export class GeneratorService extends BaseService implements IGeneratorService {
       `;
   }
 
-  private getTemplateContentTemplate(name: string): string {
+  private scaffoldTemplate(name: string): string {
     return `import { BaseService } from "./base-service.service.js";\n\nexport class ${name}Service extends BaseService {}`;
   }
 
-  private getTemplateContentService(name: string): string {
+  private scaffoldService(name: string): string {
     const newName = this.cli.case.toKebabCase(name);
     const className = this.cli.case.toPascalCase(newName);
     const serviceName = `${this.cli.case.toKebabCase(newName)}-service`;
@@ -124,12 +123,63 @@ export class ${className}Service extends BaseService implements I${className}Ser
       `;
   }
 
-  private getTemplateContentInterfaceService(name: string): string {
+  private scaffoldInterface(name: string): string {
     const className = this.cli.case.toPascalCase(name);
     return `export interface I${className}Service {
 serviceName: string;
 init(): Promise<void>
 }`;
+  }
+
+  private scaffoldFramework(frameworkName: string) {
+    const name = frameworkName.toLowerCase();
+    const baseDir = path.join(process.cwd(), "src/features/frameworks", name);
+
+    // 1. Création de l'arborescence
+    const dirs = ["services", "templates", "config", "models", "mocks", "utils"];
+    dirs.forEach((dir) => fs.mkdirSync(path.join(baseDir, dir), { recursive: true }));
+
+    // 2. Création d'un Template d'Exemple (Hello World)
+    const templatePath = path.join(baseDir, "templates", `${name}-example.template.ts`);
+    const templateContent = `
+import { IEntityJson } from '../../../types';
+
+export function ${name}ExampleTemplate(entity: IEntityJson): string {
+  return \`// Fichier généré pour l'entité : \${entity.name}
+export class \${entity.name} {
+  constructor() {
+    console.log("Hello from ${frameworkName}!");
+  }
+}\`;
+}`;
+
+    // 3. Création de l'Index (Le Portail) qui importe déjà l'exemple
+    const indexPath = path.join(baseDir, "services", "index.ts");
+    const indexContent = `
+import { IEntityJson, IProjectConfig } from '../../../types';
+import { ${name}ExampleTemplate } from '../templates/${name}-example.template';
+
+type EntityFn = (entity: IEntityJson) => string;
+type ConfigFn = (config: IProjectConfig) => string;
+
+export const ${frameworkName.charAt(0).toUpperCase() + name.slice(1)}Gen = {
+  views: {
+    example: ${name}ExampleTemplate as EntityFn,
+  },
+  data: {
+    // Tes futurs templates de config ici
+  }
+};`;
+
+    fs.writeFileSync(templatePath, templateContent);
+    fs.writeFileSync(indexPath, indexContent);
+
+    console.log(`
+🚀 Framework "${frameworkName}" initialisé !
+📂 Dossier : ${baseDir}
+📝 Template créé : ${name}-example.template.ts
+🔗 Index prêt : services/index.ts
+  `);
   }
 
   private async save(

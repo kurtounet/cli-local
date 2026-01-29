@@ -8,10 +8,11 @@ export interface IOutputTreeConfig {
 }
 export interface IAppConfig {
   cliFolder: IFileNode;
-  database: IDataBase[];
+  databases: IDataBase[];
   tree: {
     exclude: string[];
     pathIn: string;
+    pathOut: string;
     analysis: {
       enabled: boolean;
       extensions: string[];

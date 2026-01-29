@@ -1,247 +1,115 @@
-├── 📁 .doc
-├── 📁 App.ts.txt
-├── 📁 BaseCommand copy.ts.txt
-├── 📁 Vitest
-├── 📁 Exclure certains fichiers.md
-├── 📁 archi.md
-├── 📁 exemple.md
-├── 📁 install.md
-└── 📁 test-class.md
-├── 📁 claude
-├── 📁 README-REFACTORING.md
-├── 📁 command.zip
-├── 📁 extend-context.zip
-├── 📁 file-system-review
-├── 📁 changes-summary.md
-├── 📁 file-system-service-review.md
-└── 📁 file-system.service.fixed.ts
-├── 📁 file-system-review.zip
-├── 📁 files.zip
-└── 📁 handerError.zip
-├── 📁 command.interface.ts.txt
-├── 📁 command2.interface.ts.txt
-├── 📁 config.md
-├── 📁 context.ts.txt
-├── 📁 conversation.md
-├── 📁 dev
-├── 📁 command.md
-├── 📁 core
-├── 📁 context.md
-├── 📁 core.md
-└── 📁 doc_1.md
-└── 📁 rapport
-└── 📁 src
-├── 📁 commands
-├── 📁 BaseCommand.md
-└── 📁 tree.command.md
-├── 📁 services
-├── 📁 architecture.service.md
-├── 📁 case.service.md
-├── 📁 config-project.service.md
-├── 📁 config.service.md
-├── 📁 file-system.service.md
-├── 📁 generator.service.md
-├── 📁 handler-error.service.md
-├── 📁 logger.service.md
-├── 📁 prompt.service.md
-├── 📁 services-container.ts
-├── 📁 shell.service.md
-├── 📁 state.service.md
-├── 📁 task-manager.service.md
-└── 📁 template.service.md
-└── 📁 types
-├── 📁 architecture-service.interface.md
-├── 📁 case-service.interface.md
-├── 📁 command.interface.md
-├── 📁 config-project-service.interface.md
-├── 📁 config-service.interface.md
-├── 📁 context.interface.md
-├── 📁 error-handler.interface.md
-├── 📁 file-system.interface.md
-├── 📁 generator.interface.md
-├── 📁 logger-service.interface.md
-├── 📁 prompt-service.interface.md
-├── 📁 services-container.interface.md
-├── 📁 shell-service.interface.md
-├── 📁 state-service.interface.md
-├── 📁 task-manager-service.interface.md
-├── 📁 template.interface.md
-└── 📁 tool-service.interface.md
-├── 📁 extends-context.md
-├── 📁 idee
-├── 📁 ai-service-mcp.md
-├── 📁 explication.md
-└── 📁 guide-developpeur-maintenance.md
-├── 📁 index.ts.txt
-├── 📁 install.md
-├── 📁 mcp.md
-├── 📁 process.md
-├── 📁 rapport
-└── 📁 src
-├── 📁 commands
-├── 📁 BaseCommand.md
-├── 📁 ai.command.md
-└── 📁 tree.command.md
-├── 📁 context
-└── 📁 context.md
-├── 📁 index.md
-├── 📁 services
-├── 📁 ai.service.md
-├── 📁 architecture.service.md
-├── 📁 case.service.md
-├── 📁 config-project.service.md
-├── 📁 config.service.md
-├── 📁 file-system.service.md
-├── 📁 generator.service.md
-├── 📁 handler-error.service.md
-├── 📁 logger.service.md
-├── 📁 prompt.service.md
-├── 📁 services-container.ts
-├── 📁 shell.service.md
-├── 📁 state.service.md
-├── 📁 task-manager.service.md
-└── 📁 template.service.md
-└── 📁 types
-├── 📁 ai-service.interface.md
-├── 📁 architecture-service.interface.md
-├── 📁 case-service.interface.md
-├── 📁 command.interface.md
-├── 📁 config-project-service.interface.md
-├── 📁 config-service.interface.md
-├── 📁 context.interface.md
-├── 📁 error-handler.interface.md
-├── 📁 file-system.interface.md
-├── 📁 generator.interface.md
-├── 📁 logger-service.interface.md
-├── 📁 prompt-service.interface.md
-├── 📁 services-container.interface.md
-├── 📁 shell-service.interface.md
-├── 📁 state-service.interface.md
-├── 📁 task-manager-service.interface.md
-├── 📁 template.interface.md
-└── 📁 tool-service.interface.md
-├── 📁 services
-├── 📁 file-system.md
-└── 📁 task-manager.md
-├── 📁 services-container.interface.ts.txt
-├── 📁 task-manager-plugin.md
-├── 📁 todo.md
-├── 📁 tool-ai
-├── 📁 conversation.md
-├── 📁 tool-ai.md
-└── 📁 tool-dev-ai.md
-└── 📁 util.md
-├── 📁 .env
-├── 📁 .gitignore
-├── 📁 .mclprc
-├── 📁 eslint.config.mjs
-├── 📁 package-lock.json
-├── 📁 package.json
-├── 📁 prompt.md
-├── 📁 rapport-erreurs.txt
-├── 📁 rapport-eslint.md
+├── 📄 .env
+├── 📄 .gitignore
+├── 📄 .mclprc
+├── 📄 eslint.config.mjs
+├── 📄 package-lock.json
+├── 📄 package.json
+├── 📄 prompt.md
+├── 📄 rapport-erreurs.txt
+├── 📄 rapport-eslint.md
 ├── 📁 src
-├── 📁 commands
-├── 📁 BaseCommand.ts
-├── 📁 ConfigCommand.ts
-├── 📁 GenerateCommand.ts
-├── 📁 InitCommand.ts
-├── 📁 ai.command.ts
-├── 📁 create-tree.command.ts
-├── 📁 ia.command.ts
-├── 📁 list-command.help.md
-├── 📁 make.command.ts
-└── 📁 tree.command.ts
-├── 📁 context
-└── 📁 context.ts
-├── 📁 core
-└── 📁 App.ts
-├── 📁 errors
-├── 📁 cli-errors.ts
-└── 📁 handler-error.md
-├── 📁 index.ts
-├── 📁 mcp-server.ts
-├── 📁 plugins
-├── 📁 architect.plugin.js
-├── 📁 doc.plugin.js
-├── 📁 task_manager.data.json
-├── 📁 task_manager.plugin.js
-├── 📁 task_manager_cli.plugin.js
-└── 📁 task_manager_sql_lite.plugin.js
-├── 📁 services
-├── 📁 __tests__
-├── 📁 case-service.test.ts
-├── 📁 logger-service.test.ts.txt
-└── 📁 services-container.test.ts
-├── 📁 ai.service.ts
-├── 📁 architecture.service.ts
-├── 📁 ast.service.ts
-├── 📁 base-service.service.ts
-├── 📁 case.service.ts
-├── 📁 config-project.service.ts
-├── 📁 config.service.ts
-├── 📁 data-manager.service.ts
-├── 📁 file-system.service.ts
-├── 📁 generator.service.ts
-├── 📁 handler-error.service.ts
-├── 📁 ia.service.ts
-├── 📁 logger.service.ts
-├── 📁 plugin.service.ts
-├── 📁 prompt.service.ts
-├── 📁 services-container.ts
-├── 📁 services-container.ts.txt
-├── 📁 shell.service.ts
-├── 📁 src
-└── 📁 commands
-└── 📁 test.command.ts
-├── 📁 state.service.ts
-├── 📁 task-manager.service.ts
-├── 📁 template.service.ts
-├── 📁 test-error-handler.ts
-└── 📁 tool.service.ts
-├── 📁 templates
-└── 📁 class.ts.txt
-├── 📁 test
-└── 📁 types
-├── 📁 cli-options.type.ts
-├── 📁 command.interface.ts
-├── 📁 commun
-├── 📁 file-node.interface.ts
-└── 📁 member-info.interface.ts
-├── 📁 context.interface.ts
-├── 📁 plugin.interface.ts
-└── 📁 services
-├── 📁 ai-service.interface.ts
-├── 📁 architecture-service.interface.ts
-├── 📁 ast-service.interface.ts
-├── 📁 base-service.interface.ts
-├── 📁 case-service.interface.ts
-├── 📁 config-project-service.interface.ts
-├── 📁 config-service.interface.ts
-├── 📁 data-manager-service.interface.ts
-├── 📁 error-handler.interface.ts
-├── 📁 file-system.interface.ts
-├── 📁 generator.interface.ts
-├── 📁 logger-service.interface.ts
-├── 📁 plugin-service.interface.ts
-├── 📁 prompt-service.interface.ts
-├── 📁 services-container.interface.ts
-├── 📁 shell-service.interface.ts
-├── 📁 state-service.interface.ts
-├── 📁 task-manager-service.interface.ts
-├── 📁 template.interface.ts
-└── 📁 tool-service.interface.ts
+│   ├── 📁 commands
+│   │   ├── 📄 BaseCommand.ts
+│   │   ├── 📄 ConfigCommand.ts
+│   │   ├── 📄 GenerateCommand.ts
+│   │   ├── 📄 InitCommand.ts
+│   │   ├── 📄 ai.command.ts
+│   │   ├── 📄 create-tree.command.ts
+│   │   ├── 📄 ia.command.ts
+│   │   ├── 📄 list-command.help.md
+│   │   ├── 📄 make.command.ts
+│   │   └── 📄 tree.command.ts
+│   ├── 📁 context
+│   │   └── 📄 context.ts
+│   ├── 📁 core
+│   │   └── 📄 App.ts
+│   ├── 📁 errors
+│   │   ├── 📄 cli-errors.ts
+│   │   └── 📄 handler-error.md
+│   ├── 📄 index.ts
+│   ├── 📄 mcp-server.ts
+│   ├── 📁 plugins
+│   │   ├── 📄 architect.plugin.js
+│   │   ├── 📄 doc.plugin.js
+│   │   ├── 📄 task_manager.data.json
+│   │   ├── 📄 task_manager.plugin.js
+│   │   ├── 📄 task_manager_cli.plugin.js
+│   │   └── 📄 task_manager_sql_lite.plugin.js
+│   ├── 📁 services
+│   │   ├── 📁 __tests__
+│   │   │   ├── 📄 case-service.test.ts
+│   │   │   ├── 📄 logger-service.test.ts.txt
+│   │   │   └── 📄 services-container.test.ts
+│   │   ├── 📄 ai.service.ts
+│   │   ├── 📄 architecture.service.ts
+│   │   ├── 📄 ast.service.ts
+│   │   ├── 📄 base-service.service.ts
+│   │   ├── 📄 case.service.ts
+│   │   ├── 📄 config-project.service.ts
+│   │   ├── 📄 config.service.ts
+│   │   ├── 📄 data-manager.service.ts
+│   │   ├── 📄 file-system.service.ts
+│   │   ├── 📄 generator.service.ts
+│   │   ├── 📄 handler-error.service.ts
+│   │   ├── 📄 ia.service.ts
+│   │   ├── 📄 logger.service.ts
+│   │   ├── 📄 plugin.service.ts
+│   │   ├── 📄 prompt.service.ts
+│   │   ├── 📄 services-container.ts
+│   │   ├── 📄 services-container.ts.txt
+│   │   ├── 📄 shell.service.ts
+│   │   ├── 📁 src
+│   │   │   └── 📁 commands
+│   │   │       └── 📄 test.command.ts
+│   │   ├── 📄 state.service.ts
+│   │   ├── 📄 task-manager.service.ts
+│   │   ├── 📄 template.service.ts
+│   │   ├── 📄 test-error-handler.ts
+│   │   └── 📄 tool.service.ts
+│   ├── 📁 templates
+│   │   └── 📄 class.ts.txt
+│   ├── 📁 test
+│   └── 📁 types
+│       ├── 📄 cli-options.type.ts
+│       ├── 📄 command.interface.ts
+│       ├── 📁 commun
+│       │   ├── 📄 file-node.interface.ts
+│       │   └── 📄 member-info.interface.ts
+│       ├── 📄 context.interface.ts
+│       ├── 📄 plugin.interface.ts
+│       └── 📁 services
+│           ├── 📄 ai-service.interface.ts
+│           ├── 📄 architecture-service.interface.ts
+│           ├── 📄 ast-service.interface.ts
+│           ├── 📄 base-service.interface.ts
+│           ├── 📄 case-service.interface.ts
+│           ├── 📄 config-project-service.interface.ts
+│           ├── 📄 config-service.interface.ts
+│           ├── 📄 data-manager-service.interface.ts
+│           ├── 📄 error-handler.interface.ts
+│           ├── 📄 file-system.interface.ts
+│           ├── 📄 generator.interface.ts
+│           ├── 📄 logger-service.interface.ts
+│           ├── 📄 plugin-service.interface.ts
+│           ├── 📄 prompt-service.interface.ts
+│           ├── 📄 services-container.interface.ts
+│           ├── 📄 shell-service.interface.ts
+│           ├── 📄 state-service.interface.ts
+│           ├── 📄 task-manager-service.interface.ts
+│           ├── 📄 template.interface.ts
+│           └── 📄 tool-service.interface.ts
 ├── 📁 tests
-├── 📁 cli-e2e.test.ts
-├── 📁 setup.ts
-└── 📁 utils.ts
+│   ├── 📄 cli-e2e.test.ts
+│   ├── 📄 setup.ts
+│   └── 📄 utils.ts
 ├── 📁 tree
-├── 📁 tree.json
-└── 📁 tree.md
-├── 📁 tree.json
-├── 📁 tree.json.old
-├── 📁 tree.md
-├── 📁 tree.md.old
-├── 📁 tsconfig.json
-├── 📁 tsup.config.ts
-└── 📁 vite.config.js
+│   └── 📄 tree.md
+├── 📄 tree.json
+├── 📄 tree.json.old
+├── 📄 tree.md
+├── 📄 tree.md.old
+├── 📄 tsconfig.json
+├── 📄 tsup.config.ts
+└── 📄 vite.config.js
+
+Summary: 17 directories, 96 files

@@ -1,0 +1,136 @@
+directory_tree:
+  name: cli-local-poo/
+  children:
+    - name: .env
+    - name: .gitignore
+    - name: .mclprc
+    - name: eslint.config.mjs
+    - name: package-lock.json
+    - name: package.json
+    - name: prompt.md
+    - name: rapport-erreurs.txt
+    - name: rapport-eslint.md
+    - name: src/
+      children:
+        - name: commands/
+          children:
+            - name: BaseCommand.ts
+            - name: ConfigCommand.ts
+            - name: GenerateCommand.ts
+            - name: InitCommand.ts
+            - name: ai.command.ts
+            - name: create-tree.command.ts
+            - name: ia.command.ts
+            - name: list-command.help.md
+            - name: make.command.ts
+            - name: tree.command.ts
+        - name: context/
+          children:
+            - name: context.ts
+        - name: core/
+          children:
+            - name: App.ts
+        - name: errors/
+          children:
+            - name: cli-errors.ts
+            - name: handler-error.md
+        - name: index.ts
+        - name: mcp-server.ts
+        - name: plugins/
+          children:
+            - name: architect.plugin.js
+            - name: doc.plugin.js
+            - name: task_manager.data.json
+            - name: task_manager.plugin.js
+            - name: task_manager_cli.plugin.js
+            - name: task_manager_sql_lite.plugin.js
+        - name: services/
+          children:
+            - name: __tests__/
+              children:
+                - name: case-service.test.ts
+                - name: logger-service.test.ts.txt
+                - name: services-container.test.ts
+            - name: ai.service.ts
+            - name: architecture.service.ts
+            - name: ast.service.ts
+            - name: base-service.service.ts
+            - name: case.service.ts
+            - name: config-project.service.ts
+            - name: config.service.ts
+            - name: data-manager.service.ts
+            - name: file-system.service.ts
+            - name: generator.service.ts
+            - name: handler-error.service.ts
+            - name: ia.service.ts
+            - name: logger.service.ts
+            - name: plugin.service.ts
+            - name: prompt.service.ts
+            - name: services-container.ts
+            - name: services-container.ts.txt
+            - name: shell.service.ts
+            - name: src/
+              children:
+                - name: commands/
+                  children:
+                    - name: test.command.ts
+            - name: state.service.ts
+            - name: task-manager.service.ts
+            - name: template.service.ts
+            - name: test-error-handler.ts
+            - name: tool.service.ts
+        - name: templates/
+          children:
+            - name: class.ts.txt
+        - name: test/
+        - name: types/
+          children:
+            - name: cli-options.type.ts
+            - name: command.interface.ts
+            - name: commun/
+              children:
+                - name: file-node.interface.ts
+                - name: member-info.interface.ts
+            - name: context.interface.ts
+            - name: plugin.interface.ts
+            - name: services/
+              children:
+                - name: ai-service.interface.ts
+                - name: architecture-service.interface.ts
+                - name: ast-service.interface.ts
+                - name: base-service.interface.ts
+                - name: case-service.interface.ts
+                - name: config-project-service.interface.ts
+                - name: config-service.interface.ts
+                - name: data-manager-service.interface.ts
+                - name: error-handler.interface.ts
+                - name: file-system.interface.ts
+                - name: generator.interface.ts
+                - name: logger-service.interface.ts
+                - name: plugin-service.interface.ts
+                - name: prompt-service.interface.ts
+                - name: services-container.interface.ts
+                - name: shell-service.interface.ts
+                - name: state-service.interface.ts
+                - name: task-manager-service.interface.ts
+                - name: template.interface.ts
+                - name: tool-service.interface.ts
+    - name: tests/
+      children:
+        - name: cli-e2e.test.ts
+        - name: setup.ts
+        - name: utils.ts
+    - name: tree/
+      children:
+        - name: tree.md
+    - name: tree.json
+    - name: tree.json.old
+    - name: tree.md
+    - name: tree.md.old
+    - name: tsconfig.json
+    - name: tsup.config.ts
+    - name: vite.config.js
+
+metadata:
+  directories: 17
+  files: 96

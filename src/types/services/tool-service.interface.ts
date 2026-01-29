@@ -7,15 +7,11 @@ import { IBaseService } from "./base-service.interface.js";
  */
 export interface IToolService extends IBaseService {
   serviceName: string;
-  init(): Promise<void>;
-  /**
-   * Renomme des éléments (fichiers ou répertoires) avec un type spécifié.
-   * La logique de renommage dépend du type fourni.
-   * @param paths - Un tableau de chemins d'éléments à renommer.
-   * @param type - Le type de l'opération de renommage ou le contexte.
-   * @returns Une chaîne de caractères indiquant le résultat de l'opération.
-   */
-  rename(paths: string[], type: string): string;
+  // init(): Promise<void>;
 
   generateAsciiTree(node: IFileNode, viewContent?: boolean, prefix?: string): string;
+
+  generateYamlTree(node: IFileNode, viewContent: boolean): string;
+
+  generateAsciiTreeMetadata(node: IFileNode, prefix?: string, viewContent?: boolean): string;
 }

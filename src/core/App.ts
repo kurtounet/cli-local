@@ -114,7 +114,7 @@ export class App {
    */
   public async run(): Promise<void> {
     const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
-    await this.cli.configService.load(process.cwd());
+    await this.cli.config.load(process.cwd());
     try {
       // Parse les arguments du processus (process.argv)
       await this.program.parseAsync(process.argv);

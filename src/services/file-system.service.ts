@@ -61,6 +61,22 @@ export class FileSystemService extends BaseService implements IFileSystemService
    * @param filePath - Path of file to write
    * @param content - Content to write
    */
+  public async writeFileJson(filePath: string, content: string): Promise<void> {
+    this.validatePath(filePath, "filePath");
+    try {
+      await fs.writeJSON(filePath, content);
+      this.cli.logger.debug(`File written: ${filePath}`);
+    } catch (error) {
+      const message = `writeFile(): Failed to write file: ${filePath}`;
+      // this.cli.errorHandler.handle(error, message);
+      // throw error instanceof Error ? error : new Error(message);
+    }
+  }
+  /**
+   * Writes content to a file
+   * @param filePath - Path of file to write
+   * @param content - Content to write
+   */
   public async writeFile(filePath: string, content: string): Promise<void> {
     this.validatePath(filePath, "filePath");
     try {

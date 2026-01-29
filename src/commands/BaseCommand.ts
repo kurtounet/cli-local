@@ -1,11 +1,7 @@
 // BaseCommand.ts
 import type { IAppContext } from "@/types/context.interface.js";
 import type { ICommand, ICommandOption } from "@/types/command.interface.js";
-import type {
-  AnyOptions,
-  MaybePromise,
-  OptionKey,
-} from "@/types/cli-options.type.js";
+import type { AnyOptions, MaybePromise, OptionKey } from "@/types/cli-options.type.js";
 
 /**
  * Classe de base abstraite pour toutes les commandes de la CLI
@@ -40,11 +36,11 @@ export abstract class BaseCommand<
   }
 
   protected get templateService() {
-    return this.cli.templateService;
+    return this.cli.template;
   }
 
   protected get configService() {
-    return this.cli.configService;
+    return this.cli.config;
   }
 
   // ============================================================================
@@ -79,10 +75,7 @@ export abstract class BaseCommand<
   // ============================================================================
   // Helpers / Options
   // ============================================================================
-  protected hasOption(
-    options: TOptions,
-    optionName: OptionKey<TOptions>,
-  ): boolean {
+  protected hasOption(options: TOptions, optionName: OptionKey<TOptions>): boolean {
     return options[optionName] === true;
   }
 
@@ -100,8 +93,7 @@ export abstract class BaseCommand<
     this.logger.info(`Description: ${this.description}`);
 
     if (this.arguments) this.logger.info(`Arguments: ${this.arguments}`);
-    if (this.aliases?.length)
-      this.logger.info(`Alias: ${this.aliases.join(", ")}`);
+    if (this.aliases?.length) this.logger.info(`Alias: ${this.aliases.join(", ")}`);
 
     if (this.options?.length) {
       this.logger.info("Options:");
@@ -114,18 +106,12 @@ export abstract class BaseCommand<
   // ============================================================================
   // Hooks
   // ============================================================================
-  protected beforeExecute(
-    _args: string[],
-    _options: TOptions,
-  ): MaybePromise<void> {
+  protected beforeExecute(_args: string[], _options: TOptions): MaybePromise<void> {
     this.logger.info(`beforeExecute: Exécutant la commande ${this.name}`);
     return Promise.resolve();
   }
 
-  protected afterExecute(
-    _args: string[],
-    _options: TOptions,
-  ): MaybePromise<void> {
+  protected afterExecute(_args: string[], _options: TOptions): MaybePromise<void> {
     this.logger.info(`afterExecute : Commande ${this.name} terminée.`);
     return Promise.resolve();
   }

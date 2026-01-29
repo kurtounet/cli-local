@@ -17,7 +17,8 @@ export interface ITreeOptions extends AnyOptions {
 
 export class TreeCommand extends BaseCommand<ITreeOptions> {
   public name = "tree";
-  public description = `Génère l'arborescence du dossier <pathIn> en json, md ou yaml`;
+  public description = `Génère l'arborescence du dossier <pathIn> en json, md ou yaml
+`;
   public arguments = "<type> [pathIn] [pathOut]";
   public aliases = ["t"];
 
@@ -84,9 +85,7 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
 
   async execute(args: string[], options: ITreeOptions): Promise<void> {
     // On récupère la config globale via le service
-    const config = this.cli.configService.current
-      ? this.cli.configService.current
-      : this.cli.configService.current;
+    const config = this.cli.config.current ? this.cli.config.current : this.cli.config.current;
     // console.log(config.tree.analysis.maxLevel);
     // console.log(this.hasOption(options, "level"));
     // console.log(this.getOption(options, "level", 25));

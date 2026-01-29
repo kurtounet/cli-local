@@ -63,6 +63,13 @@ export interface IFileSystemService {
    */
   copy(source: string, destination: string): Promise<void>;
   /**
+   * Écrit  un contenu JSON dans un fichier de manière asynchrone. Écrase le fichier s'il existe.
+   * @param filePath - Le chemin du fichier dans lequel écrire.
+   * @param content - Le contenu à écrire dans le fichier.
+   * @returns Une promesse qui se résout une fois l'écriture terminée.
+   */
+  writeFileJson(filePath: string, content: string): Promise<void>;
+  /**
    * Écrit du contenu dans un fichier de manière asynchrone. Écrase le fichier s'il existe.
    * @param filePath - Le chemin du fichier dans lequel écrire.
    * @param content - Le contenu à écrire dans le fichier.

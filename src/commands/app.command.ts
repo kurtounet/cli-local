@@ -1,18 +1,20 @@
 import path from "node:path";
-import { BaseCommand } from "./BaseCommand.js";
 import { dump } from "js-yaml";
+import { BaseCommand } from "./BaseCommand.js";
 
-export class InitCommand extends BaseCommand {
-  public name = "init";
-  public description = "Initialise le fichier de configuration de la CLI (json, yaml, js)";
+export class CliCommand extends BaseCommand {
+  public name = "cli";
+  public description = `Initialise le fichier de configuration de la CLI (json, yaml, js)
+`;
   public arguments = "[format]";
+  public aliases = ["c"];
 
   async execute(args: string[]): Promise<void> {
     const format = (args[0] || "json").toLowerCase() as "yaml" | "json" | "js";
     const projectPath = process.cwd();
 
     // On récupère les défauts depuis le service pour générer le fichier
-    const defaults = this.cli.configService.defaults;
+    const defaults = this.cli.config.defaults;
     let fileName = "";
     let content = "";
 

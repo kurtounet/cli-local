@@ -9,6 +9,7 @@ import { IFileSystemService } from "./services/file-system.interface.js";
 import { IGeneratorService } from "./services/generator.interface.js";
 import { ILoggerService } from "./services/logger-service.interface.js";
 import { IPluginService } from "./services/plugin-service.interface.js";
+import { IProjectService } from "./services/project-service.interface.js";
 import { IPromptService } from "./services/prompt-service.interface.js";
 import { IServicesContainer } from "./services/services-container.interface.js";
 import { IStateService } from "./services/state-service.interface.js";
@@ -45,7 +46,7 @@ export interface ICliConfig {
 export interface IAppContext {
   version: string;
   rootPath: string;
-  config: ICliConfig;
+  cliCconfig: ICliConfig;
   services: IServicesContainer;
   ai: IAiService;
   ast: IAstService;
@@ -55,11 +56,12 @@ export interface IAppContext {
   state: IStateService;
   plugin: IPluginService;
   logger: ILoggerService;
+  project: IProjectService;
   generator: IGeneratorService;
-  configService: IConfigService;
-  promptService: IPromptService;
+  config: IConfigService;
+  prompt: IPromptService;
   fileSystem: IFileSystemService;
   architecture: IArchitectureService;
-  templateService: ITemplateService;
+  template: ITemplateService;
   errorHandler: IHandlerErrorService;
 }

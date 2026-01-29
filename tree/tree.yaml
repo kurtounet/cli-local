@@ -25,6 +25,7 @@ directory_tree:
             - name: ia.command.ts
             - name: list-command.help.md
             - name: make.command.ts
+            - name: project.command.ts
             - name: tree.command.ts
         - name: config/
           children:
@@ -88,7 +89,6 @@ directory_tree:
             - name: base-generator.service.ts
             - name: base-service.service.ts
             - name: case.service.ts
-            - name: config-project.service.ts
             - name: config.service.ts
             - name: data-manager.service.ts
             - name: file-system.service.ts
@@ -98,6 +98,7 @@ directory_tree:
             - name: ia.service.ts
             - name: logger.service.ts
             - name: plugin.service.ts
+            - name: project.service.ts
             - name: prompt.service.ts
             - name: services-container.ts
             - name: services-container.ts.txt
@@ -124,7 +125,9 @@ directory_tree:
               children:
                 - name: database.interface.ts
                 - name: file-node.interface.ts
+                - name: framework-commun.interface.ts
                 - name: member-info.interface.ts
+                - name: project-command.interface.ts
             - name: config.interface.ts
             - name: context.interface.ts
             - name: plugin.interface.ts
@@ -135,7 +138,6 @@ directory_tree:
                 - name: ast-service.interface.ts
                 - name: base-service.interface.ts
                 - name: case-service.interface.ts
-                - name: config-project-service.interface.ts
                 - name: config-service.interface.ts
                 - name: data-manager-service.interface.ts
                 - name: error-handler.interface.ts
@@ -143,6 +145,7 @@ directory_tree:
                 - name: generator.interface.ts
                 - name: logger-service.interface.ts
                 - name: plugin-service.interface.ts
+                - name: project-service.interface.ts
                 - name: prompt-service.interface.ts
                 - name: services-container.interface.ts
                 - name: shell-service.interface.ts
@@ -164,4 +167,4 @@ directory_tree:
 
 metadata:
   directories: 29
-  files: 106
+  files: 109

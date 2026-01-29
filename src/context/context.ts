@@ -16,6 +16,7 @@ import { DataManagerService } from "@/services/data-manager.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
 import { IBaseService } from "@/types/services/base-service.interface.js";
+import { ProjectService } from "@/services/project.service.js";
 
 /**
  * Builder pour la construction du contexte de l'application
@@ -45,7 +46,7 @@ export class AppContextBuilder {
       description: "CLI de génération et gestion de projet",
       rootPath: process.cwd(),
       services: this.services,
-      config: this.getDefaultConfig(),
+      cliCconfig: this.getDefaultConfig(),
     } as unknown as IAppContext;
 
     // ============================================================================
@@ -63,12 +64,13 @@ export class AppContextBuilder {
     cli.plugin = new PluginService(cli);
     cli.db = new DataManagerService(cli);
     cli.logger = new LoggerService(cli);
+    cli.prompt = new PromptService(cli);
+    cli.project = new ProjectService(cli);
+    cli.config = new ConfigService(cli);
+    cli.template = new TemplateService(cli);
     cli.generator = new GeneratorService(cli);
-    cli.promptService = new PromptService(cli);
-    cli.configService = new ConfigService(cli);
     cli.fileSystem = new FileSystemService(cli);
     cli.architecture = new ArchitectureService(cli);
-    cli.templateService = new TemplateService(cli);
     cli.errorHandler = new HandlerErrorService(cli);
 
     // ============================================================================
@@ -98,18 +100,19 @@ export class AppContextBuilder {
     const serviceEntries: readonly [string, IBaseService][] = [
       ["AiService", ctx.ai],
       ["AstService", ctx.ast],
-      ["LoggerService", ctx.logger],
-      ["FileSystemService", ctx.fileSystem],
       ["CaseService", ctx.case],
       ["ToolService", ctx.tool],
       ["StateService", ctx.state],
+      ["LoggerService", ctx.logger],
+      ["PromptService", ctx.prompt],
       ["PluginService", ctx.plugin],
+      ["ConfigService", ctx.config],
       ["DataManagerService", ctx.db],
+      ["ProjectService", ctx.project],
+      ["TemplateService", ctx.template],
       ["GeneratorService", ctx.generator],
-      ["PromptService", ctx.promptService],
-      ["ConfigService", ctx.configService],
+      ["FileSystemService", ctx.fileSystem],
       ["ArchitectureService", ctx.architecture],
-      ["TemplateService", ctx.templateService],
       ["HandlerErrorService", ctx.errorHandler],
     ];
 

@@ -1,11 +1,25 @@
 import path from "node:path";
 import { BaseService } from "./base-service.service.js";
-import { IConfigProjectService } from "@/types/services/config-project-service.interface.js";
 
-export class ConfigProjectService extends BaseService implements IConfigProjectService {
-  readonly serviceName = "ConfigProjectService";
+import { IProjectService } from "@/types/services/project-service.interface.js";
+import { IProjectCommand } from "@/types/commun/project-command.interface.js";
+import { IProjectConfig } from "@/types/commun/framework-commun.interface.js";
 
-  private async updateTsConfig(): Promise<void> {
+export class ProjectService extends BaseService implements IProjectService {
+  readonly serviceName = "ProjectService";
+  async initProject(project: IProjectCommand): Promise<any> {
+    const frameworksList = [...project.frontends, ...project.backends];
+    const config: IProjectConfig = {
+      projectName: project.name,
+      path: project.path,
+      starUml: project.starUml,
+      version: "1.0.0",
+      frameWorks: getConfigFrameworks(frameworksList),
+      databases: getConfigDatabases(project.databases),
+    };
+    return config;
+  }
+  async updateTsConfig(): Promise<void> {
     try {
       const filePath = path.join(process.cwd(), "tsconfig.json");
       const content = await this.cli.fileSystem.readFile(filePath);

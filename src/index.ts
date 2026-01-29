@@ -1,10 +1,14 @@
 import { App } from "./core/App.js";
-import { MakeCommand } from "./commands/make.command.js";
-import { TreeCommand } from "./commands/tree.command.js";
+
 import { AppContextBuilder } from "./context/context.js";
-import { InitCommand } from "./commands/Init.command.js";
+
+import { TreeCommand } from "./commands/tree.command.js";
+import { MakeCommand } from "./commands/make.command.js";
+import { ProjectCommand } from "./commands/project.command.js";
 import { GenerateCommand } from "./commands/generate.command.js";
+
 import { HandlerErrorService } from "./services/handler-error.service.js";
+import { CliCommand } from "./commands/app.command.js";
 
 /**
  * Point d'entrée principal de la CLI
@@ -52,10 +56,11 @@ async function bootstrap(): Promise<void> {
      * - mclp init
      * - mclp ia "génère un service utilisateur"
      */
-    app.registerCommand(GenerateCommand);
+    app.registerCommand(CliCommand);
     app.registerCommand(TreeCommand);
     app.registerCommand(MakeCommand);
-    app.registerCommand(InitCommand);
+    app.registerCommand(ProjectCommand);
+    app.registerCommand(GenerateCommand);
     // app.registerCommand(IaCommand);
 
     // TODO: Automatiser l'enregistrement en scannant le dossier commands

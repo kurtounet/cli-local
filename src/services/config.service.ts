@@ -7,10 +7,10 @@ import { IAppConfig } from "@/types/config.interface.js";
 import { IConfigService } from "@/types/services/config-service.interface.js";
 
 export class ConfigService extends BaseService implements IConfigService {
-  readonly serviceName = "ConfigService";
   readonly logLevel = "debug";
   private configData!: IAppConfig;
   private readonly moduleName = "mclp";
+  readonly serviceName = "ConfigService";
   readonly defaults: IAppConfig = defaultconfig;
 
   public async load(projectPath: string = process.cwd()): Promise<IAppConfig> {

@@ -1,3 +1,4 @@
+import { IProjectCommand } from "../commun/project-command.interface.js";
 import { IBaseService } from "./base-service.interface.js";
 
 /**
@@ -5,7 +6,8 @@ import { IBaseService } from "./base-service.interface.js";
  * Cette interface est actuellement vide mais pourrait être étendue pour inclure des méthodes
  * de lecture, écriture ou validation de la configuration d'un projet spécifique.
  */
-export interface IConfigProjectService extends IBaseService {
+export interface IProjectService extends IBaseService {
   serviceName: string;
   init(): Promise<void>;
+  initProject(project: IProjectCommand): Promise<any>;
 }

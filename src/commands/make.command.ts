@@ -9,8 +9,7 @@ export interface IMakeOptions extends AnyOptions {
 }
 export class MakeCommand extends BaseCommand<IMakeOptions> {
   public name = "make";
-  public description =
-    "Génère un nouvel élément de la CLI (Service, Command, Template)";
+  public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
   public arguments = "<type> [names...]";
   public aliases = ["m"];
 
@@ -41,9 +40,7 @@ export class MakeCommand extends BaseCommand<IMakeOptions> {
 
     // 1. Mode interactif si aucun type
     if (!type) {
-      this.cli.logger.info(
-        "Modes interactifs disponibles : " + this.actions.join(", "),
-      );
+      this.cli.logger.info("Modes interactifs disponibles : " + this.actions.join(", "));
       // Ici tu pourrais appeler Inquirer pour demander le type
       return;
     }
@@ -52,9 +49,7 @@ export class MakeCommand extends BaseCommand<IMakeOptions> {
 
     // 2. Validation
     if (!this.actions.includes(normalizedType)) {
-      throw new ValidationError(
-        `Type invalide. Choix : ${this.actions.join(", ")}`,
-      );
+      throw new ValidationError(`Type invalide. Choix : ${this.actions.join(", ")}`);
     }
 
     // 3. Gestion multiple (noms séparés par espaces ou virgules)

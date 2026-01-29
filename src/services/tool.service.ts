@@ -5,7 +5,11 @@ import { IToolService } from "@/types/services/tool-service.interface.js";
 export class ToolService extends BaseService implements IToolService {
   readonly serviceName = "ToolService";
 
-  public generateAsciiTree(node: IFileNode, viewContent = false, prefix = ""): string {
+  public generateAsciiTree(
+    node: IFileNode,
+    viewContent = false,
+    prefix = "",
+  ): string {
     let md = "";
     let fileCount = 0;
     let dirCount = 0;
@@ -65,7 +69,10 @@ export class ToolService extends BaseService implements IToolService {
     let fileCount = 0;
     let dirCount = 0;
 
-    const buildYaml = (currentNode: IFileNode, currentPrefix: string): string => {
+    const buildYaml = (
+      currentNode: IFileNode,
+      currentPrefix: string,
+    ): string => {
       let localYaml = "";
       const children = currentNode.children ?? [];
 
@@ -110,7 +117,11 @@ export class ToolService extends BaseService implements IToolService {
 
     return yaml + stats;
   }
-  public generateAsciiTreeMetadata(node: IFileNode, prefix = "", viewContent = false): string {
+  public generateAsciiTreeMetadata(
+    node: IFileNode,
+    prefix = "",
+    viewContent = false,
+  ): string {
     let md = "";
     const children = node.children ?? [];
 

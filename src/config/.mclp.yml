@@ -1,0 +1,49 @@
+# ==========================================
+# Configuration de la CLI MCLP
+# ==========================================
+
+# Paramètres globaux pour la génération d'arborescence
+tree:
+  # Dossiers à ignorer systématiquement
+  exclude:
+    - node_modules
+    - .git
+    - .vscode
+    - dist
+    - build
+    - .doc
+    - .tmp
+
+  # Analyse du code source (AST)
+  analysis:
+    enabled: true
+    # Extensions à scanner pour extraire les classes/méthodes
+    extensions:
+      - .ts
+      - .js
+      - .tsx
+      - .jsx
+    # Profondeur par défaut (0 = infini)
+    maxLevel: 0
+
+# Paramètres de sortie par défaut
+output:
+  format: md # json, md, ou yaml
+  path: ./tree/ # Dossier de destination
+  saveOnExecute: true # Sauvegarder automatiquement
+
+# Configuration pour les services d'IA (si applicable)
+ai:
+  provider: openai # ou local-ollama
+  model: gpt-4
+  contextLimit: 4096
+
+# Plugins activés
+plugins:
+  completed:
+    - architect.plugin.js
+    - doc.plugin.js
+    - task_manager.plugin.js
+    # Plugins personnalisés
+  customPlugins:
+    - task_manager_cli.plugin.js

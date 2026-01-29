@@ -17,10 +17,7 @@ export interface ITreeOptions extends AnyOptions {
 
 export class TreeCommand extends BaseCommand<ITreeOptions> {
   public name = "tree";
-  public description = `Génère l'arborescence du dossier <pathIn> en json, md ou yaml
-
-  Exemple: mclp tree yaml ./src -s -o ./backup
-  `;
+  public description = `Génère l'arborescence du dossier <pathIn> en json, md ou yaml`;
   public arguments = "<type> <pathIn> [pathOut]";
   public aliases = ["t"];
 
@@ -47,7 +44,12 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       type: "boolean",
       defaultValue: false,
     },
-    { flags: "-l, --level", description: "Niveau de profondeur", type: "number", defaultValue: 0 },
+    {
+      flags: "-l, --level",
+      description: "Niveau de profondeur",
+      type: "number",
+      defaultValue: 0,
+    },
     {
       flags: "-s, --save",
       description: "Sauvegarder dans un fichier",
@@ -75,27 +77,44 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
   ];
 
   async execute(args: string[], options: ITreeOptions): Promise<void> {
-    const excludedDirs = ["node_modules", ".git", "dist", ".vscode", ".doc"];
-    const analyzeExtensions = [".ts", ".js"];
+    // On récupère la config globale via le service
+    const config = this.cli.configService.current;
+    // FUSION DES PRIORITÉS :
+    // 1. Option CLI (si l'utilisateur tape --level 2)
+    // 2. Sinon, Config du fichier (.mclprc.json)
+    // 3. Sinon, les defaults du service
+    const level =
+      this.getOption(options, "level", 0) ?? config.tree.analysis.maxLevel;
+    const save = this.hasOption(options, "save") ?? config.tree.analysis.save;
+    const excludedDirs = config.tree.exclude;
+    const analyzeExtensions = config.tree.analysis.enabled
+      ? config.tree.analysis.extensions
+      : null;
 
-    this.validateArgs(args, 2, "Usage: mclp tree <type> <pathIn> [pathOut] [options]");
+    this.validateArgs(
+      args,
+      2,
+      "Usage: mclp tree <type> <pathIn> [pathOut] [options]",
+    );
 
-    const save = this.hasOption(options, "save");
     const view = this.hasOption(options, "view");
     const force = this.hasOption(options, "force");
-    const level = this.getOption(options, "level", 0); // Utilisation de getOption pour la valeur
+
     const dryRun = this.hasOption(options, "dryRun");
     const metadata = this.hasOption(options, "metadata");
     const output = this.getOption(options, "output", "./");
     const [type, ...pathArgs] = args;
 
     if (!this.extensions.includes(type)) {
-      throw new ValidationError(`Type invalide. Types supportés : ${this.extensions.join(", ")}`);
+      throw new ValidationError(
+        `Type invalide. Types supportés : ${this.extensions.join(", ")}`,
+      );
     }
 
     try {
       const pathIn = path.resolve(pathArgs[0] ?? ".");
-      const argOut = pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
+      const argOut =
+        pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
       const pathOut = path.resolve(argOut ?? output ?? pathIn);
       const fileName = path.resolve(pathOut, `tree.${type}`);
 
@@ -106,12 +125,19 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       this.cli.logger.info(`Processing: ${pathIn} -> ${fileName} (${type})`);
 
       // Récupération de l'objet tree (données brutes)
-      const tree = await this.cli.fileSystem.getDirectoryTree(pathIn, 0, level, metadata, {
-        excludedDirs,
-        analyzeExtensions,
-      });
+      const tree = await this.cli.fileSystem.getDirectoryTree(
+        pathIn,
+        0,
+        level,
+        metadata,
+        {
+          excludedDirs,
+          analyzeExtensions,
+        },
+      );
 
-      if (!tree) throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
+      if (!tree)
+        throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
 
       // SWITCH pour déterminer le contenu selon le type
       let content = "";
@@ -136,11 +162,15 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
 
       if (save) {
         if (this.cli.fileSystem.exists(fileName) && !force) {
-          throw new FilesystemError(`Le fichier '${fileName}' existe déjà. Utilisez --force.`);
+          throw new FilesystemError(
+            `Le fichier '${fileName}' existe déjà. Utilisez --force.`,
+          );
         }
 
         if (dryRun) {
-          this.cli.logger.info(`[dry-run] L'écriture de ${fileName} a été simulée.`);
+          this.cli.logger.info(
+            `[dry-run] L'écriture de ${fileName} a été simulée.`,
+          );
           return;
         }
 

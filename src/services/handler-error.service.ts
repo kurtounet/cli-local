@@ -3,7 +3,10 @@ import { BaseService } from "./base-service.service.js";
 import { CliError } from "@/errors/cli-errors.js";
 import { IAppContext } from "@/types/context.interface.js";
 
-export class HandlerErrorService extends BaseService implements IHandlerErrorService {
+export class HandlerErrorService
+  extends BaseService
+  implements IHandlerErrorService
+{
   readonly serviceName = "HandlerErrorService";
 
   constructor(cli: IAppContext) {
@@ -39,10 +42,14 @@ export class HandlerErrorService extends BaseService implements IHandlerErrorSer
       const err: Error =
         error instanceof Error
           ? error
-          : new Error(typeof error === "string" ? error : JSON.stringify(error));
+          : new Error(
+              typeof error === "string" ? error : JSON.stringify(error),
+            );
 
       const isCliError = err instanceof CliError;
-      const message = isCliError ? err.message : `An unexpected error occurred: ${err.message}`;
+      const message = isCliError
+        ? err.message
+        : `An unexpected error occurred: ${err.message}`;
       const exitCode = isCliError ? (err as CliError).exitCode : 1;
 
       // 2️⃣ Logger SAFE avec protection totale
@@ -69,13 +76,18 @@ export class HandlerErrorService extends BaseService implements IHandlerErrorSer
    * @param contextMessage contexte de l'erreur
    * @param message message d'erreur
    */
-  private safeLogError(contextMessage: string | undefined, message: string): void {
+  private safeLogError(
+    contextMessage: string | undefined,
+    message: string,
+  ): void {
     try {
       const logger = this.cli?.logger;
 
       // Tentative d'utilisation du logger configuré
       if (logger && typeof logger.error === "function") {
-        const finalMessage = contextMessage ? `${contextMessage}: ${message}` : message;
+        const finalMessage = contextMessage
+          ? `${contextMessage}: ${message}`
+          : message;
         logger.error(finalMessage);
         return;
       }
@@ -85,7 +97,9 @@ export class HandlerErrorService extends BaseService implements IHandlerErrorSer
     }
 
     // Fallback : utilisation de console.error
-    const finalMessage = contextMessage ? `${contextMessage}: ${message}` : message;
+    const finalMessage = contextMessage
+      ? `${contextMessage}: ${message}`
+      : message;
     console.error("❌", finalMessage);
   }
 
@@ -173,7 +187,9 @@ export class HandlerErrorService extends BaseService implements IHandlerErrorSer
    */
   public isProperlyConfigured(): boolean {
     try {
-      return !!(this.cli?.logger && typeof this.cli.logger.error === "function");
+      return !!(
+        this.cli?.logger && typeof this.cli.logger.error === "function"
+      );
     } catch {
       return false;
     }

@@ -11,7 +11,11 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   private folder = "";
   private targetPath = "";
 
-  public async newComponent(type: string, name: string, options: IGenerateOptions): Promise<void> {
+  public async newComponent(
+    type: string,
+    name: string,
+    options: IGenerateOptions,
+  ): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
     this.targetPath = path.join(this.cli.rootPath, this.folder, this.fileName);
@@ -36,7 +40,9 @@ export class GeneratorService extends BaseService implements IGeneratorService {
     }
 
     if (options.dryRun) {
-      this.cli.logger.info(`[DRY-RUN] Créerait le fichier : ${this.targetPath}`);
+      this.cli.logger.info(
+        `[DRY-RUN] Créerait le fichier : ${this.targetPath}`,
+      );
       return;
     }
   }

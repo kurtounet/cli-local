@@ -1,5 +1,5 @@
 directory_tree:
-  name: cli-local-poo/
+  name: 📁 cli-local-poo/
   children:
     - name: .env
     - name: .gitignore
@@ -10,7 +10,7 @@ directory_tree:
     - name: prompt.md
     - name: rapport-erreurs.txt
     - name: rapport-eslint.md
-    - name: src/
+    - name: 📁 src/
       children:
         - name: commands/
           children:
@@ -115,12 +115,12 @@ directory_tree:
                 - name: task-manager-service.interface.ts
                 - name: template.interface.ts
                 - name: tool-service.interface.ts
-    - name: tests/
+    - name: 📁 tests/
       children:
         - name: cli-e2e.test.ts
         - name: setup.ts
         - name: utils.ts
-    - name: tree/
+    - name: 📁 tree/
       children:
         - name: tree.md
     - name: tree.json

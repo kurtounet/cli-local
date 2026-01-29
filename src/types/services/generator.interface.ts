@@ -16,5 +16,9 @@ export interface IGeneratorService extends IBaseService {
    * @param options - Un objet d'options supplémentaires pour la génération (ex: chemin, propriétés).
    * @returns Une promesse qui se résout une fois le composant généré.
    */
-  newComponent(type: string, name: string, options: IGenerateOptions): Promise<void>;
+  newComponent(
+    type: string,
+    name: string,
+    options: IGenerateOptions,
+  ): Promise<void>;
 }

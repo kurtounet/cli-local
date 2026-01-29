@@ -1,45 +1,41 @@
+import { dump } from "js-yaml";
+import path from "node:path";
 import { BaseCommand } from "./BaseCommand.js";
+
 export class InitCommand extends BaseCommand {
   public name = "init";
-  public description = "Initialise le dossier de templates de ScroFolder";
+  public description =
+    "Initialise le fichier de configuration (json, yaml, js)";
+  public arguments = "[format]";
 
-  public options = [
-    {
-      flags: "-f, --force",
-      description: "Force la réinitialisation même si le dossier existe",
-      defaultValue: false,
-    },
-  ];
+  async execute(args: string[]): Promise<void> {
+    const format = (args[0] || "json").toLowerCase() as "yaml" | "json" | "js";
+    const projectPath = process.cwd();
 
-  async execute(
-    args: string[],
-    options: Record<string, unknown>,
-  ): Promise<void> {
-    console.log("Options reçues:", options);
-    const targetDir = this.cli.config.templatesPath;
+    // On récupère les défauts depuis le service pour générer le fichier
+    const defaults = this.cli.configService.defaults;
+    let fileName = "";
+    let content = "";
 
-    this.logger.info("Vérification de l'environnement...");
+    switch (format) {
+      case "json":
+        fileName = ".mclprc.json";
+        content = JSON.stringify(defaults, null, 2);
+        break;
+      case "js":
+        fileName = ".mclprc.js";
+        content = `export default ${JSON.stringify(defaults, null, 2)};`;
+        break;
+      default: // yaml
+        fileName = ".mclprc.yaml";
+        // content = "# MCLP Configuration\n" + dump(defaults);
+        content = "# MCLP Configuration\n";
 
-    const exists = await this.cli.fileSystem.exists(targetDir);
-
-    if (exists && !options.force) {
-      this.logger.warn(
-        `Le dossier '${targetDir}' existe déjà. Utilisez --force pour écraser.`,
-      );
-      return;
+        break;
     }
 
-    // Action : Création du dossier
-    await this.cli.fileSystem.createDirectory(targetDir);
-
-    // Exemple de création d'un fichier de config par défaut
-    await this.cli.fileSystem.writeFile(
-      `${targetDir}/example.json`,
-      JSON.stringify({ name: "template-exemple", version: "1.0.0" }, null, 2),
-    );
-
-    this.logger.success(
-      `ScroFolder initialisé avec succès dans : ${targetDir}`,
-    );
+    const fullPath = path.join(projectPath, fileName);
+    await this.cli.fileSystem.writeFile(fullPath, content);
+    this.cli.logger.success(`Fichier ${fileName} créé !`);
   }
 }

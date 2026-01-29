@@ -9,9 +9,17 @@ export interface IToolService extends IBaseService {
   serviceName: string;
   // init(): Promise<void>;
 
-  generateAsciiTree(node: IFileNode, viewContent?: boolean, prefix?: string): string;
+  generateAsciiTree(
+    node: IFileNode,
+    viewContent?: boolean,
+    prefix?: string,
+  ): string;
 
   generateYamlTree(node: IFileNode, viewContent: boolean): string;
 
-  generateAsciiTreeMetadata(node: IFileNode, prefix?: string, viewContent?: boolean): string;
+  generateAsciiTreeMetadata(
+    node: IFileNode,
+    prefix?: string,
+    viewContent?: boolean,
+  ): string;
 }

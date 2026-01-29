@@ -31,7 +31,11 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
 
   async execute(args: string[], options: IGenerateOptions): Promise<void> {
     // target + au moins 1 name
-    this.validateArgs(args, 2, "Usage: mclp generate <target> <name...> [options]");
+    this.validateArgs(
+      args,
+      2,
+      "Usage: mclp generate <target> <name...> [options]",
+    );
 
     const target = String(args[0]).toLowerCase() as Target;
     const names = args.slice(1).map(String).filter(Boolean);
@@ -40,7 +44,9 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
     const output = this.getOption(options, "output", "./src/tests");
 
     if (!["service", "command", "template", "framework"].includes(target)) {
-      throw new Error(`Target invalide "${target}". Valides: service|command|template|framework`);
+      throw new Error(
+        `Target invalide "${target}". Valides: service|command|template|framework`,
+      );
     }
 
     for (const name of names) {

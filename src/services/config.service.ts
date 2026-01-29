@@ -72,7 +72,7 @@ export class ConfigService extends BaseService implements IConfigService {
       return this.defaults;
     }
   }
-  // Getter pour accéder à la config facilement
+
   public get current(): IAppConfig {
     this.load();
     return this.configData;

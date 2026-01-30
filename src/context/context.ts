@@ -16,7 +16,7 @@ import { DataManagerService } from "@/services/data-manager.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
 import { IBaseService } from "@/types/services/base-service.interface.js";
-import { ProjectService } from "@/services/project.service.js";
+import { ProjectService } from "@/features/project/services/project.service.js";
 
 /**
  * Builder pour la construction du contexte de l'application

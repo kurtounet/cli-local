@@ -1,4 +1,4 @@
 node_modules
 .doc
 dist
-.old_cli
+old_cli/*

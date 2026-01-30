@@ -1,0 +1,74 @@
+Vous avez raison, il y a des fonctions qui ont la même fonctionnalité dans les deux codes. Voici l'analyse avec les renommages suggérés :
+
+## Fonctions avec la même fonctionnalité (à renommer)
+
+### 1. Construction des imports
+- **DTOs** : `buildDtoImports()` → `buildImports()`
+- **Entities** : `buildImportStatements()` → `buildImports()`
+
+### 2. Génération du fichier final
+- **DTOs** : `generateDtoFile()` → `generateFile()`
+- **Entities** : `generateEntityFile()` → `generateFile()`
+
+### 3. Construction des propriétés API pour Swagger
+- **DTOs** : `buildApiPropertyDecorator()` → `buildApiProperty()`
+- **Entities** : `buildApiProperty()` → `buildApiProperty()` (déjà bien nommée)
+
+## Fonctions spécifiques aux DTOs (après renommage)
+
+### Fonctions principales de génération
+- `generateAllDtos()` - Génère tous les DTOs (Create, Update, Response)
+- `generateDto()` - Génère un DTO spécifique
+- `generateCreateDto()` - Génère un DTO de création
+- `generateUpdateDto()` - Génère un DTO de mise à jour
+- `generateResponseDto()` - Génère un DTO de réponse
+
+### Fonctions de traitement spécifiques aux DTOs
+- `processColumnForDto()` - Traite une colonne pour un DTO spécifique
+- `processRelationForDto()` - Traite une relation pour un DTO
+- `shouldExcludeColumn()` - Détermine si une colonne doit être exclue du DTO
+- `getColumnOptionalStatus()` - Détermine si une colonne est optionnelle selon le type de DTO
+
+### Fonctions de décorateurs spécifiques aux DTOs
+- `getColumnDecorators()` - Génère les décorateurs pour une colonne de DTO
+- `getRelationDecorators()` - Génère les décorateurs pour une relation de DTO
+- `getValidationDecorators()` - Génère les décorateurs de validation
+- `getTypeValidationDecorators()` - Génère les décorateurs de validation basés sur le type
+- `getTransformDecorators()` - Génère les décorateurs de transformation
+
+### Fonctions utilitaires spécifiques aux DTOs
+- `getExampleValue()` - Génère une valeur d'exemple pour Swagger
+- `generateColumnDescription()` - Génère une description pour la colonne
+- `getDtoSuffix()` - Retourne le suffixe approprié pour le nom de classe DTO
+
+## Fonctions spécifiques aux Entities (après renommage)
+
+### Fonction principale de génération
+- `nestjsEntityTemplate()` - Génère le contenu complet du fichier d'entité NestJS
+
+### Fonctions de traitement spécifiques aux Entities
+- `getColumnsDecorators()` - Génère les décorateurs pour une colonne de base de données
+- `getColumnDecorator()` - Détermine le décorateur de colonne approprié
+- `buildColumnOptions()` - Construit les options de colonne pour @Column
+- `getTypeMapping()` - Retourne le mappage des types SQL vers TypeORM
+
+### Fonctions de relations spécifiques aux Entities
+- `getRelationships()` - Traite toutes les relations d'une entité
+- `processRelationship()` - Traite une relation individuelle
+- `shouldAddJoinColumn()` - Détermine si un JoinColumn doit être ajouté
+- `buildRelation()` - Construit la chaîne pour une relation
+- `getRelationConfig()` - Obtient la configuration pour une relation
+- `buildRelationDecorator()` - Construit le décorateur de relation
+
+### Fonctions utilitaires spécifiques aux Entities
+- `buildImportEntity()` - Construit une instruction d'import pour une entité liée
+
+## Résumé après renommage
+
+**Fonctions communes (à extraire dans un module partagé)** :
+- `buildImports()` - Construction des instructions d'import
+- `generateFile()` - Génération du fichier final
+- `buildApiProperty()` - Construction des propriétés API Swagger
+
+**DTOs spécifiques** : 14 fonctions (axées sur validation, transformation, exclusion de champs)
+**Entities spécifiques** : 10 fonctions (axées sur TypeORM, relations DB, mappings SQL)

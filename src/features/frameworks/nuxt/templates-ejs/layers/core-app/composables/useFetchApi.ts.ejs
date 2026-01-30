@@ -1,0 +1,18 @@
+type FetchOptions<T> = Omit<Parameters<typeof $fetch<T>>[1], 'baseURL'>;
+
+export function useFetchApi() {
+  const config = useRuntimeConfig();
+  async function get<T>(url: string, opts?: FetchOptions<T>) {
+    return $fetch<T>(url, { ...opts, baseURL: config.public.apiBase });
+  }
+  async function post<T>(url: string, body?: any, opts?: FetchOptions<T>) {
+    return $fetch<T>(url, { ...opts, method: 'POST', body, baseURL: config.public.apiBase });
+  }
+  async function put<T>(url: string, body?: any, opts?: FetchOptions<T>) {
+    return $fetch<T>(url, { ...opts, method: 'PUT', body, baseURL: config.public.apiBase });
+  }
+  async function del<T>(url: string, opts?: FetchOptions<T>) {
+    return $fetch<T>(url, { ...opts, method: 'DELETE', baseURL: config.public.apiBase });
+  }
+  return { get, post, put, del };
+}

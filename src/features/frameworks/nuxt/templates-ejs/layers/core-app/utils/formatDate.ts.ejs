@@ -1,0 +1,4 @@
+export function formatDate(input: string | number | Date) {
+  const d = new Date(input);
+  return d.toISOString();
+}

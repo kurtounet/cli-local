@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "my-workspace",
+  "workspaces": [
+    "layers/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "nuxt dev apps/web",
+    "build": "nuxt build apps/web",
+    "preview": "nuxt preview apps/web"
+  },
+  "devDependencies": {
+    "nuxt": "^3.13.0",
+    "@pinia/nuxt": "^0.5.5",
+    "typescript": "^5.5.4"
+  }
+}

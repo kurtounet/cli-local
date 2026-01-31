@@ -41,7 +41,7 @@ Exemples :
   public aliases = ["p"];
 
   // Ajout de "yaml" dans les extensions autorisées
-  private readonly extensions = ["json", "md", "yaml"];
+  private readonly possibleAction = ["new", "n", "init", "i", "generate", "g"];
 
   public options: ICommandOption[] = [
     // ... tes options restent identiques
@@ -67,77 +67,88 @@ Exemples :
 
   async execute(args: string[], options: IProjectOptions): Promise<void> {
     const [action, ...rest] = args;
-    this.cli.logger.info("Initialisation d'un nouveau projet...");
-    const frontend = FRAMEWORKS_FRONTEND;
-    const backend = FRAMEWORKS_BACKEND;
-    const database = DATABASES;
 
-    const [command, subType] = action.split(":");
-    console.log(`command: ${command} subType: ${subType}`);
-    if (command === "new") {
+    if (!this.possibleAction.includes(action)) {
+      this.cli.logger.error(`Veuillez fournir une action. 
+Choix :
+new ou n :pour créer un nouveau fichier de configuration pour un projet.
+generate ou g: pour génerer le projet a partir d'une configuration existante.
+`);
+      return;
+    }
+    if (action === "new" || action === "n" || rest.length === 0) {
       this.cli.logger.info("Initialisation d'un nouveau projet...");
       const frontend = FRAMEWORKS_FRONTEND;
       const backend = FRAMEWORKS_BACKEND;
       const database = DATABASES;
-      const [command, subType] = action.split(":");
-      console.log(`command: ${command} subType: ${subType}`);
-    }
-    const answers = await inquirer.prompt<IProjectCommand>([
-      {
-        type: "input",
-        name: "existence",
-        message: "✋ Projet existant y/yes | n/no:",
-        validate: (input: string) => (input.trim() !== "" ? true : "Le nom du projet est requis."),
-      },
-      {
-        type: "input",
-        name: "name",
-        message: "👉  Nom du projet :",
-        validate: (input: string) => (input.trim() !== "" ? true : "Le nom du projet est requis."),
-      },
-      {
-        type: "input",
-        name: "path",
-        message: "👉  Chemin du projet :",
-        validate: (input: string) =>
-          input.trim() !== "" ? true : "Le chemin du projet est requis.",
-      },
-      {
-        type: "input",
-        name: "starUml",
-        message: "👉  Chemin du fichier starUml :",
-        // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
-      },
-      {
-        type: "checkbox",
-        name: "frontends",
-        message: "👉  Choisir le Frontend",
-        choices: [...frontend],
-        // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
-      },
-      {
-        type: "checkbox",
-        name: "backends",
-        message: "👉  Choisir le Backend",
-        choices: [...backend],
-        // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
-      },
-      {
-        type: "checkbox",
-        name: "databases",
-        message: "👉  Choisir la base de données",
-        choices: [...database],
-        // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
-      },
-      /*
+      const answers = await inquirer.prompt<IProjectCommand>([
+        {
+          type: "input",
+          name: "existence",
+          message: "✋ Projet existant y/yes | n/no:",
+          validate: (input: string) =>
+            input.trim() !== "" ? true : "Le nom du projet est requis.",
+        },
+        {
+          type: "input",
+          name: "name",
+          message: "👉  Nom du projet :",
+          validate: (input: string) =>
+            input.trim() !== "" ? true : "Le nom du projet est requis.",
+        },
+        {
+          type: "input",
+          name: "path",
+          message: "👉  Chemin du projet :",
+          validate: (input: string) =>
+            input.trim() !== "" ? true : "Le chemin du projet est requis.",
+        },
+        {
+          type: "input",
+          name: "starUml",
+          message: "👉  Chemin du fichier starUml :",
+          // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
+        },
+        {
+          type: "checkbox",
+          name: "frontends",
+          message: "👉  Choisir le Frontend",
+          choices: [...frontend],
+          // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
+        },
+        {
+          type: "checkbox",
+          name: "backends",
+          message: "👉  Choisir le Backend",
+          choices: [...backend],
+          // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
+        },
+        {
+          type: "checkbox",
+          name: "databases",
+          message: "👉  Choisir la base de données",
+          choices: [...database],
+          // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
+        },
+        /*
       {
         type: "confirm",
         name: "includeLinter",
         message: "👉  Voulez-vous inclure un linter ?",
         default: true,
       },*/
-    ]);
-
+      ]);
+      this.newProject(answers);
+    } else if (action === "generate" || action === "g") {
+      this.cli.logger.info("Génération du projet...");
+      const configFileName = `${rest[0]}-config.json`;
+      const configFilePath = path.join(process.cwd(), configFileName);
+      const pconfig = await this.cli.fileSystem.readFile(configFilePath);
+      this.generateProject(pconfig);
+    }
+    return;
+  }
+  async newProject(answers: any): Promise<void> {
     const configFileName = `${answers.name}-config.json`;
     const configFilePath = path.join(process.cwd(), configFileName);
     if (answers.path == ".") {
@@ -161,5 +172,13 @@ Exemples :
         "❌ Erreur lors de la création du fichier de configuration :",
       );
     }
+  }
+  async generateProject(config: string): Promise<void> {
+    this.cli.logger.info("Génération du projet...");
+    this.cli.project.generateProject(config);
+  }
+  async getConfigProject(config: string): Promise<void> {
+    this.cli.fileSystem.readFile(config);
+    this.cli.logger.info("Vérification du fichier de configuration...");
   }
 }

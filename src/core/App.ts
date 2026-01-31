@@ -1,6 +1,10 @@
 import { Command } from "commander";
 import { IAppContext } from "../types/context.interface.js";
-import { ICommandClass, ICommand, ICommandOption } from "../types/command.interface.js";
+import {
+  ICommandClass,
+  ICommand,
+  ICommandOption,
+} from "../types/command.interface.js";
 import { HandlerErrorService } from "../services/handler-error.service.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 
@@ -78,21 +82,30 @@ export class App {
     }
 
     cmd.action(async (...actionArgs: unknown[]) => {
-      const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
+      const errorHandler = this.cli.services.get<HandlerErrorService>(
+        "HandlerErrorService",
+      );
 
       try {
         // Commander passe généralement l'instance Command en dernier
         const last = actionArgs[actionArgs.length - 1];
-        const positional = last instanceof Command ? actionArgs.slice(0, -1) : actionArgs;
+        const positional =
+          last instanceof Command ? actionArgs.slice(0, -1) : actionArgs;
 
         const commanderCmd = last instanceof Command ? last : cmd;
 
-        const cleanArgs: string[] = positional.flatMap((a: unknown): string[] => {
-          if (Array.isArray(a)) return a.map(String);
-          if (typeof a === "string" || typeof a === "number" || typeof a === "boolean")
-            return [String(a)];
-          return []; // drop objets (Command, options internes, etc.)
-        });
+        const cleanArgs: string[] = positional.flatMap(
+          (a: unknown): string[] => {
+            if (Array.isArray(a)) return a.map(String);
+            if (
+              typeof a === "string" ||
+              typeof a === "number" ||
+              typeof a === "boolean"
+            )
+              return [String(a)];
+            return []; // drop objets (Command, options internes, etc.)
+          },
+        );
 
         // ✅ Si aucun arg positionnel -> afficher l'aide de CETTE commande
         if (cleanArgs.length === 0) {
@@ -125,7 +138,9 @@ export class App {
    * Point d'entrée principal après l'enregistrement de toutes les commandes
    */
   public async run(): Promise<void> {
-    const errorHandler = this.cli.services.get<HandlerErrorService>("HandlerErrorService");
+    const errorHandler = this.cli.services.get<HandlerErrorService>(
+      "HandlerErrorService",
+    );
     await this.cli.config.load(process.cwd());
     try {
       // Parse les arguments du processus (process.argv)
@@ -134,7 +149,10 @@ export class App {
       // En cas d'erreur fatale, on utilise le gestionnaire d'erreurs
 
       if (errorHandler) {
-        errorHandler.handle(error as Error, "❌ Échec du démarrage de l'application :");
+        errorHandler.handle(
+          error as Error,
+          "❌ Échec du démarrage de l'application :",
+        );
       } else {
         // Fallback si le gestionnaire d'erreurs n'est pas disponible
         console.error("❌ Échec du démarrage de l'application :", error);
@@ -167,7 +185,11 @@ export class App {
       if (!long) continue;
 
       // Defaults (si non fourni)
-      if (out[long] === undefined && "defaultValue" in opt && opt.defaultValue !== undefined) {
+      if (
+        out[long] === undefined &&
+        "defaultValue" in opt &&
+        opt.defaultValue !== undefined
+      ) {
         out[long] = opt.defaultValue;
       }
 

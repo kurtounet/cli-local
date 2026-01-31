@@ -57,11 +57,16 @@ export class ConfigService extends BaseService implements IConfigService {
     const fileName = `.${this.moduleName}rc.json`;
 
     try {
-      this.cli.logger.info(`Génération du fichier de configuration : ${fileName}`);
+      this.cli.logger.info(
+        `Génération du fichier de configuration : ${fileName}`,
+      );
 
       const data = this.defaults;
       // On écrit le fichier proprement
-      await this.cli.fileSystem.writeFile(fileName, JSON.stringify(data, null, 2));
+      await this.cli.fileSystem.writeFile(
+        fileName,
+        JSON.stringify(data, null, 2),
+      );
 
       this.configData = data;
       return this.configData;
@@ -78,11 +83,18 @@ export class ConfigService extends BaseService implements IConfigService {
     return this.configData;
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): unknown {
+  private deepMerge(
+    target: Record<string, unknown>,
+    source: Record<string, unknown>,
+  ): unknown {
     const output = { ...target };
     if (source && typeof source === "object") {
       Object.keys(source).forEach((key) => {
-        if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
+        if (
+          source[key] &&
+          typeof source[key] === "object" &&
+          !Array.isArray(source[key])
+        ) {
           output[key] = this.deepMerge(target[key] || {}, source[key]);
         } else {
           output[key] = source[key];

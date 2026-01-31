@@ -2,4 +2,3 @@ node_modules
 .doc
 dist
 old_cli/*
-project-test/*

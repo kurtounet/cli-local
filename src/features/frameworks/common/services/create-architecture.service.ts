@@ -3,7 +3,10 @@ import * as path from "path";
 
 import { logError, logInfo, logStep } from "@utils/logger";
 import { EMOJI, messageCreateArchitecture } from "@constants/messages";
-import { IDirectory, IFramework } from "@features/frameworks/models/framework-commun.model";
+import {
+  IDirectory,
+  IFramework,
+} from "@features/frameworks/models/framework-commun.model";
 
 export function createFolder(pathFolder: string) {
   if (!fs.existsSync(pathFolder)) {
@@ -17,7 +20,10 @@ export function createFolder(pathFolder: string) {
  * @param frameworkPath The base path where the framework's architecture should be created.
  * @returns A success or error message.
  */
-export function createArchitecture(framework: IFramework, frameworkPath: string) {
+export function createArchitecture(
+  framework: IFramework,
+  frameworkPath: string,
+) {
   logStep(messageCreateArchitecture());
   if (framework.architecture.length > 0) {
     try {
@@ -32,7 +38,9 @@ export function createArchitecture(framework: IFramework, frameworkPath: string)
         }
       });
     } catch (error) {
-      logError(`${EMOJI.error} Erreur lors de la création de l'architecture ! : ${error}`);
+      logError(
+        `${EMOJI.error} Erreur lors de la création de l'architecture ! : ${error}`,
+      );
     }
   } else {
     return `${EMOJI.error}  Aucune architecture à créer !`;

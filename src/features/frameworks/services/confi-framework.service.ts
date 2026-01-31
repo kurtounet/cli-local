@@ -1,6 +1,9 @@
 import { IConfigDatabase } from "@/features/commun/database.interface.js";
 import { IConfigFramework } from "@/features/commun/framework.interface.js";
-import { DATABASE_MAP, FRAMEWORK_MAP } from "../common/config/config-frameworks.js";
+import {
+  DATABASE_MAP,
+  FRAMEWORK_MAP,
+} from "../common/config/config-frameworks.js";
 
 export class ConfigFrameworkService {
   readonly serviceName = "ConfigFrameworkService";

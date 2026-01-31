@@ -1,5 +1,8 @@
 import { IDatabase } from "@features/frameworks/models/database.model";
-import { IFramework, IProjectConfig } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 
 export function drizzleConfigTemplate(configFile: IProjectConfig): string {
   if (!configFile.databases) {

@@ -49,7 +49,9 @@ export function sqlToDoctrineType(sqlType: string): string {
   return sqlToDoctrineMapping[sqlType.toLowerCase()] || "any";
 }
 
-export function symfonyGetAttributeTypeORM(typeProperty: string | undefined | null): string {
+export function symfonyGetAttributeTypeORM(
+  typeProperty: string | undefined | null,
+): string {
   // Debug logging - remove after fixing
   /*
   logInfo(`"symfonyGetPropertyType called with:", ${
@@ -106,7 +108,9 @@ export function symfonyGetAttributeTypeORM(typeProperty: string | undefined | nu
   return Mapping[normalizedType] || "STRING";
 }
 
-export function symfonyGetPropertyType(typeProperty: string | undefined | null): string {
+export function symfonyGetPropertyType(
+  typeProperty: string | undefined | null,
+): string {
   // Handle undefined, null, or empty string cases
   if (!typeProperty || typeProperty === null || typeProperty === undefined) {
     console.warn("Type is undefined/null, defaulting to string");

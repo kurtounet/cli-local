@@ -1,4 +1,3 @@
-import path from "node:path";
 import { BaseCommand } from "@/commands/BaseCommand.js";
 
 import { AnyOptions } from "@/types/cli-options.type.js";
@@ -6,11 +5,8 @@ import { ICommandOption } from "@/types/command.interface.js";
 
 import inquirer from "inquirer";
 import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
-import {
-  DATABASES,
-  FRAMEWORKS_BACKEND,
-  FRAMEWORKS_FRONTEND,
-} from "@/features/frameworks/common/config/config-frameworks.js";
+import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
+import { IProjectConfig } from "@/features/commun/projet.interface.js";
 
 export interface IProjectOptions extends AnyOptions {
   code?: boolean;
@@ -37,7 +33,7 @@ Exemples :
   mclp generate dto Project
   mclp generate resource Task
 `;
-  public arguments = "<action> [pathIn] [pathOut]";
+  public arguments = "<action> [names...]";
   public aliases = ["p"];
 
   // Ajout de "yaml" dans les extensions autorisées
@@ -76,11 +72,9 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
 `);
       return;
     }
-    if (action === "new" || action === "n" || rest.length === 0) {
+    let response = "";
+    if (action === "new" || action === "n") {
       this.cli.logger.info("Initialisation d'un nouveau projet...");
-      const frontend = FRAMEWORKS_FRONTEND;
-      const backend = FRAMEWORKS_BACKEND;
-      const database = DATABASES;
       const answers = await inquirer.prompt<IProjectCommand>([
         {
           type: "input",
@@ -113,22 +107,28 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
           type: "checkbox",
           name: "frontends",
           message: "👉  Choisir le Frontend",
-          choices: [...frontend],
+          choices: [...FRAMEWORKS.frontend],
           // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
         },
         {
           type: "checkbox",
           name: "backends",
           message: "👉  Choisir le Backend",
-          choices: [...backend],
+          choices: [...FRAMEWORKS.backend],
           // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
         },
         {
           type: "checkbox",
           name: "databases",
           message: "👉  Choisir la base de données",
-          choices: [...database],
+          choices: [...FRAMEWORKS.databases],
           // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
+        },
+        {
+          type: "input",
+          name: "generate",
+          message: "✋ Voulez-vous générer le Projet y/yes | n/no:",
+          default: true,
         },
         /*
       {
@@ -138,22 +138,26 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
         default: true,
       },*/
       ]);
-      this.newProject(answers);
+      const config = await this.newProject(answers);
+      if (answers.generate) {
+        response = await this.generateProject(config);
+      }
     } else if (action === "generate" || action === "g") {
-      this.cli.logger.info("Génération du projet...");
       const configFileName = `${rest[0]}-config.json`;
-      const configFilePath = path.join(process.cwd(), configFileName);
-      const pconfig = await this.cli.fileSystem.readFile(configFilePath);
-      this.generateProject(pconfig);
+      const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
+      const config = await this.cli.fileSystem.readFileJson(configFilePath);
+      response = await this.generateProject(config);
     }
+    this.cli.logger.info(response);
     return;
   }
-  async newProject(answers: any): Promise<void> {
+  async newProject(answers: any): Promise<IProjectConfig> {
     const configFileName = `${answers.name}-config.json`;
-    const configFilePath = path.join(process.cwd(), configFileName);
     if (answers.path == ".") {
       answers.path = process.cwd();
     }
+    const configFilePath = this.cli.fileSystem.resolvePath(answers.path, configFileName);
+    let config = {} as IProjectConfig;
     try {
       if (answers.existence === "y" || answers.existence === "yes") {
         // await this.cli.fileSystem.writeFileJson(
@@ -161,23 +165,23 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
         //   createConfigProjectExisting(answers),
         // );
       } else {
-        const config = await this.cli.project.newProject(answers);
-        await this.cli.fileSystem.writeFileJson(configFilePath, config);
+        config = await this.cli.project.newProject(answers);
+        await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
       }
       this.cli.logger.info(`✅ 🤞Fichier de configuration créé : ${configFilePath}`);
-      this.cli.logger.info(`🚀 commande pour généré le projet: cl create-project ${answers.name}`);
+      this.cli.logger.info(`🚀 commande pour généré le projet: mclp p g ${answers.name}`);
     } catch (err: unknown) {
       this.cli.errorHandler.handle(
         err as Error,
         "❌ Erreur lors de la création du fichier de configuration :",
       );
     }
+    return config;
   }
-  async generateProject(config: string): Promise<void> {
-    this.cli.logger.info("Génération du projet...");
-    this.cli.project.generateProject(config);
+  async generateProject(config: IProjectConfig): Promise<string> {
+    return this.cli.project.generateProject(config);
   }
-  async getConfigProject(config: string): Promise<void> {
+  async loadConfigProject(config: string): Promise<void> {
     this.cli.fileSystem.readFile(config);
     this.cli.logger.info("Vérification du fichier de configuration...");
   }

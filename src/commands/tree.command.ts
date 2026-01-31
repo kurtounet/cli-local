@@ -85,7 +85,9 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
 
   async execute(args: string[], options: ITreeOptions): Promise<void> {
     // On récupère la config globale via le service
-    const config = this.cli.config.current ? this.cli.config.current : this.cli.config.current;
+    const config = this.cli.config.current
+      ? this.cli.config.current
+      : this.cli.config.current;
     // console.log(config.tree.analysis.maxLevel);
     // console.log(this.hasOption(options, "level"));
     // console.log(this.getOption(options, "level", 25));
@@ -96,11 +98,18 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
     let level = this.hasOption(options, "level")
       ? this.getOption(options, "level", 0)
       : config.tree.analysis.maxLevel;
-    let save = config.tree.analysis.save ?? this.getOption(options, "save", false);
+    let save =
+      config.tree.analysis.save ?? this.getOption(options, "save", false);
     let excludedDirs = config.tree.exclude;
-    let analyzeExtensions = config.tree.analysis.enabled ? config.tree.analysis.extensions : null;
+    let analyzeExtensions = config.tree.analysis.enabled
+      ? config.tree.analysis.extensions
+      : null;
 
-    this.validateArgs(args, 1, "Usage: mclp tree <type> <pathIn> [pathOut] [options]");
+    this.validateArgs(
+      args,
+      1,
+      "Usage: mclp tree <type> <pathIn> [pathOut] [options]",
+    );
 
     let view = this.hasOption(options, "view");
     let force = this.hasOption(options, "force");
@@ -112,12 +121,15 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
     const [type, ...pathArgs] = args;
 
     if (!this.extensions.includes(type)) {
-      throw new ValidationError(`Type invalide. Types supportés : ${this.extensions.join(", ")}`);
+      throw new ValidationError(
+        `Type invalide. Types supportés : ${this.extensions.join(", ")}`,
+      );
     }
 
     try {
       // const pathIn = path.resolve(pathArgs[0] ?? ".");
-      const argOut = pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
+      const argOut =
+        pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
       const pathOut = path.resolve(argOut ?? output ?? pathIn);
       const fileName = path.resolve(pathOut, `tree.${type}`);
       // console.log(
@@ -131,12 +143,19 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       this.cli.logger.info(`Processing: ${pathIn} -> ${fileName} (${type})`);
 
       // Récupération de l'objet tree (données brutes)
-      const tree = await this.cli.fileSystem.getDirectoryTree(pathIn, 0, level, metadata, {
-        excludedDirs,
-        analyzeExtensions,
-      });
+      const tree = await this.cli.fileSystem.getDirectoryTree(
+        pathIn,
+        0,
+        level,
+        metadata,
+        {
+          excludedDirs,
+          analyzeExtensions,
+        },
+      );
 
-      if (!tree) throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
+      if (!tree)
+        throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
 
       // SWITCH pour déterminer le contenu selon le type
       let content = "";
@@ -164,11 +183,15 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
 
       if (save) {
         if (this.cli.fileSystem.exists(fileName) && !force) {
-          throw new FilesystemError(`Le fichier '${fileName}' existe déjà. Utilisez --force.`);
+          throw new FilesystemError(
+            `Le fichier '${fileName}' existe déjà. Utilisez --force.`,
+          );
         }
 
         if (dryRun) {
-          this.cli.logger.info(`[dry-run] L'écriture de ${fileName} a été simulée.`);
+          this.cli.logger.info(
+            `[dry-run] L'écriture de ${fileName} a été simulée.`,
+          );
           return;
         }
 

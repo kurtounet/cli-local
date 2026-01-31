@@ -4,7 +4,9 @@ import { TApiDocumentation } from "../../types/api-platform-doc-json-ld.type";
 /**
  * Service pour lire et normaliser le fichier documentation-api.json
  */
-export function apiPlatformReadDocJsonldService(path: string): TApiDocumentation | null {
+export function apiPlatformReadDocJsonldService(
+  path: string,
+): TApiDocumentation | null {
   try {
     const rawData = readFile(path);
     const data = JSON.parse(rawData) as TApiDocumentation;

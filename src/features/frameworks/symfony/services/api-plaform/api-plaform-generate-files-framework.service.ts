@@ -1,4 +1,7 @@
-import { IFramework, IProjectConfig } from "@frameworks-models/framework-commun.model";
+import {
+  IFramework,
+  IProjectConfig,
+} from "@frameworks-models/framework-commun.model";
 
 import { logInfo, logStep } from "@utils/logger";
 import { messageInstallationFramework } from "@constants/messages";
@@ -32,8 +35,14 @@ export function apiPlatformGenerateFilesFrameworkService(
   if (Array.isArray(entitiesJsonFile)) {
     entitiesJsonFile.forEach((entity: IEntityJson) => {
       apiPlatformEntityService(`${rootPathProjectFramework}/src/`, entity);
-      apiPlatformEntityMapperService(`${rootPathProjectFramework}/src/ApiResource/Mappers`, entity);
-      apiPlatformEntityDtoService(`${rootPathProjectFramework}/src/ApiResource`, entity);
+      apiPlatformEntityMapperService(
+        `${rootPathProjectFramework}/src/ApiResource/Mappers`,
+        entity,
+      );
+      apiPlatformEntityDtoService(
+        `${rootPathProjectFramework}/src/ApiResource`,
+        entity,
+      );
       apiPlatformEntityProviderService(
         `${rootPathProjectFramework}/src/ApiResource/States`,
         entity,
@@ -42,7 +51,9 @@ export function apiPlatformGenerateFilesFrameworkService(
         `${rootPathProjectFramework}/src/ApiResource/States`,
         entity,
       );
-      apiPlatformServicesService(`${rootPathProjectFramework}/src/ApiResource/Services`);
+      apiPlatformServicesService(
+        `${rootPathProjectFramework}/src/ApiResource/Services`,
+      );
     });
   }
   // symfonyGenerateCommandService(rootPathProjectFramework );

@@ -31,7 +31,8 @@ export function apiPlatformDocJsonldService(processPath: string) {
   } else {
     logError(`${EMOJI.file} Ecriture du fichier JSON-LD réussie`);
   }*/
-  const doc: TApiDocumentation | null = apiPlatformReadDocJsonldService(docJsonLd);
+  const doc: TApiDocumentation | null =
+    apiPlatformReadDocJsonldService(docJsonLd);
   if (!doc) {
     logError(`${EMOJI.file} Lecture du fichier JSON-LD échouée`);
     return;
@@ -77,7 +78,10 @@ export function apiPlatformDocJsonldService(processPath: string) {
     resourceData: supportedClassResource,
   };
   apiPlatformGenerateFilesService(filesToGenerate);
-  apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(supportedClassResource, basePath);
+  apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(
+    supportedClassResource,
+    basePath,
+  );
   console.log("jsonld:", doc);
 }
 
@@ -86,11 +90,13 @@ export function apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(
   path: string,
 ) {
   resources.forEach((resource: TSupportedClass) => {
-    const propertyDefinitions = resource.supportedProperty.map((prop: TSupportedProperty) => {
-      const type = resolveTypeScriptType(prop.property.range);
-      // Utilisation du ";" pour TS et indentation de 2 espaces
-      return `  ${prop.title}: ${type};`;
-    });
+    const propertyDefinitions = resource.supportedProperty.map(
+      (prop: TSupportedProperty) => {
+        const type = resolveTypeScriptType(prop.property.range);
+        // Utilisation du ";" pour TS et indentation de 2 espaces
+        return `  ${prop.title}: ${type};`;
+      },
+    );
     const fileName = pascalToKebab(resource.title);
 
     const jsonData = {
@@ -106,7 +112,10 @@ export function apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(
       })),
     };
 
-    writeFile(`${path}/json/${fileName}.json`, JSON.stringify(jsonData, null, 2));
+    writeFile(
+      `${path}/json/${fileName}.json`,
+      JSON.stringify(jsonData, null, 2),
+    );
 
     const interfaceContent = [
       `export interface I${resource.title} {`,
@@ -120,17 +129,27 @@ export function apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(
 export function apiPlatformGenerateTypeTypeScriptFromDocJsonldService(
   resource: TSupportedClass[],
 ) {}
-export function apiPlatformGenerateSchemaZodFromDocJsonldService(resource: TSupportedClass[]) {}
-export function apiPlatformGenerateFormFromDocJsonldService(resource: TSupportedClass[]) {}
+export function apiPlatformGenerateSchemaZodFromDocJsonldService(
+  resource: TSupportedClass[],
+) {}
+export function apiPlatformGenerateFormFromDocJsonldService(
+  resource: TSupportedClass[],
+) {}
 
 function apiPlatformGenerateFilesService(files: any) {
   writeFile(files.errorPath, JSON.stringify(files.errorData, null, 2));
-  writeFile(files.constraintViolationPath, JSON.stringify(files.constraintViolationData, null, 2));
+  writeFile(
+    files.constraintViolationPath,
+    JSON.stringify(files.constraintViolationData, null, 2),
+  );
   writeFile(
     files.constraintViolationListPath,
     JSON.stringify(files.constraintViolationListData, null, 2),
   );
-  writeFile(files.entrypointPath, JSON.stringify(files.entrypointData, null, 2));
+  writeFile(
+    files.entrypointPath,
+    JSON.stringify(files.entrypointData, null, 2),
+  );
   writeFile(files.resourcePath, JSON.stringify(files.resourceData, null, 2));
   files.resourceData.forEach((classe: TSupportedClass) => {
     writeFile(
@@ -140,7 +159,9 @@ function apiPlatformGenerateFilesService(files: any) {
   });
 }
 
-export function apiPlatformFormatResourceFromDocJsonldService(resource: TSupportedClass) {
+export function apiPlatformFormatResourceFromDocJsonldService(
+  resource: TSupportedClass,
+) {
   let properties: Record<string, any> = {};
   resource.supportedProperty.forEach((prop: TSupportedProperty) => {
     properties[prop.title] = resolveTypeScriptType(prop.property.range);

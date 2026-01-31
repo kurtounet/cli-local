@@ -1,5 +1,6 @@
 export interface IProjectCommand {
   existence: "y" | "yes" | "no" | "n";
+  generate: "y" | "yes" | "no" | "n";
   name: string;
   path: string;
   starUml: string;

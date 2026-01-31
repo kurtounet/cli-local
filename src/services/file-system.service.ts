@@ -67,7 +67,7 @@ export class FileSystemService extends BaseService implements IFileSystemService
       await fs.writeJSON(filePath, content);
       this.cli.logger.debug(`File written: ${filePath}`);
     } catch (error) {
-      const message = `writeFile(): Failed to write file: ${filePath}`;
+      const message = `Failed to write file: ${filePath}`;
       // this.cli.errorHandler.handle(error, message);
       // throw error instanceof Error ? error : new Error(message);
     }
@@ -376,7 +376,7 @@ export class FileSystemService extends BaseService implements IFileSystemService
       const rawTemplate = await this.readFile(templatePath);
       this.cli.logger.debug(`Template loaded for ${fileName}, length: ${rawTemplate.length}`);
 
-      const content = this.cli.templateService.compile(rawTemplate, {
+      const content = this.cli.template.compile(rawTemplate, {
         name: fileName.replace(this.TS_EXTENSION, ""),
         author: this.DEFAULT_AUTHOR,
       });
@@ -405,7 +405,7 @@ export class FileSystemService extends BaseService implements IFileSystemService
       const pkgPath = path.join(process.cwd(), file);
       const pk = await this.cli.fileSystem.readFile(pkgPath);
       const pkg = JSON.parse(pk) as Record<string, any>;
-      pkg.mclp = this.cli.configService.defaults;
+      pkg.mclp = this.cli.config.defaults;
       await this.cli.fileSystem.writeFile(pkgPath, JSON.stringify(pkg, null, 2));
       this.cli.logger.success(`Mise à jour avec succès dans ${file} !`);
     } catch (error) {

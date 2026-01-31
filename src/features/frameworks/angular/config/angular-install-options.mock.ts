@@ -1,4 +1,5 @@
-import { IInstallOptions } from "@frameworks-models/framework-commun.model";
+import { IInstallOptions } from "@/features/commun/framework.interface.js";
+
 export function INSTALL_OPTIONS_ANGULAR_MOCK(): IInstallOptions {
   return {
     name: "frontend",

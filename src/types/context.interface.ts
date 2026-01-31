@@ -1,3 +1,4 @@
+import { IProjectService } from "@/features/project/interfaces/project-service.interface.js";
 import { IAiService } from "./services/ai-service.interface.js";
 import { IArchitectureService } from "./services/architecture-service.interface.js";
 import { IAstService } from "./services/ast-service.interface.js";
@@ -9,7 +10,7 @@ import { IFileSystemService } from "./services/file-system.interface.js";
 import { IGeneratorService } from "./services/generator.interface.js";
 import { ILoggerService } from "./services/logger-service.interface.js";
 import { IPluginService } from "./services/plugin-service.interface.js";
-import { IProjectService } from "./services/project-service.interface.js";
+
 import { IPromptService } from "./services/prompt-service.interface.js";
 import { IServicesContainer } from "./services/services-container.interface.js";
 import { IStateService } from "./services/state-service.interface.js";

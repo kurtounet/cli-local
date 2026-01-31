@@ -57,6 +57,10 @@ export class App {
       .command(`${cmdInstance.name} ${signature}`.trim())
       .description(cmdInstance.description);
 
+    if (cmdInstance.helpAfterText) {
+      cmd.addHelpText("after", "\n" + cmdInstance.helpAfterText);
+    }
+
     // Enregistrement des alias de la commande (ex: "g" pour "generate")
     if (cmdInstance.aliases?.length) {
       cmd.aliases(cmdInstance.aliases);
@@ -81,12 +85,20 @@ export class App {
         const last = actionArgs[actionArgs.length - 1];
         const positional = last instanceof Command ? actionArgs.slice(0, -1) : actionArgs;
 
+        const commanderCmd = last instanceof Command ? last : cmd;
+
         const cleanArgs: string[] = positional.flatMap((a: unknown): string[] => {
           if (Array.isArray(a)) return a.map(String);
           if (typeof a === "string" || typeof a === "number" || typeof a === "boolean")
             return [String(a)];
           return []; // drop objets (Command, options internes, etc.)
         });
+
+        // ✅ Si aucun arg positionnel -> afficher l'aide de CETTE commande
+        if (cleanArgs.length === 0) {
+          commanderCmd.help(); // affiche et exit (Commander)
+          return;
+        }
 
         const raw = cmd.opts();
         const rawOptions = this.toAnyOptions(raw); // type-guard runtime (cf. plus bas)

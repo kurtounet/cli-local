@@ -19,79 +19,76 @@
         "src/*"
       ],
       "@commands/*": [
-        "./commands/*"
+        "src/commands/*"
       ],
       "@features/*": [
-        "./features/*"
+        "src/features/*"
       ],
       "@project/*": [
-        "./features/project/*"
+        "src/features/project/*"
       ],
       "@parsersMdj/*": [
-        "./features/parsersMdj/*"
+        "src/features/parsersMdj/*"
       ],
       "@frameworks/*": [
-        "./features/frameworks/*"
+        "src/features/frameworks/*"
       ],
       "@angular/*": [
-        "./features/frameworks/angular/*"
+        "src/features/frameworks/angular/*"
       ],
       "@electron/*": [
-        "./features/frameworks/electron/*"
+        "src/features/frameworks/electron/*"
       ],
       "@nestjs/*": [
-        "./features/frameworks/nestjs/*"
+        "src/features/frameworks/nestjs/*"
       ],
       "@nitro/*": [
-        "./features/frameworks/nitro/*"
+        "src/features/frameworks/nitro/*"
       ],
       "@nuxt/*": [
-        "./features/frameworks/nuxt/*"
-      ],
-      "@react/*": [
-        "./features/frameworks/react/*"
+        "src/features/frameworks/nuxt/*"
       ],
       "@symfony/*": [
-        "./features/frameworks/symfony/*"
+        "src/features/frameworks/symfony/*"
       ],
       "@vue/*": [
-        "./features/frameworks/vue/*"
+        "src/features/frameworks/vue/*"
       ],
       "@frameworks-models/*": [
-        "./features/frameworks/models/*"
+        "src/features/frameworks/models/*"
       ],
       "@frameworks-services/*": [
-        "./features/frameworks/services/*"
+        "src/features/frameworks/services/*"
       ],
       "@constants/*": [
-        "constants/*"
+        "src/constants/*"
       ],
       "@helpers/*": [
-        "./helpers/*"
+        "src/helpers/*"
       ],
       "@mocks/*": [
-        "./mocks/*"
+        "src/mocks/*"
       ],
       "@templates/*": [
-        "./templates/*"
+        "src/templates/*"
       ],
       "@services/*": [
-        "./services/*"
+        "src/services/*"
       ],
       "@models/*": [
-        "./models/*"
+        "src/models/*"
       ],
       "@utils/*": [
-        "./utils/*"
+        "src/utils/*"
       ],
       "@utils/file-utils": [
-        "./utils/file-utils"
+        "src/utils/file-utils"
       ],
       "@utils/stringUtils": [
-        "./utils/string-utils"
+        "src/utils/string-utils"
       ],
       "@utils/execute-command": [
-        "./utils/execute-command"
+        "src/utils/execute-command"
       ]
     },
     //* Rigueur & Qualité */

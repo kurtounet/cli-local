@@ -11,7 +11,7 @@ export abstract class BaseCommand<
 > implements ICommand<TOptions> {
   abstract name: string;
   abstract description: string;
-
+  helpAfterText?: string;
   arguments?: string;
   aliases?: string[];
   options?: ICommandOption[];

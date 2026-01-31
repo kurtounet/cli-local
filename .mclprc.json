@@ -43,7 +43,8 @@
       ".git",
       "dist",
       ".vscode",
-      ".doc"
+      ".doc",
+      "old_cli"
     ],
     "pathIn": "I:\\cli\\cli-local-poo",
     "pathOut": "./tree",

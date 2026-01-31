@@ -9,6 +9,7 @@ export default defineConfig({
   clean: true, // Nettoie le dossier dist à chaque build
   minify: true, // Réduit la taille du fichier final
   shims: true, // Activer les shims pour les modules externes
+  tsconfig: "tsconfig.json",
   banner: {
     js: `#!/usr/bin/env node
 import { createRequire } from 'module';

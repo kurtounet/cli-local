@@ -1,10 +1,16 @@
 import path from "node:path";
-import { BaseCommand } from "./BaseCommand.js";
+import { BaseCommand } from "@/commands/BaseCommand.js";
 
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
-import { IProjectCommand } from "@/types/commun/project-command.interface.js";
+
 import inquirer from "inquirer";
+import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
+import {
+  DATABASES,
+  FRAMEWORKS_BACKEND,
+  FRAMEWORKS_FRONTEND,
+} from "@/features/frameworks/common/config/config-frameworks.js";
 
 export interface IProjectOptions extends AnyOptions {
   code?: boolean;
@@ -19,10 +25,19 @@ export interface IProjectOptions extends AnyOptions {
 
 export class ProjectCommand extends BaseCommand<IProjectOptions> {
   public name = "project";
-  public description = `Initialise un nouveau projet et crée un fichier de configuration.
-p:new [pathIn] [pathOut]
-project:new [pathIn] [pathOut]`;
-  public arguments = "<type> [pathIn] [pathOut]";
+  public description = `Initialise un nouveau projet et crée un fichier de configuration.`;
+  helpAfterText = `
+Actions possibles :
+  service <Name>        Génère un service
+  dto <Name>            Génère un DTO
+  resource <Name>       Génère une Resource API Platform
+
+Exemples :
+  mclp generate service User --force
+  mclp generate dto Project
+  mclp generate resource Task
+`;
+  public arguments = "<action> [pathIn] [pathOut]";
   public aliases = ["p"];
 
   // Ajout de "yaml" dans les extensions autorisées
@@ -35,42 +50,6 @@ project:new [pathIn] [pathOut]`;
       description: "Générer l'arborescence en json, yaml, md",
       type: "boolean",
       defaultValue: false,
-    },
-    {
-      flags: "-c, --code",
-      description: "Inclure les métadonnées des fichiers de code",
-      type: "boolean",
-      defaultValue: false,
-    },
-    {
-      flags: "-v, --view",
-      description: "Voir l'arborescence dans la console",
-      type: "boolean",
-      defaultValue: false,
-    },
-    {
-      flags: "-m, --metadata",
-      description: "Inclure les métadonnées des fichiers",
-      type: "boolean",
-      defaultValue: false,
-    },
-    {
-      flags: "-l, --level",
-      description: "Niveau de profondeur",
-      type: "number",
-      defaultValue: 0,
-    },
-    {
-      flags: "-s, --save",
-      description: "Sauvegarder dans un fichier",
-      type: "boolean",
-      defaultValue: false,
-    },
-    {
-      flags: "-o, --output <path>",
-      description: "Chemin de sortie",
-      type: "string",
-      defaultValue: ".",
     },
     {
       flags: "-f, --force",
@@ -87,14 +66,22 @@ project:new [pathIn] [pathOut]`;
   ];
 
   async execute(args: string[], options: IProjectOptions): Promise<void> {
-    const [type, ...names] = args;
+    const [action, ...rest] = args;
     this.cli.logger.info("Initialisation d'un nouveau projet...");
-    const frontend = ["👉 Angular", "👉 Nuxtjs", "👉 Vuejs", " no"];
-    const backend = ["👉  Nitro", "👉 Nestjs", "👉 Symfony", "👉  Electron", "👉  FastAPI", " no"];
-    const database = ["👉  Mysql", "👉  Postgres", "👉  Mongodb", "👉  Sqlite", " no"];
-    const [command, subType] = type.split(":");
-    console.log(`command: ${command} subType: ${subType}`);
+    const frontend = FRAMEWORKS_FRONTEND;
+    const backend = FRAMEWORKS_BACKEND;
+    const database = DATABASES;
 
+    const [command, subType] = action.split(":");
+    console.log(`command: ${command} subType: ${subType}`);
+    if (command === "new") {
+      this.cli.logger.info("Initialisation d'un nouveau projet...");
+      const frontend = FRAMEWORKS_FRONTEND;
+      const backend = FRAMEWORKS_BACKEND;
+      const database = DATABASES;
+      const [command, subType] = action.split(":");
+      console.log(`command: ${command} subType: ${subType}`);
+    }
     const answers = await inquirer.prompt<IProjectCommand>([
       {
         type: "input",
@@ -142,12 +129,13 @@ project:new [pathIn] [pathOut]`;
         choices: [...database],
         // validate: (input: string) => input.trim() !== '' ? true : 'Le chemin du projet est requis.',
       },
+      /*
       {
         type: "confirm",
         name: "includeLinter",
         message: "👉  Voulez-vous inclure un linter ?",
         default: true,
-      },
+      },*/
     ]);
 
     const configFileName = `${answers.name}-config.json`;
@@ -162,12 +150,10 @@ project:new [pathIn] [pathOut]`;
         //   createConfigProjectExisting(answers),
         // );
       } else {
-        const config = await this.cli.project.initProject(answers);
-        console.log(config);
+        const config = await this.cli.project.newProject(answers);
         await this.cli.fileSystem.writeFileJson(configFilePath, config);
       }
       this.cli.logger.info(`✅ 🤞Fichier de configuration créé : ${configFilePath}`);
-      this.cli.logger.info(`🚀 Le fichier de configuration a été généré avec succès !`);
       this.cli.logger.info(`🚀 commande pour généré le projet: cl create-project ${answers.name}`);
     } catch (err: unknown) {
       this.cli.errorHandler.handle(

@@ -1,14 +1,13 @@
 import { App } from "./core/App.js";
 
 import { AppContextBuilder } from "./context/context.js";
-
+import { CliCommand } from "./commands/app.command.js";
 import { TreeCommand } from "./commands/tree.command.js";
 import { MakeCommand } from "./commands/make.command.js";
-import { ProjectCommand } from "./commands/project.command.js";
 import { GenerateCommand } from "./commands/generate.command.js";
+import { ProjectCommand } from "./features/project/commands/project.command.js";
 
 import { HandlerErrorService } from "./services/handler-error.service.js";
-import { CliCommand } from "./commands/app.command.js";
 
 /**
  * Point d'entrée principal de la CLI

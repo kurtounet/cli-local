@@ -17,15 +17,15 @@ directory_tree:
         - name: commands/
           children:
             - name: BaseCommand.ts
-            - name: Init.command.ts
             - name: ai.command.ts
+            - name: app.command.ts
             - name: config.command.ts
             - name: create-tree.command.ts
             - name: generate.command.ts
             - name: ia.command.ts
             - name: list-command.help.md
             - name: make.command.ts
-            - name: project.command.ts
+            - name: project.command.ts.txt
             - name: tree.command.ts
         - name: config/
           children:
@@ -43,29 +43,944 @@ directory_tree:
             - name: handler-error.md
         - name: features/
           children:
+            - name: commun/
+              children:
+                - name: architecture.interface.ts
+                - name: database.interface.ts
+                - name: framework.interface.ts
+                - name: package-json.model.ts
+                - name: projet.interface.ts
             - name: frameworks/
               children:
                 - name: angular/
                   children:
                     - name: config/
+                      children:
+                        - name: angular-architecture.mock.ts
+                        - name: angular-config-ini.mock.ts
+                        - name: angular-dependencies.mock.ts
+                        - name: angular-environments.mock.ts
+                        - name: angular-initiale-architecture-project.mock.ts
+                        - name: angular-install-options.mock.ts
+                        - name: angular-scripts.mock.ts
+                    - name: mock/
+                      children:
+                        - name: angular-sample-config.json
+                    - name: model/
+                      children:
+                        - name: angular-model.ts
                     - name: services/
                       children:
+                        - name: angular-generate-app-html.service.ts
+                        - name: angular-generate-component.service.ts
+                        - name: angular-generate-crud-entity.service.ts
+                        - name: angular-generate-dto.service.ts
+                        - name: angular-generate-environments.service.ts
+                        - name: angular-generate-files-framework.service.ts
+                        - name: angular-generate-form-entity.service.ts
+                        - name: angular-generate-interface-entity.service.ts
+                        - name: angular-generate-mock-entity.service.ts
+                        - name: angular-generate-module.service.ts
+                        - name: angular-generate-pages.service.ts
+                        - name: angular-generate-signal-form-entity.service.ts
+                        - name: angular-generate-signal-store-entity.service.ts
+                        - name: angular-generate-test.service.ts
+                        - name: angular-generate-zod-schema-entity.service.ts
                         - name: index.ts
                     - name: templates/
                       children:
+                        - name: angular-crud-service.template.ts
+                        - name: angular-dto.template.ts
+                        - name: angular-entity.template.ts
                         - name: angular-example.template.ts
+                        - name: angular-feature.template.ts
+                        - name: angular-interface.template.ts
+                        - name: angular-module.template.ts
+                        - name: angular-service-template.template.ts
+                        - name: angular-service.template.ts
+                        - name: angular-signal-store-entity.template.ts
+                        - name: angular-test.template.ts
+                        - name: component/
+                          children:
+                            - name: angular-css-component.template.ts
+                            - name: angular-html-component.template.ts
+                            - name: angular-spec-component.template.ts
+                            - name: angular-ts-component.template.ts
+                            - name: form/
+                              children:
+                                - name: angular-form-css-entity.template.ts
+                                - name: angular-form-html-entity.template.ts
+                                - name: angular-form-spec-entity.template.ts
+                                - name: angular-form-ts-entity.template.ts
                 - name: common/
                   children:
                     - name: base-generator.ts
-                    - name: universal-orchestrator.ts
-                - name: nuxt/
-                  children:
-                    - name: nuxt-orchestrator.ts
+                    - name: config/
+                      children:
+                        - name: config-frameworks.ts
+                        - name: framework-index.ts
+                    - name: config-framework.ts
                     - name: services/
                       children:
-                        - name: index.ts
+                        - name: create-architecture.service.ts
+                        - name: generate-interface-service.ts
+                        - name: generate-route.service.ts
+                        - name: generate-types-d.service.ts
+                        - name: generate-types-db.service.ts
+                        - name: generate-zod-schema-db.service.ts
+                        - name: generate-zod-shema-entity.service.ts
+                        - name: get-command.ts
+                        - name: git.service.ts
+                        - name: install-dependencies.service.ts
+                        - name: switch-generate-file-framework.service.ts
+                        - name: universal-orchestrator.ts
+                        - name: update-package-json.service.ts
+                    - name: templates/
+                      children:
+                        - name: doc.md
+                        - name: input-html.template.ts
+                        - name: model-entity.template.ts
+                        - name: types-entity.template.ts
+                - name: database/
+                  children:
+                    - name: config/
+                    - name: mock/
+                      children:
+                        - name: database.mock.ts
+                - name: drizzle/
+                  children:
+                    - name: services/
+                      children:
+                        - name: drizzle-generate-config.service.ts
+                        - name: drizzle-generate-index-schemas.service.ts
+                        - name: drizzle-generate-index-seed.service.ts
+                        - name: drizzle-generate-schema-entity.service.ts
+                        - name: drizzle-generate-schema.service.ts
+                        - name: drizzle-generate-script-create-database.service.ts
+                        - name: drizzle-generate-seed-entity.service.ts
+                        - name: drizzle-generate-types-db.service.ts
+                        - name: drizzle-schema-from-entity.service copy.ts
+                        - name: drizzle-schema-from-entity.service.ts
+                    - name: templates/
+                      children:
+                        - name: drizzle-columns.helpers.template.ts
+                        - name: drizzle-config-template.ts
+                        - name: drizzle-config-url-template.ts
+                        - name: drizzle-schemas.template.ts
+                        - name: drizzle-seed-entity.template.ts
+                        - name: nitro-connection-drizzle-template.ts
+                        - name: scripts/
+                          children:
+                            - name: drizzle-create-database.template.ts
+                    - name: utils/
+                      children:
+                        - name: generate-value.utils.ts
+                - name: electron/
+                  children:
+                    - name: config/
+                      children:
+                        - name: architecture.mock.ts
+                        - name: config-ini.mock.ts
+                        - name: dependencies.mock.ts
+                        - name: environments.mock.ts
+                        - name: initiale-architecture-project.mock.ts
+                        - name: install-options.mock.ts
+                        - name: scripts.mock.ts
+                    - name: interfaces/
+                      children:
+                        - name: electron-model.ts
+                    - name: mock/
+                      children:
+                        - name: sample-angular-config.json
+                    - name: services/
+                      children:
+                        - name: electron-generate-controller.service.ts
+                        - name: electron-generate-dto.service.ts
+                        - name: electron-generate-entity.service.ts
+                        - name: electron-generate-files-framework.service.ts
+                        - name: electron-generate-interface.service.ts
+                        - name: electron-generate-ipcRenderer.service.ts
+                        - name: electron-generate-module.service.ts
+                        - name: electron-generate-service.service.ts
+                        - name: electron-generate-test.service.ts
+                    - name: templates/
+                      children:
+                        - name: electron-controller-template.template.ts
+                        - name: electron-dto-template.template.ts
+                        - name: electron-entity-template.template.ts
+                        - name: electron-interface-template.template.ts
+                        - name: electron-ipc-renderer.template.ts
+                        - name: electron-module-template.template.ts
+                        - name: electron-module.template.ts
+                        - name: electron-service-template.template.ts
+                        - name: electron-test-template.template.ts
+                        - name: service-template.template.ts
+                - name: interfaces/
+                  children:
+                    - name: framework-service.interface.ts
+                    - name: framework.interface.ts
+                - name: mocks/
+                  children:
+                    - name: config-init-commun.mock.ts
+                    - name: environments-commun.mock.ts
+                    - name: install-options-commun.mock.ts
+                - name: models/
+                  children:
+                    - name: autre.ts
+                    - name: database.model.ts
+                    - name: framework-commun.model.ts
+                    - name: package-json.model.ts
+                - name: nestjs/
+                  children:
+                    - name: best-practices.md
+                    - name: commun/
+                      children:
+                        - name: readme.md
+                    - name: config/
+                      children:
+                        - name: nestjs-architecture.mock.ts
+                        - name: nestjs-categories-validators-array.ts
+                        - name: nestjs-config-ini.mock.ts
+                        - name: nestjs-current-validators.ts
+                        - name: nestjs-dependencies.mock.ts
+                        - name: nestjs-environments.mock.ts
+                        - name: nestjs-initiale-architecture-project.mock.ts
+                        - name: nestjs-install-options.mock.ts
+                        - name: nestjs-scripts.mock.ts
+                        - name: nestjs-type-validator.mock.ts
+                        - name: nestjs-validators-array.ts
+                        - name: nestjs-validators-by-category.ts
+                        - name: nestjs-validators-with-options.ts.txt
+                    - name: constant/
+                      children:
+                        - name: nestjs-constants.constant.ts
+                    - name: mock/
+                      children:
+                        - name: nestjs-sample-orm-config.json
+                    - name: models/
+                      children:
+                        - name: nestjs-column-decorators-result.model.ts
+                        - name: nestjs-dto-generator-result.model.ts
+                        - name: nestjs-dto-property.model.ts
+                        - name: nestjs-entity-property.model.ts
+                        - name: nestjs-model.ts
+                        - name: nestjs-relation-config.model.ts
+                        - name: nestjs-relationship-result.model.ts
+                    - name: services/
+                      children:
+                        - name: dto/
+                          children:
+                            - name: analyse.md
+                            - name: erreurs.md
+                            - name: instruction.md
+                            - name: nest-get-example-value.service.ts
+                            - name: nestjs-build-api-property-decorator.service.ts
+                            - name: nestjs-generate-all-dtos.service.ts
+                            - name: nestjs-generate-column-description.service.ts
+                            - name: nestjs-generate-create-dto.service.ts
+                            - name: nestjs-generate-dto-file.services.ts
+                            - name: nestjs-generate-dto.service.ts
+                            - name: nestjs-generate-response-dto.service.ts
+                            - name: nestjs-generate-update-dto-service.ts
+                            - name: nestjs-get-column-decorators.service.ts
+                            - name: nestjs-get-column-optional-status.service.ts
+                            - name: nestjs-get-dto-suffix.service.ts
+                            - name: nestjs-get-relation-decorators.service.ts
+                            - name: nestjs-get-transform-decorators.service.ts
+                            - name: nestjs-get-type-validation-decorators.service.ts
+                            - name: nestjs-get-validation-decorators.service.ts
+                            - name: nestjs-process-column-for-dto.service.ts
+                            - name: nestjs-process-relation-for-dto.service.ts
+                            - name: nestjs-should-exclude-column.service.ts
+                        - name: entity/
+                          children:
+                            - name: nestjs-build-api-property-entity-service.ts
+                            - name: nestjs-build-column-options-entity-service.ts
+                            - name: nestjs-build-import-entity-service.ts
+                            - name: nestjs-build-import-statements-service.ts
+                            - name: nestjs-build-relation-decorator-entity-service.ts
+                            - name: nestjs-build-relation-entity.service.ts
+                            - name: nestjs-generate-entity-file-service.ts
+                            - name: nestjs-get-column-decorator-entity-service.ts
+                            - name: nestjs-get-columns-decorators-entity-service.ts
+                            - name: nestjs-get-relation-config-entity-service.ts
+                            - name: nestjs-get-relationships-entity-service.ts
+                            - name: nestjs-get-type-mapping-entity-service.ts
+                            - name: nestjs-process-relationship-entity-service.ts
+                            - name: nestjs-should-add-join-column-entity-service.ts
+                        - name: instruction.txt
+                        - name: nestjs-account-service.service.ts
+                        - name: nestjs-auth.service.ts
+                        - name: nestjs-build-api-property.service.ts
+                        - name: nestjs-build-imports-dto-entity.service.ts
+                        - name: nestjs-command.ts
+                        - name: nestjs-config-project.service.ts
+                        - name: nestjs-database.service.ts
+                        - name: nestjs-environment.service.ts
+                        - name: nestjs-generate-controller.service.ts
+                        - name: nestjs-generate-entity.service.ts
+                        - name: nestjs-generate-feature.service.ts
+                        - name: nestjs-generate-files-framework.service.ts
+                        - name: nestjs-generate-interface.service.ts
+                        - name: nestjs-generate-mock.service.ts
+                        - name: nestjs-generate-module.service.ts
+                        - name: nestjs-generate-service.service.ts
+                        - name: nestjs-generate-test.service.ts
+                        - name: nestjs-relationship-type-orm.service.ts
+                        - name: nestjs-tests.service.ts
+                        - name: old_dto/
+                          children:
+                            - name: analyse.md
+                            - name: erreurs.md
+                            - name: instruction.md
+                            - name: nest-get-example-value.service.ts
+                            - name: nestjs-build-api-property-decorator.service.ts
+                            - name: nestjs-generate-all-dtos.service.ts
+                            - name: nestjs-generate-column-description.service.ts
+                            - name: nestjs-generate-create-dto.service.ts
+                            - name: nestjs-generate-dto-file.services.ts
+                            - name: nestjs-generate-dto.service.ts
+                            - name: nestjs-generate-response-dto.service.ts
+                            - name: nestjs-generate-update-dto-service.ts
+                            - name: nestjs-get-column-decorators.service.ts
+                            - name: nestjs-get-column-optional-status.service.ts
+                            - name: nestjs-get-dto-suffix.service.ts
+                            - name: nestjs-get-relation-decorators.service.ts
+                            - name: nestjs-get-transform-decorators.service.ts
+                            - name: nestjs-get-type-validation-decorators.service.ts
+                            - name: nestjs-get-validation-decorators.service.ts
+                            - name: nestjs-process-column-for-dto.service.ts
+                            - name: nestjs-process-relation-for-dto.service.ts
+                            - name: nestjs-should-exclude-column.service.ts
+                    - name: templates/
+                      children:
+                        - name: account/
+                          children:
+                            - name: dto/
+                              children:
+                                - name: nestjs-create-account-dto-template.ts
+                            - name: entity/
+                            - name: interfaces/
+                              children:
+                                - name: nestjs-account-interface-template.ts
+                            - name: nestjs-account-controller-template.ts
+                            - name: nestjs-account-entity-template.ts
+                            - name: nestjs-account-module-template.ts
+                            - name: nestjs-account-service-template.ts
+                        - name: authentification/
+                          children:
+                            - name: decorators/
+                              children:
+                                - name: nestjs-permissions-decorator-template.ts
+                                - name: nestjs-permissions-decorator.ts
+                                - name: nestjs-roles-decorator-template.ts
+                                - name: nestjs-roles-decorator.ts
+                            - name: dto/
+                              children:
+                                - name: nestjs-login-dto.ts
+                            - name: guards/
+                              children:
+                                - name: nestjs-auth-jwt-guard-mock-ts.txt
+                                - name: nestjs-jwt-auth-guard-template.ts
+                                - name: nestjs-permissions-guard-template.ts
+                                - name: nestjs-roles-guard-template.ts
+                            - name: interfaces/
+                              children:
+                                - name: nestjs-jwt-payload-interface-template.ts
+                            - name: nestjs-auth-controller-mock.ts
+                            - name: nestjs-auth-doc-template.ts
+                            - name: nestjs-auth-module-template.ts
+                            - name: nestjs-auth-service-template.ts
+                            - name: strategies/
+                              children:
+                                - name: nestjs-jwt-strategy-template.ts
+                        - name: config/
+                          children:
+                            - name: json/
+                              children:
+                                - name: nestjs-architecture-initial.json
+                                - name: nestjs-dependencies-list.json
+                                - name: nestjs-dependencies.json
+                                - name: nestjs-dev-dependencies.json
+                                - name: nestjs-dev-dependencies.json~
+                                - name: nestjs-dot-env.json
+                                - name: nestjs-environments.json
+                                - name: nestjs-install-options.json
+                                - name: nestjs-install-options.json~
+                                - name: nestjs-packagejson.json
+                                - name: nestjs-packagejson.json~
+                                - name: nestjs-ressources.json
+                                - name: nestjs-ressources.json~
+                                - name: nestjs-tsconfigjson.json
+                            - name: nestjs-app-module-template.ts
+                            - name: nestjs-environments-mock.ts
+                            - name: nestjs-environments-template.ts
+                            - name: nestjs-main-template.ts
+                        - name: controller/
+                          children:
+                            - name: controller-restfull.md
+                            - name: nestjs-controller-template.ts
+                            - name: nestjs-generic-controlle-template.ts
+                            - name: nestjs-restfull-controller-template.ts
+                            - name: nestjs-test-controller-spec-template.ts
+                            - name: old-nestjs-controller-template.ts
+                            - name: old-nestjs-restfull-controller-template.ts
+                        - name: database/
+                          children:
+                            - name: nestjs-data-source-template.ts
+                            - name: nestjs-database-config-template.ts
+                        - name: doc/
+                          children:
+                            - name: nestjs-dependancies.md
+                        - name: dto/
+                          children:
+                            - name: doc.md
+                            - name: nestjs-create-dto-template.ts
+                            - name: nestjs-dto-template.ts
+                            - name: nestjs-entity-dto-template.ts
+                            - name: nestjs-response-dto-template.ts
+                            - name: nestjs-update-dto-template.ts
+                            - name: old-nestjs-create-dto-template.ts
+                            - name: old-nestjs-response-dto-template.ts
+                            - name: old-nestjs-update-dto-template.ts
+                            - name: readme.md
+                            - name: should-exclude-column.ts
+                        - name: entities/
+                          children:
+                            - name: convention.md
+                            - name: entities.md
+                            - name: nestjs-entity-template-copy.ts
+                            - name: nestjs-entity-template.ts
+                            - name: nestjs-generic-entity-template.ts
+                            - name: nestjs-relations.md
+                            - name: nestjs-repository-template.ts
+                            - name: nestjsGetTypeMappingEntity.service.ts
+                            - name: old-nestjs-entity-template.ts
+                            - name: readme.md
+                        - name: feartures-services/
+                        - name: fixtures/
+                          children:
+                            - name: nestjs-fixture-template.ts
+                        - name: helpers/
+                          children:
+                            - name: utils/
+                              children:
+                                - name: date-transformer.ts
+                        - name: interface/
+                          children:
+                            - name: nestjs-entity-interface-template.ts
+                            - name: nestjs-interface-template.ts
+                        - name: mock/
+                        - name: module/
+                          children:
+                            - name: nestjs-entity-module-template.ts
+                            - name: nestjs-generic-module-template.ts
+                        - name: seeds/
+                          children:
+                            - name: nestjs-entity-seed-template.ts
+                            - name: nestjs-seed-module-template.ts
+                            - name: nestjs-seed-template.ts
+                        - name: service/
+                          children:
+                            - name: nestjs-crud-service-template.ts
+                            - name: nestjs-generic-service-template.ts
+                            - name: nestjs-service-template.ts
+                            - name: nestjs-test-service-spec-template.ts
+                            - name: nestjs-user-service.ts
+                            - name: old-nestjs-crud-service-template.ts
+                            - name: old-nestjs-service-template.ts
+                        - name: test/
+                          children:
+                            - name: nestjs-test-template.ts
+                        - name: type-orm/
+                          children:
+                            - name: nestjs-type-orm-config-template.ts
+                        - name: user/
+                          children:
+                            - name: nestjs-users-module-template.ts
+                            - name: nestjs-users-service-template.ts
+                        - name: validation-contraints/
+                          children:
+                            - name: nestjs-contraint-template.ts
+                            - name: nestjs-validation-template.ts
+                - name: nitro/
+                  children:
+                    - name: auth-cookie-http-only.md
+                    - name: auth.md
+                    - name: config/
+                      children:
+                        - name: nitro-architecture.mock.ts
+                        - name: nitro-config-ini.mock.ts
+                        - name: nitro-dependencies.mock.ts
+                        - name: nitro-environments.mock.ts
+                        - name: nitro-initiale-architecture-project.mock.ts
+                        - name: nitro-install-options.mock.ts
+                        - name: nitro-scripts.mock.ts
+                    - name: readme.md
+                    - name: services/
+                      children:
+                        - name: dot-env-generate.service.ts
+                        - name: nitro-generate-config-drizzle.service.txt
+                        - name: nitro-generate-connection-drizzle.service.ts
+                        - name: nitro-generate-files-framework.service.ts
+                        - name: nitro-generate-repository-entity.service.ts
+                        - name: nitro-generate-routes-entity.service.ts
+                        - name: nitro-generate-service-entity.service.ts
+                        - name: nitro-generate-specific-file-.service.ts
+                    - name: templates/
+                      children:
+                        - name: config/
+                        - name: doc/
+                          children:
+                            - name: readme.template.ts
+                        - name: models/
+                          children:
+                            - name: model-base-repository-template.ts
+                            - name: model-base-service-template.ts
+                        - name: repositories/
+                          children:
+                            - name: base-repository-template.ts
+                            - name: drizzle-entity-repository-template copy.ts
+                            - name: drizzle-entity-repository-template-v1.ts
+                            - name: drizzle-entity-repository-template-v2.ts
+                            - name: drizzle-entity-repository-template.ts
+                            - name: readme.md
+                        - name: routes/
+                          children:
+                            - name: nitro-id-delete-template.ts
+                            - name: nitro-id-get-template.ts
+                            - name: nitro-id-patch-template.ts
+                            - name: nitro-id-put-template.ts
+                            - name: nitro-index-get-template.ts
+                            - name: nitro-index-post-template.ts
+                            - name: readme.md
+                        - name: services/
+                          children:
+                            - name: base-service-template.ts
+                            - name: nitro-entity-service-template copy.ts
+                            - name: nitro-entity-service-template.objet.ts
+                            - name: nitro-entity-service-template.ts
+                        - name: utils/
+                          children:
+                            - name: dot.env.template.ts
+                            - name: logger.template.ts
+                            - name: nitro-handle-api-error-template.ts
+                            - name: nitro-utils-db-template.ts
+                - name: nuxt/
+                  children:
+                    - name: config/
+                      children:
+                        - name: nuxt-architecture.mock.ts
+                        - name: nuxt-config-generator.ts
+                        - name: nuxt-config-ini.mock.ts
+                        - name: nuxt-dependencies.mock.ts
+                        - name: nuxt-environments.mock.ts
+                        - name: nuxt-initiale-architecture-project.mock.ts
+                        - name: nuxt-install-options.mock.ts
+                        - name: nuxt-scripts.mock.ts
+                    - name: gene_fram.md
+                    - name: mock/
+                      children:
+                        - name: layers/
+                          children:
+                            - name: core-app/
+                              children:
+                                - name: nuxt.config.ts
+                            - name: core-ui/
+                              children:
+                                - name: assets/
+                                  children:
+                                    - name: css/
+                                      children:
+                                        - name: main.css
+                                - name: composables/
+                                  children:
+                                    - name: useTheme.ts
+                                - name: nuxt.config.ts
+                                - name: plugins/
+                                  children:
+                                    - name: dayjs.ts
+                        - name: mock.md
+                        - name: sample-nuxt-config.json
+                    - name: models/
+                      children:
+                        - name: nuxt-config-ts.model.ts
+                        - name: nuxt-model.ts
+                    - name: readme.md
+                    - name: services/
+                      children:
+                        - name: generate-controller.service.ts
+                        - name: generate-dto.service.ts
+                        - name: generate-entity.service.ts
+                        - name: generate-layout.service.ts
+                        - name: generate-module.service.ts
+                        - name: generate-service.service.ts
+                        - name: generate-test.service.ts
+                        - name: nuxt-generate-component.service.ts
+                        - name: nuxt-generate-files-css.service.ts
+                        - name: nuxt-generate-files-framework.service.ts
+                        - name: nuxt-generate-form-entity-component.service.ts
+                        - name: nuxt-generate-model-schema-entity.service.ts
+                        - name: nuxt-generate-model.service.ts
                         - name: nuxt-generate-page.service.ts
+                        - name: nuxt-generate-store.entity.service.ts
+                        - name: nuxt-update-file-nuxt-config-ts.service.ts
+                    - name: templates/
+                      children:
+                        - name: components/
+                          children:
+                            - name: get-component-template.template.ts
+                            - name: nuxt-app.template.ts
+                            - name: nuxt-from-entity-component-template.ts
+                            - name: nuxt-page.template.ts
+                        - name: css/
+                          children:
+                            - name: nuxt-main-css.template.ts
+                            - name: nuxt-tailwind-css.template.ts
+                        - name: get-layout-template.template.ts
+                        - name: get-nuxt-controller-template.template.ts
+                        - name: get-nuxt-dto-template.template.ts
+                        - name: get-nuxt-entity-template.template.ts
+                        - name: get-nuxt-interface-template.template.ts
+                        - name: get-nuxt-module-template.template.ts
+                        - name: get-nuxt-service-template.template.ts
+                        - name: get-nuxt-test-template.template.ts
+                        - name: get-page-component-template.template.ts
+                        - name: models/
+                          children:
+                            - name: nuxt-api-response.template.ts
+                        - name: stores/
+                          children:
+                            - name: nuxt-store-actions.template.ts
+                            - name: nuxt-store-getters.template.ts
+                            - name: nuxt-store.template.ts
+                        - name: tree_template.md
+                    - name: templates-ejs/
+                      children:
+                        - name: apps/
+                          children:
+                            - name: web/
+                              children:
+                                - name: nuxt.config.ts.ejs
+                                - name: package.json.ejs
+                                - name: pages/
+                                  children:
+                                    - name: index.vue.ejs
+                        - name: layers/
+                          children:
+                            - name: auth/
+                              children:
+                                - name: composables/
+                                  children:
+                                    - name: useAuth.ts.ejs
+                                - name: nuxt.config.ts.ejs
+                                - name: pages/
+                                  children:
+                                    - name: login.vue.ejs
+                                    - name: register.vue.ejs
+                                - name: server/
+                                  children:
+                                    - name: api/
+                                      children:
+                                        - name: auth.login.post.ts.ejs
+                                - name: stores/
+                                  children:
+                                    - name: auth.store.ts.ejs
+                            - name: core-app/
+                              children:
+                                - name: app.config.ts.ejs
+                                - name: app.vue.ejs
+                                - name: assets/
+                                  children:
+                                    - name: css/
+                                      children:
+                                        - name: main.css.ejs
+                                - name: composables/
+                                  children:
+                                    - name: useAuth.ts.ejs
+                                    - name: useFetchApi.ts.ejs
+                                - name: error.vue.ejs
+                                - name: layouts/
+                                  children:
+                                    - name: admin.vue.ejs
+                                    - name: default.vue.ejs
+                                - name: middleware/
+                                  children:
+                                    - name: admin.ts.ejs
+                                    - name: auth.global.ts.ejs
+                                - name: nuxt.config.ts.ejs
+                                - name: pages/
+                                  children:
+                                    - name: [slug].vue.ejs
+                                    - name: about.vue.ejs
+                                    - name: admin/
+                                      children:
+                                        - name: index.vue.ejs
+                                    - name: index.vue.ejs
+                                - name: plugins/
+                                  children:
+                                    - name: axios.ts.ejs
+                                - name: public/
+                                  children:
+                                    - name: favicon.ico.ejs
+                                    - name: robots.txt.ejs
+                                - name: server/
+                                  children:
+                                    - name: api/
+                                      children:
+                                        - name: health.get.ts.ejs
+                                    - name: middleware/
+                                      children:
+                                        - name: logs.ts.ejs
+                                    - name: services/
+                                      children:
+                                        - name: db.ts.ejs
+                                - name: stores/
+                                  children:
+                                    - name: settings.store.ts.ejs
+                                    - name: user.store.ts.ejs
+                                - name: types/
+                                  children:
+                                    - name: global.d.ts.ejs
+                                - name: utils/
+                                  children:
+                                    - name: formatDate.ts.ejs
+                                    - name: validators.ts.ejs
+                            - name: core-ui/
+                              children:
+                                - name: assets/
+                                  children:
+                                    - name: css/
+                                      children:
+                                        - name: main.css.ejs
+                                - name: composables/
+                                  children:
+                                    - name: useTheme.ts.ejs
+                                - name: nuxt.config.ts.ejs
+                                - name: plugins/
+                                  children:
+                                    - name: dayjs.ts.ejs
+                        - name: root/
+                          children:
+                            - name: .gitignore.ejs
+                            - name: package.json.ejs
+                            - name: pnpm-workspace.yaml.ejs
+                - name: react/
+                  children:
+                    - name: services/
+                      children:
+                        - name: generate-component.service.ts
+                        - name: generate-controller.service.ts
+                        - name: generate-dto.service.ts
+                        - name: generate-entity.service.ts
+                        - name: generate-interface.service.ts
+                        - name: generate-service.service.ts
+                        - name: generate-test.service.ts
+                        - name: react-generate-files-framework.service.ts
+                    - name: templates/
+                      children:
+                        - name: get-react-component-template.template.ts
+                        - name: get-react-controller-template.template.ts
+                        - name: get-react-dto-template.template.ts
+                        - name: get-react-entity-template.template.ts
+                        - name: get-react-interface-template.template.ts
+                        - name: get-react-service-template.template.ts
+                        - name: get-react-test-template.template.ts
+                - name: readme.md
+                - name: services/
+                  children:
+                    - name: confi-framework.service.ts
+                    - name: framework.service copy 2.ts
+                    - name: framework.service.ts
+                - name: symfony/
+                  children:
+                    - name: config/
+                      children:
+                        - name: symfony-architecture.mock.ts
+                        - name: symfony-config-ini.mock.ts
+                        - name: symfony-dependencies.mock.ts
+                        - name: symfony-environments.mock.ts
+                        - name: symfony-initiale-architecture-project.mock.ts
+                        - name: symfony-install-options.mock.ts
+                        - name: symfony-scripts.mock.ts
+                    - name: constant/
+                      children:
+                        - name: symfony-constants.constant.ts
+                    - name: interfaces/
+                      children:
+                        - name: symfony-symfony-model.php
+                    - name: mock/
+                      children:
+                        - name: symfony-sample-symfony-config.yaml
+                    - name: services/
+                      children:
+                        - name: api-plaform/
+                          children:
+                            - name: api-plaform-generate-files-framework.service.ts
+                            - name: api-plaform-read-doc-jsonld.service.ts
+                            - name: api-plaform-save-doc-jsonld.service.ts
+                            - name: api-platform-doc-jsonld.service.ts
+                            - name: api-platform-entity-dto.service.ts
+                            - name: api-platform-entity-mapper.service.ts
+                            - name: api-platform-entity-processor.service.ts
+                            - name: api-platform-entity-provider.service.ts
+                            - name: api-platform-entity.service.ts
+                            - name: api-platform-services.service.ts
+                        - name: commun/
+                          children:
+                            - name: symfony-create-attribute-orm.service.ts
+                            - name: symfony-create-attribute-validation.service.ts
+                            - name: symfony-get-attribute-type-orm.ts
+                        - name: dto/
+                        - name: entity/
+                          children:
+                            - name: readme.md
+                        - name: old-symfony-generate-entities.service.ts
+                        - name: symfony-databases.service.ts
+                        - name: symfony-generate-accessors-relation.service.ts
+                        - name: symfony-generate-accessors-scalar.service.ts
+                        - name: symfony-generate-architecture.service.ts
+                        - name: symfony-generate-command.service.ts
+                        - name: symfony-generate-crud-entity.service.ts
+                        - name: symfony-generate-dtos.service.ts
+                        - name: symfony-generate-entities.service.ts
+                        - name: symfony-generate-environments.service.ts
+                        - name: symfony-generate-files-framework.service.ts
+                        - name: symfony-generate-fixtures.service.ts
+                        - name: symfony-generate-relationships.service.ts
+                        - name: symfony-generate-state-processor.service.ts
+                        - name: symfony-generate-state-provider.service.ts
+                        - name: symfony-test.service.ts
+                        - name: symfony-validation.service.ts
+                    - name: templates/
+                      children:
+                        - name: api-platform/
+                          children:
+                            - name: api-platform-entity-mapper.template.ts
+                            - name: api-platform-entity-processor.template.ts
+                            - name: api-platform-entity.template.ts
+                            - name: api-platform-services.template.ts
+                            - name: dtos/
+                              children:
+                                - name: api-platform-entity-collection-dto.template.ts
+                                - name: api-platform-entity-create-dto.template.ts
+                                - name: api-platform-entity-item-dto.template.ts
+                                - name: api-platform-entity-ressource-dto.template.ts
+                                - name: api-platform-entity-update-dto.template.ts
+                            - name: mapper/
+                              children:
+                                - name: resolve-iri.template.ts
+                                - name: scalar-dto-to-entity.template.ts
+                                - name: scalar-entity-to-dto.template.ts
+                                - name: to-iri-list.template.ts
+                                - name: to-many-dto-to-entity.template.ts
+                                - name: to-many-entity-to-dto.template.ts
+                                - name: to-one-dto-to-entity.template.ts
+                                - name: to-one-entity-to-dto.template.ts
+                            - name: services/
+                              children:
+                                - name: iri-from-resource.template.ts
+                            - name: states/
+                              children:
+                                - name: processors/
+                                  children:
+                                    - name: api-platform-entity-delete-processor.template.ts
+                                    - name: api-platform-entity-post-processor.template.ts
+                                    - name: api-platform-entity-update-processor.template.ts
+                                - name: providers/
+                                  children:
+                                    - name: api-platform-entity-collection-provider.template.ts
+                                    - name: api-platform-entity-item-provider.template.ts
+                        - name: bundles/
+                          children:
+                            - name: symfony-env-lexik-jwt-authentication.template.ts
+                            - name: symfony-env-mailer.template.ts
+                            - name: symfony-env-nelmio.template.ts
+                        - name: command/
+                          children:
+                            - name: symfony-create-all-crud-entities-command.php.template.ts
+                        - name: dto/
+                          children:
+                            - name: symfony-create-dto-template.ts
+                            - name: symfony-response-dto-template.ts
+                            - name: symfony-update-dto-template.ts
+                        - name: symfony-bundle-template.template.ts
+                        - name: symfony-controller.template.ts
+                        - name: symfony-dto.template.ts
+                        - name: symfony-entity.template.ts
+                        - name: symfony-env-database-url.template.ts
+                        - name: symfony-environment.template.ts
+                        - name: symfony-get-accessor-relation.template.ts
+                        - name: symfony-get-accessor.template.ts
+                        - name: symfony-repository.template.ts
+                        - name: symfony-service.template.ts
+                        - name: symfony-set-accessor.template.ts
+                        - name: symfony-state-processor-template.ts
+                        - name: symfony-state-provider-template.ts
+                        - name: symfony-test.template.ts
+                    - name: types/
+                      children:
+                        - name: api-platform-doc-json-ld.type.ts
+                    - name: utils/
+                      children:
+                        - name: mapping.ts
+                - name: tools/
+                  children:
+                    - name: rename_files.py
+                - name: types-script/
+                  children:
+                    - name: services/
+                    - name: templates/
+                - name: utils.ts
+                - name: vue/
+                  children:
+                    - name: config/
+                      children:
+                        - name: vue-architecture.mock.ts
+                        - name: vue-config-generator.ts
+                        - name: vue-config-ini.mock.ts
+                        - name: vue-dependencies.mock.ts
+                        - name: vue-environments.mock.ts
+                        - name: vue-initiale-architecture-project.mock.ts
+                        - name: vue-install-options.mock.ts
+                        - name: vue-scripts.mock.ts
+                    - name: services/
+                      children:
+                        - name: vue-generate-component.service.ts
+                        - name: vue-generate-dto.service.ts
+                        - name: vue-generate-entity.service.ts
+                        - name: vue-generate-files-framework.service.ts
+                        - name: vue-generate-interface.service.ts
+                        - name: vue-generate-service.service.ts
+                        - name: vue-generate-store.service.ts
+                        - name: vue-generate-test.service.ts
+                    - name: templates/
+                      children:
+                        - name: vue-component-template.template.ts
+                        - name: vue-dto-template.template.ts
+                        - name: vue-entity-template.template.ts
+                        - name: vue-interface-template.template.ts
+                        - name: vue-service-template.template.ts
+                        - name: vue-store-template.template.ts
+                        - name: vue-test-template.template.ts
             - name: parserMdj/
+            - name: project/
+              children:
+                - name: commands/
+                  children:
+                    - name: project.command.ts
+                - name: config/
+                  children:
+                    - name: config.ts
+                - name: interfaces/
+                  children:
+                    - name: file-node.interface.ts
+                    - name: project-command.interface.ts
+                    - name: project-service.interface.ts
+                - name: services/
+                  children:
+                    - name: project.service.ts
+            - name: utils/
         - name: index.ts
         - name: mcp-server.ts
         - name: plugins/
@@ -98,7 +1013,7 @@ directory_tree:
             - name: ia.service.ts
             - name: logger.service.ts
             - name: plugin.service.ts
-            - name: project.service.ts
+            - name: project.service.ts.txt
             - name: prompt.service.ts
             - name: services-container.ts
             - name: services-container.ts.txt
@@ -125,9 +1040,7 @@ directory_tree:
               children:
                 - name: database.interface.ts
                 - name: file-node.interface.ts
-                - name: framework-commun.interface.ts
                 - name: member-info.interface.ts
-                - name: project-command.interface.ts
             - name: config.interface.ts
             - name: context.interface.ts
             - name: plugin.interface.ts
@@ -145,7 +1058,6 @@ directory_tree:
                 - name: generator.interface.ts
                 - name: logger-service.interface.ts
                 - name: plugin-service.interface.ts
-                - name: project-service.interface.ts
                 - name: prompt-service.interface.ts
                 - name: services-container.interface.ts
                 - name: shell-service.interface.ts
@@ -160,11 +1072,12 @@ directory_tree:
         - name: utils.ts
     - name: tree/
       children:
+        - name: tree.json
         - name: tree.yaml
     - name: tsconfig.json
     - name: tsup.config.ts
     - name: vite.config.js
 
 metadata:
-  directories: 29
-  files: 109
+  directories: 196
+  files: 696

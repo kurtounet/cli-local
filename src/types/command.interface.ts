@@ -58,6 +58,7 @@ export interface ICommand<TOptions extends AnyOptions = AnyOptions> {
   arguments?: string;
   aliases?: string[];
   options?: ICommandOption[];
+  helpAfterText?: string;
   execute(args: string[], options: TOptions): Promise<void>;
   run?(args: string[], options: TOptions): Promise<void>;
 }

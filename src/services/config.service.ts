@@ -52,7 +52,10 @@ export class ConfigService extends BaseService implements IConfigService {
     }
   }
 
-  public async initConfigFile(projectPath: string): Promise<IAppConfig> {
+  public async initConfigFile(
+    projectPath: string,
+    dataFrom?: IAppConfig,
+  ): Promise<IAppConfig> {
     // On utilise le moduleName pour rester dynamique
     const fileName = `.${this.moduleName}rc.json`;
 
@@ -61,7 +64,10 @@ export class ConfigService extends BaseService implements IConfigService {
         `Génération du fichier de configuration : ${fileName}`,
       );
 
-      const data = this.defaults;
+      let data = this.defaults;
+      if (dataFrom) {
+        data = dataFrom;
+      }
       // On écrit le fichier proprement
       await this.cli.fileSystem.writeFile(
         fileName,

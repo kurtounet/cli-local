@@ -11,7 +11,13 @@ import { defineConfig } from "eslint/config";
 export default defineConfig([
   // --- 1. IGNORES GLOBAUX (doit être au début) ---
   {
-    ignores: ["dist/**", "bin/**", "node_modules/**", "package-lock.json", ".doc/**"],
+    ignores: [
+      "dist/**",
+      "bin/**",
+      "node_modules/**",
+      "package-lock.json",
+      ".doc/**",
+    ],
   },
 
   // --- 2. BASE JS & TS ---
@@ -70,7 +76,10 @@ export default defineConfig([
       "jsdoc/check-values": "error",
       "jsdoc/check-tag-names": "warn",
       "jsdoc/require-hyphen-before-param-description": ["warn", "always"],
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
       "no-process-exit": "off", // Souvent nécessaire dans les scripts CLI
     },
   },

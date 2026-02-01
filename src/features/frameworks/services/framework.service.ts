@@ -1,5 +1,11 @@
-import { IConfigFramework, IDependencies } from "@/features/commun/framework.interface.js";
-import { IDirectory, IProjectConfig } from "@/features/commun/projet.interface.js";
+import {
+  IConfigFramework,
+  IDependencies,
+} from "@/features/commun/framework.interface.js";
+import {
+  IDirectory,
+  IProjectConfig,
+} from "@/features/commun/projet.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
 import { IFrameworkService } from "../interfaces/framework-service.interface.js";
 import { FrameworkSelector } from "./framework-selector.service.js";
@@ -18,17 +24,25 @@ export class FrameworkService implements IFrameworkService {
     // Utilisation de for...of pour un traitement séquentiel propre
     for (const frameworkConfig of project.frameworks) {
       try {
-        this.cli.logger.info(`--- Initialisation de ${frameworkConfig.name} ---`);
+        this.cli.logger.info(
+          `--- Initialisation de ${frameworkConfig.name} ---`,
+        );
 
         // 1. On récupère le service spécifique (ex: AngularService) via le sélecteur
-        const specificService = this.frameworkSelector.getService(frameworkConfig.name);
+        const specificService = this.frameworkSelector.getService(
+          frameworkConfig.name,
+        );
 
         // 2. On délègue TOUT le travail au service spécialisé
         await specificService.generate(project);
 
-        this.cli.logger.success(`--- ${frameworkConfig.name} terminé avec succès ! ---`);
+        this.cli.logger.success(
+          `--- ${frameworkConfig.name} terminé avec succès ! ---`,
+        );
       } catch (error) {
-        this.cli.logger.error(`Erreur lors du traitement du framework ${frameworkConfig.name}`);
+        this.cli.logger.error(
+          `Erreur lors du traitement du framework ${frameworkConfig.name}`,
+        );
         // On continue ou on arrête selon ton besoin
       }
     }
@@ -76,7 +90,9 @@ export class FrameworkService implements IFrameworkService {
     try {
       this.cli.logger.info(`Géneration de l'architecture`);
       this.cli.logger.success(`Process: Géneration de l'architecture !`);
-      this.cli.logger.success(`Géneration de l'architecture terminée avec succès !`);
+      this.cli.logger.success(
+        `Géneration de l'architecture terminée avec succès !`,
+      );
     } catch (error) {
       this.cli.logger.error(`Échec de Géneration de l'architecture`);
       // Log the actual error for debugging
@@ -93,7 +109,9 @@ export class FrameworkService implements IFrameworkService {
     try {
       this.cli.logger.info(`Géneration de l'architecture`);
       this.cli.logger.success(`Process: Géneration de l'architecture !`);
-      this.cli.logger.success(`Géneration de l'architecture terminée avec succès !`);
+      this.cli.logger.success(
+        `Géneration de l'architecture terminée avec succès !`,
+      );
     } catch (error) {
       this.cli.logger.error(`Échec de Géneration de l'architecture`);
       // Log the actual error for debugging

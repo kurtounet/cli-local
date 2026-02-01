@@ -1,5 +1,6 @@
 import { IInstallFramework } from "@/features/commun/framework.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
+import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
 
 export interface IFrameworkService {
   /** Nom unique du service pour le logging ou le debugging */
@@ -9,7 +10,11 @@ export interface IFrameworkService {
    * Elle doit être définie comme une propriété de fonction (arrow function)
    * pour préserver le contexte 'this'.
    */
-  generate: (project: IProjectConfig) => Promise<any>;
+  generate: (
+    projectConfig: IProjectConfig,
+    entityJson: IGetEntityJson,
+    fileMdj: any,
+  ) => Promise<void>;
 
   /** Installation spécifique du framework (ex: ng new, create-react-app) */
   installFramework(config: IInstallFramework): Promise<void>;
@@ -24,5 +29,8 @@ export interface IFrameworkService {
   generateArchitecture(config: IInstallFramework): Promise<any>;
 
   /** Création des fichiers de configuration spécifiques (ex: angular.json, vite.config.ts) */
-  generateFileFramework(config: IInstallFramework): Promise<any>;
+  generateFileFramework(
+    config: IInstallFramework,
+    entitiesJson: IGetEntityJson,
+  ): Promise<any>;
 }

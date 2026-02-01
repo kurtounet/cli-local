@@ -17,6 +17,7 @@ import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
 import { IBaseService } from "@/types/services/base-service.interface.js";
 import { ProjectService } from "@/features/project/services/project.service.js";
+import { ShellService } from "@/services/shell.service.js";
 
 /**
  * Builder pour la construction du contexte de l'application
@@ -67,6 +68,7 @@ export class AppContextBuilder {
     cli.prompt = new PromptService(cli);
     cli.project = new ProjectService(cli);
     cli.config = new ConfigService(cli);
+    cli.shell = new ShellService(cli);
     cli.template = new TemplateService(cli);
     cli.generator = new GeneratorService(cli);
     cli.fileSystem = new FileSystemService(cli);
@@ -102,6 +104,7 @@ export class AppContextBuilder {
       ["AstService", ctx.ast],
       ["CaseService", ctx.case],
       ["ToolService", ctx.tool],
+      ["ShellService", ctx.shell],
       ["StateService", ctx.state],
       ["LoggerService", ctx.logger],
       ["PromptService", ctx.prompt],

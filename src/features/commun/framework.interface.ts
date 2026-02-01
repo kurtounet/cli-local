@@ -1,5 +1,5 @@
 import { IDirectory } from "../frameworks/models/framework-commun.model.js";
-import { IDatabase } from "./database.interface.js";
+import { IConfigDatabase } from "./database.interface.js";
 
 export interface IConfigFramework {
   type: string; // Front | Api | Backend
@@ -20,7 +20,7 @@ export interface IConfigFramework {
   dependencies: IDependencies;
   environments: IEnvironment[];
   scripts: Record<string, string>;
-  databases?: IDatabase[];
+  databases?: IConfigDatabase[];
 }
 
 export interface IInstallOptions {
@@ -92,7 +92,7 @@ export interface IEnvironment {
 export interface IVariables {
   appPort: number;
   corsOrigine: string;
-  databaseConfig: IDatabase;
+  databaseConfig: IConfigDatabase;
   mailer?: any;
   jwt?: any;
 }
@@ -104,4 +104,11 @@ export interface IApiSchematicOptions {
   strict: boolean;
   packageManager: string;
   language: string;
+}
+export interface IInstallFramework {
+  projectName: string;
+  rootProjectPath: string;
+  projectPath: string;
+  framework: IConfigFramework;
+  databases: IConfigDatabase[];
 }

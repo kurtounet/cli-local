@@ -166,6 +166,7 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
         // );
       } else {
         config = await this.cli.project.newProject(answers);
+        this.cli.logger.info(`${config}`);
         await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
       }
       this.cli.logger.info(`✅ 🤞Fichier de configuration créé : ${configFilePath}`);

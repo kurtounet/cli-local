@@ -1,14 +1,10 @@
-import { executeCommand } from "@utils/execute-command";
-
-import { logInfo } from "@utils/logger";
-import { EMOJI } from "@constants/messages";
 import {
+  IConfigFramework,
   IDependencies,
-  IFramework,
-} from "@features/frameworks/models/framework-commun.model";
+} from "@/features/commun/framework.interface.js";
 
 export async function installTSDependencies(
-  framework: IFramework,
+  framework: IConfigFramework,
   path: string,
 ) {
   const dependencies: IDependencies = framework.dependencies;
@@ -34,74 +30,6 @@ export async function installTSDependencies(
       `${EMOJI.error} Erreur lors de l'installation des dépendances de production !`,
     );
   });
-  /*
-    // Commandes d'installation
-    const packageManager = dependencies.packageManager || "npm";
-    switch (packageManager) {
-        case "npm" || "npx" || "yarn" || "pnpm":
-            installDependencies(dependencies: IDependencies, path: string)
-            break;
-        case "composer ":
-            logInfo("Composer n'est pas supporté pour l'installation des dépendances.");
-            installComposerDependencies(dependencies: IDependencies, path: string)
-            break;
-
-    }
-
-
-    // Exécuter les installations en parallèle
-    const installPromises = [];
-
-    if (installProdCommand) {
-        installPromises.push(
-            executeCommand(
-                installProdCommand,
-                { cwd: path, stdio: "inherit" },
-                "📦 Installation des dépendances de production...",
-                "✅ Dépendances de production installées avec succès !",
-                "${EMOJI.error} Erreur lors de l'installation des dépendances de production !"
-            )
-        );
-    }
-
-    if (installDevCommand) {
-        installPromises.push(
-            executeCommand(
-                installDevCommand,
-                { cwd: path, stdio: "inherit" },
-                "📦 Installation des dépendances de développement...",
-                "✅ Dépendances de développement installées avec succès !",
-                "${EMOJI.error} Erreur lors de l'installation des dépendances de développement !"
-            )
-        );
-    }
-
-    // Attente de la fin des installations
-    await Promise.all(installPromises);
-
-    // Commit unique après chaque groupe d'installation
-    if (dependencies.prod.length) {
-        await executeCommand(
-            `git add . && git commit -m "install: ${dependencies.prod.join(", ")}"`,
-            { cwd: path, stdio: "inherit" },
-            "📌 Commit des dépendances de production...",
-            "✅ Commit des dépendances de production créé avec succès !",
-            "${EMOJI.error} Erreur lors du commit des dépendances de production !"
-        );
-    }
-
-    if (dependencies.dev.length) {
-        await executeCommand(
-            `git add . && git commit -m "install: ${dependencies.dev.join(", ")} (dev)"`,
-            { cwd: path, stdio: "inherit" },
-            "📌 Commit des dépendances de développement...",
-            "✅ Commit des dépendances de développement créé avec succès !",
-            "${EMOJI.error} Erreur lors du commit des dépendances de développement !"
-        );
-    }
-
-    logInfo("✅ Toutes les dépendances ont été installées et commit !");
-    */
 }
 
 /**
@@ -109,7 +37,7 @@ export async function installTSDependencies(
  * @param framework The framework configuration object.
  * @param path The installation path.
  */
-export function installComposerDependencies(
+export async function installComposerDependencies(
   framework: IFramework,
   path: string,
 ) {

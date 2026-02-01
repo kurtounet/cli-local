@@ -1,30 +1,41 @@
 import { IConfigFramework, IDependencies } from "@/features/commun/framework.interface.js";
 import { IDirectory, IProjectConfig } from "@/features/commun/projet.interface.js";
-import { BaseService } from "@/services/base-service.service.js";
 import { IAppContext } from "@/types/context.interface.js";
+import { IFrameworkService } from "../interfaces/framework-service.interface.js";
+import { FrameworkSelector } from "./framework-selector.service.js";
 
-export class FrameworkService extends BaseService {
+export class FrameworkService implements IFrameworkService {
   readonly serviceName = "FrameworkService";
-  readonly configFrameworkMock = "1.0.0";
-  constructor(protected cli: IAppContext) {
-    super(cli);
-  }
 
+  constructor(
+    protected cli: IAppContext,
+    protected frameworkSelector = new FrameworkSelector(cli),
+  ) {}
   /**
-   * Initialisation du framework
-   * @param project
+   * Chef d'orchestre : Délègue à chaque service spécifique
    */
-  async generateFramework(project: IProjectConfig): Promise<any> {
-    project.frameworks.forEach((framework) => {
-      this.installFramework(framework);
-      this.intallDependencies(framework.dependencies);
-      this.generateArchitecture(framework.architecture);
-      this.generateFileFramework(framework.name);
-    });
-  }
+  generate = async (project: IProjectConfig): Promise<void> => {
+    // Utilisation de for...of pour un traitement séquentiel propre
+    for (const frameworkConfig of project.frameworks) {
+      try {
+        this.cli.logger.info(`--- Initialisation de ${frameworkConfig.name} ---`);
 
+        // 1. On récupère le service spécifique (ex: AngularService) via le sélecteur
+        const specificService = this.frameworkSelector.getService(frameworkConfig.name);
+
+        // 2. On délègue TOUT le travail au service spécialisé
+        await specificService.generate(project);
+
+        this.cli.logger.success(`--- ${frameworkConfig.name} terminé avec succès ! ---`);
+      } catch (error) {
+        this.cli.logger.error(`Erreur lors du traitement du framework ${frameworkConfig.name}`);
+        // On continue ou on arrête selon ton besoin
+      }
+    }
+  };
   /**
    * Installation du framework
+   * Les méthodes ci-dessous deviennent des "fallbacks" ou des outils partagés
    * @param project
    */
   async installFramework(framework: IConfigFramework): Promise<void> {
@@ -44,7 +55,7 @@ export class FrameworkService extends BaseService {
    * Installation des dépendances
    * @param project
    */
-  async intallDependencies(deps: IDependencies): Promise<void> {
+  async installDependencies(deps: IDependencies): Promise<void> {
     try {
       this.cli.logger.info(`Installation des dépendances `);
       this.cli.logger.success(`Process d'installation de des dépendances !`);
@@ -91,7 +102,6 @@ export class FrameworkService extends BaseService {
       throw error;
     }
   }
-
   async updateFile(project: string): Promise<any> {
     try {
       this.cli.logger.info(`Mise à jour du fichier package.json`);

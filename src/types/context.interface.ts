@@ -16,6 +16,7 @@ import { IServicesContainer } from "./services/services-container.interface.js";
 import { IStateService } from "./services/state-service.interface.js";
 import { ITemplateService } from "./services/template.interface.js";
 import { IToolService } from "./services/tool-service.interface.js";
+import { IShellService } from "./services/shell-service.interface.js";
 
 /**
  * Type définissant les noms des services principaux accessibles dans le conteneur de services.
@@ -55,6 +56,7 @@ export interface IAppContext {
   case: ICaseService;
   tool: IToolService;
   state: IStateService;
+  shell: IShellService;
   plugin: IPluginService;
   logger: ILoggerService;
   project: IProjectService;

@@ -711,7 +711,7 @@ directory_tree:
                                 - name: nuxt.config.ts.ejs
                                 - name: pages/
                                   children:
-                                    - name: [slug].vue.ejs
+                                    - name: slug.vue.ejs
                                     - name: about.vue.ejs
                                     - name: admin/
                                       children:

@@ -12,7 +12,7 @@ export interface IShellService extends IBaseService {
    * @param command - La commande shell à exécuter.
    * @returns La sortie standard (stdout) de la commande.
    */
-  executeSync(command: string): string;
+  executeSync(command: string, cwd: string): string;
 
   /**
    * Exécute une commande shell de manière asynchrone (non-bloquante).
@@ -20,4 +20,8 @@ export interface IShellService extends IBaseService {
    * @returns Une promesse résolue avec la sortie standard (stdout) de la commande.
    */
   execute(command: string): Promise<string>;
+
+  executeSpawn(command: string, args: string[], cwd?: string): Promise<string>;
+
+  executeSyncSpawn(command: string, args: string[], cwd?: string): string;
 }

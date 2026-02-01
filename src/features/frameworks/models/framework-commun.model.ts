@@ -1,4 +1,5 @@
-import { IDatabase } from "@frameworks-models/database.model";
+import { IConfigDatabase } from "@/features/commun/database.interface.js";
+
 export interface IArchitecture {
   directory: IDirectory[];
 }
@@ -116,7 +117,7 @@ export interface IFramework {
   dependencies: IDependencies;
   environments: IEnvironment[];
   scripts: Record<string, string>;
-  databases?: IDatabase[];
+  databases?: IConfigDatabase[];
 }
 
 export interface IEnvironment {
@@ -135,15 +136,15 @@ export interface IProjectConfig {
   starUml?: string;
   version?: string;
 
-  frameWorks: IFramework[];
-  databases?: IDatabase[];
+  frameworks: IFramework[];
+  databases?: IConfigDatabase[];
   // environments: IEnvironment[];
 }
 
 export interface IVariables {
   appPort: number;
   corsOrigine: string;
-  databaseConfig: IDatabase;
+  databaseConfig: IConfigDatabase[];
   mailer?: any;
   jwt?: any;
 }

@@ -8,10 +8,7 @@ import { IFileNode } from "@/types/commun/file-node.interface.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export class FileSystemService
-  extends BaseService
-  implements IFileSystemService
-{
+export class FileSystemService extends BaseService implements IFileSystemService {
   readonly serviceName = "FileSystemService";
 
   private readonly TS_EXTENSION = ".ts";
@@ -236,13 +233,8 @@ export class FileSystemService
         ),
       );
 
-      info.children = childrenResults.filter(
-        (child): child is IFileNode => child !== null,
-      );
-      info.size = info.children.reduce(
-        (acc, child) => acc + (child.size || 0),
-        0,
-      );
+      info.children = childrenResults.filter((child): child is IFileNode => child !== null);
+      info.size = info.children.reduce((acc, child) => acc + (child.size || 0), 0);
     } else if (!isDirectory) {
       // 2. Analyse Metadata si l'extension est dans la liste du JSON
       if (withMetadata && config.analyzeExtensions.includes(extension)) {
@@ -343,10 +335,7 @@ export class FileSystemService
    * @param node - File node to create
    * @param currentPath - Current directory path
    */
-  private async buildPhysicalTree(
-    node: IFileNode,
-    currentPath: string,
-  ): Promise<void> {
+  private async buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void> {
     const fullPath = path.join(currentPath, node.name);
 
     if (node.type === "directory" || node.children) {
@@ -371,10 +360,7 @@ export class FileSystemService
    * @param fullPath - Full path to the file
    * @returns File content
    */
-  private async getContentForFile(
-    node: IFileNode,
-    fullPath: string,
-  ): Promise<string> {
+  private async getContentForFile(node: IFileNode, fullPath: string): Promise<string> {
     if (node.content) {
       return node.content;
     }
@@ -393,12 +379,7 @@ export class FileSystemService
    */
   private async applyTemplate(fileName: string): Promise<string> {
     try {
-      const templatePath = path.resolve(
-        __dirname,
-        "..",
-        "templates",
-        this.CLASS_TEMPLATE,
-      );
+      const templatePath = path.resolve(__dirname, "..", "templates", this.CLASS_TEMPLATE);
 
       this.cli.logger.debug(`Attempting to load template: ${templatePath}`);
 
@@ -408,23 +389,17 @@ export class FileSystemService
       }
 
       const rawTemplate = await this.readFile(templatePath);
-      this.cli.logger.debug(
-        `Template loaded for ${fileName}, length: ${rawTemplate.length}`,
-      );
+      this.cli.logger.debug(`Template loaded for ${fileName}, length: ${rawTemplate.length}`);
 
       const content = this.cli.template.compile(rawTemplate, {
         name: fileName.replace(this.TS_EXTENSION, ""),
         author: this.DEFAULT_AUTHOR,
       });
 
-      this.cli.logger.debug(
-        `Content generated for ${fileName}, length: ${content.length}`,
-      );
+      this.cli.logger.debug(`Content generated for ${fileName}, length: ${content.length}`);
       return content;
     } catch (error) {
-      this.cli.logger.warn(
-        `Template not found for ${fileName}, creating empty file.`,
-      );
+      this.cli.logger.warn(`Template not found for ${fileName}, creating empty file.`);
       return "";
     }
   }
@@ -446,10 +421,7 @@ export class FileSystemService
       const pk = await this.cli.fileSystem.readFile(pkgPath);
       const pkg = JSON.parse(pk) as Record<string, any>;
       pkg.mclp = this.cli.config.defaults;
-      await this.cli.fileSystem.writeFile(
-        pkgPath,
-        JSON.stringify(pkg, null, 2),
-      );
+      await this.cli.fileSystem.writeFile(pkgPath, JSON.stringify(pkg, null, 2));
       this.cli.logger.success(`Mise à jour avec succès dans ${file} !`);
     } catch (error) {
       this.cli.logger.error(

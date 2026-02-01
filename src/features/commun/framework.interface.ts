@@ -10,6 +10,7 @@ export interface IConfigFramework {
   port: number;
   app?: string;
   plateform?: string;
+  excludes?: string[];
   mode: string;
   cliCmd: string;
   gitBranch: string[];

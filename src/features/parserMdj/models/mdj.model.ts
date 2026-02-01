@@ -36,31 +36,6 @@ export interface IERDColumn {
   referenceTo: I$ref;
 }
 
-// interface IRelationship {
-//   name: string; // Nom de la relation
-//   sourceEntity: string; // Entité source
-//   targetEntity: string; // Entité cible
-//   cardinality: '1-1' | '1-N' | 'N-N'; // Cardinalité de la relation
-//   attributes?: { [key: string]: string }; // Attributs spécifiques à la relation (ex: date, statut, etc.)
-// }
-// const relationships: IERDRelationship[] = [
-//   {
-//     name: "Possède",
-//     sourceEntity: "Client",
-//     targetEntity: "Voiture",
-//     cardinality: "1-N",
-//     attributes: {
-//       dateAchat: "string",
-//     },
-//   },
-//   {
-//     name: "TravaillePour",
-//     sourceEntity: "Employé",
-//     targetEntity: "Entreprise",
-//     cardinality: "N-N",
-//   },
-// ];
-
 export interface IERDRelationship {
   _type: string; //
   _id: string; //

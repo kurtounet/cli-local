@@ -1,23 +1,19 @@
-import { IProjectCommand } from "../interfaces/project-command.interface.js";
-
-import { IProjectConfig } from "@/features/commun/projet.interface.js";
-
-import { ConfigFrameworkService } from "@/features/frameworks/services/confi-framework.service.js";
-import { IProjectService } from "../interfaces/project-service.interface.js";
-import { IAppContext } from "@/types/context.interface.js";
-import { FrameworkService } from "@/features/frameworks/services/framework.service.js";
-
 import { EMOJI } from "@/assets/messages.js";
+import { IAppContext } from "@/types/context.interface.js";
+import { ConfigFrameworkService } from "@/features/frameworks/services/confi-framework.service.js";
+import { IProjectConfig } from "@/features/commun/projet.interface.js";
+import { IProjectService } from "../interfaces/project-service.interface.js";
+import { IProjectCommand } from "../interfaces/project-command.interface.js";
+import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
+import { ParserMDJService } from "@/features/parserMdj/services/parser-mdj.service.js";
 import { FrameworkSelector } from "@/features/frameworks/services/framework-selector.service.js";
-import { BaseFrameworkService } from "@/features/frameworks/services/base-framework.service.js";
-import { IInstallFramework } from "@/features/commun/framework.interface.js";
-
 export class ProjectService implements IProjectService {
   readonly serviceName = "ProjectService";
   constructor(
     protected cli: IAppContext,
-    protected configframeworks = new ConfigFrameworkService(),
     protected selector = new FrameworkSelector(cli),
+    protected parserMdj = new ParserMDJService(cli),
+    protected configframeworks = new ConfigFrameworkService(),
   ) {}
   public init(): Promise<void> {
     return Promise.resolve();
@@ -40,6 +36,18 @@ export class ProjectService implements IProjectService {
   async generateProject(config: IProjectConfig): Promise<string> {
     this.cli.logger.info("Generation du projet...");
     this.cli.logger.info(`${EMOJI.start} Génération du projet`);
+    let entitiesJson: IGetEntityJson = {
+      entities: [],
+      "dictionary-columns": {},
+      "dictionary-entities-json": {},
+      "dictionary-entities-pivot": [],
+      "dictionary-relationships": {},
+      "dictionary-entities-relationships": {},
+    };
+    if (config.starUml) {
+      this.cli.logger.info(`${EMOJI.rond_green} Extraction des entités...`);
+      entitiesJson = await this.parserMdj.parseMdjToJson(config.starUml);
+    }
 
     for (const framework of config.frameworks) {
       this.cli.logger.info(`Traitement du framework : ${framework.name}`);
@@ -48,7 +56,7 @@ export class ProjectService implements IProjectService {
       // On exécute la génération spécifique
       const configFramework = await specificService.generate(config);
       // 1. Génération des fichiers de base de la CLI
-      await this.generateFilesCli(configFramework);
+      await this.generateFilesCli(config, entitiesJson);
     }
 
     // 3. (Optionnel) Appel au service global si tu as encore une logique commune
@@ -57,8 +65,9 @@ export class ProjectService implements IProjectService {
     return "Projet généré avec succès !";
   }
 
-  async generateFilesCli(config: IInstallFramework): Promise<string> {
+  async generateFilesCli(config: IProjectConfig, entitiesJson: IGetEntityJson): Promise<string> {
     this.cli.logger.info(`${EMOJI.start} 1 - Génération des fichiers de CLI`);
+    this.cli.fileSystem.writeFile("./entity.json", JSON.stringify(entitiesJson, null, 2));
     // this.cli.config.init(config);
     try {
       this.cli.logger.success(`${EMOJI.processing}Process de génération des fichiers!`);

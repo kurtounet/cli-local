@@ -81,32 +81,6 @@ export interface IColumnJson {
   propsEntiy?: string[];
   validations?: string[];
 }
-
-// interface IRelationship {
-//   name: string; // Nom de la relation
-//   sourceEntity: string; // Entité source
-//   targetEntity: string; // Entité cible
-//   cardinality: '1-1' | '1-N' | 'N-N'; // Cardinalité de la relation
-//   attributes?: { [key: string]: string }; // Attributs spécifiques à la relation (ex: date, statut, etc.)
-// }
-// const relationships: IERDRelationship[] = [
-//   {
-//     name: "Possède",
-//     sourceEntity: "Client",
-//     targetEntity: "Voiture",
-//     cardinality: "1-N",
-//     attributes: {
-//       dateAchat: "string",
-//     },
-//   },
-//   {
-//     name: "TravaillePour",
-//     sourceEntity: "Employé",
-//     targetEntity: "Entreprise",
-//     cardinality: "N-N",
-//   },
-// ];
-
 export interface IEntityJson {
   // _type: string;
   // _id: string;
@@ -131,23 +105,19 @@ export interface IEntityJson {
   relationships?: IRelation[];
 }
 
-// export interface Iinterface {
-//   _type: string;
-//   _id: string;
-//   _parent: I$ref;
-//   name: string;
-//   ownedElements: IEntity[];
-// }
-// export interface IProject {
-//   _type: string;
-//   _id: string;
-//   name: string;
-//   ownedElements: Iinterface[];
-// }
 export interface IProjectJson {
   name: string;
   entities: IEntityJson[];
   dictEntities: Map<string, IEntityJson>;
   dictColumns: Map<string, IColumnJson>;
   dictRelationships: Map<string, IRelationshipJson>;
+}
+
+export interface IGetEntityJson {
+  entities: IEntityJson[];
+  "dictionary-columns": { [k: string]: IColumnJson };
+  "dictionary-entities-json": { [k: string]: IEntityJson };
+  "dictionary-entities-pivot": IEntityJson[];
+  "dictionary-relationships": { [k: string]: IRelation };
+  "dictionary-entities-relationships": { [k: string]: IRelationsEntity };
 }

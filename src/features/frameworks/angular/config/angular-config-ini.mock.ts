@@ -16,6 +16,7 @@ export const CONFIG_INIT_ANGULAR: IConfigFramework = {
   gitBranch: ["main", "dev", "release", "hotfix"],
   gitBranchCheckout: "dev",
   initialCommit: "Install angular",
+  excludes: ["node_modules", "dist", ".git", ".github"],
   installOptions: INSTALL_OPTIONS_ANGULAR_MOCK(),
   architecture: ARCHITECTURE_ANGULAR_MOCK(),
   dependencies: DEPENDENCIES_ANGULAR_MOCK(),

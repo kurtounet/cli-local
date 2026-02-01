@@ -5,18 +5,13 @@ import json from "@eslint/json";
 import jsdoc from "eslint-plugin-jsdoc";
 import markdown from "@eslint/markdown";
 import tseslint from "typescript-eslint";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   // --- 1. IGNORES GLOBAUX (doit être au début) ---
   {
-    ignores: [
-      "dist/**",
-      "bin/**",
-      "node_modules/**",
-      "package-lock.json",
-      ".doc/**",
-    ],
+    ignores: ["dist/**", "bin/**", "node_modules/**", "package-lock.json", ".doc/**"],
   },
 
   // --- 2. BASE JS & TS ---
@@ -29,6 +24,7 @@ export default defineConfig([
   {
     files: ["**/*.{ts,mts,cts,js,mjs,cjs}"],
     plugins: {
+      "simple-import-sort": simpleImportSort,
       jsdoc: jsdoc, // On déclare le plugin ici
     },
     languageOptions: {
@@ -43,6 +39,8 @@ export default defineConfig([
       },
     },
     rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
       // Pour une CLI, on autorise le console.log
       "no-console": "off",
       // La règle qui va attraper ton "cliError"
@@ -72,10 +70,7 @@ export default defineConfig([
       "jsdoc/check-values": "error",
       "jsdoc/check-tag-names": "warn",
       "jsdoc/require-hyphen-before-param-description": ["warn", "always"],
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
-      ],
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-process-exit": "off", // Souvent nécessaire dans les scripts CLI
     },
   },

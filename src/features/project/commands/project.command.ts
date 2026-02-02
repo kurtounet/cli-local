@@ -29,15 +29,15 @@ Actions possibles :
   resource <Name>       Génère une Resource API Platform
 
 Exemples :
-  mclp generate service User --force
-  mclp generate dto Project
-  mclp generate resource Task
+  mclp project|p new|n [names...]       Génère un nouveau projet.
+  mclp project|p generate|g [names]     Génère un projet a partir d'un fichier de configuration.
+  mclp project|p init|i                 Initialise le projet pour la cli.
 `;
   public arguments = "<action> [names...]";
   public aliases = ["p"];
 
   // Ajout de "yaml" dans les extensions autorisées
-  private readonly possibleAction = ["new", "n", "init", "i", "generate", "g"];
+  private readonly possibleAction = ["new", "n", "generate", "g", "init", "i"];
 
   public options: ICommandOption[] = [
     // ... tes options restent identiques
@@ -147,6 +147,11 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
       const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
       const config = await this.cli.fileSystem.readFileJson(configFilePath);
       response = await this.generateProject(config);
+    } else if (action === "init" || action === "i") {
+      // const configFileName = `${rest[0]}-config.json`;
+      // const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
+      // const config = await this.cli.fileSystem.readFileJson(configFilePath);
+      await this.loadConfigProject();
     }
     this.cli.logger.info(response);
     return;
@@ -156,10 +161,7 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
     if (answers.path == ".") {
       answers.path = process.cwd();
     }
-    const configFilePath = this.cli.fileSystem.resolvePath(
-      answers.path,
-      configFileName,
-    );
+    const configFilePath = this.cli.fileSystem.resolvePath(answers.path, configFileName);
     let config = {} as IProjectConfig;
     try {
       if (answers.existence === "y" || answers.existence === "yes") {
@@ -170,17 +172,10 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
       } else {
         config = await this.cli.project.newProject(answers);
         this.cli.logger.info(`${config}`);
-        await this.cli.fileSystem.writeFileJson(
-          configFilePath,
-          config as unknown as string,
-        );
+        await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
       }
-      this.cli.logger.info(
-        `✅ 🤞Fichier de configuration créé : ${configFilePath}`,
-      );
-      this.cli.logger.info(
-        `🚀 commande pour généré le projet: mclp p g ${answers.name}`,
-      );
+      this.cli.logger.info(`✅ 🤞Fichier de configuration créé : ${configFilePath}`);
+      this.cli.logger.info(`🚀 commande pour généré le projet: mclp p g ${answers.name}`);
     } catch (err: unknown) {
       this.cli.errorHandler.handle(
         err as Error,
@@ -192,8 +187,10 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
   async generateProject(config: IProjectConfig): Promise<string> {
     return this.cli.project.generateProject(config);
   }
-  async loadConfigProject(config: string): Promise<void> {
-    this.cli.fileSystem.readFile(config);
+  async loadConfigProject(): Promise<void> {
+    this.cli.logger.info("Récupération du fichier de configuration (.mclprc.json)...");
+    this.cli.fileSystem.exists(".cli-local");
+    this.cli.config.load(".mclprc.json");
     this.cli.logger.info("Vérification du fichier de configuration...");
   }
 }

@@ -81,7 +81,7 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
 
   async generateArchitecture(config: IInstallFramework): Promise<any> {
     this.cli.logger.info(`${EMOJI.rond_green} Création de l'arborescence des dossiers...`);
-    this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
+    // this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
   }
 
   async generateFileFramework(

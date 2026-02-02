@@ -12,10 +12,7 @@ export abstract class BaseFrameworkService {
   /**
    * Méthode utilitaire pour exécuter une étape avec logging automatique
    */
-  protected async step(
-    label: string,
-    action: () => Promise<any>,
-  ): Promise<any> {
+  protected async step(label: string, action: () => Promise<any>): Promise<any> {
     try {
       this.cli.logger.info(`${label}...`);
       await action();
@@ -29,15 +26,10 @@ export abstract class BaseFrameworkService {
     config: IProjectConfig,
     name: string,
   ): Promise<IInstallFramework | null> {
-    const framework = config.frameworks.find(
-      (f) => f.name.toLowerCase() === name.toLowerCase(),
-    );
+    const framework = config.frameworks.find((f) => f.name.toLowerCase() === name.toLowerCase());
     const databases = config.databases;
     if (framework === undefined || databases === undefined) return null;
-    const projectPath = path.join(
-      config.path,
-      `${config.projectName}-${framework?.type}`,
-    );
+    const projectPath = path.join(config.path, `${config.projectName}-${framework?.type}`);
     this.configCli(projectPath);
     return {
       projectName: `${config.projectName}-${framework?.type}`,
@@ -60,26 +52,54 @@ export abstract class BaseFrameworkService {
     });
   }
 
-  async createBranchGit(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
-    if (config.framework?.gitBranch) {
-      let command = "";
-      config.framework.gitBranch.forEach((branchName, index) => {
-        if (index === 0) {
-          command += `git branch ${branchName}`;
-        } else {
-          command += ` && git branch ${branchName}`;
-        }
-      });
-      command += ` && git checkout ${config.framework.gitBranchCheckout}`;
+  // async createBranchGit(config: IInstallFramework): Promise<void> {
+  //   this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
+  //   if (config.framework?.gitBranch) {
+  //     let command = "";
+  //     config.framework.gitBranch.forEach((branchName, index) => {
+  //       if (index === 0) {
+  //         command += `git branch ${branchName}`;
+  //       } else {
+  //         command += ` && git branch ${branchName}`;
+  //       }
+  //     });
+  //     command += ` && git -B checkout ${config.framework.gitBranchCheckout}`;
 
-      this.cli.shell.executeSyncSpawn(command, [], `${config.projectPath}`);
+  //     this.cli.shell.executeSyncSpawn(command, [], `${config.projectPath}`);
+  //   } else {
+  //     this.cli.logger.error(
+  //       `${EMOJI.error} Erreur lors de la création des branches !`,
+  //     );
+  //   }
+  //   this.cli.logger.info(`${EMOJI.success} Branch git créée avec succès !`);
+  // }
+  async createBranchGit(config: IInstallFramework): Promise<void> {
+    this.cli.logger.info(`${EMOJI.rond_green} Configuration des branches git...`);
+
+    if (config.framework?.gitBranch && config.framework.gitBranch.length > 0) {
+      try {
+        // On crée/réinitialise chaque branche individuellement
+        for (const branchName of config.framework.gitBranch) {
+          // "git checkout -B" évite l'erreur "already exists"
+          this.cli.shell.executeSyncSpawn(`git checkout -B ${branchName}`, [], config.projectPath);
+        }
+
+        // On se place sur la branche finale souhaitée
+        if (config.framework.gitBranchCheckout) {
+          this.cli.shell.executeSyncSpawn(
+            `git checkout ${config.framework.gitBranchCheckout}`,
+            [],
+            config.projectPath,
+          );
+        }
+
+        this.cli.logger.info(`${EMOJI.success} Branches git configurées avec succès !`);
+      } catch (error) {
+        this.cli.logger.error(`${EMOJI.error} Échec de la configuration Git : ${error}`);
+      }
     } else {
-      this.cli.logger.error(
-        `${EMOJI.error} Erreur lors de la création des branches !`,
-      );
+      this.cli.logger.error(`${EMOJI.error} Aucune branche configurée !`);
     }
-    this.cli.logger.info(`${EMOJI.success} Branch git créée avec succès !`);
   }
 
   async configCli(projectPath: string): Promise<void> {
@@ -98,9 +118,7 @@ export abstract class BaseFrameworkService {
     const projectPath = config.projectPath;
     const cliFolder = `${projectPath}/.cli-local`;
 
-    this.cli.logger.info(
-      `${EMOJI.start} 1 - Génération du fichier de configuration de CLI`,
-    );
+    this.cli.logger.info(`${EMOJI.start} 1 - Génération du fichier de configuration de CLI`);
 
     let newConfig: IAppConfig = this.cli.config.defaults;
     newConfig.tree.exclude = config.framework.excludes || [];
@@ -124,13 +142,9 @@ export abstract class BaseFrameworkService {
         await this.cli.fileSystem.writeFile(`${cliFolder}/mcd.mdj`, fileMdj),
       ]);
 
-      this.cli.logger.success(
-        `${EMOJI.success} Fichier de CLI générées avec succès !`,
-      );
+      this.cli.logger.success(`${EMOJI.success} Fichier de CLI générées avec succès !`);
     } catch (error) {
-      this.cli.errorHandler.handle(
-        `${EMOJI.error} Échec lors de la génération : ${error}`,
-      );
+      this.cli.errorHandler.handle(`${EMOJI.error} Échec lors de la génération : ${error}`);
       throw error;
     }
   }

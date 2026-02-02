@@ -53,20 +53,14 @@ export class ShellService extends BaseService implements IShellService {
     } catch (error: any) {
       console.error(`Erreur : ${error.message}`);
       // On throw l'erreur pour garder une cohérence avec la méthode async
-      throw new Error(
-        `Erreur lors de l'exécution de ${command}: ${error.message}`,
-      );
+      throw new Error(`Erreur lors de l'exécution de ${command}: ${error.message}`);
     }
   }
   /**
    * Version asynchrone sécurisée.
    * Idéal pour les processus longs ou les serveurs web.
    */
-  async executeSpawn(
-    command: string,
-    args: string[] = [],
-    cwd?: string,
-  ): Promise<string> {
+  async executeSpawn(command: string, args: string[] = [], cwd?: string): Promise<string> {
     return new Promise((resolve, reject) => {
       console.log(`> Exécution (spawn) : ${command} ${args.join(" ")}`);
 
@@ -82,9 +76,7 @@ export class ShellService extends BaseService implements IShellService {
         if (code === 0) {
           resolve(stdout.trim());
         } else {
-          reject(
-            new Error(`La commande a échoué (code ${code}): ${stderr.trim()}`),
-          );
+          reject(new Error(`La commande a échoué (code ${code}): ${stderr.trim()}`));
         }
       });
 

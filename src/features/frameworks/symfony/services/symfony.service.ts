@@ -6,10 +6,7 @@ import { BaseFrameworkService } from "../../services/base-framework.service.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
 import { IFrameworkService } from "../../interfaces/framework-service.interface.js";
 
-export class SymfonyService
-  extends BaseFrameworkService
-  implements IFrameworkService
-{
+export class SymfonyService extends BaseFrameworkService implements IFrameworkService {
   private config!: IInstallFramework;
   readonly frameworkName = "symfony";
   readonly serviceName = "SymfonyService";
@@ -59,9 +56,7 @@ export class SymfonyService
     const args = [
       "new",
       config.projectName,
-      config.framework.version
-        ? `--version=${config.framework.version}`
-        : `--version=7.4.*`,
+      config.framework.version ? `--version=${config.framework.version}` : `--version=7.4.*`,
       config.framework.app,
     ].filter((arg): arg is string => Boolean(arg));
     this.cli.logger.info(`config.projectPath : ${config.projectPath}`);
@@ -69,16 +64,10 @@ export class SymfonyService
   }
 
   async installDependencies(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(
-      `${EMOJI.rond_green} Installation des dépendances Symfony...`,
-    );
+    this.cli.logger.info(`${EMOJI.rond_green} Installation des dépendances Symfony...`);
     if (config.framework.mode === "install") {
       config.framework.dependencies.prod.map((dep) => {
-        this.cli.shell.executeSyncSpawn(
-          `composer`,
-          ["require", dep],
-          `${config.projectPath}`,
-        );
+        this.cli.shell.executeSyncSpawn(`composer`, ["require", dep], `${config.projectPath}`);
       });
       config.framework.dependencies.dev.map((dep) => {
         this.cli.shell.executeSyncSpawn(
@@ -91,13 +80,8 @@ export class SymfonyService
   }
 
   async generateArchitecture(config: IInstallFramework): Promise<any> {
-    this.cli.logger.info(
-      `${EMOJI.rond_green} Création de l'arborescence des dossiers...`,
-    );
-    this.cli.fileSystem.buildPhysicalTree(
-      config.framework.architecture,
-      config.projectPath,
-    );
+    this.cli.logger.info(`${EMOJI.rond_green} Création de l'arborescence des dossiers...`);
+    this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
   }
 
   async generateFileFramework(

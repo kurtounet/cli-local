@@ -1,5 +1,5 @@
 import { BaseCommand } from "@/commands/BaseCommand.js";
-
+import chokidar from "chokidar";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
 
@@ -8,6 +8,7 @@ import { IProjectCommand } from "@/features/project/interfaces/project-command.i
 import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { ProjectService } from "../services/project.service.js";
+import { TaskService } from "../services/task.service.js";
 
 export interface IProjectOptions extends AnyOptions {
   code?: boolean;
@@ -69,6 +70,9 @@ Exemples :
       defaultValue: false,
     },
   ];
+
+  // taskService = this.cli.services.get<TaskService>("TaskService");
+  // projectService = this.cli.services.get<ProjectService>("ProjectService");
 
   async execute(args: string[], options: IProjectOptions): Promise<void> {
     const [action, ...rest] = args;
@@ -150,26 +154,23 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
       const config = await this.newProject(answers);
       if (answers.generate) {
         if (answers.generate === "y" || answers.generate === "yes") {
-          response = await this.generateProject(config);
+          response = await this.cli.project.generateProject(config);
         }
       }
     } else if (action === "generate" || action === "g") {
       const configFileName = `${rest[0]}-config.json`;
       const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
       const config = await this.cli.fileSystem.readFileJson(configFilePath);
-      response = await this.generateProject(config);
+      response = await this.cli.project.generateProject(config);
     } else if (action === "load" || action === "l") {
       await this.cli.project.loadProject(process.cwd());
     } else if (action === "watch" || action === "w") {
       const targetPath = rest[0] || ".";
-
       // Si l'option n'est pas présente, on lance le processus node --watch
       if (!options.internalWatch) {
         await this.watchAction(targetPath);
       } else {
-        // Si l'option est là, on lance le service (on est déjà dans le watcher)
-        const service = this.cli.services.get<ProjectService>("ProjectService");
-        await service.loadProject(targetPath);
+        await this.cli.project.loadProject(targetPath);
       }
     }
     this.cli.logger.info(response);
@@ -203,42 +204,40 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
     }
     return config;
   }
-  async generateProject(config: IProjectConfig): Promise<string> {
-    return this.cli.project.generateProject(config);
-  }
-  async loadConfigProject(): Promise<void> {
-    this.cli.logger.info("Récupération du fichier de configuration (.mclprc.json)...");
-    this.cli.fileSystem.exists(".cli-local");
-    this.cli.config.load(".mclprc.json");
-    this.cli.logger.info("Vérification du fichier de configuration...");
-  }
 
   async watchAction(path: string) {
-    // On récupère le chemin absolu du dossier à surveiller (C:\test-backend)
-    const absoluteTargetPath = this.cli.fileSystem.resolvePath(path);
+    const watcher = chokidar.watch(path, {
+      ignored: /node_modules|.cli-local/,
+    });
 
-    // Si on n'est pas déjà sous le contrôle du watcher de Node
-    if (!process.execArgv.includes("--watch")) {
-      this.cli.logger.info(`🔭 Initialisation du watcher sur : ${absoluteTargetPath}`);
+    watcher.on("change", async (filePath) => {
+      console.log(`-> Fichier modifié : ${filePath}`);
+      const ext = filePath.split(".").pop();
 
-      // On récupère le chemin de l'exécutable de ta CLI (I:\cli\cli-local-poo\dist\index.js)
-      const cliBinPath = process.argv[1];
+      switch (ext) {
+        case "mdj":
+          // Tâche de synchronisation du modèle
+          console.log("Tâche de synchronisation du modèle");
+          // await this.cli.task.runTask("Sync StarUML", () => projectService.parserMdj(filePath));
+          break;
 
-      // On relance la CLI via Node avec les flags de surveillance
-      this.cli.shell.executeSyncSpawn("node", [
-        "--watch",
-        `--watch-path=${absoluteTargetPath}`, // On force Node à surveiller le projet externe
-        cliBinPath,
-        "project",
-        "watch",
-        absoluteTargetPath,
-        "--internal-watch", // Pour éviter la boucle infinie
-      ]);
-      return;
-    }
+        case "json":
+          if (filePath.includes(".mclprc.json")) {
+            // Tâche de rechargement de configuration
+            console.log("Tâche de rechargement de configuration");
+            // await this.cli.task.runTask("Reload Config", () => projectService.loadConfig(filePath));
+          }
+          break;
 
-    // --- CE CODE S'EXÉCUTE À CHAQUE CHANGEMENT DANS C:\test-backend ---
-    const service = this.cli.services.get<ProjectService>("ProjectService");
-    await service.loadProject(absoluteTargetPath);
+        case "php":
+        case "ts":
+          // Exemple : Lancer un linter ou une analyse de code dès qu'un fichier source change
+          await this.cli.task.runTask("Code Analysis", async () => {
+            this.cli.logger.info("Analyse du code source en cours...");
+            // Ta logique ici
+          });
+          break;
+      }
+    });
   }
 }

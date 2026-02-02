@@ -12,4 +12,5 @@ export interface IProjectService extends IBaseService {
   init(): Promise<void>;
   newProject(project: IProjectCommand): Promise<IProjectConfig>;
   generateProject(project: IProjectConfig): Promise<string>;
+  loadProject(path: string): Promise<void>;
 }

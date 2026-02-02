@@ -7,6 +7,7 @@ import inquirer from "inquirer";
 import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
 import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
+import { ProjectService } from "../services/project.service.js";
 
 export interface IProjectOptions extends AnyOptions {
   code?: boolean;
@@ -17,6 +18,7 @@ export interface IProjectOptions extends AnyOptions {
   output?: string;
   force?: boolean;
   dryRun?: boolean;
+  internalWatch?: boolean;
 }
 
 export class ProjectCommand extends BaseCommand<IProjectOptions> {
@@ -37,7 +39,7 @@ Exemples :
   public aliases = ["p"];
 
   // Ajout de "yaml" dans les extensions autorisées
-  private readonly possibleAction = ["new", "n", "generate", "g", "init", "i"];
+  private readonly possibleAction = ["new", "n", "generate", "g", "load", "l", "watch", "w"];
 
   public options: ICommandOption[] = [
     // ... tes options restent identiques
@@ -46,6 +48,13 @@ Exemples :
       description: "Générer l'arborescence en json, yaml, md",
       type: "boolean",
       defaultValue: false,
+    },
+    {
+      flags: "--internal-watch",
+      description: "Flag interne pour le mode surveillance",
+      type: "boolean",
+      defaultValue: false,
+      // hidden: true, // Pour qu'elle n'apparaisse pas dans le --help
     },
     {
       flags: "-f, --force",
@@ -128,7 +137,7 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
           type: "input",
           name: "generate",
           message: "✋ Voulez-vous générer le Projet y/yes | n/no:",
-          default: true,
+          default: false,
         },
         /*
       {
@@ -140,18 +149,28 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
       ]);
       const config = await this.newProject(answers);
       if (answers.generate) {
-        response = await this.generateProject(config);
+        if (answers.generate === "y" || answers.generate === "yes") {
+          response = await this.generateProject(config);
+        }
       }
     } else if (action === "generate" || action === "g") {
       const configFileName = `${rest[0]}-config.json`;
       const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
       const config = await this.cli.fileSystem.readFileJson(configFilePath);
       response = await this.generateProject(config);
-    } else if (action === "init" || action === "i") {
-      // const configFileName = `${rest[0]}-config.json`;
-      // const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
-      // const config = await this.cli.fileSystem.readFileJson(configFilePath);
-      await this.loadConfigProject();
+    } else if (action === "load" || action === "l") {
+      await this.cli.project.loadProject(process.cwd());
+    } else if (action === "watch" || action === "w") {
+      const targetPath = rest[0] || ".";
+
+      // Si l'option n'est pas présente, on lance le processus node --watch
+      if (!options.internalWatch) {
+        await this.watchAction(targetPath);
+      } else {
+        // Si l'option est là, on lance le service (on est déjà dans le watcher)
+        const service = this.cli.services.get<ProjectService>("ProjectService");
+        await service.loadProject(targetPath);
+      }
     }
     this.cli.logger.info(response);
     return;
@@ -192,5 +211,34 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
     this.cli.fileSystem.exists(".cli-local");
     this.cli.config.load(".mclprc.json");
     this.cli.logger.info("Vérification du fichier de configuration...");
+  }
+
+  async watchAction(path: string) {
+    // On récupère le chemin absolu du dossier à surveiller (C:\test-backend)
+    const absoluteTargetPath = this.cli.fileSystem.resolvePath(path);
+
+    // Si on n'est pas déjà sous le contrôle du watcher de Node
+    if (!process.execArgv.includes("--watch")) {
+      this.cli.logger.info(`🔭 Initialisation du watcher sur : ${absoluteTargetPath}`);
+
+      // On récupère le chemin de l'exécutable de ta CLI (I:\cli\cli-local-poo\dist\index.js)
+      const cliBinPath = process.argv[1];
+
+      // On relance la CLI via Node avec les flags de surveillance
+      this.cli.shell.executeSyncSpawn("node", [
+        "--watch",
+        `--watch-path=${absoluteTargetPath}`, // On force Node à surveiller le projet externe
+        cliBinPath,
+        "project",
+        "watch",
+        absoluteTargetPath,
+        "--internal-watch", // Pour éviter la boucle infinie
+      ]);
+      return;
+    }
+
+    // --- CE CODE S'EXÉCUTE À CHAQUE CHANGEMENT DANS C:\test-backend ---
+    const service = this.cli.services.get<ProjectService>("ProjectService");
+    await service.loadProject(absoluteTargetPath);
   }
 }

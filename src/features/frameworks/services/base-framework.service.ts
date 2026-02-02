@@ -52,29 +52,18 @@ export abstract class BaseFrameworkService {
     });
   }
 
-  // async createBranchGit(config: IInstallFramework): Promise<void> {
-  //   this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
-  //   if (config.framework?.gitBranch) {
-  //     let command = "";
-  //     config.framework.gitBranch.forEach((branchName, index) => {
-  //       if (index === 0) {
-  //         command += `git branch ${branchName}`;
-  //       } else {
-  //         command += ` && git branch ${branchName}`;
-  //       }
-  //     });
-  //     command += ` && git -B checkout ${config.framework.gitBranchCheckout}`;
-
-  //     this.cli.shell.executeSyncSpawn(command, [], `${config.projectPath}`);
-  //   } else {
-  //     this.cli.logger.error(
-  //       `${EMOJI.error} Erreur lors de la création des branches !`,
-  //     );
-  //   }
-  //   this.cli.logger.info(`${EMOJI.success} Branch git créée avec succès !`);
-  // }
   async createBranchGit(config: IInstallFramework): Promise<void> {
     this.cli.logger.info(`${EMOJI.rond_green} Configuration des branches git...`);
+    // 1. Forcer la création d'un nouveau dépôt Git local au projet
+    this.cli.shell.executeSyncSpawn(`git init`, [], config.projectPath);
+    // 2. IMPORTANT : Créer un commit initial
+    // On ne peut pas créer de branches (dev, release) sur un dépôt vide
+    try {
+      this.cli.shell.executeSyncSpawn(`git add .`, [], config.projectPath);
+      this.cli.shell.executeSyncSpawn(`git commit -m "initial commit"`, [], config.projectPath);
+    } catch (e) {
+      // Si c'est déjà commité (comme avec Symfony), on ignore l'erreur
+    }
 
     if (config.framework?.gitBranch && config.framework.gitBranch.length > 0) {
       try {

@@ -351,7 +351,7 @@ export class FileSystemService extends BaseService implements IFileSystemService
    * @param node - File node to create
    * @param currentPath - Current directory path
    */
-  private async buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void> {
+  public async buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void> {
     const fullPath = path.join(currentPath, node.name);
 
     if (node.type === "directory" || node.children) {

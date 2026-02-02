@@ -1,14 +1,11 @@
-import { BaseCommand } from "@/commands/BaseCommand.js";
 import chokidar from "chokidar";
+import inquirer from "inquirer";
+import { BaseCommand } from "@/commands/BaseCommand.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
-
-import inquirer from "inquirer";
+import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
 import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
-import { IProjectConfig } from "@/features/commun/projet.interface.js";
-import { ProjectService } from "../services/project.service.js";
-import { TaskService } from "../services/task.service.js";
 
 export interface IProjectOptions extends AnyOptions {
   code?: boolean;

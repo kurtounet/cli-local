@@ -53,9 +53,9 @@ export interface IAppContext {
   cliCconfig: ICliConfig;
   services: IServicesContainer;
   ai: IAiService;
+  db: IDataManagerService;
   git: IGitService;
   ast: IAstService;
-  db: IDataManagerService;
   case: ICaseService;
   tool: IToolService;
   state: IStateService;
@@ -63,12 +63,12 @@ export interface IAppContext {
   shell: IShellService;
   plugin: IPluginService;
   logger: ILoggerService;
-  project: IProjectService;
-  generator: IGeneratorService;
   config: IConfigService;
   prompt: IPromptService;
+  project: IProjectService;
+  template: ITemplateService;
+  generator: IGeneratorService;
   fileSystem: IFileSystemService;
   architecture: IArchitectureService;
-  template: ITemplateService;
   errorHandler: IHandlerErrorService;
 }

@@ -8,6 +8,7 @@ import { GenerateCommand } from "./commands/generate.command.js";
 import { HandlerErrorService } from "./services/handler-error.service.js";
 import { ProjectCommand } from "./features/project/commands/project.command.js";
 import { FrameworkCommand } from "./features/frameworks/commands/framework.command.js";
+import { PluginCommand } from "./commands/plugin.command.js";
 
 /**
  * Point d'entrée principal de la CLI
@@ -27,17 +28,13 @@ async function bootstrap(): Promise<void> {
     // ainsi que la configuration de l'application
     const builder = new AppContextBuilder();
     const cli = await builder.buildContext();
-    cli.services
-      .get<HandlerErrorService>("HandlerErrorService")
-      .setupGlobalHandlers();
+    cli.services.get<HandlerErrorService>("HandlerErrorService").setupGlobalHandlers();
 
     // 1) init services
     await cli.services.initializeAll();
 
     // 2) setup handlers après init
-    cli.services
-      .get<HandlerErrorService>("HandlerErrorService")
-      .setupGlobalHandlers();
+    cli.services.get<HandlerErrorService>("HandlerErrorService").setupGlobalHandlers();
 
     // ============================================================================
     // ÉTAPE 2 : Initialisation de l'application
@@ -62,6 +59,7 @@ async function bootstrap(): Promise<void> {
     app.registerCommand(CliCommand);
     app.registerCommand(TreeCommand);
     app.registerCommand(MakeCommand);
+    app.registerCommand(PluginCommand);
     app.registerCommand(ProjectCommand);
     app.registerCommand(GenerateCommand);
     app.registerCommand(FrameworkCommand);

@@ -13,7 +13,7 @@ export const CONFIG_INIT_SYMFONY: IConfigFramework = {
   port: 8001,
   mode: "install",
   app: "--api",
-  excludes: ["node_modules", "dist", ".git", ".github"],
+  excludes: ["var", "vendor", ".git", ".github"],
   gitBranch: ["main", "dev", "release", "hotfix"],
   gitBranchCheckout: "dev",
   cliCmd: "symfony",

@@ -1,0 +1,43 @@
+{
+    "name": "Symfony Generator",
+    "id": "symfony",
+    "entryPoint": "symfony.service.js",
+    "templateDir": "./templates",
+    "blueprints": [
+        {
+            "type": "resource",
+            "target": "src/ApiResource/Resources",
+            "suffix": "Resource"
+        },
+        {
+            "type": "mapper",
+            "target": "src/ApiResource/Mapper",
+            "suffix": "Mapper"
+        },
+        {
+            "type": "provider",
+            "target": "src/ApiResource/States",
+            "suffix": "Provider"
+        },
+        {
+            "type": "pocessor",
+            "target": "src/ApiResource/States",
+            "suffix": "Processor"
+        },
+        {
+            "type": "entity",
+            "target": "src/Entity",
+            "suffix": ""
+        },
+        {
+            "type": "repository",
+            "target": "src/Repository",
+            "suffix": "Repository"
+        },
+        {
+            "type": "dto",
+            "target": "src/Dto",
+            "suffix": "Dto"
+        }
+    ]
+}

@@ -1,8 +1,7 @@
-import { ICommandOption } from "@/types/command.interface.js";
 import { BaseCommand } from "./BaseCommand.js";
-import { ValidationError } from "@/errors/cli-errors.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
-import { App } from "@/core/App.js";
+import { ICommandOption } from "@/types/command.interface.js";
+
 export interface IPluginOptions extends AnyOptions {
   force?: boolean;
   output?: string;
@@ -11,7 +10,7 @@ export interface IPluginOptions extends AnyOptions {
 export class PluginCommand extends BaseCommand<IPluginOptions> {
   public name = "plugin";
   public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
-  public arguments = "<pluginId>";
+  public arguments = "<pluginId> <pathPlugin>";
   //   public aliases = ["m"];
 
   public options: ICommandOption[] = [
@@ -29,18 +28,20 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     },
   ];
 
-  private readonly actions = ["service", "command", "template", "plugin"];
+  private readonly actions = ["service", "command", "scaffolder", "template", "plugin"];
 
   async execute(args: string[], options: IPluginOptions): Promise<void> {
-    const [pluginId] = args;
+    const [pluginId, typePluging] = args;
     try {
       this.cli.logger.info(`Chargement du plugin : ${pluginId}...`);
 
       // 1. Charger le plugin via le service
-      const { instance, manifest, pluginDir } = await this.cli.plugin.load(pluginId); //symfony
+      const { instance, manifest, pluginDir } = await this.cli.plugin.load(pluginId, typePluging);
 
       // 2. Préparer des données de test (ceci viendra normalement de tes entités JSON)
       const data = {
+        pluginDir: pluginDir,
+        manifest: manifest,
         blueprints: [...manifest.blueprints],
         entities: [
           { name: "User", fields: [{ name: "email", type: "string" }] },

@@ -1,6 +1,12 @@
 export interface ISDKContext {
   /** Affiche des messages dans la console */
-  log: (msg: string) => void;
+  log: {
+    info: (msg: string) => void;
+    success: (msg: string) => void;
+    error: (msg: string) => void;
+    warning: (msg: string) => void;
+    debug: (msg: string) => void;
+  };
 
   /** Accès aux méthodes de manipulation de fichiers */
   fs: {
@@ -10,7 +16,7 @@ export interface ISDKContext {
   };
 
   /** Moteur de rendu EJS lié au plugin */
-  render: (templateName: string, data: any) => Promise<string>;
+  render: (pluginDir: string, tplDir: string, templateName: string, data: any) => Promise<string>;
 
   /** Configuration du projet */
   config: {

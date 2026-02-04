@@ -2,10 +2,17 @@ import path from "node:path";
 import { BaseService } from "./base-service.service.js";
 import { ISDKContext } from "@/types/commun/sdk-context.interface.js";
 import { IPluginService } from "@/types/services/plugin-service.interface.js";
+import { IPlugin, IPluginManifest } from "@/types/plugin.interface.js";
 
 export class PluginService extends BaseService implements IPluginService {
   readonly serviceName = "PluginService";
+
   private pluginsBaseDir = path.join(process.cwd(), "plugins");
+  private pluginsIndex = path.join(this.pluginsBaseDir, "index.json");
+  private pluginsIndexJson!: any;
+  private pluginsManifest!: IPluginManifest;
+
+  private plugin!: IPlugin;
 
   public override async init(): Promise<void> {
     return Promise.resolve();
@@ -14,38 +21,43 @@ export class PluginService extends BaseService implements IPluginService {
   /**
    * Charge et exécute un plugin dynamiquement
    */
-  async load(pluginId: string): Promise<any> {
-    const pluginDir = path.join(this.pluginsBaseDir, pluginId);
-    const manifestPath = path.join(pluginDir, "manifest.json");
-    console.log(manifestPath);
-
-    // 1. Vérification du plugin
+  async load(pluginId: string, type: string): Promise<any> {
+    const indexPluginJson = await this.cli.fileSystem.readFile(this.pluginsIndex);
+    this.pluginsIndexJson = JSON.parse(indexPluginJson);
+    const typePlugin = this.pluginsIndexJson.plugins[type];
+    this.plugin = typePlugin.find((p: any) => p.id === pluginId);
+    // Vérification du plugin
+    if (!this.plugin) {
+      throw new Error(`Plugin ${pluginId} non trouvé dans la catégorie ${type}`);
+    }
+    this.plugin.pluginDir = path.join(this.pluginsBaseDir, this.plugin.pluginDir);
+    const manifestPath = path.join(this.plugin.pluginDir, "manifest.json");
+    // Vérification du manifest.json du plugin
     if (!this.cli.fileSystem.exists(manifestPath)) {
-      throw new Error(`Plugin ${pluginId} non trouvé à l'adresse : ${manifestPath}`);
+      throw new Error(`le fichier manifest.json du plugin ${pluginId}.json n'existe pas`);
     }
 
-    // 2. Lecture du Manifest
+    //Lecture du Manifest
     const manifestJson = await this.cli.fileSystem.readFile(manifestPath);
-    const manifest = JSON.parse(manifestJson);
-    const entryPoint = path.join(pluginDir, manifest.entryPoint);
-    console.log(entryPoint);
+    this.pluginsManifest = JSON.parse(manifestJson);
+    const isComplet = await this.verifyPlugin(this.pluginsManifest);
+    // Vérification du plugin
+    if (!isComplet) {
+      throw new Error(`Le plugin ${pluginId} n'est pas complet`);
+    }
 
-    // 3. Préparation du SDK (Contexte injecté)
-    // On injecte ici les services de ta CLI
-    const sdk: ISDKContext = {
-      log: (msg: string) => this.cli.logger.info(`[${pluginId}] ${msg}`),
-      fs: {
-        writeAsync: (p, c) => this.cli.fileSystem.writeFileAsync(p, c),
-        exists: (p) => this.cli.fileSystem.exists(p),
-        readFile: (p, e) => this.cli.fileSystem.readFile(p),
-      },
-      render: (tpl: string, data: any) => this.cli.template.render(pluginDir, tpl, data),
-      config: this.cli.config as any,
-    };
+    const service = path.join(this.plugin.pluginDir, this.pluginsManifest.service);
+    if (!this.cli.fileSystem.exists(service)) {
+      throw new Error(`Le fichier d'entrée du plugin ${pluginId} n'existe pas`);
+    }
+
+    //Préparation du SDK (Contexte injecté)
+    //injecte ici les services de la CLI
+    const sdk: ISDKContext = this.getSDKContext();
 
     // 4. Import dynamique du fichier JS
     // Note: On utilise file:// pour Windows/Linux compatibility en ESM
-    const module = await import(`file://${entryPoint}`);
+    const module = await import(`file://${service}?update=${Date.now()}`);
     const PluginClass = module.default;
     if (!PluginClass) {
       throw new Error(`Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`);
@@ -56,8 +68,8 @@ export class PluginService extends BaseService implements IPluginService {
 
     return {
       instance,
-      manifest,
-      pluginDir,
+      manifest: this.pluginsManifest,
+      pluginDir: this.plugin.pluginDir,
     };
   }
 
@@ -83,86 +95,65 @@ export class PluginService extends BaseService implements IPluginService {
 
     return availablePlugins;
   }
+
+  async listByType(type: string): Promise<any[]> {
+    const plugins = await this.list();
+    return plugins.filter((p: any) => p.type === type);
+  }
+  async verifyPlugin(manifest: any): Promise<boolean> {
+    let errors: string[] = [];
+    const propertiesManifest = ["id", "name", "templateDir", "service", "blueprints"];
+    const serviceFile = path.join(this.plugin.pluginDir, manifest.service);
+    const templateDir = path.join(this.plugin.pluginDir, manifest.templateDir);
+
+    for (const property of propertiesManifest) {
+      if (!manifest[property]) {
+        errors.push(
+          `Le plugin manifest.json du plugin ${manifest.id} n'a pas de propriété ${property}`,
+        );
+      }
+    }
+    if (errors.length > 0) {
+      throw new Error(errors.join("\n"));
+    }
+    console.log(serviceFile);
+    if (!this.cli.fileSystem.exists(serviceFile)) {
+      throw new Error(`Le fichier d'entrée du plugin ${manifest.id}.service.js n'existe pas`);
+    }
+    console.log(templateDir);
+    if (!this.cli.fileSystem.exists(templateDir)) {
+      throw new Error(`Le dossier de templates du plugin ${manifest.id} n'existe pas`);
+    }
+
+    for (const blueprint of manifest.blueprints) {
+      const blueprintPath = path.join(templateDir, blueprint.template);
+      if (!this.cli.fileSystem.exists(blueprintPath)) {
+        errors.push(`Le template ${blueprint.template} du plugin ${manifest.id} n'existe pas`);
+      }
+    }
+
+    if (errors.length > 0) {
+      throw new Error(errors.join("\n"));
+    }
+    return true;
+  }
+  getSDKContext(): ISDKContext {
+    return {
+      log: {
+        info: (msg: string) => this.cli.logger.info(msg),
+        success: (msg: string) => this.cli.logger.success(msg),
+        error: (msg: string) => this.cli.logger.error(msg),
+        warning: (msg: string) => this.cli.logger.warn(msg),
+        debug: (msg: string) => this.cli.logger.debug(msg),
+      },
+      fs: {
+        writeAsync: (p, c) => this.cli.fileSystem.writeFileAsync(p, c),
+        exists: (p) => this.cli.fileSystem.exists(p),
+        readFile: (p, e) => this.cli.fileSystem.readFile(p),
+      },
+      render: (pluginDir: string, tplDir: string, tpl: string, data: any) =>
+        this.cli.template.render(pluginDir, tplDir, tpl, data),
+      config: this.cli.config as any,
+    };
+  }
 }
-
-// import path from "node:path";
-// import { BaseService } from "./base-service.service.js";
-// import { IPluginService } from "@/types/services/plugin-service.interface.js";
-
-// // import { DataManagerService } from "./data-manager.service.js";
-
-// export class PluginService extends BaseService implements IPluginService {
-//   readonly serviceName = "PluginService";
-
-//   public override async init(): Promise<void> {
-//     // Si tu n'as rien à initialiser pour l'instant :
-//     return Promise.resolve();
-//   }
-
-//   plugins = new Map<string, any>();
-
-//   // Charge dynamiquement tous les plugins d'un dossier
-//   async registerPlugin(PluginClass: any) {
-//     const definition = PluginClass.definition;
-//     this.plugins.set(definition.name, new PluginClass());
-//     console.log(`[PluginService] Plugin chargé : ${definition.name}`);
-//   }
-
-//   // Point d'entrée unique pour exécuter n'importe quel plugin
-//   async run(pluginName: string, args: string[]): Promise<any> {
-//     const plugin = this.plugins.get(pluginName);
-//     if (!plugin) throw new Error(`Plugin ${pluginName} introuvable.`);
-
-//     // Voici l'injection : on prépare le contexte ici
-//     const context = {
-//       db: this.cli.db,
-//       log: (msg: string) => console.log(`[${pluginName}] ${msg}`),
-//       timestamp: new Date().toISOString(),
-//     };
-
-//     try {
-//       // On exécute le plugin avec les arguments et le contexte injecté
-//       return await plugin.execute(args, context);
-//     } catch (error: any) {
-//       console.error(`Erreur d'exécution dans ${pluginName}:`, error);
-//       return { success: false, error: error.message };
-//     }
-//   }
-//   private pluginsBaseDir = path.join(process.cwd(), "plugins");
-
-//   async load(pluginId: string): Promise<any> {
-//     const pluginDir = path.join(this.pluginsBaseDir, pluginId);
-//     const manifestPath = path.join(pluginDir, "manifest.json");
-
-//     if (!this.cli.fileSystem.exists(manifestPath)) throw new Error(`Plugin ${pluginId} non trouvé`);
-
-//     const manifestjson = await this.cli.fileSystem.readFile(manifestPath);
-//     const manifest = JSON.parse(manifestjson);
-//     const entryPath = path.join(pluginDir, manifest.entry);
-
-//     // --- LE SDK INJECTÉ ---
-//     const sdk = {
-//       log: (msg: string) => this.cli.logger.info(`[${pluginId}] ${msg}`),
-//       fs: this.cli.fileSystem,
-//       // On lie la factory de template au plugin spécifique
-//       render: (templateName: string, data: any) => {
-//         // Appelle la méthode statique de ton TemplateService
-//         return this.cli.template.render(pluginDir, templateName, data);
-//       },
-//     };
-
-//     // Chargement dynamique
-//     const module = await import(`file://${entryPath}`);
-//     const PluginClass = module.default;
-
-//     return {
-//       instance: new PluginClass(sdk), // On injecte le SDK ici
-//       manifest,
-//       pluginDir,
-//     };
-//   }
-
-//   log(msg: string): void {
-//     console.log(msg);
-//   }
-// }

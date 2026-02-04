@@ -1,0 +1,57 @@
+{
+    "id": "symfony",
+    "name": "Symfony Generator",
+    "templateDir": "./templates",
+    "service": "symfony.service.js",
+    "blueprints": [
+        {
+            "type": "resource",
+            "target": "src/ApiResource/Resources",
+            "template": "resource.php.ejs",
+            "prefix": "",
+            "suffix": "Resource"
+        },
+        {
+            "type": "mapper",
+            "target": "src/ApiResource/Mapper",
+            "template": "mapper.php.ejs",
+            "prefix": "",
+            "suffix": "Mapper"
+        },
+        {
+            "type": "provider",
+            "target": "src/ApiResource/States",
+            "template": "prodiver.php.ejs",
+            "prefix": "",
+            "suffix": "Provider"
+        },
+        {
+            "type": "processor",
+            "target": "src/ApiResource/States",
+            "template": "processor.php.ejs",
+            "prefix": "",
+            "suffix": "Processor"
+        },
+        {
+            "type": "entity",
+            "target": "src/Entity",
+            "template": "entity.php.ejs",
+            "prefix": "",
+            "suffix": ""
+        },
+        {
+            "type": "repository",
+            "target": "src/Repository",
+            "template": "repository.php.ejs",
+            "prefix": "",
+            "suffix": "Repository"
+        },
+        {
+            "type": "dto",
+            "target": "src/Dto",
+            "template": "dto.php.ejs",
+            "prefix": "",
+            "suffix": "Dto"
+        }
+    ]
+}

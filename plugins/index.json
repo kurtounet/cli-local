@@ -1,0 +1,38 @@
+{
+    "plugins": {
+        "tool": [
+            {
+                "type": "cli",
+                "id": "symfony",
+                "pluginDir": "scaffolders/cli/symfony"
+            },
+            {
+                "type": "cli",
+                "id": "angular",
+                "pluginDir": "scaffolders/cli/angular"
+            }
+        ],
+        "scaffolder": [
+            {
+                "type": "framework",
+                "id": "symfony",
+                "pluginDir": "scaffolders/frameworks/symfony"
+            },
+            {
+                "type": "framework",
+                "id": "angular",
+                "pluginDir": "scaffolders/frameworks/angular"
+            },
+            {
+                "type": "framework",
+                "id": "nuxt",
+                "pluginDir": "scaffolders/frameworks/nuxt"
+            },
+            {
+                "type": "framework",
+                "id": "nitro",
+                "pluginDir": "scaffolders/frameworks/nitro"
+            }
+        ]
+    }
+}

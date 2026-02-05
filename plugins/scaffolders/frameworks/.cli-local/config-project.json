@@ -12,20 +12,10 @@
       "app": "--api",
       "mode": "dev",
       "cliCmd": "ng",
-      "gitBranch": [
-        "main",
-        "dev",
-        "release",
-        "hotfix"
-      ],
+      "gitBranch": ["main", "dev", "release", "hotfix"],
       "gitBranchCheckout": "dev",
       "initialCommit": "Install angular",
-      "excludes": [
-        "node_modules",
-        "dist",
-        ".git",
-        ".github"
-      ],
+      "excludes": ["node_modules", "dist", ".git", ".github"],
       "installOptions": {
         "name": "frontend",
         "directory": "./nom-du-projet",
@@ -209,9 +199,7 @@
       "dependencies": {
         "packageManager": "npm",
         "prod": [],
-        "dev": [
-          "prettier-eslint"
-        ]
+        "dev": ["prettier-eslint"]
       },
       "environments": [
         {
@@ -248,18 +236,8 @@
       "port": 8001,
       "mode": "dev",
       "app": "--api",
-      "excludes": [
-        "node_modules",
-        "dist",
-        ".git",
-        ".github"
-      ],
-      "gitBranch": [
-        "main",
-        "dev",
-        "release",
-        "hotfix"
-      ],
+      "excludes": ["node_modules", "dist", ".git", ".github"],
+      "gitBranch": ["main", "dev", "release", "hotfix"],
       "gitBranchCheckout": "dev",
       "cliCmd": "symfony",
       "initialCommit": "Install symfony",
@@ -338,10 +316,7 @@
       ],
       "dependencies": {
         "packageManager": "composer",
-        "prod": [
-          "doctrine/orm",
-          "symfony/framework-bundle"
-        ],
+        "prod": ["doctrine/orm", "symfony/framework-bundle"],
         "dev": [
           "symfony/maker-bundle",
           "phpunit/phpunit",

@@ -1,0 +1,22 @@
+# Dépendances
+node_modules/
+
+# Dossiers de build/sortie
+dist/
+build/
+.next/
+
+# Fichiers spécifiques
+package-lock.json
+*.min.js
+
+.cli-local/**
+.doc/**
+dist/**
+bin/**
+node_modules/**
+old_cli/**
+output/**
+plugins/**
+project-test/**
+tree/**

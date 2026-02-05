@@ -6,7 +6,10 @@ export class SymfonyFileFactory {
   /**
    * Retourne le contenu et le chemin cible selon le type
    */
-  static create(type: SymfonyFileType, entity: any): { content: string; fileName: string } {
+  static create(
+    type: SymfonyFileType,
+    entity: any,
+  ): { content: string; fileName: string } {
     switch (type) {
       case "dto":
         return this.buildDto(entity);

@@ -77,7 +77,12 @@ export interface ITemplateVariable {
 export interface ITemplateService extends IBaseService {
   serviceName: string;
   init(): Promise<void>;
-  render(pluginDir: string, templateDir: string, templateName: string, data: any): Promise<any>;
+  render(
+    pluginDir: string,
+    templateDir: string,
+    templateName: string,
+    data: any,
+  ): Promise<any>;
   /**
    * Récupère la liste de tous les templates disponibles.
    * @returns Une promesse résolue avec un tableau d'objets ITemplate.

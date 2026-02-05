@@ -1,6 +1,6 @@
 {
-    "id": "architecture",
-    "name": "Architecture Generator",
-    "service": "architecture.service.js",
-    "type": "tool"
+  "id": "architecture",
+  "name": "Architecture Generator",
+  "service": "architecture.service.js",
+  "type": "tool"
 }

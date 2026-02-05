@@ -1,160 +1,160 @@
 {
-    "id": "symfony",
-    "name": "Symfony Generator",
-    "templateDir": "./templates",
-    "service": "symfony.service.js",
-    "blueprints": [
-        {
-            "type": "resource",
-            "scope": "entity",
-            "target": "src/ApiResource/Resources",
-            "template": "resource.php.ejs",
-            "suffix": "Resource",
-            "platform": "api-platform"
-        },
-        {
-            "type": "mapper",
-            "scope": "entity",
-            "target": "src/ApiResource/Mappers",
-            "template": "mapper.php.ejs",
-            "suffix": "Mapper",
-            "platform": "api-platform"
-        },
-        {
-            "type": "provider-item",
-            "scope": "entity",
-            "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-            "template": "provider.php.ejs",
-            "suffix": "ItemProvider",
-            "platform": "api-platform"
-        },
-        {
-            "type": "provider-collection",
-            "scope": "entity",
-            "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-            "template": "collection-provider.php.ejs",
-            "suffix": "CollectionProvider",
-            "platform": "api-platform"
-        },
-        {
-            "type": "processor-create",
-            "scope": "entity",
-            "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-            "template": "processor.php.ejs",
-            "suffix": "CreateProcessor",
-            "platform": "api-platform"
-        },
-        {
-            "type": "processor-update",
-            "scope": "entity",
-            "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-            "template": "update-processor.php.ejs",
-            "suffix": "UpdateProcessor",
-            "platform": "api-platform"
-        },
-        {
-            "type": "processor-delete",
-            "scope": "entity",
-            "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-            "template": "delete-processor.php.ejs",
-            "suffix": "DeleteProcessor",
-            "platform": "api-platform"
-        },
-        {
-            "type": "entity",
-            "scope": "entity",
-            "target": "src/Entity",
-            "template": "entity.php.ejs",
-            "suffix": "",
-            "platform": "symfony"
-        },
-        {
-            "type": "repository",
-            "scope": "entity",
-            "target": "src/Repository",
-            "template": "repository.php.ejs",
-            "suffix": "Repository",
-            "platform": "symfony"
-        },
-        {
-            "type": "dto-item",
-            "scope": "entity",
-            "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-            "template": "dto.php.ejs",
-            "suffix": "ItemDto",
-            "platform": "api-platform"
-        },
-        {
-            "type": "dto-collection",
-            "scope": "entity",
-            "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-            "template": "collection-item-dto.php.ejs",
-            "suffix": "CollectionItemDto",
-            "platform": "api-platform"
-        },
-        {
-            "type": "dto-create",
-            "scope": "entity",
-            "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-            "template": "create-dto.php.ejs",
-            "suffix": "CreateDto",
-            "platform": "api-platform"
-        },
-        {
-            "type": "dto-update",
-            "scope": "entity",
-            "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-            "template": "update-dto.php.ejs",
-            "suffix": "UpdateDto",
-            "platform": "api-platform"
-        },
-        {
-            "type": "controller",
-            "scope": "entity",
-            "target": "src/Controller",
-            "template": "controller.php.ejs",
-            "suffix": "Controller",
-            "platform": "symfony"
-        },
-        {
-            "type": "service",
-            "scope": "entity",
-            "target": "src/Service",
-            "template": "service.php.ejs",
-            "suffix": "Service",
-            "platform": "symfony"
-        },
-        {
-            "type": "test-controller",
-            "scope": "entity",
-            "target": "tests/Controller",
-            "template": "test.php.ejs",
-            "suffix": "ControllerTest",
-            "platform": "symfony"
-        },
-        {
-            "type": "service-iri",
-            "scope": "project",
-            "target": "src/ApiResource/Services",
-            "template": "services/iri-from-resource.php.ejs",
-            "suffix": "IriFromResource",
-            "platform": "api-platform"
-        },
-        {
-            "type": "command-crud-all",
-            "scope": "project",
-            "target": "src/Command",
-            "template": "commands/crud-all.php.ejs",
-            "suffix": "Command",
-            "platform": "symfony"
-        },
-        {
-            "type": "env-local",
-            "scope": "project",
-            "target": "./",
-            "template": "env/env.local.ejs",
-            "filename": ".env.local",
-            "platform": "symfony"
-        }
-    ]
+  "id": "symfony",
+  "name": "Symfony Generator",
+  "templateDir": "./templates",
+  "service": "symfony.service.js",
+  "blueprints": [
+    {
+      "type": "resource",
+      "scope": "entity",
+      "target": "src/ApiResource/Resources",
+      "template": "resource.php.ejs",
+      "suffix": "Resource",
+      "platform": "api-platform"
+    },
+    {
+      "type": "mapper",
+      "scope": "entity",
+      "target": "src/ApiResource/Mappers",
+      "template": "mapper.php.ejs",
+      "suffix": "Mapper",
+      "platform": "api-platform"
+    },
+    {
+      "type": "provider-item",
+      "scope": "entity",
+      "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
+      "template": "provider.php.ejs",
+      "suffix": "ItemProvider",
+      "platform": "api-platform"
+    },
+    {
+      "type": "provider-collection",
+      "scope": "entity",
+      "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
+      "template": "collection-provider.php.ejs",
+      "suffix": "CollectionProvider",
+      "platform": "api-platform"
+    },
+    {
+      "type": "processor-create",
+      "scope": "entity",
+      "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
+      "template": "processor.php.ejs",
+      "suffix": "CreateProcessor",
+      "platform": "api-platform"
+    },
+    {
+      "type": "processor-update",
+      "scope": "entity",
+      "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
+      "template": "update-processor.php.ejs",
+      "suffix": "UpdateProcessor",
+      "platform": "api-platform"
+    },
+    {
+      "type": "processor-delete",
+      "scope": "entity",
+      "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
+      "template": "delete-processor.php.ejs",
+      "suffix": "DeleteProcessor",
+      "platform": "api-platform"
+    },
+    {
+      "type": "entity",
+      "scope": "entity",
+      "target": "src/Entity",
+      "template": "entity.php.ejs",
+      "suffix": "",
+      "platform": "symfony"
+    },
+    {
+      "type": "repository",
+      "scope": "entity",
+      "target": "src/Repository",
+      "template": "repository.php.ejs",
+      "suffix": "Repository",
+      "platform": "symfony"
+    },
+    {
+      "type": "dto-item",
+      "scope": "entity",
+      "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
+      "template": "dto.php.ejs",
+      "suffix": "ItemDto",
+      "platform": "api-platform"
+    },
+    {
+      "type": "dto-collection",
+      "scope": "entity",
+      "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
+      "template": "collection-item-dto.php.ejs",
+      "suffix": "CollectionItemDto",
+      "platform": "api-platform"
+    },
+    {
+      "type": "dto-create",
+      "scope": "entity",
+      "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
+      "template": "create-dto.php.ejs",
+      "suffix": "CreateDto",
+      "platform": "api-platform"
+    },
+    {
+      "type": "dto-update",
+      "scope": "entity",
+      "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
+      "template": "update-dto.php.ejs",
+      "suffix": "UpdateDto",
+      "platform": "api-platform"
+    },
+    {
+      "type": "controller",
+      "scope": "entity",
+      "target": "src/Controller",
+      "template": "controller.php.ejs",
+      "suffix": "Controller",
+      "platform": "symfony"
+    },
+    {
+      "type": "service",
+      "scope": "entity",
+      "target": "src/Service",
+      "template": "service.php.ejs",
+      "suffix": "Service",
+      "platform": "symfony"
+    },
+    {
+      "type": "test-controller",
+      "scope": "entity",
+      "target": "tests/Controller",
+      "template": "test.php.ejs",
+      "suffix": "ControllerTest",
+      "platform": "symfony"
+    },
+    {
+      "type": "service-iri",
+      "scope": "project",
+      "target": "src/ApiResource/Services",
+      "template": "services/iri-from-resource.php.ejs",
+      "suffix": "IriFromResource",
+      "platform": "api-platform"
+    },
+    {
+      "type": "command-crud-all",
+      "scope": "project",
+      "target": "src/Command",
+      "template": "commands/crud-all.php.ejs",
+      "suffix": "Command",
+      "platform": "symfony"
+    },
+    {
+      "type": "env-local",
+      "scope": "project",
+      "target": "./",
+      "template": "env/env.local.ejs",
+      "filename": ".env.local",
+      "platform": "symfony"
+    }
+  ]
 }

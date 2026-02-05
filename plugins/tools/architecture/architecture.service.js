@@ -14,7 +14,10 @@ export default class ArchitecturePlugin {
           await this.ctx.fs.mkdirAsync(newPath, { recursive: true });
           this.ctx.log.info(`✓ Dossier créé : ${newPath}`);
         } catch (err) {
-          this.ctx.log.error(`✗ Erreur lors de la création de ${newPath}:`, err);
+          this.ctx.log.error(
+            `✗ Erreur lors de la création de ${newPath}:`,
+            err,
+          );
           continue; // Continue with the next node even if one fails
         }
 
@@ -30,7 +33,9 @@ export default class ArchitecturePlugin {
 
     const projectConfig = data.project;
     if (!projectConfig || !projectConfig.frameworks) {
-      this.ctx.log.error("✗ La configuration du projet (projectConfig.frameworks) est manquante.");
+      this.ctx.log.error(
+        "✗ La configuration du projet (projectConfig.frameworks) est manquante.",
+      );
       return;
     }
 
@@ -40,10 +45,15 @@ export default class ArchitecturePlugin {
     for (const framework of projectConfig.frameworks) {
       if (framework.architecture && framework.architecture.length > 0) {
         const frameworkName = framework.installOptions?.name || framework.name;
-        this.ctx.log.info(`🏗️  Génération de l'architecture pour le framework: ${frameworkName}`);
+        this.ctx.log.info(
+          `🏗️  Génération de l'architecture pour le framework: ${frameworkName}`,
+        );
 
         const frameworkRoot = path.join(projectBasePath, frameworkName);
-        await this.createDirectoryStructure(framework.architecture, frameworkRoot);
+        await this.createDirectoryStructure(
+          framework.architecture,
+          frameworkRoot,
+        );
       }
     }
 

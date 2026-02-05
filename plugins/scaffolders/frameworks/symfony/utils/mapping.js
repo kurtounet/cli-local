@@ -16,10 +16,16 @@ const typeMapping = {
   date: { doctrine: "date", php: "\DateTimeInterface" },
   time: { doctrine: "time", php: "\DateTimeInterface" },
   datetimetz: { doctrine: "datetimetz", php: "\DateTimeInterface" },
-  datetime_immutable: { doctrine: "datetime_immutable", php: "\DateTimeImmutable" },
+  datetime_immutable: {
+    doctrine: "datetime_immutable",
+    php: "\DateTimeImmutable",
+  },
   date_immutable: { doctrine: "date_immutable", php: "\DateTimeImmutable" },
   time_immutable: { doctrine: "time_immutable", php: "\DateTimeImmutable" },
-  datetimetz_immutable: { doctrine: "datetimetz_immutable", php: "\DateTimeImmutable" },
+  datetimetz_immutable: {
+    doctrine: "datetimetz_immutable",
+    php: "\DateTimeImmutable",
+  },
   // Boolean type
   bool: { doctrine: "boolean", php: "bool" },
   boolean: { doctrine: "boolean", php: "bool" },

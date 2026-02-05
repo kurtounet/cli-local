@@ -16,7 +16,12 @@ export interface ISDKContext {
   };
 
   /** Moteur de rendu EJS lié au plugin */
-  render: (pluginDir: string, tplDir: string, templateName: string, data: any) => Promise<string>;
+  render: (
+    pluginDir: string,
+    tplDir: string,
+    templateName: string,
+    data: any,
+  ) => Promise<string>;
 
   /** Configuration du projet */
   config: {

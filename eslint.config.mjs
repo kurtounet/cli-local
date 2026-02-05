@@ -12,11 +12,17 @@ export default defineConfig([
   // --- 1. IGNORES GLOBAUX (doit être au début) ---
   {
     ignores: [
+      ".cli-local/**",
+      ".doc/**",
       "dist/**",
       "bin/**",
       "node_modules/**",
+      "old_cli/**",
+      "output/**",
+      "plugins/**",
+      "project-test/**",
+      "tree/**",
       "package-lock.json",
-      ".doc/**",
     ],
   },
 
@@ -102,13 +108,13 @@ export default defineConfig([
     language: "markdown/commonmark",
   },
 
-  // --- 6. STYLING (CSS) ---
-  {
-    files: ["**/*.css"],
-    plugins: { css },
-    language: "css/css",
-    rules: {
-      "css/no-duplicate-imports": "error",
-    },
-  },
+  // --- 6. STYLING (CSS) ---  
+  // {
+  //   files: ["**/*.css"],
+  //   plugins: { css },
+  //   language: "css/css",
+  //   rules: {
+  //     "css/no-duplicate-imports": "error",
+  //   },
+  // },
 ]);

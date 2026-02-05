@@ -37,7 +37,16 @@ Exemples :
   public aliases = ["p"];
 
   // Ajout de "yaml" dans les extensions autorisées
-  private readonly possibleAction = ["new", "n", "generate", "g", "load", "l", "watch", "w"];
+  private readonly possibleAction = [
+    "new",
+    "n",
+    "generate",
+    "g",
+    "load",
+    "l",
+    "watch",
+    "w",
+  ];
 
   public options: ICommandOption[] = [
     // ... tes options restent identiques
@@ -178,7 +187,10 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
     if (answers.path == ".") {
       answers.path = process.cwd();
     }
-    const configFilePath = this.cli.fileSystem.resolvePath(answers.path, configFileName);
+    const configFilePath = this.cli.fileSystem.resolvePath(
+      answers.path,
+      configFileName,
+    );
     let config = {} as IProjectConfig;
     try {
       if (answers.existence === "y" || answers.existence === "yes") {
@@ -189,10 +201,17 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
       } else {
         config = await this.cli.project.newProject(answers);
         this.cli.logger.info(`${config}`);
-        await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
+        await this.cli.fileSystem.writeFileJson(
+          configFilePath,
+          config as unknown as string,
+        );
       }
-      this.cli.logger.info(`✅ 🤞Fichier de configuration créé : ${configFilePath}`);
-      this.cli.logger.info(`🚀 commande pour généré le projet: mclp p g ${answers.name}`);
+      this.cli.logger.info(
+        `✅ 🤞Fichier de configuration créé : ${configFilePath}`,
+      );
+      this.cli.logger.info(
+        `🚀 commande pour généré le projet: mclp p g ${answers.name}`,
+      );
     } catch (err: unknown) {
       this.cli.errorHandler.handle(
         err as Error,

@@ -9,7 +9,8 @@ export interface IPluginOptions extends AnyOptions {
 }
 export class PluginCommand extends BaseCommand<IPluginOptions> {
   public name = "plugin";
-  public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
+  public description =
+    "Génère un nouvel élément de la CLI (Service, Command, Template)";
   public arguments = "<pluginId> <type>";
   //   public aliases = ["m"];
 
@@ -28,7 +29,13 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     },
   ];
 
-  private readonly actions = ["service", "command", "scaffolder", "template", "plugin"];
+  private readonly actions = [
+    "service",
+    "command",
+    "scaffolder",
+    "template",
+    "plugin",
+  ];
 
   async execute(args: string[], options: IPluginOptions): Promise<void> {
     const [pluginId, typePluging] = args;
@@ -52,8 +59,13 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
           break;
       }
       // 1. Charger le plugin via le service
-      const { project, entitiesJson } = await this.cli.project.loadFileCliLocal(process.cwd());
-      const { instance, manifest, pluginDir } = await this.cli.plugin.load(pluginId, typePluging);
+      const { project, entitiesJson } = await this.cli.project.loadFileCliLocal(
+        process.cwd(),
+      );
+      const { instance, manifest, pluginDir } = await this.cli.plugin.load(
+        pluginId,
+        typePluging,
+      );
 
       // 2. Préparer des données de test (ceci viendra normalement de tes entités JSON)
       const data = {
@@ -66,12 +78,16 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
       };
 
       // 3. Exécuter
-      this.cli.logger.info(`Exécution de ${manifest.name} (v${manifest.version || "1.0.0"})...`);
+      this.cli.logger.info(
+        `Exécution de ${manifest.name} (v${manifest.version || "1.0.0"})...`,
+      );
       this.cli.logger.info(`Chargement du plugin : ${pluginDir}...`);
       await instance.execute({}, data);
       this.cli.logger.success("Plugin exécuté avec succès !");
     } catch (error: any) {
-      this.cli.logger.error(`Erreur lors de l'exécution du plugin : ${error.message}`);
+      this.cli.logger.error(
+        `Erreur lors de l'exécution du plugin : ${error.message}`,
+      );
     }
   }
 }

@@ -7,7 +7,10 @@ import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js
 import { ParserMDJService } from "@/features/parserMdj/services/parser-mdj.service.js";
 import { FrameworkSelector } from "@/features/frameworks/services/framework-selector.service.js";
 import { ConfigFrameworkService } from "@/features/frameworks/services/confi-framework.service.js";
-import { IArchitecture, IFileNode } from "@/features/commun/architecture.interface.js";
+import {
+  IArchitecture,
+  IFileNode,
+} from "@/features/commun/architecture.interface.js";
 import path from "node:path";
 
 export class ProjectService implements IProjectService {
@@ -65,10 +68,14 @@ export class ProjectService implements IProjectService {
       if (configProject.starUml) {
         this.cli.logger.info(`${EMOJI.rond_green} Extraction des entités...`);
         fileMdj = await this.parserMdj.loadFile(configProject.starUml);
-        entitiesJson = await this.parserMdj.parseMdjToJson(configProject.starUml);
+        entitiesJson = await this.parserMdj.parseMdjToJson(
+          configProject.starUml,
+        );
       }
     } catch (error) {
-      this.cli.logger.error(`${EMOJI.error} Erreur lors de la récupération des entités : ${error}`);
+      this.cli.logger.error(
+        `${EMOJI.error} Erreur lors de la récupération des entités : ${error}`,
+      );
       process.exit(1);
     }
 
@@ -76,7 +83,9 @@ export class ProjectService implements IProjectService {
       this.cli.logger.info(`Traitement du framework : ${framework.name}`);
       // 1. On récupère le service spécifique au framework
       const specificService = this.selector.getService(framework.name);
-      this.cli.logger.info(`${EMOJI.rond_green} Génération des fichiers de base...`);
+      this.cli.logger.info(
+        `${EMOJI.rond_green} Génération des fichiers de base...`,
+      );
       await specificService.generate(configProject, entitiesJson, fileMdj);
     }
     return "Projet généré avec succès !";
@@ -87,7 +96,9 @@ export class ProjectService implements IProjectService {
     const configProject = this.cli.fileSystem.readFileJson(
       `${path}/.cli-local/config-project.json`,
     );
-    const entitiesJson = this.cli.fileSystem.readFileJson(`${path}/.cli-local/entities.json`);
+    const entitiesJson = this.cli.fileSystem.readFileJson(
+      `${path}/.cli-local/entities.json`,
+    );
 
     return {
       project: configProject,
@@ -114,8 +125,12 @@ export class ProjectService implements IProjectService {
     const absolutePath = path.resolve(targetPath);
 
     // 1. Détection des fichiers importants
-    const hasConfig = this.cli.fileSystem.exists(path.join(absolutePath, ".mclprc.json"));
-    const hasCliLocal = this.cli.fileSystem.exists(path.join(absolutePath, ".cli-local"));
+    const hasConfig = this.cli.fileSystem.exists(
+      path.join(absolutePath, ".mclprc.json"),
+    );
+    const hasCliLocal = this.cli.fileSystem.exists(
+      path.join(absolutePath, ".cli-local"),
+    );
 
     // On récupère tous les fichiers pour checker le StarUML
     const allFiles = await this.cli.fileSystem.readDir(absolutePath);
@@ -150,22 +165,34 @@ export class ProjectService implements IProjectService {
   private async initProject(path: string): Promise<void> {
     let allDirAndFiles: string[] = await this.cli.fileSystem.readDir(path);
 
-    this.cli.logger.info(`${EMOJI.help} Vérification de l'existance du dossier: .cli-local`);
+    this.cli.logger.info(
+      `${EMOJI.help} Vérification de l'existance du dossier: .cli-local`,
+    );
     if (!allDirAndFiles.includes(".cli-local")) {
-      this.cli.logger.warn(`${EMOJI.warning} Le dossier .cli-local n'existe pas`);
+      this.cli.logger.warn(
+        `${EMOJI.warning} Le dossier .cli-local n'existe pas`,
+      );
       //TODO créer le dossier .cli-local
     } else {
-      this.cli.logger.success(`${EMOJI.success} Le dossier .cli-local existe déjas`);
+      this.cli.logger.success(
+        `${EMOJI.success} Le dossier .cli-local existe déjas`,
+      );
       //TODO Récupérer les fichiers du dossier .cli-local
       //
     }
 
-    this.cli.logger.info(`${EMOJI.help} Vérification de l'existance du fichier: .mclprc.json`);
+    this.cli.logger.info(
+      `${EMOJI.help} Vérification de l'existance du fichier: .mclprc.json`,
+    );
     if (!allDirAndFiles.includes(".mclprc.json")) {
-      this.cli.logger.warn(`${EMOJI.warning} Le fichier .mclprc.json existe pas`);
+      this.cli.logger.warn(
+        `${EMOJI.warning} Le fichier .mclprc.json existe pas`,
+      );
       //TODO créer le fichier .mclprc.json
     } else {
-      this.cli.logger.success(`${EMOJI.success} Le fichier .mclprc.json existe déjas`);
+      this.cli.logger.success(
+        `${EMOJI.success} Le fichier .mclprc.json existe déjas`,
+      );
       //TODO Mettre le fichier .mclprc.json à jour,
       // avec les des data des fichiers de .cli-local
     }

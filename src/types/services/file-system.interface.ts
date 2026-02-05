@@ -85,7 +85,10 @@ export interface IFileSystemService {
    * @param targetPath - Chemin cible où la structure sera créée.
    * @returns Une promesse qui se résout une fois l'arborescence créée.
    */
-  createDirectoryTreeFromJson(sourcePath: string, targetPath: string): Promise<void>;
+  createDirectoryTreeFromJson(
+    sourcePath: string,
+    targetPath: string,
+  ): Promise<void>;
 
   buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void>;
   /**
@@ -95,7 +98,12 @@ export interface IFileSystemService {
    * @param fileName - Le nom du fichier à écrire.
    * @param content - Le contenu à écrire dans le fichier.
    */
-  writeToOutput(basePath: string, subDir: string, fileName: string, content: string): Promise<void>;
+  writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): Promise<void>;
   readFileJson(filePath: string): Promise<any>;
   updateJson(file: string): Promise<void>;
 }

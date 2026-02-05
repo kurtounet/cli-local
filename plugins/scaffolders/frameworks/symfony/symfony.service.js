@@ -1,5 +1,8 @@
 import { snakeToCamel, snakeToPascal } from "./utils/convert.js";
-import { symfonyGetAttributeTypeORM, symfonyGetPropertyType } from "./utils/mapping.js";
+import {
+  symfonyGetAttributeTypeORM,
+  symfonyGetPropertyType,
+} from "./utils/mapping.js";
 import pluralize from "pluralize";
 
 export default class SymfonyPlugin {
@@ -48,8 +51,12 @@ export default class SymfonyPlugin {
         relation.namePascalCase = snakeToPascal(relation.name);
         relation.targetPascalCase = snakeToPascal(relation.target);
         relation.targetCamelCase = snakeToCamel(relation.target);
-        relation.targetPascalCaseSingular = pluralize.singular(relation.targetPascalCase);
-        relation.targetCamelCaseSingular = pluralize.singular(relation.targetCamelCase);
+        relation.targetPascalCaseSingular = pluralize.singular(
+          relation.targetPascalCase,
+        );
+        relation.targetCamelCaseSingular = pluralize.singular(
+          relation.targetCamelCase,
+        );
         if (relation.owner) {
           relation.ownerPascalCase = snakeToPascal(relation.owner);
         }
@@ -67,7 +74,10 @@ export default class SymfonyPlugin {
       data,
     );
 
-    const targetPath = await this.ctx.renderTemplateString(blueprint.target, data);
+    const targetPath = await this.ctx.renderTemplateString(
+      blueprint.target,
+      data,
+    );
 
     let fileName;
     if (blueprint.filename) {
@@ -89,7 +99,9 @@ export default class SymfonyPlugin {
 
     //Traitement des blueprints scope project
     this.ctx.log.info("Génération des fichiers de projet...");
-    const projectBlueprints = data.manifest.blueprints.filter((bp) => bp.scope === "project");
+    const projectBlueprints = data.manifest.blueprints.filter(
+      (bp) => bp.scope === "project",
+    );
     const projectData = data.project || {}; // Utilise data.project si fourni, sinon un objet vide
 
     for (const bp of projectBlueprints) {
@@ -98,10 +110,14 @@ export default class SymfonyPlugin {
 
     //Traitement des blueprints scope entity
     this.ctx.log.info("Génération des fichiers par entité...");
-    const entityBlueprints = data.manifest.blueprints.filter((bp) => bp.scope === "entity");
+    const entityBlueprints = data.manifest.blueprints.filter(
+      (bp) => bp.scope === "entity",
+    );
     if (data.entities && data.entities.length > 0) {
       for (const entity of data.entities) {
-        const enrichedEntity = this.enrichEntity(JSON.parse(JSON.stringify(entity)));
+        const enrichedEntity = this.enrichEntity(
+          JSON.parse(JSON.stringify(entity)),
+        );
         const templateData = {
           entity: enrichedEntity,
           ...data,
@@ -112,7 +128,9 @@ export default class SymfonyPlugin {
         }
       }
     } else {
-      this.ctx.log.warn("Aucune entité fournie, les blueprints par entité ne seront pas générés.");
+      this.ctx.log.warn(
+        "Aucune entité fournie, les blueprints par entité ne seront pas générés.",
+      );
     }
     this.ctx.log.success("✅ Tous les blueprints ont été générés.");
   }

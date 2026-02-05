@@ -21,19 +21,28 @@ export class PluginService extends BaseService implements IPluginService {
    * Charge et exécute un plugin dynamiquement
    */
   async load(pluginId: string, type: string): Promise<any> {
-    const indexPluginJson = await this.cli.fileSystem.readFile(this.pluginsIndex);
+    const indexPluginJson = await this.cli.fileSystem.readFile(
+      this.pluginsIndex,
+    );
     this.pluginsIndexJson = JSON.parse(indexPluginJson);
     const typePlugin = this.pluginsIndexJson.plugins[type];
     this.plugin = typePlugin.find((p: any) => p.id === pluginId);
 
     if (!this.plugin) {
-      throw new Error(`Plugin ${pluginId} non trouvé dans la catégorie ${type}`);
+      throw new Error(
+        `Plugin ${pluginId} non trouvé dans la catégorie ${type}`,
+      );
     }
-    this.plugin.pluginDir = path.join(this.pluginsBaseDir, this.plugin.pluginDir);
+    this.plugin.pluginDir = path.join(
+      this.pluginsBaseDir,
+      this.plugin.pluginDir,
+    );
     const manifestPath = path.join(this.plugin.pluginDir, "manifest.json");
 
     if (!this.cli.fileSystem.exists(manifestPath)) {
-      throw new Error(`le fichier manifest.json du plugin ${pluginId}.json n'existe pas`);
+      throw new Error(
+        `le fichier manifest.json du plugin ${pluginId}.json n'existe pas`,
+      );
     }
 
     const manifestJson = await this.cli.fileSystem.readFile(manifestPath);
@@ -46,11 +55,16 @@ export class PluginService extends BaseService implements IPluginService {
     }
 
     const sdk: ISDKContext = this.getSDKContext();
-    const service = path.join(this.plugin.pluginDir, this.pluginsManifest.service);
+    const service = path.join(
+      this.plugin.pluginDir,
+      this.pluginsManifest.service,
+    );
     const module = await import(`file://${service}`);
     const PluginClass = module.default;
     if (!PluginClass) {
-      throw new Error(`Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`);
+      throw new Error(
+        `Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`,
+      );
     }
 
     const instance = new PluginClass(sdk);
@@ -73,7 +87,11 @@ export class PluginService extends BaseService implements IPluginService {
     const availablePlugins = [];
 
     for (const folder of folders) {
-      const manifestPath = path.join(this.pluginsBaseDir, folder, "manifest.json");
+      const manifestPath = path.join(
+        this.pluginsBaseDir,
+        folder,
+        "manifest.json",
+      );
 
       if (this.cli.fileSystem.exists(manifestPath)) {
         const content = await this.cli.fileSystem.readFile(manifestPath);
@@ -98,8 +116,17 @@ export class PluginService extends BaseService implements IPluginService {
     };
     console.log(manifest);
     if (this.plugin.type === "scaffolder") {
-      propertiesManifest = ["id", "name", "templateDir", "service", "blueprints"];
-      pathPlugin.templateDir = path.join(this.plugin.pluginDir, manifest.templateDir);
+      propertiesManifest = [
+        "id",
+        "name",
+        "templateDir",
+        "service",
+        "blueprints",
+      ];
+      pathPlugin.templateDir = path.join(
+        this.plugin.pluginDir,
+        manifest.templateDir,
+      );
     } else if (this.plugin.type === "tool") {
       propertiesManifest = ["id", "name", "service"];
     }
@@ -117,20 +144,29 @@ export class PluginService extends BaseService implements IPluginService {
     }
 
     if (!this.cli.fileSystem.exists(pathPlugin.service) && pathPlugin.service) {
-      throw new Error(`Le fichier d'entrée du plugin ${manifest.id}.service.js n'existe pas`);
+      throw new Error(
+        `Le fichier d'entrée du plugin ${manifest.id}.service.js n'existe pas`,
+      );
     }
 
     if (pathPlugin.templateDir && this.plugin.type === "scaffolder") {
       if (!this.cli.fileSystem.exists(pathPlugin.templateDir)) {
-        throw new Error(`Le dossier de templates du plugin ${manifest.id} n'existe pas`);
+        throw new Error(
+          `Le dossier de templates du plugin ${manifest.id} n'existe pas`,
+        );
       }
     }
 
     if (manifest.blueprints) {
       for (const blueprint of manifest.blueprints) {
-        const blueprintPath = path.join(pathPlugin.templateDir, blueprint.template);
+        const blueprintPath = path.join(
+          pathPlugin.templateDir,
+          blueprint.template,
+        );
         if (!this.cli.fileSystem.exists(blueprintPath)) {
-          errors.push(`Le template ${blueprint.template} du plugin ${manifest.id} n'existe pas`);
+          errors.push(
+            `Le template ${blueprint.template} du plugin ${manifest.id} n'existe pas`,
+          );
         }
       }
     }

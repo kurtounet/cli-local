@@ -1,0 +1,15 @@
+<% if (relation.relationType === 'OneToOne') { %>
+#[ORM\OneToOne(targetEntity: <%= relation.targetPascalCase %>::class, inversedBy: '<%= relation.inversedBy ?? '' %>', cascade: ['persist', 'remove'])]
+#[ORM\JoinColumn(nullable: <%= relation.nullable ? 'true' : 'false' %>)]
+private ?<%= relation.targetPascalCase %> $<%= relation.nameCamelCase %> = null;
+<% } else if (relation.relationType === 'ManyToOne') { %>
+#[ORM\ManyToOne(targetEntity: <%= relation.targetPascalCase %>::class, inversedBy: '<%= relation.inversedBy ?? '' %>')]
+#[ORM\JoinColumn(nullable: <%= relation.nullable ? 'true' : 'false' %>)]
+private ?<%= relation.targetPascalCase %> $<%= relation.nameCamelCase %> = null;
+<% } else if (relation.relationType === 'OneToMany') { %>
+#[ORM\OneToMany(targetEntity: <%= relation.targetPascalCase %>::class, mappedBy: '<%= relation.mappedBy ?? '' %>', cascade: ['persist', 'remove'])]
+private Collection $<%= relation.nameCamelCase %>;
+<% } else if (relation.relationType === 'ManyToMany') { %>
+#[ORM\ManyToMany(targetEntity: <%= relation.targetPascalCase %>::class, inversedBy: '<%= relation.inversedBy ?? '' %>')]
+private Collection $<%= relation.nameCamelCase %>;
+<% } %>

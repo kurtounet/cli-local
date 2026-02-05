@@ -1,20 +1,27 @@
-/**
- * Interface générique pour la définition d'un plugin.
- * Les plugins sont des modules dynamiquement chargeables qui étendent les fonctionnalités de la CLI.
- */
+export interface IPluginService {
+  execute(args: any, data: any): Promise<void>;
+}
 export interface IPlugin {
-  /**
-   * Le nom unique du plugin.
-   */
+  type: string;
+  id: string;
   name: string;
-  /**
-   * Une brève description de ce que fait le plugin.
-   */
-  description: string;
-  /**
-   * La méthode principale d'exécution du plugin.
-   * @param args - Les arguments passés au plugin pour son exécution.
-   * @returns Une promesse qui se résout une fois l'exécution du plugin terminée.
-   */
-  execute(args: any): Promise<void>;
+  pluginDir: string;
+  templateDir?: string;
+}
+export interface IPluginManifest {
+  id: string;
+  name: string;
+  templateDir?: string;
+  service: string;
+  description?: string;
+  blueprints?: any[];
+}
+
+export interface IPluginBlueprint {
+  type: string;
+  target: string;
+  prefix?: string;
+  suffix?: string;
+  template: string;
+  description?: string;
 }

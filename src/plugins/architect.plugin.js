@@ -6,8 +6,7 @@ export default class ArchitectPlugin {
   // Définition statique pour que l'Hôte MCP puisse décrire l'outil à l'IA
   static definition = {
     name: "architect",
-    description:
-      "Analyse la structure des fichiers source et les interfaces du projet.",
+    description: "Analyse la structure des fichiers source et les interfaces du projet.",
     inputSchema: {
       type: "object",
       properties: {
@@ -41,10 +40,7 @@ export default class ArchitectPlugin {
 
       // 2. Lire l'interface principale pour connaître les capacités
       const interfacePath = "./src/types/ai-service.interface.ts";
-      const interfaceContent = await context.fs.readFile(
-        interfacePath,
-        "utf-8",
-      );
+      const interfaceContent = await context.fs.readFile(interfacePath, "utf-8");
 
       // 3. Synthèse pour l'IA
       const report = {

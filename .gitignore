@@ -1,7 +1,9 @@
-node_modules
+.cli-local/*
 .doc
 dist
+node_modules
 old_cli/*
+output/*
 project-test/*
 output/*
 .cli-local

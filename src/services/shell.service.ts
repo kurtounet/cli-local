@@ -9,6 +9,7 @@ import { IShellService } from "@/types/services/shell-service.interface.js";
 const execPromise = promisify(exec);
 export class ShellService extends BaseService implements IShellService {
   readonly serviceName = "ShellService";
+  private isWindows = process.platform === "win32";
   /**
    * Recommandé pour les serveurs Web.
    * Ne bloque pas l'Event Loop (Boucle d'événements).
@@ -120,4 +121,85 @@ export class ShellService extends BaseService implements IShellService {
     // Si on est en mode "inherit", stdout est null, donc on renvoie une chaîne vide.
     return result.stdout ? result.stdout.trim() : "";
   }
+
+  /**
+   * Liste les fichiers (ls / dir) - Plus rapide que fs.readdir
+   */
+  async list(path: string = "."): Promise<string> {
+    const cmd = this.isWindows ? `dir "${path}" /b` : `ls "${path}"`;
+    return this.execute(cmd);
+  }
+
+  /**
+   * Création de dossier (mkdir -p)
+   */
+  async makeDir(path: string): Promise<string> {
+    const cmd = this.isWindows ? `mkdir "${path}"` : `mkdir -p "${path}"`;
+    return this.execute(cmd);
+  }
+
+  /**
+   * Suppression radicale (rm -rf / rd /s)
+   */
+  async remove(path: string): Promise<string> {
+    const cmd = this.isWindows ? `rmdir /s /q "${path}"` : `rm -rf "${path}"`;
+    return this.execute(cmd);
+  }
+
+  /**
+   * Déplacement ou Renommage (mv / move)
+   */
+  async move(source: string, destination: string): Promise<string> {
+    const cmd = this.isWindows
+      ? `move "${source}" "${destination}"`
+      : `mv "${source}" "${destination}"`;
+    return this.execute(cmd);
+  }
+
+  /**
+   * Copie (cp / copy)
+   */
+  async copy(source: string, destination: string): Promise<string> {
+    const cmd = this.isWindows
+      ? `copy "${source}" "${destination}"`
+      : `cp -r "${source}" "${destination}"`;
+    return this.execute(cmd);
+  }
+
+  /**
+   * Recherche de texte dans les fichiers (grep / findstr)
+   * Très puissant pour scanner ton dossier /src
+   */
+  async searchInFiles(pattern: string, path: string = "."): Promise<string> {
+    const cmd = this.isWindows
+      ? `findstr /s /i "${pattern}" "${path}\\*.*"`
+      : `grep -r "${pattern}" "${path}"`;
+    return this.execute(cmd);
+  }
+  /*
+  async readDirShell(dirPath: string): Promise<string[]> {
+    this.validatePath(dirPath, "dirPath");
+
+    // On choisit la commande selon l'OS
+    // Windows: dir /s /b (récursif + format court)
+    // Unix: find . -type f (récursif)
+    const isWindows = process.platform === "win32";
+    const command = isWindows ? `dir "${dirPath}" /s /b` : `find "${dirPath}" -maxdepth 2`; // maxdepth pour limiter si besoin
+
+    try {
+      // On utilise ta méthode execute qui capture le stdout
+      const output = await this.execute(command);
+
+      if (!output) return [];
+
+      // On transforme la grosse chaîne de caractères en tableau
+      // Windows utilise \r\n, Unix utilise \n
+      return output.split(/\r?\n/).map((line) => line.trim());
+    } catch (error) {
+      const message = `Échec de lecture shell du dossier : ${dirPath}`;
+      // On garde ta logique de gestion d'erreur
+      throw new Error(`${message}: ${error.message}`);
+    }
+  }
+    */
 }

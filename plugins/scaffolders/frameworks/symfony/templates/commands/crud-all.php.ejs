@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Command;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Process\Process;
+
+#[AsCommand(
+    name: 'app:crud:all',
+    description: 'Generates CRUDs for all entities.',
+)]
+class CreateAllCrudEntitiesCommand extends Command
+{
+    public function __construct(
+        private EntityManagerInterface $em,
+        private string $projectDir,
+    )
+    {
+        parent::__construct();
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        $io = new SymfonyStyle($input, $output);
+        $meta = $this->em->getMetadataFactory()->getAllMetadata();
+        $entities = [];
+        foreach ($meta as $m) {
+            $fqcn = $m->getName();
+            $parts = explode('\\', $fqcn);
+            $entities[] = end($parts);
+        }
+
+        $io->title('Generating CRUDs for all entities');
+
+        foreach ($entities as $entity) {
+            $io->section("Generating CRUD for {$entity}");
+            $process = new Process(['php', 'bin/console', 'make:crud', $entity], $this->projectDir);
+            $process->setInput("\n\n"); // Accept default values
+            $process->run(function ($type, $buffer) use ($io) {
+                $io->text($buffer);
+            });
+
+            if (!$process->isSuccessful()) {
+                $io->error("Failed to generate CRUD for {$entity}");
+            } else {
+                $io->success("Successfully generated CRUD for {$entity}");
+            }
+        }
+
+        $io->success('All CRUDs generated!');
+
+        return Command::SUCCESS;
+    }
+}

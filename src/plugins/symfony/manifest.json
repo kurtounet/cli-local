@@ -1,0 +1,18 @@
+{
+    "name": "Symfony Generator",
+    "id": "symfony",
+    "entryPoint": "symfony.service.js",
+    "templateDir": "./templates",
+    "blueprints": [
+        {
+            "type": "entity",
+            "target": "src/Entity",
+            "suffix": ""
+        },
+        {
+            "type": "dto",
+            "target": "src/Dto",
+            "suffix": "Dto"
+        }
+    ]
+}

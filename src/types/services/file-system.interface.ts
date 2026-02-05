@@ -29,8 +29,10 @@ export interface IFileSystemService {
     level: number,
     maxLevel: number, // 0 = infini
     withMetadata: boolean,
-    config?: { excludedDirs: string[]; analyzeExtensions: string[] | null },
+    config?: { excludedDirs?: string[]; analyzeExtensions?: string[] | null },
   ): Promise<IFileNode | null>;
+
+  readDir(dirPath: string): Promise<string[]> | string[];
   /**
    * Résout une séquence de segments de chemin en un chemin absolu ou relatif normalisé.
    * @param segments - Les segments de chemin à résoudre.
@@ -69,6 +71,7 @@ export interface IFileSystemService {
    * @returns Une promesse qui se résout une fois l'écriture terminée.
    */
   writeFileJson(filePath: string, content: string): Promise<void>;
+  writeFileAsync(filePath: string, content: string): Promise<void>;
   /**
    * Écrit du contenu dans un fichier de manière asynchrone. Écrase le fichier s'il existe.
    * @param filePath - Le chemin du fichier dans lequel écrire.
@@ -82,10 +85,7 @@ export interface IFileSystemService {
    * @param targetPath - Chemin cible où la structure sera créée.
    * @returns Une promesse qui se résout une fois l'arborescence créée.
    */
-  createDirectoryTreeFromJson(
-    sourcePath: string,
-    targetPath: string,
-  ): Promise<void>;
+  createDirectoryTreeFromJson(sourcePath: string, targetPath: string): Promise<void>;
 
   buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void>;
   /**
@@ -95,12 +95,7 @@ export interface IFileSystemService {
    * @param fileName - Le nom du fichier à écrire.
    * @param content - Le contenu à écrire dans le fichier.
    */
-  writeToOutput(
-    basePath: string,
-    subDir: string,
-    fileName: string,
-    content: string,
-  ): Promise<void>;
+  writeToOutput(basePath: string, subDir: string, fileName: string, content: string): Promise<void>;
   readFileJson(filePath: string): Promise<any>;
   updateJson(file: string): Promise<void>;
 }

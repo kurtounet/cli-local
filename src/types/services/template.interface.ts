@@ -77,24 +77,25 @@ export interface ITemplateVariable {
 export interface ITemplateService extends IBaseService {
   serviceName: string;
   init(): Promise<void>;
+  render(pluginDir: string, templateDir: string, templateName: string, data: any): Promise<any>;
   /**
    * Récupère la liste de tous les templates disponibles.
    * @returns Une promesse résolue avec un tableau d'objets ITemplate.
    */
-  getTemplates(): Promise<ITemplate[]>;
+  // getTemplates(): Promise<ITemplate[]>;
   /**
    * Récupère un template spécifique par son nom.
    * @param name - Le nom du template à récupérer.
    * @returns Une promesse résolue avec l'objet ITemplate correspondant, ou undefined si non trouvé.
    */
-  getTemplateByName(name: string): Promise<ITemplate | undefined>;
+  // getTemplateByName(name: string): Promise<ITemplate | undefined>;
   /**
    * Compile le contenu d'un template avec les données fournies.
    * @param templateContent - Le contenu brut du template (peut inclure des placeholders).
    * @param data - Les données à injecter dans le template.
    * @returns La chaîne de caractères du template compilé.
    */
-  compile(templateContent: string, data: Record<string, string>): string;
+  // compile(templateContent: string, data: Record<string, string>): string;
 }
 
 /**

@@ -1,4 +1,4 @@
-import { IEnvironment } from "@frameworks-models/framework-commun.model";
+import { IEnvironment } from "@/features/commun/framework.interface.js";
 
 export function ENVIRONMENTS_SYMFONY_MOCK(): IEnvironment[] {
   return [

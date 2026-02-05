@@ -1,21 +1,35 @@
 import * as fs from "fs-extra";
 import * as path from "path";
+import { fr } from "zod/v4/locales/index.cjs";
+
 import {
   IFramework,
   IProjectConfig,
   IScript,
 } from "./models/framework-commun.model";
 import { IpackageJson } from "./models/package-json.model";
-import { fr } from "zod/v4/locales/index.cjs";
 
+/**
+ *
+ * @param pathFile
+ */
 export function getConfigFile(pathFile: string) {
   return JSON.parse(fs.readFileSync(pathFile, "utf8"));
 }
 
+/**
+ *
+ * @param min
+ * @param max
+ */
 export function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+/**
+ *
+ * @param frameworkProjectPath
+ */
 export function updateTsConfig(frameworkProjectPath: string): string {
   const tsConfigPath = path.join(frameworkProjectPath, "tsconfig.json");
   if (!fs.existsSync(tsConfigPath)) {
@@ -46,6 +60,13 @@ export function updateTsConfig(frameworkProjectPath: string): string {
   }
 }
 
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ */
 export function updatePackageJson(
   configFile: IProjectConfig,
   framework: IFramework,
@@ -79,9 +100,9 @@ export function updatePackageJson(
 
 /**
  * Adds or modifies a property in a JSON file.
- * @param filePath The path to the JSON file.
- * @param keyPath The dot-separated path to the property (e.g., "compilerOptions.paths").
- * @param value The value to set for the property.
+ * @param filePath - The path to the JSON file.
+ * @param keyPath - The dot-separated path to the property (e.g., "compilerOptions.paths").
+ * @param value - The value to set for the property.
  * @returns A message indicating the success or failure of the operation.
  */
 export function addPropertyToJsonFile(

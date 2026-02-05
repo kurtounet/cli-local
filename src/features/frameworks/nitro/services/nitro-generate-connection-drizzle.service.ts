@@ -1,17 +1,22 @@
+import { drizzleConfigUrlTemplate } from "@features/frameworks/drizzle/templates/drizzle-config-url-template";
+import { nitroConnectionDrizzleTemplate } from "@features/frameworks/drizzle/templates/nitro-connection-drizzle-template";
 import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-
-import { logSuccess } from "@utils/logger";
 import { writeFile } from "@utils/file-utils";
-import { nitroConnectionDrizzleTemplate } from "@features/frameworks/drizzle/templates/nitro-connection-drizzle-template";
-import { drizzleConfigUrlTemplate } from "@features/frameworks/drizzle/templates/drizzle-config-url-template";
+import { logSuccess } from "@utils/logger";
 
+/**
+ *
+ * @param rootServer
+ * @param configFile
+ * @param url
+ */
 export function nitroGenerateConnectionDrizzleService(
   rootServer: string,
   configFile: IProjectConfig,
-  url: boolean = false,
+  url = false,
 ) {
   // writeFile(
   //   `${rootServer}/database/db.ts`,

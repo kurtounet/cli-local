@@ -1,4 +1,7 @@
+import { EMOJI } from "@/assets/messages.js";
+import { sqlToDoctrineType } from "@/features/frameworks/symfony/utils/mapping.js";
 import { IAppContext } from "@/types/context.interface.js";
+
 import {
   IColumnJson,
   IEntityJson,
@@ -15,9 +18,7 @@ import {
   IERDProject,
   IERDRelationship,
 } from "../models/mdj.model.js";
-import { EMOJI } from "@/assets/messages.js";
 import { sqlToTypeScript } from "./mapping.js";
-import { sqlToDoctrineType } from "@/features/frameworks/symfony/utils/mapping.js";
 
 export class ParserMDJService {
   readonly serviceName = "ParserMDJService";
@@ -80,7 +81,7 @@ export class ParserMDJService {
       return [];
     }
 
-    let columnsJson: Array<IColumnJson> = [];
+    const columnsJson: IColumnJson[] = [];
 
     entity.columns.forEach((column: IERDColumn) => {
       // vérifier si le type de la colonne n'est pas undifined ou null avant de l'ajouter à la relation
@@ -108,17 +109,17 @@ export class ParserMDJService {
     return columnsJson;
   }
 
-  createdDictionaries(entities: Array<IERDEntity>): IGetEntityJson {
-    let dictionaryEntities: Array<IEntityJson> = [];
-    let dictionaryEntitiesPivot: Array<IEntityJson> = [];
-    let dictionaryEntitiesJson = new Map<string, IEntityJson>();
-    let dictionaryColumns = new Map<string, IColumnJson>();
-    let dictionaryRelationships = new Map<string, IRelation>();
-    let dictionaryEntitiesRelationships = new Map<string, IRelationsEntity>();
+  createdDictionaries(entities: IERDEntity[]): IGetEntityJson {
+    const dictionaryEntities: IEntityJson[] = [];
+    const dictionaryEntitiesPivot: IEntityJson[] = [];
+    const dictionaryEntitiesJson = new Map<string, IEntityJson>();
+    const dictionaryColumns = new Map<string, IColumnJson>();
+    const dictionaryRelationships = new Map<string, IRelation>();
+    const dictionaryEntitiesRelationships = new Map<string, IRelationsEntity>();
 
     entities.forEach((entity: IERDEntity) => {
       if (!entity.name.includes("ERDDiagram")) {
-        let entityJson: IEntityJson = {
+        const entityJson: IEntityJson = {
           tableName: entity.name.replace("&", "_"), // code_base
           id: entity._id,
           parent: entity._parent.$ref,
@@ -137,16 +138,16 @@ export class ParserMDJService {
     });
     entities.forEach((entity: IERDEntity) => {
       if (!entity.name.includes("ERDDiagram")) {
-        let relationships: Array<IRelationshipJson> = this.getRelationships(
+        const relationships: IRelationshipJson[] = this.getRelationships(
           entity,
           dictionaryEntitiesJson,
         );
         relationships.forEach((relationship: IRelationshipJson) => {
           if (relationship) {
-            let entSource = dictionaryEntitiesRelationships.get(
+            const entSource = dictionaryEntitiesRelationships.get(
               relationship.source.inEntity,
             );
-            let entTarget = dictionaryEntitiesRelationships.get(
+            const entTarget = dictionaryEntitiesRelationships.get(
               relationship.target.inEntity,
             );
 
@@ -175,13 +176,13 @@ export class ParserMDJService {
         });
 
         // Création du dictionnaire des colonnes
-        let columns: Array<IColumnJson> = this.getColumns(entity);
+        const columns: IColumnJson[] = this.getColumns(entity);
         columns.forEach((column: IColumnJson) => {
           dictionaryColumns.set(column.id, column);
         });
 
-        let entityName = entity.name.toLowerCase().replace("&", "_");
-        let entityJson: IEntityJson = {
+        const entityName = entity.name.toLowerCase().replace("&", "_");
+        const entityJson: IEntityJson = {
           tableName: entityName, // code_base
           id: entity._id,
           parent: entity._parent.$ref,
@@ -252,13 +253,13 @@ export class ParserMDJService {
   getRelationships(
     entity: IERDEntity,
     dictionaryEntitiesJson: Map<string, IEntityJson>,
-  ): Array<IRelationshipJson> {
+  ): IRelationshipJson[] {
     if (!Array.isArray(entity.ownedElements)) {
       return [];
     }
-    let relationshipsJson: Array<IRelationshipJson> = [];
+    const relationshipsJson: IRelationshipJson[] = [];
     entity.ownedElements.forEach((r: IERDRelationship) => {
-      let relation = {
+      const relation = {
         type: r._type,
         id: r._id,
         parent: r._parent.$ref,

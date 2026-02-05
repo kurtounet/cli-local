@@ -1,8 +1,13 @@
 import { camelToKebab, camelToPascal } from "@utils/convert";
 
+/**
+ *
+ * @param name
+ * @param prefix
+ */
 export function angularTsComponentTemplate(
-  name: string = "",
-  prefix: string = "",
+  name = "",
+  prefix = "",
 ): string {
   return `
 import { Component } from '@angular/core';

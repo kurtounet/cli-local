@@ -1,4 +1,5 @@
 import { IConfigFramework } from "@/features/commun/framework.interface.js";
+
 import { ARCHITECTURE_SYMFONY_MOCK } from "./symfony-architecture.mock.js";
 import { DEPENDENCIES_SYMFONY_MOCK } from "./symfony-dependencies.mock.js";
 import { ENVIRONMENTS_SYMFONY_MOCK } from "./symfony-environments.mock.js";

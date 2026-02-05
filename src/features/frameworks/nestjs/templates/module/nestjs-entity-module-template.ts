@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsEntityModuleTemplate(entity: IEntityJson): string {
   return `import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';

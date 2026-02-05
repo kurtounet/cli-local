@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsUserServiceTemplate(entity: IEntityJson): string {
   return `import { Injectable } from '@nestjs/common';
 import { ${entity.namePascalCase} } from '../entity/${entity.nameKebabCase}.entity';

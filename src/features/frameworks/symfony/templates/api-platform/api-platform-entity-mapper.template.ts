@@ -4,13 +4,18 @@ import {
   IRelation,
   IRelationshipJson,
 } from "@features/parsersMdj/models/entity-json.model";
-import { logInfo } from "@utils/logger";
-import { toIriListTemplate } from "./mapper/to-iri-list.template";
-import { resolveIriTemplate } from "./mapper/resolve-iri.template";
-import { NEWLINE } from "../../constant/symfony-constants.constant";
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
+import { logInfo } from "@utils/logger";
+
+import { NEWLINE } from "../../constant/symfony-constants.constant";
+import { resolveIriTemplate } from "./mapper/resolve-iri.template";
+import { toIriListTemplate } from "./mapper/to-iri-list.template";
 /*
     Entity to DTO 
+ */
+/**
+ *
+ * @param entity
  */
 export function scalarEntityToDtoTemplate(entity: IEntityJson) {
   const properties: string[] = [];
@@ -23,6 +28,11 @@ export function scalarEntityToDtoTemplate(entity: IEntityJson) {
   });
   return properties.join(NEWLINE);
 }
+/**
+ *
+ * @param entity
+ * @param resourceClass
+ */
 export function toOneEntityToDtoTemplate(
   entity: IEntityJson,
   resourceClass = "",
@@ -33,7 +43,7 @@ export function toOneEntityToDtoTemplate(
       relation.relationType === "OneToOne" ||
       relation.relationType === "ManyToOne"
     ) {
-      let prop = snakeToCamel(relation.target);
+      const prop = snakeToCamel(relation.target);
       properties.push(
         `$dto->${snakeToCamel(relation.target)} = $entity->get${snakeToPascal(relation.target)}()
         ? ($this->iriFromResource)(${snakeToPascal(relation.target)}${resourceClass}::class, $entity->get${snakeToPascal(relation.target)}()->getId())
@@ -44,6 +54,11 @@ export function toOneEntityToDtoTemplate(
   return properties.join(NEWLINE);
 }
 
+/**
+ *
+ * @param entity
+ * @param resourceClass
+ */
 export function toManyEntityToDtoTemplate(
   entity: IEntityJson,
   resourceClass = "",
@@ -59,6 +74,10 @@ export function toManyEntityToDtoTemplate(
 /*
     DTO to Entity
  */
+/**
+ *
+ * @param entity
+ */
 export function scalarDtoToEntityTemplate(entity: IEntityJson) {
   const properties = entity.columns
     ?.map(
@@ -68,6 +87,11 @@ export function scalarDtoToEntityTemplate(entity: IEntityJson) {
     .join("\n");
   return properties;
 }
+/**
+ *
+ * @param entity
+ * @param resourceClass
+ */
 export function toOneDtoToEntityTemplate(
   entity: IEntityJson,
   resourceClass = "",
@@ -80,6 +104,11 @@ export function toOneDtoToEntityTemplate(
     .join("\n");
   return properties;
 }
+/**
+ *
+ * @param entity
+ * @param resourceClass
+ */
 export function toManyDtoToEntityTemplate(
   entity: IEntityJson,
   resourceClass = "",
@@ -94,6 +123,10 @@ export function toManyDtoToEntityTemplate(
 }
 /*
     Full Template
+ */
+/**
+ *
+ * @param entity
  */
 export function entityToItemDtoTemplate(entity: IEntityJson) {
   const scalar = scalarEntityToDtoTemplate(entity);
@@ -112,6 +145,10 @@ export function entityToItemDtoTemplate(entity: IEntityJson) {
         return $dto;
     }`;
 }
+/**
+ *
+ * @param entity
+ */
 export function entityToCollectionDtoTemplate(entity: IEntityJson) {
   return `     
     public function entityToCollectionDto(${entity.namePascalCase} $entity): ${entity.namePascalCase}CollectionItemDto
@@ -121,6 +158,10 @@ export function entityToCollectionDtoTemplate(entity: IEntityJson) {
         return $dto;
     }`;
 }
+/**
+ *
+ * @param entity
+ */
 export function createDtoToEntityTemplate(entity: IEntityJson) {
   return `
     public function createDtoToEntity(${entity.namePascalCase}CreateDto $dto): ${entity.namePascalCase}
@@ -130,6 +171,10 @@ export function createDtoToEntityTemplate(entity: IEntityJson) {
         return $entity;
     }`;
 }
+/**
+ *
+ * @param entity
+ */
 export function mapEntityToCreateDtoTemplate(entity: IEntityJson) {
   return `
     public function mapEntityToCreateDto(${entity.namePascalCase} $entity): ${entity.namePascalCase}CreateDto
@@ -138,6 +183,10 @@ export function mapEntityToCreateDtoTemplate(entity: IEntityJson) {
         return $dto;
     }`;
 }
+/**
+ *
+ * @param entity
+ */
 export function updateDtoToEntityTemplate(entity: IEntityJson) {
   return `
     public function updateDtoToEntity(${entity.namePascalCase} $entity, ${entity.namePascalCase}UpdateDto $data): ${entity.namePascalCase}
@@ -146,6 +195,10 @@ export function updateDtoToEntityTemplate(entity: IEntityJson) {
         return $entity;
     }`;
 }
+/**
+ *
+ * @param entity
+ */
 export function commonFieldsEntityToDtoTemplate(entity: IEntityJson) {
   return `
     private function commonFieldsEntityToDto(${entity.namePascalCase} $entity, object $dto): void
@@ -154,6 +207,10 @@ export function commonFieldsEntityToDtoTemplate(entity: IEntityJson) {
     }`;
 }
 
+/**
+ *
+ * @param entity
+ */
 export function apiPlatformEntityMapperTemplate(entity: IEntityJson) {
   return `<?php
 

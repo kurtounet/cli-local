@@ -1,18 +1,28 @@
-import * as path from "path";
-import * as fs from "fs";
 import { IFramework } from "@frameworks-models/framework-commun.model";
 import { buildAndsaveFile } from "@utils/file-utils";
-import { nestjsDatabaseSourceTemplate } from "../templates/database/nestjs-data-source-template";
-import { nestjsAppModuleTemplate } from "../templates/config/nestjs-app-module-template";
-import { nestjsMainTemplate } from "../templates/config/nestjs-main-template";
-import { nestjsEnvironmentsTemplate } from "../templates/config/nestjs-environments-template";
+import * as fs from "fs";
+import * as path from "path";
 
+import { nestjsAppModuleTemplate } from "../templates/config/nestjs-app-module-template";
+import { nestjsEnvironmentsTemplate } from "../templates/config/nestjs-environments-template";
+import { nestjsMainTemplate } from "../templates/config/nestjs-main-template";
+import { nestjsDatabaseSourceTemplate } from "../templates/database/nestjs-data-source-template";
+
+/**
+ *
+ * @param projectPath
+ */
 export function createConfigProjectNestjs(projectPath: string) {
   // logInfo('Config du projet');
   // databaseConfigNestjs(projectPath);
   // appModuleNestjs(projectPath);
   // mainFileNestjs(projectPath);
 }
+/**
+ *
+ * @param projectPath
+ * @param thisProjectConfig
+ */
 export function databaseConfigNestjs(
   projectPath: string,
   thisProjectConfig: IFramework,
@@ -24,12 +34,17 @@ export function databaseConfigNestjs(
     nestjsDatabaseSourceTemplate(thisProjectConfig),
   );
 }
+/**
+ *
+ * @param projectPath
+ * @param entities
+ */
 export function appModuleNestjs(
   projectPath: string,
-  entities: Array<{
+  entities: {
     entityNamePascalCase: string;
     entityNameKebabCase: string;
-  }>,
+  }[],
 ) {
   const rootPath = path.join(projectPath, "src");
 
@@ -38,17 +53,26 @@ export function appModuleNestjs(
     nestjsAppModuleTemplate(entities),
   );
 }
+/**
+ *
+ * @param projectPath
+ */
 export function mainFileNestjs(projectPath: string) {
   const rootPath = path.join(projectPath, "src");
 
   buildAndsaveFile(rootPath + `/main.ts`, nestjsMainTemplate());
 }
+/**
+ *
+ * @param projectPath
+ * @param framework
+ */
 export function createEnvironmentsNestjs(
   projectPath: string,
   framework: IFramework,
 ) {
   const rootPath = path.join(projectPath, "src");
-  let content: string = "";
+  let content = "";
   framework.environments.forEach((environment) => {
     let envPath = "";
     content = nestjsEnvironmentsTemplate(environment);

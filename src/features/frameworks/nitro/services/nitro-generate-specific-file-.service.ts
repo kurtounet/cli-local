@@ -1,11 +1,16 @@
 import { writeFile } from "@utils/file-utils";
 import { logSuccess } from "@utils/logger";
-import { baseRepositoryTemplate } from "../templates/repositories/base-repository-template";
-import { interfaceBaseServiceTemplate } from "../templates/models/model-base-service-template";
+
 import { interfaceBaseRepositoryTemplate } from "../templates/models/model-base-repository-template";
+import { interfaceBaseServiceTemplate } from "../templates/models/model-base-service-template";
+import { baseRepositoryTemplate } from "../templates/repositories/base-repository-template";
 import { baseServiceTemplate } from "../templates/services/base-service-template";
 import { nitroHandleApiErrorTemplate } from "../templates/utils/nitro-handle-api-error-template";
 
+/**
+ *
+ * @param rootServer
+ */
 export function nitroGenerateSpecificFileService(rootServer: string) {
   // server/database
 

@@ -38,7 +38,7 @@ export const currentValidators: string[] = [
   // "IsEnum", "IsUUID", etc. peuvent être ajoutés selon tes besoins
 ];
 
-export const categoryCurrentValidators: { [category: string]: string[] } = {
+export const categoryCurrentValidators: Record<string, string[]> = {
   // 🎯 Types de base
   types: ["IsString", "IsNumber", "IsBoolean", "IsInt", "IsDate"],
 

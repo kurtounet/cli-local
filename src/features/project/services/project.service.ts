@@ -1,17 +1,19 @@
+import path from "node:path";
+
 import { EMOJI } from "@/assets/messages.js";
-import { IAppContext } from "@/types/context.interface.js";
-import { IProjectConfig } from "@/features/commun/projet.interface.js";
-import { IProjectService } from "../interfaces/project-service.interface.js";
-import { IProjectCommand } from "../interfaces/project-command.interface.js";
-import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
-import { ParserMDJService } from "@/features/parserMdj/services/parser-mdj.service.js";
-import { FrameworkSelector } from "@/features/frameworks/services/framework-selector.service.js";
-import { ConfigFrameworkService } from "@/features/frameworks/services/confi-framework.service.js";
 import {
   IArchitecture,
   IFileNode,
 } from "@/features/commun/architecture.interface.js";
-import path from "node:path";
+import { IProjectConfig } from "@/features/commun/projet.interface.js";
+import { ConfigFrameworkService } from "@/features/frameworks/services/confi-framework.service.js";
+import { FrameworkSelector } from "@/features/frameworks/services/framework-selector.service.js";
+import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
+import { ParserMDJService } from "@/features/parserMdj/services/parser-mdj.service.js";
+import { IAppContext } from "@/types/context.interface.js";
+
+import { IProjectCommand } from "../interfaces/project-command.interface.js";
+import { IProjectService } from "../interfaces/project-service.interface.js";
 
 export class ProjectService implements IProjectService {
   readonly serviceName = "ProjectService";
@@ -163,7 +165,7 @@ export class ProjectService implements IProjectService {
   }
 
   private async initProject(path: string): Promise<void> {
-    let allDirAndFiles: string[] = await this.cli.fileSystem.readDir(path);
+    const allDirAndFiles: string[] = await this.cli.fileSystem.readDir(path);
 
     this.cli.logger.info(
       `${EMOJI.help} Vérification de l'existance du dossier: .cli-local`,

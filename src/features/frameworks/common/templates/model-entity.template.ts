@@ -1,6 +1,10 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { snakeToCamel } from "@utils/convert";
 
+/**
+ *
+ * @param entity
+ */
 export function modelEntityTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

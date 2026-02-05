@@ -1,8 +1,13 @@
-import path from "path";
-import * as fs from "fs";
-import { executeCommand } from "@utils/execute-command";
 import { EMOJI } from "@constants/messages";
+import { executeCommand } from "@utils/execute-command";
+import * as fs from "fs";
+import path from "path";
 
+/**
+ *
+ * @param frameworkProjectPath
+ * @param contentToAdd
+ */
 export function updateGitIgnore(
   frameworkProjectPath: string,
   contentToAdd: string,
@@ -26,6 +31,11 @@ export function updateGitIgnore(
   return `${frameworkProjectPath} : "${contentToAdd}" est déjà dans .gitignore ⚠️`;
 }
 
+/**
+ *
+ * @param frameworkPath
+ * @param message
+ */
 export function gitCommit(frameworkPath: string, message: string): boolean {
   const gitCommand = `git checkout dev && git add . && git commit -m "${message}"`;
   executeCommand(
@@ -37,6 +47,10 @@ export function gitCommit(frameworkPath: string, message: string): boolean {
   );
   return true;
 }
+/**
+ *
+ * @param message
+ */
 export function gitCommitAndPush(message: string): boolean {
   const gitCommand = `git add . && git commit -m "${message}" && git push`;
   executeCommand(
@@ -50,8 +64,8 @@ export function gitCommitAndPush(message: string): boolean {
 }
 /**
  * Verifies if a directory is present in the .gitignore file.
- * @param pathGitIgnore The path to the .gitignore file.
- * @param dir The directory to check.
+ * @param pathGitIgnore - The path to the .gitignore file.
+ * @param dir - The directory to check.
  * @returns True if the directory is found in .gitignore, false otherwise.
  */
 export function verifyInGitIgnoreFile(

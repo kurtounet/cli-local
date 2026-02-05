@@ -1,5 +1,8 @@
 import { logInfo } from "@utils/logger";
 
+/**
+ *
+ */
 export function nestjsAuthRolesDecoratorTemplate() {
   logInfo("Auth");
   return `import { SetMetadata } from '@nestjs/common';

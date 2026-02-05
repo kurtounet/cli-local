@@ -1,8 +1,9 @@
-import path from "path";
 import ejs from "ejs";
+import path from "path";
+
+import { ITemplateService } from "@/types/services/template.interface.js";
 
 import { BaseService } from "./base-service.service.js";
-import { ITemplateService } from "@/types/services/template.interface.js";
 
 export class TemplateService extends BaseService implements ITemplateService {
   readonly serviceName = "TemplateService";

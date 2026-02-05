@@ -1,5 +1,9 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function resolveIriTemplate(entity: IEntityJson) {
   return `private function resolveIri(?string $iri, string $expectedClass, string $field, bool $required = false): ?object
     {

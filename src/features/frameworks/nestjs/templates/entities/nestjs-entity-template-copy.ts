@@ -8,12 +8,12 @@ import { snakeToCamel, snakeToKebab, snakeToPascal } from "@utils/convert";
 const n = "\n";
 const indent = "  ";
 
-type TProperty = {
+interface TProperty {
   name: string;
   nullable: string;
   tsType: string;
   decorators: string[];
-};
+}
 
 /**
  * Generates the full NestJS entity file content as a string.
@@ -23,7 +23,7 @@ type TProperty = {
 export function nestjsEntityTemplate(entity: IEntityJson): string {
   const typeormImports = new Set<string>(["Entity", "PrimaryGeneratedColumn"]);
   const entityImports = new Set<string>();
-  let dtoProperties: TProperty[] = [];
+  const dtoProperties: TProperty[] = [];
 
   // Process columns
   entity.columns?.forEach((column: IColumnJson) => {
@@ -158,7 +158,7 @@ export function getColumnsDecorators(column: IColumnJson): {
   const typeSqlLower = column.typeSql.toLowerCase();
 
   // Map SQL types to TypeORM options
-  const typeMapping: { [key: string]: string } = {
+  const typeMapping: Record<string, string> = {
     varchar: `'varchar'`,
     text: `'text'`,
     longtext: `'text'`,

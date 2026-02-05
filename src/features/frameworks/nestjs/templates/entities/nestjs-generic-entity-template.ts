@@ -1,3 +1,7 @@
+/**
+ *
+ * @param name
+ */
 export function getEntityTemplate(name: string): string {
   return `import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 

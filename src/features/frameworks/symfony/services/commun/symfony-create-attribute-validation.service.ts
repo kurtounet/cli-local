@@ -1,5 +1,11 @@
 import { symfonyGetAttributeTypeORM } from "../../utils/mapping";
 
+/**
+ *
+ * @param propName
+ * @param type
+ * @param length
+ */
 export function symfonyCreateAttributeValidation(
   propName: string,
   type: string,
@@ -16,7 +22,7 @@ export function symfonyCreateAttributeValidation(
     "datetime_immutable",
     "array",
   ];
-  let typeConstraint = "";
+  const typeConstraint = "";
 
   if (!exclude.includes(typeConstraint)) {
     if (["varchar", "char"].includes(typeConstraint) && length) {

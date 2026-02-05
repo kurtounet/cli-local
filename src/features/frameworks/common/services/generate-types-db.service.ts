@@ -1,5 +1,11 @@
 import { writeFile } from "@utils/file-utils";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param entities
+ * @param types
+ */
 export function generateTypesDbService(
   rootPathProjectFramework: string,
   entities: string[],

@@ -4,21 +4,25 @@ import { snakeToCamel, snakeToKebab, snakeToPascal } from "@utils/convert";
 const n = "\n";
 const indent = "  ";
 
-type ValidatorMapping = {
+interface ValidatorMapping {
   importDecorators: string[];
   validators: Validators;
-};
+}
 
-type Validators = {
+interface Validators {
   name: string;
   nullable: string;
   typeSql: string;
   tsType: string;
   decorators: string[];
-};
+}
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsCreateDtoTemplate(entity: IEntityJson): string {
-  let dtoProperties: Validators[] = [];
+  const dtoProperties: Validators[] = [];
   const importClassValidators = new Set<string>();
 
   entity.columns?.forEach((column: IColumnJson) => {
@@ -47,11 +51,15 @@ ${dtoProperties
 `;
 }
 
+/**
+ *
+ * @param column
+ */
 export function mapSqlTypeToValidators(column: IColumnJson): ValidatorMapping {
   const type = column.typeSql.toUpperCase();
   const length = Number(column.length);
   const precision = Number(column.precision) || 2;
-  let arrayImports: string[] = [];
+  const arrayImports: string[] = [];
   const decorators: string[] = [];
 
   // Add ApiProperty decorator

@@ -1,5 +1,7 @@
 import path from "node:path";
+
 import { dump } from "js-yaml";
+
 import { BaseCommand } from "./BaseCommand.js";
 
 export class CliCommand extends BaseCommand {

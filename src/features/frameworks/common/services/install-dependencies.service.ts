@@ -3,6 +3,11 @@ import {
   IDependencies,
 } from "@/features/commun/framework.interface.js";
 
+/**
+ *
+ * @param framework
+ * @param path
+ */
 export async function installTSDependencies(
   framework: IConfigFramework,
   path: string,
@@ -34,8 +39,8 @@ export async function installTSDependencies(
 
 /**
  * Installs Composer dependencies for PHP frameworks.
- * @param framework The framework configuration object.
- * @param path The installation path.
+ * @param framework - The framework configuration object.
+ * @param path - The installation path.
  */
 export async function installComposerDependencies(
   framework: IFramework,

@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nitroUtilsDbTemplate(): string {
   return `// server/utils/db.ts
 import { drizzle } from 'drizzle-orm/mysql2';

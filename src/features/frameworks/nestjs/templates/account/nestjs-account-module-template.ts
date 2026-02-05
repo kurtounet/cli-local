@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsAccountModuleTemplate() {
   return `import { Module } from '@nestjs/common';
 import { AccountService } from './account.service';

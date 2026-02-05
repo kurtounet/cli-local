@@ -1,9 +1,14 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { buildAndsaveFile } from "@utils/file-utils";
-
 import path from "path";
+
 import { symfonyStateProviderTemplate } from "../templates/symfony-state-provider-template";
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function symfonyGenerateStatePriovider(
   frameworkPath: string,
   entity: IEntityJson,

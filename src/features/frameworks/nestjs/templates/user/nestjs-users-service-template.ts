@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsUserTemplate(): string {
   return `import { Injectable } from '@nestjs/common';
 

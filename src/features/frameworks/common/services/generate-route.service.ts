@@ -8,6 +8,11 @@ export const angularDefaultRouteTemplate: IRoute[] = [
   },
 ];
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param routes
+ */
 export function angularGenerateRouteService(
   rootPathProjectFramework: string,
   routes: IRoute[],

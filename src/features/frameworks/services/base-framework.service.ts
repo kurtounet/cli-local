@@ -1,16 +1,19 @@
+import path from "node:path";
+
 import { EMOJI } from "@/assets/messages.js";
 import { IInstallFramework } from "@/features/commun/framework.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
 import { IAppConfig } from "@/types/config.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
-import path from "node:path";
 
 export abstract class BaseFrameworkService {
   constructor(protected cli: IAppContext) {}
 
   /**
    * Méthode utilitaire pour exécuter une étape avec logging automatique
+   * @param label
+   * @param action
    */
   protected async step(
     label: string,
@@ -133,7 +136,7 @@ export abstract class BaseFrameworkService {
       `${EMOJI.start} 1 - Génération du fichier de configuration de CLI`,
     );
 
-    let newConfig: IAppConfig = this.cli.config.defaults;
+    const newConfig: IAppConfig = this.cli.config.defaults;
     newConfig.tree.exclude = config.framework.excludes || [];
 
     try {

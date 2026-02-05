@@ -1,10 +1,11 @@
-import { IAppContext } from "@/types/context.interface.js";
-
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { BaseService } from "./base-service.service.js";
+
+import { IAppContext } from "@/types/context.interface.js";
 import { IAiService } from "@/types/services/ai-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 /**
  * Service gérant les interactions avec l'IA et le système de plugins dynamiques.
@@ -63,9 +64,9 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Charge et exécute un plugin JavaScript de manière dynamique.
-   * @param {string} name - Le nom du plugin (avec ou sans l'extension .plugin.js).
-   * @param {any[]} [args=[]] - Les arguments à passer à la méthode execute du plugin.
-   * @returns {Promise<any>} Le résultat de l'exécution du plugin.
+   * @param name - Le nom du plugin (avec ou sans l'extension .plugin.js).
+   * @param [args] - Les arguments à passer à la méthode execute du plugin.
+   * @returns Le résultat de l'exécution du plugin.
    * @throws {Error} Si le fichier est introuvable ou si l'export par défaut est manquant.
    */
   async executeTool(name: string, args: unknown[] = []): Promise<unknown> {
@@ -86,7 +87,7 @@ export class AiService extends BaseService implements IAiService {
       const plugin = new module.default() as unknown;
 
       /**
-       * * Injection du SDK (Context)
+       * Injection du SDK (Context)
        * Permet au plugin d'accéder aux capacités de la CLI sans imports circulaires.       *
        */
       return await plugin.execute(args, {
@@ -130,8 +131,8 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Demande à l'IA de concevoir le code source d'un nouveau plugin.
-   * @param {string} prompt - Description textuelle de ce que le plugin doit accomplir.
-   * @returns {Promise<string>} Le code JavaScript source généré, prêt à être sauvegardé.
+   * @param prompt - Description textuelle de ce que le plugin doit accomplir.
+   * @returns Le code JavaScript source généré, prêt à être sauvegardé.
    */
   async generatePlugin(prompt: string): Promise<string> {
     const systemContext = `
@@ -148,9 +149,9 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Enregistre un nouveau plugin sur le système de fichiers.
-   * @param {string} name - Le nom de l'outil à créer.
-   * @param {string} code - Le code source JavaScript du plugin.
-   * @returns {Promise<void>}
+   * @param name - Le nom de l'outil à créer.
+   * @param code - Le code source JavaScript du plugin.
+   * @returns
    */
   async savePlugin(name: string, code: string): Promise<void> {
     await fs.mkdir(this.pluginsPath, { recursive: true });
@@ -161,7 +162,7 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Analyse le dossier plugins et retourne la liste des outils disponibles.
-   * @returns {Promise<string[]>} Tableau contenant les noms des plugins (sans extension).
+   * @returns Tableau contenant les noms des plugins (sans extension).
    */
   async listTools(): Promise<string[]> {
     try {
@@ -176,8 +177,8 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Lit le contenu d'un fichier de manière asynchrone.
-   * @param {string} targetPath - Chemin relatif ou absolu du fichier.
-   * @returns {Promise<string>} Le contenu textuel du fichier.
+   * @param targetPath - Chemin relatif ou absolu du fichier.
+   * @returns Le contenu textuel du fichier.
    */
   async readFile(targetPath: string): Promise<string> {
     return await fs.readFile(path.resolve(targetPath), "utf-8");
@@ -185,9 +186,9 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Écrit du contenu dans un fichier, crée les répertoires si nécessaire.
-   * @param {string} targetPath - Chemin de destination.
-   * @param {string} content - Texte à écrire.
-   * @returns {Promise<void>}
+   * @param targetPath - Chemin de destination.
+   * @param content - Texte à écrire.
+   * @returns
    */
   async writeFile(targetPath: string, content: string): Promise<void> {
     const fullPath = path.resolve(targetPath);

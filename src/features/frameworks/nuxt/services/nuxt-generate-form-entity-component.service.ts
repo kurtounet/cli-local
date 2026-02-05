@@ -1,7 +1,13 @@
-import { writeFile } from "@utils/file-utils";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { writeFile } from "@utils/file-utils";
+
 import { nuxtFromEntityComponentTemplate } from "../templates/components/nuxt-from-entity-component-template";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param entity
+ */
 export function nuxtGenerateFromEntityComponentService(
   rootPathProjectFramework: string,
   entity: IEntityJson,

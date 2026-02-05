@@ -1,6 +1,11 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ * @param isActive
+ */
 export function nuxtStoreGettersTemplate(
   entity: IEntityJson,
   isActive: boolean,

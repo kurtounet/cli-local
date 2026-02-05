@@ -1,5 +1,10 @@
 import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
 
+/**
+ *
+ * @param projectPath
+ * @param configFile
+ */
 export function dotEnvTemplate(
   projectPath: string,
   configFile: IProjectConfig,

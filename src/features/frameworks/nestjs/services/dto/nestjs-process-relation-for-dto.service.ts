@@ -1,10 +1,16 @@
-import { snakeToCamel, snakeToPascal } from "@utils/convert";
-import { DtoProperty } from "../../models/nestjs-dto-property.model";
 import { IRelation } from "@parsersMdj/models/entity-json.model";
+import { snakeToCamel, snakeToPascal } from "@utils/convert";
+
+import { DtoProperty } from "../../models/nestjs-dto-property.model";
 import { nestjsGetRelationDecorators } from "./nestjs-get-relation-decorators.service";
 
 /**
  * Traite une relation pour un DTO (principalement pour les réponses).
+ * @param relation
+ * @param currentEntityTableName
+ * @param validationImports
+ * @param transformImports
+ * @param responseDtoImports
  */
 export function nestjsProcessRelationForDto(
   relation: IRelation,

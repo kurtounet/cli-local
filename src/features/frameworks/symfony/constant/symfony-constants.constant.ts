@@ -1975,6 +1975,10 @@ export interface ConstraintMeta {
   proprietes: Record<string, any>;
 }
 
+/**
+ *
+ * @param type
+ */
 export function getContraintTypeORM(type: string): ConstraintMeta | null {
   const Mapping: Record<string, ConstraintMeta> = {
     // ------------- BASIC -------------

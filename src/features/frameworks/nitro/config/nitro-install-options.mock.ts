@@ -1,5 +1,8 @@
 import { IInstallOptions } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ */
 export function INSTALL_OPTIONS_NITRO_MOCK(): IInstallOptions {
   return {
     name: "backend",

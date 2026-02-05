@@ -1,8 +1,14 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
-import { nuxtStoreTemplate } from "../templates/stores/nuxt-store.template";
 import { logInfo } from "@utils/logger";
 
+import { nuxtStoreTemplate } from "../templates/stores/nuxt-store.template";
+
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param entity
+ */
 export function nuxtGenerateStoreEntityService(
   rootPathProjectFramework: string,
   entity: IEntityJson,

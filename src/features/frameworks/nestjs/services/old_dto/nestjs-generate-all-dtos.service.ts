@@ -1,7 +1,8 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { nestjsGenerateDto } from "./nestjs-generate-dto.service";
-import { DtoGeneratorResult } from "../../models/nestjs-dto-generator-result.model";
+
 import { DtoType } from "../../constant/nestjs-constants.constant";
+import { DtoGeneratorResult } from "../../models/nestjs-dto-generator-result.model";
+import { nestjsGenerateDto } from "./nestjs-generate-dto.service";
 
 /**
  * Génère tous les DTOs (Create, Update, Response) pour une entité.

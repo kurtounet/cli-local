@@ -2,28 +2,27 @@ import {
   COMMAND_ANGULAR,
   COMMAND_ELECTRON,
   COMMAND_NESTJS,
-  COMMAND_SYMFONY,
-  COMMAND_VUE,
-  COMMAND_NUXT,
   COMMAND_NEXTJS,
   COMMAND_NITRO,
+  COMMAND_NUXT,
+  COMMAND_SYMFONY,
+  COMMAND_VUE,
 } from "@constants/global.constants";
-
-import { logError } from "@utils/logger";
 import { EMOJI } from "@constants/messages";
 import { IFramework } from "@features/frameworks/models/framework-commun.model";
+import { logError } from "@utils/logger";
 
 /**
  * Generates the appropriate command string for creating a new framework project.
- * @param frameWork The framework configuration object.
- * @param projectName The name of the project to be created.
+ * @param frameWork - The framework configuration object.
+ * @param projectName - The name of the project to be created.
  * @returns The command string for creating the framework project.
  */
 export function getCommandFramework(
   frameWork: IFramework,
   projectName: string,
 ) {
-  let options = ``;
+  const options = ``;
   if (!frameWork) {
     logError("${EMOJI.error} Framework non renseigné.");
     process.exit(1);

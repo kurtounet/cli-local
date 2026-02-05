@@ -1,10 +1,14 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IFramework } from "@features/frameworks/models/framework-commun.model";
-
 import { logInfo } from "@utils/logger";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param framework
+ */
 export function updatePackageJsonService(
   rootPathProjectFramework: string,
   framework: IFramework,

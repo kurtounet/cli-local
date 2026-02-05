@@ -1,5 +1,6 @@
-import { BaseCommand } from "./BaseCommand.js";
 import { ValidationError } from "@/errors/cli-errors.js";
+
+import { BaseCommand } from "./BaseCommand.js";
 
 export class TestCommand extends BaseCommand {
   public name = "test";

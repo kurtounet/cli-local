@@ -1,12 +1,13 @@
 // import { ReactService } from "./react.service.js";
 
 import { IAppContext } from "@/types/context.interface.js";
-import { IFrameworkService } from "../interfaces/framework-service.interface.js";
+
 import { AngularService } from "../angular/services/angular.service.js";
+import { IFrameworkService } from "../interfaces/framework-service.interface.js";
 import { SymfonyService } from "../symfony/services/symfony.service.js";
 
 export class FrameworkSelector {
-  private services: Map<string, IFrameworkService> = new Map();
+  private services = new Map<string, IFrameworkService>();
 
   constructor(private cli: IAppContext) {
     // On initialise les services disponibles
@@ -24,6 +25,7 @@ export class FrameworkSelector {
 
   /**
    * Récupère le service correspondant au framework
+   * @param frameworkName
    */
   getService(frameworkName: string): IFrameworkService {
     const service = this.services.get(frameworkName.toLowerCase());

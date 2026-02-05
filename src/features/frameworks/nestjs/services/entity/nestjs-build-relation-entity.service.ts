@@ -1,6 +1,7 @@
-import { snakeToCamel, snakeToPascal } from "@utils/convert";
-import { INDENT, NEWLINE } from "../../constant/nestjs-constants.constant";
 import { IRelation } from "@parsersMdj/models/entity-json.model";
+import { snakeToCamel, snakeToPascal } from "@utils/convert";
+
+import { INDENT, NEWLINE } from "../../constant/nestjs-constants.constant";
 import { nestjsBuildRelationDecoratorEntity } from "./nestjs-build-relation-decorator-entity-service";
 import { nestjsGetRelationConfigEntity } from "./nestjs-get-relation-config-entity-service";
 /**
@@ -10,6 +11,11 @@ import { nestjsGetRelationConfigEntity } from "./nestjs-get-relation-config-enti
  * @returns Une chaîne formatée représentant la relation d'entité.
  */
 
+/**
+ *
+ * @param relation
+ * @param currentEntityTableName
+ */
 export function nestjsBuildRelationEntity(
   relation: IRelation,
   currentEntityTableName: string,

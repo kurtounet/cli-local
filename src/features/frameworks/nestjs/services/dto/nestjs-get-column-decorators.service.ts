@@ -1,11 +1,16 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { DtoType } from "../../constant/nestjs-constants.constant";
 import { nestjsBuildApiPropertyDecorator } from "./nestjs-build-api-property-decorator.service";
-import { nestjsGetValidationDecorators } from "./nestjs-get-validation-decorators.service";
 import { nestjsGetTransformDecorators } from "./nestjs-get-transform-decorators.service";
+import { nestjsGetValidationDecorators } from "./nestjs-get-validation-decorators.service";
 
 /**
  * Génère les décorateurs pour une colonne de DTO.
+ * @param column
+ * @param dtoType
+ * @param validationImports
+ * @param transformImports
  */
 export function nestjsGetColumnDecorators(
   column: IColumnJson,

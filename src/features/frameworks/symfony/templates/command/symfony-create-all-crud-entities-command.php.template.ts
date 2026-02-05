@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function symfonyCreateAllCrudEntitiesCommandPhpTemplate(): string {
   const returnLine = "\n";
   return `<?php

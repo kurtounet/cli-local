@@ -1,3 +1,7 @@
+/**
+ *
+ * @param targetPath
+ */
 export async function generateNuxtConfig(targetPath: string) {
   const content = `// nuxt.config.js
 export default {

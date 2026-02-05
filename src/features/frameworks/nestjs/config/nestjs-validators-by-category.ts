@@ -169,7 +169,7 @@ export const allValidators = [
   ...transformationDecorators,
 ];
 
-export const validatorI: { [category: string]: string[] } = {
+export const validatorI: Record<string, string[]> = {
   // Types de base
   types: [
     "IsBoolean",
@@ -277,7 +277,7 @@ export const validatorI: { [category: string]: string[] } = {
   ],
 };
 
-export const VALIDATOR_IMPORT: Array<string> = [
+export const VALIDATOR_IMPORT: string[] = [
   "IsBoolean",
   "IsDate",
   "IsString",

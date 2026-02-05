@@ -1,5 +1,8 @@
 import { IInstallOptions } from "../models/framework-commun.model";
 
+/**
+ *
+ */
 export function INSTALL_OPTIONS_COMMUN_MOCK(): IInstallOptions {
   return {
     name: "frontend",

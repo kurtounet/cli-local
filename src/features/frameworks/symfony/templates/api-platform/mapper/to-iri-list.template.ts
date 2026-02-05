@@ -1,5 +1,9 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function toIriListTemplate(entity: IEntityJson) {
   return `
     private function toIriList(iterable $items, string $resourceClass): array

@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nitroHandleApiErrorTemplate(): string {
   return `// server/utils/handleApiError.ts
 

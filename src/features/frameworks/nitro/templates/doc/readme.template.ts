@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function readmeTemplate(): string {
   return ` 
 # README

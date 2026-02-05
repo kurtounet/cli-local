@@ -1,19 +1,18 @@
-import path from "path";
-import { symfonyGenerateAccessorsScalarService } from "./symfony-generate-accessors-scalar.service";
 import {
   IColumnJson,
   IEntityJson,
   IRelation,
 } from "@parsersMdj/models/entity-json.model";
-import { buildAndsaveFile } from "@utils/file-utils";
-
 import { snakeToCamel } from "@utils/convert";
-import { symfonyEntityRepositoryTemplate } from "../templates/symfony-repository.template";
+import { buildAndsaveFile } from "@utils/file-utils";
+import path from "path";
 
-import { symfonyCreateAttributeORM } from "./commun/symfony-create-attribute-orm.service";
-import { symfonyGetPropertyType } from "../utils/mapping";
-import { symfonyEntityTemplate } from "../templates/symfony-entity.template";
 import { INDENT } from "../constant/symfony-constants.constant";
+import { symfonyEntityTemplate } from "../templates/symfony-entity.template";
+import { symfonyEntityRepositoryTemplate } from "../templates/symfony-repository.template";
+import { symfonyGetPropertyType } from "../utils/mapping";
+import { symfonyCreateAttributeORM } from "./commun/symfony-create-attribute-orm.service";
+import { symfonyGenerateAccessorsScalarService } from "./symfony-generate-accessors-scalar.service";
 import { symfonyGenerateRelationShipsService } from "./symfony-generate-relationships.service";
 
 const { execSync } = require("child_process");
@@ -26,6 +25,11 @@ interface Iproperty {
   type: string;
 }
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function symfonyGenerateEntityService(
   frameworkPath: string,
   entity: IEntityJson,
@@ -35,10 +39,10 @@ export function symfonyGenerateEntityService(
   const n = "\n";
   // entities.map((entity: IEntityJson) => {
 
-  let properties: string = "";
-  let accessors: string = "";
-  let content: string = "";
-  let relations: string = "";
+  let properties = "";
+  let accessors = "";
+  const content = "";
+  let relations = "";
 
   entity.columns?.map((column: IColumnJson) => {
     if (column.name !== "id") {
@@ -56,7 +60,7 @@ export function symfonyGenerateEntityService(
     }
   });
   entity.relationships?.map((relationships: IRelation) => {
-    let relation = symfonyGenerateRelationShipsService(relationships);
+    const relation = symfonyGenerateRelationShipsService(relationships);
     relations += relation;
   });
 
@@ -79,6 +83,12 @@ export function symfonyGenerateEntityService(
   // })
 }
 
+/**
+ *
+ * @param entityName
+ * @param propName
+ * @param type
+ */
 export function getProperty(
   entityName: string,
   propName: string,

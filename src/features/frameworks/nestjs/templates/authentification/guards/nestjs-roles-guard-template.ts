@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsRolesGuardTemplate() {
   return `import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';

@@ -3,6 +3,11 @@ import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { executeCommand } from "@utils/execute-command";
 import path from "path";
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function symfonyGenerateCrudEntityService(
   frameworkPath: string,
   entity: IEntityJson,

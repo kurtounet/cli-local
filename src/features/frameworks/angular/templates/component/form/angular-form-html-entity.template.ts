@@ -37,6 +37,10 @@ import {
 //   // Fall back to data type mapping
 //   return typesHtml[col.typeTypeScript as keyof typeof typesHtml] || "text";
 // }
+/**
+ *
+ * @param col
+ */
 export function typeField(col: IColumnJson): string {
   // Mapping basé sur le nom du champ (prioritaire)
   const nameTypeMap: Record<string, string> = {
@@ -95,9 +99,14 @@ export function typeField(col: IColumnJson): string {
   return typesHtml[col.typeTypeScript.toLowerCase()] || "text";
 }
 
+/**
+ *
+ * @param entity
+ * @param typeForm
+ */
 export function angularFormHtmlEntityTemplate(
   entity: IEntityJson,
-  typeForm: string = "",
+  typeForm = "",
 ): string {
   const contentForm =
     entity.columns
@@ -135,6 +144,10 @@ ${contentForm}
 </form>
  `;
 }
+/**
+ *
+ * @param col
+ */
 export function angularFormHtmlErrorsTemplate(col: IColumnJson): string {
   const line = "\n";
   let errors = "";

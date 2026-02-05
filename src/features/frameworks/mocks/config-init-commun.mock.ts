@@ -1,5 +1,9 @@
 import { IFramework } from "../models/framework-commun.model";
 
+/**
+ *
+ * @param initFramework
+ */
 export function configInitFramework(initFramework: IFramework): IFramework {
   return {
     type: initFramework.type,

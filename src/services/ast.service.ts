@@ -1,7 +1,9 @@
 import ts from "typescript";
-import { BaseService } from "./base-service.service.js";
+
 import { IMemberInfo } from "@/types/commun/member-info.interface.js";
 import { IAstService } from "@/types/services/ast-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 /**
  * Interface représentant les membres extraits du code source.
@@ -36,6 +38,7 @@ export class AstService extends BaseService implements IAstService {
 
     /**
      * Helper pour extraire les noms des paramètres et leurs types.
+     * @param node
      */
     const getParams = (
       node: ts.FunctionDeclaration | ts.MethodDeclaration | ts.ArrowFunction,
@@ -49,6 +52,7 @@ export class AstService extends BaseService implements IAstService {
 
     /**
      * Parcours récursif des nœuds de l'AST.
+     * @param node
      */
     const visit = (node: ts.Node) => {
       // 1. Détection des fonctions classiques (ex: function maFonction()...)

@@ -1,11 +1,11 @@
 // BaseCommand.ts
-import type { IAppContext } from "@/types/context.interface.js";
-import type { ICommand, ICommandOption } from "@/types/command.interface.js";
 import type {
   AnyOptions,
   MaybePromise,
   OptionKey,
 } from "@/types/cli-options.type.js";
+import type { ICommand, ICommandOption } from "@/types/command.interface.js";
+import type { IAppContext } from "@/types/context.interface.js";
 
 /**
  * Classe de base abstraite pour toutes les commandes de la CLI

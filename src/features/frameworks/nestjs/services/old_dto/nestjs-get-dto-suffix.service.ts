@@ -2,6 +2,7 @@ import { DtoType } from "../../constant/nestjs-constants.constant";
 
 /**
  * Retourne le suffixe approprié pour le nom de classe DTO.
+ * @param dtoType
  */
 export function nestjsGetDtoSuffix(dtoType: DtoType): string {
   switch (dtoType) {

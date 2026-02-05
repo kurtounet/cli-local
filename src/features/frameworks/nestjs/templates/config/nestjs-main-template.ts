@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsMainTemplate(): string {
   return `import { NestFactory } from '@nestjs/core';
   import { AppModule } from './app.module';

@@ -4,9 +4,14 @@ import {
   IEntityJson,
 } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ * @param typeForm
+ */
 export function angularFormTscEntityTemplate(
   entity: IEntityJson,
-  typeForm: string = "",
+  typeForm = "",
 ): string {
   let createProperties = "";
   let updateProperties = "";
@@ -95,6 +100,11 @@ export class ${entity.namePascalCase}FormComponent {
 }
 `;
 }
+/**
+ *
+ * @param col
+ * @param operation
+ */
 export function validators(col: IColumnJson, operation: string): string {
   let validators = "";
 

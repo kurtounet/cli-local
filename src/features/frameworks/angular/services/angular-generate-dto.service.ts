@@ -3,7 +3,7 @@ import { saveFileSync } from "@utils/file-utils";
 import { logInfo } from "@utils/logger";
 /**
  * Generates an Angular DTO (Data Transfer Object).
- * @param entity The entity JSON object.
+ * @param entity - The entity JSON object.
  */
 export function angularGenerateDto(entity: IEntityJson) {
   // Logique de génération de DTO Angular ici

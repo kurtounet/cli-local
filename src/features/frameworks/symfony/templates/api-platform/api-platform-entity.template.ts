@@ -3,30 +3,34 @@ import {
   IEntityJson,
   IRelation,
 } from "@features/parsersMdj/models/entity-json.model";
+import { snakeToCamel, snakeToPascal } from "@utils/convert";
+
+import { symfonyGenerateAccessorsRelationService } from "../../services/symfony-generate-accessors-relation.service";
+import { symfonyGenerateAccessorsScalarService } from "../../services/symfony-generate-accessors-scalar.service";
+import { symfonyGenerateRelationShipsService } from "../../services/symfony-generate-relationships.service";
 import {
   symfonyGetAttributeTypeORM,
   symfonyGetPropertyType,
 } from "../../utils/mapping";
-import { snakeToCamel, snakeToPascal } from "@utils/convert";
 
-import { symfonyGenerateRelationShipsService } from "../../services/symfony-generate-relationships.service";
-import { symfonyGenerateAccessorsScalarService } from "../../services/symfony-generate-accessors-scalar.service";
-import { symfonyGenerateAccessorsRelationService } from "../../services/symfony-generate-accessors-relation.service";
-
+/**
+ *
+ * @param entity
+ */
 function generatePropertiesContent(entity: IEntityJson): string[] {
-  let propertiesScalar: string[] = [];
-  let accessorsScalar: string[] = [];
-  let propertiesRelation: string[] = [];
-  let accessorsRelation: string[] = [];
+  const propertiesScalar: string[] = [];
+  const accessorsScalar: string[] = [];
+  const propertiesRelation: string[] = [];
+  const accessorsRelation: string[] = [];
 
   const excludeColumns = ["id", "created_at", "updated_at"];
   entity.columns?.forEach((col: IColumnJson) => {
     if (!excludeColumns.includes(col.name) && col.foreignKey === false) {
-      let nullable: string = col.nullable ? "true" : "false";
-      let property = `#[ORM\\Column(type: '${symfonyGetAttributeTypeORM(col.typeSql)}', nullable: ${nullable})]
+      const nullable: string = col.nullable ? "true" : "false";
+      const property = `#[ORM\\Column(type: '${symfonyGetAttributeTypeORM(col.typeSql)}', nullable: ${nullable})]
          public ?${symfonyGetPropertyType(col.typeSql)} $${snakeToCamel(col.name)} = null;
 `;
-      let propertyAccessors = symfonyGenerateAccessorsScalarService(
+      const propertyAccessors = symfonyGenerateAccessorsScalarService(
         snakeToCamel(col.name),
         symfonyGetPropertyType(col.typeSql),
       );
@@ -36,7 +40,7 @@ function generatePropertiesContent(entity: IEntityJson): string[] {
   });
   entity.relationships?.forEach((relation: IRelation) => {
     propertiesRelation.push(symfonyGenerateRelationShipsService(relation));
-    let propertyAccessors = symfonyGenerateAccessorsRelationService(relation);
+    const propertyAccessors = symfonyGenerateAccessorsRelationService(relation);
     accessorsRelation.push(propertyAccessors);
     /*
     if (relation.name !== "id") {
@@ -66,6 +70,10 @@ function generatePropertiesContent(entity: IEntityJson): string[] {
   ];
 }
 
+/**
+ *
+ * @param entity
+ */
 export function apiPlatformEntityTemplate(entity: IEntityJson) {
   const [
     propertiesScalar,

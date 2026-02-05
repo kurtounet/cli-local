@@ -1,9 +1,11 @@
 import { execSync, spawn, spawnSync } from "node:child_process";
-import { BaseService } from "./base-service.service.js";
 
-import { promisify } from "util";
 import { exec } from "child_process";
+import { promisify } from "util";
+
 import { IShellService } from "@/types/services/shell-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 // On transforme exec en version qui retourne une Promise
 const execPromise = promisify(exec);
@@ -13,6 +15,8 @@ export class ShellService extends BaseService implements IShellService {
   /**
    * Recommandé pour les serveurs Web.
    * Ne bloque pas l'Event Loop (Boucle d'événements).
+   * @param command
+   * @param cwd
    */
   async execute(command: string, cwd?: string): Promise<string> {
     try {
@@ -37,6 +41,8 @@ export class ShellService extends BaseService implements IShellService {
   /**
    * À utiliser uniquement pour des scripts CLI ou au démarrage.
    * Bloque l'Event Loop jusqu'à la fin de l'exécution.
+   * @param command
+   * @param cwd
    */
   executeSync(command: string, cwd: string): string {
     try {
@@ -62,6 +68,9 @@ export class ShellService extends BaseService implements IShellService {
   /**
    * Version asynchrone sécurisée.
    * Idéal pour les processus longs ou les serveurs web.
+   * @param command
+   * @param args
+   * @param cwd
    */
   async executeSpawn(
     command: string,
@@ -98,6 +107,9 @@ export class ShellService extends BaseService implements IShellService {
   /**
    * Version synchrone sécurisée.
    * Utile pour des scripts d'initialisation.
+   * @param command
+   * @param args
+   * @param cwd
    */
   executeSyncSpawn(command: string, args: string[] = [], cwd?: string): string {
     console.log(`> Exécution (spawnSync) : ${command} ${args.join(" ")}`);
@@ -124,14 +136,16 @@ export class ShellService extends BaseService implements IShellService {
 
   /**
    * Liste les fichiers (ls / dir) - Plus rapide que fs.readdir
+   * @param path
    */
-  async list(path: string = "."): Promise<string> {
+  async list(path = "."): Promise<string> {
     const cmd = this.isWindows ? `dir "${path}" /b` : `ls "${path}"`;
     return this.execute(cmd);
   }
 
   /**
    * Création de dossier (mkdir -p)
+   * @param path
    */
   async makeDir(path: string): Promise<string> {
     const cmd = this.isWindows ? `mkdir "${path}"` : `mkdir -p "${path}"`;
@@ -140,6 +154,7 @@ export class ShellService extends BaseService implements IShellService {
 
   /**
    * Suppression radicale (rm -rf / rd /s)
+   * @param path
    */
   async remove(path: string): Promise<string> {
     const cmd = this.isWindows ? `rmdir /s /q "${path}"` : `rm -rf "${path}"`;
@@ -148,6 +163,8 @@ export class ShellService extends BaseService implements IShellService {
 
   /**
    * Déplacement ou Renommage (mv / move)
+   * @param source
+   * @param destination
    */
   async move(source: string, destination: string): Promise<string> {
     const cmd = this.isWindows
@@ -158,6 +175,8 @@ export class ShellService extends BaseService implements IShellService {
 
   /**
    * Copie (cp / copy)
+   * @param source
+   * @param destination
    */
   async copy(source: string, destination: string): Promise<string> {
     const cmd = this.isWindows
@@ -169,8 +188,10 @@ export class ShellService extends BaseService implements IShellService {
   /**
    * Recherche de texte dans les fichiers (grep / findstr)
    * Très puissant pour scanner ton dossier /src
+   * @param pattern
+   * @param path
    */
-  async searchInFiles(pattern: string, path: string = "."): Promise<string> {
+  async searchInFiles(pattern: string, path = "."): Promise<string> {
     const cmd = this.isWindows
       ? `findstr /s /i "${pattern}" "${path}\\*.*"`
       : `grep -r "${pattern}" "${path}"`;

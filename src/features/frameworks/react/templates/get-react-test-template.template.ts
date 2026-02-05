@@ -1,6 +1,10 @@
 // Template pour un testreact
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getReactTestTemplate(entity: IEntityJson) {
   return `import { render, screen } from '@testing-library/react';
 import ${entity.namePascalCase}Component from './${entity.namePascalCase}Component';

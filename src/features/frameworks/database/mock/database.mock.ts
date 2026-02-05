@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function DATABASE_CONFIG_MYSQL_MOCK() {
   return [
     {

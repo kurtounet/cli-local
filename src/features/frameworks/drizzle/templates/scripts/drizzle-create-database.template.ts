@@ -1,5 +1,9 @@
 import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
 
+/**
+ *
+ * @param configFile
+ */
 export function drizzleScriptCreateDatabaseTemplate(
   configFile: IProjectConfig,
 ) {

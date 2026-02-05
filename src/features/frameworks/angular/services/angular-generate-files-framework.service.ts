@@ -1,21 +1,29 @@
+import { fr } from "@faker-js/faker/.";
+import { angularGenerateRouteService } from "@features/frameworks/commun/services/generate-route.service";
+import { installTSDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
+import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-
 import { logInfo } from "@utils/logger";
-import { angularGenerateFormEntityService } from "./angular-generate-form-entity.service";
-import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
-import { angularGenerateCrudEntityService } from "./angular-generate-crud-entity.service";
-import { installTSDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
-import { angularGenerateEnvironmentsService } from "./angular-generate-environments.service";
-import { angularGenerateInterfaceEntityService } from "./angular-generate-interface-entity.service";
-import { angularGenerateZodSchemaEntityService } from "./angular-generate-zod-schema-entity.service";
-import { angularGenerateRouteService } from "@features/frameworks/commun/services/generate-route.service";
-import { angularGeneratePagesService } from "./angular-generate-pages.service";
-import { angularGenerateAppHtmlService } from "./angular-generate-app-html.service";
-import { fr } from "@faker-js/faker/.";
 
+import { angularGenerateAppHtmlService } from "./angular-generate-app-html.service";
+import { angularGenerateCrudEntityService } from "./angular-generate-crud-entity.service";
+import { angularGenerateEnvironmentsService } from "./angular-generate-environments.service";
+import { angularGenerateFormEntityService } from "./angular-generate-form-entity.service";
+import { angularGenerateInterfaceEntityService } from "./angular-generate-interface-entity.service";
+import { angularGeneratePagesService } from "./angular-generate-pages.service";
+import { angularGenerateZodSchemaEntityService } from "./angular-generate-zod-schema-entity.service";
+
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ * @param mode
+ */
 export function angularGenerateFilesFramework(
   configFile: IProjectConfig,
   framework: IFramework,

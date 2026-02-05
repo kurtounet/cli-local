@@ -2,6 +2,8 @@ import { INDENT, NEWLINE } from "../../constant/nestjs-constants.constant";
 
 /**
  * Construit les instructions d'import pour l'entité.
+ * @param typeormImports
+ * @param entityImports
  */
 export function buildImportStatements(
   typeormImports: Set<string>,

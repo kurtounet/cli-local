@@ -1,11 +1,12 @@
 import chokidar from "chokidar";
 import inquirer from "inquirer";
+
 import { BaseCommand } from "@/commands/BaseCommand.js";
+import { IProjectConfig } from "@/features/commun/projet.interface.js";
+import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
+import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
-import { IProjectConfig } from "@/features/commun/projet.interface.js";
-import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
-import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
 
 export interface ISymfonyOptions extends AnyOptions {
   code?: boolean;
@@ -109,7 +110,7 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
 `);
       return;
     }
-    let response = "";
+    const response = "";
     if (action === "generate" || action === "g") {
       if (type === "all" || type === "a") {
         this.cli.logger.info("Initialisation d'un nouveau projet...");

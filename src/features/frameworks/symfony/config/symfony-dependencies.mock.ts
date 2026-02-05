@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function DEPENDENCIES_SYMFONY_MOCK() {
   return {
     packageManager: "composer",

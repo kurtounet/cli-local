@@ -1,10 +1,11 @@
+import { cosmiconfig } from "cosmiconfig";
 import yaml from "js-yaml";
 
-import { cosmiconfig } from "cosmiconfig";
 import { defaultconfig } from "@/config/config.js";
-import { BaseService } from "./base-service.service.js";
 import { IAppConfig } from "@/types/config.interface.js";
 import { IConfigService } from "@/types/services/config-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class ConfigService extends BaseService implements IConfigService {
   readonly logLevel = "debug";
@@ -88,7 +89,7 @@ export class ConfigService extends BaseService implements IConfigService {
     this.load();
     return this.configData;
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   private deepMerge(
     target: Record<string, unknown>,
     source: Record<string, unknown>,

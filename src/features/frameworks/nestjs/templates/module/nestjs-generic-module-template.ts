@@ -1,3 +1,7 @@
+/**
+ *
+ * @param name
+ */
 export function getModuleTemplate(name: string): string {
   return `import { Module } from '@nestjs/common';
 import { User } from './user.entity';

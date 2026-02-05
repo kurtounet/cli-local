@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function interfaceBaseServiceTemplate(): string {
   return `import { IBaseRepository } from './base-repository.model';
 

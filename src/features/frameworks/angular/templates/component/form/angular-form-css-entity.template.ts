@@ -1,5 +1,9 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function angularFormCssEntityTemplate(entity: IEntityJson): string {
   return `
     .${entity.nameKebabCase}{

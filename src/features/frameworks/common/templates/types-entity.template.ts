@@ -1,5 +1,9 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function typesTemplate(entity: IEntityJson) {
   return `
 // Types pour l'entité ${entity.namePascalCase}

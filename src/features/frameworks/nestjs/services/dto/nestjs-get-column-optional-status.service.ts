@@ -1,8 +1,11 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { DtoType } from "../../constant/nestjs-constants.constant";
 
 /**
  * Détermine si une colonne est optionnelle selon le type de DTO.
+ * @param column
+ * @param dtoType
  */
 export function nestjsGetColumnOptionalStatus(
   column: IColumnJson,

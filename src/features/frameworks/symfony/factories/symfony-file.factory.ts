@@ -5,6 +5,8 @@ export type SymfonyFileType = "entity" | "dto" | "repository";
 export class SymfonyFileFactory {
   /**
    * Retourne le contenu et le chemin cible selon le type
+   * @param type
+   * @param entity
    */
   static create(
     type: SymfonyFileType,

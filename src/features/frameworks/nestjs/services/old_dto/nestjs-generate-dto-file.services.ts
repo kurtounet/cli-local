@@ -5,11 +5,15 @@ import {
   INDENT,
   NEWLINE,
 } from "../../constant/nestjs-constants.constant";
-import { nestjsGetDtoSuffix } from "./nestjs-get-dto-suffix.service";
 import { DtoProperty } from "../../models/nestjs-dto-property.model";
+import { nestjsGetDtoSuffix } from "./nestjs-get-dto-suffix.service";
 
 /**
  * Génère le contenu final du fichier DTO.
+ * @param entity
+ * @param properties
+ * @param imports
+ * @param dtoType
  */
 export function nestjsGenerateDtoFile(
   entity: IEntityJson,

@@ -5,6 +5,10 @@ import {
 
 /**
  * Génère les décorateurs pour une relation de DTO.
+ * @param targetPascal
+ * @param isArray
+ * @param validationImports
+ * @param transformImports
  */
 export function nestjsGetRelationDecorators(
   targetPascal: string,

@@ -3,9 +3,15 @@ import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ */
 export function nestjsGenerateFilesFramework(
   configFile: IProjectConfig,
   framework: IFramework,

@@ -1,8 +1,13 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-
 import { writeFile } from "@utils/file-utils";
+
 import { nitroEntityServiceTemplate } from "../templates/services/nitro-entity-service-template";
 
+/**
+ *
+ * @param rootServerApi
+ * @param entity
+ */
 export function nitroGenerateServiceEntityService(
   rootServerApi: string,
   entity: IEntityJson,

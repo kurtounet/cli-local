@@ -21,14 +21,18 @@ const asNum = (v: string | number | null | undefined): number | undefined =>
   v == null ? undefined : Number(v);
 
 // options
-export type GenOptions = {
+export interface GenOptions {
   importResolver?: (tableName: string) => string; // default: "./<table>.schema"
-};
+}
 
-type FkActions = {
+interface FkActions {
   onDelete?: "cascade" | "restrict" | "no action" | "set null" | "set default";
   onUpdate?: FkActions["onDelete"];
-};
+}
+/**
+ *
+ * @param validations
+ */
 function parseFkActions(validations?: string[] | null): FkActions | undefined {
   if (!Array.isArray(validations)) return undefined;
   const pick = (k: "onDelete" | "onUpdate") => {
@@ -44,15 +48,20 @@ function parseFkActions(validations?: string[] | null): FkActions | undefined {
 }
 
 // imports tracking
-type ImportsBag = {
+interface ImportsBag {
   mysqlCore: Set<string>;
   drizzle: Set<string>;
   // exportName -> path
   extraTables: Map<string, string>;
   opt: GenOptions;
-};
+}
 
 // public api
+/**
+ *
+ * @param e
+ * @param opt
+ */
 export function drizzleSchemaFromEntityService(
   e: IEntityJson,
   opt: GenOptions = {},
@@ -173,6 +182,11 @@ export type ${TableNamePascal}Insert = InferInsertModel<typeof ${TableNameCamel}
 }
 
 // multi-entities
+/**
+ *
+ * @param entities
+ * @param opt
+ */
 export function drizzleSchemaFromEntitiesService(
   entities: IEntityJson[],
   opt: GenOptions = {},
@@ -186,6 +200,11 @@ export function drizzleSchemaFromEntitiesService(
 }
 
 // helpers
+/**
+ *
+ * @param e
+ * @param targetTable
+ */
 function findFkColumnReferencing(
   e: IEntityJson,
   targetTable: string,
@@ -195,6 +214,11 @@ function findFkColumnReferencing(
   );
 }
 
+/**
+ *
+ * @param c
+ * @param imports
+ */
 function mapColumnBuilder(c: IColumnJson, imports: ImportsBag): string {
   const t = (c.typeSql || "varchar").toLowerCase();
   const len = asNum(c.length);
@@ -314,6 +338,15 @@ function mapColumnBuilder(c: IColumnJson, imports: ImportsBag): string {
   }
 }
 
+/**
+ *
+ * @param c
+ * @param expr
+ * @param ctx
+ * @param ctx.pkCount
+ * @param ctx.imports
+ * @param ctx.ownerTable
+ */
 function applyModifiers(
   c: IColumnJson,
   expr: string,

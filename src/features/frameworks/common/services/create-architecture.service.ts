@@ -1,13 +1,16 @@
-import * as fs from "fs";
-import * as path from "path";
-
-import { logError, logInfo, logStep } from "@utils/logger";
 import { EMOJI, messageCreateArchitecture } from "@constants/messages";
 import {
   IDirectory,
   IFramework,
 } from "@features/frameworks/models/framework-commun.model";
+import { logError, logInfo, logStep } from "@utils/logger";
+import * as fs from "fs";
+import * as path from "path";
 
+/**
+ *
+ * @param pathFolder
+ */
 export function createFolder(pathFolder: string) {
   if (!fs.existsSync(pathFolder)) {
     logInfo(`${EMOJI.folder} Dossier créer : ${pathFolder}`);
@@ -16,8 +19,8 @@ export function createFolder(pathFolder: string) {
 }
 /**
  * Creates the directory structure for a given framework based on its defined architecture.
- * @param framework The framework object containing the architecture definition.
- * @param frameworkPath The base path where the framework's architecture should be created.
+ * @param framework - The framework object containing the architecture definition.
+ * @param frameworkPath - The base path where the framework's architecture should be created.
  * @returns A success or error message.
  */
 export function createArchitecture(
@@ -28,11 +31,11 @@ export function createArchitecture(
   if (framework.architecture.length > 0) {
     try {
       framework.architecture.forEach((item: IDirectory) => {
-        let pathFolder = path.join(frameworkPath, item.name);
+        const pathFolder = path.join(frameworkPath, item.name);
         createFolder(pathFolder);
         if (item.children.length > 0) {
           item.children.forEach((child: IDirectory) => {
-            let pathFolder = path.join(frameworkPath, item.name, child.name);
+            const pathFolder = path.join(frameworkPath, item.name, child.name);
             createFolder(pathFolder);
           });
         }

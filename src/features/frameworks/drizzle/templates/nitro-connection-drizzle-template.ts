@@ -3,6 +3,10 @@ import {
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ * @param configFile
+ */
 export function nitroConnectionDrizzleTemplate(
   configFile: IProjectConfig,
 ): string {

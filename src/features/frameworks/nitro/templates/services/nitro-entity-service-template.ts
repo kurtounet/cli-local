@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nitroEntityServiceTemplate(entity: IEntityJson): string {
   return `import { createError } from "h3";
 import { ${entity.namePascalCase}Repository } from "./${entity.nameKebabCase}.repository";

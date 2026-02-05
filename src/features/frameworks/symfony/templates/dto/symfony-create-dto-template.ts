@@ -1,5 +1,11 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ * @param properties
+ * @param accessors
+ */
 export function symfonyCreateDtoTemplate(
   entity: IEntityJson,
   properties: string,

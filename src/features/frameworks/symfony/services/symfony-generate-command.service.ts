@@ -1,7 +1,12 @@
 import { writeFile } from "@utils/file-utils";
 import { write } from "fs";
+
 import { symfonyCreateAllCrudEntitiesCommandPhpTemplate } from "../templates/command/symfony-create-all-crud-entities-command.php.template";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ */
 export function symfonyGenerateCommandService(
   rootPathProjectFramework: string,
 ) {

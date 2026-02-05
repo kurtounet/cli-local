@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nuxtApiResponseTemplate() {
   return `
 export interface ApiResponse<T> {

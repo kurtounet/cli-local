@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function drizzleEntityRepositoryTemplatev2(entity: IEntityJson): string {
   return `// file: server/utils/user.repository.ts
 

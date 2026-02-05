@@ -1,28 +1,32 @@
 import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { snakeToCamel } from "@utils/convert";
+import { buildAndsaveFile, writeFile } from "@utils/file-utils";
+import { logDebug, logInfo } from "@utils/logger";
 import fs from "fs";
+import { get } from "http";
 import path from "path";
 
-import { buildAndsaveFile, writeFile } from "@utils/file-utils";
-
-import { snakeToCamel } from "@utils/convert";
-
-import { symfonyCreateDtoTemplate } from "../templates/dto/symfony-create-dto-template";
-import { symfonyUpdateDtoTemplate } from "../templates/dto/symfony-update-dto-template";
-import { symfonyResponseDtoTemplate } from "../templates/dto/symfony-response-dto-template";
-import { symfonyGenerateAccessorsScalarService } from "./symfony-generate-accessors-scalar.service";
 import {
   getContraintTypeORM,
   INDENT,
   NEWLINE,
 } from "../constant/symfony-constants.constant";
+import { symfonyCreateDtoTemplate } from "../templates/dto/symfony-create-dto-template";
+import { symfonyResponseDtoTemplate } from "../templates/dto/symfony-response-dto-template";
+import { symfonyUpdateDtoTemplate } from "../templates/dto/symfony-update-dto-template";
 import { symfonyGetPropertyType } from "../utils/mapping";
-import { logDebug, logInfo } from "@utils/logger";
-import { get } from "http";
+import { symfonyGenerateAccessorsScalarService } from "./symfony-generate-accessors-scalar.service";
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ * @param platform
+ */
 export function symfonyGenerateDtoService(
   frameworkPath: string,
   entity: IEntityJson,
-  platform: string = "symfony",
+  platform = "symfony",
 ) {
   // const pathDto = path.join(frameworkPath, "src", "Dto");
   // if (!fs.existsSync(pathDto)) {
@@ -38,9 +42,9 @@ export function symfonyGenerateDtoService(
   //   fs.mkdirSync(pathDtoEntity);
   // }
   const n = "\n";
-  let properties: string = "";
-  let accessors: string = "";
-  let content: string = "";
+  let properties = "";
+  let accessors = "";
+  const content = "";
   entity.columns?.map((column: IColumnJson) => {
     if (column.name !== "id") {
       properties +=
@@ -73,6 +77,11 @@ export function symfonyGenerateDtoService(
   // gitCommit(frameworkPath,`add dtos ${entity.namePascalCase}`);
 }
 
+/**
+ *
+ * @param entityName
+ * @param column
+ */
 export function getProperty(
   entityName: string,
   column: IColumnJson,
@@ -86,6 +95,10 @@ export function getProperty(
     private ?${typeProperty} $${snakeToCamel(column.name)} = null;
     `;
 }
+/**
+ *
+ * @param column
+ */
 export function getContraintsPropertyType(column: IColumnJson) {
   let assets = "";
   if (column.nullable === false) {

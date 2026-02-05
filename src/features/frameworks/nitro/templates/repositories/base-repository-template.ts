@@ -1,5 +1,8 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ */
 export function baseRepositoryTemplate(): string {
   return `import { MySql2Database } from 'drizzle-orm/mysql2';
 import { MySqlTable } from 'drizzle-orm/mysql-core';

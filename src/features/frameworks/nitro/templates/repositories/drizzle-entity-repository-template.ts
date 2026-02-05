@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function drizzleEntityRepositoryTemplate(entity: IEntityJson): string {
   return `//server/api/${entity.nameKebabCase}/${entity.nameKebabCase}.repository.ts
 import { db } from '../../database/db';

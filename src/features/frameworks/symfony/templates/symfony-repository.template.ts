@@ -1,6 +1,10 @@
 // Template pour une interface Symfony
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getSymfonyInterfaceTemplate(entity: IEntityJson) {
   const properties =
     entity.columns
@@ -11,6 +15,10 @@ export function getSymfonyInterfaceTemplate(entity: IEntityJson) {
       .join("\n") || "";
   return `<?php\n\nnamespace App\Interfaces;\n\ninterface ${entity.namePascalCase}Interface\n{\n${properties}\n}\n`;
 }
+/**
+ *
+ * @param entity
+ */
 export function symfonyEntityRepositoryTemplate(entity: IEntityJson) {
   return `<?php
 

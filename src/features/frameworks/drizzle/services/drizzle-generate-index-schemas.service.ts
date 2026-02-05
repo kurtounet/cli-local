@@ -1,6 +1,11 @@
 import { camelToKebab } from "@utils/convert";
 import { writeFile } from "@utils/file-utils";
 
+/**
+ *
+ * @param rootServer
+ * @param entities
+ */
 export function drizzleGenerateIndexSchemasService(
   rootServer: string,
   entities: string[],

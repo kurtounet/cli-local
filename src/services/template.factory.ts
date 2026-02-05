@@ -1,6 +1,8 @@
-import ejs from "ejs";
 import fs from "node:fs";
 import path from "node:path";
+
+import ejs from "ejs";
+
 import { BaseService } from "./base-service.service.js";
 
 export class TemplateFactory extends BaseService {

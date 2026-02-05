@@ -3,7 +3,7 @@ import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Electron controller template string.
- * @param entity The entity JSON object.
+ * @param entity - The entity JSON object.
  * @returns The Electron controller template string.
  */
 export function getElectronControllerTemplate(entity: IEntityJson) {

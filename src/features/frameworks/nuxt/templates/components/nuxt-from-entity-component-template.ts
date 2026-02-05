@@ -3,6 +3,10 @@ import {
   IEntityJson,
 } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nuxtFromEntityComponentTemplate(entity: IEntityJson): string {
   const contentForm =
     entity.columns
@@ -29,6 +33,10 @@ ${contentForm}
 </style>`;
 }
 
+/**
+ *
+ * @param col
+ */
 export function typeField(col: IColumnJson): string {
   // Field name-based type mapping (takes priority)
   const nameTypeMap = {

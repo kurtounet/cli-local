@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function SCRIPTS_NESTJS_MOCK() {
   return {
     plan: "clinode create:plan gest-project",

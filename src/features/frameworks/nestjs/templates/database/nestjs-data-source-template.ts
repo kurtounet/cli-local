@@ -1,5 +1,9 @@
 import { IFramework } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ * @param thisProjectConfig
+ */
 export function nestjsDatabaseSourceTemplate(
   thisProjectConfig: IFramework,
 ): string {

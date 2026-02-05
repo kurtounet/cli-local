@@ -1,6 +1,10 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { logInfo } from "@utils/logger";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsUpdateDtoTemplate(entity: IEntityJson): string {
   logInfo(`updateDto :${entity.namePascalCase}`);
   return `import { PartialType } from '@nestjs/mapped-types';

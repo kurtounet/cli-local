@@ -1,6 +1,10 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { snakeToCamel } from "@utils/convert";
 
+/**
+ *
+ * @param entity
+ */
 export function generateInterfaceService(entity: IEntityJson) {
   const properties =
     entity.columns
@@ -9,6 +13,11 @@ export function generateInterfaceService(entity: IEntityJson) {
   return `export interface I${entity.namePascalCase} {\n${properties}\n}\n`;
 }
 
+/**
+ *
+ * @param entity
+ * @param allEntities
+ */
 function getInterfaceImports(
   entity: IEntityJson,
   allEntities: IEntityJson[],
@@ -32,6 +41,11 @@ function getInterfaceImports(
   return Array.from(imports).join("\n");
 }
 
+/**
+ *
+ * @param entity
+ * @param allEntities
+ */
 export function generateInterfaceFileContent(
   entity: IEntityJson,
   allEntities: IEntityJson[],

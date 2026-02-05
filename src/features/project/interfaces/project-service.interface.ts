@@ -1,6 +1,7 @@
-import { IProjectCommand } from "./project-command.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IBaseService } from "@/types/services/base-service.interface.js";
+
+import { IProjectCommand } from "./project-command.interface.js";
 
 /**
  * Interface définissant les capacités du service de gestion de la configuration spécifique au projet.

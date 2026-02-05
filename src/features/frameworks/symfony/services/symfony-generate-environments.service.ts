@@ -1,3 +1,6 @@
+import { updateGitIgnore } from "@features/frameworks/commun/services/git.service";
+import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
+import { writeFile } from "@utils/file-utils";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -5,10 +8,11 @@ import {
   SymfonyDotEnvLocal,
   SymfonyDotEnvTest,
 } from "../templates/symfony-environment.template";
-import { writeFile } from "@utils/file-utils";
-
-import { updateGitIgnore } from "@features/frameworks/commun/services/git.service";
-import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
+/**
+ *
+ * @param frameworkProjectPath
+ * @param configFile
+ */
 export function symfonyGenerateEnvironmentsService(
   frameworkProjectPath: string,
   configFile: IProjectConfig,

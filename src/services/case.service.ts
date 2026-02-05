@@ -1,5 +1,6 @@
-import { BaseService } from "./base-service.service.js";
 import { ICaseService } from "@/types/services/case-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 /*
 Méthode	Résultat	Utilisation typique
@@ -14,6 +15,7 @@ export class CaseService extends BaseService implements ICaseService {
 
   /**
    * Méthode interne pour découper n'importe quelle chaîne en tableau de mots
+   * @param str
    */
   private getWords(str: string): string[] {
     return (

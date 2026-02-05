@@ -1,5 +1,8 @@
 import { IEnvironment } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ */
 export function ENVIRONMENTS_NITRO_MOCK(): IEnvironment[] {
   return [
     {

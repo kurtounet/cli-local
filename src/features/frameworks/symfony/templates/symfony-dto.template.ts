@@ -1,6 +1,10 @@
 // Template pour un DTO Symfony
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getSymfonyDtoTemplate(entity: IEntityJson) {
   const properties =
     entity.columns?.map((col: any) => `    public ${col.name};`).join("\n") ||

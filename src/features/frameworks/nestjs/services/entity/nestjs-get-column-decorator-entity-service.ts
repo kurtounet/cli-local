@@ -1,4 +1,5 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import {
   SPECIAL_COLUMN_NAMES,
   TYPEORM_DECORATORS,
@@ -7,6 +8,7 @@ import { nestjsBuildColumnOptionsEntity } from "./nestjs-build-column-options-en
 
 /**
  * Détermine le décorateur de colonne approprié.
+ * @param column
  */
 export function nestjsGetColumnDecoratorEntity(column: IColumnJson): {
   decorator: string;

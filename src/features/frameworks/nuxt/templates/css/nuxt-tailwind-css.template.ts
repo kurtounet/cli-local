@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nuxtTailwindCssTemplate(): string {
   return `@tailwind base;
 @tailwind components;

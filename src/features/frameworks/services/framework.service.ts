@@ -7,6 +7,7 @@ import {
   IProjectConfig,
 } from "@/features/commun/projet.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
+
 import { IFrameworkService } from "../interfaces/framework-service.interface.js";
 import { FrameworkSelector } from "./framework-selector.service.js";
 
@@ -19,6 +20,7 @@ export class FrameworkService implements IFrameworkService {
   ) {}
   /**
    * Chef d'orchestre : Délègue à chaque service spécifique
+   * @param project
    */
   generate = async (project: IProjectConfig): Promise<void> => {
     // Utilisation de for...of pour un traitement séquentiel propre
@@ -51,6 +53,7 @@ export class FrameworkService implements IFrameworkService {
    * Installation du framework
    * Les méthodes ci-dessous deviennent des "fallbacks" ou des outils partagés
    * @param project
+   * @param framework
    */
   async installFramework(framework: IConfigFramework): Promise<void> {
     try {
@@ -68,6 +71,7 @@ export class FrameworkService implements IFrameworkService {
   /**
    * Installation des dépendances
    * @param project
+   * @param deps
    */
   async installDependencies(deps: IDependencies): Promise<void> {
     try {
@@ -85,6 +89,7 @@ export class FrameworkService implements IFrameworkService {
   /**
    * Installation des dépendances
    * @param project
+   * @param architecture
    */
   async generateArchitecture(architecture: IDirectory[]): Promise<any> {
     try {

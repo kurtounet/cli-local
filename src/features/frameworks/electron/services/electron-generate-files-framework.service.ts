@@ -4,6 +4,13 @@ import {
 } from "@frameworks-models/framework-commun.model";
 import { logInfo } from "@utils/logger";
 
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ */
 export function electronGenerateFilesFramework(
   configFile: IProjectConfig,
   framework: IFramework,

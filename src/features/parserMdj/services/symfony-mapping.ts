@@ -1,5 +1,9 @@
+/**
+ *
+ * @param typeTypeScript
+ */
 export function getPhpType(typeTypeScript: string): string {
-  const typeMapping: { [key: string]: string } = {
+  const typeMapping: Record<string, string> = {
     string: "string",
     number: "int",
     Date: "\\DateTimeImmutable",
@@ -8,9 +12,13 @@ export function getPhpType(typeTypeScript: string): string {
   return typeMapping[typeTypeScript] || "mixed";
 }
 
+/**
+ *
+ * @param sqlType
+ */
 export function getDoctrineColumnType(sqlType: string): string {
   const lowerCaseSqlType = sqlType.toLowerCase();
-  const typeMapping: { [key: string]: string } = {
+  const typeMapping: Record<string, string> = {
     bigint: "bigint",
     varchar: "string",
     text: "text",

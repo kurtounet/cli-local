@@ -2,8 +2,14 @@ import { IDatabase } from "@features/frameworks/models/database.model";
 import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
 import { writeFile } from "@utils/file-utils";
 import { write } from "fs";
+
 import { drizzleScriptCreateDatabaseTemplate } from "../templates/scripts/drizzle-create-database.template";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param configFile
+ */
 export function drizzleGenerateScriptCreateDatabase(
   rootPathProjectFramework: string,
   configFile: IProjectConfig,

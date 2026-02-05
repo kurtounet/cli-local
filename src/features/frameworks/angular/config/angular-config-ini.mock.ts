@@ -1,8 +1,9 @@
 import { IConfigFramework } from "@/features/commun/framework.interface.js";
-import { INSTALL_OPTIONS_ANGULAR_MOCK } from "./angular-install-options.mock.js";
+
 import { ARCHITECTURE_ANGULAR_MOCK } from "./angular-architecture.mock.js";
 import { DEPENDENCIES_ANGULAR_MOCK } from "./angular-dependencies.mock.js";
 import { ENVIRONMENTS_ANGULAR_MOCK } from "./angular-environments.mock.js";
+import { INSTALL_OPTIONS_ANGULAR_MOCK } from "./angular-install-options.mock.js";
 import { SCRIPTS_ANGULAR_MOCK } from "./angular-scripts.mock.js";
 
 export const CONFIG_INIT_ANGULAR: IConfigFramework = {

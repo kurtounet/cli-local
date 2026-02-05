@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsAccountServiceTemplate(): string {
   return `// src/account/account.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';

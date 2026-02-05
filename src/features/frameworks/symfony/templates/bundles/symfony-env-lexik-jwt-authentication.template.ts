@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function symfonyEnvLexikJwtAuthenticationTemplate() {
   return `
 ###> lexik/jwt-authentication-bundle ###

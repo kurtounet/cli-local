@@ -1,8 +1,10 @@
 import path from "node:path";
-import { BaseService } from "./base-service.service.js";
+
 import { ISDKContext } from "@/types/commun/sdk-context.interface.js";
-import { IPluginService } from "@/types/services/plugin-service.interface.js";
 import { IPlugin, IPluginManifest } from "@/types/plugin.interface.js";
+import { IPluginService } from "@/types/services/plugin-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class PluginService extends BaseService implements IPluginService {
   readonly serviceName = "PluginService";
@@ -19,6 +21,8 @@ export class PluginService extends BaseService implements IPluginService {
 
   /**
    * Charge et exécute un plugin dynamiquement
+   * @param pluginId
+   * @param type
    */
   async load(pluginId: string, type: string): Promise<any> {
     const indexPluginJson = await this.cli.fileSystem.readFile(
@@ -108,9 +112,9 @@ export class PluginService extends BaseService implements IPluginService {
   }
 
   async verifyPlugin(manifest: any): Promise<boolean> {
-    let errors: string[] = [];
+    const errors: string[] = [];
     let propertiesManifest: string[] = [];
-    let pathPlugin = {
+    const pathPlugin = {
       templateDir: "",
       service: "",
     };

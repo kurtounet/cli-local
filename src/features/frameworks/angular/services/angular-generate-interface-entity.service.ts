@@ -4,7 +4,8 @@ import { writeFile } from "@utils/file-utils";
 
 /**
  * Generates an Angular interface.
- * @param entity The entity JSON object.
+ * @param pathDir
+ * @param entity - The entity JSON object.
  */
 export function angularGenerateInterfaceEntityService(
   pathDir: string,

@@ -1,6 +1,10 @@
 // Template pour une entité Vue.js
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getVueEntityTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

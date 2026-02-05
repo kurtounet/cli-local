@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function angularCrudServiceTemplate(entity: IEntityJson) {
   const entityName = entity.namePascalCase;
   const entityNamePlural = entity.namePascalCase || `${entityName}s`;

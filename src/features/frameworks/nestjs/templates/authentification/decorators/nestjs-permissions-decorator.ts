@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsAuthPermissionsDecoratorTemplate() {
   return `import { SetMetadata } from '@nestjs/common';
 

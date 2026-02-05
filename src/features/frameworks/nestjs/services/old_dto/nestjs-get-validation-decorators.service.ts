@@ -1,4 +1,5 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import {
   DtoType,
   VALIDATION_DECORATORS,
@@ -7,6 +8,9 @@ import { nestjsGetTypeValidationDecorators } from "./nestjs-get-type-validation-
 
 /**
  * Génère les décorateurs de validation.
+ * @param column
+ * @param dtoType
+ * @param validationImports
  */
 export function nestjsGetValidationDecorators(
   column: IColumnJson,

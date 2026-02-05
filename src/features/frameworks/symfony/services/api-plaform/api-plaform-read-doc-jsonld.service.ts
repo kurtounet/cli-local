@@ -1,8 +1,10 @@
 import { readFile } from "@utils/file-utils";
+
 import { TApiDocumentation } from "../../types/api-platform-doc-json-ld.type";
 
 /**
  * Service pour lire et normaliser le fichier documentation-api.json
+ * @param path
  */
 export function apiPlatformReadDocJsonldService(
   path: string,
@@ -19,7 +21,7 @@ export function apiPlatformReadDocJsonldService(
       supportedProperty: sClass.supportedProperty.map((sProp) => ({
         ...sProp,
         // On normalise aussi les headers dans les opérations
-        operation: sClass.supportedOperation as any, // Type assertion temporaire pour le map
+        operation: sClass.supportedOperation, // Type assertion temporaire pour le map
       })),
     }));
 
@@ -44,6 +46,7 @@ export function apiPlatformReadDocJsonldService(
 /**
  * Utilitaire pour transformer une valeur unique en tableau si nécessaire
  * (Crucial pour le format Hydra/JSON-LD)
+ * @param item
  */
 function ensureArray<T>(item: T | T[] | undefined): T[] {
   if (!item) return [];

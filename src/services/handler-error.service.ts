@@ -1,7 +1,8 @@
-import { IHandlerErrorService } from "@/types/services/error-handler.interface.js";
-import { BaseService } from "./base-service.service.js";
 import { CliError } from "@/errors/cli-errors.js";
 import { IAppContext } from "@/types/context.interface.js";
+import { IHandlerErrorService } from "@/types/services/error-handler.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class HandlerErrorService
   extends BaseService
@@ -33,8 +34,8 @@ export class HandlerErrorService
   /**
    * Méthode centrale pour traiter toute erreur de l'application.
    * Cette méthode est ultra-sécurisée et ne devrait jamais planter.
-   * @param error erreur à traiter
-   * @param contextMessage message contextuel optionnel
+   * @param error - erreur à traiter
+   * @param contextMessage - message contextuel optionnel
    */
   public handle(error: unknown, contextMessage?: string): void {
     try {
@@ -50,7 +51,7 @@ export class HandlerErrorService
       const message = isCliError
         ? err.message
         : `An unexpected error occurred: ${err.message}`;
-      const exitCode = isCliError ? (err as CliError).exitCode : 1;
+      const exitCode = isCliError ? (err).exitCode : 1;
 
       // 2️⃣ Logger SAFE avec protection totale
       this.safeLogError(contextMessage, message);
@@ -73,8 +74,8 @@ export class HandlerErrorService
   /**
    * Log une erreur de manière sécurisée avec plusieurs fallbacks.
    * Cette méthode ne devrait jamais planter.
-   * @param contextMessage contexte de l'erreur
-   * @param message message d'erreur
+   * @param contextMessage - contexte de l'erreur
+   * @param message - message d'erreur
    */
   private safeLogError(
     contextMessage: string | undefined,
@@ -106,7 +107,7 @@ export class HandlerErrorService
   /**
    * Affiche la stack trace seulement en mode debug.
    * Cette méthode ne plante jamais, même si la récupération du log level échoue.
-   * @param err erreur dont on veut afficher la stack
+   * @param err - erreur dont on veut afficher la stack
    */
   private safeLogStackTrace(err: Error): void {
     try {
@@ -164,8 +165,8 @@ export class HandlerErrorService
   /**
    * Méthode utilitaire pour forcer l'affichage de détails en mode debug.
    * Utile pour le développement.
-   * @param title titre de la section de debug
-   * @param data données à afficher
+   * @param title - titre de la section de debug
+   * @param data - données à afficher
    */
   public debugLog(title: string, data: unknown): void {
     try {

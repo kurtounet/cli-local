@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function SCRIPTS_ANGULAR_MOCK() {
   return {
     lint: "npx eslint . --fix",

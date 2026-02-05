@@ -1,9 +1,12 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { DtoType } from "../../constant/nestjs-constants.constant";
 import { nestjsGetExampleValue } from "./nest-get-example-value.service";
 
 /**
  * Construit le décorateur ApiProperty pour Swagger.
+ * @param column
+ * @param dtoType
  */
 export function nestjsBuildApiPropertyDecorator(
   column: IColumnJson,

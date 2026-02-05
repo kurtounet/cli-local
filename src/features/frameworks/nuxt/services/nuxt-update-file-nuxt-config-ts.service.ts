@@ -1,10 +1,15 @@
-import path from "path";
-import fs from "fs";
-import { INuxtConfigTs } from "../models/nuxt-config-ts.model";
 import { writeFile } from "@utils/file-utils";
+import fs from "fs";
+import path from "path";
 import { pathToFileURL } from "url";
 
+import { INuxtConfigTs } from "../models/nuxt-config-ts.model";
+
 //import type { NuxtConfig } from '@nuxt/schema'
+/**
+ *
+ * @param rootPathProjectFramework
+ */
 export async function nuxtUpdateFileNuxtConfigTsService(
   rootPathProjectFramework: string,
 ) {
@@ -37,6 +42,10 @@ export default defineNuxtConfig(${JSON.stringify(updated, null, 2)})
     return `Erreur lors de la mise à jour de nuxt.config.ts : ${error}`;
   }
 }
+/**
+ *
+ * @param nuxtConfigFileJson
+ */
 export function nuxtUpdateContentFileNuxtConfigTs(
   nuxtConfigFileJson: INuxtConfigTs,
 ): INuxtConfigTs {

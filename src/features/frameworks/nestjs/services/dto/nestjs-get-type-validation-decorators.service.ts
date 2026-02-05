@@ -1,8 +1,11 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { VALIDATION_DECORATORS } from "../../constant/nestjs-constants.constant";
 
 /**
  * Génère les décorateurs de validation basés sur le type.
+ * @param column
+ * @param validationImports
  */
 export function nestjsGetTypeValidationDecorators(
   column: IColumnJson,

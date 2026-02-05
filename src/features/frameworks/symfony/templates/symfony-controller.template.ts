@@ -1,3 +1,7 @@
+/**
+ *
+ * @param name
+ */
 export function getControllerTemplate(name: string): string {
   return `<?php
 

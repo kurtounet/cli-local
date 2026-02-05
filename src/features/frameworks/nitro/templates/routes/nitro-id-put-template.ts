@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nitroIdPutTemplate(entity: IEntityJson): string {
   return ` import { ${entity.namePascalCase}Service } from './${entity.nameKebabCase}.service'
 import { update${entity.namePascalCase}Schema } from '../../../shared/schemas/${entity.nameKebabCase}.schema'

@@ -1,6 +1,7 @@
 import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { generateValue, item } from "../utils/generate-value.utils";
 import { snakeToCamel } from "@utils/convert";
+
+import { generateValue, item } from "../utils/generate-value.utils";
 
 // export function item(entity: IEntityJson): Record<string, unknown> {
 //   return Object.fromEntries(
@@ -11,6 +12,11 @@ import { snakeToCamel } from "@utils/convert";
 //   );
 // }
 
+/**
+ *
+ * @param str
+ * @param spaces
+ */
 function indentBlock(str: string, spaces = 2) {
   const pad = " ".repeat(spaces);
   return str
@@ -21,12 +27,12 @@ function indentBlock(str: string, spaces = 2) {
 
 /**
  * Génère un fichier de seed Drizzle pour une entité
- * @param entity Définition d'entité
- * @param count  Nombre de lignes à générer (par défaut 10)
+ * @param entity - Définition d'entité
+ * @param count  - Nombre de lignes à générer (par défaut 10)
  */
 export function drizzleSeedEntityTemplate(entity: IEntityJson) {
   const count = 10;
-  let properties: string = "";
+  let properties = "";
   const exclude = ["id", "created_at", "updated_at"];
 
   /* const seeds = Array.from({ length: count }, () => item(entity, exclude));

@@ -1,10 +1,11 @@
 import { EMOJI } from "@/assets/messages.js";
-import { IAppContext } from "@/types/context.interface.js";
-import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IInstallFramework } from "@/features/commun/framework.interface.js";
-import { BaseFrameworkService } from "../../services/base-framework.service.js";
+import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
+import { IAppContext } from "@/types/context.interface.js";
+
 import { IFrameworkService } from "../../interfaces/framework-service.interface.js";
+import { BaseFrameworkService } from "../../services/base-framework.service.js";
 
 export class AngularService
   extends BaseFrameworkService
@@ -20,6 +21,9 @@ export class AngularService
 
   /**
    * Point d'entrée principal pour la génération Angular
+   * @param project
+   * @param entitiesJson
+   * @param fileMdj
    */
   generate = async (
     project: IProjectConfig,
@@ -29,7 +33,7 @@ export class AngularService
     this.config = (await this.buildInstallFramework(
       project,
       this.frameworkName,
-    )) as IInstallFramework;
+    ))!;
 
     if (this.config === null) {
       return;

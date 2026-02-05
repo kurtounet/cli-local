@@ -1,22 +1,24 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
 import { logInfo } from "@utils/logger";
+
 import { angularFormEntityTemplate } from "../templates/angular-entity.template";
+import { angularFormCssEntityTemplate } from "../templates/component/form/angular-form-css-entity.template";
+import { angularFormHtmlEntityTemplate } from "../templates/component/form/angular-form-html-entity.template";
 import { angularFormSpecEntityTemplate } from "../templates/component/form/angular-form-spec-entity.template";
 import { angularFormTscEntityTemplate } from "../templates/component/form/angular-form-ts-entity.template";
-import { angularFormHtmlEntityTemplate } from "../templates/component/form/angular-form-html-entity.template";
-import { angularFormCssEntityTemplate } from "../templates/component/form/angular-form-css-entity.template";
 
 /**
  * Generates an Angular form entity.
- * @param  componentDir  The entity JSON object.
- * @param entity The entity JSON object.
- * @param prefix  prefix for the files ex : ".component.extension".
+ * @param  componentDir  - The entity JSON object.
+ * @param entity - The entity JSON object.
+ * @param typeForm
+ * @param prefix  - prefix for the files ex : ".component.extension".
  */
 export function angularGenerateFormEntityService(
   componentDir: string,
   entity: IEntityJson,
-  typeForm: string = "",
+  typeForm = "",
   prefix: string,
 ) {
   writeFile(

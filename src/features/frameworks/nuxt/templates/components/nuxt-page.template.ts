@@ -1,4 +1,8 @@
-export function nuxtPageComponentTemplate(title: string = "") {
+/**
+ *
+ * @param title
+ */
+export function nuxtPageComponentTemplate(title = "") {
   return `
 <template>
   <section class="section-page">

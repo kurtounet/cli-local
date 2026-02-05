@@ -1,4 +1,5 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { ColumnDecoratorsResult } from "../../models/nestjs-column-decorators-result.model";
 import { nestjsGetColumnDecoratorEntity } from "./nestjs-get-column-decorator-entity-service";
 
@@ -28,6 +29,10 @@ export function nestjsGetColumnsDecoratorsEntity(
   return { decorators, typeormImports };
 }
 
+/**
+ *
+ * @param column
+ */
 function nestjGetColumnDecoratorEntity(column: IColumnJson): {
   decorator: any;
   imports: any;

@@ -1,9 +1,10 @@
-import { SCRIPTS_NITRO_MOCK } from "./nitro-scripts.mock";
+import { IFramework } from "@frameworks-models/framework-commun.model";
+
+import { ARCHITECTURE_NITRO_MOCK } from "./nitro-architecture.mock";
 import { DEPENDENCIES_NITRO_MOCK } from "./nitro-dependencies.mock";
 import { ENVIRONMENTS_NITRO_MOCK } from "./nitro-environments.mock";
-import { ARCHITECTURE_NITRO_MOCK } from "./nitro-architecture.mock";
 import { INSTALL_OPTIONS_NITRO_MOCK } from "./nitro-install-options.mock";
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import { SCRIPTS_NITRO_MOCK } from "./nitro-scripts.mock";
 
 export const CONFIG_INIT_NITRO: IFramework = {
   type: "backend",

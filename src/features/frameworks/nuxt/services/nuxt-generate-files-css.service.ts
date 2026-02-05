@@ -1,7 +1,12 @@
 import { writeFile } from "@utils/file-utils";
-import { nuxtTailwindCssTemplate } from "../templates/css/nuxt-tailwind-css.template";
-import { nuxtMainCssTemplate } from "../templates/css/nuxt-main-css.template";
 
+import { nuxtMainCssTemplate } from "../templates/css/nuxt-main-css.template";
+import { nuxtTailwindCssTemplate } from "../templates/css/nuxt-tailwind-css.template";
+
+/**
+ *
+ * @param rootPathProjectFramework
+ */
 export function nuxtGenerateFilesCssService(
   rootPathProjectFramework: string,
 ): void {

@@ -1,6 +1,10 @@
 // Template pour une interfacereact
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getReactInterfaceTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

@@ -1,6 +1,10 @@
 // Template pour une entité Nuxt
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getNuxtEntityTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

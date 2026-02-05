@@ -1,6 +1,8 @@
 import chalk from "chalk";
-import { BaseService } from "./base-service.service.js";
+
 import { ILoggerService } from "@/types/services/logger-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class LoggerService extends BaseService implements ILoggerService {
   readonly serviceName = "LoggerService";

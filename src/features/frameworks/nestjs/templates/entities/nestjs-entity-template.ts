@@ -3,12 +3,13 @@ import {
   IEntityJson,
   IRelation,
 } from "@parsersMdj/models/entity-json.model";
-import { nestjsGetColumnsDecoratorsEntity } from "../../services/entity/nestjs-get-columns-decorators-entity-service";
-import { EntityProperty } from "../../models/nestjs-entity-property.model";
+
 import { TYPEORM_DECORATORS } from "../../constant/nestjs-constants.constant";
-import { nestjsGetRelationshipsEntity } from "../../services/entity/nestjs-get-relationships-entity-service";
+import { EntityProperty } from "../../models/nestjs-entity-property.model";
 import { buildImportStatements } from "../../services/entity/nestjs-build-import-statements-service";
 import { nestjsGenerateEntityFile } from "../../services/entity/nestjs-generate-entity-file-service";
+import { nestjsGetColumnsDecoratorsEntity } from "../../services/entity/nestjs-get-columns-decorators-entity-service";
+import { nestjsGetRelationshipsEntity } from "../../services/entity/nestjs-get-relationships-entity-service";
 
 /**
  * Génère le contenu complet du fichier d'entité NestJS sous forme de chaîne.

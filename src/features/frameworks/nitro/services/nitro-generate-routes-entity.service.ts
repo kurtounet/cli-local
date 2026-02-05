@@ -1,13 +1,20 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
-import { nitroIndexGetTemplate } from "../templates/routes/nitro-index-get-template";
-import { nitroIndexPostTemplate } from "../templates/routes/nitro-index-post-template";
-import { nitroIdGetTemplate } from "../templates/routes/nitro-id-get-template";
-import { nitroIdPutTemplate } from "../templates/routes/nitro-id-put-template";
-import { nitroIdPatchTemplate } from "../templates/routes/nitro-id-patch-template";
-import { nitroIdDeleteTemplate } from "../templates/routes/nitro-id-delete-template";
 import { logInfo } from "@utils/logger";
 
+import { nitroIdDeleteTemplate } from "../templates/routes/nitro-id-delete-template";
+import { nitroIdGetTemplate } from "../templates/routes/nitro-id-get-template";
+import { nitroIdPatchTemplate } from "../templates/routes/nitro-id-patch-template";
+import { nitroIdPutTemplate } from "../templates/routes/nitro-id-put-template";
+import { nitroIndexGetTemplate } from "../templates/routes/nitro-index-get-template";
+import { nitroIndexPostTemplate } from "../templates/routes/nitro-index-post-template";
+
+/**
+ *
+ * @param rootServerApi
+ * @param entity
+ * @param mode
+ */
 export function nitroGenerateRoutesEntityService(
   rootServerApi: string,
   entity: IEntityJson,

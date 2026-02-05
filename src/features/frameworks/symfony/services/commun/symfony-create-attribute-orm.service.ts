@@ -1,5 +1,11 @@
 import { symfonyGetAttributeTypeORM } from "../../utils/mapping";
 
+/**
+ *
+ * @param propName
+ * @param type
+ * @param length
+ */
 export function symfonyCreateAttributeORM(
   propName: string,
   type: string,

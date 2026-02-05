@@ -1,25 +1,26 @@
+import { ProjectService } from "@/features/project/services/project.service.js";
+import { TaskService } from "@/features/project/services/task.service.js";
 import { AiService } from "@/services/ai.service.js";
+import { ArchitectureService } from "@/services/architecture.service.js";
 import { AstService } from "@/services/ast.service.js";
-import { ToolService } from "@/services/tool.service.js";
 import { CaseService } from "@/services/case.service.js";
 import { ConfigService } from "@/services/config.service.js";
-import { StateService } from "@/services/state.service.js";
-import { LoggerService } from "@/services/logger.service.js";
-import { PromptService } from "@/services/prompt.service.js";
-import { PluginService } from "@/services/plugin.service.js";
-import { TemplateService } from "@/services/template.service.js";
-import { GeneratorService } from "@/services/generator.service.js";
+import { DataManagerService } from "@/services/data-manager.service.js";
 import { FileSystemService } from "@/services/file-system.service.js";
+import { GeneratorService } from "@/services/generator.service.js";
+import { GitService } from "@/services/git.service.js";
+import { HandlerErrorService } from "@/services/handler-error.service.js";
+import { LoggerService } from "@/services/logger.service.js";
+import { PluginService } from "@/services/plugin.service.js";
+import { PromptService } from "@/services/prompt.service.js";
+import { ShellService } from "@/services/shell.service.js";
+import { StateService } from "@/services/state.service.js";
+import { TemplateService } from "@/services/template.service.js";
+import { ToolService } from "@/services/tool.service.js";
+import { IBaseService } from "@/types/services/base-service.interface.js";
+
 import { ServicesContainer } from "../services/services-container.js";
 import { IAppContext, ICliConfig } from "../types/context.interface.js";
-import { DataManagerService } from "@/services/data-manager.service.js";
-import { HandlerErrorService } from "@/services/handler-error.service.js";
-import { ArchitectureService } from "@/services/architecture.service.js";
-import { IBaseService } from "@/types/services/base-service.interface.js";
-import { ProjectService } from "@/features/project/services/project.service.js";
-import { ShellService } from "@/services/shell.service.js";
-import { GitService } from "@/services/git.service.js";
-import { TaskService } from "@/features/project/services/task.service.js";
 
 /**
  * Builder pour la construction du contexte de l'application

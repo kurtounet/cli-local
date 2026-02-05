@@ -1,9 +1,13 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entities
+ */
 export function nestjsSeedTemplate(entities: IEntityJson[]): string {
-  let awaitSeeder: string[] = [];
-  let importEntitiesSeeder: string[] = [];
-  let constSeeder: string[] = [];
+  const awaitSeeder: string[] = [];
+  const importEntitiesSeeder: string[] = [];
+  const constSeeder: string[] = [];
   entities.map((entity: IEntityJson) => {
     importEntitiesSeeder.push(
       `import { ${entity.namePascalCase}Seeder } from './${entity.nameKebabCase}.seeder';`,

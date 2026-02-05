@@ -2,30 +2,34 @@ import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 const n = "\n";
 const indent = "  ";
-type ValidatorMapping = {
+interface ValidatorMapping {
   importDecorators: string[];
   validators: Validators;
-};
-type Validators = {
+}
+interface Validators {
   name: string;
   nullable: string;
   typeSql: string;
   tsType: string;
   decorators: string[];
-};
+}
+/**
+ *
+ * @param entity
+ */
 export function nestjsCreateDtoTemplate(entity: IEntityJson): string {
-  let dtoProperties: Validators[] = [];
+  const dtoProperties: Validators[] = [];
   const importClassValidators = new Set<string>();
 
   entity.columns?.map((column: IColumnJson) => {
-    let result = mapSqlTypeToValidators(column);
+    const result = mapSqlTypeToValidators(column);
 
     result.importDecorators.map((importLine: string) =>
       importClassValidators.add(`${importLine}`),
     );
     dtoProperties.push(result.validators);
   });
-  let dtoImports = [
+  const dtoImports = [
     // `import { Type } from 'class-transformer';`,
     `import { ApiProperty } from '@nestjs/swagger';`,
     `import { ${[...importClassValidators].map((importLine: string) => importLine).join(", ")} } from 'class-validator';`,
@@ -36,11 +40,15 @@ export class Create${entity.namePascalCase}Dto {
 ${dtoProperties.map((property: Validators) => `${property.decorators.join("\n")}${n}${indent}${property.name}${property.nullable}: ${property.tsType};`).join("\n\n")}${n}}${n}`;
 }
 
+/**
+ *
+ * @param column
+ */
 function mapSqlTypeToValidators(column: IColumnJson): ValidatorMapping {
   const type = column.typeSql.toUpperCase();
   const length = Number(column.length);
   const precision = Number(column.precision) || 2;
-  let arrayImports: string[] = [];
+  const arrayImports: string[] = [];
   if (
     ["INT", "INTEGER", "SMALLINT", "TINYINT", "MEDIUMINT", "BIGINT"].includes(
       type,
@@ -210,11 +218,15 @@ function mapSqlTypeToValidators(column: IColumnJson): ValidatorMapping {
     },
   };
 }
+/**
+ *
+ * @param column
+ */
 function propertyNameToValidators(column: IColumnJson): ValidatorMapping {
   const type = column.typeSql.toUpperCase();
   const length = Number(column.length);
   const precision = Number(column.precision);
-  let arrayImports: string[] = [];
+  const arrayImports: string[] = [];
   if (
     ["INT", "INTEGER", "SMALLINT", "TINYINT", "MEDIUMINT", "BIGINT"].includes(
       type,

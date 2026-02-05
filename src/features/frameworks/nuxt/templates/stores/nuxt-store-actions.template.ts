@@ -1,6 +1,10 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsFindAllTemplate(entity: IEntityJson): string {
   return `
     async findAll() {
@@ -14,6 +18,10 @@ export function nuxtStoreActionsFindAllTemplate(entity: IEntityJson): string {
     },    
 `;
 }
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsFindByIdTemplate(entity: IEntityJson): string {
   return `
     async findById(id: number) {
@@ -38,6 +46,10 @@ export function nuxtStoreActionsFindByIdTemplate(entity: IEntityJson): string {
       }
     },`;
 }
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsCreateTemplate(entity: IEntityJson): string {
   return `
     async create(body:${entity.namePascalCase}Insert) {
@@ -56,6 +68,10 @@ export function nuxtStoreActionsCreateTemplate(entity: IEntityJson): string {
       }
     },`;
 }
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsCreateManyTemplate(
   entity: IEntityJson,
 ): string {
@@ -85,6 +101,10 @@ export function nuxtStoreActionsCreateManyTemplate(
     },
 `;
 }
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsUpdateTemplate(entity: IEntityJson): string {
   return `
     async update(body: Partial<${entity.namePascalCase}>): Promise<${entity.namePascalCase}> {
@@ -112,6 +132,10 @@ export function nuxtStoreActionsUpdateTemplate(entity: IEntityJson): string {
     },
 `;
 }
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsDeleteTemplate(entity: IEntityJson): string {
   return `
     async delete(id: number) {
@@ -132,6 +156,10 @@ export function nuxtStoreActionsDeleteTemplate(entity: IEntityJson): string {
 `;
 }
 
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreActionsFindAllCacheTemplate(
   entity: IEntityJson,
 ): string {

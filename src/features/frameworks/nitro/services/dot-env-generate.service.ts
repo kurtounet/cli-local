@@ -1,6 +1,12 @@
 import { IProjectConfig } from "@features/frameworks/models/framework-commun.model";
-import { dotEnvTemplate } from "../templates/utils/dot.env.template";
 import { writeFile } from "@utils/file-utils";
+
+import { dotEnvTemplate } from "../templates/utils/dot.env.template";
+/**
+ *
+ * @param projectPath
+ * @param configFile
+ */
 export function dotEnvGenerateService(
   projectPath: string,
   configFile: IProjectConfig,

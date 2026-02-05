@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsAuthModuleTemplate() {
   return `import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';

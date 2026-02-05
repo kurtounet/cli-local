@@ -8,6 +8,10 @@ import { snakeToCamel, snakeToKebab, snakeToPascal } from "@utils/convert";
 const n = "\n";
 const indent = "  ";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsResponseDtoTemplate(entity: IEntityJson): string {
   const entityImports = new Set<string>();
   const properties: string[] = [];

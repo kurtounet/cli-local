@@ -1,5 +1,9 @@
 import { IEnvironment } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ * @param environment
+ */
 export function nestjsEnvironmentsTemplate(environment: IEnvironment) {
   return `MODE=${environment.mode}
 DEBUG=${environment.debug}

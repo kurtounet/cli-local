@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function ARCHITECTURE_ANGULAR_MOCK() {
   return [
     {
@@ -38,15 +41,27 @@ export function ARCHITECTURE_ANGULAR_MOCK() {
     },
   ];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_ANGULAR_CORE_MOCK() {
   return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK()];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_ANGULAR_DIR_SHARED_MOCK() {
   return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK()];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_ANGULAR_DIR_FEATURE_MOCK() {
   return [...ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK()];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_ANGULAR_DIR_GENERAL_MOCK() {
   return [
     {

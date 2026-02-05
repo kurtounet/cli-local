@@ -1,5 +1,6 @@
 import { IConfigDatabase } from "@/features/commun/database.interface.js";
 import { IConfigFramework } from "@/features/commun/framework.interface.js";
+
 import {
   DATABASE_MAP,
   FRAMEWORK_MAP,
@@ -8,11 +9,11 @@ import {
 export class ConfigFrameworkService {
   readonly serviceName = "ConfigFrameworkService";
 
-  configFrameworks(frameWorks: Array<string>): Array<IConfigFramework> {
-    let configFramework: Array<IConfigFramework> = [];
+  configFrameworks(frameWorks: string[]): IConfigFramework[] {
+    const configFramework: IConfigFramework[] = [];
     frameWorks.forEach((element) => {
       if (element != "no") {
-        let config = this.configFrameworkMock(element);
+        const config = this.configFrameworkMock(element);
         if (config != null) {
           configFramework.push(config);
         }
@@ -20,10 +21,10 @@ export class ConfigFrameworkService {
     });
     return configFramework;
   }
-  configDatabases(database: Array<string>): Array<IConfigDatabase> {
-    let configDatabase: Array<IConfigDatabase> = [];
+  configDatabases(database: string[]): IConfigDatabase[] {
+    const configDatabase: IConfigDatabase[] = [];
     database.forEach((element) => {
-      let config = this.configDatabaseMock(element);
+      const config = this.configDatabaseMock(element);
       if (config != null) {
         configDatabase.push(config);
       }

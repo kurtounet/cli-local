@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsJwtPayloadInterfaceTemplate() {
   return `export interface JwtPayload {
   email: string;

@@ -1,5 +1,9 @@
 import { IDatabase } from "@frameworks-models/database.model";
 
+/**
+ *
+ * @param db
+ */
 export function symfonyEnvDatabaseUrlTemplate(db: IDatabase): string {
   let DATABASE_URL = "";
   switch (db.type) {

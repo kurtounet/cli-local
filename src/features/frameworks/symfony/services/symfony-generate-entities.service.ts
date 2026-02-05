@@ -1,16 +1,17 @@
-import path from "path";
-import { symfonyGenerateAccessorsScalarService } from "./symfony-generate-accessors-scalar.service";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { buildAndsaveFile } from "@utils/file-utils";
 import { snakeToCamel } from "@utils/convert";
-import { symfonyEntityRepositoryTemplate } from "../templates/symfony-repository.template";
-import { symfonyCreateAttributeORM } from "./commun/symfony-create-attribute-orm.service";
-import { symfonyGetPropertyType } from "../utils/mapping";
-import { symfonyEntityTemplate } from "../templates/symfony-entity.template";
-import { INDENT } from "../constant/symfony-constants.constant";
-import { symfonyGenerateRelationShipsService } from "./symfony-generate-relationships.service";
+import { buildAndsaveFile } from "@utils/file-utils";
 import { logError, logInfo } from "@utils/logger";
+import path from "path";
+
+import { INDENT } from "../constant/symfony-constants.constant";
+import { symfonyEntityTemplate } from "../templates/symfony-entity.template";
+import { symfonyEntityRepositoryTemplate } from "../templates/symfony-repository.template";
+import { symfonyGetPropertyType } from "../utils/mapping";
+import { symfonyCreateAttributeORM } from "./commun/symfony-create-attribute-orm.service";
 import { symfonyCreateAttributeValidation } from "./commun/symfony-create-attribute-validation.service";
+import { symfonyGenerateAccessorsScalarService } from "./symfony-generate-accessors-scalar.service";
+import { symfonyGenerateRelationShipsService } from "./symfony-generate-relationships.service";
 
 const { execSync } = require("child_process");
 const { spawnSync } = require("child_process");
@@ -29,10 +30,16 @@ interface IEntityGenerationResult {
 }
 
 // Fonction principale pour générer une entité
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ * @param platform
+ */
 export function symfonyGenerateEntityService(
   frameworkPath: string,
   entity: IEntityJson,
-  platform: string = "symfony",
+  platform = "symfony",
 ): void {
   const paths = getEntityPaths(frameworkPath);
   const generatedContent = generateEntityContent(entity);
@@ -41,6 +48,10 @@ export function symfonyGenerateEntityService(
 }
 
 // Obtenir les chemins des dossiers Entity et Repository
+/**
+ *
+ * @param frameworkPath
+ */
 function getEntityPaths(frameworkPath: string): {
   entity: string;
   repository: string;
@@ -52,6 +63,10 @@ function getEntityPaths(frameworkPath: string): {
 }
 
 // Générer tout le contenu de l'entité
+/**
+ *
+ * @param entity
+ */
 function generateEntityContent(entity: IEntityJson): IEntityGenerationResult {
   const properties = generatePropertiesContent(entity);
   const accessors = generateAccessorsContent(entity);
@@ -61,6 +76,10 @@ function generateEntityContent(entity: IEntityJson): IEntityGenerationResult {
 }
 
 // Générer le contenu des propriétés
+/**
+ *
+ * @param entity
+ */
 function generatePropertiesContent(entity: IEntityJson): string {
   if (!entity.columns) return "";
 
@@ -84,6 +103,10 @@ function generatePropertiesContent(entity: IEntityJson): string {
 }
 
 // Générer le contenu des accesseurs
+/**
+ *
+ * @param entity
+ */
 function generateAccessorsContent(entity: IEntityJson): string {
   if (!entity.columns) return "";
 
@@ -96,6 +119,10 @@ function generateAccessorsContent(entity: IEntityJson): string {
 }
 
 // Générer le contenu des relations
+/**
+ *
+ * @param entity
+ */
 function generateRelationsContent(entity: IEntityJson): string {
   if (!entity.relationships) return "";
 
@@ -105,6 +132,14 @@ function generateRelationsContent(entity: IEntityJson): string {
 }
 
 // Sauvegarder les fichiers d'entité et de repository
+/**
+ *
+ * @param paths
+ * @param paths.entity
+ * @param paths.repository
+ * @param entity
+ * @param content
+ */
 function saveEntityFiles(
   paths: { entity: string; repository: string },
   entity: IEntityJson,
@@ -127,6 +162,12 @@ function saveEntityFiles(
 }
 
 // Générer une propriété PHP
+/**
+ *
+ * @param entityName
+ * @param propName
+ * @param type
+ */
 export function getProperty(
   entityName: string,
   propName: string,
@@ -137,6 +178,10 @@ export function getProperty(
 }
 
 // Valider une entité avant génération
+/**
+ *
+ * @param entity
+ */
 function validateEntity(entity: IEntityJson): string[] {
   const errors: string[] = [];
 
@@ -163,6 +208,11 @@ function validateEntity(entity: IEntityJson): string[] {
 }
 
 // Générer plusieurs entités d'un coup
+/**
+ *
+ * @param frameworkPath
+ * @param entities
+ */
 export function symfonyGenerateMultipleEntitiesService(
   frameworkPath: string,
   entities: IEntityJson[],
@@ -187,21 +237,37 @@ export function symfonyGenerateMultipleEntitiesService(
 }
 
 // Générer seulement les relations d'une entité
+/**
+ *
+ * @param entity
+ */
 export function generateEntityRelationsOnly(entity: IEntityJson): string {
   return generateRelationsContent(entity);
 }
 
 // Générer seulement les propriétés d'une entité
+/**
+ *
+ * @param entity
+ */
 export function generateEntityPropertiesOnly(entity: IEntityJson): string {
   return generatePropertiesContent(entity);
 }
 
 // Générer seulement les accesseurs d'une entité
+/**
+ *
+ * @param entity
+ */
 export function generateEntityAccessorsOnly(entity: IEntityJson): string {
   return generateAccessorsContent(entity);
 }
 
 // Obtenir les statistiques d'une entité
+/**
+ *
+ * @param entity
+ */
 function getEntityStats(entity: IEntityJson): {
   columnsCount: number;
   relationsCount: number;
@@ -233,6 +299,11 @@ function getEntityStats(entity: IEntityJson): {
 // }
 
 // Exemple d'utilisation avec validation
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function generateEntityWithValidation(
   frameworkPath: string,
   entity: IEntityJson,

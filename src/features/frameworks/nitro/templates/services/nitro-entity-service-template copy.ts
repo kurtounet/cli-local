@@ -65,6 +65,10 @@ export interface GenericRepository<T extends BaseEntity> {
 // template/nitro-entity-service.template.ts
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nitroEntityServiceTemplate(entity: IEntityJson): string {
   return `// file: server/api/${entity.nameCamelCase}/${entity.nameCamelCase}.service.ts
 import { ${entity.nameCamelCase}Repository } from './${entity.nameCamelCase}.repository';

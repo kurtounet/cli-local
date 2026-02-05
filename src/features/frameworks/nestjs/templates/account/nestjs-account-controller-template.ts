@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsAccountControllerTemplate() {
   return `// src/account/account.controller.ts
 import {

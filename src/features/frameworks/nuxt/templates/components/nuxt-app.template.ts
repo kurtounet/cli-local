@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nuxtAppComponentTemplate() {
   return `
 <template>

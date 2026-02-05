@@ -3,25 +3,29 @@ import { logInfo } from "@utils/logger";
 
 const n = "\n";
 const indent = "  ";
-type ValidatorMapping = {
+interface ValidatorMapping {
   importDecorators: string[];
   validators: Validators;
-};
-type Validators = {
+}
+interface Validators {
   name: string;
   nullable?: string;
   typeSql: string;
   tsType: string;
   decorators: string[];
-};
+}
+/**
+ *
+ * @param entity
+ */
 export function nestjsresponseDtoTemplate(entity: IEntityJson): string {
   logInfo(`"ResponseDto", ${entity.namePascalCase}`);
 
-  let dtoProperties: Validators[] = [];
+  const dtoProperties: Validators[] = [];
   const importClassValidators = new Set<string>();
 
   entity.columns?.map((column: IColumnJson) => {
-    let result = mapSqlTypeToValidators(column);
+    const result = mapSqlTypeToValidators(column);
 
     result.importDecorators.map((importLine: string) =>
       importClassValidators.add(`${importLine}`),
@@ -29,7 +33,7 @@ export function nestjsresponseDtoTemplate(entity: IEntityJson): string {
 
     dtoProperties.push(result.validators);
   });
-  let dtoImports = [
+  const dtoImports = [
     // `import { Type } from 'class-transformer';`,
     // `import { ApiProperty } from '@nestjs/swagger';`,
     `import { Expose } from 'class-transformer';`,
@@ -41,11 +45,15 @@ export class Response${entity.namePascalCase}Dto {
 ${dtoProperties.map((property: Validators) => `${indent}@Expose()${n}${indent}${property.name}${property.nullable}: ${property.tsType};`).join("\n\n")}${n}}${n}`;
 }
 
+/**
+ *
+ * @param column
+ */
 function mapSqlTypeToValidators(column: IColumnJson): ValidatorMapping {
   const type = column.typeSql.toUpperCase();
   const length = Number(column.length);
   const precision = Number(column.precision) || 2;
-  let arrayImports: string[] = [];
+  const arrayImports: string[] = [];
   if (
     ["INT", "INTEGER", "SMALLINT", "TINYINT", "MEDIUMINT", "BIGINT"].includes(
       type,

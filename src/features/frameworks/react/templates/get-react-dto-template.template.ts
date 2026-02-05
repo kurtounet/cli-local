@@ -2,6 +2,10 @@
 
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getReactDtoTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

@@ -6,7 +6,8 @@ export interface IFrameworkService {
   /** Nom unique du service pour le logging ou le debugging */
   readonly serviceName: string;
 
-  /** * La méthode principale appelée par le FrameworkService (Chef d'orchestre).
+  /**
+   * La méthode principale appelée par le FrameworkService (Chef d'orchestre).
    * Elle doit être définie comme une propriété de fonction (arrow function)
    * pour préserver le contexte 'this'.
    */

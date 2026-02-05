@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function drizzleColumnsHelpersTemplate() {
   return `const timestamps = {
   updated_at: timestamp(),

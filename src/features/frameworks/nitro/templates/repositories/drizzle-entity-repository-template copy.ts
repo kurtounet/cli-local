@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function drizzleEntityRepositoryTemplate(entity: IEntityJson): string {
   return `// file: server/api/${entity.nameCamelCase}/${entity.nameCamelCase}.repository.ts
 import { drizzle } from 'drizzle-orm/node-postgres';

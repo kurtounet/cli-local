@@ -1,31 +1,36 @@
+import { installTSDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
+import { typesTemplate } from "@features/frameworks/commun/templates/types-entity.template";
+import { drizzleGenerateConfigService } from "@features/frameworks/drizzle/services/drizzle-generate-config.service";
+import { drizzleGenerateIndexSchemasService } from "@features/frameworks/drizzle/services/drizzle-generate-index-schemas.service";
+import { drizzleGenerateIndexSeedService } from "@features/frameworks/drizzle/services/drizzle-generate-index-seed.service";
+import { drizzleGenerateSchemaService } from "@features/frameworks/drizzle/services/drizzle-generate-schema.service";
+import { drizzleGenerateSchemaEntityService } from "@features/frameworks/drizzle/services/drizzle-generate-schema-entity.service";
+import { drizzleGenerateScriptCreateDatabase } from "@features/frameworks/drizzle/services/drizzle-generate-script-create-database.service";
+import { drizzleGenerateSeedEntityService } from "@features/frameworks/drizzle/services/drizzle-generate-seed-entity.service";
+import { drizzleGenerateTypesDbService } from "@features/frameworks/drizzle/services/drizzle-generate-types-db.service";
+import { drizzleSchemaTemplate } from "@features/frameworks/drizzle/templates/drizzle-schemas.template";
+import { nuxtGenerateModelSchemaEntityService } from "@features/frameworks/nuxt/services/nuxt-generate-model-schema-entity.service";
 import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { nitroGenerateServiceEntityService } from "./nitro-generate-service-entity.service";
-import { nitroGenerateConnectionDrizzleService } from "./nitro-generate-connection-drizzle.service";
-import { nitroGenerateRoutesEntityService } from "./nitro-generate-routes-entity.service";
 
-import { nitroGenerateRepositoryEntityService } from "./nitro-generate-repository-entity.service";
-
-import { drizzleSchemaTemplate } from "@features/frameworks/drizzle/templates/drizzle-schemas.template";
-import { drizzleGenerateTypesDbService } from "@features/frameworks/drizzle/services/drizzle-generate-types-db.service";
-import { drizzleGenerateIndexSeedService } from "@features/frameworks/drizzle/services/drizzle-generate-index-seed.service";
-import { drizzleGenerateSeedEntityService } from "@features/frameworks/drizzle/services/drizzle-generate-seed-entity.service";
-import { drizzleGenerateConfigService } from "@features/frameworks/drizzle/services/drizzle-generate-config.service";
 import { dotEnvGenerateService } from "./dot-env-generate.service";
-import { drizzleGenerateSchemaService } from "@features/frameworks/drizzle/services/drizzle-generate-schema.service";
-import { drizzleGenerateScriptCreateDatabase } from "@features/frameworks/drizzle/services/drizzle-generate-script-create-database.service";
-
-import { drizzleGenerateSchemaEntityService } from "@features/frameworks/drizzle/services/drizzle-generate-schema-entity.service";
-import { nuxtGenerateModelSchemaEntityService } from "@features/frameworks/nuxt/services/nuxt-generate-model-schema-entity.service";
-
-import { drizzleGenerateIndexSchemasService } from "@features/frameworks/drizzle/services/drizzle-generate-index-schemas.service";
-import { installTSDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
-import { typesTemplate } from "@features/frameworks/commun/templates/types-entity.template";
+import { nitroGenerateConnectionDrizzleService } from "./nitro-generate-connection-drizzle.service";
+import { nitroGenerateRepositoryEntityService } from "./nitro-generate-repository-entity.service";
+import { nitroGenerateRoutesEntityService } from "./nitro-generate-routes-entity.service";
+import { nitroGenerateServiceEntityService } from "./nitro-generate-service-entity.service";
 import { nitroGenerateSpecificFileService } from "./nitro-generate-specific-file-.service";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param configFile
+ * @param framework
+ * @param entitiesJsonFile
+ * @param mode
+ */
 export function nitroGenerateFilesFramework(
   rootPathProjectFramework: string,
   configFile: IProjectConfig,

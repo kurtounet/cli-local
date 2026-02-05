@@ -1,10 +1,16 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
+import { logSuccess } from "@utils/logger";
+
+import { apiPlatformEntityDeleteProcessorTemplate } from "../../templates/api-platform/states/processors/api-platform-entity-delete-processor.template";
 import { apiPlatformEntityPostProcessorTemplate } from "../../templates/api-platform/states/processors/api-platform-entity-post-processor.template";
 import { apiPlatformEntityUpdateProcessorTemplate } from "../../templates/api-platform/states/processors/api-platform-entity-update-processor.template";
-import { logSuccess } from "@utils/logger";
-import { apiPlatformEntityDeleteProcessorTemplate } from "../../templates/api-platform/states/processors/api-platform-entity-delete-processor.template";
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function apiPlatformEntityProcessorService(
   frameworkPath: string,
   entity: IEntityJson,

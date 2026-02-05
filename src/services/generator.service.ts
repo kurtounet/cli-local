@@ -1,8 +1,10 @@
-import path from "path";
 import * as fs from "fs";
-import { BaseService } from "./base-service.service.js";
-import { IGeneratorService } from "@/types/services/generator.interface.js";
+import path from "path";
+
 import { IGenerateOptions } from "@/commands/GenerateCommand.js";
+import { IGeneratorService } from "@/types/services/generator.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class GeneratorService extends BaseService implements IGeneratorService {
   readonly serviceName = "GeneratorService";

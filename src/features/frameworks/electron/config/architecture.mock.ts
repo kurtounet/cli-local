@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function ARCHITECTURE_ELECTRON_MOCK() {
   return [
     {

@@ -1,8 +1,14 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
+
 import { drizzleSchemaFromEntityService } from "./drizzle-schema-from-entity.service";
 
 // ---------- table generator ----------
+/**
+ *
+ * @param rootServer
+ * @param entity
+ */
 export function drizzleGenerateSchemaEntityService(
   rootServer: string,
   entity: IEntityJson,

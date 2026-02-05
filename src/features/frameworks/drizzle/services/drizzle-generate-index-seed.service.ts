@@ -2,6 +2,11 @@ import { camelToKebab, capitalize } from "@utils/convert";
 import { writeFile } from "@utils/file-utils";
 import { logInfo } from "@utils/logger";
 
+/**
+ *
+ * @param rootServer
+ * @param entities
+ */
 export function drizzleGenerateIndexSeedService(
   rootServer: string,
   entities: string[],

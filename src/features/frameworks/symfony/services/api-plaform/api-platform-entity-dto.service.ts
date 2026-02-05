@@ -1,12 +1,18 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
-import { apiPlatformEntityCollectionDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-collection-dto.template";
 import { logSuccess } from "@utils/logger";
-import { apiPlatformEntityItemDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-item-dto.template";
-import { apiPlatformEntityCreateDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-create-dto.template";
-import { apiPlatformEntityUpdateDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-update-dto.template";
-import { apiPlatformEntityRessourceDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-ressource-dto.template";
 
+import { apiPlatformEntityCollectionDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-collection-dto.template";
+import { apiPlatformEntityCreateDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-create-dto.template";
+import { apiPlatformEntityItemDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-item-dto.template";
+import { apiPlatformEntityRessourceDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-ressource-dto.template";
+import { apiPlatformEntityUpdateDtoTemplate } from "../../templates/api-platform/dtos/api-platform-entity-update-dto.template";
+
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function apiPlatformEntityDtoService(
   frameworkPath: string,
   entity: IEntityJson,

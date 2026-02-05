@@ -1,4 +1,7 @@
 // src/account/interfaces/account.interface.ts
+/**
+ *
+ */
 export function nestjsAccountInterfaceTemplate() {
   return `export interface AccountInterface {
   id: number;

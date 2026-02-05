@@ -1,4 +1,7 @@
 // export const architectureAppMock: IDirectory[] = []
+/**
+ *
+ */
 export function architectureApp() {
   return [
     {

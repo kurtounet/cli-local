@@ -4,6 +4,10 @@ import {
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ * @param configFile
+ */
 export function drizzleConfigTemplate(configFile: IProjectConfig): string {
   if (!configFile.databases) {
     return "";

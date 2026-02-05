@@ -2,6 +2,12 @@ import {
   IConfigFramework,
   IInstallOptions,
 } from "@/features/commun/framework.interface.js";
+/**
+ *
+ * @param framework
+ * @param projectName
+ * @param options
+ */
 export function INSTALL_COMMAND_ANGULAR(
   framework: IConfigFramework,
   projectName: string,
@@ -9,6 +15,9 @@ export function INSTALL_COMMAND_ANGULAR(
 ): string {
   return `ng new ${projectName} --style=${framework.installOptions.style}  --ssr=false --ai-config="gemini" ${options || ""}`;
 }
+/**
+ *
+ */
 export function INSTALL_OPTIONS_ANGULAR_MOCK(): IInstallOptions {
   return {
     name: "frontend",

@@ -1,5 +1,8 @@
 import { IEnvironment } from "../models/framework-commun.model";
 
+/**
+ *
+ */
 export function ENVIRONMENTS_ELECTRON_MOCK(): IEnvironment[] {
   return [
     {

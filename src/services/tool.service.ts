@@ -1,6 +1,7 @@
 import { IFileNode } from "@/types/commun/file-node.interface.js";
-import { BaseService } from "./base-service.service.js";
 import { IToolService } from "@/types/services/tool-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class ToolService extends BaseService implements IToolService {
   readonly serviceName = "ToolService";

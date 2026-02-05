@@ -1,3 +1,10 @@
+/**
+ *
+ * @param entityName
+ * @param properties
+ * @param accessors
+ * @param relations
+ */
 export function symfonyEntityTemplate(
   entityName: string,
   properties: string,

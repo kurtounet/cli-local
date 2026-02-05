@@ -35,6 +35,10 @@ tsconfig.json
 
 import { IDirectory } from "@features/frameworks/models/framework-commun.model";
 
+/**
+ *
+ * @param path
+ */
 export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
   path: string,
 ): IDirectory[] {
@@ -66,6 +70,9 @@ export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
     { _type: "directory", name: "utils", gitIgnore: false, pathInProject: directory, children: [] },*/
   ];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_DIRECTORY_PROJECT_NUXT_MOCK(): IDirectory[] {
   const path = "./app";
   const directory: string[] = [
@@ -95,6 +102,9 @@ export function ARCHITECTURE_DIRECTORY_PROJECT_NUXT_MOCK(): IDirectory[] {
      */
   ];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_DIRECTORY_SHARED_NUXT_MOCK(): IDirectory[] {
   const path = "./shared";
   const directory: string[] = ["models", "schemas", "types"];
@@ -108,6 +118,9 @@ export function ARCHITECTURE_DIRECTORY_SHARED_NUXT_MOCK(): IDirectory[] {
     })),
   ];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_NUXT_MOCK() {
   const directory = "./";
   return [
@@ -255,6 +268,9 @@ export function ARCHITECTURE_NUXT_MOCK() {
   ];
 }
 
+/**
+ *
+ */
 export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
   return [
     // ---- LAYERS ----
@@ -883,6 +899,9 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
   ];
 }
 
+/**
+ *
+ */
 export function ARCHITECTURE_NUXT_LAYERS_CORE_UI_MOCK() {
   return [
     {

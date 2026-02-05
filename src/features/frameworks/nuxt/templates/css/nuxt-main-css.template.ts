@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nuxtMainCssTemplate(): string {
   return `root {
   color: #f9fafb;

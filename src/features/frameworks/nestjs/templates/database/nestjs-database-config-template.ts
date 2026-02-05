@@ -1,5 +1,9 @@
 import { logInfo } from "@utils/logger";
 
+/**
+ *
+ * @param projectPath
+ */
 export function nestjsDatabaseConfigTemplate(projectPath: string): string {
   logInfo("databaseConfig.ts du projet");
   return `import { TypeOrmModuleOptions } from '@nestjs/typeorm';

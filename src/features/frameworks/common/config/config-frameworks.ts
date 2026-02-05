@@ -1,9 +1,9 @@
-import { CONFIG_INIT_NUXT } from "../../nuxt/config/nuxt-config-ini.mock.js";
-import { CONFIG_INIT_ELECTRON } from "../../electron/config/config-ini.mock.js";
-import { CONFIG_INIT_NITRO } from "../../nitro/config/nitro-config-ini.mock.js";
-import { CONFIG_INIT_NESTJS } from "../../nestjs/config/nestjs-config-ini.mock.js";
-import { CONFIG_INIT_SYMFONY } from "../../symfony/config/symfony-config-ini.mock.js";
 import { CONFIG_INIT_ANGULAR } from "../../angular/config/angular-config-ini.mock.js";
+import { CONFIG_INIT_ELECTRON } from "../../electron/config/config-ini.mock.js";
+import { CONFIG_INIT_NESTJS } from "../../nestjs/config/nestjs-config-ini.mock.js";
+import { CONFIG_INIT_NITRO } from "../../nitro/config/nitro-config-ini.mock.js";
+import { CONFIG_INIT_NUXT } from "../../nuxt/config/nuxt-config-ini.mock.js";
+import { CONFIG_INIT_SYMFONY } from "../../symfony/config/symfony-config-ini.mock.js";
 
 export const FRAMEWORK_MAP: Record<string, any> = {
   nuxtjs: CONFIG_INIT_NUXT,
@@ -50,9 +50,9 @@ export const DATABASE_MAP: Record<string, any> = {
   },
 };
 
-export let FRAMEWORKS_FRONTEND = ["Angular", "Nuxtjs", "no"];
-export let DATABASES = ["Mysql", "Postgres", "Mongodb", "Sqlite", "no"];
-export let FRAMEWORKS_BACKEND = [
+export const FRAMEWORKS_FRONTEND = ["Angular", "Nuxtjs", "no"];
+export const DATABASES = ["Mysql", "Postgres", "Mongodb", "Sqlite", "no"];
+export const FRAMEWORKS_BACKEND = [
   "Nitro",
   "Nestjs",
   "Symfony",

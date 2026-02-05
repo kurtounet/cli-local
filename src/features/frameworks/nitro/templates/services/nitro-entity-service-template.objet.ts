@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nitroEntityServiceTemplate(entity: IEntityJson): string {
   return `import type {
   ICreate${entity.namePascalCase}Data,

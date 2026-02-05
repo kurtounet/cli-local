@@ -1,3 +1,7 @@
+/**
+ *
+ * @param name
+ */
 export function getLayoutTemplate(name: string): string {
   return `<template>
   <div>

@@ -1,6 +1,10 @@
 // Template pour une entitéreact
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getReactEntityTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function ARCHITECTURE_NITRO_MOCK() {
   return [
     {

@@ -1,5 +1,10 @@
 import { IFramework } from "../../models/framework-commun.model.js";
 
+/**
+ *
+ * @param framework
+ * @param command
+ */
 export function buildCommandService(
   framework: IFramework,
   command: string,

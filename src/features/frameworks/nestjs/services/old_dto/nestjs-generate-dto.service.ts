@@ -1,13 +1,17 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 import { DtoType } from "../../constant/nestjs-constants.constant";
+import { DtoProperty } from "../../models/nestjs-dto-property.model";
+import { nestjsBuildDtoEntityImports } from "../nestjs-build-imports-dto-entity.service";
+import { nestjsGenerateDtoFile } from "./nestjs-generate-dto-file.services";
 import { nestjsProcessColumnForDto } from "./nestjs-process-column-for-dto.service";
 import { nestjsProcessRelationForDto } from "./nestjs-process-relation-for-dto.service";
 
-import { nestjsBuildDtoEntityImports } from "../nestjs-build-imports-dto-entity.service";
-import { nestjsGenerateDtoFile } from "./nestjs-generate-dto-file.services";
-import { DtoProperty } from "../../models/nestjs-dto-property.model";
-
+/**
+ *
+ * @param entity
+ * @param dtoType
+ */
 export function nestjsGenerateDto(
   entity: IEntityJson,
   dtoType: DtoType,

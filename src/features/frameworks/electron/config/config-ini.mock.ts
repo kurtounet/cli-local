@@ -1,9 +1,10 @@
-import { SCRIPTS_ELECTRON_MOCK } from "./scripts.mock";
+import { IFramework } from "@frameworks-models/framework-commun.model";
+
+import { ARCHITECTURE_ELECTRON_MOCK } from "./architecture.mock";
 import { DEPENDENCIES_ELECTRON_MOCK } from "./dependencies.mock";
 import { ENVIRONMENTS_ELECTRON_MOCK } from "./environments.mock";
-import { ARCHITECTURE_ELECTRON_MOCK } from "./architecture.mock";
 import { INSTALL_OPTIONS_ELECTRON_MOCK } from "./install-options.mock";
-import { IFramework } from "@frameworks-models/framework-commun.model";
+import { SCRIPTS_ELECTRON_MOCK } from "./scripts.mock";
 
 export const CONFIG_INIT_ELECTRON: IFramework = {
   type: "backend",

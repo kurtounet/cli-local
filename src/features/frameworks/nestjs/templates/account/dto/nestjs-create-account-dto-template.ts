@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsCreateAccountDtoTemplate() {
   return `import { ApiProperty } from '@nestjs/swagger';
 import {

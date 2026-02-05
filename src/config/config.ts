@@ -1,5 +1,6 @@
-import { IAppConfig } from "@/types/config.interface.js";
 import path from "node:path";
+
+import { IAppConfig } from "@/types/config.interface.js";
 
 export const defaultconfig: IAppConfig = {
   cliFolder: {

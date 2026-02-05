@@ -1,8 +1,14 @@
-import { writeFile } from "@utils/file-utils";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { writeFile } from "@utils/file-utils";
 import { logSuccess } from "@utils/logger";
+
 import { drizzleSeedEntityTemplate } from "../templates/drizzle-seed-entity.template";
 
+/**
+ *
+ * @param rootServer
+ * @param entity
+ */
 export function drizzleGenerateSeedEntityService(
   rootServer: string,
   entity: IEntityJson,

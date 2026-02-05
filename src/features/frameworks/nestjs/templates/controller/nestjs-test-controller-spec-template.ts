@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsTestControllerSpecTemplate(entity: IEntityJson): string {
   return `import { Test, TestingModule } from '@nestjs/testing';
 import { ${entity.namePascalCase}Controller } from './${entity.nameKebabCase}.controller';

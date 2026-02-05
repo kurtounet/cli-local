@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function symfonyEnvNelmioTemplate() {
   return `
 ###> nelmio/cors-bundle ###

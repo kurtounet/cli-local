@@ -1,12 +1,14 @@
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
+
 import { AiService } from "./services/ai.service.js";
-import path from "node:path";
-import { pathToFileURL } from "node:url";
 
 const aiService = new AiService();
 /*

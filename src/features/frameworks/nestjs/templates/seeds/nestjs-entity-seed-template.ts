@@ -1,5 +1,9 @@
 import { IColumnJson, IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsSeederEntityTemplate(entity: IEntityJson): string {
   const seeder = generateSeeder(entity);
   const entities = "";
@@ -31,6 +35,10 @@ export class ${entity.namePascalCase}Seeder {
 }
 `;
 }
+/**
+ *
+ * @param col
+ */
 function generateValue(col: IColumnJson): string {
   switch (col.typeTypeScript) {
     case "string":
@@ -44,6 +52,10 @@ function generateValue(col: IColumnJson): string {
   }
 }
 
+/**
+ *
+ * @param entity
+ */
 export function generateSeeder(entity: IEntityJson): string {
   const seed: Record<string, string> = {};
   entity.columns?.map((column: IColumnJson) => {

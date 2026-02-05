@@ -1,9 +1,14 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+
 import { INDENT, NEWLINE } from "../../constant/nestjs-constants.constant";
 import { EntityProperty } from "../../models/nestjs-entity-property.model";
 
 /**
  * Génère le contenu final du fichier d'entité.
+ * @param entity
+ * @param properties
+ * @param relations
+ * @param imports
  */
 export function nestjsGenerateEntityFile(
   entity: IEntityJson,

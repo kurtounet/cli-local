@@ -1,3 +1,7 @@
+/**
+ *
+ * @param name
+ */
 export function getPageComponentTemplate(name: string): string {
   return `<template>
   <div>

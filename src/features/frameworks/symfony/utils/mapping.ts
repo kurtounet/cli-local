@@ -1,6 +1,11 @@
 import { logInfo } from "@utils/logger";
+
 import { TPropertyDetail } from "../types/api-platform-doc-json-ld.type";
 
+/**
+ *
+ * @param sqlType
+ */
 export function sqlToDoctrineType(sqlType: string): string {
   const sqlToDoctrineMapping: Record<string, string> = {
     // Types numériques
@@ -49,6 +54,10 @@ export function sqlToDoctrineType(sqlType: string): string {
   return sqlToDoctrineMapping[sqlType.toLowerCase()] || "any";
 }
 
+/**
+ *
+ * @param typeProperty
+ */
 export function symfonyGetAttributeTypeORM(
   typeProperty: string | undefined | null,
 ): string {
@@ -108,6 +117,10 @@ export function symfonyGetAttributeTypeORM(
   return Mapping[normalizedType] || "STRING";
 }
 
+/**
+ *
+ * @param typeProperty
+ */
 export function symfonyGetPropertyType(
   typeProperty: string | undefined | null,
 ): string {
@@ -184,6 +197,10 @@ export const TYPE_MAPPING: Record<string, string> = {
   "rdf:langString": "string",
   "xmls:anyURI": "string",
 };
+/**
+ *
+ * @param range
+ */
 export function getTypeFromRange(range: string | string[]): string {
   if (Array.isArray(range)) {
     // Si c'est un tableau, on prend le premier type comme référence
@@ -206,6 +223,10 @@ export function getTypeFromRange(range: string | string[]): string {
   // Si le type n'est pas reconnu, retourne 'any' par défaut
   return "any";
 }
+/**
+ *
+ * @param range
+ */
 export function resolveTypeScriptType(range: string | string[]): string {
   // 1. Si range est un tableau, on traite le premier ou on fait une union
   const typeValue = Array.isArray(range) ? range[0] : range;

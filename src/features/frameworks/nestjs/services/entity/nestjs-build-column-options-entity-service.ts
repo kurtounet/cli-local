@@ -1,8 +1,10 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { nestjsGetTypeMappingEntity } from "./nestjs-get-type-mapping-entity-service";
 
 /**
  * Construit les options de colonne pour le décorateur @Column.
+ * @param column
  */
 export function nestjsBuildColumnOptionsEntity(column: IColumnJson): string[] {
   const options: string[] = [];

@@ -2,6 +2,7 @@ import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Détermine si une colonne doit être exclue du DTO.
+ * @param column
  */
 export function nestjsShouldExcludeColumn(column: IColumnJson): boolean {
   const excludedColumns = ["id", "created_at", "updated_at"];

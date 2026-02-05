@@ -1,8 +1,10 @@
 import path from "node:path";
-import { BaseCommand } from "./BaseCommand.js";
+
 import { FilesystemError, ValidationError } from "@/errors/cli-errors.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
+
+import { BaseCommand } from "./BaseCommand.js";
 
 export interface ITreeOptions extends AnyOptions {
   code?: boolean;
@@ -95,13 +97,13 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
     // 1. Option CLI (si l'utilisateur tape --level 2)
     // 2. Sinon, Config du fichier (.mclprc.json)
     // 3. Sinon, les defaults du service
-    let level = this.hasOption(options, "level")
+    const level = this.hasOption(options, "level")
       ? this.getOption(options, "level", 0)
       : config.tree.analysis.maxLevel;
-    let save =
+    const save =
       config.tree.analysis.save ?? this.getOption(options, "save", false);
-    let excludedDirs = config.tree.exclude;
-    let analyzeExtensions = config.tree.analysis.enabled
+    const excludedDirs = config.tree.exclude;
+    const analyzeExtensions = config.tree.analysis.enabled
       ? config.tree.analysis.extensions
       : null;
 
@@ -111,13 +113,13 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       "Usage: mclp tree <type> <pathIn> [pathOut] [options]",
     );
 
-    let view = this.hasOption(options, "view");
-    let force = this.hasOption(options, "force");
+    const view = this.hasOption(options, "view");
+    const force = this.hasOption(options, "force");
 
-    let dryRun = this.hasOption(options, "dryRun");
-    let metadata = this.hasOption(options, "metadata");
-    let output = config.tree.pathOut ?? this.getOption(options, "output", "./");
-    let pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
+    const dryRun = this.hasOption(options, "dryRun");
+    const metadata = this.hasOption(options, "metadata");
+    const output = config.tree.pathOut ?? this.getOption(options, "output", "./");
+    const pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
     const [type, ...pathArgs] = args;
 
     if (!this.extensions.includes(type)) {

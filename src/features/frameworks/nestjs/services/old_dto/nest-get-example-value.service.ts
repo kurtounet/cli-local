@@ -2,6 +2,7 @@ import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Génère une valeur d'exemple pour la documentation Swagger.
+ * @param column
  */
 export function nestjsGetExampleValue(column: IColumnJson): string {
   const tsType = column.typeTypeScript.toLowerCase();

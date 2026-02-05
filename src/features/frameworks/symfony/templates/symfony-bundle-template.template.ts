@@ -1,3 +1,7 @@
+/**
+ *
+ * @param name
+ */
 export function getBundleTemplate(name: string): string {
   return `<?php
 

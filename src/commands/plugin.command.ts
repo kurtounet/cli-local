@@ -1,6 +1,7 @@
-import { BaseCommand } from "./BaseCommand.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
+
+import { BaseCommand } from "./BaseCommand.js";
 
 export interface IPluginOptions extends AnyOptions {
   force?: boolean;

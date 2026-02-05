@@ -5,6 +5,10 @@ import {
 } from "@features/parsersMdj/models/entity-json.model";
 import { snakeToCamel } from "@utils/convert";
 
+/**
+ *
+ * @param entity
+ */
 export function generateZodShemaEntityService(entity: IEntityJson) {
   const properties =
     entity.columns
@@ -33,6 +37,10 @@ export type Z${entity.namePascalCase}Insert = z.infer<typeof insert${entity.name
 export type Z${entity.namePascalCase}Update = z.infer<typeof update${entity.namePascalCase}Schema>;
 `;
 }
+/**
+ *
+ * @param col
+ */
 export function ZodProperty(col: IColumnJson) {
   let zodProperty = "";
   const colTypeTypeScript = col.typeTypeScript.toLowerCase();

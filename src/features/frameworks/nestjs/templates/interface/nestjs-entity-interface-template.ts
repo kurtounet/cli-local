@@ -1,6 +1,10 @@
 // Template pour une interface NestJS
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getNestjsInterfaceTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

@@ -1,5 +1,8 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ */
 export function nestjsAccountEntityJsonTemplate(): IEntityJson {
   return {
     tableName: "account",
@@ -160,6 +163,9 @@ export function nestjsAccountEntityJsonTemplate(): IEntityJson {
     relationships: [],
   };
 }
+/**
+ *
+ */
 export function nestjsAccountEntityTemplate(): string {
   return `import {
   Entity,

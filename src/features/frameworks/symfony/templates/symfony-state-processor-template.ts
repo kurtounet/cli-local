@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function symfonyStateProcessorTemplate(entity: IEntityJson): string {
   return `<?php
 

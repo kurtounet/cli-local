@@ -2,10 +2,18 @@ import { IRelation } from "@parsersMdj/models/entity-json.model";
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
 import { logInfo } from "@utils/logger";
 
+/**
+ *
+ * @param relationships
+ */
 export function symfonyGenerateRelationShipsService(relationships: IRelation) {
   return generatePhpAttribute(relationships);
 }
 // Fonction principale pour générer les attributs Doctrine
+/**
+ *
+ * @param relation
+ */
 function generatePhpAttribute(relation: IRelation): string {
   const { relationType } = relation;
 
@@ -31,6 +39,10 @@ function generatePhpAttribute(relation: IRelation): string {
 }
 
 // Génération OneToOne
+/**
+ *
+ * @param relation
+ */
 function generateOneToOne(relation: IRelation): string {
   const { relationName, foreignKeySource, target, owner } = relation;
 
@@ -45,6 +57,10 @@ private ?${snakeToPascal(target)} $${snakeToCamel(foreignKeySource.replace(/_id$
 }
 
 // Génération OneToMany
+/**
+ *
+ * @param relation
+ */
 function generateOneToMany(relation: IRelation): string {
   const { relationName, foreignKeySource, target } = relation;
 
@@ -53,6 +69,10 @@ private Collection $${snakeToCamel(foreignKeySource.replace(/_id$/, ""))};\n`;
 }
 
 // Génération ManyToOne
+/**
+ *
+ * @param relation
+ */
 function generateManyToOne(relation: IRelation): string {
   const { relationName, foreignKeySource, target } = relation;
 
@@ -62,6 +82,10 @@ private ?${snakeToPascal(target)} $${snakeToCamel(foreignKeySource.replace(/_id$
 }
 
 // Génération ManyToMany
+/**
+ *
+ * @param relation
+ */
 function generateManyToMany(relation: IRelation): string {
   const { relationName, foreignKeySource, target, owner } = relation;
 
@@ -75,6 +99,10 @@ private Collection $${snakeToCamel(foreignKeySource.replace(/_id$/, ""))};`;
 }
 
 // Déterminer le nom de la propriété inverse
+/**
+ *
+ * @param relation
+ */
 function getInversePropertyName(relation: IRelation): string {
   const { source, relationType } = relation;
 
@@ -92,17 +120,26 @@ function getInversePropertyName(relation: IRelation): string {
 }
 
 // Générer les getters/setters
+/**
+ *
+ * @param relation
+ */
 function generateGettersSetters(relation: IRelation): string {
   const { relationName, target, relationType } = relation;
 
   if (relationType === "OneToOne" || relationType === "ManyToOne") {
-    return generateSinglePropertyAccessors(relationName!, target);
+    return generateSinglePropertyAccessors(relationName, target);
   } else {
-    return generateCollectionAccessors(relationName!, target);
+    return generateCollectionAccessors(relationName, target);
   }
 }
 
 // Accesseurs pour propriétés simples
+/**
+ *
+ * @param propertyName
+ * @param target
+ */
 function generateSinglePropertyAccessors(
   propertyName: string,
   target: string,
@@ -123,6 +160,11 @@ public function set${capitalizedName}(?${target} $${propertyName}): static
 }
 
 // Accesseurs pour collections
+/**
+ *
+ * @param propertyName
+ * @param target
+ */
 function generateCollectionAccessors(
   propertyName: string,
   target: string,
@@ -159,6 +201,10 @@ public function remove${capitalizedSingular}(${target} $${singularName}): static
 }
 
 // Générer le constructeur pour les collections
+/**
+ *
+ * @param relations
+ */
 function generateConstructor(relations: IRelation[]): string {
   const collectionsRelations = relations.filter(
     (r) => r.relationType === "OneToMany" || r.relationType === "ManyToMany",
@@ -182,6 +228,11 @@ function generateConstructor(relations: IRelation[]): string {
 }
 
 // Générer une entité complète
+/**
+ *
+ * @param entityName
+ * @param relations
+ */
 function generateCompleteEntity(
   entityName: string,
   relations: IRelation[],
@@ -235,6 +286,10 @@ class ${entityName}
 }
 
 // Générer toutes les entités d'un schéma
+/**
+ *
+ * @param relations
+ */
 function generateAllEntities(relations: IRelation[]): Record<string, string> {
   const entities: Record<string, string> = {};
   const entityNames = [...new Set(relations.map((r) => r.source))];
@@ -247,6 +302,10 @@ function generateAllEntities(relations: IRelation[]): Record<string, string> {
 }
 
 // Valider les relations
+/**
+ *
+ * @param relations
+ */
 function validateRelations(relations: IRelation[]): string[] {
   const errors: string[] = [];
 

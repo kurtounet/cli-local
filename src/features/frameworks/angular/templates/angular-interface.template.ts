@@ -3,7 +3,7 @@ import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Generates an Angular interface template.
- * @param entity The entity JSON object.
+ * @param entity - The entity JSON object.
  * @returns The Angular interface template string.
  */
 export function angularInterfaceTemplate(entity: IEntityJson) {

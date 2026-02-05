@@ -1,7 +1,9 @@
 import { App } from "./core/App.js";
-
 import { PluginService } from "./src/core/services/plugin.service.js";
 
+/**
+ *
+ */
 async function test() {
   // 1. Simuler l'objet CLI avec ses services
   const cli = bootstrap();

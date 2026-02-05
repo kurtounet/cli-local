@@ -1,11 +1,13 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
 import { logInfo } from "@utils/logger";
+
 import { angularCrudServiceTemplate } from "../templates/angular-crud-service.template";
 
 /**
  * Generates an Angular service.
- * @param entity The entity JSON object.
+ * @param entity - The entity JSON object.
+ * @param componentDir
  */
 export function angularGenerateEnvironmentsService(componentDir: string) {
   writeFile(

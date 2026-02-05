@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function nestjsAuthRolesDecoratorTemplate() {
   return `import { SetMetadata } from '@nestjs/common';
 

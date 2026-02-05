@@ -1,13 +1,18 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { DtoType } from "../../constant/nestjs-constants.constant";
 import { DtoProperty } from "../../models/nestjs-dto-property.model";
-import { nestjsShouldExcludeColumn } from "./nestjs-should-exclude-column.service";
+import { nestjsGenerateColumnDescription } from "./nestjs-generate-column-description.service";
 import { nestjsGetColumnDecorators } from "./nestjs-get-column-decorators.service";
 import { nestjsGetColumnOptionalStatus } from "./nestjs-get-column-optional-status.service";
-import { nestjsGenerateColumnDescription } from "./nestjs-generate-column-description.service";
+import { nestjsShouldExcludeColumn } from "./nestjs-should-exclude-column.service";
 
 /**
  * Traite une colonne pour un DTO spécifique.
+ * @param column
+ * @param dtoType
+ * @param validationImports
+ * @param transformImports
  */
 export function nestjsProcessColumnForDto(
   column: IColumnJson,

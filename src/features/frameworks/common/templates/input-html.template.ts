@@ -1,3 +1,7 @@
+/**
+ *
+ * @param type
+ */
 export function getInputHtmlTemplate(type: string) {
   return `<input type="button">
 <input type="checkbox">

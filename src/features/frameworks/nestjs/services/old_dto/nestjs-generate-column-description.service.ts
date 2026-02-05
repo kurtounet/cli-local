@@ -2,6 +2,7 @@ import { IColumnJson } from "@parsersMdj/models/entity-json.model";
 
 /**
  * Génère une description pour la colonne.
+ * @param column
  */
 export function nestjsGenerateColumnDescription(column: IColumnJson): string {
   const baseDescription = `Champ ${column.name}`;

@@ -9,6 +9,12 @@ import {
 } from "@parsersMdj/models/mdj.model";
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
 
+/**
+ *
+ * @param type
+ * @param inEntity
+ * @param toEntity
+ */
 export function getRelation(
   type: string,
   inEntity: string,
@@ -46,6 +52,11 @@ export function getRelation(
 //     ];
 //   }
 
+/**
+ *
+ * @param source_cardinality
+ * @param target_cardinality
+ */
 export function getRelationType(
   source_cardinality: string,
   target_cardinality: string,
@@ -72,6 +83,11 @@ export function getRelationType(
   return mapping[key] || "Unknown Relation";
 }
 
+/**
+ *
+ * @param dictionaryEntitiesJson
+ * @param end
+ */
 export function getInEntity(
   dictionaryEntitiesJson: Map<string, IEntityJson>,
   end: Iend,
@@ -84,23 +100,31 @@ export function getInEntity(
   return "";
 }
 
+/**
+ *
+ */
 export function getinverseSide(): string {
   return "inverseSide";
 }
 
+/**
+ *
+ * @param entity
+ * @param dictionaryEntitiesJson
+ */
 export function getRelationShips(
   entity: IERDEntity,
   dictionaryEntitiesJson: Map<string, IEntityJson>,
-): Array<IRelationshipJson> {
+): IRelationshipJson[] {
   if (!Array.isArray(entity.ownedElements)) {
     // logInfo(`⏩ ${entity.name} n'a pas de relations. Ignoré.`);
     return [];
   }
   // let relationships: IERDRelationship[] = entity.ownedElements;
-  let relationshipsJson: Array<IRelationshipJson> = [];
+  const relationshipsJson: IRelationshipJson[] = [];
 
   entity.ownedElements.map((r: IERDRelationship) => {
-    let propertiesTypeOrmColumn = ""; // JSON.stringify(column.propertiesTypeOrmColumn);
+    const propertiesTypeOrmColumn = ""; // JSON.stringify(column.propertiesTypeOrmColumn);
 
     relationshipsJson.push({
       type: r._type,

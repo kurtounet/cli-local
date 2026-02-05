@@ -1,8 +1,11 @@
 import { writeFile } from "@utils/file-utils";
+
 import { apiPlatformReadDocJsonldService } from "./api-plaform-read-doc-jsonld.service";
 
 /**
  * Service pour lire et normaliser le fichier documentation-api.json
+ * @param pathfile
+ * @param doc
  */
 export function apiPlatformSaveDocJsonldService(
   pathfile: string,

@@ -1,5 +1,9 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function nestjsServiceTemplate(entity: IEntityJson): string {
   return `import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';

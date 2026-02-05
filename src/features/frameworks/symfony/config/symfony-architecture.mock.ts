@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function ARCHITECTURE_SYMFONY_MOCK() {
   return [
     {
@@ -59,6 +62,9 @@ export function ARCHITECTURE_SYMFONY_MOCK() {
     },
   ];
 }
+/**
+ *
+ */
 export function ARCHITECTURE_SYMFONY_API_PLATFORM_MOCK() {
   return [
     {

@@ -1,5 +1,10 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ * @param mode
+ */
 export function nitroIndexPostTemplate(
   entity: IEntityJson,
   mode: string,

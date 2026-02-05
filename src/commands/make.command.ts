@@ -1,7 +1,8 @@
-import { ICommandOption } from "@/types/command.interface.js";
-import { BaseCommand } from "./BaseCommand.js";
 import { ValidationError } from "@/errors/cli-errors.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
+import { ICommandOption } from "@/types/command.interface.js";
+
+import { BaseCommand } from "./BaseCommand.js";
 export interface IMakeOptions extends AnyOptions {
   force?: boolean;
   output?: string;

@@ -1,5 +1,11 @@
 import { writeFile } from "@utils/file-utils";
 
+/**
+ *
+ * @param rootPathProjectFramework
+ * @param entities
+ * @param zodSchemas
+ */
 export function generateZodSchemaDbService(
   rootPathProjectFramework: string,
   entities: string[],

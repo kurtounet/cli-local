@@ -1,19 +1,24 @@
+import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { buildAndsaveFile } from "@utils/file-utils";
+import { logInfo } from "@utils/logger";
 import * as fs from "fs";
 import * as path from "path";
 
-import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { buildAndsaveFile } from "@utils/file-utils";
-import { nestjsRepositoryTemplate } from "../templates/entities/nestjs-repository-template";
-import { nestjsEntityTemplate } from "../templates/entities/nestjs-entity-template-copy";
 import { nestjsControlleRestfullTemplate } from "../templates/controller/nestjs-restfull-controller-template";
-import { nestjsServiceCrudTemplate } from "../templates/service/nestjs-crud-service-template";
+import { nestjsEntityTemplate } from "../templates/entities/nestjs-entity-template-copy";
+import { nestjsRepositoryTemplate } from "../templates/entities/nestjs-repository-template";
+import { nestjsEntityModuleTemplate } from "../templates/module/nestjs-entity-module-template";
 import { nestjsSeederEntityTemplate } from "../templates/seeds/nestjs-entity-seed-template";
 import { nestjsSeedModuleTemplate } from "../templates/seeds/nestjs-seed-module-template";
 import { nestjsSeedTemplate } from "../templates/seeds/nestjs-seed-template";
-import { nestjsEntityModuleTemplate } from "../templates/module/nestjs-entity-module-template";
+import { nestjsServiceCrudTemplate } from "../templates/service/nestjs-crud-service-template";
 import { nestjsGenerateAllDtos } from "./dto/nestjs-generate-all-dtos.service";
-import { logInfo } from "@utils/logger";
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function nestjsGenerateFeature(
   frameworkPath: string,
   entity: IEntityJson,
@@ -28,7 +33,7 @@ export function nestjsGenerateFeature(
     "fixture",
   ];
   folders.forEach((folder) => {
-    let pathFolder = path.join(
+    const pathFolder = path.join(
       frameworkPath,
       "src",
       "modules",
@@ -49,6 +54,11 @@ export function nestjsGenerateFeature(
   createServiceNestjs(frameworkPath, entity);
   // createFixtureNestjs(frameworkPath, entity);
 }
+/**
+ *
+ * @param projectPath
+ * @param entity
+ */
 export function createEntityNestjs(projectPath: string, entity: IEntityJson) {
   const rootPath = path.join(
     projectPath,
@@ -75,6 +85,11 @@ export function createEntityNestjs(projectPath: string, entity: IEntityJson) {
     nestjsRepositoryTemplate(entity),
   );
 }
+/**
+ *
+ * @param projectPath
+ * @param entity
+ */
 export function createDtoNestjs(projectPath: string, entity: IEntityJson) {
   const rootPath = path.join(
     projectPath,
@@ -102,6 +117,11 @@ export function createDtoNestjs(projectPath: string, entity: IEntityJson) {
     dtos.responseDto,
   );
 }
+/**
+ *
+ * @param projectPath
+ * @param entity
+ */
 export function createControllerNestjs(
   projectPath: string,
   entity: IEntityJson,
@@ -120,6 +140,11 @@ export function createControllerNestjs(
   );
 }
 
+/**
+ *
+ * @param projectPath
+ * @param entity
+ */
 export function createServiceNestjs(projectPath: string, entity: IEntityJson) {
   const rootPath = path.join(
     projectPath,
@@ -134,6 +159,11 @@ export function createServiceNestjs(projectPath: string, entity: IEntityJson) {
     nestjsServiceCrudTemplate(entity),
   );
 }
+/**
+ *
+ * @param projectPath
+ * @param entities
+ */
 export function createSeederNestjs(
   projectPath: string,
   entities: IEntityJson[],
@@ -154,6 +184,11 @@ export function createSeederNestjs(
 
   buildAndsaveFile(rootPath + `/seed.ts`, nestjsSeedTemplate(entities));
 }
+/**
+ *
+ * @param projectPath
+ * @param entity
+ */
 export function createModuleEntityNestjs(
   projectPath: string,
   entity: IEntityJson,

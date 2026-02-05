@@ -1,3 +1,6 @@
+/**
+ *
+ */
 export function interfaceBaseRepositoryTemplate(): string {
   return `export interface IBaseRepository<T, TInsert, TId = number> {
   findAll(): Promise<T[]>;

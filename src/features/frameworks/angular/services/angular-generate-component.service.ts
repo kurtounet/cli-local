@@ -1,15 +1,15 @@
+import { camelToKebab, camelToPascal } from "@utils/convert";
 import { writeFile } from "@utils/file-utils";
 
+import { angularCssComponentTemplate } from "../templates/component/angular-css-component.template";
+import { angularHtmlComponentTemplate } from "../templates/component/angular-html-component.template";
 import { angularSpecComponentTemplate } from "../templates/component/angular-spec-component.template";
 import { angularTsComponentTemplate } from "../templates/component/angular-ts-component.template";
-import { angularHtmlComponentTemplate } from "../templates/component/angular-html-component.template";
-import { angularCssComponentTemplate } from "../templates/component/angular-css-component.template";
-import { camelToKebab, camelToPascal } from "@utils/convert";
 
 /**
  * Generates an Angular component.
- * @param targetPath The target directory for the component.
- * @param name The name of the component.
+ * @param targetPath - The target directory for the component.
+ * @param name - The name of the component.
  */
 /*
 export function angularGenerateComponentService(
@@ -38,6 +38,12 @@ export function angularGenerateComponentService(
 };
 */
 
+/**
+ *
+ * @param componentDir
+ * @param name
+ * @param prefix
+ */
 export function angularGenerateComponentService(
   componentDir: string,
   name: string,

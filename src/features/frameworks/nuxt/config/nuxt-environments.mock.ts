@@ -1,5 +1,8 @@
 import { IEnvironment } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ */
 export function ENVIRONMENTS_NUXT_MOCK(): IEnvironment[] {
   return [
     {

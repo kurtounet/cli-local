@@ -1,4 +1,5 @@
 import { snakeToCamel, snakeToPascal } from "@utils/convert";
+
 import { RelationConfig } from "../../models/nestjs-relation-config.model";
 
 /**

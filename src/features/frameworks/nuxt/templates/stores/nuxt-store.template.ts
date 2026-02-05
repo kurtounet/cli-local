@@ -1,5 +1,6 @@
 import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
+
 import {
   nuxtStoreActionsCreateTemplate,
   nuxtStoreActionsDeleteTemplate,
@@ -9,6 +10,10 @@ import {
 } from "./nuxt-store-actions.template";
 import { nuxtStoreGettersTemplate } from "./nuxt-store-getters.template";
 
+/**
+ *
+ * @param entity
+ */
 export function nuxtStoreTemplate(entity: IEntityJson): string {
   return `import { defineStore } from 'pinia'
 import type { ApiResponse } from '~~/shared/models/api-response.model'

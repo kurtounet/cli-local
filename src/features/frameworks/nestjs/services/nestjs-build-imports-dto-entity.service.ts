@@ -2,6 +2,8 @@ import { INDENT, NEWLINE } from "../constant/nestjs-constants.constant";
 
 /**
  * Construit les instructions d'import pour les DTOs.
+ * @param validationImports
+ * @param transformImports
  */
 export function nestjsBuildDtoEntityImports(
   validationImports: Set<string>,

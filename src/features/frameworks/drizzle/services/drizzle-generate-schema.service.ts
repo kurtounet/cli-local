@@ -1,6 +1,11 @@
 import { writeFile } from "@utils/file-utils";
 import { logSuccess } from "@utils/logger";
 
+/**
+ *
+ * @param rootServerApi
+ * @param schemas
+ */
 export function drizzleGenerateSchemaService(
   rootServerApi: string,
   schemas: string,

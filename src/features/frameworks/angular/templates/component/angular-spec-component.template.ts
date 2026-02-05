@@ -1,9 +1,14 @@
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { pascalToKebab } from "@utils/convert";
 
+/**
+ *
+ * @param namePascalCase
+ * @param prefix
+ */
 export function angularSpecComponentTemplate(
-  namePascalCase: string = "",
-  prefix: string = "",
+  namePascalCase = "",
+  prefix = "",
 ): string {
   return `import { ComponentFixture, TestBed } from '@angular/core/testing';
 

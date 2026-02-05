@@ -1,5 +1,5 @@
-import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { faker, fakerFR, fr } from "@faker-js/faker";
+import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { snakeToCamel } from "@utils/convert";
 // ------------------- Interfaces -------------------
 // export interface IColumnJson {
@@ -38,10 +38,18 @@ export interface IColumnJson {
 //   name: string;
 //   columns: IColumnJson[];
 // }
+/**
+ *
+ * @param time
+ */
 function formatDate(time: string) {
   return `new Date('${time}')`;
 }
 // ------------------- Générateur de valeurs -------------------
+/**
+ *
+ * @param column
+ */
 export function generateValue(column: IColumnJson): any {
   const { typeSql, length, minLength, maxLength, enumValues, name } = column;
   if (name === "id") return null;
@@ -226,6 +234,11 @@ export function generateValue(column: IColumnJson): any {
 }
 
 // ------------------- Générateur d'objet -------------------
+/**
+ *
+ * @param entity
+ * @param exclude
+ */
 export function item(
   entity: IEntityJson,
   exclude: string[],

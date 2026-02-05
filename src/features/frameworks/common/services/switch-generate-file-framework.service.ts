@@ -1,3 +1,4 @@
+import { EMOJI } from "@constants/messages";
 import { angularGenerateFilesFramework } from "@features/frameworks/angular/services/angular-generate-files-framework.service";
 import { electronGenerateFilesFramework } from "@features/frameworks/electron/services/electron-generate-files-framework.service";
 import {
@@ -10,11 +11,18 @@ import { nuxtGenerateFilesFramework } from "@features/frameworks/nuxt/services/n
 import { nuxtUpdateFileNuxtConfigTsService } from "@features/frameworks/nuxt/services/nuxt-update-file-nuxt-config-ts.service";
 import { symfonyGenerateFilesFramework } from "@features/frameworks/symfony/services/symfony-generate-files-framework.service";
 import { vueGenerateFilesFramework } from "@features/frameworks/vue/services/vue-generate-files-framework.service";
-import { logInfo } from "@utils/logger";
-import { updatePackageJsonService } from "./update-package-json.service";
 import { executeCommand } from "@utils/execute-command";
-import { EMOJI } from "@constants/messages";
+import { logInfo } from "@utils/logger";
 
+import { updatePackageJsonService } from "./update-package-json.service";
+
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ */
 export function switchGenerateFileFrameworkService(
   configFile: IProjectConfig,
   framework: IFramework,

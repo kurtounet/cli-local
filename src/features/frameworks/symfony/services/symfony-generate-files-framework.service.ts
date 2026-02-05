@@ -1,19 +1,27 @@
+import { platform } from "node:os";
+
+import { messageInstallationFramework } from "@constants/messages";
+import { installComposerDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
 import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-
-import { symfonyGenerateEnvironmentsService } from "./symfony-generate-environments.service";
-import { symfonyGenerateDtoService } from "./symfony-generate-dtos.service";
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
-import { symfonyGenerateEntityService } from "./symfony-generate-entities.service";
 import { logInfo, logStep } from "@utils/logger";
-import { messageInstallationFramework } from "@constants/messages";
-import { symfonyGenerateCrudEntityService } from "./symfony-generate-crud-entity.service";
-import { installComposerDependencies } from "@features/frameworks/commun/services/install-dependencies.service";
-import { symfonyGenerateCommandService } from "./symfony-generate-command.service";
-import { platform } from "node:os";
 
+import { symfonyGenerateCommandService } from "./symfony-generate-command.service";
+import { symfonyGenerateCrudEntityService } from "./symfony-generate-crud-entity.service";
+import { symfonyGenerateDtoService } from "./symfony-generate-dtos.service";
+import { symfonyGenerateEntityService } from "./symfony-generate-entities.service";
+import { symfonyGenerateEnvironmentsService } from "./symfony-generate-environments.service";
+
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ */
 export function symfonyGenerateFilesFramework(
   configFile: IProjectConfig,
   framework: IFramework,

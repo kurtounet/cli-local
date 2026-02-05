@@ -1,9 +1,11 @@
-import path from "path";
 import fs from "fs-extra";
+import path from "path";
 import { fileURLToPath } from "url";
-import { BaseService } from "./base-service.service.js";
-import { IFileSystemService } from "@/types/services/file-system.interface.js";
+
 import { IFileNode } from "@/types/commun/file-node.interface.js";
+import { IFileSystemService } from "@/types/services/file-system.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -222,7 +224,7 @@ export class FileSystemService
         encoding: "utf-8", // Important pour garantir le type string[]
       });
 
-      return files as string[];
+      return files;
     } catch (error) {
       const message = `Unable to read directory: ${dirPath}`;
       this.cli.errorHandler.handle(error, message);
@@ -231,7 +233,7 @@ export class FileSystemService
   }
   async scranDir(
     dirPath: string,
-    recursive: boolean = false,
+    recursive = false,
   ): Promise<string[]> {
     this.validatePath(dirPath, "dirPath");
     try {
@@ -264,7 +266,7 @@ export class FileSystemService
     //   };
     // }
 
-    if (config && config.excludedDirs.includes(name)) {
+    if (config?.excludedDirs.includes(name)) {
       return null;
     }
 
@@ -312,8 +314,7 @@ export class FileSystemService
       // 2. Analyse Metadata si l'extension est dans la liste du JSON
       if (
         withMetadata &&
-        config &&
-        config.analyzeExtensions.includes(extension)
+        config?.analyzeExtensions.includes(extension)
       ) {
         try {
           const sourceCode = await fs.readFile(dirPath, "utf-8");
@@ -365,6 +366,7 @@ export class FileSystemService
   /**
    * Creates a directory tree from a JSON file
    * @param sourcePath - Path to JSON file containing tree structure
+   * @param sourceJson
    * @param targetBaseDir - Base directory where tree will be created
    */
   public async createDirectoryTreeFromJson(

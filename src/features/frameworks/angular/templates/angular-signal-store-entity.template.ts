@@ -2,6 +2,10 @@ import { I } from "@faker-js/faker/dist/airline-CHFQMWko";
 import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { snakeToCamel } from "@utils/convert";
 
+/**
+ *
+ * @param type
+ */
 export function defaultInitialValueType(type: string): string | number {
   if (type === "string") return '""';
   if (type === "number") return 0;
@@ -9,6 +13,10 @@ export function defaultInitialValueType(type: string): string | number {
   if (type === "Date") return "new Date('now()')";
   return "false";
 }
+/**
+ *
+ * @param entity
+ */
 export function angularInitialEntityState(entity: IEntityJson) {
   const properties =
     entity.columns
@@ -23,6 +31,11 @@ export function angularInitialEntityState(entity: IEntityJson) {
 };`;
 }
 
+/**
+ *
+ * @param entity
+ * @param dir
+ */
 export function angularSignalStoreEntityTemplate(
   entity: IEntityJson,
   dir: string,

@@ -12,6 +12,10 @@ export default {
   },
 } satisfies Config`;
 
+/**
+ *
+ * @param configFile
+ */
 export function drizzleConfigUrlTemplate(configFile: IProjectConfig): string {
   if (!configFile.databases) {
     return configDefault;

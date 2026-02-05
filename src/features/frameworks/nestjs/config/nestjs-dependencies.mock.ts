@@ -1,5 +1,8 @@
 import { IDependencies } from "@frameworks-models/framework-commun.model";
 
+/**
+ *
+ */
 export function DEPENDENCIES_NESTJS_MOCK(): IDependencies {
   return {
     packageManager: "npm", // ou "yarn"

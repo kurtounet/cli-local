@@ -1,6 +1,10 @@
 // Template pour une entité Electron
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entity
+ */
 export function getElectronEntityTemplate(entity: IEntityJson) {
   const properties =
     entity.columns

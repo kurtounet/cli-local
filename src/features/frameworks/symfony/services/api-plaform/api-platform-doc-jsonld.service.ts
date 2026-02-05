@@ -1,21 +1,25 @@
-import { logError, logSuccess } from "@utils/logger";
-import { apiPlatformSaveDocJsonldService } from "./api-plaform-save-doc-jsonld.service";
 import { EMOJI } from "@constants/messages";
-import { readFile, writeFile } from "@utils/file-utils";
-import { apiPlatformReadDocJsonldService } from "./api-plaform-read-doc-jsonld.service";
-
-import { FILE_CLI_LOCAL } from "@services/cli-conf/services/cli-local-directory.service";
-import { write } from "fs";
 import { base } from "@faker-js/faker/.";
+import { FILE_CLI_LOCAL } from "@services/cli-conf/services/cli-local-directory.service";
+import { pascalToKebab } from "@utils/convert";
+import { readFile, writeFile } from "@utils/file-utils";
+import { logError, logSuccess } from "@utils/logger";
+import { write } from "fs";
+import path from "path";
+
 import {
   TApiDocumentation,
   TSupportedClass,
   TSupportedProperty,
 } from "../../types/api-platform-doc-json-ld.type";
-import path from "path";
-import { pascalToKebab } from "@utils/convert";
 import { resolveTypeScriptType } from "../../utils/mapping";
+import { apiPlatformReadDocJsonldService } from "./api-plaform-read-doc-jsonld.service";
+import { apiPlatformSaveDocJsonldService } from "./api-plaform-save-doc-jsonld.service";
 
+/**
+ *
+ * @param processPath
+ */
 export function apiPlatformDocJsonldService(processPath: string) {
   const basePath = `${processPath}/${FILE_CLI_LOCAL.DIRECTORY_CLI_LOCAL}/api`;
   const docJsonLd = `${basePath}/documentation-api.json`;
@@ -43,11 +47,11 @@ export function apiPlatformDocJsonldService(processPath: string) {
   const title = doc.title;
   const entrypoint = doc.entrypoint;
   const supportedClass: TSupportedClass[] = doc.supportedClass;
-  let supportedClassError: TSupportedClass[] = [];
-  let supportedClassConstraintViolation: TSupportedClass[] = [];
-  let supportedClassConstraintViolationList: TSupportedClass[] = [];
-  let supportedClassEntrypoint: TSupportedClass[] = [];
-  let supportedClassResource: TSupportedClass[] = [];
+  const supportedClassError: TSupportedClass[] = [];
+  const supportedClassConstraintViolation: TSupportedClass[] = [];
+  const supportedClassConstraintViolationList: TSupportedClass[] = [];
+  const supportedClassEntrypoint: TSupportedClass[] = [];
+  const supportedClassResource: TSupportedClass[] = [];
   if (supportedClass && supportedClass.length > 0) {
     supportedClass.forEach((classe: TSupportedClass) => {
       if (classe["@id"] === "#Error") {
@@ -85,6 +89,11 @@ export function apiPlatformDocJsonldService(processPath: string) {
   console.log("jsonld:", doc);
 }
 
+/**
+ *
+ * @param resources
+ * @param path
+ */
 export function apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(
   resources: TSupportedClass[],
   path: string,
@@ -126,16 +135,32 @@ export function apiPlatformGenerateInterfaceTypeScriptFromDocJsonldService(
     writeFile(`${path}/models/${fileName}.model.ts`, interfaceContent);
   });
 }
+/**
+ *
+ * @param resource
+ */
 export function apiPlatformGenerateTypeTypeScriptFromDocJsonldService(
   resource: TSupportedClass[],
 ) {}
+/**
+ *
+ * @param resource
+ */
 export function apiPlatformGenerateSchemaZodFromDocJsonldService(
   resource: TSupportedClass[],
 ) {}
+/**
+ *
+ * @param resource
+ */
 export function apiPlatformGenerateFormFromDocJsonldService(
   resource: TSupportedClass[],
 ) {}
 
+/**
+ *
+ * @param files
+ */
 function apiPlatformGenerateFilesService(files: any) {
   writeFile(files.errorPath, JSON.stringify(files.errorData, null, 2));
   writeFile(
@@ -159,10 +184,14 @@ function apiPlatformGenerateFilesService(files: any) {
   });
 }
 
+/**
+ *
+ * @param resource
+ */
 export function apiPlatformFormatResourceFromDocJsonldService(
   resource: TSupportedClass,
 ) {
-  let properties: Record<string, any> = {};
+  const properties: Record<string, any> = {};
   resource.supportedProperty.forEach((prop: TSupportedProperty) => {
     properties[prop.title] = resolveTypeScriptType(prop.property.range);
     // const propertyName = getPropertyName(prop.property);

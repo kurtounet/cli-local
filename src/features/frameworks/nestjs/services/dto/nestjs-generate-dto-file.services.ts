@@ -1,15 +1,21 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
+import { pascalToKebab, snakeToKebab } from "@utils/convert";
+
 import {
   DtoType,
   INDENT,
   NEWLINE,
 } from "../../constant/nestjs-constants.constant";
-import { nestjsGetDtoSuffix } from "./nestjs-get-dto-suffix.service";
 import { DtoProperty } from "../../models/nestjs-dto-property.model";
-import { pascalToKebab, snakeToKebab } from "@utils/convert";
+import { nestjsGetDtoSuffix } from "./nestjs-get-dto-suffix.service";
 
 /**
  * Génère le contenu final du fichier DTO.
+ * @param entity
+ * @param properties
+ * @param imports
+ * @param dtoType
+ * @param responseDtoImports
  */
 export function nestjsGenerateDtoFile(
   entity: IEntityJson,

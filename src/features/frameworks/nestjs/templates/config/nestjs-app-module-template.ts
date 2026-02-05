@@ -1,8 +1,12 @@
+/**
+ *
+ * @param entities
+ */
 export function nestjsAppModuleTemplate(
-  entities: Array<{
+  entities: {
     entityNamePascalCase: string;
     entityNameKebabCase: string;
-  }>,
+  }[],
 ): string {
   const entitiesModules = entities.map(
     (entity) => `${entity.entityNamePascalCase}Module`,

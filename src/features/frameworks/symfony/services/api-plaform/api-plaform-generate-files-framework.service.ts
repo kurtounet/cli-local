@@ -1,19 +1,26 @@
+import { messageInstallationFramework } from "@constants/messages";
+import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import {
   IFramework,
   IProjectConfig,
 } from "@frameworks-models/framework-commun.model";
-
 import { logInfo, logStep } from "@utils/logger";
-import { messageInstallationFramework } from "@constants/messages";
 
-import { IEntityJson } from "@features/parsersMdj/models/entity-json.model";
 import { apiPlatformEntityService } from "./api-platform-entity.service";
-import { apiPlatformEntityMapperService } from "./api-platform-entity-mapper.service";
 import { apiPlatformEntityDtoService } from "./api-platform-entity-dto.service";
-import { apiPlatformEntityProviderService } from "./api-platform-entity-provider.service";
+import { apiPlatformEntityMapperService } from "./api-platform-entity-mapper.service";
 import { apiPlatformEntityProcessorService } from "./api-platform-entity-processor.service";
+import { apiPlatformEntityProviderService } from "./api-platform-entity-provider.service";
 import { apiPlatformServicesService } from "./api-platform-services.service";
 
+/**
+ *
+ * @param configFile
+ * @param framework
+ * @param rootPathProjectFramework
+ * @param entitiesJsonFile
+ * @param docJsonld
+ */
 export function apiPlatformGenerateFilesFrameworkService(
   configFile: IProjectConfig,
   framework: IFramework,

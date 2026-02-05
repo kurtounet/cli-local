@@ -1,10 +1,14 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 
+/**
+ *
+ * @param entities
+ */
 export function nestjsSeedModuleTemplate(entities: IEntityJson[]): string {
-  let importEntities: string[] = [];
-  let entitiesOrm: string[] = [];
-  let importEntitiesSeeder: string[] = [];
-  let entitiesSeeder: string[] = [];
+  const importEntities: string[] = [];
+  const entitiesOrm: string[] = [];
+  const importEntitiesSeeder: string[] = [];
+  const entitiesSeeder: string[] = [];
   entities.map((entity: IEntityJson) => {
     importEntities.push(
       `import { ${entity.namePascalCase} } from 'src/modules/${entity.nameKebabCase}/entity/${entity.nameKebabCase}.entity';`,

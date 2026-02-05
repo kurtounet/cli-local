@@ -1,8 +1,11 @@
 import { IColumnJson } from "@parsersMdj/models/entity-json.model";
+
 import { TRANSFORM_DECORATORS } from "../../constant/nestjs-constants.constant";
 
 /**
  * Génère les décorateurs de transformation pour les DTOs de réponse.
+ * @param column
+ * @param transformImports
  */
 export function nestjsGetTransformDecorators(
   column: IColumnJson,

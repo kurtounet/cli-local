@@ -1,4 +1,5 @@
 import { IRelation } from "@parsersMdj/models/entity-json.model";
+
 import { TYPEORM_DECORATORS } from "../../constant/nestjs-constants.constant";
 import { nestjsBuildImportEntity } from "./nestjs-build-import-entity-service";
 import { nestjsBuildRelationEntity } from "./nestjs-build-relation-entity.service";
@@ -6,6 +7,11 @@ import { nestjsShouldAddJoinColumnEntity } from "./nestjs-should-add-join-column
 
 /**
  * Traite une relation individuelle.
+ * @param relationship
+ * @param currentEntityTableName
+ * @param relations
+ * @param entityImports
+ * @param typeormImports
  */
 export function nestjsProcessRelationshipEntity(
   relationship: IRelation,

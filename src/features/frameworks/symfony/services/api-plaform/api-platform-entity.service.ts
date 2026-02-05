@@ -1,10 +1,15 @@
 import { IEntityJson } from "@parsersMdj/models/entity-json.model";
 import { writeFile } from "@utils/file-utils";
-
 import { logInfo, logStep } from "@utils/logger";
+
 import { apiPlatformEntityTemplate } from "../../templates/api-platform/api-platform-entity.template";
 import { symfonyEntityRepositoryTemplate } from "../../templates/symfony-repository.template";
 
+/**
+ *
+ * @param frameworkPath
+ * @param entity
+ */
 export function apiPlatformEntityService(
   frameworkPath: string,
   entity: IEntityJson,

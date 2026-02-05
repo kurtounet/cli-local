@@ -1,5 +1,6 @@
 # Dépendances
 node_modules/
+node_modules/**
 
 # Dossiers de build/sortie
 dist/
@@ -9,12 +10,9 @@ build/
 # Fichiers spécifiques
 package-lock.json
 *.min.js
-
+# Dossiers spécifiques
 .cli-local/**
 .doc/**
-dist/**
-bin/**
-node_modules/**
 old_cli/**
 output/**
 plugins/**

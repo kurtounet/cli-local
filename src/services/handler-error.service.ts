@@ -51,7 +51,7 @@ export class HandlerErrorService
       const message = isCliError
         ? err.message
         : `An unexpected error occurred: ${err.message}`;
-      const exitCode = isCliError ? (err).exitCode : 1;
+      const exitCode = isCliError ? err.exitCode : 1;
 
       // 2️⃣ Logger SAFE avec protection totale
       this.safeLogError(contextMessage, message);

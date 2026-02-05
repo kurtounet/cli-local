@@ -108,7 +108,7 @@ export default defineConfig([
     language: "markdown/commonmark",
   },
 
-  // --- 6. STYLING (CSS) ---  
+  // --- 6. STYLING (CSS) ---
   // {
   //   files: ["**/*.css"],
   //   plugins: { css },

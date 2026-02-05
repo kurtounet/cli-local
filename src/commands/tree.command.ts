@@ -118,7 +118,8 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
 
     const dryRun = this.hasOption(options, "dryRun");
     const metadata = this.hasOption(options, "metadata");
-    const output = config.tree.pathOut ?? this.getOption(options, "output", "./");
+    const output =
+      config.tree.pathOut ?? this.getOption(options, "output", "./");
     const pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
     const [type, ...pathArgs] = args;
 

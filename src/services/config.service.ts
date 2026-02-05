@@ -89,7 +89,7 @@ export class ConfigService extends BaseService implements IConfigService {
     this.load();
     return this.configData;
   }
-   
+
   private deepMerge(
     target: Record<string, unknown>,
     source: Record<string, unknown>,

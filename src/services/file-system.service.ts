@@ -231,10 +231,7 @@ export class FileSystemService
       throw error instanceof Error ? error : new Error(message);
     }
   }
-  async scranDir(
-    dirPath: string,
-    recursive = false,
-  ): Promise<string[]> {
+  async scranDir(dirPath: string, recursive = false): Promise<string[]> {
     this.validatePath(dirPath, "dirPath");
     try {
       return await fs.readdir(dirPath, {
@@ -312,10 +309,7 @@ export class FileSystemService
       );
     } else if (!isDirectory) {
       // 2. Analyse Metadata si l'extension est dans la liste du JSON
-      if (
-        withMetadata &&
-        config?.analyzeExtensions.includes(extension)
-      ) {
+      if (withMetadata && config?.analyzeExtensions.includes(extension)) {
         try {
           const sourceCode = await fs.readFile(dirPath, "utf-8");
           info.content = sourceCode;

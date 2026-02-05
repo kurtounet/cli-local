@@ -4,16 +4,16 @@ namespace App\ApiResource\Dtos\<%= entity.namePascalCase %>;
 
 use Symfony\Component\Serializer\Attribute\Groups;
 
-final class <%= entity.namePascalCase %>ItemDto
+final class <%= entity.namePascalCase %>CollectionItemDto
 {
     <% entity.columns?.forEach(col => { %>
-    #[Groups(['<%= entity.namePascalCase %>:item:read'])]
+    #[Groups(['<%= entity.namePascalCase %>:collection:read'])]
     public ?<%- col.phpType %> $<%= col.nameCamelCase %> = null;
     <% }) %>
-
+    
     <%# Add relations as IRI strings %>
     <% entity.relationships?.forEach(relation => { %>
-    #[Groups(['<%= entity.namePascalCase %>:item:read'])]
+    #[Groups(['<%= entity.namePascalCase %>:collection:read'])]
     public ?string $<%= relation.nameCamelCase %> = null;
     <% }) %>
 }

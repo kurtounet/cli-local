@@ -1,0 +1,42 @@
+<%- await include('mapper-resolve-iri.php.ejs') %>
+<%- await include('mapper-to-iri-list.php.ejs') %>
+
+<%# DTO to Entity %>
+private function scalarDtoToEntity(<%= entity.namePascalCase %>CreateDto|<%= entity.namePascalCase %>UpdateDto $dto, <%= entity.namePascalCase %> $entity): void
+{
+    <% entity.columns?.forEach(col => { %>
+    <% if (!col.foreignKey && !["id", "created_at", "updated_at"].includes(col.name) ) { %>
+    $entity->set<%= col.namePascalCase %>($dto-><%= col.nameCamelCase %>);
+    <% } %>
+    <% }) %>
+}
+
+private function relationsDtoToEntity(<%= entity.namePascalCase %>CreateDto|<%= entity.namePascalCase %>UpdateDto $dto, <%= entity.namePascalCase %> $entity): void
+{
+    <% entity.relationships?.forEach(relation => { %>
+    $entity->set<%= relation.namePascalCase %>($this->resolveIri($dto-><%= relation.nameCamelCase %>, <%= relation.targetPascalCase %>::class, '<%= relation.nameCamelCase %>', required: <%= !relation.nullable %>));
+    <% }) %>
+}
+
+<%# Entity to DTO %>
+private function scalarEntityToDto(<%= entity.namePascalCase %> $entity, object $dto): void
+{
+    <% entity.columns?.forEach(col => { %>
+    <% if (!col.foreignKey) { %>
+    $dto-><%= col.nameCamelCase %> = $entity->get<%= col.namePascalCase %>();
+    <% } %>
+    <% }) %>
+}
+
+private function relationsEntityToDto(<%= entity.namePascalCase %> $entity, object $dto): void
+{
+    <% entity.relationships?.forEach(relation => { %>
+    <% if (relation.relationType === 'OneToOne' || relation.relationType === 'ManyToOne') { %>
+    $dto-><%= relation.nameCamelCase %> = $entity->get<%= relation.namePascalCase %>()
+        ? ($this->iriFromResource)(<%= relation.targetPascalCase %>Resource::class, $entity->get<%= relation.namePascalCase %>()->getId())
+        : null;
+    <% } else { %>
+    $dto-><%= relation.nameCamelCase %> = $this->toIriList($entity->get<%= relation.namePascalCase %>(), <%= relation.targetPascalCase %>Resource::class);
+    <% } %>
+    <% }) %>
+}

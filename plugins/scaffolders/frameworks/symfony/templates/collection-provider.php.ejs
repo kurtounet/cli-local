@@ -1,0 +1,37 @@
+<?php
+
+namespace App\ApiResource\States\<%= entity.namePascalCase %>;
+
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProviderInterface;
+use ApiPlatform\Metadata\CollectionOperationInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use App\ApiResource\Mappers\<%= entity.namePascalCase %>Mapper;
+use App\Entity\<%= entity.namePascalCase %>;
+
+final readonly class <%= entity.namePascalCase %>CollectionProvider implements ProviderInterface
+{
+    public function __construct(
+        #[Autowire(service: 'api_platform.doctrine.orm.state.collection_provider')]
+        private ProviderInterface $collectionProvider,
+        private <%= entity.namePascalCase %>Mapper $<%= entity.nameCamelCase %>Mapper
+    ) {}
+
+    public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
+    {
+        $result = $this->collectionProvider->provide($operation, $uriVariables, $context);
+
+        if (!is_iterable($result)) {
+            return $result;
+        }
+
+        $items = [];
+        foreach ($result as $entity) {
+            if (!$entity instanceof <%= entity.namePascalCase %>) {
+                continue;
+            }
+            $items[] = $this-><%= entity.nameCamelCase %>Mapper->entityToCollectionDto($entity);
+        }
+        return $items;
+    }
+}

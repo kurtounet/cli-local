@@ -2,19 +2,71 @@
 
 namespace App\Entity;
 
-/**
- * Entity <%= entity.name %>
- */
-class <%= entity.name %> 
-{
-    private $id;
 
-<% entity.fields.forEach(field => { %>
-    private $<%= field.name %>; // type: <%= field.type %>
-<% }) %>
+use App\Repository\<%= entity.namePascalCase %>Repository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
+// use App\Traits\TimestampTrait;
+
+// #[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: <%= entity.namePascalCase %>Repository::class)]
+class <%= entity.namePascalCase %>
+{
+    // use TimestampTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    <%# Properties Scalar %>
+    <% entity.columns?.forEach(col => { %>
+    <% if (!["id", "created_at", "updated_at"].includes(col.name) && col.foreignKey === false) { %>
+    #[ORM\Column(type: '<%= col.ormType %>', nullable: <%= col.nullable ? 'true' : 'false' %>)]
+    public ?<%- col.phpType %> $<%= col.nameCamelCase %> = null;
+    <% } %>
+    <% }) %>
+
+    <%# Properties Relation %>
+    <% entity.relationships?.forEach(relation => { %>
+    <%- include('partials/entity-relation.php.ejs', { relation: relation }) %>
+    <% }) %>
+
+    public function __construct()
+    {
+        <% entity.relationships?.forEach(relation => { %>
+        <% if (relation.relationType === 'OneToMany' || relation.relationType === 'ManyToMany') { %>
+        $this-><%= relation.nameCamelCase %> = new ArrayCollection();
+        <% } %>
+        <% }) %>
+    }
 
     public function getId(): ?int
     {
-        return $this.id;
+        return $this->id;
     }
+
+    <%# Accessors Scalar %>
+    <% entity.columns?.forEach(col => { %>
+    <% if (!["id", "created_at", "updated_at"].includes(col.name) && col.foreignKey === false) { %>
+    public function get<%= col.namePascalCase %>(): ?<%= col.phpType %>
+    {
+        return $this-><%= col.nameCamelCase %>;
+    }
+
+    public function set<%= col.namePascalCase %>(?<%= col.phpType %> $<%= col.nameCamelCase %>): static
+    {
+        $this-><%= col.nameCamelCase %> = $<%= col.nameCamelCase %>;
+        return $this;
+    }
+    <% } %>
+    <% }) %>
+
+    <%# Accessors Relation %>
+    <% entity.relationships?.forEach(relation => { %>
+    <%- include('partials/entity-accessor-relation.php.ejs', { relation: relation }) %>
+    <% }) %>
 }

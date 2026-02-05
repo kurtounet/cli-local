@@ -38,12 +38,24 @@
     }
   ],
   "tree": {
-    "exclude": ["node_modules", ".git", "dist", ".vscode", ".doc", "old_cli"],
+    "exclude": [
+      ".git",
+      "dist",
+      ".doc",
+      "output",
+      ".vscode",
+      "old_cli",
+      "project-test",
+      "node_modules"
+    ],
     "pathIn": "I:\\cli\\cli-local-poo",
     "pathOut": "./tree",
     "analysis": {
       "enabled": false,
-      "extensions": [".ts", ".js"],
+      "extensions": [
+        ".ts",
+        ".js"
+      ],
       "save": true,
       "maxLevel": 32
     },

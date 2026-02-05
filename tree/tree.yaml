@@ -1,6 +1,12 @@
 directory_tree:
   name: cli-local-poo/
   children:
+    - name: .cli-local/
+      children:
+        - name: config-project.json
+        - name: entities.json
+        - name: mcd.json
+        - name: mcd.mdj
     - name: .env
     - name: .eslintignore
     - name: .gitignore
@@ -8,12 +14,81 @@ directory_tree:
     - name: eslint.config.mjs
     - name: package-lock.json
     - name: package.json
-    - name: prompt.md
-    - name: rapport-erreurs.txt
-    - name: rapport-eslint.md
+    - name: plugins/
+      children:
+        - name: index.json
+        - name: scaffolders/
+          children:
+            - name: cli/
+              children:
+                - name: command/
+                - name: plugin/
+                - name: service/
+            - name: frameworks/
+              children:
+                - name: .cli-local/
+                  children:
+                    - name: config-project.json
+                    - name: entities.json
+                    - name: mcd.json
+                    - name: mcd.mdj
+                - name: angular/
+                - name: symfony/
+                  children:
+                    - name: index.js
+                    - name: manifest.json
+                    - name: symfony.service.js
+                    - name: templates/
+                      children:
+                        - name: collection-item-dto.php.ejs
+                        - name: collection-provider.php.ejs
+                        - name: commands/
+                          children:
+                            - name: crud-all.php.ejs
+                        - name: controller.php.ejs
+                        - name: create-dto.php.ejs
+                        - name: delete-processor.php.ejs
+                        - name: dto.php.ejs
+                        - name: entity.php.ejs
+                        - name: env/
+                          children:
+                            - name: env.local.ejs
+                        - name: mapper.php.ejs
+                        - name: partials/
+                          children:
+                            - name: entity-accessor-relation.php.ejs
+                            - name: entity-relation.php.ejs
+                            - name: mapper-logic.php.ejs
+                            - name: mapper-resolve-iri.php.ejs
+                            - name: mapper-to-iri-list.php.ejs
+                        - name: processor.php.ejs
+                        - name: prodiver.php.ejs
+                        - name: provider.php.ejs
+                        - name: repository.php.ejs
+                        - name: resource.php.ejs
+                        - name: service.php.ejs
+                        - name: services/
+                          children:
+                            - name: iri-from-resource.php.ejs
+                        - name: test.php.ejs
+                        - name: update-dto.php.ejs
+                        - name: update-processor.php.ejs
+                    - name: test-generator.js
+                    - name: utils/
+                      children:
+                        - name: convert.js
+                        - name: mapping.js
+        - name: tools/
+          children:
+            - name: architecture/
+              children:
+                - name: architecture.service.js
+                - name: manifest.json
     - name: src/
       children:
         - name: assets/
+          children:
+            - name: messages.ts
         - name: commands/
           children:
             - name: BaseCommand.ts
@@ -25,7 +100,7 @@ directory_tree:
             - name: ia.command.ts
             - name: list-command.help.md
             - name: make.command.ts
-            - name: project.command.ts.txt
+            - name: plugin.command.ts
             - name: tree.command.ts
         - name: config/
           children:
@@ -43,11 +118,15 @@ directory_tree:
             - name: handler-error.md
         - name: features/
           children:
+            - name: .gitignore
             - name: commun/
               children:
+                - name: .gitignore
                 - name: architecture.interface.ts
                 - name: database.interface.ts
+                - name: file-node.interface.ts
                 - name: framework.interface.ts
+                - name: member-info.interface.ts
                 - name: package-json.model.ts
                 - name: projet.interface.ts
             - name: frameworks/
@@ -86,6 +165,7 @@ directory_tree:
                         - name: angular-generate-signal-store-entity.service.ts
                         - name: angular-generate-test.service.ts
                         - name: angular-generate-zod-schema-entity.service.ts
+                        - name: angular.service.ts
                         - name: index.ts
                     - name: templates/
                       children:
@@ -112,16 +192,19 @@ directory_tree:
                                 - name: angular-form-html-entity.template.ts
                                 - name: angular-form-spec-entity.template.ts
                                 - name: angular-form-ts-entity.template.ts
+                        - name: index.ts
+                - name: commands/
+                  children:
+                    - name: framework.command.ts
                 - name: common/
                   children:
                     - name: base-generator.ts
                     - name: config/
                       children:
                         - name: config-frameworks.ts
-                        - name: framework-index.ts
-                    - name: config-framework.ts
                     - name: services/
                       children:
+                        - name: build-command.service.ts
                         - name: create-architecture.service.ts
                         - name: generate-interface-service.ts
                         - name: generate-route.service.ts
@@ -215,6 +298,7 @@ directory_tree:
                         - name: electron-service-template.template.ts
                         - name: electron-test-template.template.ts
                         - name: service-template.template.ts
+                - name: example/
                 - name: interfaces/
                   children:
                     - name: framework-service.interface.ts
@@ -711,7 +795,7 @@ directory_tree:
                                 - name: nuxt.config.ts.ejs
                                 - name: pages/
                                   children:
-                                    - name: slug.vue.ejs
+                                    - name: [slug].vue.ejs
                                     - name: about.vue.ejs
                                     - name: admin/
                                       children:
@@ -789,11 +873,15 @@ directory_tree:
                 - name: readme.md
                 - name: services/
                   children:
+                    - name: base-framework.service.ts
                     - name: confi-framework.service.ts
-                    - name: framework.service copy 2.ts
+                    - name: framework-selector.service.ts
                     - name: framework.service.ts
                 - name: symfony/
                   children:
+                    - name: commands/
+                      children:
+                        - name: symfony.command.ts
                     - name: config/
                       children:
                         - name: symfony-architecture.mock.ts
@@ -806,6 +894,9 @@ directory_tree:
                     - name: constant/
                       children:
                         - name: symfony-constants.constant.ts
+                    - name: factories/
+                      children:
+                        - name: symfony-file.factory.ts
                     - name: interfaces/
                       children:
                         - name: symfony-symfony-model.php
@@ -852,6 +943,7 @@ directory_tree:
                         - name: symfony-generate-state-provider.service.ts
                         - name: symfony-test.service.ts
                         - name: symfony-validation.service.ts
+                        - name: symfony.service.ts
                     - name: templates/
                       children:
                         - name: api-platform/
@@ -964,8 +1056,41 @@ directory_tree:
                         - name: vue-store-template.template.ts
                         - name: vue-test-template.template.ts
             - name: parserMdj/
+              children:
+                - name: models/
+                  children:
+                    - name: entity-json.model.ts
+                    - name: mdj.model.ts
+                    - name: schema.model.ts
+                    - name: star-uml.model.ts
+                - name: ressource/
+                  children:
+                    - name: shopify.json
+                    - name: shopify.mdj
+                - name: services/
+                  children:
+                    - name: .gitignore
+                    - name: mapping.ts
+                    - name: old_services/
+                      children:
+                        - name: get-colums.service.ts
+                        - name: get-entities.service.ts
+                        - name: get-relationships.service.ts
+                        - name: mdj-handle-colums.service.ts
+                        - name: mdj-to-json.service.ts
+                        - name: mdj-update-handle-colums.service.ts
+                        - name: nestjs-code-generation.service.ts
+                        - name: nestjs-generate-dto.service.ts
+                        - name: nestjs-generate-entity.service.ts
+                        - name: nestjs-generate-interface.service.ts
+                        - name: symfony-code-generation.service.ts
+                        - name: symfony-generate-dto.service.ts
+                        - name: symfony-generate-entity.service.ts
+                    - name: parser-mdj.service.ts
+                    - name: symfony-mapping.ts
             - name: project/
               children:
+                - name: .gitignore
                 - name: commands/
                   children:
                     - name: project.command.ts
@@ -977,9 +1102,11 @@ directory_tree:
                     - name: file-node.interface.ts
                     - name: project-command.interface.ts
                     - name: project-service.interface.ts
+                    - name: task-service.interface.ts
                 - name: services/
                   children:
                     - name: project.service.ts
+                    - name: task.service.ts
             - name: utils/
         - name: index.ts
         - name: mcp-server.ts
@@ -987,6 +1114,12 @@ directory_tree:
           children:
             - name: architect.plugin.js
             - name: doc.plugin.js
+            - name: symfony/
+              children:
+                - name: index.js
+                - name: manifest.json
+                - name: symfony.service.js
+                - name: templates/
             - name: task_manager.data.json
             - name: task_manager.plugin.js
             - name: task_manager_cli.plugin.js
@@ -1009,11 +1142,11 @@ directory_tree:
             - name: file-system.service.ts
             - name: generate-dto.service.ts
             - name: generator.service.ts
+            - name: git.service.ts
             - name: handler-error.service.ts
             - name: ia.service.ts
             - name: logger.service.ts
             - name: plugin.service.ts
-            - name: project.service.ts.txt
             - name: prompt.service.ts
             - name: services-container.ts
             - name: services-container.ts.txt
@@ -1025,6 +1158,7 @@ directory_tree:
                     - name: test.command.ts
             - name: state.service.ts
             - name: task-manager.service.ts
+            - name: template.factory.ts
             - name: template.service.ts
             - name: test-error-handler.ts
             - name: tool.service.ts
@@ -1041,6 +1175,7 @@ directory_tree:
                 - name: database.interface.ts
                 - name: file-node.interface.ts
                 - name: member-info.interface.ts
+                - name: sdk-context.interface.ts
             - name: config.interface.ts
             - name: context.interface.ts
             - name: plugin.interface.ts
@@ -1056,6 +1191,7 @@ directory_tree:
                 - name: error-handler.interface.ts
                 - name: file-system.interface.ts
                 - name: generator.interface.ts
+                - name: git-service.interface.ts
                 - name: logger-service.interface.ts
                 - name: plugin-service.interface.ts
                 - name: prompt-service.interface.ts
@@ -1068,7 +1204,6 @@ directory_tree:
     - name: tests/
       children:
         - name: cli-e2e.test.ts
-        - name: setup.ts
         - name: utils.ts
     - name: tree/
       children:
@@ -1079,5 +1214,5 @@ directory_tree:
     - name: vite.config.js
 
 metadata:
-  directories: 196
-  files: 696
+  directories: 225
+  files: 777

@@ -4,3 +4,4 @@ dist
 old_cli/*
 project-test/*
 output/*
+.cli-local/*

@@ -10,7 +10,7 @@ export interface IPluginOptions extends AnyOptions {
 export class PluginCommand extends BaseCommand<IPluginOptions> {
   public name = "plugin";
   public description = "Génère un nouvel élément de la CLI (Service, Command, Template)";
-  public arguments = "<pluginId> <pathPlugin>";
+  public arguments = "<pluginId> <type>";
   //   public aliases = ["m"];
 
   public options: ICommandOption[] = [
@@ -34,19 +34,35 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     const [pluginId, typePluging] = args;
     try {
       this.cli.logger.info(`Chargement du plugin : ${pluginId}...`);
-
+      switch (typePluging) {
+        case "service":
+          this.cli.logger.info(`Chargement du service : ${pluginId}...`);
+          break;
+        case "command":
+          this.cli.logger.info(`Chargement de la commande : ${pluginId}...`);
+          break;
+        case "scaffolder":
+          this.cli.logger.info(`Chargement du scaffolder : ${pluginId}...`);
+          break;
+        case "template":
+          this.cli.logger.info(`Chargement du template : ${pluginId}...`);
+          break;
+        case "plugin":
+          this.cli.logger.info(`Chargement du plugin : ${pluginId}...`);
+          break;
+      }
       // 1. Charger le plugin via le service
+      const { project, entitiesJson } = await this.cli.project.loadFileCliLocal(process.cwd());
       const { instance, manifest, pluginDir } = await this.cli.plugin.load(pluginId, typePluging);
 
       // 2. Préparer des données de test (ceci viendra normalement de tes entités JSON)
       const data = {
+        project: project,
+        entitiesJson: entitiesJson,
         pluginDir: pluginDir,
         manifest: manifest,
         blueprints: [...manifest.blueprints],
-        entities: [
-          { name: "User", fields: [{ name: "email", type: "string" }] },
-          { name: "Post", fields: [{ name: "title", type: "string" }] },
-        ],
+        entities: entitiesJson.entities,
       };
 
       // 3. Exécuter

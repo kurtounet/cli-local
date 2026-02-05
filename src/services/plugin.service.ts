@@ -11,7 +11,6 @@ export class PluginService extends BaseService implements IPluginService {
   private pluginsIndex = path.join(this.pluginsBaseDir, "index.json");
   private pluginsIndexJson!: any;
   private pluginsManifest!: IPluginManifest;
-
   private plugin!: IPlugin;
 
   public override async init(): Promise<void> {
@@ -26,46 +25,35 @@ export class PluginService extends BaseService implements IPluginService {
     this.pluginsIndexJson = JSON.parse(indexPluginJson);
     const typePlugin = this.pluginsIndexJson.plugins[type];
     this.plugin = typePlugin.find((p: any) => p.id === pluginId);
-    // Vérification du plugin
+
     if (!this.plugin) {
       throw new Error(`Plugin ${pluginId} non trouvé dans la catégorie ${type}`);
     }
     this.plugin.pluginDir = path.join(this.pluginsBaseDir, this.plugin.pluginDir);
     const manifestPath = path.join(this.plugin.pluginDir, "manifest.json");
-    // Vérification du manifest.json du plugin
+
     if (!this.cli.fileSystem.exists(manifestPath)) {
       throw new Error(`le fichier manifest.json du plugin ${pluginId}.json n'existe pas`);
     }
 
-    //Lecture du Manifest
     const manifestJson = await this.cli.fileSystem.readFile(manifestPath);
     this.pluginsManifest = JSON.parse(manifestJson);
+
     const isComplet = await this.verifyPlugin(this.pluginsManifest);
-    // Vérification du plugin
+
     if (!isComplet) {
       throw new Error(`Le plugin ${pluginId} n'est pas complet`);
     }
 
-    const service = path.join(this.plugin.pluginDir, this.pluginsManifest.service);
-    if (!this.cli.fileSystem.exists(service)) {
-      throw new Error(`Le fichier d'entrée du plugin ${pluginId} n'existe pas`);
-    }
-
-    //Préparation du SDK (Contexte injecté)
-    //injecte ici les services de la CLI
     const sdk: ISDKContext = this.getSDKContext();
-
-    // 4. Import dynamique du fichier JS
-    // Note: On utilise file:// pour Windows/Linux compatibility en ESM
-    const module = await import(`file://${service}?update=${Date.now()}`);
+    const service = path.join(this.plugin.pluginDir, this.pluginsManifest.service);
+    const module = await import(`file://${service}`);
     const PluginClass = module.default;
     if (!PluginClass) {
       throw new Error(`Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`);
     }
 
-    // 5. Instanciation avec injection du SDK
     const instance = new PluginClass(sdk);
-
     return {
       instance,
       manifest: this.pluginsManifest,
@@ -100,11 +88,22 @@ export class PluginService extends BaseService implements IPluginService {
     const plugins = await this.list();
     return plugins.filter((p: any) => p.type === type);
   }
+
   async verifyPlugin(manifest: any): Promise<boolean> {
     let errors: string[] = [];
-    const propertiesManifest = ["id", "name", "templateDir", "service", "blueprints"];
-    const serviceFile = path.join(this.plugin.pluginDir, manifest.service);
-    const templateDir = path.join(this.plugin.pluginDir, manifest.templateDir);
+    let propertiesManifest: string[] = [];
+    let pathPlugin = {
+      templateDir: "",
+      service: "",
+    };
+    console.log(manifest);
+    if (this.plugin.type === "scaffolder") {
+      propertiesManifest = ["id", "name", "templateDir", "service", "blueprints"];
+      pathPlugin.templateDir = path.join(this.plugin.pluginDir, manifest.templateDir);
+    } else if (this.plugin.type === "tool") {
+      propertiesManifest = ["id", "name", "service"];
+    }
+    pathPlugin.service = path.join(this.plugin.pluginDir, manifest.service);
 
     for (const property of propertiesManifest) {
       if (!manifest[property]) {
@@ -116,19 +115,23 @@ export class PluginService extends BaseService implements IPluginService {
     if (errors.length > 0) {
       throw new Error(errors.join("\n"));
     }
-    console.log(serviceFile);
-    if (!this.cli.fileSystem.exists(serviceFile)) {
+
+    if (!this.cli.fileSystem.exists(pathPlugin.service) && pathPlugin.service) {
       throw new Error(`Le fichier d'entrée du plugin ${manifest.id}.service.js n'existe pas`);
     }
-    console.log(templateDir);
-    if (!this.cli.fileSystem.exists(templateDir)) {
-      throw new Error(`Le dossier de templates du plugin ${manifest.id} n'existe pas`);
+
+    if (pathPlugin.templateDir && this.plugin.type === "scaffolder") {
+      if (!this.cli.fileSystem.exists(pathPlugin.templateDir)) {
+        throw new Error(`Le dossier de templates du plugin ${manifest.id} n'existe pas`);
+      }
     }
 
-    for (const blueprint of manifest.blueprints) {
-      const blueprintPath = path.join(templateDir, blueprint.template);
-      if (!this.cli.fileSystem.exists(blueprintPath)) {
-        errors.push(`Le template ${blueprint.template} du plugin ${manifest.id} n'existe pas`);
+    if (manifest.blueprints) {
+      for (const blueprint of manifest.blueprints) {
+        const blueprintPath = path.join(pathPlugin.templateDir, blueprint.template);
+        if (!this.cli.fileSystem.exists(blueprintPath)) {
+          errors.push(`Le template ${blueprint.template} du plugin ${manifest.id} n'existe pas`);
+        }
       }
     }
 
@@ -137,6 +140,7 @@ export class PluginService extends BaseService implements IPluginService {
     }
     return true;
   }
+
   getSDKContext(): ISDKContext {
     return {
       log: {

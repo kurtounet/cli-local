@@ -3,13 +3,8 @@
         "tool": [
             {
                 "type": "cli",
-                "id": "symfony",
-                "pluginDir": "scaffolders/cli/symfony"
-            },
-            {
-                "type": "cli",
-                "id": "angular",
-                "pluginDir": "scaffolders/cli/angular"
+                "id": "architecture",
+                "pluginDir": "/tools/architecture"
             }
         ],
         "scaffolder": [

@@ -18,6 +18,8 @@ export class PathService extends BaseService implements IPathService {
    */
   public join(...segments: string[]): string {
     this.validateSegments(segments);
+    // Log de debug interne (optionnel)
+    // console.debug(`[PathService] Joined: ${segments.join(' + ')} => ${result}`);
     return path.join(...segments);
   }
 
@@ -87,7 +89,16 @@ export class PathService extends BaseService implements IPathService {
   public isAbsolute(filePath: string): boolean {
     return path.isAbsolute(filePath);
   }
-
+  /**
+   * Vérifie que le chemin n'est pas vide.
+   * @param filePath - Chemin à vérifier
+   * @param paramName - Nom du paramètre pour le message d'erreur. Par exemple, `filePath` ou `dirPath`.
+   */
+  public validatePath(filePath: string, paramName: string): void {
+    if (!filePath || filePath.trim() === "") {
+      throw new Error(`${paramName} cannot be empty`);
+    }
+  }
   /**
    * Méthode privée pour valider les entrées et éviter les crashs.
    * @param segments - Les segments de chemin à resilier
@@ -98,5 +109,71 @@ export class PathService extends BaseService implements IPathService {
         "[PathService] Tous les segments du chemin doivent être des chaînes de caractères.",
       );
     }
+  }
+  /**
+   * Retourne un objet dont les propriétés représentent des éléments significatifs du chemin.
+   * (root, dir, base, ext, name)
+   * @param filePath - Chemin à analyser
+   * @returns Objet contenant les éléments significatifs
+   */
+  public parse(filePath: string): path.ParsedPath {
+    this.validatePath(filePath, "filePath");
+    return path.parse(filePath);
+  }
+
+  /**
+   * Retourne une chaîne de chemin à partir d'un objet (l'inverse de parse).
+   * @param pathObject - Objet contenant les éléments significatifs
+   * @returns Chemin
+   */
+  public format(pathObject: path.FormatInputPathObject): string {
+    return path.format(pathObject);
+  }
+
+  /**
+   * Retourne l'équivalent spécifique au système (utile pour Windows long paths \\?\).
+   * @param filePath - Chemin
+   * @returns Chemin
+   */
+  public toNamespacedPath(filePath: string): string {
+    return path.toNamespacedPath(filePath);
+  }
+
+  /**
+   * Retourne le séparateur de segment spécifique au système (\ ou /).
+   * @returns Le séparateur
+   */
+  public getSeparator(): string {
+    return path.sep;
+  }
+
+  /**
+   * Retourne le délimiteur de chemin spécifique au système (; ou :).
+   * @returns Le délimiteur
+   */
+  public getDelimiter(): string {
+    return path.delimiter;
+  }
+
+  /**
+   * Sécurité : Vérifie si un chemin (child) est réellement à l'intérieur d'un autre (parent).
+   * Très utile pour empêcher les accès non autorisés (ex: ../../etc/passwd).
+   * @param parent - Chemin parent
+   * @param child - Chemin enfant
+   * @returns `true` si le chemin enfant est à l'intérieur du chemin parent, `false` sinon
+   */
+  public isChildOf(parent: string, child: string): boolean {
+    const relative = path.relative(parent, child);
+    return relative.length > 0 && !relative.startsWith("..") && !path.isAbsolute(relative);
+  }
+
+  /**
+   * Nettoie un chemin des caractères potentiellement dangereux.
+   * @param filePath - Chemin à nettoyer
+   * @returns Chemin nettoy
+   */
+  public sanitize(filePath: string): string {
+    // Remplace les multiples slashes et normalise
+    return filePath.replace(/[<>:"|?*]/g, "").trim();
   }
 }

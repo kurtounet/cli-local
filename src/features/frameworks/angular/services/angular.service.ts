@@ -7,10 +7,7 @@ import { IAppContext } from "@/types/context.interface.js";
 import { IFrameworkService } from "../../interfaces/framework-service.interface.js";
 import { BaseFrameworkService } from "../../services/base-framework.service.js";
 
-export class AngularService
-  extends BaseFrameworkService
-  implements IFrameworkService
-{
+export class AngularService extends BaseFrameworkService implements IFrameworkService {
   private config!: IInstallFramework;
   readonly frameworkName = "angular";
   readonly serviceName = "AngularService";
@@ -21,19 +18,16 @@ export class AngularService
 
   /**
    * Point d'entrée principal pour la génération Angular
-   * @param project
-   * @param entitiesJson
-   * @param fileMdj
+   * @param project - Config du projet
+   * @param entitiesJson - Entitées du entitiesJson
+   * @param fileMdj - Fichier Mdj
    */
   generate = async (
     project: IProjectConfig,
     entitiesJson: IGetEntityJson,
-    fileMdj: any,
+    fileMdj: string,
   ): Promise<void> => {
-    this.config = (await this.buildInstallFramework(
-      project,
-      this.frameworkName,
-    ))!;
+    this.config = (await this.buildInstallFramework(project, this.frameworkName))!;
 
     if (this.config === null) {
       return;
@@ -70,19 +64,14 @@ export class AngularService
     ].filter((arg): arg is string => Boolean(arg));
 
     this.cli.shell.executeSyncSpawn(`ng`, args, config.rootProjectPath);
+    await Promise.resolve();
   }
 
   async installDependencies(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(
-      `${EMOJI.rond_green} Installation des dépendances Angular...`,
-    );
+    this.cli.logger.info(`${EMOJI.rond_green} Installation des dépendances Angular...`);
     if (config.framework.mode === "install") {
       config.framework.dependencies.prod.map((dep) => {
-        this.cli.shell.executeSyncSpawn(
-          `npm`,
-          ["install", dep],
-          `${config.projectPath}`,
-        );
+        this.cli.shell.executeSyncSpawn(`npm`, ["install", dep], `${config.projectPath}`);
       });
       config.framework.dependencies.dev.map((dep) => {
         this.cli.shell.executeSyncSpawn(
@@ -92,6 +81,7 @@ export class AngularService
         );
       });
     }
+    await Promise.resolve();
   }
   // async createBranchGit(config: IInstallFramework): Promise<void> {
   //   this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
@@ -112,24 +102,24 @@ export class AngularService
   //   }
   //   this.cli.logger.info(`${EMOJI.success} Branch git créée avec succès !`);
   // }
-  async generateArchitecture(config: IInstallFramework): Promise<any> {
-    this.cli.logger.info(
-      `${EMOJI.rond_green} Création de l'arborescence des dossiers...`,
-    );
+  async generateArchitecture(config: IInstallFramework): Promise<unknown> {
+    // this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
+    this.cli.logger.info(`${EMOJI.rond_green} Création de l'arborescence des dossiers...`);
     return Promise.resolve();
   }
 
-  async generateFileFramework(config: IInstallFramework): Promise<any> {
+  async generateFileFramework(config: IInstallFramework): Promise<unknown> {
     this.cli.logger.info(
       `${EMOJI.rond_green} Génération des fichiers de base pour ${config.projectName}`,
     );
     return Promise.resolve();
   }
 
-  async updateFile(config: IInstallFramework): Promise<any> {
+  async updateFile(config: IInstallFramework): Promise<unknown> {
     this.cli.logger.info(`Mise à jour du fichier package.json`);
     this.cli.logger.info(`Mise à jour du fichier tsconfig.json`);
     this.cli.logger.info(`Mise à jour du fichier config.json`);
     this.cli.logger.success(`Mise à jour terminée avec succès !`);
+    return Promise.resolve();
   }
 }

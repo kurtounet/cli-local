@@ -51,7 +51,7 @@ Exemples :
   public options: ICommandOption[] = [
     {
       flags: "-n, --new",
-      description: "Générer l'arborescence en json, yaml, md",
+      description: "Créer un nouveau fichier de configuration pour un projet",
       type: "boolean",
       defaultValue: false,
     },
@@ -170,7 +170,7 @@ Choix :
 
   private async handleGenerateProject(rest: string[]): Promise<string> {
     const configFileName = `${rest[0]}-config.json`;
-    const configFilePath = this.cli.fileSystem.resolvePath(configFileName);
+    const configFilePath = this.cli.path.resolve(configFileName);
     const config = (await this.cli.fileSystem.readFileJson(configFilePath)) as IProjectConfig;
     return await this.cli.project.generateProject(config);
   }
@@ -188,7 +188,7 @@ Choix :
   async newProject(answers: IProjectCommand): Promise<IProjectConfig> {
     const configFileName = `${answers.name}-config.json`;
     const projectPath = answers.path === "." ? process.cwd() : answers.path;
-    const configFilePath = this.cli.fileSystem.resolvePath(projectPath, configFileName);
+    const configFilePath = this.cli.path.resolve(projectPath, configFileName);
 
     let config = {} as IProjectConfig;
 

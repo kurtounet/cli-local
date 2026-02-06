@@ -25,15 +25,14 @@ export class FrameworkSelector {
 
   /**
    * Récupère le service correspondant au framework
-   * @param frameworkName
+   * @param frameworkName - Nom du framework
+   * @returns  Le service du framework
    */
   getService(frameworkName: string): IFrameworkService {
     const service = this.services.get(frameworkName.toLowerCase());
 
     if (!service) {
-      throw new Error(
-        `Le framework "${frameworkName}" n'est pas encore supporté par la CLI.`,
-      );
+      throw new Error(`Le framework "${frameworkName}" n'est pas encore supporté par la CLI.`);
     }
 
     return service;

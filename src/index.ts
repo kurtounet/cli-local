@@ -1,4 +1,5 @@
 import { AppCommand } from "./commands/app.command.js";
+import { DocCommand } from "./commands/doc.command.js";
 import { GenerateCommand } from "./commands/generate.command.js";
 import { McpCommand } from "./commands/mcp.command.js";
 import { PluginCommand } from "./commands/plugin.command.js";
@@ -56,6 +57,7 @@ async function bootstrap(): Promise<void> {
      * - mclp ia "génère un service utilisateur"
      */
     app.registerCommand(McpCommand);
+    app.registerCommand(DocCommand);
     app.registerCommand(AppCommand);
     app.registerCommand(TreeCommand);
     app.registerCommand(PluginCommand);

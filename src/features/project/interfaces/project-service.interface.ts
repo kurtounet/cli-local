@@ -11,7 +11,7 @@ import { IProjectCommand } from "./project-command.interface.js";
 export interface IProjectService extends IBaseService {
   serviceName: string;
   init(): Promise<void>;
-  newProject(project: IProjectCommand): Promise<IProjectConfig>;
+  newProject(project: IProjectCommand): IProjectConfig;
   generateProject(project: IProjectConfig): Promise<string>;
   loadFileCliLocal(path: string): Promise<any>;
   loadProject(path: string): Promise<void>;

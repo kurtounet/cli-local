@@ -1,8 +1,6 @@
 import path from "node:path";
 
-import { dump } from "js-yaml";
-
-import { FilesystemError, ValidationError } from "@/errors/cli-errors.js";
+import { FilesystemError } from "@/errors/cli-errors.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 
 import { BaseCommand } from "./BaseCommand.js";
@@ -19,7 +17,7 @@ export class DocCommand extends BaseCommand {
   public name = "doc";
   public description = `Génère la documentation md
 `;
-  public arguments = "[format]";
+  public arguments = "[pathIn] [pathOut] [options]";
   public aliases = ["d"];
 
   async execute(args: string[], options: IDocOptions): Promise<void> {
@@ -33,7 +31,7 @@ export class DocCommand extends BaseCommand {
     const excludedDirs = config.tree.exclude;
     const analyzeExtensions = config.tree.analysis.enabled ? config.tree.analysis.extensions : null;
 
-    this.validateArgs(args, 1, "Usage: mclp tree <type> <pathIn> [pathOut] [options]");
+    this.validateArgs(args, 0, "Usage: mclp doc [pathIn] [pathOut] [options]");
 
     const view = this.hasOption(options, "view");
     const force = this.hasOption(options, "force");
@@ -46,13 +44,10 @@ export class DocCommand extends BaseCommand {
     try {
       const argOut = pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
       const pathOut = path.resolve(argOut ?? output ?? pathIn);
-      const fileName = path.resolve(pathOut, `tree.${type}`);
 
       if (!this.cli.fileSystem.exists(pathIn)) {
         throw new FilesystemError(`Le dossier '${pathIn}' n'existe pas.`);
       }
-
-      this.cli.logger.info(`Processing: ${pathIn} -> ${fileName} (${type})`);
 
       // Récupération de l'objet tree (données brutes)
       const tree = await this.cli.fileSystem.getDirectoryTree(pathIn, 0, 0, true, {
@@ -62,11 +57,7 @@ export class DocCommand extends BaseCommand {
 
       if (!tree) throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
 
-      const doc = this.cli.fileSystem.buildDoc(tree, {
-        level,
-        save,
-      });
-      await this.cli.fileSystem.writeFile(fileName, doc);
+      await this.cli.tool.buildDoc(tree, output);
     } catch (error) {
       this.cli.errorHandler.handle(error);
     }

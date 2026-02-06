@@ -1,10 +1,12 @@
 import { IInstallFramework } from "@/features/commun/framework.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
+import { IBaseService } from "@/types/services/base-service.interface.js";
 
-export interface IFrameworkService {
+export interface IFrameworkService extends IBaseService {
   /** Nom unique du service pour le logging ou le debugging */
   readonly serviceName: string;
+  init(): Promise<void>;
 
   /**
    * La méthode principale appelée par le FrameworkService (Chef d'orchestre).
@@ -14,7 +16,7 @@ export interface IFrameworkService {
   generate: (
     projectConfig: IProjectConfig,
     entityJson: IGetEntityJson,
-    fileMdj: any,
+    fileMdj: string,
   ) => Promise<void>;
 
   /** Installation spécifique du framework (ex: ng new, create-react-app) */
@@ -27,11 +29,8 @@ export interface IFrameworkService {
   createBranchGit(config: IInstallFramework): Promise<void>;
 
   /** Création des dossiers et de l'arborescence */
-  generateArchitecture(config: IInstallFramework): Promise<any>;
+  generateArchitecture(config: IInstallFramework): Promise<unknown>;
 
   /** Création des fichiers de configuration spécifiques (ex: angular.json, vite.config.ts) */
-  generateFileFramework(
-    config: IInstallFramework,
-    entitiesJson: IGetEntityJson,
-  ): Promise<any>;
+  generateFileFramework(config: IInstallFramework, entitiesJson: IGetEntityJson): Promise<unknown>;
 }

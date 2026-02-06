@@ -53,7 +53,8 @@
       "enabled": true,
       "extensions": [
         ".ts",
-        ".js"
+        ".js",
+        ".php"
       ],
       "save": true,
       "maxLevel": 32

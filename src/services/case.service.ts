@@ -15,15 +15,14 @@ export class CaseService extends BaseService implements ICaseService {
 
   /**
    * Méthode interne pour découper n'importe quelle chaîne en tableau de mots
-   * @param str
+   * @param str - Chaine de caractères
+   * @returns Tableau de mots
    */
   private getWords(str: string): string[] {
     return (
       str
-        .match(
-          /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g,
-        )
-        ?.map((w) => w.toLowerCase()) || []
+        .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+        ?.map((w) => w.toLowerCase()) ?? []
     );
   }
 
@@ -61,11 +60,12 @@ export class CaseService extends BaseService implements ICaseService {
 
   public slugify(str: string): string {
     return str
+      .normalize("NFD") // 1. Split accents from letters
+      .replace(/[\u0300-\u036f]/g, "") // 2. Strip the accent marks
       .toLowerCase()
       .trim()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "") // Supprime les accents
-      .replace(/[\s_-]+/g, "-")
-      .replace(/[^\w-]+/g, "");
+      .replace(/[^\w\s-]/g, "") // 3. Remove non-word chars (except spaces/hyphens)
+      .replace(/[\s_-]+/g, "-") // 4. Convert spaces/underscores to hyphens
+      .replace(/^-+|-+$/g, ""); // 5. Trim hyphens from ends
   }
 }

@@ -97,12 +97,12 @@ ${EMOJI.info}  type: json, md, yaml, all
       type: "boolean",
       defaultValue: false,
     },
-    {
-      flags: "-v, --verbose",
-      description: "Afficher les détails de la création",
-      type: "boolean",
-      defaultValue: false,
-    },
+    // {
+    //   flags: "-v, --verbose",
+    //   description: "Afficher les détails de la création",
+    //   type: "boolean",
+    //   defaultValue: false,
+    // },
     {
       flags: "-h, --help",
       description: "Afficher l'aide",

@@ -1,13 +1,13 @@
-import { App } from "./core/App.js";
-import { AppCommand} from "./commands/app.command.js";
+import { AppCommand } from "./commands/app.command.js";
+import { GenerateCommand } from "./commands/generate.command.js";
 import { McpCommand } from "./commands/mcp.command.js";
+import { PluginCommand } from "./commands/plugin.command.js";
 import { TreeCommand } from "./commands/tree.command.js";
 import { AppContextBuilder } from "./context/context.js";
-import { PluginCommand } from "./commands/plugin.command.js";
-import { GenerateCommand } from "./commands/generate.command.js";
-import { HandlerErrorService } from "./services/handler-error.service.js";
-import { ProjectCommand } from "./features/project/commands/project.command.js";
+import { App } from "./core/App.js";
 import { FrameworkCommand } from "./features/frameworks/commands/framework.command.js";
+import { ProjectCommand } from "./features/project/commands/project.command.js";
+import { HandlerErrorService } from "./services/handler-error.service.js";
 
 /**
  * Point d'entrée principal de la CLI

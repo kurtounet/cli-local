@@ -7,12 +7,17 @@
     "mclp": "./dist/index.js"
   },
   "scripts": {
-    "dev": "tsup --watch --onSuccess \"node dist/index.js\"",
     "build": "tsup",
+    "mcp": "npx @modelcontextprotocol/inspector node dist/index.js mcp start",
+    "dev": "tsup --watch --onSuccess \"node dist/index.js\"",
     "start": "node dist/index.js",
-    "lint": "eslint src/**/*.ts --fix",
+    "lint": "eslint src/**/*.ts",
+    "lint:json": "eslint src/**/*.ts --format json -o lint-report.json",
+    "lint:perso": "eslint src/**/*.ts -f ./eslint-formatter.js -o rapport-perso.txt",
+    "lint:txt": "eslint src/**/*.ts --format stylish -o lint-report.txt",
+    "lint:html": "eslint src/**/*.ts --format html -o lint-report.html",
+    "lint:compact": "eslint src/**/*.ts --format compact -o lint-report.txt",
     "format": "prettier --write .",
-    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -27,6 +32,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.0.10",
     "eslint": "^9.39.2",
+    "eslint-formatter-compact": "^9.0.1",
     "eslint-plugin-jsdoc": "^62.5.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "ts-node": "^10.9.2",
@@ -35,6 +41,7 @@
     "typescript-eslint": "^8.54.0"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
     "@types/ejs": "^3.1.5",
     "chalk": "^5.6.2",
     "chokidar": "^5.0.0",
@@ -42,13 +49,17 @@
     "cosmiconfig": "^9.0.0",
     "cosmiconfig-typescript-loader": "^6.2.0",
     "ejs": "^4.0.1",
+    "eslint-formatter-pretty": "^7.0.0",
     "fs-extra": "^11.3.3",
     "inquirer": "^13.2.1",
     "js-yaml": "^4.1.1",
+    "mysql2": "^3.16.3",
     "ora": "^9.1.0",
     "pluralize": "^8.0.0",
     "prettier": "^3.8.1",
-    "tsconfig-paths": "^4.2.0"
+    "sqlite3": "^5.1.7",
+    "tsconfig-paths": "^4.2.0",
+    "zod": "^4.3.6"
   },
   "mclp": {
     "version": "1.0.0"

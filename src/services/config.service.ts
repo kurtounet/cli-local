@@ -53,27 +53,19 @@ export class ConfigService extends BaseService implements IConfigService {
     }
   }
 
-  public async initConfigFile(
-    projectPath: string,
-    dataFrom?: IAppConfig,
-  ): Promise<IAppConfig> {
+  public async initConfigFile(projectPath: string, dataFrom?: IAppConfig): Promise<IAppConfig> {
     // On utilise le moduleName pour rester dynamique
     const fileName = `.${this.moduleName}rc.json`;
 
     try {
-      this.cli.logger.info(
-        `Génération du fichier de configuration : ${fileName}`,
-      );
+      this.cli.logger.info(`Génération du fichier de configuration : ${fileName}`);
 
       let data = this.defaults;
       if (dataFrom) {
         data = dataFrom;
       }
       // On écrit le fichier proprement
-      await this.cli.fileSystem.writeFile(
-        fileName,
-        JSON.stringify(data, null, 2),
-      );
+      await this.cli.fileSystem.writeFile(fileName, JSON.stringify(data, null, 2));
 
       this.configData = data;
       return this.configData;
@@ -85,23 +77,20 @@ export class ConfigService extends BaseService implements IConfigService {
     }
   }
 
+  // Accès instantané (données en mémoire)
   public get current(): IAppConfig {
-    this.load();
-    return this.configData;
+    return this.configData || this.defaults;
+  }
+  // Pour rafraîchir manuellement quand c'est nécessaire
+  public async refresh(): Promise<IAppConfig> {
+    return this.load(process.cwd());
   }
 
-  private deepMerge(
-    target: Record<string, unknown>,
-    source: Record<string, unknown>,
-  ): unknown {
+  private deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): unknown {
     const output = { ...target };
     if (source && typeof source === "object") {
       Object.keys(source).forEach((key) => {
-        if (
-          source[key] &&
-          typeof source[key] === "object" &&
-          !Array.isArray(source[key])
-        ) {
+        if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
           output[key] = this.deepMerge(target[key] || {}, source[key]);
         } else {
           output[key] = source[key];

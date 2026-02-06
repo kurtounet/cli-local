@@ -1,0 +1,108 @@
+import { Command } from "commander";
+
+import { runMcpServer, stopMcpServer } from "../mcp-server.js";
+import {
+  getMcpPid,
+  isMcpServerRunning,
+  killAllMcpProcesses,
+  listMcpProcesses,
+} from "../utils/mcp-process-utils.js";
+
+/**
+ *
+ * @param program
+ */
+export function registerMcpCommands(program: Command) {
+  const mcp = program.command("mcp").description("Gestion du serveur MCP");
+
+  // Démarrer le serveur
+  mcp
+    .command("start")
+    .description("Démarre le serveur MCP")
+    .action(async () => {
+      const isRunning = await isMcpServerRunning();
+
+      if (isRunning) {
+        console.log("⚠️ Un serveur MCP est déjà en cours d'exécution");
+        console.log("💡 Utilisez 'mclp mcp stop' pour l'arrêter d'abord");
+        console.log("💡 Ou utilisez 'mclp mcp restart' pour redémarrer");
+        return;
+      }
+
+      console.log("🚀 Démarrage du serveur MCP...");
+      await runMcpServer();
+    });
+
+  // Arrêter le serveur
+  mcp
+    .command("stop")
+    .description("Arrête le serveur MCP")
+    .action(async () => {
+      console.log("🛑 Arrêt du serveur MCP...");
+      await stopMcpServer();
+      await killAllMcpProcesses();
+      console.log("✅ Serveur MCP arrêté");
+    });
+
+  // Redémarrer le serveur
+  mcp
+    .command("restart")
+    .description("Redémarre le serveur MCP")
+    .action(async () => {
+      console.log("🔄 Redémarrage du serveur MCP...");
+      await stopMcpServer();
+      await killAllMcpProcesses();
+
+      // Attendre un peu avant de redémarrer
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      console.log("🚀 Démarrage du serveur MCP...");
+      await runMcpServer();
+    });
+
+  // Statut du serveur
+  mcp
+    .command("status")
+    .description("Affiche le statut du serveur MCP")
+    .action(async () => {
+      const isRunning = await isMcpServerRunning();
+      const pid = await getMcpPid();
+
+      if (isRunning && pid) {
+        console.log("✅ Serveur MCP en cours d'exécution");
+        console.log(`📌 PID: ${pid}`);
+      } else {
+        console.log("❌ Serveur MCP arrêté");
+      }
+    });
+
+  // Lister les processus MCP
+  mcp
+    .command("ps")
+    .description("Liste tous les processus MCP")
+    .action(async () => {
+      console.log("🔍 Recherche de processus MCP...\n");
+      const processes = await listMcpProcesses();
+
+      if (processes.length === 0) {
+        console.log("❌ Aucun processus MCP trouvé");
+      } else {
+        console.log(`✅ ${processes.length} processus trouvé(s):\n`);
+        processes.forEach((proc, index) => {
+          console.log(`${index + 1}. ${proc}`);
+        });
+      }
+    });
+
+  // Tuer tous les processus MCP (force)
+  mcp
+    .command("kill")
+    .description("Force l'arrêt de tous les processus MCP")
+    .action(async () => {
+      console.log("💀 Arrêt forcé de tous les processus MCP...");
+      await killAllMcpProcesses();
+      console.log("✅ Tous les processus MCP ont été arrêtés");
+    });
+
+  return program;
+}

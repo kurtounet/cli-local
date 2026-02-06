@@ -419,8 +419,7 @@ export const initialeArchitectureProjectMock = [
                     _type: "directory",
                     name: "open-sans",
                     gitIgnore: false,
-                    pathInProject:
-                      "public\\bundles\\apiplatform\\fonts\\open-sans",
+                    pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans",
                     createdAt: "2025-05-02T11:11:21.043Z",
                     updatedAt: "2025-05-02T11:11:21.060Z",
                     children: [
@@ -428,8 +427,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "file",
                         name: "400.css",
                         gitIgnore: false,
-                        pathInProject:
-                          "public\\bundles\\apiplatform\\fonts\\open-sans",
+                        pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans",
                         createdAt: "2025-05-02T11:11:21.043Z",
                         updatedAt: "2025-05-02T11:11:21.060Z",
                       },
@@ -437,8 +435,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "file",
                         name: "700.css",
                         gitIgnore: false,
-                        pathInProject:
-                          "public\\bundles\\apiplatform\\fonts\\open-sans",
+                        pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans",
                         createdAt: "2025-05-02T11:11:21.043Z",
                         updatedAt: "2025-05-02T11:11:21.060Z",
                       },
@@ -446,8 +443,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "files",
                         gitIgnore: false,
-                        pathInProject:
-                          "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                        pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                         createdAt: "2025-05-02T11:11:21.060Z",
                         updatedAt: "2025-05-02T11:11:21.325Z",
                         children: [
@@ -455,8 +451,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -464,8 +459,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -473,8 +467,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -482,8 +475,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -491,8 +483,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-ext-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -500,8 +491,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-ext-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -509,8 +499,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-ext-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -518,8 +507,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-cyrillic-ext-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -527,8 +515,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -536,8 +523,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -545,8 +531,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -554,8 +539,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -563,8 +547,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-ext-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -572,8 +555,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-ext-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -581,8 +563,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-ext-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -590,8 +571,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-greek-ext-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -599,8 +579,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-hebrew-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -608,8 +587,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-hebrew-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -617,8 +595,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-hebrew-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -626,8 +603,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-hebrew-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -635,8 +611,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -644,8 +619,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -653,8 +627,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -662,8 +635,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -671,8 +643,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-ext-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -680,8 +651,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-ext-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -689,8 +659,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-ext-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -698,8 +667,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-latin-ext-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -707,8 +675,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-math-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -716,8 +683,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-math-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -725,8 +691,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-math-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -734,8 +699,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-math-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -743,8 +707,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-symbols-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -752,8 +715,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-symbols-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -761,8 +723,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-symbols-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -770,8 +731,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-symbols-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -779,8 +739,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-vietnamese-400-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -788,8 +747,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-vietnamese-400-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -797,8 +755,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-vietnamese-700-normal.woff",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -806,8 +763,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "open-sans-vietnamese-700-normal.woff2",
                             gitIgnore: false,
-                            pathInProject:
-                              "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
+                            pathInProject: "public\\bundles\\apiplatform\\fonts\\open-sans\\files",
                             createdAt: "2025-05-02T11:11:21.060Z",
                             updatedAt: "2025-05-02T11:11:21.325Z",
                           },
@@ -855,8 +811,7 @@ export const initialeArchitectureProjectMock = [
                 _type: "directory",
                 name: "graphql-playground",
                 gitIgnore: false,
-                pathInProject:
-                  "public\\bundles\\apiplatform\\graphql-playground",
+                pathInProject: "public\\bundles\\apiplatform\\graphql-playground",
                 createdAt: "2025-05-02T11:11:21.713Z",
                 updatedAt: "2025-05-02T11:11:21.869Z",
                 children: [
@@ -864,8 +819,7 @@ export const initialeArchitectureProjectMock = [
                     _type: "file",
                     name: "index.css",
                     gitIgnore: false,
-                    pathInProject:
-                      "public\\bundles\\apiplatform\\graphql-playground",
+                    pathInProject: "public\\bundles\\apiplatform\\graphql-playground",
                     createdAt: "2025-05-02T11:11:21.713Z",
                     updatedAt: "2025-05-02T11:11:21.869Z",
                   },
@@ -873,8 +827,7 @@ export const initialeArchitectureProjectMock = [
                     _type: "file",
                     name: "middleware.js",
                     gitIgnore: false,
-                    pathInProject:
-                      "public\\bundles\\apiplatform\\graphql-playground",
+                    pathInProject: "public\\bundles\\apiplatform\\graphql-playground",
                     createdAt: "2025-05-02T11:11:21.713Z",
                     updatedAt: "2025-05-02T11:11:21.869Z",
                   },
@@ -4000,8 +3953,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "Proxies",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\doctrine\\orm\\Proxies",
+                        pathInProject: "var\\cache\\dev\\doctrine\\orm\\Proxies",
                         createdAt: "2025-05-02T11:11:15.812Z",
                         updatedAt: "2025-05-02T11:11:15.812Z",
                         children: [],
@@ -4030,8 +3982,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "0xYMABrXMP",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\0xYMABrXMP",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\0xYMABrXMP",
                         createdAt: "2025-05-02T11:11:14.313Z",
                         updatedAt: "2025-05-02T11:11:14.313Z",
                         children: [],
@@ -4040,8 +3991,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "165xFjNPS2",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\165xFjNPS2",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\165xFjNPS2",
                         createdAt: "2025-05-02T11:11:14.313Z",
                         updatedAt: "2025-05-02T11:11:18.720Z",
                         children: [
@@ -4049,8 +3999,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "D",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\165xFjNPS2\\D",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\165xFjNPS2\\D",
                             createdAt: "2025-05-02T11:11:18.193Z",
                             updatedAt: "2025-05-02T11:11:18.193Z",
                             children: [
@@ -4058,8 +4007,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "W",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\165xFjNPS2\\D\\W",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\165xFjNPS2\\D\\W",
                                 createdAt: "2025-05-02T11:11:18.193Z",
                                 updatedAt: "2025-05-02T11:11:18.209Z",
                                 children: [
@@ -4080,8 +4028,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "K",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\165xFjNPS2\\K",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\165xFjNPS2\\K",
                             createdAt: "2025-05-02T11:11:18.703Z",
                             updatedAt: "2025-05-02T11:11:18.703Z",
                             children: [
@@ -4089,8 +4036,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "C",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\165xFjNPS2\\K\\C",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\165xFjNPS2\\K\\C",
                                 createdAt: "2025-05-02T11:11:18.703Z",
                                 updatedAt: "2025-05-02T11:11:18.719Z",
                                 children: [
@@ -4113,8 +4059,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "aQkQKKa6SY",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\aQkQKKa6SY",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\aQkQKKa6SY",
                         createdAt: "2025-05-02T11:11:14.313Z",
                         updatedAt: "2025-05-02T11:11:14.313Z",
                         children: [],
@@ -4123,8 +4068,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "BWKkAY01cl",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\BWKkAY01cl",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\BWKkAY01cl",
                         createdAt: "2025-05-02T11:11:14.312Z",
                         updatedAt: "2025-05-02T11:11:14.312Z",
                         children: [],
@@ -4133,8 +4077,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "nb26-B+u90",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\nb26-B+u90",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\nb26-B+u90",
                         createdAt: "2025-05-02T11:11:14.312Z",
                         updatedAt: "2025-05-02T11:11:14.312Z",
                         children: [],
@@ -4143,8 +4086,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "rNXCf+Tyww",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\rNXCf+Tyww",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww",
                         createdAt: "2025-05-02T11:11:14.313Z",
                         updatedAt: "2025-05-02T11:11:18.702Z",
                         children: [
@@ -4152,8 +4094,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "2",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\2",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\2",
                             createdAt: "2025-05-02T11:11:18.525Z",
                             updatedAt: "2025-05-02T11:11:18.525Z",
                             children: [
@@ -4161,8 +4102,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "N",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\2\\N",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\2\\N",
                                 createdAt: "2025-05-02T11:11:18.525Z",
                                 updatedAt: "2025-05-02T11:11:18.539Z",
                                 children: [
@@ -4183,8 +4123,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "5",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\5",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\5",
                             createdAt: "2025-05-02T11:11:18.672Z",
                             updatedAt: "2025-05-02T11:11:18.672Z",
                             children: [
@@ -4192,8 +4131,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "F",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\5\\F",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\5\\F",
                                 createdAt: "2025-05-02T11:11:18.672Z",
                                 updatedAt: "2025-05-02T11:11:18.686Z",
                                 children: [
@@ -4214,8 +4152,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "6",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\6",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\6",
                             createdAt: "2025-05-02T11:11:18.608Z",
                             updatedAt: "2025-05-02T11:11:18.608Z",
                             children: [
@@ -4223,8 +4160,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "N",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\6\\N",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\6\\N",
                                 createdAt: "2025-05-02T11:11:18.608Z",
                                 updatedAt: "2025-05-02T11:11:18.621Z",
                                 children: [
@@ -4245,8 +4181,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "9",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\9",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\9",
                             createdAt: "2025-05-02T11:11:18.624Z",
                             updatedAt: "2025-05-02T11:11:18.624Z",
                             children: [
@@ -4254,8 +4189,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "8",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\9\\8",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\9\\8",
                                 createdAt: "2025-05-02T11:11:18.624Z",
                                 updatedAt: "2025-05-02T11:11:18.638Z",
                                 children: [
@@ -4276,8 +4210,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "A",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\A",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\A",
                             createdAt: "2025-05-02T11:11:18.078Z",
                             updatedAt: "2025-05-02T11:11:18.078Z",
                             children: [
@@ -4285,8 +4218,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "X",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\A\\X",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\A\\X",
                                 createdAt: "2025-05-02T11:11:18.078Z",
                                 updatedAt: "2025-05-02T11:11:18.094Z",
                                 children: [
@@ -4307,8 +4239,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "B",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\B",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\B",
                             createdAt: "2025-05-02T11:11:17.842Z",
                             updatedAt: "2025-05-02T11:11:18.017Z",
                             children: [
@@ -4316,8 +4247,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "I",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\B\\I",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\B\\I",
                                 createdAt: "2025-05-02T11:11:18.017Z",
                                 updatedAt: "2025-05-02T11:11:18.035Z",
                                 children: [
@@ -4336,8 +4266,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "S",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\B\\S",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\B\\S",
                                 createdAt: "2025-05-02T11:11:17.842Z",
                                 updatedAt: "2025-05-02T11:11:17.856Z",
                                 children: [
@@ -4358,8 +4287,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "C",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\C",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\C",
                             createdAt: "2025-05-02T11:11:17.926Z",
                             updatedAt: "2025-05-02T11:11:17.926Z",
                             children: [
@@ -4367,8 +4295,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "3",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\C\\3",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\C\\3",
                                 createdAt: "2025-05-02T11:11:17.926Z",
                                 updatedAt: "2025-05-02T11:11:17.941Z",
                                 children: [
@@ -4389,8 +4316,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "E",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\E",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\E",
                             createdAt: "2025-05-02T11:11:18.059Z",
                             updatedAt: "2025-05-02T11:11:18.493Z",
                             children: [
@@ -4398,8 +4324,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "9",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\E\\9",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\E\\9",
                                 createdAt: "2025-05-02T11:11:18.059Z",
                                 updatedAt: "2025-05-02T11:11:18.075Z",
                                 children: [
@@ -4418,8 +4343,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "N",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\E\\N",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\E\\N",
                                 createdAt: "2025-05-02T11:11:18.493Z",
                                 updatedAt: "2025-05-02T11:11:18.506Z",
                                 children: [
@@ -4440,8 +4364,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "F",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F",
                             createdAt: "2025-05-02T11:11:17.074Z",
                             updatedAt: "2025-05-02T11:11:18.441Z",
                             children: [
@@ -4449,8 +4372,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "F",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F\\F",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F\\F",
                                 createdAt: "2025-05-02T11:11:17.074Z",
                                 updatedAt: "2025-05-02T11:11:17.087Z",
                                 children: [
@@ -4469,8 +4391,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "H",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F\\H",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F\\H",
                                 createdAt: "2025-05-02T11:11:18.097Z",
                                 updatedAt: "2025-05-02T11:11:18.114Z",
                                 children: [
@@ -4489,8 +4410,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "Z",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F\\Z",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\F\\Z",
                                 createdAt: "2025-05-02T11:11:18.441Z",
                                 updatedAt: "2025-05-02T11:11:18.457Z",
                                 children: [
@@ -4511,8 +4431,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "H",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\H",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\H",
                             createdAt: "2025-05-02T11:11:17.892Z",
                             updatedAt: "2025-05-02T11:11:17.892Z",
                             children: [
@@ -4520,8 +4439,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "H",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\H\\H",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\H\\H",
                                 createdAt: "2025-05-02T11:11:17.892Z",
                                 updatedAt: "2025-05-02T11:11:17.907Z",
                                 children: [
@@ -4542,8 +4460,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "I",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\I",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\I",
                             createdAt: "2025-05-02T11:11:17.978Z",
                             updatedAt: "2025-05-02T11:11:18.657Z",
                             children: [
@@ -4551,8 +4468,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "G",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\I\\G",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\I\\G",
                                 createdAt: "2025-05-02T11:11:18.657Z",
                                 updatedAt: "2025-05-02T11:11:18.670Z",
                                 children: [
@@ -4571,8 +4487,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "X",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\I\\X",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\I\\X",
                                 createdAt: "2025-05-02T11:11:17.978Z",
                                 updatedAt: "2025-05-02T11:11:17.992Z",
                                 children: [
@@ -4593,8 +4508,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "J",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J",
                             createdAt: "2025-05-02T11:11:17.858Z",
                             updatedAt: "2025-05-02T11:11:18.688Z",
                             children: [
@@ -4602,8 +4516,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "2",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\2",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\2",
                                 createdAt: "2025-05-02T11:11:18.262Z",
                                 updatedAt: "2025-05-02T11:11:18.277Z",
                                 children: [
@@ -4622,8 +4535,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "H",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\H",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\H",
                                 createdAt: "2025-05-02T11:11:18.542Z",
                                 updatedAt: "2025-05-02T11:11:18.555Z",
                                 children: [
@@ -4642,8 +4554,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "I",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\I",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\I",
                                 createdAt: "2025-05-02T11:11:17.858Z",
                                 updatedAt: "2025-05-02T11:11:17.872Z",
                                 children: [
@@ -4662,8 +4573,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "K",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\K",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\J\\K",
                                 createdAt: "2025-05-02T11:11:18.688Z",
                                 updatedAt: "2025-05-02T11:11:18.702Z",
                                 children: [
@@ -4684,8 +4594,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "K",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\K",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\K",
                             createdAt: "2025-05-02T11:11:17.961Z",
                             updatedAt: "2025-05-02T11:11:18.557Z",
                             children: [
@@ -4693,8 +4602,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "N",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\K\\N",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\K\\N",
                                 createdAt: "2025-05-02T11:11:17.961Z",
                                 updatedAt: "2025-05-02T11:11:17.976Z",
                                 children: [
@@ -4713,8 +4621,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "S",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\K\\S",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\K\\S",
                                 createdAt: "2025-05-02T11:11:18.557Z",
                                 updatedAt: "2025-05-02T11:11:18.573Z",
                                 children: [
@@ -4735,8 +4642,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "L",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\L",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\L",
                             createdAt: "2025-05-02T11:11:17.909Z",
                             updatedAt: "2025-05-02T11:11:17.909Z",
                             children: [
@@ -4744,8 +4650,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "V",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\L\\V",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\L\\V",
                                 createdAt: "2025-05-02T11:11:17.909Z",
                                 updatedAt: "2025-05-02T11:11:17.924Z",
                                 children: [
@@ -4766,8 +4671,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "N",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N",
                             createdAt: "2025-05-02T11:11:17.825Z",
                             updatedAt: "2025-05-02T11:11:18.576Z",
                             children: [
@@ -4775,8 +4679,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "2",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N\\2",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N\\2",
                                 createdAt: "2025-05-02T11:11:18.576Z",
                                 updatedAt: "2025-05-02T11:11:18.589Z",
                                 children: [
@@ -4795,8 +4698,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "B",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N\\B",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N\\B",
                                 createdAt: "2025-05-02T11:11:17.826Z",
                                 updatedAt: "2025-05-02T11:11:17.840Z",
                                 children: [
@@ -4815,8 +4717,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "K",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N\\K",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\N\\K",
                                 createdAt: "2025-05-02T11:11:18.137Z",
                                 updatedAt: "2025-05-02T11:11:18.153Z",
                                 children: [
@@ -4837,8 +4738,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "O",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\O",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\O",
                             createdAt: "2025-05-02T11:11:18.592Z",
                             updatedAt: "2025-05-02T11:11:18.592Z",
                             children: [
@@ -4846,8 +4746,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "N",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\O\\N",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\O\\N",
                                 createdAt: "2025-05-02T11:11:18.592Z",
                                 updatedAt: "2025-05-02T11:11:18.606Z",
                                 children: [
@@ -4868,8 +4767,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "P",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P",
                             createdAt: "2025-05-02T11:11:17.874Z",
                             updatedAt: "2025-05-02T11:11:18.460Z",
                             children: [
@@ -4877,8 +4775,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "D",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P\\D",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P\\D",
                                 createdAt: "2025-05-02T11:11:18.459Z",
                                 updatedAt: "2025-05-02T11:11:18.476Z",
                                 children: [
@@ -4897,8 +4794,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "L",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P\\L",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P\\L",
                                 createdAt: "2025-05-02T11:11:18.038Z",
                                 updatedAt: "2025-05-02T11:11:18.056Z",
                                 children: [
@@ -4917,8 +4813,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "O",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P\\O",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\P\\O",
                                 createdAt: "2025-05-02T11:11:17.874Z",
                                 updatedAt: "2025-05-02T11:11:17.889Z",
                                 children: [
@@ -4939,8 +4834,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "R",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\R",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\R",
                             createdAt: "2025-05-02T11:11:18.421Z",
                             updatedAt: "2025-05-02T11:11:18.421Z",
                             children: [
@@ -4948,8 +4842,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "Z",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\R\\Z",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\R\\Z",
                                 createdAt: "2025-05-02T11:11:18.421Z",
                                 updatedAt: "2025-05-02T11:11:18.439Z",
                                 children: [
@@ -4970,8 +4863,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "T",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\T",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\T",
                             createdAt: "2025-05-02T11:11:17.944Z",
                             updatedAt: "2025-05-02T11:11:17.944Z",
                             children: [
@@ -4979,8 +4871,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "7",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\T\\7",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\T\\7",
                                 createdAt: "2025-05-02T11:11:17.944Z",
                                 updatedAt: "2025-05-02T11:11:17.958Z",
                                 children: [
@@ -5001,8 +4892,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "U",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\U",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\U",
                             createdAt: "2025-05-02T11:11:18.509Z",
                             updatedAt: "2025-05-02T11:11:18.509Z",
                             children: [
@@ -5010,8 +4900,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "Y",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\U\\Y",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\U\\Y",
                                 createdAt: "2025-05-02T11:11:18.509Z",
                                 updatedAt: "2025-05-02T11:11:18.523Z",
                                 children: [
@@ -5032,8 +4921,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "W",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\W",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\W",
                             createdAt: "2025-05-02T11:11:18.117Z",
                             updatedAt: "2025-05-02T11:11:18.118Z",
                             children: [
@@ -5041,8 +4929,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "S",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\W\\S",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\W\\S",
                                 createdAt: "2025-05-02T11:11:18.118Z",
                                 updatedAt: "2025-05-02T11:11:18.134Z",
                                 children: [
@@ -5063,8 +4950,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "X",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\X",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\X",
                             createdAt: "2025-05-02T11:11:17.996Z",
                             updatedAt: "2025-05-02T11:11:18.478Z",
                             children: [
@@ -5072,8 +4958,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "3",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\X\\3",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\X\\3",
                                 createdAt: "2025-05-02T11:11:18.478Z",
                                 updatedAt: "2025-05-02T11:11:18.491Z",
                                 children: [
@@ -5092,8 +4977,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "L",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\X\\L",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\X\\L",
                                 createdAt: "2025-05-02T11:11:17.996Z",
                                 updatedAt: "2025-05-02T11:11:18.654Z",
                                 children: [
@@ -5123,8 +5007,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Y",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Y",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Y",
                             createdAt: "2025-05-02T11:11:18.405Z",
                             updatedAt: "2025-05-02T11:11:18.405Z",
                             children: [
@@ -5132,8 +5015,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "T",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Y\\T",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Y\\T",
                                 createdAt: "2025-05-02T11:11:18.405Z",
                                 updatedAt: "2025-05-02T11:11:18.419Z",
                                 children: [
@@ -5154,8 +5036,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Z",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Z",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Z",
                             createdAt: "2025-05-02T11:11:18.287Z",
                             updatedAt: "2025-05-02T11:11:18.287Z",
                             children: [
@@ -5163,8 +5044,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "Z",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Z\\Z",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\rNXCf+Tyww\\Z\\Z",
                                 createdAt: "2025-05-02T11:11:18.287Z",
                                 updatedAt: "2025-05-02T11:11:18.303Z",
                                 children: [
@@ -5187,8 +5067,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "SpPy9ifP1Z",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\pools\\system\\SpPy9ifP1Z",
+                        pathInProject: "var\\cache\\dev\\pools\\system\\SpPy9ifP1Z",
                         createdAt: "2025-05-02T11:11:14.313Z",
                         updatedAt: "2025-05-02T11:11:16.615Z",
                         children: [
@@ -5196,8 +5075,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "G",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\pools\\system\\SpPy9ifP1Z\\G",
+                            pathInProject: "var\\cache\\dev\\pools\\system\\SpPy9ifP1Z\\G",
                             createdAt: "2025-05-02T11:11:16.602Z",
                             updatedAt: "2025-05-02T11:11:16.602Z",
                             children: [
@@ -5205,8 +5083,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "directory",
                                 name: "6",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\pools\\system\\SpPy9ifP1Z\\G\\6",
+                                pathInProject: "var\\cache\\dev\\pools\\system\\SpPy9ifP1Z\\G\\6",
                                 createdAt: "2025-05-02T11:11:16.602Z",
                                 updatedAt: "2025-05-02T11:11:16.614Z",
                                 children: [
@@ -5257,8 +5134,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "ApiPlatform",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                        pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                         createdAt: "2025-05-02T11:11:14.370Z",
                         updatedAt: "2025-05-02T11:11:14.381Z",
                         children: [
@@ -5286,8 +5162,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "CollectionConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5295,8 +5170,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DefaultsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5304,8 +5178,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DocsFormatsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5313,8 +5186,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DoctrineConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5322,8 +5194,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DoctrineMongodbOdmConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5331,8 +5202,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "EagerLoadingConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5340,8 +5210,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ElasticsearchConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5349,8 +5218,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ErrorFormatsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5358,8 +5226,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "FormatsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5367,8 +5234,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Graphql",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform\\Graphql",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform\\Graphql",
                             createdAt: "2025-05-02T11:11:14.375Z",
                             updatedAt: "2025-05-02T11:11:14.377Z",
                             children: [
@@ -5434,8 +5300,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "GraphqlConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5483,8 +5348,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "HttpCacheConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5492,8 +5356,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MakerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5501,8 +5364,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MappingConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5510,8 +5372,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MercureConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5519,8 +5380,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MessengerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5528,8 +5388,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "OauthConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5537,8 +5396,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Openapi",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform\\Openapi",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform\\Openapi",
                             createdAt: "2025-05-02T11:11:14.379Z",
                             updatedAt: "2025-05-02T11:11:14.380Z",
                             children: [
@@ -5575,8 +5433,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "OpenapiConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5584,8 +5441,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "PatchFormatsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5593,8 +5449,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SerializerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5602,8 +5457,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Swagger",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform\\Swagger",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform\\Swagger",
                             createdAt: "2025-05-02T11:11:14.377Z",
                             updatedAt: "2025-05-02T11:11:14.378Z",
                             children: [
@@ -5631,8 +5485,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SwaggerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5640,8 +5493,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ValidatorConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\ApiPlatform",
                             createdAt: "2025-05-02T11:11:14.370Z",
                             updatedAt: "2025-05-02T11:11:14.381Z",
                           },
@@ -5659,8 +5511,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "Doctrine",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\Symfony\\Config\\Doctrine",
+                        pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine",
                         createdAt: "2025-05-02T11:11:14.353Z",
                         updatedAt: "2025-05-02T11:11:14.356Z",
                         children: [
@@ -5668,8 +5519,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Dbal",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Dbal",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Dbal",
                             createdAt: "2025-05-02T11:11:14.354Z",
                             updatedAt: "2025-05-02T11:11:14.355Z",
                             children: [
@@ -5706,8 +5556,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "file",
                                 name: "ConnectionConfig.php",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Dbal",
+                                pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Dbal",
                                 createdAt: "2025-05-02T11:11:14.354Z",
                                 updatedAt: "2025-05-02T11:11:14.355Z",
                               },
@@ -5715,8 +5564,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "file",
                                 name: "TypeConfig.php",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Dbal",
+                                pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Dbal",
                                 createdAt: "2025-05-02T11:11:14.354Z",
                                 updatedAt: "2025-05-02T11:11:14.355Z",
                               },
@@ -5726,8 +5574,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DbalConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Doctrine",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine",
                             createdAt: "2025-05-02T11:11:14.353Z",
                             updatedAt: "2025-05-02T11:11:14.356Z",
                           },
@@ -5735,8 +5582,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Orm",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm",
                             createdAt: "2025-05-02T11:11:14.356Z",
                             updatedAt: "2025-05-02T11:11:14.357Z",
                             children: [
@@ -5744,8 +5590,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "file",
                                 name: "ControllerResolverConfig.php",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm",
+                                pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm",
                                 createdAt: "2025-05-02T11:11:14.356Z",
                                 updatedAt: "2025-05-02T11:11:14.357Z",
                               },
@@ -5791,10 +5636,8 @@ export const initialeArchitectureProjectMock = [
                                             gitIgnore: false,
                                             pathInProject:
                                               "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm\\EntityManagerConfig\\EntityListeners\\EntityConfig\\ListenerConfig",
-                                            createdAt:
-                                              "2025-05-02T11:11:14.360Z",
-                                            updatedAt:
-                                              "2025-05-02T11:11:14.360Z",
+                                            createdAt: "2025-05-02T11:11:14.360Z",
+                                            updatedAt: "2025-05-02T11:11:14.360Z",
                                             children: [
                                               {
                                                 _type: "file",
@@ -5802,10 +5645,8 @@ export const initialeArchitectureProjectMock = [
                                                 gitIgnore: false,
                                                 pathInProject:
                                                   "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm\\EntityManagerConfig\\EntityListeners\\EntityConfig\\ListenerConfig",
-                                                createdAt:
-                                                  "2025-05-02T11:11:14.360Z",
-                                                updatedAt:
-                                                  "2025-05-02T11:11:14.360Z",
+                                                createdAt: "2025-05-02T11:11:14.360Z",
+                                                updatedAt: "2025-05-02T11:11:14.360Z",
                                               },
                                             ],
                                           },
@@ -5815,10 +5656,8 @@ export const initialeArchitectureProjectMock = [
                                             gitIgnore: false,
                                             pathInProject:
                                               "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm\\EntityManagerConfig\\EntityListeners\\EntityConfig",
-                                            createdAt:
-                                              "2025-05-02T11:11:14.359Z",
-                                            updatedAt:
-                                              "2025-05-02T11:11:14.360Z",
+                                            createdAt: "2025-05-02T11:11:14.359Z",
+                                            updatedAt: "2025-05-02T11:11:14.360Z",
                                           },
                                         ],
                                       },
@@ -5929,10 +5768,8 @@ export const initialeArchitectureProjectMock = [
                                             gitIgnore: false,
                                             pathInProject:
                                               "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm\\EntityManagerConfig\\SecondLevelCache\\RegionConfig",
-                                            createdAt:
-                                              "2025-05-02T11:11:14.361Z",
-                                            updatedAt:
-                                              "2025-05-02T11:11:14.362Z",
+                                            createdAt: "2025-05-02T11:11:14.361Z",
+                                            updatedAt: "2025-05-02T11:11:14.362Z",
                                           },
                                         ],
                                       },
@@ -5962,8 +5799,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "file",
                                 name: "EntityManagerConfig.php",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm",
+                                pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine\\Orm",
                                 createdAt: "2025-05-02T11:11:14.356Z",
                                 updatedAt: "2025-05-02T11:11:14.357Z",
                               },
@@ -5973,8 +5809,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "OrmConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Doctrine",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Doctrine",
                             createdAt: "2025-05-02T11:11:14.353Z",
                             updatedAt: "2025-05-02T11:11:14.356Z",
                           },
@@ -5992,8 +5827,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "DoctrineMigrations",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\Symfony\\Config\\DoctrineMigrations",
+                        pathInProject: "var\\cache\\dev\\Symfony\\Config\\DoctrineMigrations",
                         createdAt: "2025-05-02T11:11:14.364Z",
                         updatedAt: "2025-05-02T11:11:14.364Z",
                         children: [
@@ -6021,8 +5855,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "StorageConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\DoctrineMigrations",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\DoctrineMigrations",
                             createdAt: "2025-05-02T11:11:14.364Z",
                             updatedAt: "2025-05-02T11:11:14.364Z",
                           },
@@ -6040,8 +5873,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "Framework",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\Symfony\\Config\\Framework",
+                        pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                         createdAt: "2025-05-02T11:10:42.150Z",
                         updatedAt: "2025-05-02T11:10:42.174Z",
                         children: [
@@ -6049,8 +5881,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "AnnotationsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6058,8 +5889,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "AssetMapperConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6067,8 +5897,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Assets",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Assets",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Assets",
                             createdAt: "2025-05-02T11:10:42.156Z",
                             updatedAt: "2025-05-02T11:10:42.156Z",
                             children: [
@@ -6087,8 +5916,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "AssetsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6096,8 +5924,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Cache",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Cache",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Cache",
                             createdAt: "2025-05-02T11:10:42.160Z",
                             updatedAt: "2025-05-02T11:10:42.160Z",
                             children: [
@@ -6105,8 +5932,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "file",
                                 name: "PoolConfig.php",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\Symfony\\Config\\Framework\\Cache",
+                                pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Cache",
                                 createdAt: "2025-05-02T11:10:42.160Z",
                                 updatedAt: "2025-05-02T11:10:42.160Z",
                               },
@@ -6116,8 +5942,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "CacheConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6125,8 +5950,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "CsrfProtectionConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6134,8 +5958,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "EsiConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6143,8 +5966,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ExceptionConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6152,8 +5974,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Form",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Form",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Form",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.151Z",
                             children: [
@@ -6161,8 +5982,7 @@ export const initialeArchitectureProjectMock = [
                                 _type: "file",
                                 name: "CsrfProtectionConfig.php",
                                 gitIgnore: false,
-                                pathInProject:
-                                  "var\\cache\\dev\\Symfony\\Config\\Framework\\Form",
+                                pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Form",
                                 createdAt: "2025-05-02T11:10:42.150Z",
                                 updatedAt: "2025-05-02T11:10:42.151Z",
                               },
@@ -6172,8 +5992,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "FormConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6181,8 +6000,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "FragmentsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6210,8 +6028,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "HtmlSanitizerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6219,8 +6036,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "HttpCacheConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6355,8 +6171,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "HttpClientConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6364,8 +6179,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "LockConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6373,8 +6187,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Mailer",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Mailer",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Mailer",
                             createdAt: "2025-05-02T11:10:42.170Z",
                             updatedAt: "2025-05-02T11:10:42.170Z",
                             children: [
@@ -6402,8 +6215,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MailerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6411,8 +6223,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Messenger",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Messenger",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Messenger",
                             createdAt: "2025-05-02T11:10:42.162Z",
                             updatedAt: "2025-05-02T11:10:42.165Z",
                             children: [
@@ -6527,8 +6338,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MessengerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6536,8 +6346,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Notifier",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Notifier",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Notifier",
                             createdAt: "2025-05-02T11:10:42.171Z",
                             updatedAt: "2025-05-02T11:10:42.171Z",
                             children: [
@@ -6556,8 +6365,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "NotifierConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6565,8 +6373,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "PhpErrorsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6574,8 +6381,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ProfilerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6583,8 +6389,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "PropertyAccessConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6592,8 +6397,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "PropertyInfoConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6641,8 +6445,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "RateLimiterConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6650,8 +6453,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "RemoteeventConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6659,8 +6461,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "RequestConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6668,8 +6469,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "RouterConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6677,8 +6477,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SchedulerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6686,8 +6485,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SecretsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6695,8 +6493,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SemaphoreConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6724,8 +6521,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SerializerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6733,8 +6529,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SessionConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6742,8 +6537,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "SsiConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6780,8 +6574,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "TranslatorConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6789,8 +6582,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "UidConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6836,8 +6628,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ValidationConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6845,8 +6636,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Webhook",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Webhook",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Webhook",
                             createdAt: "2025-05-02T11:10:42.173Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                             children: [
@@ -6865,8 +6655,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "WebhookConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6874,8 +6663,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "WebLinkConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6883,8 +6671,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "directory",
                             name: "Workflows",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework\\Workflows",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework\\Workflows",
                             createdAt: "2025-05-02T11:10:42.153Z",
                             updatedAt: "2025-05-02T11:10:42.153Z",
                             children: [
@@ -6950,8 +6737,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "WorkflowsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Framework",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Framework",
                             createdAt: "2025-05-02T11:10:42.150Z",
                             updatedAt: "2025-05-02T11:10:42.174Z",
                           },
@@ -6969,8 +6755,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "NelmioCors",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\Symfony\\Config\\NelmioCors",
+                        pathInProject: "var\\cache\\dev\\Symfony\\Config\\NelmioCors",
                         createdAt: "2025-05-02T11:11:14.366Z",
                         updatedAt: "2025-05-02T11:11:14.366Z",
                         children: [
@@ -6978,8 +6763,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DefaultsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\NelmioCors",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\NelmioCors",
                             createdAt: "2025-05-02T11:11:14.366Z",
                             updatedAt: "2025-05-02T11:11:14.366Z",
                           },
@@ -6987,8 +6771,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "PathsConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\NelmioCors",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\NelmioCors",
                             createdAt: "2025-05-02T11:11:14.366Z",
                             updatedAt: "2025-05-02T11:11:14.366Z",
                           },
@@ -7006,8 +6789,7 @@ export const initialeArchitectureProjectMock = [
                         _type: "directory",
                         name: "Security",
                         gitIgnore: false,
-                        pathInProject:
-                          "var\\cache\\dev\\Symfony\\Config\\Security",
+                        pathInProject: "var\\cache\\dev\\Symfony\\Config\\Security",
                         createdAt: "2025-05-02T11:11:14.339Z",
                         updatedAt: "2025-05-02T11:11:14.350Z",
                         children: [
@@ -7015,8 +6797,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "AccessControlConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Security",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Security",
                             createdAt: "2025-05-02T11:11:14.339Z",
                             updatedAt: "2025-05-02T11:11:14.350Z",
                           },
@@ -7024,8 +6805,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "AccessDecisionManagerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Security",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Security",
                             createdAt: "2025-05-02T11:11:14.339Z",
                             updatedAt: "2025-05-02T11:11:14.350Z",
                           },
@@ -7279,8 +7059,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "FirewallConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Security",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Security",
                             createdAt: "2025-05-02T11:11:14.339Z",
                             updatedAt: "2025-05-02T11:11:14.350Z",
                           },
@@ -7288,8 +7067,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "PasswordHasherConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Security",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Security",
                             createdAt: "2025-05-02T11:11:14.339Z",
                             updatedAt: "2025-05-02T11:11:14.350Z",
                           },
@@ -7364,8 +7142,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "ProviderConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Security",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Security",
                             createdAt: "2025-05-02T11:11:14.339Z",
                             updatedAt: "2025-05-02T11:11:14.350Z",
                           },
@@ -7391,8 +7168,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "DateConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Twig",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Twig",
                             createdAt: "2025-05-02T11:11:14.332Z",
                             updatedAt: "2025-05-02T11:11:14.333Z",
                           },
@@ -7400,8 +7176,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "GlobalConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Twig",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Twig",
                             createdAt: "2025-05-02T11:11:14.332Z",
                             updatedAt: "2025-05-02T11:11:14.333Z",
                           },
@@ -7409,8 +7184,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "MailerConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Twig",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Twig",
                             createdAt: "2025-05-02T11:11:14.332Z",
                             updatedAt: "2025-05-02T11:11:14.333Z",
                           },
@@ -7418,8 +7192,7 @@ export const initialeArchitectureProjectMock = [
                             _type: "file",
                             name: "NumberFormatConfig.php",
                             gitIgnore: false,
-                            pathInProject:
-                              "var\\cache\\dev\\Symfony\\Config\\Twig",
+                            pathInProject: "var\\cache\\dev\\Symfony\\Config\\Twig",
                             createdAt: "2025-05-02T11:11:14.332Z",
                             updatedAt: "2025-05-02T11:11:14.333Z",
                           },

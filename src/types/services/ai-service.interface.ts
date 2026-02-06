@@ -7,6 +7,7 @@ import { IBaseService } from "./base-service.interface.js";
  */
 export interface IAiService extends IBaseService {
   serviceName: string;
+  pluginsPath: string;
   init(): Promise<void>;
 
   /**
@@ -58,7 +59,7 @@ export interface IAiService extends IBaseService {
    * @param [args] - Paramètres optionnels à passer à la méthode execute du plugin.
    * @returns Le résultat retourné par l'exécution du plugin.
    */
-  executeTool(name: string, args?: unknown[]): Promise<unknown>;
+  executeTool(name: string, args?: unknown): Promise<unknown>;
 
   /**
    * Charge dynamiquement et exécute un plugin existant.

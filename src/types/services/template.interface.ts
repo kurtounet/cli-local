@@ -81,8 +81,8 @@ export interface ITemplateService extends IBaseService {
     pluginDir: string,
     templateDir: string,
     templateName: string,
-    data: any,
-  ): Promise<any>;
+    data: Record<string, unknown>,
+  ): Promise<string>;
   /**
    * Récupère la liste de tous les templates disponibles.
    * @returns Une promesse résolue avec un tableau d'objets ITemplate.

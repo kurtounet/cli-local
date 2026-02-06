@@ -20,12 +20,12 @@ export interface ISDKContext {
     pluginDir: string,
     tplDir: string,
     templateName: string,
-    data: any,
+    data: Record<string, unknown>,
   ) => Promise<string>;
 
   /** Configuration du projet */
   config: {
     projectPath: string;
-    [key: string]: any;
+    [key: string]: unknown;
   };
 }

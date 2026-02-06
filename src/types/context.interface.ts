@@ -52,7 +52,7 @@ export interface IAppContext {
   rootPath: string;
   cliCconfig: ICliConfig;
   services: IServicesContainer;
-  ai: IAiService;
+  // ai: IAiService;
   db: IDataManagerService;
   git: IGitService;
   ast: IAstService;

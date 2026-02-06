@@ -1,7 +1,7 @@
 {
   "name": "Symfony Generator",
   "id": "symfony",
-  "entryPoint": "symfony.service.js",
+  "service": "symfony.service.js",
   "templateDir": "./templates",
   "blueprints": [
     {

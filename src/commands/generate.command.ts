@@ -11,15 +11,20 @@ type Target = "service" | "command" | "template" | "framework";
 
 export class GenerateCommand extends BaseCommand<IGenerateOptions> {
   name = "generate";
-  description =
-    "Génère des Composants de la CLI (service, command, template, framework)";
-  arguments = "<target> <name...>";
+  description = "Génère des Composants de la CLI (service, command, template, framework)";
+  arguments = "<type> <name...>";
   aliases = ["g"];
 
   options = [
     {
       flags: "-f, --force",
-      description: "Écrase si existe",
+      description: "Écraser les fichiers existants",
+      type: "boolean",
+      defaultValue: false,
+    },
+    {
+      flags: "-d, --dry-run",
+      description: "Simuler la création sans écrire",
       type: "boolean",
       defaultValue: false,
     },
@@ -31,41 +36,81 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
   ] satisfies ICommandOption[];
 
   async execute(args: string[], options: IGenerateOptions): Promise<void> {
-    this.validateArgs(
-      args,
-      2,
-      "Usage: mclp generate <target> <name...> [options]",
-    );
+    this.validateArgs(args, 2, "Usage: mclp generate <type> <name...> [options]");
 
-    const target = String(args[0]).toLowerCase() as Target;
+    const type = String(args[0]).toLowerCase() as Target;
     const names = args.slice(1).map(String).filter(Boolean);
 
     const force = this.hasOption(options, "force");
     const output = this.getOption(options, "output", "./src/tests");
 
-    if (!["service", "command", "template", "framework"].includes(target)) {
-      throw new Error(
-        `Target invalide "${target}". Valides: service|command|template|framework`,
-      );
+    if (!["service", "command", "template", "framework"].includes(type)) {
+      throw new Error(`Type invalide "${type}". Valides: service|command|template|framework`);
     }
 
     for (const name of names) {
-      switch (target) {
+      switch (type) {
         case "service":
-          await this.generator.newComponent(target, name, { output, force });
+          await this.generator.newComponent(type, name, { output, force });
           break;
         case "command":
-          await this.generator.newComponent(target, name, { output, force });
+          await this.generator.newComponent(type, name, { output, force });
           break;
         case "template":
-          await this.generator.newComponent(target, name, { output, force });
+          await this.generator.newComponent(type, name, { output, force });
           break;
         case "framework":
-          await this.generator.newComponent(target, name, { output, force });
+          await this.generator.newComponent(type, name, { output, force });
           break;
       }
 
-      this.success(`${target} "${name}" généré dans ${output}`);
+      this.success(`${type} "${name}" généré dans ${output}`);
     }
   }
 }
+/*
+ async execute(args: string[], options: IMakeOptions): Promise<void> {
+    // const output = this.getOption(options, "output", "./dist");
+    // const force = this.hasOption(options, "force");
+
+    const [type, ...names] = args;
+    console.log("Arguments reçus:", args);
+    console.log("Options reçues:", options);
+
+    // 1. Mode interactif si aucun type
+    if (!type) {
+      this.cli.logger.info(
+        "Modes interactifs disponibles : " + this.actions.join(", "),
+      );
+      // Ici tu pourrais appeler Inquirer pour demander le type
+      return;
+    }
+
+    const normalizedType = type.toLowerCase();
+
+    // 2. Validation
+    if (!this.actions.includes(normalizedType)) {
+      throw new ValidationError(
+        `Type invalide. Choix : ${this.actions.join(", ")}`,
+      );
+    }
+
+    // 3. Gestion multiple (noms séparés par espaces ou virgules)
+    const namesArray = names
+      .flatMap((n) => n.split(","))
+      .map((n) => n.trim())
+      .filter((n) => n.length > 0);
+
+    if (namesArray.length === 0) {
+      this.cli.logger.warn("Veuillez fournir au moins un nom.");
+      return;
+    }
+
+    // 4. Exécution
+    for (const name of namesArray) {
+      await this.cli.generator.newComponent(normalizedType, name, options);
+    }
+
+    this.cli.logger.success("✅ Opération terminée.");
+  }
+*/

@@ -41,6 +41,11 @@ export const defaultconfig: IAppConfig = {
       database: "task_backup",
     },
   ],
+  doc: {
+    pathIn: process.cwd(),
+    pathOut: "./.doc",
+    saveOnExecute: true,
+  },
   tree: {
     exclude: ["node_modules", ".git", "dist", ".vscode", ".doc"],
     pathIn: process.cwd(),

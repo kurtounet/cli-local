@@ -118,7 +118,7 @@ export abstract class BaseCommand<
     _args: string[],
     _options: TOptions,
   ): MaybePromise<void> {
-    this.logger.info(`beforeExecute: Exécutant la commande ${this.name}`);
+    // this.logger.debug(`beforeExecute: Exécutant la commande ${this.name}`);
     return Promise.resolve();
   }
 
@@ -126,7 +126,7 @@ export abstract class BaseCommand<
     _args: string[],
     _options: TOptions,
   ): MaybePromise<void> {
-    this.logger.info(`afterExecute : Commande ${this.name} terminée.`);
+    // this.logger.debug(`afterExecute : Commande ${this.name} terminée.`);
     return Promise.resolve();
   }
 

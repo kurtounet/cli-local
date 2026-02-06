@@ -60,7 +60,7 @@ export class AppContextBuilder {
     // L'ordre d'instanciation n'est pas critique car les dépendances sont résolues
     // via le contexte partagé
 
-    cli.ai = new AiService(cli);
+    // cli.ai = new AiService(cli);
     cli.git = new GitService(cli);
     cli.ast = new AstService(cli);
     cli.task = new TaskService(cli);
@@ -105,7 +105,7 @@ export class AppContextBuilder {
      * Le nom de service est utilisé pour la récupération via services.get<T>(name)
      */
     const serviceEntries: readonly [string, IBaseService][] = [
-      ["AiService", ctx.ai],
+      // ["AiService", ctx.ai],
       ["GitService", ctx.git],
       ["AstService", ctx.ast],
       ["CaseService", ctx.case],

@@ -10,22 +10,22 @@ import { BaseService } from "./base-service.service.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export class FileSystemService
-  extends BaseService
-  implements IFileSystemService
-{
+export class FileSystemService extends BaseService implements IFileSystemService {
   readonly serviceName = "FileSystemService";
+
+  public excludedDirs = [
+    ".git",
+    "dist",
+    ".doc",
+    "old_cli",
+    ".vscode",
+    "node_modules",
+    "project-test",
+  ];
 
   private readonly TS_EXTENSION = ".ts";
   private readonly CLASS_TEMPLATE = "class.ts.txt";
   private readonly DEFAULT_AUTHOR = "MCLP System";
-
-  public excludedDirs = ["node_modules", ".git", "dist", ".vscode"];
-
-  // public init(): Promise<void> {
-  //   // Si tu n'as rien à initialiser pour l'instant :
-  //   return Promise.resolve();
-  // }
 
   /**
    * Adds additional directories to the exclusion list
@@ -78,17 +78,17 @@ export class FileSystemService
     }
   }
   /**
-   * Writes content to a file
+   * Writes content to a file in JSON
    * @param filePath - Path of file to write
-   * @param content - Content to write
+   * @returns File content
    */
   public async readFileJson(filePath: string): Promise<any> {
     this.validatePath(filePath, "filePath");
     try {
       return await fs.readJSONSync(filePath, "utf-8");
     } catch (error) {
-      const message = `Failed to read file: ${filePath}`;
-      // this.cli.errorHandler.handle(error, message);
+      // const message = `Failed to read file: ${filePath}`;
+      this.cli.errorHandler.handle(error, `Failed to read file: ${filePath}`);
       // throw error instanceof Error ? error : new Error(message);
     }
   }
@@ -103,22 +103,17 @@ export class FileSystemService
       await fs.outputFile(filePath, content);
       this.cli.logger.debug(`File written: ${filePath}`);
     } catch (error) {
-      const message = `writeFile(): Failed to write file: ${filePath}`;
-      // this.cli.errorHandler.handle(error, message);
+      this.cli.errorHandler.handle(error, `writeFile(): Failed to write file: ${filePath}`);
       // throw error instanceof Error ? error : new Error(message);
     }
   }
-  public async writeFileAsync(
-    filePath: string,
-    content: string,
-  ): Promise<void> {
+  public async writeFileAsync(filePath: string, content: string): Promise<void> {
     this.validatePath(filePath, "filePath");
     try {
       await fs.outputFile(filePath, content);
       this.cli.logger.debug(`File written: ${filePath}`);
     } catch (error) {
-      const message = `writeFile(): Failed to write file: ${filePath}`;
-      // this.cli.errorHandler.handle(error, message);
+      this.cli.errorHandler.handle(error, `writeFileAsync(): Failed to write file: ${filePath}`);
       // throw error instanceof Error ? error : new Error(message);
     }
   }
@@ -247,8 +242,8 @@ export class FileSystemService
   public async getDirectoryTree(
     dirPath: string,
     level = 0,
-    maxLevel = 0, // 0 = infini
-    withMetadata = true,
+    maxLevel = 0,
+    withMetadata = false,
     config?: { excludedDirs: string[]; analyzeExtensions: string[] },
   ): Promise<IFileNode | null> {
     this.validatePath(dirPath, "dirPath");
@@ -266,6 +261,10 @@ export class FileSystemService
     if (config?.excludedDirs.includes(name)) {
       return null;
     }
+    // 2. Vérification des extensions
+    // if (config?.analyzeExtensions && !config.analyzeExtensions.includes(name)) {
+    //   return null;
+    // }
 
     const stats = await fs.stat(dirPath);
     const isDirectory = stats.isDirectory();
@@ -300,22 +299,20 @@ export class FileSystemService
         ),
       );
 
-      info.children = childrenResults.filter(
-        (child): child is IFileNode => child !== null,
-      );
-      info.size = info.children.reduce(
-        (acc, child) => acc + (child.size || 0),
-        0,
-      );
+      info.children = childrenResults.filter((child): child is IFileNode => child !== null);
+      info.size = info.children.reduce((acc, child) => acc + (child.size || 0), 0);
     } else if (!isDirectory) {
       // 2. Analyse Metadata si l'extension est dans la liste du JSON
       if (withMetadata && config?.analyzeExtensions.includes(extension)) {
         try {
+          this.cli.logger.info(`Analyse metadata: ${dirPath}`);
           const sourceCode = await fs.readFile(dirPath, "utf-8");
+          // if (sourceCode) {
           info.content = sourceCode;
           info.metadata = this.cli.ast.analyzeFileMetadata(dirPath, sourceCode);
-        } catch (err) {
-          console.warn(`Erreur lecture metadata: ${name}`);
+          // }
+        } catch (error: unknown) {
+          this.cli.errorHandler.handle(error, `Erreur lecture metadata: ${name}`);
         }
       }
     }
@@ -363,10 +360,7 @@ export class FileSystemService
    * @param sourceJson
    * @param targetBaseDir - Base directory where tree will be created
    */
-  public async createDirectoryTreeFromJson(
-    sourceJson: any,
-    targetBaseDir: string,
-  ): Promise<void> {
+  public async createDirectoryTreeFromJson(sourceJson: any, targetBaseDir: string): Promise<void> {
     try {
       // const treeData = await this.readJsonFile(sourcePath);
       await this.buildPhysicalTree(sourceJson, targetBaseDir);
@@ -427,10 +421,7 @@ export class FileSystemService
    * @param node - File node to create
    * @param currentPath - Current directory path
    */
-  public async buildPhysicalTree(
-    node: IFileNode,
-    currentPath: string,
-  ): Promise<void> {
+  public async buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void> {
     const fullPath = path.join(currentPath, node.name);
 
     if (node.type === "directory" || node.children) {
@@ -455,10 +446,7 @@ export class FileSystemService
    * @param fullPath - Full path to the file
    * @returns File content
    */
-  private async getContentForFile(
-    node: IFileNode,
-    fullPath: string,
-  ): Promise<string> {
+  private async getContentForFile(node: IFileNode, fullPath: string): Promise<string> {
     if (node.content) {
       return node.content;
     }
@@ -477,12 +465,7 @@ export class FileSystemService
    */
   private async applyTemplate(fileName: string): Promise<string> {
     try {
-      const templatePath = path.resolve(
-        __dirname,
-        "..",
-        "templates",
-        this.CLASS_TEMPLATE,
-      );
+      const templatePath = path.resolve(__dirname, "..", "templates", this.CLASS_TEMPLATE);
 
       this.cli.logger.debug(`Attempting to load template: ${templatePath}`);
 
@@ -492,21 +475,18 @@ export class FileSystemService
       }
 
       const rawTemplate = await this.readFile(templatePath);
-      this.cli.logger.debug(
-        `Template loaded for ${fileName}, length: ${rawTemplate.length}`,
-      );
+      this.cli.logger.debug(`Template loaded for ${fileName}, length: ${rawTemplate.length}`);
 
       const content = this.cli.template.compile(rawTemplate, {
         name: fileName.replace(this.TS_EXTENSION, ""),
         author: this.DEFAULT_AUTHOR,
       });
 
-      this.cli.logger.debug(
-        `Content generated for ${fileName}, length: ${content.length}`,
-      );
+      this.cli.logger.debug(`Content generated for ${fileName}, length: ${content.length}`);
       return content;
     } catch (error) {
-      this.cli.logger.warn(
+      this.cli.errorHandler.handle(
+        error,
         `Template not found for ${fileName}, creating empty file.`,
       );
       return "";
@@ -530,10 +510,7 @@ export class FileSystemService
       const pk = await this.cli.fileSystem.readFile(pkgPath);
       const pkg = JSON.parse(pk) as Record<string, any>;
       pkg.mclp = this.cli.config.defaults;
-      await this.cli.fileSystem.writeFile(
-        pkgPath,
-        JSON.stringify(pkg, null, 2),
-      );
+      await this.cli.fileSystem.writeFile(pkgPath, JSON.stringify(pkg, null, 2));
       this.cli.logger.success(`Mise à jour avec succès dans ${file} !`);
     } catch (error) {
       this.cli.logger.error(

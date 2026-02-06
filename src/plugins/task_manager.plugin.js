@@ -102,7 +102,7 @@ export default class TaskManagerPlugin {
         tags,
         dependsOn,
         search,
-      } = args[0];
+      } = args;
       const data = await loadTasks(context);
       let { tasks, taskIdCounter } = data;
 

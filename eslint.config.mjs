@@ -82,10 +82,8 @@ export default defineConfig([
       "jsdoc/check-values": "error",
       "jsdoc/check-tag-names": "warn",
       "jsdoc/require-hyphen-before-param-description": ["warn", "always"],
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
-      ],
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-process-exit": "off", // Souvent nécessaire dans les scripts CLI
     },
   },

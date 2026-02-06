@@ -1,0 +1,247 @@
+// import path from "node:path";
+// import { pathToFileURL } from "node:url";
+
+// import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+// import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+// import { z } from "zod";
+
+// import { AiService } from "./services/ai.service.js";
+
+// const aiService = new AiService();
+// // On garde les instances en dehors des fonctions pour pouvoir les manipuler
+// let serverInstance: McpServer | null = null;
+// let transportInstance: StdioServerTransport | null = null;
+
+// // Initialisation du serveur comme dans l'exemple
+
+// /**
+//  * Arrête proprement le serveur et libère le flux STDIO
+//  */
+// export async function stopMcpServer() {
+//   if (transportInstance) {
+//     await transportInstance.close();
+//     transportInstance = null;
+//     serverInstance = null;
+//     console.error("🛑 Serveur MCP arrêté");
+//   }
+// }
+
+// /**
+//  * 2. Chargement dynamique des plugins existants
+//  */
+// async function loadPlugins() {
+//   const tools = await aiService.listTools();
+
+//   for (const name of tools) {
+//     try {
+//       const pluginPath = path.resolve(process.cwd(), "src", "plugins", `${name}.plugin.js`);
+//       const fileUrl = pathToFileURL(pluginPath).href;
+
+//       // Cache-busting pour importer la version fraîche du code
+//       const module = await import(`${fileUrl}?update=${Date.now()}`);
+
+//       if (module.default) {
+//         // On récupère la définition et le schéma exportés par ton plugin
+//         const definition = module.default.definition || { name, description: "Outil dynamique" };
+//         const schema = module.default.schema || {};
+
+//         server.registerTool(
+//           definition.name,
+//           {
+//             description: definition.description,
+//             inputSchema: schema, // On injecte le schéma Zod du plugin ici
+//           },
+//           async (args: any) => {
+//             const result = await aiService.executeTool(definition.name, [args]);
+//             return {
+//               content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+//             };
+//           },
+//         );
+//       }
+//     } catch (error: any) {
+//       console.error(`[MCP] Erreur chargement ${name}:`, error.message);
+//     }
+//   }
+// }
+
+// /**
+//  *
+//  */
+// export async function runMcpServer() {
+//   const server = new McpServer({
+//     name: "mclp-mcp-server",
+//     version: "1.0.0",
+//   });
+//   server.registerTool(
+//     "create-new-plugin",
+//     {
+//       title: "Create New Plugin",
+//       description: "Génère et installe un nouveau plugin pour étendre tes propres capacités.",
+//       inputSchema: {
+//         name: z.string().describe("Nom du plugin (ex: 'github-helper')"),
+//         instruction: z.string().describe("Instructions détaillées pour la logique du code"),
+//       },
+//     },
+//     async ({ name, instruction }) => {
+//       try {
+//         const code = await aiService.generatePlugin(instruction);
+//         await aiService.savePlugin(name, code);
+//         return {
+//           content: [{ type: "text", text: `✅ Plugin '${name}' créé et chargé avec succès.` }],
+//         };
+//       } catch (error: unknown) {
+//         return {
+//           isError: true,
+//           content: [{ type: "text", text: `Erreur : ${error}` }],
+//         };
+//       }
+//     },
+//   );
+
+//   await loadPlugins();
+//   const transport = new StdioServerTransport();
+//   await server.connect(transport);
+//   console.error("🚀 MCP Server running on stdio");
+// }
+
+// runMcpServer().catch((error) => {
+//   console.error("Fatal error:", error);
+//   process.exit(1);
+// });import path from "node:path";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { z } from "zod";
+
+import { AiService } from "@/services/ai.service.js";
+
+const aiService = new AiService();
+let serverInstance: McpServer | null = null;
+let transportInstance: StdioServerTransport | null = null;
+let isConnected = false;
+
+/**
+ * Arrête proprement le serveur
+ */
+export async function stopMcpServer() {
+  if (transportInstance && isConnected) {
+    await transportInstance.close();
+    transportInstance = null;
+    serverInstance = null;
+    isConnected = false;
+    console.error("🛑 Serveur MCP arrêté");
+  }
+}
+
+/**
+ * Chargement dynamique des plugins existants
+ * @param server
+ */
+async function loadPlugins(server: McpServer) {
+  const tools = await aiService.listTools();
+
+  for (const name of tools) {
+    try {
+      const pluginPath = path.resolve(process.cwd(), "src", "plugins", `${name}.plugin.js`);
+      const fileUrl = pathToFileURL(pluginPath).href;
+
+      // Cache-busting pour importer la version fraîche du code
+      const module = await import(`${fileUrl}?update=${Date.now()}`);
+
+      if (module.default) {
+        const definition = module.default.definition || { name, description: "Outil dynamique" };
+        const schema = module.default.schema || {};
+
+        server.registerTool(
+          definition.name,
+          {
+            description: definition.description,
+            inputSchema: schema,
+          },
+          async (args: Record<string, unknown>) => {
+            const result = await aiService.executeTool(definition.name, [args]);
+            return {
+              content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+            };
+          },
+        );
+      }
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`[MCP] Erreur chargement ${name}:`, errorMessage);
+    }
+  }
+}
+
+/**
+ * Lancement du serveur MCP
+ */
+export async function runMcpServer() {
+  // Vérifier si déjà connecté
+  if (isConnected && serverInstance && transportInstance) {
+    console.error("⚠️ Serveur MCP déjà en cours d'exécution");
+    return;
+  }
+
+  // Nettoyer les instances existantes si nécessaire
+  if (serverInstance || transportInstance) {
+    await stopMcpServer();
+  }
+
+  const server = new McpServer({
+    name: "mclp-mcp-server",
+    version: "1.0.0",
+  });
+
+  server.registerTool(
+    "create-new-plugin",
+    {
+      title: "Create New Plugin",
+      description: "Génère et installe un nouveau plugin pour étendre tes propres capacités.",
+      inputSchema: {
+        name: z.string().describe("Nom du plugin (ex: 'github-helper')"),
+        instruction: z.string().describe("Instructions détaillées pour la logique du code"),
+      },
+    },
+    async ({ name, instruction }) => {
+      try {
+        const code = await aiService.generatePlugin(instruction);
+        await aiService.savePlugin(name, code);
+        return {
+          content: [
+            { type: "text" as const, text: `✅ Plugin '${name}' créé et chargé avec succès.` },
+          ],
+        };
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        return {
+          isError: true,
+          content: [{ type: "text" as const, text: `Erreur : ${errorMessage}` }],
+        };
+      }
+    },
+  );
+
+  await loadPlugins(server);
+
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+
+  // Sauvegarde des instances pour le stop/restart
+  serverInstance = server;
+  transportInstance = transport;
+  isConnected = true;
+
+  console.error("🚀 MCP Server running on stdio");
+}
+
+// Lancement initial seulement si pas déjà connecté
+if (!isConnected) {
+  runMcpServer().catch((error) => {
+    console.error("Fatal error:", error);
+    process.exit(1);
+  });
+}

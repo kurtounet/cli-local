@@ -4,12 +4,12 @@ import { dump } from "js-yaml";
 
 import { BaseCommand } from "./BaseCommand.js";
 
-export class CliCommand extends BaseCommand {
-  public name = "cli";
+export class AppCommand extends BaseCommand {
+  public name = "app";
   public description = `Initialise le fichier de configuration de la CLI (json, yaml, js)
 `;
   public arguments = "[format]";
-  public aliases = ["c"];
+  public aliases = ["a"];
 
   async execute(args: string[]): Promise<void> {
     const format = (args[0] || "json").toLowerCase() as "yaml" | "json" | "js";

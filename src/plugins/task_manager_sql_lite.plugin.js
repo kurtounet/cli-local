@@ -83,13 +83,13 @@ const db = new DatabaseManager();
 
 export default class TaskManagerPlugin {
   static definition = {
-    name: "task_manager",
+    name: "task_manager_sql_lite",
     description: "Gestionnaire avec persistance SQLite locale et backup MySQL.",
     // ... même schéma que précédemment ...
   };
 
   async execute(args, context) {
-    const { action, description, user, priority, tags } = args[0];
+    const { action, description, user, priority, tags } = args;
 
     switch (action) {
       case "add":

@@ -1,0 +1,32 @@
+/**
+ * Plugin: <%- pluginName %>
+ * Description: <%- description %>
+ */
+export default class <%- className %> {
+  static definition = {
+    name: "<%- pluginName %>",
+    description: "<%- description %>",
+    inputSchema: {
+      type: "object",
+      properties: {
+        // Définissez vos arguments ici
+        exampleArg: { type: "string", description: "Un argument exemple" },
+      },
+    },
+  };
+
+  async execute(args, context) {
+    // Les arguments sont passés directement comme un objet
+    // const { exampleArg } = args;
+    
+    context.log(`Exécution du plugin <%- pluginName %>...`);
+    
+    // Votre logique ici
+    
+    return {
+      success: true,
+      message: "Plugin <%- pluginName %> exécuté avec succès !",
+      // data: ...
+    };
+  }
+}

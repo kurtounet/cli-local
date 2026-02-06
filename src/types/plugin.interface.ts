@@ -1,5 +1,5 @@
 export interface IPluginService {
-  execute(args: any, data: any): Promise<void>;
+  execute(args: Record<string, unknown>, data: Record<string, unknown>): Promise<void>;
 }
 export interface IPlugin {
   type: string;
@@ -8,13 +8,14 @@ export interface IPlugin {
   pluginDir: string;
   templateDir?: string;
 }
+
 export interface IPluginManifest {
   id: string;
   name: string;
   templateDir?: string;
   service: string;
   description?: string;
-  blueprints?: any[];
+  blueprints?: IPluginBlueprint[];
 }
 
 export interface IPluginBlueprint {

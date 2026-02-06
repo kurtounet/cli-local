@@ -18,8 +18,8 @@ export class TemplateService extends BaseService implements ITemplateService {
     pluginDir: string,
     templateDir: string,
     templateName: string,
-    data: any,
-  ): Promise<any> {
+    data: Record<string, unknown>,
+  ): Promise<string> {
     const cacheKey = `${pluginDir}:${templateName}`;
     let compiled = this.cache.get(cacheKey);
 

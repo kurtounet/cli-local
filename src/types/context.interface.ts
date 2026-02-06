@@ -1,7 +1,6 @@
 import { IProjectService } from "@/features/project/interfaces/project-service.interface.js";
 import { ITaskService } from "@/features/project/interfaces/task-service.interface.js";
 
-import { IAiService } from "./services/ai-service.interface.js";
 import { IArchitectureService } from "./services/architecture-service.interface.js";
 import { IAstService } from "./services/ast-service.interface.js";
 import { ICaseService } from "./services/case-service.interface.js";
@@ -12,6 +11,7 @@ import { IFileSystemService } from "./services/file-system.interface.js";
 import { IGeneratorService } from "./services/generator.interface.js";
 import { IGitService } from "./services/git-service.interface.js";
 import { ILoggerService } from "./services/logger-service.interface.js";
+import { IPathService } from "./services/path-service.interface.js";
 import { IPluginService } from "./services/plugin-service.interface.js";
 import { IPromptService } from "./services/prompt-service.interface.js";
 import { IServicesContainer } from "./services/services-container.interface.js";
@@ -60,6 +60,7 @@ export interface IAppContext {
   tool: IToolService;
   state: IStateService;
   task: ITaskService;
+  path: IPathService;
   shell: IShellService;
   plugin: IPluginService;
   logger: ILoggerService;

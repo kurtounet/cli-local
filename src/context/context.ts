@@ -11,6 +11,7 @@ import { GeneratorService } from "@/services/generator.service.js";
 import { GitService } from "@/services/git.service.js";
 import { HandlerErrorService } from "@/services/handler-error.service.js";
 import { LoggerService } from "@/services/logger.service.js";
+import { PathService } from "@/services/path.service.js";
 import { PluginService } from "@/services/plugin.service.js";
 import { PromptService } from "@/services/prompt.service.js";
 import { ShellService } from "@/services/shell.service.js";
@@ -64,6 +65,7 @@ export class AppContextBuilder {
     cli.git = new GitService(cli);
     cli.ast = new AstService(cli);
     cli.task = new TaskService(cli);
+    cli.path = new PathService(cli);
     cli.case = new CaseService(cli);
     cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
@@ -111,6 +113,7 @@ export class AppContextBuilder {
       ["CaseService", ctx.case],
       ["ToolService", ctx.tool],
       ["TaskService", ctx.task],
+      ["PathService", ctx.path],
       ["ShellService", ctx.shell],
       ["StateService", ctx.state],
       ["LoggerService", ctx.logger],

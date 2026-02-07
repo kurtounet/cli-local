@@ -1,6 +1,11 @@
+import { Stats } from "node:fs";
+
 import { Dirent } from "fs-extra";
 
-import { ReaddirOptions } from "@/services/file-system.service.js";
+import {
+  ReaddirOptions,
+  StatDirectory,
+} from "@/services/file-system.service.js";
 
 import { IFileNode } from "../commun/file-node.interface.js";
 
@@ -36,6 +41,13 @@ export interface IFileSystemService {
    * @param dirPath - Le chemin du répertoire à créer.
    */
   createDirectory(dirPath: string): Promise<void>;
+
+  /**
+   * Renvoie les statistiques d'un repertoire.
+   * @param dirPath - Chemin absolu ou relatif du repertoire.
+   * @returns - Statistiques du repertoire
+   */
+  statDirectory(dirPath: string): Promise<Stats>;
 
   /**
    * Écrit un objet dans un fichier au format JSON.
@@ -77,7 +89,12 @@ export interface IFileSystemService {
    * @param fileName - Le nom du fichier final.
    * @param content - Le contenu à écrire.
    */
-  writeToOutput(basePath: string, subDir: string, fileName: string, content: string): Promise<void>;
+  writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): Promise<void>;
 
   /**
    * Lit le contenu d'un fichier en encodage UTF-8.
@@ -103,36 +120,16 @@ export interface IFileSystemService {
    * @param dirPath - Le chemin du répertoire à scanner.
    * @returns La liste des fichiers et dossiers sous forme de `fs.Dirent`.
    */
-  readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]>;
+  readDirWithFileTypes(
+    dirPath: string,
+    options?: ReaddirOptions,
+  ): Promise<Dirent[]>;
   /**
    * Lit le contenu d'un répertoire de manière récursive.
    * @param dirPath - Le chemin du répertoire à scanner.
    * @returns La liste des fichiers et dossiers du répertoire.
    */
   readDir(dirPath: string): Promise<string[]>;
-
-  /**
-   * Génère une représentation sous forme d'arbre (FileNode) d'un répertoire.
-   * @param dirPath - Le chemin racine du scan.
-   * @param level - Le niveau de profondeur actuel (usage interne).
-   * @param maxLevel - La limite de profondeur du scan (0 pour illimité).
-   * @param withMetadata - Si vrai, analyse les métadonnées des fichiers via l'AST.
-   * @param config - Configuration des exclusions et des extensions à analyser.
-   */
-  getDirectoryTree(
-    dirPath: string,
-    level?: number,
-    maxLevel?: number,
-    withMetadata?: boolean,
-    config?: { excludedDirs: string[]; analyzeExtensions: string[] },
-  ): Promise<IFileNode | null>;
-
-  /**
-   * Recrée physiquement sur le disque une structure de dossiers et fichiers à partir d'un nœud.
-   * @param node - Le nœud racine (fichier ou dossier) à construire.
-   * @param currentPath - Le chemin de destination sur le disque.
-   */
-  buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void>;
 
   /**
    * Met à jour un fichier JSON (ex: package.json) avec les configurations par défaut du CLI.

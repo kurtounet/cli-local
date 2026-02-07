@@ -67,7 +67,8 @@ describe("CaseService", () => {
 
     describe("slugify", () => {
       it("devrait supprimer les accents et les caractères spéciaux", () => {
-        const input = `"C'est l'été à Noël ?` + "`" + `!.,:;/\\@#$%^&* _ - + = < > ~ ' "`;
+        const input =
+          `"C'est l'été à Noël ?` + "`" + `!.,:;/\\@#$%^&* _ - + = < > ~ ' "`;
         // normalize + replace devraient transformer ça en :
         // "c-est-l-ete-a-noel"
         expect(service.slugify(input)).toBe("cest-lete-a-noel");

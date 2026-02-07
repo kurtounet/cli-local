@@ -18,7 +18,8 @@ function wouldCreateCycle(taskId, newDeps, allTasks) {
     if (!visited.has(currentId)) {
       visited.add(currentId);
       const currentTask = allTasks.find((t) => t.id === currentId);
-      if (currentTask && currentTask.dependsOn) queue.push(...currentTask.dependsOn);
+      if (currentTask && currentTask.dependsOn)
+        queue.push(...currentTask.dependsOn);
     }
   }
   return false;
@@ -85,7 +86,8 @@ export default class TaskManagerPlugin {
   static isWriting = false;
 
   async execute(args, context) {
-    while (TaskManagerPlugin.isWriting) await new Promise((r) => setTimeout(r, 50));
+    while (TaskManagerPlugin.isWriting)
+      await new Promise((r) => setTimeout(r, 50));
 
     try {
       TaskManagerPlugin.isWriting = true;
@@ -142,7 +144,8 @@ export default class TaskManagerPlugin {
           }));
 
           if (status) results = results.filter((t) => t.status === status);
-          if (assignee) results = results.filter((t) => t.assignee === assignee);
+          if (assignee)
+            results = results.filter((t) => t.assignee === assignee);
           if (search) {
             const s = search.toLowerCase();
             results = results.filter(
@@ -154,7 +157,9 @@ export default class TaskManagerPlugin {
 
           // Tri : Priorité d'abord, puis ID décroissant
           const pWeight = { high: 3, medium: 2, low: 1 };
-          results.sort((a, b) => pWeight[b.priority] - pWeight[a.priority] || b.id - a.id);
+          results.sort(
+            (a, b) => pWeight[b.priority] - pWeight[a.priority] || b.id - a.id,
+          );
 
           return { success: true, count: results.length, tasks: results };
 
@@ -194,7 +199,9 @@ export default class TaskManagerPlugin {
               JSON.stringify(fields[key]) !== JSON.stringify(task[key])
             ) {
               task[key] = fields[key];
-              task.history.push(`${new Date().toLocaleString()}: ${key} mis à jour par ${user}`);
+              task.history.push(
+                `${new Date().toLocaleString()}: ${key} mis à jour par ${user}`,
+              );
               changed = true;
             }
           });
@@ -204,7 +211,9 @@ export default class TaskManagerPlugin {
 
         case "stats":
           const tagCloud = {};
-          tasks.forEach((t) => t.tags.forEach((tag) => (tagCloud[tag] = (tagCloud[tag] || 0) + 1)));
+          tasks.forEach((t) =>
+            t.tags.forEach((tag) => (tagCloud[tag] = (tagCloud[tag] || 0) + 1)),
+          );
           return { success: true, total: tasks.length, tags: tagCloud };
 
         default:

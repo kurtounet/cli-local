@@ -1,6 +1,8 @@
+import { IGitService } from "@/types/services/git-service.interface.js";
+
 import { BaseService } from "./base-service.service.js";
 
-export class GitService extends BaseService {
+export class GitService extends BaseService implements IGitService {
   readonly serviceName = "GitService";
 
   public init(): Promise<void> {
@@ -19,7 +21,12 @@ export class GitService extends BaseService {
   }
 
   async commit(message: string): Promise<void> {
-    this.cli.shell.executeSyncSpawn("git", ["commit -m", message], "inherit", true);
+    this.cli.shell.executeSyncSpawn(
+      "git",
+      ["commit -m", message],
+      "inherit",
+      true,
+    );
     return Promise.resolve();
   }
 
@@ -35,18 +42,26 @@ export class GitService extends BaseService {
 
     const currentContent = await this.cli.fileSystem.readFile(gitIgnorePath);
 
-    const isAlreadyPresent = this.verifyInGitIgnoreFile(currentContent, contentToAdd);
+    const isAlreadyPresent = this.verifyInGitIgnoreFile(
+      currentContent,
+      contentToAdd,
+    );
 
     if (isAlreadyPresent) {
       throw new Error(`${path} : "${contentToAdd}" est déjà présent ⚠️`);
     }
-    const entry = currentContent.endsWith("\n") ? `${contentToAdd}\n` : `\n${contentToAdd}\n`;
+    const entry = currentContent.endsWith("\n")
+      ? `${contentToAdd}\n`
+      : `\n${contentToAdd}\n`;
 
     await this.cli.fileSystem.appendFile(gitIgnorePath, entry);
 
     return `${path} : "${contentToAdd}" ajouté à .gitignore ✅`;
   }
-  async removeInGitignore(path: string, itemsToRemove: string[]): Promise<string> {
+  async removeInGitignore(
+    path: string,
+    itemsToRemove: string[],
+  ): Promise<string> {
     const gitIgnorePath = this.cli.path.join(path, ".gitignore");
 
     if (!this.cli.fileSystem.exists(gitIgnorePath)) {
@@ -65,11 +80,17 @@ export class GitService extends BaseService {
       return "Aucun changement nécessaire dans .gitignore.";
     }
 
-    await this.cli.fileSystem.writeFile(gitIgnorePath, filteredLines.join("\n"));
+    await this.cli.fileSystem.writeFile(
+      gitIgnorePath,
+      filteredLines.join("\n"),
+    );
     return `Éléments retirés de .gitignore dans ${path} ✅`;
   }
 
-  async gitAddAndCommitAndPush(folder: string, message: string): Promise<boolean> {
+  async gitAddAndCommitAndPush(
+    folder: string,
+    message: string,
+  ): Promise<boolean> {
     try {
       await this.add(folder);
       await this.commit(message);
@@ -88,8 +109,10 @@ export class GitService extends BaseService {
    * @param item - Contenu à ajouter.
    * @returns Retourne le nouveau contenu du fichier .gitignore ou un tableau vide.
    */
-  verifyInGitIgnoreFile(currentContent: string, item: string): boolean {
+  private verifyInGitIgnoreFile(currentContent: string, item: string): boolean {
     if (!item.trim()) return false; // Ne pas valider si l'item est vide
-    return currentContent.split("\n").some((line) => line.trim() === item.trim());
+    return currentContent
+      .split("\n")
+      .some((line) => line.trim() === item.trim());
   }
 }

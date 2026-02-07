@@ -32,7 +32,9 @@ export class FrameworkSelector {
     const service = this.services.get(frameworkName.toLowerCase());
 
     if (!service) {
-      throw new Error(`Le framework "${frameworkName}" n'est pas encore supporté par la CLI.`);
+      throw new Error(
+        `Le framework "${frameworkName}" n'est pas encore supporté par la CLI.`,
+      );
     }
 
     return service;

@@ -11,11 +11,15 @@ export async function isMcpServerRunning(): Promise<boolean> {
   try {
     if (process.platform === "win32") {
       // Windows
-      const { stdout } = await execAsync('tasklist /FI "IMAGENAME eq node.exe" /FO CSV');
+      const { stdout } = await execAsync(
+        'tasklist /FI "IMAGENAME eq node.exe" /FO CSV',
+      );
       return stdout.includes("mcp-server") || stdout.includes("mclp");
     } else {
       // Linux/Mac
-      const { stdout } = await execAsync("ps aux | grep mcp-server | grep -v grep");
+      const { stdout } = await execAsync(
+        "ps aux | grep mcp-server | grep -v grep",
+      );
       return stdout.trim().length > 0;
     }
   } catch (error) {
@@ -51,13 +55,19 @@ export async function killAllMcpProcesses(): Promise<void> {
 export async function listMcpProcesses(): Promise<string[]> {
   try {
     if (process.platform === "win32") {
-      const { stdout } = await execAsync('tasklist /FI "IMAGENAME eq node.exe" /FO CSV /V');
+      const { stdout } = await execAsync(
+        'tasklist /FI "IMAGENAME eq node.exe" /FO CSV /V',
+      );
       const lines = stdout.split("\n");
       return lines.filter(
-        (line) => line.toLowerCase().includes("mcp") || line.toLowerCase().includes("mclp"),
+        (line) =>
+          line.toLowerCase().includes("mcp") ||
+          line.toLowerCase().includes("mclp"),
       );
     } else {
-      const { stdout } = await execAsync("ps aux | grep -E 'mcp-server|mclp' | grep -v grep");
+      const { stdout } = await execAsync(
+        "ps aux | grep -E 'mcp-server|mclp' | grep -v grep",
+      );
       return stdout
         .trim()
         .split("\n")

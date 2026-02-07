@@ -1,6 +1,5 @@
 import { ProjectService } from "@/features/project/services/project.service.js";
 import { TaskService } from "@/features/project/services/task.service.js";
-import { AiService } from "@/services/ai.service.js";
 import { ArchitectureService } from "@/services/architecture.service.js";
 import { AstService } from "@/services/ast.service.js";
 import { CaseService } from "@/services/case.service.js";

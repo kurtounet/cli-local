@@ -22,14 +22,19 @@ export class DocCommand extends BaseCommand {
 
   async execute(args: string[], options: IDocOptions): Promise<void> {
     // On récupère la config globale via le service
-    const config = this.cli.config.current ? this.cli.config.current : this.cli.config.current;
+    const config = this.cli.config.current
+      ? this.cli.config.current
+      : this.cli.config.current;
 
     const level = this.hasOption(options, "level")
       ? this.getOption(options, "level", 0)
       : config.tree.analysis.maxLevel;
-    const save = config.tree.analysis.save ?? this.getOption(options, "save", false);
+    const save =
+      config.tree.analysis.save ?? this.getOption(options, "save", false);
     const excludedDirs = config.tree.exclude;
-    const analyzeExtensions = config.tree.analysis.enabled ? config.tree.analysis.extensions : null;
+    const analyzeExtensions = config.tree.analysis.enabled
+      ? config.tree.analysis.extensions
+      : null;
 
     this.validateArgs(args, 0, "Usage: mclp doc [pathIn] [pathOut] [options]");
 
@@ -37,12 +42,14 @@ export class DocCommand extends BaseCommand {
     const force = this.hasOption(options, "force");
     const dryRun = this.hasOption(options, "dryRun");
     const metadata = this.hasOption(options, "metadata");
-    const output = config.tree.pathOut ?? this.getOption(options, "output", "./");
+    const output =
+      config.tree.pathOut ?? this.getOption(options, "output", "./");
     const pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
     const [type, ...pathArgs] = args;
 
     try {
-      const argOut = pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
+      const argOut =
+        pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
       const pathOut = path.resolve(argOut ?? output ?? pathIn);
 
       if (!this.cli.fileSystem.exists(pathIn)) {
@@ -50,12 +57,19 @@ export class DocCommand extends BaseCommand {
       }
 
       // Récupération de l'objet tree (données brutes)
-      const tree = await this.cli.fileSystem.getDirectoryTree(pathIn, 0, 0, true, {
-        excludedDirs,
-        analyzeExtensions,
-      });
+      const tree = await this.cli.fileSystem.getDirectoryTree(
+        pathIn,
+        0,
+        0,
+        true,
+        {
+          excludedDirs,
+          analyzeExtensions,
+        },
+      );
 
-      if (!tree) throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
+      if (!tree)
+        throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
 
       await this.cli.tool.buildDoc(tree, output);
     } catch (error) {

@@ -10,6 +10,7 @@ export interface IGitService extends IBaseService {
   pull(): Promise<void>;
   push(): Promise<void>;
   commit(message: string): Promise<void>;
-  addToGitignore(path: string, message: string[]): Promise<void>;
-  removeInGitignore(path: string, message: string[]): Promise<void>;
+  addToGitignore(path: string, message: string): Promise<string>;
+  removeInGitignore(path: string, itemsToRemove: string[]): Promise<string>;
+  gitAddAndCommitAndPush(folder: string, message: string): Promise<boolean>;
 }

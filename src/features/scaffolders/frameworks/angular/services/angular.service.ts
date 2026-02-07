@@ -6,7 +6,10 @@ import { BaseFrameworkService } from "@/features/scaffolders/common/services/bas
 import { IFrameworkService } from "@/features/scaffolders/interfaces/framework-service.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
 
-export class AngularService extends BaseFrameworkService implements IFrameworkService {
+export class AngularService
+  extends BaseFrameworkService
+  implements IFrameworkService
+{
   private config!: IInstallFramework;
   readonly frameworkName = "angular";
   readonly serviceName = "AngularService";
@@ -28,7 +31,10 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
     entitiesJson: IGetEntityJson,
     fileMdj: string,
   ): Promise<void> => {
-    this.config = (await this.buildInstallFramework(project, this.frameworkName))!;
+    this.config = (await this.buildInstallFramework(
+      project,
+      this.frameworkName,
+    ))!;
 
     if (this.config === null) {
       return;
@@ -42,10 +48,10 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
     await this.step(`${EMOJI.rond_green} Configuration Angular`, async () => {
       await this.installFramework(this.config);
       await this.installDependencies(this.config);
-      await this.createBranchGit(this.config);
-      await this.generateArchitecture(this.config);
+      await this.createBranchGit(this.config); // dans la classe parente
+      await this.generateArchitecture(this.config); // dans la classe parente
       await this.generateFileFramework(this.config);
-      await this.updateFile(this.config);
+      await this.updateFile(this.config); // dans la classe parente
       await this.generateFileCli(project, entitiesJson, fileMdj, this.config);
     });
   };
@@ -64,12 +70,20 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
       `--ai-config="gemini`,
     ].filter((arg): arg is string => Boolean(arg));
 
-    this.cli.shell.executeSyncSpawn(`ng`, args, "inherit", true, config.rootProjectPath);
+    this.cli.shell.executeSyncSpawn(
+      `ng`,
+      args,
+      "inherit",
+      true,
+      config.rootProjectPath,
+    );
     await Promise.resolve();
   }
 
   async installDependencies(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Installation des dépendances Angular...`);
+    this.cli.logger.info(
+      `${EMOJI.rond_green} Installation des dépendances Angular...`,
+    );
     if (config.framework.mode === "install") {
       config.framework.dependencies.prod.map((dep) => {
         this.cli.shell.executeSyncSpawn(
@@ -92,28 +106,11 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
     }
     await Promise.resolve();
   }
-  createBranchGit(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
-    return Promise.resolve();
-  }
-  async generateArchitecture(config: IInstallFramework): Promise<unknown> {
-    // this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
-    this.cli.logger.info(`${EMOJI.rond_green} Création de l'arborescence des dossiers...`);
-    return Promise.resolve();
-  }
 
   async generateFileFramework(config: IInstallFramework): Promise<unknown> {
     this.cli.logger.info(
       `${EMOJI.rond_green} Génération des fichiers de base pour ${config.projectName}`,
     );
-    return Promise.resolve();
-  }
-
-  async updateFile(config: IInstallFramework): Promise<unknown> {
-    this.cli.logger.info(`Mise à jour du fichier package.json`);
-    this.cli.logger.info(`Mise à jour du fichier tsconfig.json`);
-    this.cli.logger.info(`Mise à jour du fichier config.json`);
-    this.cli.logger.success(`Mise à jour terminée avec succès !`);
     return Promise.resolve();
   }
 }

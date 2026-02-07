@@ -1,5 +1,5 @@
 export default class TaskManagerCliPlugin {
- static definition = {
+  static definition = {
     name: "task_manager_cli_plugin",
     description: "Gestionnaire avec persistance SQLite locale et backup MySQL.",
     // ... même schéma que précédemment ...

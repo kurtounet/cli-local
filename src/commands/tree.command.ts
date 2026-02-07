@@ -34,7 +34,7 @@ ${EMOJI.info}  type: json, md, yaml, all
   public aliases = ["t"];
 
   // Ajout de "yaml" dans les extensions autorisées
-  private readonly extensions = ["json", "md", "yaml"];
+  private readonly extensions = ["json", "md", "yaml", "all", "create"];
 
   public options: ICommandOption[] = [
     {
@@ -113,31 +113,44 @@ ${EMOJI.info}  type: json, md, yaml, all
 
   async execute(args: string[], options: ITreeOptions): Promise<void> {
     // On récupère la config globale via le service
-    const config = this.cli.config.current ? this.cli.config.current : this.cli.config.current;
+    const config = this.cli.config.current
+      ? this.cli.config.current
+      : this.cli.config.current;
 
     const level = this.hasOption(options, "level")
       ? this.getOption(options, "level", 0)
       : config.tree.analysis.maxLevel;
-    const save = config.tree.analysis.save ?? this.getOption(options, "save", false);
+    const save =
+      config.tree.analysis.save ?? this.getOption(options, "save", false);
     const excludedDirs = config.tree.exclude;
-    const analyzeExtensions = config.tree.analysis.enabled ? config.tree.analysis.extensions : null;
+    const analyzeExtensions = config.tree.analysis.enabled
+      ? config.tree.analysis.extensions
+      : [];
 
-    this.validateArgs(args, 1, "Usage: mclp tree <type> <pathIn> [pathOut] [options]");
+    this.validateArgs(
+      args,
+      1,
+      "Usage: mclp tree <type> <pathIn> [pathOut] [options]",
+    );
 
     const view = this.hasOption(options, "view");
     const force = this.hasOption(options, "force");
     const dryRun = this.hasOption(options, "dryRun");
     const metadata = this.hasOption(options, "metadata");
-    const output = config.tree.pathOut ?? this.getOption(options, "output", "./");
+    const output =
+      config.tree.pathOut ?? this.getOption(options, "output", "./");
     const pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
     const [type, ...pathArgs] = args;
 
     if (!this.extensions.includes(type)) {
-      throw new ValidationError(`Type invalide. Types supportés : ${this.extensions.join(", ")}`);
+      throw new ValidationError(
+        `Type invalide. Types supportés : ${this.extensions.join(", ")}`,
+      );
     }
 
     try {
-      const argOut = pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
+      const argOut =
+        pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
       const pathOut = path.resolve(argOut ?? output ?? pathIn);
       const fileName = path.resolve(pathOut, `tree.${type}`);
 
@@ -148,12 +161,19 @@ ${EMOJI.info}  type: json, md, yaml, all
       this.cli.logger.info(`Processing: ${pathIn} -> ${fileName} (${type})`);
 
       // Récupération de l'objet tree (données brutes)
-      const tree = await this.cli.fileSystem.getDirectoryTree(pathIn, 0, level, metadata, {
-        excludedDirs,
-        analyzeExtensions,
-      });
+      const tree = await this.cli.tool.getDirectoryTree(
+        pathIn,
+        0,
+        level,
+        metadata,
+        {
+          excludedDirs,
+          analyzeExtensions,
+        },
+      );
 
-      if (!tree) throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
+      if (!tree)
+        throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
 
       // SWITCH pour déterminer le contenu selon le type
       let content = "";
@@ -170,6 +190,10 @@ ${EMOJI.info}  type: json, md, yaml, all
         case "all":
           content = this.cli.tool.generateYamlTree(tree, view);
           break;
+        case "create":
+          // await this.cli.tool.buildPhysicalTree(tree, pathOut);
+          await this.cli.tool.createDirectoryStructure(tree, pathOut);
+          break;
       }
 
       // Gestion de l'affichage console si pas de sauvegarde ou option view activée
@@ -181,15 +205,20 @@ ${EMOJI.info}  type: json, md, yaml, all
 
       if (save) {
         if (this.cli.fileSystem.exists(fileName) && !force) {
-          throw new FilesystemError(`Le fichier '${fileName}' existe déjà. Utilisez --force.`);
+          throw new FilesystemError(
+            `Le fichier '${fileName}' existe déjà. Utilisez --force.`,
+          );
         }
 
         if (dryRun) {
-          this.cli.logger.info(`[dry-run] L'écriture de ${fileName} a été simulée.`);
+          this.cli.logger.info(
+            `[dry-run] L'écriture de ${fileName} a été simulée.`,
+          );
           return;
         }
 
         await this.cli.fileSystem.writeFile(`${fileName}`, content);
+        this.cli.logger.success(content);
         this.cli.logger.success(`Fichier généré: ${fileName}`);
       }
     } catch (error: unknown) {

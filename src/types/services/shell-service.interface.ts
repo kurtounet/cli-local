@@ -21,7 +21,12 @@ export interface IShellService extends IBaseService {
    */
   execute(command: string): Promise<string>;
 
-  executeSpawn(command: string, args: string[], shell: boolean, cwd?: string): Promise<string>;
+  executeSpawn(
+    command: string,
+    args: string[],
+    shell: boolean,
+    cwd?: string,
+  ): Promise<string>;
 
   executeSyncSpawn(
     command: string,

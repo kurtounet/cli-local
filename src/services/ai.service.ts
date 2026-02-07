@@ -38,7 +38,8 @@ export class AiService extends BaseService implements IAiService {
    */
   async chat(prompt: string): Promise<string> {
     const tools = await this.listTools(); // Récupère les noms des plugins
-    if (!process.env.GEMINI_API_KEY) return "Erreur : Clé GEMINI_API_KEY manquante.";
+    if (!process.env.GEMINI_API_KEY)
+      return "Erreur : Clé GEMINI_API_KEY manquante.";
 
     // 1. On prépare le contexte MCP pour l'IA
     const mcpContext = `
@@ -74,7 +75,9 @@ export class AiService extends BaseService implements IAiService {
       const module: any = await import(`${fileUrl}?update=${Date.now()}`);
 
       if (!module.default) {
-        throw new Error(`Le plugin ${name} ne possède pas d'exportation 'default'.`);
+        throw new Error(
+          `Le plugin ${name} ne possède pas d'exportation 'default'.`,
+        );
       }
 
       const plugin = new module.default();
@@ -86,7 +89,8 @@ export class AiService extends BaseService implements IAiService {
       return await plugin.execute(args, {
         ai: this,
         fs: fs,
-        log: (msg: string) => console.error(`[PLUGIN:${name.toUpperCase()}] ${msg}`),
+        log: (msg: string) =>
+          console.error(`[PLUGIN:${name.toUpperCase()}] ${msg}`),
       });
     } catch (error: unknown) {
       throw new Error(`Erreur d'exécution [${name}]: ${error}`);
@@ -113,7 +117,8 @@ export class AiService extends BaseService implements IAiService {
       return await plugin.execute(args, {
         ai: this,
         fs: fs,
-        log: (msg: string) => console.error(`[MCP:TOOL:${name.toUpperCase()}] ${msg}`),
+        log: (msg: string) =>
+          console.error(`[MCP:TOOL:${name.toUpperCase()}] ${msg}`),
       });
     } catch (error: unknown) {
       throw new Error(`Erreur MCP Tool [${name}]: ${error.message}`);
@@ -129,7 +134,9 @@ export class AiService extends BaseService implements IAiService {
     // 1. Extraction du nom et description
     const nameMatch = /nomm[ée]\s+['"]?([a-z0-9-_]+)['"]?/i.exec(prompt);
     const pluginId = nameMatch ? nameMatch[1] : `plugin_${Date.now()}`;
-    const pluginName = pluginId.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+    const pluginName = pluginId
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
 
     const className =
       pluginId
@@ -161,7 +168,10 @@ export class AiService extends BaseService implements IAiService {
       "templates",
       "manifest.ejs",
     );
-    const manifestContent = await this.cli.fileSystem.readFile(manifestTemplatePath, "utf-8");
+    const manifestContent = await this.cli.fileSystem.readFile(
+      manifestTemplatePath,
+      "utf-8",
+    );
     const manifestCode = ejs.render(manifestContent, {
       pluginId,
       pluginName,
@@ -179,7 +189,8 @@ export class AiService extends BaseService implements IAiService {
       "templates",
       "service.ejs",
     );
-    const serviceContent = await this.cli.fileSystem.readFile(serviceTemplatePath);
+    const serviceContent =
+      await this.cli.fileSystem.readFile(serviceTemplatePath);
     const serviceCode = ejs.render(serviceContent, {
       className,
       pluginName: pluginId,
@@ -208,14 +219,20 @@ export class AiService extends BaseService implements IAiService {
    */
   async listTools(): Promise<string[]> {
     try {
-      const entries = await this.cli.fileSystem.readDirWithFileTypes(this.pluginsPath);
+      const entries = await this.cli.fileSystem.readDirWithFileTypes(
+        this.pluginsPath,
+      );
       const toolNames: string[] = [];
 
       for (const entry of entries) {
         if (entry.isFile() && entry.name.endsWith(".plugin.js")) {
           toolNames.push(entry.name.replace(".plugin.js", ""));
         } else if (entry.isDirectory()) {
-          const manifestPath = this.cli.path.join(this.pluginsPath, entry.name, "manifest.json");
+          const manifestPath = this.cli.path.join(
+            this.pluginsPath,
+            entry.name,
+            "manifest.json",
+          );
           try {
             await fs.access(manifestPath);
             toolNames.push(entry.name);
@@ -236,7 +253,9 @@ export class AiService extends BaseService implements IAiService {
    * @returns Le contenu textuel du fichier.
    */
   async readFile(targetPath: string): Promise<string> {
-    return await this.cli.fileSystem.readFile(this.cli.path.resolve(targetPath));
+    return await this.cli.fileSystem.readFile(
+      this.cli.path.resolve(targetPath),
+    );
   }
 
   /**
@@ -246,7 +265,9 @@ export class AiService extends BaseService implements IAiService {
    */
   async writeFile(targetPath: string, content: string): Promise<void> {
     const fullPath = this.cli.path.resolve(targetPath);
-    await this.cli.fileSystem.createDirectory(this.cli.path.getDirectory(fullPath));
+    await this.cli.fileSystem.createDirectory(
+      this.cli.path.getDirectory(fullPath),
+    );
     await this.cli.fileSystem.writeFile(fullPath, content);
   }
 }

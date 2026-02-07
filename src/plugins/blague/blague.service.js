@@ -7,13 +7,13 @@ export default class BlaguePlugin {
 
   async execute(args) {
     this.ctx.log(`Exécution du plugin blague...`);
-    
+
     // Logique du plugin
     // args contient les arguments passés
-    
+
     return {
       success: true,
-      message: "Plugin blague exécuté avec succès !"
+      message: "Plugin blague exécuté avec succès !",
     };
   }
 }

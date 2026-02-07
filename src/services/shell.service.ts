@@ -42,7 +42,9 @@ export class ShellService extends BaseService implements IShellService {
       return stdout.trim(); // .trim() retire les sauts de ligne inutiles
     } catch (error: any) {
       console.error(`Erreur d'exécution : ${error.message}`);
-      throw new Error(`Échec de la commande : ${command}. ${error.stderr || error.message}`);
+      throw new Error(
+        `Échec de la commande : ${command}. ${error.stderr || error.message}`,
+      );
       // if (error instanceof Error) {
       //   console.error(`Erreur : ${error.message}`);
       //   throw new Error(`Échec de la commande ${command}: ${error.message}`);
@@ -112,7 +114,9 @@ export class ShellService extends BaseService implements IShellService {
         process.stderr.write(data as string); // Affiche les erreurs en temps réel
       });
 
-      child.on("error", (err) => reject(new Error(`Lancement échoué : ${err.message}`)));
+      child.on("error", (err) =>
+        reject(new Error(`Lancement échoué : ${err.message}`)),
+      );
 
       child.on("close", (code) => {
         if (code === 0) resolve(fullOutput.trim());
@@ -154,7 +158,9 @@ export class ShellService extends BaseService implements IShellService {
 
     if (result.status !== 0) {
       // Note : avec "inherit", result.stderr sera nul car déjà affiché dans le terminal
-      throw new Error(`Échec de la commande ${command} (code ${result.status})`);
+      throw new Error(
+        `Échec de la commande ${command} (code ${result.status})`,
+      );
     }
 
     return result.stdout ? result.stdout.trim() : "";

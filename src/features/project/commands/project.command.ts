@@ -22,7 +22,8 @@ export interface IProjectOptions extends AnyOptions {
 
 export class ProjectCommand extends BaseCommand<IProjectOptions> {
   public name = "project";
-  public description = "Initialise un nouveau projet et crée un fichier de configuration.";
+  public description =
+    "Initialise un nouveau projet et crée un fichier de configuration.";
   public helpAfterText = `
 Actions possibles :
   service <Name>        Génère un service
@@ -78,7 +79,11 @@ Exemples :
   async execute(args: string[], options: IProjectOptions): Promise<void> {
     const [action, ...rest] = args;
 
-    if (!this.possibleAction.includes(action as (typeof this.possibleAction)[number])) {
+    if (
+      !this.possibleAction.includes(
+        action as (typeof this.possibleAction)[number],
+      )
+    ) {
       this.cli.logger.error(`Veuillez fournir une action valide.
 Choix :
   new ou n      : créer un nouveau fichier de configuration pour un projet.
@@ -114,13 +119,15 @@ Choix :
         type: "input",
         name: "existence",
         message: "✋ Projet existant y/yes | n/no:",
-        validate: (input: string) => (input.trim() !== "" ? true : "Une réponse est requise."),
+        validate: (input: string) =>
+          input.trim() !== "" ? true : "Une réponse est requise.",
       },
       {
         type: "input",
         name: "name",
         message: "👉 Nom du projet :",
-        validate: (input: string) => (input.trim() !== "" ? true : "Le nom du projet est requis."),
+        validate: (input: string) =>
+          input.trim() !== "" ? true : "Le nom du projet est requis.",
       },
       {
         type: "input",
@@ -171,11 +178,16 @@ Choix :
   private async handleGenerateProject(rest: string[]): Promise<string> {
     const configFileName = `${rest[0]}-config.json`;
     const configFilePath = this.cli.path.resolve(configFileName);
-    const config = (await this.cli.fileSystem.readFileJson(configFilePath)) as IProjectConfig;
+    const config = (await this.cli.fileSystem.readFileJson(
+      configFilePath,
+    )) as IProjectConfig;
     return await this.cli.project.generateProject(config);
   }
 
-  private async handleWatchProject(rest: string[], options: IProjectOptions): Promise<void> {
+  private async handleWatchProject(
+    rest: string[],
+    options: IProjectOptions,
+  ): Promise<void> {
     const targetPath = rest[0] || ".";
 
     if (!options.internalWatch) {
@@ -195,14 +207,23 @@ Choix :
     try {
       if (answers.existence === "y" || answers.existence === "yes") {
         // Logique pour projet existant à implémenter
-        this.cli.logger.warn("Configuration pour projet existant non implémentée.");
+        this.cli.logger.warn(
+          "Configuration pour projet existant non implémentée.",
+        );
       } else {
         config = this.cli.project.newProject(answers);
-        await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
+        await this.cli.fileSystem.writeFileJson(
+          configFilePath,
+          config as unknown as string,
+        );
       }
 
-      this.cli.logger.info(`✅ Fichier de configuration créé : ${configFilePath}`);
-      this.cli.logger.info(`🚀 Commande pour générer le projet: mclp p g ${answers.name}`);
+      this.cli.logger.info(
+        `✅ Fichier de configuration créé : ${configFilePath}`,
+      );
+      this.cli.logger.info(
+        `🚀 Commande pour générer le projet: mclp p g ${answers.name}`,
+      );
     } catch (err) {
       this.cli.errorHandler.handle(
         err as Error,
@@ -234,13 +255,17 @@ Choix :
       // Pas d'async ici, on lance handleFileChange sans attendre
       // void this.handleFileChange(filePath);
       this.handleFileChange(filePath).catch((error) => {
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        this.cli.logger.error(`Erreur non gérée dans handleFileChange: ${errorMessage}`);
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
+        this.cli.logger.error(
+          `Erreur non gérée dans handleFileChange: ${errorMessage}`,
+        );
       });
     });
 
     watcher.on("error", (error: unknown) => {
-      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
       this.cli.logger.error(`Erreur Watcher : ${errorMessage}`);
     });
   }
@@ -273,8 +298,11 @@ Choix :
           break;
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      this.cli.logger.error(`Erreur lors du traitement de ${filePath}: ${errorMessage}`);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      this.cli.logger.error(
+        `Erreur lors du traitement de ${filePath}: ${errorMessage}`,
+      );
     }
   }
 }

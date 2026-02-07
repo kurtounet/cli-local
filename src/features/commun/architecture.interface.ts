@@ -1,43 +1,29 @@
 import { IMemberInfo } from "./member-info.interface.js";
 
-export interface IFileNode {
-  type: "directory" | "file";
+// Common properties for everything in the file tree
+interface IBaseNode {
   name: string;
   path: string;
   extension: string;
   size: number;
   level: number;
-  content: string;
-  metadata?: IMemberInfo[];
-  children?: IFileNode[];
-}
-export interface IArchitecture {
-  directory: IDirectory[];
-}
-
-export interface IFile {
-  type?: string;
-  framework?: string;
-  name: string;
-  pathInProject?: string;
-  pathTemplate?: string;
-  content?: string;
-}
-
-export interface IDirectory {
-  _type: string;
-  name: string;
-  pathInProject: string;
-  gitIgnore?: boolean;
-  content?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  children: IDirectory[];
-  varsTemplate?: Record<string, any>;
+  metadata?: IMemberInfo[];
 }
 
-export interface IFolder {
-  name: string;
-  files?: IFile[];
-  subFolders?: IFolder[];
+export interface IFile extends IBaseNode {
+  type: "file";
+  content?: string;
+}
+
+export interface IDirectory extends IBaseNode {
+  type: "directory" | "file";
+  pathInProject: string;
+  gitIgnore?: boolean;
+  children?: (IDirectory | IFile)[]; // Recursive structure
+}
+
+export interface IArchitecture {
+  directory: IDirectory[];
 }

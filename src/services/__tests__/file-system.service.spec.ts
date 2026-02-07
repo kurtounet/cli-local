@@ -48,7 +48,10 @@ describe("FileSystemService", () => {
 
     const exists = fileSystem.exists("/test/path");
 
-    expect(mockCli.path.validatePath).toHaveBeenCalledWith("/test/path", "targetPath");
+    expect(mockCli.path.validatePath).toHaveBeenCalledWith(
+      "/test/path",
+      "targetPath",
+    );
     expect(fs.existsSync).toHaveBeenCalledWith("/test/path");
     expect(exists).toBe(true);
   });
@@ -67,7 +70,10 @@ describe("FileSystemService", () => {
     vi.mocked(fs.readFile).mockRejectedValue(error);
 
     await expect(fileSystem.readFile("/bad/path")).rejects.toThrow();
-    expect(mockCli.errorHandler.handle).toHaveBeenCalledWith(error, expect.any(String));
+    expect(mockCli.errorHandler.handle).toHaveBeenCalledWith(
+      error,
+      expect.any(String),
+    );
   });
 
   it("should build a physical tree recursively", async () => {

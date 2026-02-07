@@ -11,7 +11,8 @@ type Target = "service" | "command" | "template" | "framework";
 
 export class GenerateCommand extends BaseCommand<IGenerateOptions> {
   name = "generate";
-  description = "Génère des Composants de la CLI (service, command, template, framework)";
+  description =
+    "Génère des Composants de la CLI (service, command, template, framework)";
   arguments = "<type> <name...>";
   aliases = ["g"];
 
@@ -36,7 +37,11 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
   ] satisfies ICommandOption[];
 
   async execute(args: string[], options: IGenerateOptions): Promise<void> {
-    this.validateArgs(args, 2, "Usage: mclp generate <type> <name...> [options]");
+    this.validateArgs(
+      args,
+      2,
+      "Usage: mclp generate <type> <name...> [options]",
+    );
 
     const type = String(args[0]).toLowerCase() as Target;
     const names = args.slice(1).map(String).filter(Boolean);
@@ -45,7 +50,9 @@ export class GenerateCommand extends BaseCommand<IGenerateOptions> {
     const output = this.getOption(options, "output", "./src/tests");
 
     if (!["service", "command", "template", "framework"].includes(type)) {
-      throw new Error(`Type invalide "${type}". Valides: service|command|template|framework`);
+      throw new Error(
+        `Type invalide "${type}". Valides: service|command|template|framework`,
+      );
     }
 
     for (const name of names) {

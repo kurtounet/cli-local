@@ -34,7 +34,7 @@ export class ConfigService extends BaseService implements IConfigService {
 
       // 1. Si aucun fichier n'est trouvé, on l'initialise
       if (!result) {
-        this.cli.logger.warn(
+        console.warn(
           "Aucun fichier de configuration trouvé. Création du fichier par défaut.",
         );
         return await this.initConfigFile(projectPath);
@@ -42,35 +42,47 @@ export class ConfigService extends BaseService implements IConfigService {
 
       // 2. On utilise 'result.config' qui contient déjà les données parsées
       // Optionnel : fusionner avec les défauts ici
-      this.configData = result.config;
+      this.configData = this.deepMerge(
+        this.defaults,
+        result.config,
+      ) as IAppConfig;
       return this.configData;
     } catch (error) {
-      this.cli.logger.warn(
-        "Fichier de configuration corrompu. Utilisation des valeurs par défaut.",
+      console.warn(
+        "Fichier de configuration corrompu ou introuvable. Utilisation des valeurs par défaut.",
       );
       this.configData = this.defaults;
       return this.configData;
     }
   }
 
-  public async initConfigFile(projectPath: string, dataFrom?: IAppConfig): Promise<IAppConfig> {
+  public async initConfigFile(
+    projectPath: string,
+    dataFrom?: IAppConfig,
+  ): Promise<IAppConfig> {
     // On utilise le moduleName pour rester dynamique
     const fileName = `.${this.moduleName}rc.json`;
+    const data = dataFrom ?? this.defaults;
 
     try {
-      this.cli.logger.info(`Génération du fichier de configuration : ${fileName}`);
-
-      let data = this.defaults;
-      if (dataFrom) {
-        data = dataFrom;
-      }
-      // On écrit le fichier proprement
-      await this.cli.fileSystem.writeFile(fileName, JSON.stringify(data, null, 2));
-
+      // On met à jour configData AVANT d'écrire pour que les logs suivants
+      // puissent accéder à une config valide
       this.configData = data;
+      console.log(`Génération du fichier de configuration : ${fileName}`);
+
+      // let data = this.defaults;
+      // if (dataFrom) {
+      //   data = dataFrom;
+      // }
+      // On écrit le fichier proprement
+      await this.cli.fileSystem.writeFile(
+        fileName,
+        JSON.stringify(data, null, 2),
+      );
+
       return this.configData;
     } catch (error) {
-      this.cli.logger.error(
+      console.error(
         `Impossible de créer le fichier dans ${projectPath} : ${error instanceof Error ? error.message : String(error)}`,
       );
       return this.defaults;
@@ -86,11 +98,18 @@ export class ConfigService extends BaseService implements IConfigService {
     return this.load(process.cwd());
   }
 
-  private deepMerge(target: Record<string, unknown>, source: Record<string, unknown>): unknown {
+  private deepMerge(
+    target: Record<string, unknown>,
+    source: Record<string, unknown>,
+  ): unknown {
     const output = { ...target };
     if (source && typeof source === "object") {
       Object.keys(source).forEach((key) => {
-        if (source[key] && typeof source[key] === "object" && !Array.isArray(source[key])) {
+        if (
+          source[key] &&
+          typeof source[key] === "object" &&
+          !Array.isArray(source[key])
+        ) {
           output[key] = this.deepMerge(target[key] || {}, source[key]);
         } else {
           output[key] = source[key];

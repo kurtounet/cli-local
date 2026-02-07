@@ -8,7 +8,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 class DatabaseManager {
   constructor() {
     // 1. Connexion SQLite (Locale)
-    this.sqlite = new sqlite3.Database(this.cli.path.join(__dirname, "tasks.db"));
+    this.sqlite = new sqlite3.Database(
+      this.cli.path.join(__dirname, "tasks.db"),
+    );
     this.initSQLite();
 
     // 2. Configuration MySQL (Sécurité)
@@ -52,7 +54,9 @@ class DatabaseManager {
     this.sqlite.run(sql, params);
 
     // Sauvegarde MySQL de sécurité (Async non-bloquant)
-    this.syncToMySQL(sql, params).catch((err) => console.error("MySQL Sync Error:", err.message));
+    this.syncToMySQL(sql, params).catch((err) =>
+      console.error("MySQL Sync Error:", err.message),
+    );
   }
 
   async syncToMySQL(query, params) {

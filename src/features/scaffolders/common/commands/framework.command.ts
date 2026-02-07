@@ -160,7 +160,9 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
     } else if (action === "generate" || action === "g") {
       const configFileName = `${rest[0]}-config.json`;
       const configFilePath = this.cli.path.resolve(configFileName);
-      const config = (await this.cli.fileSystem.readFileJson(configFilePath)) as IProjectConfig;
+      const config = (await this.cli.fileSystem.readFileJson(
+        configFilePath,
+      )) as IProjectConfig;
       response = await this.generateProject(config);
     }
     this.cli.logger.info(response);
@@ -182,10 +184,17 @@ generate ou g: pour génerer le projet a partir d'une configuration existante.
       } else {
         config = await this.cli.project.newProject(answers);
         this.cli.logger.info(`${config}`);
-        await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
+        await this.cli.fileSystem.writeFileJson(
+          configFilePath,
+          config as unknown as string,
+        );
       }
-      this.cli.logger.info(`✅ 🤞Fichier de configuration créé : ${configFilePath}`);
-      this.cli.logger.info(`🚀 commande pour généré le projet: mclp p g ${answers.name}`);
+      this.cli.logger.info(
+        `✅ 🤞Fichier de configuration créé : ${configFilePath}`,
+      );
+      this.cli.logger.info(
+        `🚀 commande pour généré le projet: mclp p g ${answers.name}`,
+      );
     } catch (err: unknown) {
       this.cli.errorHandler.handle(
         err as Error,

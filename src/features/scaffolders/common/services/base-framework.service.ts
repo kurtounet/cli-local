@@ -7,12 +7,10 @@ import { IAppContext } from "@/types/context.interface.js";
 export abstract class BaseFrameworkService {
   constructor(protected cli: IAppContext) {}
 
-  /**
-   * Méthode utilitaire pour exécuter une étape avec logging automatique
-   * @param label
-   * @param action
-   */
-  protected async step(label: string, action: () => Promise<any>): Promise<any> {
+  protected async step(
+    label: string,
+    action: () => Promise<any>,
+  ): Promise<any> {
     try {
       this.cli.logger.info(`${label}...`);
       await action();
@@ -22,14 +20,21 @@ export abstract class BaseFrameworkService {
       throw error;
     }
   }
+
+  // Ces métodes peuventêtre surchargées (override) si besoin
   async buildInstallFramework(
     config: IProjectConfig,
     name: string,
   ): Promise<IInstallFramework | null> {
-    const framework = config.frameworks.find((f) => f.name.toLowerCase() === name.toLowerCase());
+    const framework = config.frameworks.find(
+      (f) => f.name.toLowerCase() === name.toLowerCase(),
+    );
     const databases = config.databases;
     if (framework === undefined || databases === undefined) return null;
-    const projectPath = this.cli.path.join(config.path, `${config.projectName}-${framework?.type}`);
+    const projectPath = this.cli.path.join(
+      config.path,
+      `${config.projectName}-${framework?.type}`,
+    );
     // await this.configCli(projectPath);
     await Promise.resolve();
     return {
@@ -48,6 +53,11 @@ export abstract class BaseFrameworkService {
   }
 
   async generateArchitecture(config: IInstallFramework): Promise<unknown> {
+    const architecture = config.framework.architecture;
+    await this.cli.tool.createDirectoryStructure(
+      config.projectPath,
+      architecture,
+    );
     await this.step("Génération de l'architecture", async () => {
       // Logique commune de création de dossiers
     });
@@ -55,13 +65,27 @@ export abstract class BaseFrameworkService {
   }
 
   async createBranchGit(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Configuration des branches git...`);
+    this.cli.logger.info(
+      `${EMOJI.rond_green} Configuration des branches git...`,
+    );
     // 1. Forcer la création d'un nouveau dépôt Git local au projet
-    this.cli.shell.executeSyncSpawn(`git init`, [], "inherit", true, config.projectPath);
+    this.cli.shell.executeSyncSpawn(
+      `git init`,
+      [],
+      "inherit",
+      true,
+      config.projectPath,
+    );
     // 2. IMPORTANT : Créer un commit initial
     // On ne peut pas créer de branches (dev, release) sur un dépôt vide
     try {
-      this.cli.shell.executeSyncSpawn(`git add .`, [], "inherit", true, config.projectPath);
+      this.cli.shell.executeSyncSpawn(
+        `git add .`,
+        [],
+        "inherit",
+        true,
+        config.projectPath,
+      );
       this.cli.shell.executeSyncSpawn(
         `git commit -m "initial commit"`,
         [],
@@ -98,9 +122,14 @@ export abstract class BaseFrameworkService {
           );
         }
 
-        this.cli.logger.info(`${EMOJI.success} Branches git configurées avec succès !`);
+        this.cli.logger.info(
+          `${EMOJI.success} Branches git configurées avec succès !`,
+        );
       } catch (error) {
-        this.cli.errorHandler.handle(error, `${EMOJI.error} Échec de la configuration Git.`);
+        this.cli.errorHandler.handle(
+          error,
+          `${EMOJI.error} Échec de la configuration Git.`,
+        );
       }
     } else {
       this.cli.logger.error(`${EMOJI.error} Aucune branche configurée !`);
@@ -124,7 +153,9 @@ export abstract class BaseFrameworkService {
     const projectPath = config.projectPath;
     const cliFolder = `${projectPath}/.cli-local`;
 
-    this.cli.logger.info(`${EMOJI.start} 1 - Génération du fichier de configuration de CLI`);
+    this.cli.logger.info(
+      `${EMOJI.start} 1 - Génération du fichier de configuration de CLI`,
+    );
 
     // const newConfig: IAppConfig = this.cli.config.defaults;
     // newConfig.tree.exclude = config.framework.excludes ?? [];
@@ -148,10 +179,22 @@ export abstract class BaseFrameworkService {
         this.cli.fileSystem.writeFile(`${cliFolder}/mcd.mdj`, fileMdj),
       ]);
 
-      this.cli.logger.success(`${EMOJI.success} Fichier de CLI générées avec succès !`);
+      this.cli.logger.success(
+        `${EMOJI.success} Fichier de CLI générées avec succès !`,
+      );
     } catch (error) {
-      this.cli.errorHandler.handle(error, `${EMOJI.error} Échec lors de la génération `);
+      this.cli.errorHandler.handle(
+        error,
+        `${EMOJI.error} Échec lors de la génération `,
+      );
       throw error;
     }
+  }
+  async updateFile(config: IInstallFramework): Promise<unknown> {
+    this.cli.logger.info(`Mise à jour du fichier package.json`);
+    this.cli.logger.info(`Mise à jour du fichier tsconfig.json`);
+    this.cli.logger.info(`Mise à jour du fichier config.json`);
+    this.cli.logger.success(`Mise à jour terminée avec succès !`);
+    return Promise.resolve();
   }
 }

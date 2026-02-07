@@ -8,7 +8,10 @@ import { BaseService } from "./base-service.service.js";
 export class AstService extends BaseService implements IAstService {
   readonly serviceName = "AstService";
 
-  public analyzeFileMetadata(filePath: string, sourceCode: string): IMemberInfo[] {
+  public analyzeFileMetadata(
+    filePath: string,
+    sourceCode: string,
+  ): IMemberInfo[] {
     const members: IMemberInfo[] = [];
 
     const sourceFile = ts.createSourceFile(
@@ -60,12 +63,18 @@ export class AstService extends BaseService implements IAstService {
      * @param node - ts.Node
      * @returns Retourne la visibilité
      */
-    const getVisibility = (node: ts.Node): "public" | "private" | "protected" => {
-      const modifiers = ts.canHaveModifiers(node) ? ts.getModifiers(node) : undefined;
+    const getVisibility = (
+      node: ts.Node,
+    ): "public" | "private" | "protected" => {
+      const modifiers = ts.canHaveModifiers(node)
+        ? ts.getModifiers(node)
+        : undefined;
       if (!modifiers) return "public";
 
-      if (modifiers.some((m) => m.kind === ts.SyntaxKind.PrivateKeyword)) return "private";
-      if (modifiers.some((m) => m.kind === ts.SyntaxKind.ProtectedKeyword)) return "protected";
+      if (modifiers.some((m) => m.kind === ts.SyntaxKind.PrivateKeyword))
+        return "private";
+      if (modifiers.some((m) => m.kind === ts.SyntaxKind.ProtectedKeyword))
+        return "protected";
       return "public";
     };
 
@@ -99,7 +108,9 @@ export class AstService extends BaseService implements IAstService {
           type: "function",
           visibility: "public",
           description: getDocumentation(docNode),
-          returnType: node.initializer.type ? node.initializer.type.getText(sourceFile) : "any",
+          returnType: node.initializer.type
+            ? node.initializer.type.getText(sourceFile)
+            : "any",
           arguments: getParams(node.initializer),
         });
       }
@@ -122,7 +133,9 @@ export class AstService extends BaseService implements IAstService {
               type: "method",
               visibility: getVisibility(member),
               description: getDocumentation(member),
-              returnType: member.type ? member.type.getText(sourceFile) : "void",
+              returnType: member.type
+                ? member.type.getText(sourceFile)
+                : "void",
               arguments: getParams(member),
             });
           }
@@ -147,11 +160,17 @@ export class AstService extends BaseService implements IAstService {
               name: `${interfaceName}.${memberName}`,
               visibility: "public" as const,
               description: getDocumentation(member),
-              returnType: (member as any).type ? (member as any).type.getText(sourceFile) : "any",
+              returnType: (member as any).type
+                ? (member as any).type.getText(sourceFile)
+                : "any",
             };
 
             if (ts.isMethodDeclaration(member)) {
-              members.push({ ...commonData, type: "method", arguments: getParams(member) });
+              members.push({
+                ...commonData,
+                type: "method",
+                arguments: getParams(member),
+              });
             } else if (ts.isPropertySignature(member)) {
               const isFunc = member.type && ts.isFunctionTypeNode(member.type);
               members.push({

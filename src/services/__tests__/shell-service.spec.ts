@@ -16,19 +16,25 @@ describe("ShellService", () => {
   describe("execute", () => {
     it("doit retourner la sortie de la commande avec succès", async () => {
       // On demande à Node d'afficher 'Hello'
-      const result = await shellService.execute("node -e \"console.log('Hello')\"");
+      const result = await shellService.execute(
+        "node -e \"console.log('Hello')\"",
+      );
       expect(result).toBe("Hello");
     });
 
     it("doit lever une erreur si la commande échoue", async () => {
-      await expect(shellService.execute("commande_inexistante")).rejects.toThrow();
+      await expect(
+        shellService.execute("commande_inexistante"),
+      ).rejects.toThrow();
     });
   });
 
   // --- 2. TEST EXECUTESYNC (Sync Buffer) ---
   describe("executeSync", () => {
     it("doit retourner la sortie de manière synchrone", () => {
-      const result = shellService.executeSync("node -e \"console.log('Sync')\"");
+      const result = shellService.executeSync(
+        "node -e \"console.log('Sync')\"",
+      );
       expect(result).toBe("Sync");
     });
 
@@ -41,14 +47,17 @@ describe("ShellService", () => {
   describe("executeSpawn", () => {
     it("doit gérer les arguments dans un tableau", async () => {
       // On passe 'Hello Spawn' comme argument à un script node
-      const result = await shellService.executeSpawn("node", ["-e", "console.log('Hello Spawn')"]);
+      const result = await shellService.executeSpawn("node", [
+        "-e",
+        "console.log('Hello Spawn')",
+      ]);
       expect(result).toBe("Hello Spawn");
     });
 
     it("doit capturer stderr en cas d'erreur", async () => {
-      await expect(shellService.executeSpawn("node", ["-e", "process.exit(1)"])).rejects.toThrow(
-        /code 1/i,
-      );
+      await expect(
+        shellService.executeSpawn("node", ["-e", "process.exit(1)"]),
+      ).rejects.toThrow(/code 1/i);
     });
   });
 
@@ -62,7 +71,9 @@ describe("ShellService", () => {
 
     it("doit lever une erreur si le processus échoue", () => {
       // On force un code de sortie 1
-      expect(() => shellService.executeSyncSpawn("node", ["-e", "process.exit(1)"])).toThrow();
+      expect(() =>
+        shellService.executeSyncSpawn("node", ["-e", "process.exit(1)"]),
+      ).toThrow();
     });
   });
 });

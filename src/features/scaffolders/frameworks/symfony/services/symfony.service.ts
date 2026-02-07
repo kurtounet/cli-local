@@ -7,7 +7,10 @@ import { IFrameworkService } from "@/features/scaffolders/interfaces/framework-s
 
 import { SymfonyFileFactory } from "../factories/symfony-file.factory.js";
 
-export class SymfonyService extends BaseFrameworkService implements IFrameworkService {
+export class SymfonyService
+  extends BaseFrameworkService
+  implements IFrameworkService
+{
   private config!: IInstallFramework;
   readonly frameworkName = "symfony";
   readonly serviceName = "SymfonyService";
@@ -22,16 +25,19 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
 
   /**
    * Point d'entrée principal pour la génération Symfony
-   * @param project
-   * @param entitiesJson
-   * @param fileMdj
+   * @param project - La configuration du projet
+   * @param entitiesJson - Les entités extraites du mdj
+   * @param fileMdj - Le contenu du fichier mdj
    */
   generate = async (
     project: IProjectConfig,
     entitiesJson: IGetEntityJson,
     fileMdj: string,
   ): Promise<void> => {
-    this.config = (await this.buildInstallFramework(project, this.frameworkName))!;
+    this.config = (await this.buildInstallFramework(
+      project,
+      this.frameworkName,
+    ))!;
 
     if (this.config === null) {
       return;
@@ -46,7 +52,7 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
     await this.step(`${EMOJI.rond_green} Configuration Symfony`, async () => {
       await this.installFramework(this.config);
       await this.installDependencies(this.config);
-      await this.createBranchGit(this.config);
+      await this.createBranchGit(this.config); // dans la classe parente
       await this.generateArchitecture(this.config);
       await this.generateFileFramework(this.config, entitiesJson);
       await this.updateFile(this.config);
@@ -61,19 +67,26 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
     const args = [
       "new",
       config.projectName,
-      config.framework.version ? `--version=${config.framework.version}` : `--version=7.4.*`,
+      config.framework.version
+        ? `--version=${config.framework.version}`
+        : `--version=7.4.*`,
       config.framework.app,
     ].filter((arg): arg is string => Boolean(arg));
     this.cli.logger.info(`config.projectPath : ${config.projectPath}`);
-    this.cli.shell.executeSyncSpawn(`symfony`, args, "inherit", true, config.rootProjectPath);
+    this.cli.shell.executeSyncSpawn(
+      `symfony`,
+      args,
+      "inherit",
+      true,
+      config.rootProjectPath,
+    );
     await Promise.resolve();
   }
-  async createBranchGit(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
-    return Promise.resolve();
-  }
+
   async installDependencies(config: IInstallFramework): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Installation des dépendances Symfony...`);
+    this.cli.logger.info(
+      `${EMOJI.rond_green} Installation des dépendances Symfony...`,
+    );
     if (config.framework.mode === "install") {
       const { prod, dev } = config.framework.dependencies;
 
@@ -101,17 +114,13 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
     await Promise.resolve();
   }
 
-  async generateArchitecture(config: IInstallFramework): Promise<any> {
-    this.cli.logger.info(`${EMOJI.rond_green} Création de l'arborescence des dossiers...`);
-    // this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
-    await Promise.resolve();
-  }
-
   async generateFileFramework(
     config: IInstallFramework,
     entitiesJson: IGetEntityJson,
   ): Promise<void> {
-    this.cli.logger.info(`${EMOJI.rond_green} Génération asynchrone des fichiers...`);
+    this.cli.logger.info(
+      `${EMOJI.rond_green} Génération asynchrone des fichiers...`,
+    );
 
     // On prépare une liste de promesses
     const tasks: Promise<void>[] = [];
@@ -134,7 +143,9 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
     // C'est ici que tu gagnes réellement du temps si tu as beaucoup d'entités
     await Promise.all(tasks);
 
-    this.cli.logger.success(`✅ ${tasks.length} fichiers générés en parallèle.`);
+    this.cli.logger.success(
+      `✅ ${tasks.length} fichiers générés en parallèle.`,
+    );
   }
   async updateFile(config: IInstallFramework): Promise<any> {
     this.cli.logger.info(`Mise à jour du fichier package.json`);

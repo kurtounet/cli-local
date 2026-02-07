@@ -26,7 +26,9 @@ async function main() {
 
       if (fs.existsSync(this.cli.path.join(pluginDir, "manifest.json")))
         console.log("   - manifest.json exists");
-      if (fs.existsSync(this.cli.path.join(pluginDir, `${pluginId}.service.js`)))
+      if (
+        fs.existsSync(this.cli.path.join(pluginDir, `${pluginId}.service.js`))
+      )
         console.log("   - Service file exists");
     } else {
       console.error("❌ ERROR: Plugin directory not found!");

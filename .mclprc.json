@@ -45,17 +45,14 @@
       "old_cli",
       ".vscode",
       "node_modules",
-      "project-test"
+      "project-test",
+      "output"
     ],
     "pathIn": "I:\\cli\\cli-local-poo",
     "pathOut": "./tree",
     "analysis": {
       "enabled": true,
-      "extensions": [
-        ".ts",
-        ".js",
-        ".php"
-      ],
+      "extensions": [".ts", ".js", ".php"],
       "save": true,
       "maxLevel": 32
     },

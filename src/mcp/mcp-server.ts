@@ -10,7 +10,10 @@ import { AppContextBuilder } from "@/context/context.js";
 import { AiService } from "@/services/ai.service.js";
 import { PluginService } from "@/services/plugin.service.js";
 
-import { isMcpServerRunning, killAllMcpProcesses } from "./mcp-process-utils.js";
+import {
+  isMcpServerRunning,
+  killAllMcpProcesses,
+} from "./mcp-process-utils.js";
 
 const aiService = new AiService();
 let serverInstance: McpServer | null = null;
@@ -51,7 +54,10 @@ async function watchPlugins(server: McpServer) {
 
   const loadTool = async (filePath: string) => {
     // Cas 1: Plugin fichier unique (Legacy)
-    if (filePath.endsWith(".plugin.js") && path.dirname(filePath) === aiService.pluginsPath) {
+    if (
+      filePath.endsWith(".plugin.js") &&
+      path.dirname(filePath) === aiService.pluginsPath
+    ) {
       try {
         const name = path.basename(filePath, ".plugin.js");
         const fileUrl = pathToFileURL(filePath).href;
@@ -61,14 +67,25 @@ async function watchPlugins(server: McpServer) {
           // Heuristique simple: on passe le SDK si disponible, sinon aiService
           const ctx = pluginService ? pluginService.getSDKContext() : aiService;
 
-          const definition = module.default.definition || { name, description: "Outil dynamique" };
+          const definition = module.default.definition || {
+            name,
+            description: "Outil dynamique",
+          };
           server.registerTool(
             definition.name,
-            { description: definition.description, inputSchema: module.default.schema || {} },
+            {
+              description: definition.description,
+              inputSchema: module.default.schema || {},
+            },
             async (args: any) => {
               const result = await aiService.executeTool(definition.name, args);
               return {
-                content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+                content: [
+                  {
+                    type: "text" as const,
+                    text: JSON.stringify(result, null, 2),
+                  },
+                ],
               };
             },
           );
@@ -84,14 +101,19 @@ async function watchPlugins(server: McpServer) {
     if (path.basename(filePath) === "manifest.json") {
       try {
         const pluginDir = path.dirname(filePath);
-        const manifestContent = await import(`${pathToFileURL(filePath).href}?t=${Date.now()}`, {
-          with: { type: "json" },
-        });
+        const manifestContent = await import(
+          `${pathToFileURL(filePath).href}?t=${Date.now()}`,
+          {
+            with: { type: "json" },
+          }
+        );
 
         // Validation du manifest
         const manifest = manifestContent.default;
         if (!manifest?.id || !manifest.service) {
-          console.error(`[MCP] Manifest invalide pour ${filePath} (id ou service manquant)`);
+          console.error(
+            `[MCP] Manifest invalide pour ${filePath} (id ou service manquant)`,
+          );
           return;
         }
 
@@ -115,13 +137,24 @@ async function watchPlugins(server: McpServer) {
               server.registerTool(
                 manifest.id,
                 {
-                  description: manifest.description || `Plugin ${manifest.name}`,
-                  inputSchema: { type: "object", properties: { project: { type: "object" } } },
+                  description:
+                    manifest.description || `Plugin ${manifest.name}`,
+                  inputSchema: {
+                    type: "object",
+                    properties: { project: { type: "object" } },
+                  },
                 },
                 async (args: any) => {
-                  const result = await pluginInstance.execute(args, { project: {} });
+                  const result = await pluginInstance.execute(args, {
+                    project: {},
+                  });
                   return {
-                    content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+                    content: [
+                      {
+                        type: "text" as const,
+                        text: JSON.stringify(result, null, 2),
+                      },
+                    ],
                   };
                 },
               );
@@ -131,14 +164,19 @@ async function watchPlugins(server: McpServer) {
               // server.sendNotification("notifications/tools/list_changed");
             } catch (regError: any) {
               if (regError.message?.includes("already registered")) {
-                console.warn(`[MCP] Warning: Plugin ${manifest.id} déjà enregistré (ignoré)`);
+                console.warn(
+                  `[MCP] Warning: Plugin ${manifest.id} déjà enregistré (ignoré)`,
+                );
               } else {
                 throw regError;
               }
             }
           }
         } catch (importErr) {
-          console.error(`[MCP] Erreur import service ${servicePath}`, importErr);
+          console.error(
+            `[MCP] Erreur import service ${servicePath}`,
+            importErr,
+          );
         }
       } catch (err) {
         console.error(`[MCP] Erreur loading manifest ${filePath}`, err);
@@ -146,10 +184,14 @@ async function watchPlugins(server: McpServer) {
     }
   };
 
-  watcher.on("add", (path) => loadTool(path)).on("change", (path) => loadTool(path));
+  watcher
+    .on("add", (path) => loadTool(path))
+    .on("change", (path) => loadTool(path));
   // .on("unlink", ...)
 
-  console.error(`[MCP] Surveillance des plugins activée dans ${aiService.pluginsPath}`);
+  console.error(
+    `[MCP] Surveillance des plugins activée dans ${aiService.pluginsPath}`,
+  );
 }
 
 /**
@@ -200,10 +242,13 @@ export async function runMcpServer() {
           ],
         };
       } catch (error: unknown) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage =
+          error instanceof Error ? error.message : String(error);
         return {
           isError: true,
-          content: [{ type: "text" as const, text: `Erreur : ${errorMessage}` }],
+          content: [
+            { type: "text" as const, text: `Erreur : ${errorMessage}` },
+          ],
         };
       }
     },

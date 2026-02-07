@@ -32,5 +32,8 @@ export interface IFrameworkService extends IBaseService {
   generateArchitecture(config: IInstallFramework): Promise<unknown>;
 
   /** Création des fichiers de configuration spécifiques (ex: angular.json, vite.config.ts) */
-  generateFileFramework(config: IInstallFramework, entitiesJson: IGetEntityJson): Promise<unknown>;
+  generateFileFramework(
+    config: IInstallFramework,
+    entitiesJson: IGetEntityJson,
+  ): Promise<unknown>;
 }

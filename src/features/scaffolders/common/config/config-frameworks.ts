@@ -48,7 +48,13 @@ export const DATABASE_MAP: Record<string, any> = {
 
 export const FRAMEWORKS_FRONTEND = ["Angular", "Nuxtjs", "no"];
 export const DATABASES = ["Mysql", "Postgres", "Mongodb", "Sqlite", "no"];
-export const FRAMEWORKS_BACKEND = ["Nitro", "Nestjs", "Symfony", "Electron", "no"];
+export const FRAMEWORKS_BACKEND = [
+  "Nitro",
+  "Nestjs",
+  "Symfony",
+  "Electron",
+  "no",
+];
 
 export const FRAMEWORKS = {
   databases: DATABASES,

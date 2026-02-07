@@ -1,0 +1,10 @@
+<script setup lang="ts">
+const { theme } = useTheme();
+useHead({ bodyAttrs: { 'data-theme': theme } });
+</script>
+
+<template>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+</template>

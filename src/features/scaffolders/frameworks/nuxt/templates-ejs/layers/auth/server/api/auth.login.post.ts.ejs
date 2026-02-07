@@ -1,0 +1,9 @@
+export default defineEventHandler(async (event) => {
+  const body = await readBody<{ email: string; password: string }>(event);
+  // TODO: validate and check real DB
+  if (!body?.email || !body?.password) {
+    throw createError({ statusCode: 400, statusMessage: 'Bad Request' });
+  }
+  // fake token
+  return { token: 'dev-token' };
+});

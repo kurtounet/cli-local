@@ -1,0 +1,9 @@
+<script setup lang="ts">
+const route = useRoute();
+</script>
+
+<template>
+  <div style="padding:2rem">
+    <h1>Dynamic page: {{ $route.params.slug }}</h1>
+  </div>
+</template>

@@ -197,7 +197,7 @@ Choix :
         // Logique pour projet existant à implémenter
         this.cli.logger.warn("Configuration pour projet existant non implémentée.");
       } else {
-        config = await this.cli.project.newProject(answers);
+        config = this.cli.project.newProject(answers);
         await this.cli.fileSystem.writeFileJson(configFilePath, config as unknown as string);
       }
 

@@ -204,7 +204,7 @@ export class ProjectService implements IProjectService {
     });
   };
 
-  private isFileNode(node: any): node is IFileNode {
-    return node && typeof node === "object" && "someUniqueProperty" in node;
-  }
+  // private isFileNode(node: any): node is IFileNode {
+  //   return node && typeof node === "object" && "someUniqueProperty" in node;
+  // }
 }

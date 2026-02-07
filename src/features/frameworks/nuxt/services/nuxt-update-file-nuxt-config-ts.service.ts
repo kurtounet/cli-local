@@ -10,10 +10,8 @@ import { INuxtConfigTs } from "../models/nuxt-config-ts.model";
  *
  * @param rootPathProjectFramework
  */
-export async function nuxtUpdateFileNuxtConfigTsService(
-  rootPathProjectFramework: string,
-) {
-  const nuxtConfigPath = path.join(rootPathProjectFramework, "nuxt.config.ts");
+export async function nuxtUpdateFileNuxtConfigTsService(rootPathProjectFramework: string) {
+  const nuxtConfigPath = this.cli.path.join(rootPathProjectFramework, "nuxt.config.ts");
 
   if (!fs.existsSync(nuxtConfigPath)) {
     return `Erreur: Aucun fichier nuxt.config.ts trouvé dans ${rootPathProjectFramework}`;
@@ -21,8 +19,7 @@ export async function nuxtUpdateFileNuxtConfigTsService(
   try {
     // 1) Charger le module (TS/JS) via import dynamique
     const mod = await import(pathToFileURL(nuxtConfigPath).href);
-    const currentConfig: INuxtConfigTs = (mod &&
-      (mod.default ?? mod)) as INuxtConfigTs;
+    const currentConfig: INuxtConfigTs = (mod && (mod.default ?? mod)) as INuxtConfigTs;
 
     // 2) Mettre a jour la config (defensif)
     const updated = nuxtUpdateContentFileNuxtConfigTs(currentConfig);
@@ -60,18 +57,12 @@ export function nuxtUpdateContentFileNuxtConfigTs(
   // Eviter de dupliquer si deja present
   const ensureModule = (arr: any[] | undefined, entry: any) => {
     const a = arr ?? [];
-    return a.some((x) => JSON.stringify(x) === JSON.stringify(entry))
-      ? a
-      : [...a, entry];
+    return a.some((x) => JSON.stringify(x) === JSON.stringify(entry)) ? a : [...a, entry];
   };
 
   cfg.modules = ensureModule(cfg.modules, "@nuxtjs/tailwindcss");
   cfg.css = Array.from(
-    new Set([
-      ...(cfg.css ?? []),
-      "~/assets/css/main.css",
-      "~/assets/css/tailwind.css",
-    ]),
+    new Set([...(cfg.css ?? []), "~/assets/css/main.css", "~/assets/css/tailwind.css"]),
   );
 
   cfg.runtimeConfig ??= {};

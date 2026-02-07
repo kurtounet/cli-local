@@ -7,7 +7,7 @@ import { IFileSystemService } from "@/types/services/file-system.interface.js";
 import { BaseService } from "./base-service.service.js";
 
 // On utilise toujours fileURLToPath pour l'init, mais on pourrait aussi le mettre dans PathService
-const __filename = fileURLToPath(import.meta.url);
+// const __filename = fileURLToPath(import.meta.url);
 
 export type ReaddirOptions = Parameters<typeof fs.readdir>[1];
 
@@ -153,6 +153,27 @@ export class FileSystemService extends BaseService implements IFileSystemService
     return info; // filterTree est déjà géré par les checks au début de la récursion
   }
   //FILE
+
+  public async ensureFile(filePath: string): Promise<void> {
+    this.cli.path.validatePath(filePath, "filePath");
+    try {
+      await fs.ensureFile(filePath);
+      this.cli.logger.debug(`File written: ${filePath}`);
+    } catch (error) {
+      this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
+      throw error;
+    }
+  }
+  public async appendFile(filePath: string, content: string): Promise<void> {
+    this.cli.path.validatePath(filePath, "filePath");
+    try {
+      await fs.appendFile(filePath, content);
+      this.cli.logger.debug(`File written: ${filePath}`);
+    } catch (error) {
+      this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
+      throw error;
+    }
+  }
   public async writeFileJson(filePath: string, content: string): Promise<void> {
     this.cli.path.validatePath(filePath, "filePath");
     try {
@@ -251,32 +272,33 @@ export class FileSystemService extends BaseService implements IFileSystemService
     return Promise.resolve();
   }
 
-  private async getContentForFile(node: IFileNode, fullPath: string): Promise<string> {
-    if (node.content) return node.content;
-    if (fullPath.endsWith(this.TS_EXTENSION)) {
-      return await this.applyTemplate(node.name);
-    }
-    return "";
-  }
+  // private async getContentForFile(node: IFileNode, fullPath: string): Promise<string> {
+  //   if (node.content) return node.content;
+  //   if (fullPath.endsWith(this.TS_EXTENSION)) {
+  //     return await this.applyTemplate(node.name);
+  //   }
+  //   return "";
+  // }
 
-  private async applyTemplate(fileName: string): Promise<string> {
-    const templatePath = this.cli.path.resolve(
-      this.cli.path.getDirectory(__filename),
-      "..",
-      "templates",
-      this.CLASS_TEMPLATE,
-    );
-    if (!this.exists(templatePath)) return "";
-    const rawTemplate = await this.readFile(templatePath);
-    return this.cli.template.compile(rawTemplate, {
-      name: fileName.replace(this.TS_EXTENSION, ""),
-      author: this.DEFAULT_AUTHOR,
-    });
-  }
+  // private async applyTemplate(fileName: string): Promise<string> {
+  //   const templatePath = this.cli.path.resolve(
+  //     this.cli.path.getDirectory(__filename),
+  //     "..",
+  //     "templates",
+  //     this.CLASS_TEMPLATE,
+  //   );
+  //   if (!this.exists(templatePath)) return "";
+  //   const rawTemplate = await this.readFile(templatePath);
+
+  //   return this.cli.template.compile(rawTemplate, {
+  //     name: fileName.replace(this.TS_EXTENSION, ""),
+  //     author: this.DEFAULT_AUTHOR,
+  //   });
+  // }
 
   public async updateJson(file: string): Promise<void> {
     try {
-      const pkgPath = this.cli.this.cli.path.join(process.cwd(), file);
+      const pkgPath = this.cli.path.join(process.cwd(), file);
       const pkg = (await this.readFileJson(pkgPath)) as Record<string, unknown>;
       pkg.mclp = this.cli.config.defaults;
       await this.writeFileJson(pkgPath, JSON.stringify(pkg, null, 2));

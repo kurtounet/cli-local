@@ -11,11 +11,13 @@ export class FrameworkSelector {
 
   constructor(private cli: IAppContext) {
     // On initialise les services disponibles
-    // Tu pourras en ajouter ici au fur et à mesure
+    // Ajouter ici au fur et à mesure
     this.register(new AngularService(this.cli));
     this.register(new SymfonyService(this.cli));
   }
-
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
   private register(service: IFrameworkService) {
     // On utilise le nom du service en minuscule comme clé (ex: 'angularservice')
     // Ou mieux, tu peux ajouter une propriété 'slug' (ex: 'angular') à ton interface

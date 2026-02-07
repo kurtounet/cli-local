@@ -8,7 +8,7 @@ export default class ArchitecturePlugin {
   async createDirectoryStructure(nodes, parentPath) {
     for (const node of nodes) {
       if (node._type === "directory") {
-        const newPath = path.join(parentPath, node.name);
+        const newPath = this.cli.path.join(parentPath, node.name);
 
         try {
           await this.ctx.fs.mkdirAsync(newPath, { recursive: true });
@@ -49,7 +49,7 @@ export default class ArchitecturePlugin {
           `🏗️  Génération de l'architecture pour le framework: ${frameworkName}`,
         );
 
-        const frameworkRoot = path.join(projectBasePath, frameworkName);
+        const frameworkRoot = this.cli.path.join(projectBasePath, frameworkName);
         await this.createDirectoryStructure(
           framework.architecture,
           frameworkRoot,

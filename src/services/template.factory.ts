@@ -14,13 +14,8 @@ export class TemplateFactory extends BaseService {
     let compiled = this.cache.get(cacheKey);
 
     if (!compiled) {
-      const fullPath = path.join(
-        pluginPath,
-        "templates",
-        `${templateName}.ejs`,
-      );
-      if (!fs.existsSync(fullPath))
-        throw new Error(`Template manquante: ${fullPath}`);
+      const fullPath = this.cli.path.join(pluginPath, "templates", `${templateName}.ejs`);
+      if (!fs.existsSync(fullPath)) throw new Error(`Template manquante: ${fullPath}`);
 
       const content = this.cli.fileSystem.readFileSync(fullPath, "utf-8");
       compiled = ejs.compile(content);

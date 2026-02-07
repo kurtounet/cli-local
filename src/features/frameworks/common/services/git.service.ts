@@ -8,10 +8,7 @@ import path from "path";
  * @param frameworkProjectPath
  * @param contentToAdd
  */
-export function updateGitIgnore(
-  frameworkProjectPath: string,
-  contentToAdd: string,
-): string {
+export function updateGitIgnore(frameworkProjectPath: string, contentToAdd: string): string {
   const gitIgnoreFile = path.join(frameworkProjectPath, ".gitignore");
 
   // Vérifie si le fichier .gitignore existe
@@ -68,10 +65,7 @@ export function gitCommitAndPush(message: string): boolean {
  * @param dir - The directory to check.
  * @returns True if the directory is found in .gitignore, false otherwise.
  */
-export function verifyInGitIgnoreFile(
-  pathGitIgnore: string,
-  dir: string,
-): boolean {
+export function verifyInGitIgnoreFile(pathGitIgnore: string, dir: string): boolean {
   if (!fs.existsSync(pathGitIgnore)) {
     // logInfo(`Le fichier .gitignore est introuvable dans le dossier du projet !`);
     return false;

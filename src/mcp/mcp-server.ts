@@ -1,13 +1,13 @@
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import chokidar from "chokidar";
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import chokidar from "chokidar";
 import { z } from "zod";
 
-import { AiService } from "@/services/ai.service.js";
 import { AppContextBuilder } from "@/context/context.js";
+import { AiService } from "@/services/ai.service.js";
 import { PluginService } from "@/services/plugin.service.js";
 
 import { isMcpServerRunning, killAllMcpProcesses } from "./mcp-process-utils.js";
@@ -52,95 +52,103 @@ async function watchPlugins(server: McpServer) {
   const loadTool = async (filePath: string) => {
     // Cas 1: Plugin fichier unique (Legacy)
     if (filePath.endsWith(".plugin.js") && path.dirname(filePath) === aiService.pluginsPath) {
-        try {
-            const name = path.basename(filePath, ".plugin.js");
-            const fileUrl = pathToFileURL(filePath).href;
-            const module = await import(`${fileUrl}?update=${Date.now()}`);
+      try {
+        const name = path.basename(filePath, ".plugin.js");
+        const fileUrl = pathToFileURL(filePath).href;
+        const module = await import(`${fileUrl}?update=${Date.now()}`);
 
-            if (module.default) {
-                // Heuristique simple: on passe le SDK si disponible, sinon aiService
-                const ctx = pluginService ? pluginService.getSDKContext() : aiService;
+        if (module.default) {
+          // Heuristique simple: on passe le SDK si disponible, sinon aiService
+          const ctx = pluginService ? pluginService.getSDKContext() : aiService;
 
-                const definition = module.default.definition || { name, description: "Outil dynamique" };
-                server.registerTool(
-                    definition.name,
-                    { description: definition.description, inputSchema: module.default.schema || {} },
-                    async (args: any) => {
-                        const result = await aiService.executeTool(definition.name, args);
-                        return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-                    }
-                );
-                console.error(`[MCP] Plugin (Legacy) chargé: ${name}`);
-            }
-        } catch (err) { console.error(`[MCP] Erreur legacy ${filePath}`, err); }
-        return;
+          const definition = module.default.definition || { name, description: "Outil dynamique" };
+          server.registerTool(
+            definition.name,
+            { description: definition.description, inputSchema: module.default.schema || {} },
+            async (args: any) => {
+              const result = await aiService.executeTool(definition.name, args);
+              return {
+                content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+              };
+            },
+          );
+          console.error(`[MCP] Plugin (Legacy) chargé: ${name}`);
+        }
+      } catch (err) {
+        console.error(`[MCP] Erreur legacy ${filePath}`, err);
+      }
+      return;
     }
 
     // Cas 2: Plugin répertoire (Manifest)
     if (path.basename(filePath) === "manifest.json") {
+      try {
+        const pluginDir = path.dirname(filePath);
+        const manifestContent = await import(`${pathToFileURL(filePath).href}?t=${Date.now()}`, {
+          with: { type: "json" },
+        });
+
+        // Validation du manifest
+        const manifest = manifestContent.default;
+        if (!manifest?.id || !manifest.service) {
+          console.error(`[MCP] Manifest invalide pour ${filePath} (id ou service manquant)`);
+          return;
+        }
+
+        const servicePath = this.cli.path.join(pluginDir, manifest.service);
+        const serviceUrl = pathToFileURL(servicePath).href;
+
         try {
-            const pluginDir = path.dirname(filePath);
-            const manifestContent = await import(`${pathToFileURL(filePath).href}?t=${Date.now()}`, { with: { type: "json" } });
-            
-            // Validation du manifest
-            const manifest = manifestContent.default;
-            if (!manifest || !manifest.id || !manifest.service) {
-                console.error(`[MCP] Manifest invalide pour ${filePath} (id ou service manquant)`);
-                return;
+          const module = await import(`${serviceUrl}?update=${Date.now()}`);
+
+          if (module.default) {
+            // Instanciation avec injection de contexte REEL (CLI SDK)
+            let context = aiService;
+            if (pluginService) {
+              context = pluginService.getSDKContext() as any;
             }
 
-            const servicePath = path.join(pluginDir, manifest.service);
-            const serviceUrl = pathToFileURL(servicePath).href;
-            
+            const pluginInstance = new module.default(context);
+
+            // Tentative d'enregistrement (Gérer les doublons)
             try {
-                const module = await import(`${serviceUrl}?update=${Date.now()}`);
+              server.registerTool(
+                manifest.id,
+                {
+                  description: manifest.description || `Plugin ${manifest.name}`,
+                  inputSchema: { type: "object", properties: { project: { type: "object" } } },
+                },
+                async (args: any) => {
+                  const result = await pluginInstance.execute(args, { project: {} });
+                  return {
+                    content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }],
+                  };
+                },
+              );
+              console.error(`[MCP] Plugin (Dir) chargé: ${manifest.name}`);
 
-                if (module.default) {
-                     // Instanciation avec injection de contexte REEL (CLI SDK)
-                    let context = aiService; 
-                    if (pluginService) {
-                        context = pluginService.getSDKContext() as any;
-                    }
-                    
-                    const pluginInstance = new module.default(context); 
-                    
-                    // Tentative d'enregistrement (Gérer les doublons)
-                    try {
-                        server.registerTool(
-                            manifest.id,
-                            {
-                                description: manifest.description || `Plugin ${manifest.name}`,
-                                inputSchema: { type: "object", properties: { project: { type: "object" } } } 
-                            },
-                            async (args: any) => {
-                                const result = await pluginInstance.execute(args, { project: {} }); 
-                                return { content: [{ type: "text" as const, text: JSON.stringify(result, null, 2) }] };
-                            }
-                        );
-                         console.error(`[MCP] Plugin (Dir) chargé: ${manifest.name}`);
-                         
-                         // Notification désactivée pour éviter le spam/erreur JSON
-                         // server.sendNotification("notifications/tools/list_changed");
-                    } catch (regError: any) {
-                        if (regError.message && regError.message.includes("already registered")) {
-                             console.warn(`[MCP] Warning: Plugin ${manifest.id} déjà enregistré (ignoré)`);
-                        } else {
-                            throw regError;
-                        }
-                    }
-                }
-            } catch (importErr) {
-                console.error(`[MCP] Erreur import service ${servicePath}`, importErr);
+              // Notification désactivée pour éviter le spam/erreur JSON
+              // server.sendNotification("notifications/tools/list_changed");
+            } catch (regError: any) {
+              if (regError.message?.includes("already registered")) {
+                console.warn(`[MCP] Warning: Plugin ${manifest.id} déjà enregistré (ignoré)`);
+              } else {
+                throw regError;
+              }
             }
-        } catch (err) { console.error(`[MCP] Erreur loading manifest ${filePath}`, err); }
+          }
+        } catch (importErr) {
+          console.error(`[MCP] Erreur import service ${servicePath}`, importErr);
+        }
+      } catch (err) {
+        console.error(`[MCP] Erreur loading manifest ${filePath}`, err);
+      }
     }
   };
 
-  watcher
-    .on("add", (path) => loadTool(path))
-    .on("change", (path) => loadTool(path))
-    // .on("unlink", ...) 
-    
+  watcher.on("add", (path) => loadTool(path)).on("change", (path) => loadTool(path));
+  // .on("unlink", ...)
+
   console.error(`[MCP] Surveillance des plugins activée dans ${aiService.pluginsPath}`);
 }
 
@@ -150,14 +158,14 @@ async function watchPlugins(server: McpServer) {
 export async function runMcpServer() {
   // Initialization du contexte CLI complet
   try {
-      console.error("🔄 Initialisation du contexte CLI pour MCP...");
-      const builder = new AppContextBuilder();
-      cliContext = await builder.buildContext();
-      // On s'assure que tout est init
-      pluginService = cliContext.services.get("PluginService");
-      console.error("✅ Contexte CLI chargé. Service Plugin disponible.");
+    console.error("🔄 Initialisation du contexte CLI pour MCP...");
+    const builder = new AppContextBuilder();
+    cliContext = await builder.buildContext();
+    // On s'assure que tout est init
+    pluginService = cliContext.services.get("PluginService");
+    console.error("✅ Contexte CLI chargé. Service Plugin disponible.");
   } catch (error) {
-      console.error("❌ Echec initialisation CLI Context:", error);
+    console.error("❌ Echec initialisation CLI Context:", error);
   }
 
   // Nettoyer les instances existantes par précaution
@@ -185,7 +193,10 @@ export async function runMcpServer() {
         const pluginId = await aiService.generatePlugin(instruction);
         return {
           content: [
-            { type: "text" as const, text: `✅ Plugin '${pluginId}' créé avec succès (Format Dossier).` },
+            {
+              type: "text" as const,
+              text: `✅ Plugin '${pluginId}' créé avec succès (Format Dossier).`,
+            },
           ],
         };
       } catch (error: unknown) {

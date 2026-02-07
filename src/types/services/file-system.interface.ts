@@ -45,6 +45,19 @@ export interface IFileSystemService {
   writeFileJson(filePath: string, content: unknown): Promise<void>;
 
   /**
+   * Ajoute du contenu à un fichier.
+   * @param filePath - Le chemin du fichier.
+   * @param content - Le contenu à ajouter.
+   */
+  appendFile(filePath: string, content: string): Promise<void>;
+
+  /**
+   *Vérifie si un fichier existe et le crée si besoin.
+   * @param filePath - Chemin du fichier
+   */
+  ensureFile(filePath: string): Promise<void>;
+
+  /**
    * Lit et parse un fichier JSON.
    * @param filePath - Le chemin du fichier à lire.
    */

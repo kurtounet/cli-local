@@ -2,11 +2,7 @@ import * as fs from "fs-extra";
 import * as path from "path";
 import { fr } from "zod/v4/locales/index.cjs";
 
-import {
-  IFramework,
-  IProjectConfig,
-  IScript,
-} from "./models/framework-commun.model";
+import { IFramework, IProjectConfig, IScript } from "./models/framework-commun.model";
 import { IpackageJson } from "./models/package-json.model";
 
 /**
@@ -31,7 +27,7 @@ export function getRandomInt(min: number, max: number) {
  * @param frameworkProjectPath
  */
 export function updateTsConfig(frameworkProjectPath: string): string {
-  const tsConfigPath = path.join(frameworkProjectPath, "tsconfig.json");
+  const tsConfigPath = this.cli.path.join(frameworkProjectPath, "tsconfig.json");
   if (!fs.existsSync(tsConfigPath)) {
     return `Erreur : Aucun fichier tsconfig.json trouvé dans ${frameworkProjectPath}`;
   }
@@ -41,18 +37,11 @@ export function updateTsConfig(frameworkProjectPath: string): string {
     // Ajoute ou met à jour baseUrl
     tsConfigData.compilerOptions.baseUrl = ".";
     // Ajoute ou met à jour paths
-    tsConfigData.compilerOptions.paths =
-      tsConfigData.compilerOptions.paths || {};
+    tsConfigData.compilerOptions.paths = tsConfigData.compilerOptions.paths || {};
     tsConfigData.compilerOptions.paths["@app/*"] = ["src/app/*"];
-    tsConfigData.compilerOptions.paths["@environments/*"] = [
-      "src/environments/*",
-    ];
+    tsConfigData.compilerOptions.paths["@environments/*"] = ["src/environments/*"];
 
-    fs.writeFileSync(
-      tsConfigPath,
-      JSON.stringify(tsConfigData, null, 2),
-      "utf8",
-    );
+    fs.writeFileSync(tsConfigPath, JSON.stringify(tsConfigData, null, 2), "utf8");
 
     return `${frameworkProjectPath} : tsconfig.json mis à jour avec baseUrl et paths ✅`;
   } catch (error) {
@@ -73,24 +62,18 @@ export function updatePackageJson(
   rootPathProjectFramework: string,
   entitiesJsonFile: object,
 ): string {
-  const packageJsonPath = path.join(rootPathProjectFramework, "package.json");
+  const packageJsonPath = this.cli.path.join(rootPathProjectFramework, "package.json");
 
   if (!fs.existsSync(packageJsonPath)) {
     return `Erreur: Aucun fichier package.json trouvé dans ${rootPathProjectFramework}`;
   }
 
   try {
-    const packageJson: IpackageJson = JSON.parse(
-      fs.readFileSync(packageJsonPath, "utf8"),
-    );
+    const packageJson: IpackageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
     // Ajout des script personnalisé
     packageJson.scripts = framework.scripts;
 
-    fs.writeFileSync(
-      packageJsonPath,
-      JSON.stringify(packageJson, null, 2),
-      "utf8",
-    );
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), "utf8");
 
     return `${rootPathProjectFramework} : package.json mis à jour ✅`;
   } catch (error) {
@@ -105,11 +88,7 @@ export function updatePackageJson(
  * @param value - The value to set for the property.
  * @returns A message indicating the success or failure of the operation.
  */
-export function addPropertyToJsonFile(
-  filePath: string,
-  keyPath: string,
-  value: any,
-): string {
+export function addPropertyToJsonFile(filePath: string, keyPath: string, value: any): string {
   if (!fs.existsSync(filePath)) {
     return `Erreur : Le fichier ${filePath} est introuvable.`;
   }

@@ -35,7 +35,7 @@ export class AppCommand extends BaseCommand {
         break;
     }
 
-    const fullPath = path.join(projectPath, fileName);
+    const fullPath = this.cli.path.join(projectPath, fileName);
     await this.cli.fileSystem.writeFile(fullPath, content);
     this.cli.logger.success(`Fichier ${fileName} créé !`);
   }

@@ -208,7 +208,7 @@ winston.format.json()
 ),
 transports: [
 new winston.transports.File({
-filename: path.join(process.cwd(), "myapp-error.log"),
+filename: this.cli.path.join(process.cwd(), "myapp-error.log"),
 level: "error"
 }),
 ],
@@ -239,7 +239,7 @@ console.error(chalk.red("\n✘ Une erreur inattendue est survenue."));
 }
 
 // 3. Information sur le fichier de log
-console.error(chalk.gray(`\nPlus de détails dans : ${path.join(process.cwd(), "myapp-error.log")}`));
+console.error(chalk.gray(`\nPlus de détails dans : ${this.cli.path.join(process.cwd(), "myapp-error.log")}`));
 
 if (isVerbose && error.stack) {
 console.error(chalk.gray(`\nStack Trace:\n${error.stack}`));

@@ -1,27 +1,29 @@
-import * as fs from "node:fs/promises";
-import * as path from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { IAppContext } from "@/types/context.interface.js";
 import { IAiService } from "@/types/services/ai-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 /**
  * Service gérant les interactions avec l'IA et le système de plugins dynamiques.
  * Implémente une architecture de type 'Agentic' où l'IA peut lire, écrire et exécuter du code.
  */
-export class AiService implements IAiService {
+export class AiService extends BaseService implements IAiService {
   readonly serviceName = "AiService";
 
   public get pluginsPath(): string {
-    return path.resolve(process.cwd(), "src", "plugins");
+    return this.cli.path.resolve(process.cwd(), "src", "plugins");
   }
   // private genAI: GoogleGenerativeAI;
   private model: unknown;
 
-  constructor() {
+  constructor(protected cli: IAppContext) {
     // Récupère ta clé API depuis les variables d'environnement
     const apiKey = process.env.GEMINI_API_KEY ?? "";
     // this.genAI = new GoogleGenerativeAI(apiKey);
     // this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    super(cli);
   }
   public init(): Promise<void> {
     // Si tu n'as rien à initialiser pour l'instant :
@@ -64,7 +66,7 @@ export class AiService implements IAiService {
    */
   async executeTool(name: string, args: unknown = {}): Promise<unknown> {
     const fileName = name.endsWith(".plugin.js") ? name : `${name}.plugin.js`;
-    const pluginPath = path.join(this.pluginsPath, fileName);
+    const pluginPath = this.cli.path.join(this.pluginsPath, fileName);
 
     try {
       const fileUrl = pathToFileURL(pluginPath).href;
@@ -99,7 +101,7 @@ export class AiService implements IAiService {
    */
   async executeToolMCP(name: string, args: unknown[] = []): Promise<unknown> {
     const fileName = name.endsWith(".plugin.js") ? name : `${name}.plugin.js`;
-    const pluginPath = path.join(this.pluginsPath, fileName);
+    const pluginPath = this.cli.path.join(this.pluginsPath, fileName);
 
     try {
       const fileUrl = pathToFileURL(pluginPath).href;
@@ -142,8 +144,8 @@ export class AiService implements IAiService {
         .trim() || prompt;
 
     // 2. Préparation des chemins
-    const pluginDir = path.join(this.pluginsPath, pluginId);
-    await fs.mkdir(pluginDir, { recursive: true });
+    const pluginDir = this.cli.path.join(this.pluginsPath, pluginId);
+    await this.cli.fileSystem.mkdir(pluginDir, { recursive: true });
 
     const serviceFileName = `${pluginId}.service.js`;
 
@@ -153,23 +155,39 @@ export class AiService implements IAiService {
     const ejs = ejsModule.default || ejsModule;
 
     // 4. Rendu et écriture du Manifest
-    const manifestTemplatePath = path.resolve(process.cwd(), "src", "templates", "manifest.ejs");
-    const manifestContent = await fs.readFile(manifestTemplatePath, "utf-8");
+    const manifestTemplatePath = this.cli.path.resolve(
+      process.cwd(),
+      "src",
+      "templates",
+      "manifest.ejs",
+    );
+    const manifestContent = await this.cli.fileSystem.readFile(manifestTemplatePath, "utf-8");
     const manifestCode = ejs.render(manifestContent, {
       pluginId,
       pluginName,
       serviceFileName,
     });
-    await fs.writeFile(path.join(pluginDir, "manifest.json"), manifestCode, "utf-8");
+    await this.cli.fileSystem.writeFile(
+      this.cli.path.join(pluginDir, "manifest.json"),
+      manifestCode,
+    );
 
     // 5. Rendu et écriture du Service
-    const serviceTemplatePath = path.resolve(process.cwd(), "src", "templates", "service.ejs");
-    const serviceContent = await fs.readFile(serviceTemplatePath, "utf-8");
+    const serviceTemplatePath = this.cli.path.resolve(
+      process.cwd(),
+      "src",
+      "templates",
+      "service.ejs",
+    );
+    const serviceContent = await this.cli.fileSystem.readFile(serviceTemplatePath);
     const serviceCode = ejs.render(serviceContent, {
       className,
       pluginName: pluginId,
     });
-    await fs.writeFile(path.join(pluginDir, serviceFileName), serviceCode, "utf-8");
+    await this.cli.fileSystem.writeFile(
+      this.cli.path.join(pluginDir, serviceFileName),
+      serviceCode,
+    );
 
     return pluginId;
   }
@@ -190,14 +208,14 @@ export class AiService implements IAiService {
    */
   async listTools(): Promise<string[]> {
     try {
-      const entries = await fs.readdir(this.pluginsPath, { withFileTypes: true });
+      const entries = await this.cli.fileSystem.readDirWithFileTypes(this.pluginsPath);
       const toolNames: string[] = [];
 
       for (const entry of entries) {
         if (entry.isFile() && entry.name.endsWith(".plugin.js")) {
           toolNames.push(entry.name.replace(".plugin.js", ""));
         } else if (entry.isDirectory()) {
-          const manifestPath = path.join(this.pluginsPath, entry.name, "manifest.json");
+          const manifestPath = this.cli.path.join(this.pluginsPath, entry.name, "manifest.json");
           try {
             await fs.access(manifestPath);
             toolNames.push(entry.name);
@@ -218,18 +236,17 @@ export class AiService implements IAiService {
    * @returns Le contenu textuel du fichier.
    */
   async readFile(targetPath: string): Promise<string> {
-    return await fs.readFile(path.resolve(targetPath), "utf-8");
+    return await this.cli.fileSystem.readFile(this.cli.path.resolve(targetPath));
   }
 
   /**
    * Écrit du contenu dans un fichier, crée les répertoires si nécessaire.
    * @param targetPath - Chemin de destination.
    * @param content - Texte à écrire.
-   * @returns
    */
   async writeFile(targetPath: string, content: string): Promise<void> {
-    const fullPath = path.resolve(targetPath);
-    await fs.mkdir(path.dirname(fullPath), { recursive: true });
-    await fs.writeFile(fullPath, content, "utf-8");
+    const fullPath = this.cli.path.resolve(targetPath);
+    await this.cli.fileSystem.createDirectory(this.cli.path.getDirectory(fullPath));
+    await this.cli.fileSystem.writeFile(fullPath, content);
   }
 }

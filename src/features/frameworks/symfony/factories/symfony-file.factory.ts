@@ -8,10 +8,7 @@ export class SymfonyFileFactory {
    * @param type
    * @param entity
    */
-  static create(
-    type: SymfonyFileType,
-    entity: any,
-  ): { content: string; fileName: string } {
+  static create(type: SymfonyFileType, entity: any): { content: string; fileName: string } {
     switch (type) {
       case "dto":
         return this.buildDto(entity);
@@ -49,7 +46,7 @@ export class SymfonyFileFactory {
   private static templateCache: Record<string, string> = {};
 
   static createFromTemplate(type: string, data: any): string {
-    const templatePath = path.join(__dirname, `../templates/symfony/${type}.php.tpl`);
+    const templatePath = this.cli.path.join(__dirname, `../templates/symfony/${type}.php.tpl`);
     
     // Lecture (avec petit cache pour la performance)
     if (!this.templateCache[type]) {

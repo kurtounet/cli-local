@@ -15,7 +15,9 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
   constructor(protected cli: IAppContext) {
     super(cli);
   }
-
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
   /**
    * Point d'entrée principal pour la génération Angular
    * @param project - Config du projet
@@ -63,7 +65,7 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
       `--ai-config="gemini`,
     ].filter((arg): arg is string => Boolean(arg));
 
-    this.cli.shell.executeSyncSpawn(`ng`, args, config.rootProjectPath);
+    this.cli.shell.executeSyncSpawn(`ng`, args, "inherit", true, config.rootProjectPath);
     await Promise.resolve();
   }
 
@@ -71,12 +73,20 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
     this.cli.logger.info(`${EMOJI.rond_green} Installation des dépendances Angular...`);
     if (config.framework.mode === "install") {
       config.framework.dependencies.prod.map((dep) => {
-        this.cli.shell.executeSyncSpawn(`npm`, ["install", dep], `${config.projectPath}`);
+        this.cli.shell.executeSyncSpawn(
+          `npm`,
+          ["install", dep],
+          "inherit",
+          true,
+          `${config.projectPath}`,
+        );
       });
       config.framework.dependencies.dev.map((dep) => {
         this.cli.shell.executeSyncSpawn(
           `npm`,
           ["install", "--save-dev", dep],
+          "inherit",
+          true,
           `${config.projectPath}`,
         );
       });

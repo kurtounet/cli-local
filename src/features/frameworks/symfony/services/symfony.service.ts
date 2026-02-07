@@ -17,6 +17,10 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
     super(cli);
   }
 
+  init(): Promise<void> {
+    return Promise.resolve();
+  }
+
   /**
    * Point d'entrée principal pour la génération Symfony
    * @param project
@@ -62,7 +66,7 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
       config.framework.app,
     ].filter((arg): arg is string => Boolean(arg));
     this.cli.logger.info(`config.projectPath : ${config.projectPath}`);
-    this.cli.shell.executeSyncSpawn(`symfony`, args, config.rootProjectPath);
+    this.cli.shell.executeSyncSpawn(`symfony`, args, "inherit", true, config.rootProjectPath);
     await Promise.resolve();
   }
 
@@ -73,13 +77,21 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
 
       if (prod && prod.length > 0) {
         // On passe le tableau complet de dépendances
-        this.cli.shell.executeSyncSpawn(`composer`, ["require", ...prod], config.projectPath);
+        this.cli.shell.executeSyncSpawn(
+          `composer`,
+          ["require", ...prod],
+          "inherit",
+          true,
+          config.projectPath,
+        );
       }
 
       if (dev && dev.length > 0) {
         this.cli.shell.executeSyncSpawn(
           `composer`,
           ["require", "--dev", ...dev],
+          "inherit",
+          true,
           config.projectPath,
         );
       }

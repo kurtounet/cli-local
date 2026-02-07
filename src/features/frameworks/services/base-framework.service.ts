@@ -57,12 +57,18 @@ export abstract class BaseFrameworkService {
   async createBranchGit(config: IInstallFramework): Promise<void> {
     this.cli.logger.info(`${EMOJI.rond_green} Configuration des branches git...`);
     // 1. Forcer la création d'un nouveau dépôt Git local au projet
-    this.cli.shell.executeSyncSpawn(`git init`, [], config.projectPath);
+    this.cli.shell.executeSyncSpawn(`git init`, [], "inherit", true, config.projectPath);
     // 2. IMPORTANT : Créer un commit initial
     // On ne peut pas créer de branches (dev, release) sur un dépôt vide
     try {
-      this.cli.shell.executeSyncSpawn(`git add .`, [], config.projectPath);
-      this.cli.shell.executeSyncSpawn(`git commit -m "initial commit"`, [], config.projectPath);
+      this.cli.shell.executeSyncSpawn(`git add .`, [], "inherit", true, config.projectPath);
+      this.cli.shell.executeSyncSpawn(
+        `git commit -m "initial commit"`,
+        [],
+        "inherit",
+        true,
+        config.projectPath,
+      );
     } catch (e) {
       // Si c'est déjà commité (comme avec Symfony), on ignore l'erreur
     }
@@ -72,7 +78,13 @@ export abstract class BaseFrameworkService {
         // On crée/réinitialise chaque branche individuellement
         for (const branchName of config.framework.gitBranch) {
           // "git checkout -B" évite l'erreur "already exists"
-          this.cli.shell.executeSyncSpawn(`git checkout -B ${branchName}`, [], config.projectPath);
+          this.cli.shell.executeSyncSpawn(
+            `git checkout -B ${branchName}`,
+            [],
+            "inherit",
+            true,
+            config.projectPath,
+          );
         }
 
         // On se place sur la branche finale souhaitée
@@ -80,6 +92,8 @@ export abstract class BaseFrameworkService {
           this.cli.shell.executeSyncSpawn(
             `git checkout ${config.framework.gitBranchCheckout}`,
             [],
+            "inherit",
+            true,
             config.projectPath,
           );
         }
@@ -106,7 +120,7 @@ export abstract class BaseFrameworkService {
     entitiesJson: IGetEntityJson,
     fileMdj: string,
     config: IInstallFramework,
-  ): Promise<any> {
+  ): Promise<void> {
     const projectPath = config.projectPath;
     const cliFolder = `${projectPath}/.cli-local`;
 

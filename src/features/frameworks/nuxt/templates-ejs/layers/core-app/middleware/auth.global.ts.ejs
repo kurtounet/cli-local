@@ -1,5 +1,0 @@
-export default defineNuxtRouteMiddleware((to) => {
-  const token = useCookie('token').value;
-  const isProtected = to.path.startsWith('/admin');
-  if (isProtected && !token) return navigateTo('/login');
-});

@@ -1,4 +1,0 @@
-# sampleSymfonyConfig.yaml
-# This is a sample Symfony config for testing.
-parameters:
-  app.name: My Symfony App

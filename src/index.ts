@@ -6,7 +6,7 @@ import { PluginCommand } from "./commands/plugin.command.js";
 import { TreeCommand } from "./commands/tree.command.js";
 import { AppContextBuilder } from "./context/context.js";
 import { App } from "./core/App.js";
-import { FrameworkCommand } from "./features/frameworks/commands/framework.command.js";
+import { FrameworkCommand } from "./features/frameworks/common/commands/framework.command.js";
 import { ProjectCommand } from "./features/project/commands/project.command.js";
 import { HandlerErrorService } from "./services/handler-error.service.js";
 

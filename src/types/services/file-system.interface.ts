@@ -1,3 +1,7 @@
+import { Dirent } from "fs-extra";
+
+import { ReaddirOptions } from "@/services/file-system.service.js";
+
 import { IFileNode } from "../commun/file-node.interface.js";
 
 export interface IFileSystemService {
@@ -38,13 +42,13 @@ export interface IFileSystemService {
    * @param filePath - Le chemin du fichier de destination.
    * @param content - Les données à sérialiser.
    */
-  writeFileJson(filePath: string, content: any): Promise<void>;
+  writeFileJson(filePath: string, content: unknown): Promise<void>;
 
   /**
    * Lit et parse un fichier JSON.
    * @param filePath - Le chemin du fichier à lire.
    */
-  readFileJson(filePath: string): Promise<any>;
+  readFileJson(filePath: string): Promise<unknown>;
 
   /**
    * Écrit du contenu textuel dans un fichier. Normalise le chemin au préalable.
@@ -81,10 +85,16 @@ export interface IFileSystemService {
    * @param content - Le contenu optionnel du fichier.
    */
   createFile(filePath: string, content?: string): Promise<void>;
-
   /**
    * Lit le contenu d'un répertoire de manière récursive.
    * @param dirPath - Le chemin du répertoire à scanner.
+   * @returns La liste des fichiers et dossiers sous forme de `fs.Dirent`.
+   */
+  readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]>;
+  /**
+   * Lit le contenu d'un répertoire de manière récursive.
+   * @param dirPath - Le chemin du répertoire à scanner.
+   * @returns La liste des fichiers et dossiers du répertoire.
    */
   readDir(dirPath: string): Promise<string[]>;
 

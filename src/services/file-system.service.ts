@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import fs, { Dirent } from "fs-extra";
 import { fileURLToPath } from "url";
 
 import { IFileNode } from "@/types/commun/file-node.interface.js";
@@ -8,6 +8,8 @@ import { BaseService } from "./base-service.service.js";
 
 // On utilise toujours fileURLToPath pour l'init, mais on pourrait aussi le mettre dans PathService
 const __filename = fileURLToPath(import.meta.url);
+
+export type ReaddirOptions = Parameters<typeof fs.readdir>[1];
 
 export class FileSystemService extends BaseService implements IFileSystemService {
   readonly serviceName = "FileSystemService";
@@ -30,6 +32,8 @@ export class FileSystemService extends BaseService implements IFileSystemService
    * Note : On utilise this.cli.path pour TOUTES les manipulations de chaînes.
    */
 
+  //DIRECTORY
+
   public setExcludedDirs(excludedDirs: string[]): void {
     this.excludedDirs = [...this.excludedDirs, ...excludedDirs];
   }
@@ -37,6 +41,11 @@ export class FileSystemService extends BaseService implements IFileSystemService
   public exists(targetPath: string): boolean {
     this.cli.path.validatePath(targetPath, "targetPath");
     return fs.existsSync(targetPath);
+  }
+
+  public isDirectory(targetPath: string): boolean {
+    this.cli.path.validatePath(targetPath, "targetPath");
+    return fs.lstatSync(targetPath).isDirectory();
   }
 
   public async createDirectory(dirPath: string): Promise<void> {
@@ -50,92 +59,31 @@ export class FileSystemService extends BaseService implements IFileSystemService
       throw error instanceof Error ? error : new Error(message);
     }
   }
-
-  public async writeFileJson(filePath: string, content: string): Promise<void> {
-    this.cli.path.validatePath(filePath, "filePath");
-    try {
-      await fs.writeJSON(filePath, content);
-      this.cli.logger.debug(`File written: ${filePath}`);
-    } catch (error) {
-      this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
-      throw error;
-    }
-  }
-
-  public async readFileJson(filePath: string): Promise<any> {
-    this.cli.path.validatePath(filePath, "filePath");
-    try {
-      return await fs.readJSON(filePath); // fs-extra supporte l'async ici
-    } catch (error) {
-      this.cli.errorHandler.handle(error, `Failed to read file: ${filePath}`);
-    }
-  }
-
-  public async writeFile(filePath: string, content: string): Promise<void> {
-    const cleanPath = this.cli.path.normalize(filePath);
-    this.cli.path.validatePath(cleanPath, "filePath");
-    try {
-      await fs.outputFile(cleanPath, content);
-      this.cli.logger.debug(`File written: ${cleanPath}`);
-    } catch (error) {
-      // this.cli.errorHandler.handle(error, `writeFile(): Failed to write file: ${cleanPath}`);
-      // throw error;
-    }
-  }
-
-  public async writeToOutput(
-    basePath: string,
-    subDir: string,
-    fileName: string,
-    content: string,
-  ): Promise<void> {
-    const targetDir = this.cli.this.cli.path.join(basePath, subDir);
-
-    if (!this.exists(targetDir)) {
-      await this.createDirectory(targetDir);
-    }
-
-    const finalPath = this.cli.this.cli.path.join(targetDir, fileName);
-    await this.writeFile(finalPath, content);
-  }
-
-  public async readFile(filePath: string): Promise<string> {
-    this.cli.path.validatePath(filePath, "filePath");
-    try {
-      return await fs.readFile(filePath, "utf-8");
-    } catch (error) {
-      const message = `Unable to read file: ${filePath}`;
-      this.cli.errorHandler.handle(error, message);
-      throw error instanceof Error ? error : new Error(message);
-    }
-  }
-
-  public async copy(source: string, destination: string): Promise<void> {
-    this.cli.path.validatePath(source, "source");
-    this.cli.path.validatePath(destination, "destination");
-    try {
-      await fs.copy(source, destination);
-      this.cli.logger.debug(`Copied from ${source} to ${destination}`);
-    } catch (error) {
-      const message = `Copy failed: ${source} -> ${destination}`;
-      this.cli.errorHandler.handle(error, message);
-      throw error instanceof Error ? error : new Error(message);
-    }
-  }
-
-  public async createFile(filePath: string, content = ""): Promise<void> {
-    this.cli.path.validatePath(filePath, "filePath");
-    const dir = this.cli.path.getDirectory(filePath);
-    if (!this.exists(dir)) {
-      await this.createDirectory(dir);
-    }
-    await this.writeFile(filePath, content);
-  }
-
-  public async readDir(dirPath: string): Promise<string[]> {
+  public async readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]> {
     this.cli.path.validatePath(dirPath, "dirPath");
+
     try {
-      return await fs.readdir(dirPath, { recursive: true, encoding: "utf-8" });
+      const entries = await fs.readdir(dirPath, {
+        ...options,
+        withFileTypes: true as const,
+      } as ReaddirOptions);
+
+      return entries as unknown as Dirent[];
+    } catch (error) {
+      const message = `Unable to read directory: ${dirPath}`;
+      this.cli.errorHandler.handle(error, message);
+      throw error instanceof Error ? error : new Error(message);
+    }
+  }
+
+  public async readDir(dirPath: string, options?: fs.ReadOptions): Promise<string[]> {
+    this.cli.path.validatePath(dirPath, "dirPath");
+
+    try {
+      return (await fs.readdir(dirPath, {
+        ...options,
+        withFileTypes: false, // verrouille le contrat
+      })) as string[];
     } catch (error) {
       const message = `Unable to read directory: ${dirPath}`;
       this.cli.errorHandler.handle(error, message);
@@ -182,7 +130,7 @@ export class FileSystemService extends BaseService implements IFileSystemService
       const childrenResults = await Promise.all(
         childrenNames.map((child) =>
           this.getDirectoryTree(
-            this.cli.this.cli.path.join(dirPath, child),
+            this.cli.path.join(dirPath, child),
             level + 1,
             maxLevel,
             withMetadata,
@@ -203,6 +151,87 @@ export class FileSystemService extends BaseService implements IFileSystemService
     }
 
     return info; // filterTree est déjà géré par les checks au début de la récursion
+  }
+  //FILE
+  public async writeFileJson(filePath: string, content: string): Promise<void> {
+    this.cli.path.validatePath(filePath, "filePath");
+    try {
+      await fs.writeJSON(filePath, content);
+      this.cli.logger.debug(`File written: ${filePath}`);
+    } catch (error) {
+      this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
+      throw error;
+    }
+  }
+
+  public async readFileJson(filePath: string): Promise<any> {
+    this.cli.path.validatePath(filePath, "filePath");
+    try {
+      return await fs.readJSON(filePath); // fs-extra supporte l'async ici
+    } catch (error) {
+      this.cli.errorHandler.handle(error, `Failed to read file: ${filePath}`);
+    }
+  }
+
+  public async writeFile(filePath: string, content: string): Promise<void> {
+    const cleanPath = this.cli.path.normalize(filePath);
+    this.cli.path.validatePath(cleanPath, "filePath");
+    try {
+      await fs.outputFile(cleanPath, content);
+      this.cli.logger.debug(`File written: ${cleanPath}`);
+    } catch (error) {
+      // this.cli.errorHandler.handle(error, `writeFile(): Failed to write file: ${cleanPath}`);
+      // throw error;
+    }
+  }
+
+  public async writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): Promise<void> {
+    const targetDir = this.cli.path.join(basePath, subDir);
+
+    if (!this.exists(targetDir)) {
+      await this.createDirectory(targetDir);
+    }
+
+    const finalPath = this.cli.path.join(targetDir, fileName);
+    await this.writeFile(finalPath, content);
+  }
+
+  public async readFile(filePath: string): Promise<string> {
+    this.cli.path.validatePath(filePath, "filePath");
+    try {
+      return await fs.readFile(filePath, "utf-8");
+    } catch (error) {
+      const message = `Unable to read file: ${filePath}`;
+      this.cli.errorHandler.handle(error, message);
+      throw error instanceof Error ? error : new Error(message);
+    }
+  }
+
+  public async copy(source: string, destination: string): Promise<void> {
+    this.cli.path.validatePath(source, "source");
+    this.cli.path.validatePath(destination, "destination");
+    try {
+      await fs.copy(source, destination);
+      this.cli.logger.debug(`Copied from ${source} to ${destination}`);
+    } catch (error) {
+      const message = `Copy failed: ${source} -> ${destination}`;
+      this.cli.errorHandler.handle(error, message);
+      throw error instanceof Error ? error : new Error(message);
+    }
+  }
+
+  public async createFile(filePath: string, content = ""): Promise<void> {
+    this.cli.path.validatePath(filePath, "filePath");
+    const dir = this.cli.path.getDirectory(filePath);
+    if (!this.exists(dir)) {
+      await this.createDirectory(dir);
+    }
+    await this.writeFile(filePath, content);
   }
 
   public async buildPhysicalTree(node: IFileNode, currentPath: string): Promise<void> {

@@ -2,10 +2,9 @@ import { EMOJI } from "@/assets/messages.js";
 import { IInstallFramework } from "@/features/commun/framework.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
+import { BaseFrameworkService } from "@/features/scaffolders/common/services/base-framework.service.js";
+import { IFrameworkService } from "@/features/scaffolders/interfaces/framework-service.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
-
-import { IFrameworkService } from "../../interfaces/framework-service.interface.js";
-import { BaseFrameworkService } from "../../services/base-framework.service.js";
 
 export class AngularService extends BaseFrameworkService implements IFrameworkService {
   private config!: IInstallFramework;
@@ -93,25 +92,10 @@ export class AngularService extends BaseFrameworkService implements IFrameworkSe
     }
     await Promise.resolve();
   }
-  // async createBranchGit(config: IInstallFramework): Promise<void> {
-  //   this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
-  //   if (config.framework?.gitBranch) {
-  //     let command = "";
-  //     config.framework.gitBranch.forEach((branchName, index) => {
-  //       if (index === 0) {
-  //         command += `git branch ${branchName}`;
-  //       } else {
-  //         command += ` && git branch ${branchName}`;
-  //       }
-  //     });
-  //     command += ` && git checkout ${config.framework.gitBranchCheckout}`;
-
-  //     this.cli.shell.executeSyncSpawn(command, [], `${config.projectPath}`);
-  //   } else {
-  //     this.cli.logger.error(`${EMOJI.error} Erreur lors de la création des branches !`);
-  //   }
-  //   this.cli.logger.info(`${EMOJI.success} Branch git créée avec succès !`);
-  // }
+  createBranchGit(config: IInstallFramework): Promise<void> {
+    this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
+    return Promise.resolve();
+  }
   async generateArchitecture(config: IInstallFramework): Promise<unknown> {
     // this.cli.fileSystem.buildPhysicalTree(config.framework.architecture, config.projectPath);
     this.cli.logger.info(`${EMOJI.rond_green} Création de l'arborescence des dossiers...`);

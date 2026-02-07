@@ -1,10 +1,8 @@
-// import { ReactService } from "./react.service.js";
-
 import { IAppContext } from "@/types/context.interface.js";
 
-import { AngularService } from "../angular/services/angular.service.js";
-import { IFrameworkService } from "../interfaces/framework-service.interface.js";
-import { SymfonyService } from "../symfony/services/symfony.service.js";
+import { AngularService } from "../../frameworks/angular/services/angular.service.js";
+import { SymfonyService } from "../../frameworks/symfony/services/symfony.service.js";
+import { IFrameworkService } from "../../interfaces/framework-service.interface.js";
 
 export class FrameworkSelector {
   private services = new Map<string, IFrameworkService>();

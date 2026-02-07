@@ -3,10 +3,11 @@ import path from "node:path";
 import { EMOJI } from "@/assets/messages.js";
 import { IArchitecture, IFileNode } from "@/features/commun/architecture.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
-import { ConfigFrameworkService } from "@/features/frameworks/services/confi-framework.service.js";
-import { FrameworkSelector } from "@/features/frameworks/services/framework-selector.service.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
 import { ParserMDJService } from "@/features/parserMdj/services/parser-mdj.service.js";
+import { ConfigFrameworkService } from "@/features/scaffolders/common/services/confi-framework.service.js";
+import { FrameworkSelector } from "@/features/scaffolders/common/services/framework-selector.service.js";
+import { IFrameworkService } from "@/features/scaffolders/interfaces/framework-service.interface.js";
 import { IAppContext } from "@/types/context.interface.js";
 
 import { IProjectCommand } from "../interfaces/project-command.interface.js";
@@ -149,7 +150,7 @@ export class ProjectService implements IProjectService {
     // ACTION : Sécurité .cli-local
     if (!hasCliLocal) {
       this.cli.logger.warn(`⚠️ Dossier .cli-local manquant, initialisation...`);
-      this.cli.shell.executeSyncSpawn("mclp", ["p", "new", absolutePath]);
+      this.cli.shell.executeSyncSpawn("mclp", ["p", "new", absolutePath], "inherit", true);
     } else {
       this.cli.logger.success(`✅ Projet conforme.`);
     }
@@ -184,10 +185,10 @@ export class ProjectService implements IProjectService {
   private filterTree(tree: IFileNode[], props: string): IFileNode | null {
     // if (!tree.children) return null;
     const node = tree.find((node: IFileNode) => node.name === props);
-    return node || null;
+    return node ?? null;
   }
 
-  private flattenFiles = (nodes: any[]): any[] => {
+  private flattenFiles = (nodes: IFileNode[]): IFileNode[] => {
     return nodes.flatMap((node) => {
       // 1. Si c'est un fichier, on le retourne dans un tableau
       if (node.type === "file") {

@@ -1,5 +1,5 @@
 import { EMOJI } from "@/assets/messages.js";
-import { sqlToDoctrineType } from "@/features/frameworks/symfony/utils/mapping.js";
+import { sqlToDoctrineType } from "@/features/scaffolders/frameworks/symfony/utils/mapping.js";
 import { IAppContext } from "@/types/context.interface.js";
 
 import {
@@ -51,26 +51,20 @@ export class ParserMDJService {
       }
 
       if (!erdModel) {
-        this.cli.logger.error(
-          `${EMOJI.error} Aucun ERDDataModel trouvé dans le fichier MDJ.`,
-        );
+        this.cli.logger.error(`${EMOJI.error} Aucun ERDDataModel trouvé dans le fichier MDJ.`);
         process.exit(1);
       }
 
       const entities: IERDEntity[] = erdModel.ownedElements;
       if (!Array.isArray(entities) || entities.length === 0) {
-        this.cli.logger.error(
-          `⏩ Pas d'entités trouvées dans ${erdModel.name}`,
-        );
+        this.cli.logger.error(`⏩ Pas d'entités trouvées dans ${erdModel.name}`);
         process.exit(1);
       }
       // Création du dictionnaire des entités
       dictionaries = this.createdDictionaries(entities);
       return dictionaries;
     } catch (error) {
-      this.cli.logger.error(
-        `${EMOJI.error} Erreur lors de la récupération des entités : ${error}`,
-      );
+      this.cli.logger.error(`${EMOJI.error} Erreur lors de la récupération des entités : ${error}`);
       process.exit(1);
     }
   }
@@ -144,12 +138,8 @@ export class ParserMDJService {
         );
         relationships.forEach((relationship: IRelationshipJson) => {
           if (relationship) {
-            const entSource = dictionaryEntitiesRelationships.get(
-              relationship.source.inEntity,
-            );
-            const entTarget = dictionaryEntitiesRelationships.get(
-              relationship.target.inEntity,
-            );
+            const entSource = dictionaryEntitiesRelationships.get(relationship.source.inEntity);
+            const entTarget = dictionaryEntitiesRelationships.get(relationship.target.inEntity);
 
             const relSource: IRelation = {
               relationName: `${relationship.source.inEntity}`,
@@ -190,11 +180,9 @@ export class ParserMDJService {
           namePascalCase: this.cli.case.toPascalCase(entityName), // CodeBase
           nameCamelCase: this.cli.case.toCamelCase(entityName), // codeBase
           typeEntity: entity.name.includes("&") ? "pivot" : "entity",
-          columns: columns || [],
-          // relationships: relationships || [],
-          relationships:
-            dictionaryEntitiesRelationships.get(entityName)?.relationships ||
-            [],
+          columns: columns ?? [],
+          // relationships: relationships ?? [],
+          relationships: dictionaryEntitiesRelationships.get(entityName)?.relationships ?? [],
         };
         dictionaryEntities.push(entityJson);
         dictionaryEntitiesJson.set(entity._id, entityJson);
@@ -207,18 +195,13 @@ export class ParserMDJService {
       "dictionary-entities-json": Object.fromEntries(dictionaryEntitiesJson),
       "dictionary-entities-pivot": dictionaryEntitiesPivot,
       "dictionary-relationships": Object.fromEntries(dictionaryRelationships),
-      "dictionary-entities-relationships": Object.fromEntries(
-        dictionaryEntitiesRelationships,
-      ),
+      "dictionary-entities-relationships": Object.fromEntries(dictionaryEntitiesRelationships),
     };
 
     return json;
   }
 
-  getRelationType(
-    source_cardinality: string,
-    target_cardinality: string,
-  ): string {
+  getRelationType(source_cardinality: string, target_cardinality: string): string {
     const mapping: Record<string, string> = {
       "0..1-0..1": "OneToOne", // (optionnel)
       "1..1-1..1": "OneToOne", //(obligatoire)
@@ -235,17 +218,12 @@ export class ParserMDJService {
     target_cardinality ??= "1..1";
 
     const key = `${source_cardinality}-${target_cardinality}`;
-    return mapping[key] || "Unknown Relation";
+    return mapping[key] ?? "Unknown Relation";
   }
 
-  getInEntity(
-    dictionaryEntitiesJson: Map<string, IEntityJson>,
-    end: Iend,
-  ): string {
+  getInEntity(dictionaryEntitiesJson: Map<string, IEntityJson>, end: Iend): string {
     if (end.reference) {
-      return (
-        dictionaryEntitiesJson.get(end.reference.$ref || "")?.tableName || ""
-      );
+      return dictionaryEntitiesJson.get(end.reference.$ref ?? "")?.tableName ?? "";
     }
     return "";
   }
@@ -271,13 +249,10 @@ export class ParserMDJService {
           id: r.end1._id,
           entityId: r.end1.reference.$ref,
           inEntity: this.getInEntity(dictionaryEntitiesJson, r.end1),
-          columnName: r.end1.name || "id",
-          cardinality: r.end1.cardinality || "1",
+          columnName: r.end1.name ?? "id",
+          cardinality: r.end1.cardinality ?? "1",
           parent: r.end1._parent ? r.end1._parent.$ref : "",
-          relationType: this.getRelationType(
-            r.end1.cardinality,
-            r.end2.cardinality,
-          ),
+          relationType: this.getRelationType(r.end1.cardinality, r.end2.cardinality),
           inverseSide: this.getInEntity(dictionaryEntitiesJson, r.end2),
         },
         target: {
@@ -286,12 +261,9 @@ export class ParserMDJService {
           entityId: r.end2.reference.$ref,
           inEntity: this.getInEntity(dictionaryEntitiesJson, r.end2),
           columnName: r.end2.name,
-          cardinality: r.end2.cardinality || "1",
+          cardinality: r.end2.cardinality ?? "1",
           parent: r.end2._parent ? r.end2._parent.$ref : "",
-          relationType: this.getRelationType(
-            r.end2.cardinality,
-            r.end1.cardinality,
-          ),
+          relationType: this.getRelationType(r.end2.cardinality, r.end1.cardinality),
           inverseSide: this.getInEntity(dictionaryEntitiesJson, r.end1),
         },
       };

@@ -2,10 +2,9 @@ import { EMOJI } from "@/assets/messages.js";
 import { IInstallFramework } from "@/features/commun/framework.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
-import { IAppContext } from "@/types/context.interface.js";
+import { BaseFrameworkService } from "@/features/scaffolders/common/services/base-framework.service.js";
+import { IFrameworkService } from "@/features/scaffolders/interfaces/framework-service.interface.js";
 
-import { IFrameworkService } from "../../interfaces/framework-service.interface.js";
-import { BaseFrameworkService } from "../../services/base-framework.service.js";
 import { SymfonyFileFactory } from "../factories/symfony-file.factory.js";
 
 export class SymfonyService extends BaseFrameworkService implements IFrameworkService {
@@ -13,9 +12,9 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
   readonly frameworkName = "symfony";
   readonly serviceName = "SymfonyService";
 
-  constructor(protected cli: IAppContext) {
-    super(cli);
-  }
+  // constructor(protected cli: IAppContext) {
+  //   super(cli);
+  // }
 
   init(): Promise<void> {
     return Promise.resolve();
@@ -69,7 +68,10 @@ export class SymfonyService extends BaseFrameworkService implements IFrameworkSe
     this.cli.shell.executeSyncSpawn(`symfony`, args, "inherit", true, config.rootProjectPath);
     await Promise.resolve();
   }
-
+  async createBranchGit(config: IInstallFramework): Promise<void> {
+    this.cli.logger.info(`${EMOJI.rond_green} Création de la branche git...`);
+    return Promise.resolve();
+  }
   async installDependencies(config: IInstallFramework): Promise<void> {
     this.cli.logger.info(`${EMOJI.rond_green} Installation des dépendances Symfony...`);
     if (config.framework.mode === "install") {

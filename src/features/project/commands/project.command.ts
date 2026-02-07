@@ -3,8 +3,8 @@ import inquirer from "inquirer";
 
 import { BaseCommand } from "@/commands/BaseCommand.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
-import { FRAMEWORKS } from "@/features/frameworks/common/config/config-frameworks.js";
 import { IProjectCommand } from "@/features/project/interfaces/project-command.interface.js";
+import { FRAMEWORKS } from "@/features/scaffolders/common/config/config-frameworks.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
 

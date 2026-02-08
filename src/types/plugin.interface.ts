@@ -1,7 +1,10 @@
 import { ISDKContext } from "./commun/sdk-context.interface.js";
 
 export interface IPluginService {
-  execute(args: Record<string, unknown>, data: Record<string, unknown>): Promise<void>;
+  execute(
+    args: Record<string, unknown>,
+    data: Record<string, unknown>,
+  ): Promise<void>;
 }
 export interface IPlugin {
   type: string;
@@ -40,7 +43,10 @@ export interface IPluginsIndexJson {
 }
 
 export interface IPluginService {
-  execute(args: Record<string, unknown>, data: Record<string, unknown>): Promise<void>;
+  execute(
+    args: Record<string, unknown>,
+    data: Record<string, unknown>,
+  ): Promise<void>;
 }
 export interface IPluginModule {
   default: new (sdk: ISDKContext) => IPluginService;

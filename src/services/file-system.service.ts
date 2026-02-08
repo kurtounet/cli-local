@@ -13,7 +13,10 @@ import { BaseService } from "./base-service.service.js";
 export type ReaddirOptions = Parameters<typeof fs.readdir>[1];
 export type StatDirectory = Stats;
 
-export class FileSystemService extends BaseService implements IFileSystemService {
+export class FileSystemService
+  extends BaseService
+  implements IFileSystemService
+{
   readonly serviceName = "FileSystemService";
 
   public excludedDirs = [
@@ -65,7 +68,10 @@ export class FileSystemService extends BaseService implements IFileSystemService
     }
   }
 
-  public async readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]> {
+  public async readDirWithFileTypes(
+    dirPath: string,
+    options?: ReaddirOptions,
+  ): Promise<Dirent[]> {
     this.cli.path.validatePath(dirPath, "dirPath");
     try {
       const entries = await fs.readdir(dirPath, {
@@ -124,7 +130,8 @@ export class FileSystemService extends BaseService implements IFileSystemService
       await fs.ensureFile(filePath);
     } catch (error) {
       // this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
-      if (error instanceof Error) throw new Error(`Failed to write file: ${filePath}`);
+      if (error instanceof Error)
+        throw new Error(`Failed to write file: ${filePath}`);
     }
   }
   public async appendFile(filePath: string, content: string): Promise<void> {

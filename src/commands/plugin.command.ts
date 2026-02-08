@@ -16,7 +16,8 @@ type PluginType = "service" | "command" | "scaffolder" | "template" | "plugin";
 
 export class PluginCommand extends BaseCommand<IPluginOptions> {
   public name = "plugin";
-  public description = "Génère un nouveaux Plugin pour la CLI (Service, Command, Template)";
+  public description =
+    "Génère un nouveaux Plugin pour la CLI (Service, Command, Template)";
   public arguments = "<action> [pluginId] [type]";
 
   public options: ICommandOption[] = [
@@ -41,11 +42,21 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     "template",
     "scaffolder",
   ];
-  private readonly validActions: PluginAction[] = ["new", "init", "generate", "list", "delete"];
+  private readonly validActions: PluginAction[] = [
+    "new",
+    "init",
+    "generate",
+    "list",
+    "delete",
+  ];
 
   async execute(args: string[], options: IPluginOptions): Promise<void> {
     // Validation des arguments
-    this.validateArgs(args, 1, "Usage: mclp plugin <action> <pluginId> <type> [options]");
+    this.validateArgs(
+      args,
+      1,
+      "Usage: mclp plugin <action> <pluginId> <type> [options]",
+    );
 
     const [action, pluginId, typePluging] = args;
 
@@ -92,7 +103,9 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
         }
       }
     } catch (error: any) {
-      this.cli.logger.error(`Erreur lors de l'exécution du plugin : ${error.message}`);
+      this.cli.logger.error(
+        `Erreur lors de l'exécution du plugin : ${error.message}`,
+      );
       if (error.stack) {
         this.cli.logger.debug(error.stack);
       }
@@ -104,23 +117,34 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     if (plugins.length > 0) {
       this.cli.logger.info("Liste des plugins disponibles :");
       for (const plugin of plugins) {
-        this.cli.logger.info(`- ${plugin.name} (v${plugin.version ?? "1.0.0"})`);
+        this.cli.logger.info(
+          `- ${plugin.name} (v${plugin.version ?? "1.0.0"})`,
+        );
       }
     } else {
       this.cli.logger.info("Aucun plugin disponible");
     }
   }
 
-  private async handleDelete(pluginId: string, typePluging: string): Promise<void> {
+  private async handleDelete(
+    pluginId: string,
+    typePluging: string,
+  ): Promise<void> {
     await this.cli.plugin.delete(pluginId, typePluging);
   }
 
-  private async handleInit(pluginId: string, typePluging: string): Promise<void> {
+  private async handleInit(
+    pluginId: string,
+    typePluging: string,
+  ): Promise<void> {
     const result = await this.handleScaffolder(pluginId, typePluging);
     await this.executePlugin(result);
   }
 
-  private async handleGenerate(pluginId: string, typePluging: PluginType): Promise<void> {
+  private async handleGenerate(
+    pluginId: string,
+    typePluging: PluginType,
+  ): Promise<void> {
     switch (typePluging) {
       case "scaffolder":
         const result = await this.handleScaffolder(pluginId, typePluging);
@@ -131,7 +155,9 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
       case "command":
       case "template":
       case "plugin":
-        this.cli.logger.warn(`Le type "${typePluging}" n'est pas encore implémenté`);
+        this.cli.logger.warn(
+          `Le type "${typePluging}" n'est pas encore implémenté`,
+        );
         break;
 
       default:
@@ -140,7 +166,10 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     }
   }
 
-  private async handleNew(pluginId: string, typePluging: string): Promise<void> {
+  private async handleNew(
+    pluginId: string,
+    typePluging: string,
+  ): Promise<void> {
     await this.cli.plugin.newPlugin(pluginId, typePluging);
   }
 
@@ -152,7 +181,9 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
   }): Promise<void> {
     const { instance, manifest, pluginDir, data } = result;
 
-    this.cli.logger.info(`Exécution de ${manifest.name} (v${manifest.version ?? "1.0.0"})...`);
+    this.cli.logger.info(
+      `Exécution de ${manifest.name} (v${manifest.version ?? "1.0.0"})...`,
+    );
     this.cli.logger.info(`Chargement du plugin : ${pluginDir}...`);
 
     await instance.execute({}, data);
@@ -180,7 +211,9 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     this.cli.logger.info(`Chargement du ${typePluging} : ${pluginId}...`);
 
     // Charger le fichier de configuration du projet
-    const { project, entitiesJson } = await this.cli.project.loadFileCliLocal(process.cwd());
+    const { project, entitiesJson } = await this.cli.project.loadFileCliLocal(
+      process.cwd(),
+    );
 
     // Charger le plugin
     const { instance, manifest, pluginDir } = (await this.cli.plugin.load(

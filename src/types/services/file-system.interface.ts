@@ -2,7 +2,10 @@ import { Stats } from "node:fs";
 
 import { Dirent } from "fs-extra";
 
-import { ReaddirOptions, StatDirectory } from "@/services/file-system.service.js";
+import {
+  ReaddirOptions,
+  StatDirectory,
+} from "@/services/file-system.service.js";
 
 import { IFileNode } from "../commun/file-node.interface.js";
 
@@ -99,7 +102,12 @@ export interface IFileSystemService {
    * @param fileName - Le nom du fichier final.
    * @param content - Le contenu à écrire.
    */
-  writeToOutput(basePath: string, subDir: string, fileName: string, content: string): Promise<void>;
+  writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): Promise<void>;
 
   /**
    * Lit le contenu d'un fichier en encodage UTF-8.
@@ -125,7 +133,10 @@ export interface IFileSystemService {
    * @param dirPath - Le chemin du répertoire à scanner.
    * @returns La liste des fichiers et dossiers sous forme de `fs.Dirent`.
    */
-  readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]>;
+  readDirWithFileTypes(
+    dirPath: string,
+    options?: ReaddirOptions,
+  ): Promise<Dirent[]>;
   /**
    * Lit le contenu d'un répertoire de manière récursive.
    * @param dirPath - Le chemin du répertoire à scanner.

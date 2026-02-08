@@ -16,7 +16,10 @@ export class PluginService extends BaseService implements IPluginService {
   readonly serviceName = "PluginService";
 
   private pluginsBaseDir = this.cli.path.join(process.cwd(), "plugins");
-  private pluginsIndexJsonPath = this.cli.path.join(this.pluginsBaseDir, "index.json");
+  private pluginsIndexJsonPath = this.cli.path.join(
+    this.pluginsBaseDir,
+    "index.json",
+  );
   private pluginsIndexJson!: IPluginsIndexJson;
   private pluginsManifest!: IPluginManifest;
   private plugin!: IPlugin | null;
@@ -32,17 +35,28 @@ export class PluginService extends BaseService implements IPluginService {
     this.plugin = this.getPluginToIndexJson(pluginId, type);
 
     if (!this.plugin) {
-      throw new Error(`Plugin ${pluginId} non trouvé dans la catégorie ${type}`);
+      throw new Error(
+        `Plugin ${pluginId} non trouvé dans la catégorie ${type}`,
+      );
     }
 
-    this.plugin.pluginDir = this.cli.path.join(this.pluginsBaseDir, this.plugin.pluginDir);
-    const manifestPath = this.cli.path.join(this.plugin.pluginDir, "manifest.json");
+    this.plugin.pluginDir = this.cli.path.join(
+      this.pluginsBaseDir,
+      this.plugin.pluginDir,
+    );
+    const manifestPath = this.cli.path.join(
+      this.plugin.pluginDir,
+      "manifest.json",
+    );
 
     if (!this.cli.fileSystem.exists(manifestPath)) {
-      throw new Error(`le fichier manifest.json du plugin ${pluginId}.json n'existe pas`);
+      throw new Error(
+        `le fichier manifest.json du plugin ${pluginId}.json n'existe pas`,
+      );
     }
 
-    const manifestJson: string = await this.cli.fileSystem.readFile(manifestPath);
+    const manifestJson: string =
+      await this.cli.fileSystem.readFile(manifestPath);
     this.pluginsManifest = JSON.parse(manifestJson) as IPluginManifest;
 
     const isComplet = this.verifyPlugin();
@@ -52,7 +66,10 @@ export class PluginService extends BaseService implements IPluginService {
     }
 
     const sdk: ISDKContext = this.getSDKContext();
-    const service = this.cli.path.join(this.plugin.pluginDir, this.pluginsManifest.service);
+    const service = this.cli.path.join(
+      this.plugin.pluginDir,
+      this.pluginsManifest.service,
+    );
 
     console.log(service);
 
@@ -61,7 +78,9 @@ export class PluginService extends BaseService implements IPluginService {
     const pluginClass = module.default;
 
     if (!pluginClass) {
-      throw new Error(`Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`);
+      throw new Error(
+        `Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`,
+      );
     }
 
     const instance = new pluginClass(sdk);
@@ -82,7 +101,9 @@ export class PluginService extends BaseService implements IPluginService {
     const folders = await this.cli.fileSystem.readDir(this.pluginsBaseDir);
     const availablePlugins = [];
 
-    for (const folder of folders.filter((f: string) => f.includes("manifest.json"))) {
+    for (const folder of folders.filter((f: string) =>
+      f.includes("manifest.json"),
+    )) {
       console.log(folder);
       // if (folder) {
       //   const manifestPath = this.cli.path.join(this.pluginsBaseDir, folder., "manifest.json");
@@ -118,7 +139,12 @@ export class PluginService extends BaseService implements IPluginService {
 
   async newPlugin(pluginId: string, type: string): Promise<string[]> {
     const pluginDir = this.cli.path.join(this.pluginsBaseDir, type, pluginId);
-    const templateDir = this.cli.path.join(this.pluginsBaseDir, "scaffolders", "cli", "plugin");
+    const templateDir = this.cli.path.join(
+      this.pluginsBaseDir,
+      "scaffolders",
+      "cli",
+      "plugin",
+    );
 
     if (this.cli.fileSystem.exists(pluginDir)) {
       throw new Error(`Le plugin ${pluginId} existe deja`);
@@ -143,7 +169,12 @@ export class PluginService extends BaseService implements IPluginService {
         "manifest.json",
         data,
       ),
-      [servicePath]: await this.cli.template.render(servicePath, templateDir, "service.js", data),
+      [servicePath]: await this.cli.template.render(
+        servicePath,
+        templateDir,
+        "service.js",
+        data,
+      ),
       [templatePath]: await this.cli.template.render(
         templatePath,
         templateDir,
@@ -179,7 +210,9 @@ export class PluginService extends BaseService implements IPluginService {
     const plugin = this.getPluginToIndexJson(pluginId, type);
 
     if (plugin === null) {
-      throw new Error(`Plugin ${pluginId} non trouvé dans la catégorie ${type}`);
+      throw new Error(
+        `Plugin ${pluginId} non trouvé dans la catégorie ${type}`,
+      );
     }
 
     const initialLength = pluginsIndex.plugins[type].length;
@@ -241,7 +274,13 @@ export class PluginService extends BaseService implements IPluginService {
     }
 
     if (this.plugin.type === "scaffolder") {
-      propertiesManifest = ["id", "name", "templateDir", "service", "blueprints"];
+      propertiesManifest = [
+        "id",
+        "name",
+        "templateDir",
+        "service",
+        "blueprints",
+      ];
     } else if (this.plugin.type === "tool") {
       propertiesManifest = ["id", "name", "service"];
     }
@@ -259,7 +298,10 @@ export class PluginService extends BaseService implements IPluginService {
         this.pluginsManifest.templateDir,
       );
     }
-    pathPlugin.service = this.cli.path.join(this.plugin.pluginDir, this.pluginsManifest.service);
+    pathPlugin.service = this.cli.path.join(
+      this.plugin.pluginDir,
+      this.pluginsManifest.service,
+    );
 
     if (errors.length > 0) {
       throw new Error(errors.join("\n"));
@@ -281,7 +323,10 @@ export class PluginService extends BaseService implements IPluginService {
 
     if (this.pluginsManifest.blueprints) {
       for (const blueprint of this.pluginsManifest.blueprints) {
-        const blueprintPath = this.cli.path.join(pathPlugin.templateDir, blueprint.template);
+        const blueprintPath = this.cli.path.join(
+          pathPlugin.templateDir,
+          blueprint.template,
+        );
         if (!this.cli.fileSystem.exists(blueprintPath)) {
           errors.push(
             `Le template ${blueprint.template} du plugin ${this.pluginsManifest.id} n'existe pas`,

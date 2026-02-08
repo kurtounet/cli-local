@@ -26,8 +26,12 @@ export class TemplateService extends BaseService implements ITemplateService {
     let compiled = this.cache.get(cacheKey);
 
     if (!compiled) {
-      const fullPath = this.cli.path.join(templateDir, templateNameWithExtension);
-      if (!this.cli.fileSystem.exists(fullPath)) throw new Error(`Template manquante: ${fullPath}`);
+      const fullPath = this.cli.path.join(
+        templateDir,
+        templateNameWithExtension,
+      );
+      if (!this.cli.fileSystem.exists(fullPath))
+        throw new Error(`Template manquante: ${fullPath}`);
 
       const content = await this.cli.fileSystem.readFile(fullPath);
       compiled = ejs.compile(content);

@@ -1,32 +1,55 @@
 {
   "plugins": {
-    "tool": [
+    "scaffolders": [
       {
         "type": "cli",
-        "id": "architecture",
-        "pluginDir": "/tools/architecture"
-      }
-    ],
-    "scaffolder": [
+        "description": "Créer une nouvelle commande",
+        "id": "command",
+        "pluginDir": "scaffolders/cli/command"
+      },
+      {
+        "type": "cli",
+        "description": "Créer un nouveau plugin",
+        "id": "plugin",
+        "pluginDir": "scaffolders/cli/plugin"
+      },
+      {
+        "type": "cli",
+        "description": "Créer un nouveau service",
+        "id": "service",
+        "pluginDir": "scaffolders/cli/service"
+      },
       {
         "type": "framework",
+        "description": "Générer des fichier pour un projet Symfony",
         "id": "symfony",
         "pluginDir": "scaffolders/frameworks/symfony"
       },
       {
         "type": "framework",
+        "description": "Générer des fichier pour un projet Angular",
         "id": "angular",
         "pluginDir": "scaffolders/frameworks/angular"
       },
       {
         "type": "framework",
+        "description": "Générer des fichier pour un projet Nuxt",
         "id": "nuxt",
         "pluginDir": "scaffolders/frameworks/nuxt"
       },
       {
         "type": "framework",
+        "description": "Générer des fichier pour un projet Nitro",
         "id": "nitro",
         "pluginDir": "scaffolders/frameworks/nitro"
+      }
+    ],
+    "tools": [
+      {
+        "type": "tools",
+        "description": "Récupère l'architecture du projet",
+        "id": "architecture",
+        "pluginDir": "/tools/architecture"
       }
     ]
   }

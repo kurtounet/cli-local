@@ -8,7 +8,7 @@
       "type": "resource",
       "scope": "entity",
       "target": "src/ApiResource/Resources",
-      "template": "resource.php.ejs",
+      "template": "api-platform/resource/resource.php.ejs",
       "suffix": "Resource",
       "platform": "api-platform"
     },
@@ -16,15 +16,15 @@
       "type": "mapper",
       "scope": "entity",
       "target": "src/ApiResource/Mappers",
-      "template": "mapper.php.ejs",
+      "template": "api-platform/mapper/mapper.php.ejs",
       "suffix": "Mapper",
       "platform": "api-platform"
     },
     {
-      "type": "provider-item",
+      "type": "provider",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-      "template": "provider.php.ejs",
+      "template": "api-platform/state/provider.php.ejs",
       "suffix": "ItemProvider",
       "platform": "api-platform"
     },
@@ -37,7 +37,7 @@
       "platform": "api-platform"
     },
     {
-      "type": "processor-create",
+      "type": "processor",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
       "template": "processor.php.ejs",
@@ -45,7 +45,7 @@
       "platform": "api-platform"
     },
     {
-      "type": "processor-update",
+      "type": "processor",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
       "template": "update-processor.php.ejs",
@@ -53,7 +53,7 @@
       "platform": "api-platform"
     },
     {
-      "type": "processor-delete",
+      "type": "processor",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
       "template": "delete-processor.php.ejs",
@@ -77,7 +77,7 @@
       "platform": "symfony"
     },
     {
-      "type": "dto-item",
+      "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
       "template": "dto.php.ejs",
@@ -85,7 +85,7 @@
       "platform": "api-platform"
     },
     {
-      "type": "dto-collection",
+      "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
       "template": "collection-item-dto.php.ejs",
@@ -93,7 +93,7 @@
       "platform": "api-platform"
     },
     {
-      "type": "dto-create",
+      "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
       "template": "create-dto.php.ejs",
@@ -101,7 +101,7 @@
       "platform": "api-platform"
     },
     {
-      "type": "dto-update",
+      "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
       "template": "update-dto.php.ejs",
@@ -125,7 +125,7 @@
       "platform": "symfony"
     },
     {
-      "type": "test-controller",
+      "type": "test",
       "scope": "entity",
       "target": "tests/Controller",
       "template": "test.php.ejs",
@@ -133,23 +133,23 @@
       "platform": "symfony"
     },
     {
-      "type": "service-iri",
+      "type": "service",
       "scope": "project",
       "target": "src/ApiResource/Services",
       "template": "services/iri-from-resource.php.ejs",
-      "suffix": "IriFromResource",
+      "suffix": "",
       "platform": "api-platform"
     },
     {
-      "type": "command-crud-all",
+      "type": "command",
       "scope": "project",
       "target": "src/Command",
       "template": "commands/crud-all.php.ejs",
-      "suffix": "Command",
+      "suffix": "",
       "platform": "symfony"
     },
     {
-      "type": "env-local",
+      "type": "env",
       "scope": "project",
       "target": "./",
       "template": "env/env.local.ejs",

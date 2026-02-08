@@ -1,0 +1,55 @@
+<?php
+
+namespace App\ApiResource\Mappers;
+
+use App\ApiResource\Services\IriFromResource;
+use ApiPlatform\Metadata\IriConverterInterface;
+use App\ApiResource\Dtos\<%= entity.namePascalCase %>\<%= entity.namePascalCase %>CollectionItemDto;
+use App\ApiResource\Dtos\<%= entity.namePascalCase %>\<%= entity.namePascalCase %>CreateDto;
+use App\ApiResource\Dtos\<%= entity.namePascalCase %>\<%= entity.namePascalCase %>ItemDto;
+use App\ApiResource\Dtos\<%= entity.namePascalCase %>\<%= entity.namePascalCase %>UpdateDto;
+use App\ApiResource\Resources\<%= entity.namePascalCase %>\<%= entity.namePascalCase %>Resource;
+use App\Entity\<%= entity.namePascalCase %>;
+use Doctrine\ORM\EntityManagerInterface;
+
+class <%= entity.namePascalCase %>Mapper
+{
+    public function __construct(
+        private EntityManagerInterface $em,
+        private IriFromResource $iriFromResource,
+        private IriConverterInterface $iriConverter,
+    ) {}
+
+    public function entityToItemDto(<%= entity.namePascalCase %> $entity): <%= entity.namePascalCase %>ItemDto
+    {
+        $dto = new <%= entity.namePascalCase %>ItemDto();
+        $this->scalarEntityToDto($entity, $dto);
+        $this->relationsEntityToDto($entity, $dto);
+        return $dto;
+    }
+
+    public function entityToCollectionDto(<%= entity.namePascalCase %> $entity): <%= entity.namePascalCase %>CollectionItemDto
+    {
+        $dto = new <%= entity.namePascalCase %>CollectionItemDto();
+        $this->scalarEntityToDto($entity, $dto);
+        $this->relationsEntityToDto($entity, $dto);
+        return $dto;
+    }
+
+    public function createDtoToEntity(<%= entity.namePascalCase %>CreateDto $dto): <%= entity.namePascalCase %>
+    {
+        $entity = new <%= entity.namePascalCase %>();
+        $this->scalarDtoToEntity($dto, $entity);
+        $this->relationsDtoToEntity($dto, $entity);
+        return $entity;
+    }
+
+    public function updateDtoToEntity(<%= entity.namePascalCase %>UpdateDto $dto, <%= entity.namePascalCase %> $entity): <%= entity.namePascalCase %>
+    {
+        $this->scalarDtoToEntity($dto, $entity);
+        $this->relationsDtoToEntity($dto, $entity);
+        return $entity;
+    }
+
+    <%- await include('partials/mapper-logic.php.ejs', { entity: entity }) %>
+}

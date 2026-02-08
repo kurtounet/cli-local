@@ -13,10 +13,7 @@ import { BaseService } from "./base-service.service.js";
 export type ReaddirOptions = Parameters<typeof fs.readdir>[1];
 export type StatDirectory = Stats;
 
-export class FileSystemService
-  extends BaseService
-  implements IFileSystemService
-{
+export class FileSystemService extends BaseService implements IFileSystemService {
   readonly serviceName = "FileSystemService";
 
   public excludedDirs = [
@@ -67,10 +64,8 @@ export class FileSystemService
       throw error instanceof Error ? error : new Error(message);
     }
   }
-  public async readDirWithFileTypes(
-    dirPath: string,
-    options?: ReaddirOptions,
-  ): Promise<Dirent[]> {
+
+  public async readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]> {
     this.cli.path.validatePath(dirPath, "dirPath");
     try {
       const entries = await fs.readdir(dirPath, {
@@ -86,17 +81,15 @@ export class FileSystemService
     }
   }
 
-  public async readDir(
-    dirPath: string,
-    options?: fs.ReadOptions,
-  ): Promise<string[]> {
+  public async readDir(dirPath: string): Promise<string[]> {
     this.cli.path.validatePath(dirPath, "dirPath");
 
     try {
-      return (await fs.readdir(dirPath, {
-        ...options,
+      return await fs.readdir(dirPath, {
+        encoding: "utf-8",
+        recursive: true,
         withFileTypes: false, // verrouille le contrat
-      })) as string[];
+      });
     } catch (error) {
       const message = `Unable to read directory: ${dirPath}`;
       // this.cli.errorHandler.handle(error, message);
@@ -113,6 +106,16 @@ export class FileSystemService
         throw new Error(`Failed to write file: ${dirPath}: ${error.message}`);
     }
   }
+
+  public async removeDirectory(dirPath: string): Promise<void> {
+    this.cli.path.validatePath(dirPath, "dirPath");
+    try {
+      await fs.remove(dirPath);
+    } catch (error) {
+      // this.cli.errorHandler.handle(error, `Failed to remove directory: ${dirPath}`);
+      throw new Error(`Failed to remove directory: ${dirPath}`);
+    }
+  }
   //FILE
 
   public async ensureFile(filePath: string): Promise<void> {
@@ -121,7 +124,7 @@ export class FileSystemService
       await fs.ensureFile(filePath);
     } catch (error) {
       // this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
-      throw new Error(`Failed to write file: ${filePath}`);
+      if (error instanceof Error) throw new Error(`Failed to write file: ${filePath}`);
     }
   }
   public async appendFile(filePath: string, content: string): Promise<void> {
@@ -159,7 +162,7 @@ export class FileSystemService
     try {
       await fs.outputFile(cleanPath, content);
     } catch (error) {
-      throw new Error(`Failed to write file: ${filePath}`);
+      throw new Error(`Failed to write file: ${filePath}: ${error.message}`);
       // this.cli.errorHandler.handle(error, `Failed to write file: ${cleanPath}`);
       //    throw new Error(`Failed to write file: ${filePath}`);
     }

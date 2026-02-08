@@ -1,5 +1,4 @@
 import ejs from "ejs";
-import path from "path";
 
 import { ITemplateService } from "@/types/services/template.interface.js";
 
@@ -20,13 +19,15 @@ export class TemplateService extends BaseService implements ITemplateService {
     templateName: string,
     data: Record<string, unknown>,
   ): Promise<string> {
-    const cacheKey = `${pluginDir}:${templateName}`;
+    const templateNameWithExtension = templateName.endsWith(".ejs")
+      ? templateName
+      : templateName + ".ejs";
+    const cacheKey = `${pluginDir}:${templateNameWithExtension}`;
     let compiled = this.cache.get(cacheKey);
 
     if (!compiled) {
-      const fullPath = this.cli.path.join(pluginDir, templateDir, templateName);
-      if (!this.cli.fileSystem.exists(fullPath))
-        throw new Error(`Template manquante: ${fullPath}`);
+      const fullPath = this.cli.path.join(templateDir, templateNameWithExtension);
+      if (!this.cli.fileSystem.exists(fullPath)) throw new Error(`Template manquante: ${fullPath}`);
 
       const content = await this.cli.fileSystem.readFile(fullPath);
       compiled = ejs.compile(content);

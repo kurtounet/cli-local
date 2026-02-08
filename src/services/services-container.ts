@@ -1,5 +1,5 @@
-import { IBaseService } from "@/types/base-service.interface.js";
-import { IServicesContainer } from "@/types/services-container.interface.js";
+import { IBaseService } from "@/types/services/base-service.interface.js";
+import { IServicesContainer } from "@/types/services/services-container.interface.js";
 
 /**
  * Conteneur de services (Service Container)
@@ -28,6 +28,10 @@ export class ServicesContainer implements IServicesContainer {
    */
   public register(name: string, service: IBaseService): void {
     this.services.set(name, service);
+  }
+
+  public has(name: string): boolean {
+    return this.services.has(name);
   }
 
   /**

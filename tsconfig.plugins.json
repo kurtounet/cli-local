@@ -3,11 +3,14 @@
         "target": "ES2022",
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
-        "rootDirs": [
-            "plugins-src",
-            "src/types"
-        ],
+        "rootDir": "plugins-src",
         "outDir": "plugins",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "plugins-src/*"
+            ]
+        },
         "skipLibCheck": true,
         "strictNullChecks": true,
         "noImplicitAny": true,
@@ -16,7 +19,9 @@
         "isolatedModules": true
     },
     "include": [
-        "plugins-src/**/*.ts",
-        "src/types/*.ts"
+        "plugins-src/**/*.ts"
+    ],
+    "exclude": [
+        "plugins"
     ]
 }

@@ -1,20 +1,13 @@
-import { IConfigFramework } from "@/features/commun/framework.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
-import {
-  IBagData,
-  IEntityColumn,
-  IEntityDefinition,
-  IProjectBag,
-} from "@/types/commun/data-bag.interface.js";
-import { ISDKContext } from "@/types/commun/sdk-context.interface.js";
 import {
   IPackPlugin,
   IPlugin,
   IPluginManifest,
-  IPluginModule,
   IPluginsIndexJson,
-} from "@/types/plugin.interface.js";
+} from "@/types/plugins/plugin.interface.js";
+import { ITemplateContext } from "@/types/plugins/plugin-execution-context.interface.js";
+import { ISDKContext } from "@/types/plugins/sdk-context.interface.js";
 import { IPluginService } from "@/types/services/plugin-service.interface.js";
 
 import { BaseService } from "./base-service.service.js";
@@ -60,12 +53,24 @@ export class PluginService extends BaseService implements IPluginService {
     const sdk: ISDKContext = this.getSDKContext();
     const service = this.cli.path.join(this.plugin.pluginDir, this.pluginsManifest.service);
 
-    const module = (await import(`file://${service}`)) as IPluginModule;
+    const module = (await import(`file://${service}`)) as IPluginService;
 
-    const pluginClass = module.default;
+    // Résoudre le constructeur en gérant le double wrapping
+    const pluginClass = module.default?.default || module.default || module;
 
     if (!pluginClass) {
       throw new Error(`Le plugin ${pluginId} n'a pas d'exportation par défaut (export default).`);
+    }
+    console.log("[DEBUG] Module keys:", Object.keys(module));
+    console.log("[DEBUG] module.default:", module.default);
+    console.log("[DEBUG] Type of pluginClass:", typeof pluginClass);
+    console.log("[DEBUG] pluginClass.name:", pluginClass?.name);
+
+    if (typeof pluginClass !== "function") {
+      throw new Error(
+        `Le plugin ${pluginId} n'exporte pas un constructeur valide. ` +
+          `Type reçu: ${typeof pluginClass}`,
+      );
     }
 
     const instance = new pluginClass(sdk);
@@ -301,7 +306,7 @@ export class PluginService extends BaseService implements IPluginService {
     return true;
   }
 
-  private getSDKContext(): ISDKContext {
+  public getSDKContext(): ISDKContext {
     return {
       log: {
         info: (msg: string) => this.cli.logger.info(msg),
@@ -320,14 +325,14 @@ export class PluginService extends BaseService implements IPluginService {
       config: this.cli.config as any,
     };
   }
-  public async buildBagData(
+  public async buildTemplateContext(
     configProjectData: IProjectConfig,
     entitiesData: IGetEntityJson,
-  ): Promise<IBagData> {
-    let bagData!: IBagData;
+  ): Promise<ITemplateContext> {
+    let bagData!: ITemplateContext;
     if (this.cli.fileSystem.exists(this.bagDataFile)) {
       const file = await this.cli.fileSystem.readFile(this.bagDataFile);
-      bagData = JSON.parse(file) as IBagData;
+      bagData = JSON.parse(file) as ITemplateContext;
     }
 
     return bagData;

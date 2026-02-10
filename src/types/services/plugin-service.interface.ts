@@ -1,8 +1,9 @@
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
 
-import { IBagData } from "../commun/data-bag.interface.js";
-import { IPlugin } from "../plugin.interface.js";
+import { IPlugin } from "../plugins/plugin.interface.js";
+import { ITemplateContext } from "../plugins/plugin-execution-context.interface.js";
+import { ISDKContext } from "../plugins/sdk-context.interface.js";
 import { IBaseService } from "./base-service.interface.js";
 
 export interface IPluginService extends IBaseService {
@@ -14,7 +15,11 @@ export interface IPluginService extends IBaseService {
   initPlugins(pluginId: string, type: string): Promise<void>;
   newPlugin(pluginId: string, type: string): Promise<any>;
   delete(pluginId: string, type: string): Promise<void>;
-  buildBagData(configProjectData: IProjectConfig, entitiesData: IGetEntityJson): Promise<IBagData>;
+  buildTemplateContext(
+    configProjectData: IProjectConfig,
+    entitiesData: IGetEntityJson,
+  ): Promise<ITemplateContext>;
+  getSDKContext(): ISDKContext;
   // plugins: Map<string, unknown>;
   // registerPlugin(PluginClass: unknown): Promise<void>;
   // run(pluginName: string, args: string[]): Promise<unknown>;

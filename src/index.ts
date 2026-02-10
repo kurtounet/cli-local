@@ -1,3 +1,5 @@
+export * from "./types/plugins/index.js";
+
 import { AppCommand } from "./commands/app.command.js";
 import { DocCommand } from "./commands/doc.command.js";
 // import { GenerateCommand } from "./commands/generate.command.js";

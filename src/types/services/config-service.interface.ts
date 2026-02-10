@@ -6,7 +6,10 @@ export interface IConfigService extends IBaseService {
   logLevel: "debug" | "info" | "warn" | "error";
   init(): Promise<void>;
   load(projectPath: string): Promise<IAppConfig>;
-  initConfigFile(projectPath: string, dataFrom?: IAppConfig): Promise<IAppConfig>;
+  initConfigFile(
+    projectPath: string,
+    dataFrom?: IAppConfig,
+  ): Promise<IAppConfig>;
   defaults: Record<string, unknown>;
   current: IAppConfig;
 }

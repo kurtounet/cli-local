@@ -74,3 +74,47 @@ export interface IEntityRelationship {
   nullable: boolean;
   inversedBy: string;
 }
+export interface IProjectTemplateData {
+  name: string;
+  version: string;
+  databases: IConfigDatabase[];
+  env?: Record<string, any>;
+  db?: IConfigDatabase;
+}
+
+export interface IColumnTemplateData {
+  phpType: string;
+  name: string;
+  nameCamelCase: string;
+  namePascalCase: string;
+  foreignKey: boolean;
+  ormType: string;
+  nullable: boolean;
+  typeSql: string;
+  typeTypeScript: string;
+  primaryKey: boolean;
+  unique: boolean;
+}
+
+export interface IRelationshipTemplateData {
+  nameCamelCase: string;
+  namePascalCase: string;
+  targetPascalCase: string;
+  relationType: "ManyToOne" | "OneToMany" | "ManyToMany" | "OneToOne";
+  targetPascalCaseSingular: string;
+  mappedBy: string;
+  ownerPascalCase: string;
+  nullable: boolean;
+  inversedBy: string;
+}
+
+export interface IEntityTemplateData {
+  namePascalCase: string;
+  nameKebabCase: string;
+  nameSnakeCase: string;
+  namePluralCamelCase: string;
+  nameCamelCase: string;
+  tableName: string;
+  columns: IColumnTemplateData[];
+  relationships: IRelationshipTemplateData[];
+}

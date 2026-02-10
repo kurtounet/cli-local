@@ -99,7 +99,12 @@ export interface IFileSystemService {
    * @param fileName - Le nom du fichier final.
    * @param content - Le contenu à écrire.
    */
-  writeToOutput(basePath: string, subDir: string, fileName: string, content: string): Promise<void>;
+  writeToOutput(
+    basePath: string,
+    subDir: string,
+    fileName: string,
+    content: string,
+  ): Promise<void>;
 
   /**
    * Lit le contenu d'un fichier en encodage UTF-8.
@@ -125,7 +130,10 @@ export interface IFileSystemService {
    * @param dirPath - Le chemin du répertoire à scanner.
    * @returns La liste des fichiers et dossiers sous forme de `fs.Dirent`.
    */
-  readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]>;
+  readDirWithFileTypes(
+    dirPath: string,
+    options?: ReaddirOptions,
+  ): Promise<Dirent[]>;
 
   /**
    * Met à jour un fichier JSON (ex: package.json) avec les configurations par défaut du CLI.

@@ -8,10 +8,7 @@ import {
   IPluginManifest,
   IPluginService,
 } from "@/types/plugins/plugin.interface.js";
-import {
-  ITemplateContext,
-  ITemplateData,
-} from "@/types/plugins/plugin-execution-context.interface.js";
+import { ITemplateContext } from "@/types/plugins/plugin-execution-context.interface.js";
 
 import { BaseCommand } from "./BaseCommand.js";
 
@@ -50,10 +47,20 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     "template",
     "scaffolder",
   ];
-  private readonly validActions: PluginAction[] = ["new", "init", "generate", "list", "delete"];
+  private readonly validActions: PluginAction[] = [
+    "new",
+    "init",
+    "generate",
+    "list",
+    "delete",
+  ];
 
   async execute(args: string[], options: IPluginOptions): Promise<void> {
-    this.validateArgs(args, 1, "Usage: mclp plugin <action> [pluginId] [type] [options]");
+    this.validateArgs(
+      args,
+      1,
+      "Usage: mclp plugin <action> [pluginId] [type] [options]",
+    );
 
     const [action, pluginId, typePlugin] = args;
 
@@ -65,8 +72,13 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     }
 
     // Validation spécifique pour les actions nécessitant un ID et un Type
-    if (["generate", "new", "delete", "init"].includes(action) && (!pluginId || !typePlugin)) {
-      this.cli.logger.error(`L'action "${action}" requiert un [pluginId] et un [type]`);
+    if (
+      ["generate", "new", "delete", "init"].includes(action) &&
+      (!pluginId || !typePlugin)
+    ) {
+      this.cli.logger.error(
+        `L'action "${action}" requiert un [pluginId] et un [type]`,
+      );
       return;
     }
 
@@ -85,12 +97,17 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
           break;
         case "generate":
         case "init":
-          await this.handleGenerate(pluginId, typePlugin as PluginType, options);
+          await this.handleGenerate(
+            pluginId,
+            typePlugin as PluginType,
+            options,
+          );
           break;
       }
     } catch (error) {
       this.cli.logger.error(`Erreur : ${error.message}`);
-      if (this.cli.config.logLevel === "debug") this.cli.logger.debug(error.stack);
+      if (this.cli.config.logLevel === "debug")
+        this.cli.logger.debug(error.stack);
     }
   }
 
@@ -114,11 +131,16 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     this.cli.logger.info(`Chargement du ${type} : ${pluginId}...`);
 
     // 1. Récupération des données projet (Entités, config, etc.)
-    const { project, entitiesJson } = (await this.cli.project.loadFileCliLocal(process.cwd())) as {
+    const { project, entitiesJson } = (await this.cli.project.loadFileCliLocal(
+      process.cwd(),
+    )) as {
       project: IProjectConfig;
       entitiesJson: IGetEntityJson;
     };
-    const templateContext = await this.cli.plugin.buildTemplateContext(project, entitiesJson);
+    const templateContext = await this.cli.plugin.buildTemplateContext(
+      project,
+      entitiesJson,
+    );
 
     // 2. Chargement du plugin via PluginService
     const pack = (await this.cli.plugin.load(pluginId, type)) as IPackPlugin;
@@ -131,15 +153,20 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
     };
   }
 
-  private async executePlugin(result: any, args: IPluginOptions): Promise<void> {
+  private async executePlugin(
+    result: any,
+    args: IPluginOptions,
+  ): Promise<void> {
     const { instance, manifest, pluginDir, templateContext } = result as {
       instance: IPluginService;
       manifest: IPluginManifest;
       pluginDir: string;
       templateContext: ITemplateContext;
     };
-    console.error("[templateContext]", templateContext);
-    this.cli.logger.info(`🚀 Exécution de : ${manifest.name} (v${manifest.version ?? "1.0.0"})`);
+
+    this.cli.logger.info(
+      `🚀 Exécution de : ${manifest.name} (v${manifest.version ?? "1.0.0"})`,
+    );
     // this.cli.logger.info(`🚀 IBagData : ${JSON.stringify(data)}`);
 
     // On passe les options CLI (force, dry-run) et les données projet au plugin
@@ -160,7 +187,9 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
       return;
     }
     this.cli.logger.info("Plugins installés :");
-    plugins.forEach((p) => this.cli.logger.info(`- [${p.type}] ${p.id} : ${p.name}`));
+    plugins.forEach((p) =>
+      this.cli.logger.info(`- [${p.type}] ${p.id} : ${p.description}`),
+    );
   }
 
   private isValidAction(a: string): a is PluginAction {

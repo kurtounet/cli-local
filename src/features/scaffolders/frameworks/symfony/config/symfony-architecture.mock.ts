@@ -1,66 +1,93 @@
+import { IDirectory } from "@/features/commun/architecture.interface.js";
+
 /**
- *
+ *Construit l'architecture Symfony
+ *@returns Architecture Symfony
  */
-export function ARCHITECTURE_SYMFONY_MOCK() {
+export function dirSymfony(): IDirectory[] {
+  let architectureSymfony: IDirectory[] = [];
+  const dir = [
+    "src/Dto",
+    "src/Entity",
+    "src/EventListener",
+    "src/EventSubscriber",
+    "src/State",
+    "src/Service",
+    "src/Traits",
+    "src/Utils",
+  ];
+  architectureSymfony = dir.map((d) => ({
+    type: "directory",
+    pathInProject: d,
+    path: "./",
+    name: d.replace("src/", ""),
+    extension: "",
+    size: 0,
+    level: 2,
+    gitIgnore: true,
+    children: [],
+  }));
+
+  return architectureSymfony;
+}
+
+/**
+ * Construit l'architecture du Projet
+ *@returns Objet:IDirectory[] qui représente l'Architecture Projet
+ */
+export function ARCHITECTURE_SYMFONY_MOCK(): IDirectory[] {
   return [
     {
-      _type: "directory",
-      name: ".doc",
-      gitIgnore: true,
+      type: "directory",
       pathInProject: "./",
+      path: "./",
+      name: ".doc",
+      extension: "",
+      size: 0,
+      level: 1,
+      gitIgnore: true,
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
+      pathInProject: "./src",
+      path: "./src",
       name: "src",
+      extension: "",
+      size: 0,
+      level: 1,
       gitIgnore: true,
-      pathInProject: "./",
-      children: [
-        {
-          _type: "directory",
-          name: "Dto",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "Service",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "EventListener",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "EventSubscriber",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "State",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "Traits",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-      ],
+      children: [...dirSymfony()],
     },
   ];
+}
+
+/**
+ *
+ */
+export function dirApi(): IDirectory[] {
+  let architectureSymfony: IDirectory[] = [];
+  const dir = [
+    "src/ApiResource",
+    "src/ApiResource/Dtos",
+    "src/ApiResource/Resources",
+    "src/ApiResource/States",
+    "src/ApiResource/Mappers",
+    "src/ApiResource/Services",
+  ];
+  architectureSymfony = dir.map((d) => ({
+    type: "directory",
+    pathInProject: d,
+    path: "./",
+    name: d.replace("src/", ""),
+    extension: "",
+    size: 0,
+    level: 2,
+    gitIgnore: true,
+    children: [],
+  }));
+
+  return architectureSymfony;
 }
 /**
  *
@@ -68,95 +95,53 @@ export function ARCHITECTURE_SYMFONY_MOCK() {
 export function ARCHITECTURE_SYMFONY_API_PLATFORM_MOCK() {
   return [
     {
-      _type: "directory",
+      type: "directory",
       name: ".doc",
       gitIgnore: true,
       pathInProject: "./",
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "src",
       gitIgnore: true,
       pathInProject: "./",
       children: [
         {
-          _type: "directory",
+          type: "directory",
           name: "ApiResource",
           gitIgnore: false,
           pathInProject: "src",
           children: [
             {
-              _type: "directory",
+              type: "directory",
               name: "Mappers",
               gitIgnore: false,
               pathInProject: "src/ApiResource",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "Dto",
               gitIgnore: false,
               pathInProject: "src/ApiResource",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "Resources",
               gitIgnore: false,
               pathInProject: "src/ApiResource",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "State",
               gitIgnore: false,
               pathInProject: "src/ApiResource",
               children: [],
             },
           ],
-        },
-        {
-          _type: "directory",
-          name: "Dto",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "Services",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "EventListeners",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "EventSubscribers",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "States",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
-        },
-        {
-          _type: "directory",
-          name: "Traits",
-          gitIgnore: false,
-          pathInProject: "src",
-          children: [],
         },
       ],
     },

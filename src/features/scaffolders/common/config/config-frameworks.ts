@@ -1,5 +1,5 @@
 import { CONFIG_INIT_ANGULAR } from "../../frameworks/angular/config/angular-config-ini.mock.js";
-import { CONFIG_INIT_SYMFONY } from "../../frameworks/symfony/config/symfony-config-ini.mock.js";
+import { CONFIG_INIT_SYMFONY } from "../../frameworks/symfony/config/index.js";
 
 export const FRAMEWORK_MAP: Record<string, any> = {
   symfony: CONFIG_INIT_SYMFONY,
@@ -48,13 +48,7 @@ export const DATABASE_MAP: Record<string, any> = {
 
 export const FRAMEWORKS_FRONTEND = ["Angular", "Nuxtjs", "no"];
 export const DATABASES = ["Mysql", "Postgres", "Mongodb", "Sqlite", "no"];
-export const FRAMEWORKS_BACKEND = [
-  "Nitro",
-  "Nestjs",
-  "Symfony",
-  "Electron",
-  "no",
-];
+export const FRAMEWORKS_BACKEND = ["Nitro", "Nestjs", "Symfony", "Electron", "no"];
 
 export const FRAMEWORKS = {
   databases: DATABASES,

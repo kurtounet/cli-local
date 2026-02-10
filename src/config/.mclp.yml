@@ -21,8 +21,7 @@ tree:
     extensions:
       - .ts
       - .js
-      - .tsx
-      - .jsx
+
     # Profondeur par défaut (0 = infini)
     maxLevel: 0
 

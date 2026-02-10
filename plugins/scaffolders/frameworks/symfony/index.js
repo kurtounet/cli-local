@@ -1,28 +1,28 @@
 export default class SymfonyPlugin {
-  constructor(ctx) {
-    this.ctx = ctx;
-  }
-
-  async execute(args, data) {
-    // FIX : Utilise 'this.ctx.log' et non 'this.ctx.logger.info'
-    this.ctx.log("🚀 Démarrage du plugin Symfony...");
-
-    // On récupère les blueprints définis dans le manifest.json
-    // Note : Tu peux passer le manifest complet dans le SDK lors du load()
-    const blueprints = data.blueprints;
-    console.log(args);
-    console.log(data.entities);
-
-    for (const entity of data.entities) {
-      for (const bp of blueprints) {
-        // On cherche le template correspondant au 'type' (entity.php.ejs)
-        const content = await this.ctx.render(`${bp.type}.php`, { entity });
-        const fileName = `${entity.name}${bp.suffix}.php`;
-        const destination = `./output/${bp.target}/${fileName}`;
-
-        await this.ctx.fs.writeAsync(destination, content);
-      }
+    sdk;
+    constructor(sdk) {
+        this.sdk = sdk;
     }
-    this.ctx.log("✅ Tous les blueprints ont été générés.");
-  }
+    async execute(blueprint, options) {
+        this.sdk.log.success(`[Symfony] Plugin chargé.${process.cwd()}`);
+        const data = {
+            className: options.name ?? "DefaultController",
+            namespace: "App\\Controller",
+        };
+        const pluginDir = process.cwd() + "/plugins/scaffolders/frameworks/symfony";
+        const templateDir = "templates";
+        const templateName = "controller/controller.php.ejs";
+        // Ton PluginService utilisera ce chemin pour EJS
+        console.log(pluginDir);
+        try {
+            const content = await this.sdk.render(pluginDir, templateDir, templateName, data);
+            this.sdk.log.success(`[Symfony]:${content}`);
+            await this.sdk.fs.writeAsync(`./src/Controller/${data.className}.php`, content);
+            this.sdk.log.success(`[Symfony] ${data.className} généré.`);
+        }
+        catch (error) {
+            this.sdk.log.error(`Erreur lors de la génération du contrôleur: ${error}`);
+            throw error;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 {
   "plugins": {
-    "scaffolders": [
+    "scaffolder": [
       {
         "type": "cli",
         "description": "Créer une nouvelle commande",
@@ -44,7 +44,7 @@
         "pluginDir": "scaffolders/frameworks/nitro"
       }
     ],
-    "tools": [
+    "tool": [
       {
         "type": "tools",
         "description": "Récupère l'architecture du projet",

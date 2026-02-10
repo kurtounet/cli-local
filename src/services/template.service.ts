@@ -19,6 +19,7 @@ export class TemplateService extends BaseService implements ITemplateService {
     templateName: string,
     data: Record<string, unknown>,
   ): Promise<string> {
+    this.cli.logger.success(`[Template] Plugin chargé.${pluginDir}/${templateDir}/${templateName}`);
     const templateNameWithExtension = templateName.endsWith(".ejs")
       ? templateName
       : templateName + ".ejs";
@@ -26,12 +27,8 @@ export class TemplateService extends BaseService implements ITemplateService {
     let compiled = this.cache.get(cacheKey);
 
     if (!compiled) {
-      const fullPath = this.cli.path.join(
-        templateDir,
-        templateNameWithExtension,
-      );
-      if (!this.cli.fileSystem.exists(fullPath))
-        throw new Error(`Template manquante: ${fullPath}`);
+      const fullPath = this.cli.path.join(pluginDir, templateDir, templateNameWithExtension);
+      if (!this.cli.fileSystem.exists(fullPath)) throw new Error(`Template manquante: ${fullPath}`);
 
       const content = await this.cli.fileSystem.readFile(fullPath);
       compiled = ejs.compile(content);

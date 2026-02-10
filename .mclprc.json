@@ -37,6 +37,11 @@
       "database": "task_backup"
     }
   ],
+  "doc": {
+    "pathIn": "I:\\cli\\cli-local-poo",
+    "pathOut": "./.doc",
+    "saveOnExecute": true
+  },
   "tree": {
     "exclude": [
       ".git",
@@ -51,10 +56,14 @@
     "pathIn": "I:\\cli\\cli-local-poo",
     "pathOut": "./tree",
     "analysis": {
-      "enabled": true,
-      "extensions": [".ts", ".js", ".php"],
+      "enabled": false,
+      "extensions": [
+        ".ts",
+        ".js",
+        ".php"
+      ],
       "save": true,
-      "maxLevel": 32
+      "maxLevel": 0
     },
     "output": [
       {
@@ -73,10 +82,5 @@
         "saveOnExecute": true
       }
     ]
-  },
-  "doc": {
-    "pathIn": ".",
-    "pathOut": "./.doc",
-    "saveOnExecute": true
   }
 }

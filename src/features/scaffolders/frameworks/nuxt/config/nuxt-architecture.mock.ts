@@ -33,15 +33,13 @@ package.json
 tsconfig.json
 */
 
-import { IDirectory } from "@features/frameworks/models/framework-commun.model";
+import { IDirectory } from "@/features/commun/architecture.interface.js";
 
 /**
  *
  * @param path
  */
-export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
-  path: string,
-): IDirectory[] {
+export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(path: string): IDirectory[] {
   const directory: string[] = [
     "assets",
     "components",
@@ -54,20 +52,20 @@ export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
   ];
   return [
     ...directory.map((item) => ({
-      _type: "directory",
+      type: "directory",
       name: item,
       gitIgnore: false,
       pathInProject: path,
       children: [],
     })),
-    /*{ _type: "directory", name: "assets", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "components", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "composables", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "layouts", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "middleware", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "pages", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "plugins", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "utils", gitIgnore: false, pathInProject: directory, children: [] },*/
+    /*{ type: "directory", name: "assets", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "components", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "composables", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "layouts", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "middleware", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "pages", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "plugins", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "utils", gitIgnore: false, pathInProject: directory, children: [] },*/
   ];
 }
 /**
@@ -75,30 +73,22 @@ export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
  */
 export function ARCHITECTURE_DIRECTORY_PROJECT_NUXT_MOCK(): IDirectory[] {
   const path = "./app";
-  const directory: string[] = [
-    "app",
-    "layers",
-    "content",
-    "modules",
-    "public",
-    "server",
-    "shared",
-  ];
+  const directory: string[] = ["app", "layers", "content", "modules", "public", "server", "shared"];
   return [
     ...directory.map((item) => ({
-      _type: "directory",
+      type: "directory",
       name: item,
       gitIgnore: false,
       pathInProject: path,
       children: [],
     })),
     /*
-    { _type: "directory", name: "app", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "content", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "modules", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "public", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "server", gitIgnore: false, pathInProject: directory, children: [] },
-    { _type: "directory", name: "shared", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "app", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "content", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "modules", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "public", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "server", gitIgnore: false, pathInProject: directory, children: [] },
+    { type: "directory", name: "shared", gitIgnore: false, pathInProject: directory, children: [] },
      */
   ];
 }
@@ -110,7 +100,7 @@ export function ARCHITECTURE_DIRECTORY_SHARED_NUXT_MOCK(): IDirectory[] {
   const directory: string[] = ["models", "schemas", "types"];
   return [
     ...directory.map((item) => ({
-      _type: "directory",
+      type: "directory",
       name: item,
       gitIgnore: false,
       pathInProject: path,
@@ -125,49 +115,49 @@ export function ARCHITECTURE_NUXT_MOCK() {
   const directory = "./";
   return [
     {
-      _type: "directory",
+      type: "directory",
       name: "app",
       gitIgnore: false,
       pathInProject: directory,
       children: [...ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK("./app")],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "content",
       gitIgnore: false,
       pathInProject: directory,
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "modules",
       gitIgnore: false,
       pathInProject: directory,
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "public",
       gitIgnore: false,
       pathInProject: directory,
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "layers",
       gitIgnore: false,
       pathInProject: directory,
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "server",
       gitIgnore: false,
       pathInProject: directory,
       children: [],
     },
     {
-      _type: "directory",
+      type: "directory",
       name: "shared",
       gitIgnore: false,
       pathInProject: directory,
@@ -175,91 +165,91 @@ export function ARCHITECTURE_NUXT_MOCK() {
     },
     /*
     {
-      _type: "directory",
+      type: "directory",
       name: "layers",
       gitIgnore: false,
       pathInProject: "./",
       children: [
         {
-          _type: "directory",
+          type: "directory",
           name: "core-ui",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
-            { _type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
-            { _type: "directory", name: "components", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
-            { _type: "directory", name: "assets", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
-            { _type: "directory", name: "plugins", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
-            { _type: "directory", name: "composables", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] }
+            { type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
+            { type: "directory", name: "components", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
+            { type: "directory", name: "assets", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
+            { type: "directory", name: "plugins", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] },
+            { type: "directory", name: "composables", gitIgnore: false, pathInProject: "./layers/core-ui/", children: [] }
           ]
         },
         {
-          _type: "directory",
+          type: "directory",
           name: "core-app",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
-            { _type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/core-app/", children: [] },
-            { _type: "directory", name: "layouts", gitIgnore: false, pathInProject: "./layers/core-app/", children: [] },
-            { _type: "directory", name: "middleware", gitIgnore: false, pathInProject: "./layers/core-app/", children: [] }
+            { type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/core-app/", children: [] },
+            { type: "directory", name: "layouts", gitIgnore: false, pathInProject: "./layers/core-app/", children: [] },
+            { type: "directory", name: "middleware", gitIgnore: false, pathInProject: "./layers/core-app/", children: [] }
           ]
         },
         {
-          _type: "directory",
+          type: "directory",
           name: "auth",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
-            { _type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
-            { _type: "directory", name: "pages", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
-            { _type: "directory", name: "server", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
-            { _type: "directory", name: "stores", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
-            { _type: "directory", name: "composables", gitIgnore: false, pathInProject: "./layers/auth/", children: [] }
+            { type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
+            { type: "directory", name: "pages", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
+            { type: "directory", name: "server", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
+            { type: "directory", name: "stores", gitIgnore: false, pathInProject: "./layers/auth/", children: [] },
+            { type: "directory", name: "composables", gitIgnore: false, pathInProject: "./layers/auth/", children: [] }
           ]
         },
         {
-          _type: "directory",
+          type: "directory",
           name: "billing",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
-            { _type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
-            { _type: "directory", name: "pages", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
-            { _type: "directory", name: "server", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
-            { _type: "directory", name: "components", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
-            { _type: "directory", name: "composables", gitIgnore: false, pathInProject: "./layers/billing/", children: [] }
+            { type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
+            { type: "directory", name: "pages", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
+            { type: "directory", name: "server", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
+            { type: "directory", name: "components", gitIgnore: false, pathInProject: "./layers/billing/", children: [] },
+            { type: "directory", name: "composables", gitIgnore: false, pathInProject: "./layers/billing/", children: [] }
           ]
         }
       ]
     },    
     {
-      _type: "directory",
+      type: "directory",
       name: "apps",
       gitIgnore: false,
       pathInProject: "./",
       children: [
         {
-          _type: "directory",
+          type: "directory",
           name: "web",
           gitIgnore: false,
           pathInProject: "./apps/",
           children: [
-            { _type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./apps/web/", children: [] },
-            { _type: "directory", name: "pages", gitIgnore: false, pathInProject: "./apps/web/", children: [] },
-            { _type: "directory", name: "server", gitIgnore: false, pathInProject: "./apps/web/", children: [] }
+            { type: "file", name: "nuxt.config.ts", gitIgnore: false, pathInProject: "./apps/web/", children: [] },
+            { type: "directory", name: "pages", gitIgnore: false, pathInProject: "./apps/web/", children: [] },
+            { type: "directory", name: "server", gitIgnore: false, pathInProject: "./apps/web/", children: [] }
           ]
         }
       ]
     },
     {
-      _type: "file",
+      type: "file",
       name: "pnpm-workspace.yaml",
       gitIgnore: false,
       pathInProject: "./",
       children: []
     },*/
     {
-      _type: "file",
+      type: "file",
       name: "package.json",
       gitIgnore: false,
       pathInProject: "./",
@@ -275,39 +265,39 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
   return [
     // ---- LAYERS ----
     {
-      _type: "directory",
+      type: "directory",
       name: "layers",
       gitIgnore: false,
       pathInProject: "./",
       children: [
         // Core UI (design system, plugins globaux)
         {
-          _type: "directory",
+          type: "directory",
           name: "core-ui",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
             {
-              _type: "file",
+              type: "file",
               name: "nuxt.config.ts",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "assets",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "css",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/assets/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "main.css",
                       gitIgnore: false,
                       pathInProject: "./layers/core-ui/assets/css/",
@@ -318,13 +308,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "components",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "ui",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/components/",
@@ -333,13 +323,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "plugins",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "dayjs.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/plugins/",
@@ -348,13 +338,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "composables",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "useTheme.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/composables/",
@@ -367,34 +357,34 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
 
         // Core App: TOUT le squelette Nuxt
         {
-          _type: "directory",
+          type: "directory",
           name: "core-app",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
             {
-              _type: "file",
+              type: "file",
               name: "nuxt.config.ts",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [],
             },
             {
-              _type: "file",
+              type: "file",
               name: "app.vue",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [],
             },
             {
-              _type: "file",
+              type: "file",
               name: "error.vue",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [],
             },
             {
-              _type: "file",
+              type: "file",
               name: "app.config.ts",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
@@ -402,19 +392,19 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "assets",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "css",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/assets/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "main.css",
                       gitIgnore: false,
                       pathInProject: "./layers/core-app/assets/css/",
@@ -423,7 +413,7 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
                   ],
                 },
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "images",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/assets/",
@@ -433,20 +423,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "components",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "layout",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/components/",
                   children: [],
                 },
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "shared",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/components/",
@@ -456,20 +446,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "composables",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "useFetchApi.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/composables/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "useAuth.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/composables/",
@@ -479,20 +469,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "layouts",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "default.vue",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/layouts/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "admin.vue",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/layouts/",
@@ -502,20 +492,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "middleware",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "auth.global.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/middleware/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "admin.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/middleware/",
@@ -525,33 +515,33 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "pages",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "index.vue",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/pages/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "about.vue",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/pages/",
                   children: [],
                 },
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "admin",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/pages/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "index.vue",
                       gitIgnore: false,
                       pathInProject: "./layers/core-app/pages/admin/",
@@ -560,7 +550,7 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
                   ],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "[slug].vue",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/pages/",
@@ -570,13 +560,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "plugins",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "axios.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/plugins/",
@@ -586,20 +576,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "public",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "robots.txt",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/public/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "favicon.ico",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/public/",
@@ -609,19 +599,19 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "server",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "api",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/server/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "health.get.ts",
                       gitIgnore: false,
                       pathInProject: "./layers/core-app/server/api/",
@@ -630,13 +620,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
                   ],
                 },
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "middleware",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/server/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "logs.ts",
                       gitIgnore: false,
                       pathInProject: "./layers/core-app/server/middleware/",
@@ -645,13 +635,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
                   ],
                 },
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "services",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/server/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "db.ts",
                       gitIgnore: false,
                       pathInProject: "./layers/core-app/server/services/",
@@ -663,20 +653,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "stores",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "user.store.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/stores/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "settings.store.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/stores/",
@@ -686,13 +676,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "types",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "global.d.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/types/",
@@ -702,20 +692,20 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
             },
 
             {
-              _type: "directory",
+              type: "directory",
               name: "utils",
               gitIgnore: false,
               pathInProject: "./layers/core-app/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "formatDate.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/utils/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "validators.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-app/utils/",
@@ -728,33 +718,33 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
 
         // Features optionnelles (exemples)
         {
-          _type: "directory",
+          type: "directory",
           name: "auth",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
             {
-              _type: "file",
+              type: "file",
               name: "nuxt.config.ts",
               gitIgnore: false,
               pathInProject: "./layers/auth/",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "pages",
               gitIgnore: false,
               pathInProject: "./layers/auth/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "login.vue",
                   gitIgnore: false,
                   pathInProject: "./layers/auth/pages/",
                   children: [],
                 },
                 {
-                  _type: "file",
+                  type: "file",
                   name: "register.vue",
                   gitIgnore: false,
                   pathInProject: "./layers/auth/pages/",
@@ -763,19 +753,19 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "server",
               gitIgnore: false,
               pathInProject: "./layers/auth/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "api",
                   gitIgnore: false,
                   pathInProject: "./layers/auth/server/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "auth.login.post.ts",
                       gitIgnore: false,
                       pathInProject: "./layers/auth/server/api/",
@@ -786,13 +776,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "stores",
               gitIgnore: false,
               pathInProject: "./layers/auth/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "auth.store.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/auth/stores/",
@@ -801,13 +791,13 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "composables",
               gitIgnore: false,
               pathInProject: "./layers/auth/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "useAuth.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/auth/composables/",
@@ -822,32 +812,32 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
 
     // ---- APP CONSOMMATRICE ----
     {
-      _type: "directory",
+      type: "directory",
       name: "apps",
       gitIgnore: false,
       pathInProject: "./",
       children: [
         {
-          _type: "directory",
+          type: "directory",
           name: "web",
           gitIgnore: false,
           pathInProject: "./apps/",
           children: [
             {
-              _type: "file",
+              type: "file",
               name: "nuxt.config.ts",
               gitIgnore: false,
               pathInProject: "./apps/web/",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "pages",
               gitIgnore: false,
               pathInProject: "./apps/web/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "index.vue",
                   gitIgnore: false,
                   pathInProject: "./apps/web/pages/",
@@ -856,14 +846,14 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "server",
               gitIgnore: false,
               pathInProject: "./apps/web/",
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "public",
               gitIgnore: false,
               pathInProject: "./apps/web/",
@@ -876,21 +866,21 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
 
     // ---- RACINE WORKSPACE ----
     {
-      _type: "file",
+      type: "file",
       name: "pnpm-workspace.yaml",
       gitIgnore: false,
       pathInProject: "./",
       children: [],
     },
     {
-      _type: "file",
+      type: "file",
       name: "package.json",
       gitIgnore: false,
       pathInProject: "./",
       children: [],
     },
     {
-      _type: "file",
+      type: "file",
       name: ".gitignore",
       gitIgnore: false,
       pathInProject: "./",
@@ -905,19 +895,19 @@ export function ARCHITECTURE_CLASSIC_NUXT_MOCK() {
 export function ARCHITECTURE_NUXT_LAYERS_CORE_UI_MOCK() {
   return [
     {
-      _type: "directory",
+      type: "directory",
       name: "layers",
       gitIgnore: false,
       pathInProject: "./",
       children: [
         {
-          _type: "directory",
+          type: "directory",
           name: "core-ui",
           gitIgnore: false,
           pathInProject: "./layers/",
           children: [
             {
-              _type: "file",
+              type: "file",
               name: "nuxt.config.ts",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
@@ -931,19 +921,19 @@ export function ARCHITECTURE_NUXT_LAYERS_CORE_UI_MOCK() {
               children: [],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "assets",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "css",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/assets/",
                   children: [
                     {
-                      _type: "file",
+                      type: "file",
                       name: "main.css",
                       gitIgnore: false,
                       pathInProject: "./layers/core-ui/assets/css/",
@@ -957,13 +947,13 @@ body { margin: 0; font-family: system-ui, sans-serif; }`,
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "components",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "directory",
+                  type: "directory",
                   name: "ui",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/components/",
@@ -972,13 +962,13 @@ body { margin: 0; font-family: system-ui, sans-serif; }`,
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "plugins",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "dayjs.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/plugins/",
@@ -996,13 +986,13 @@ export default defineNuxtPlugin(() => {
               ],
             },
             {
-              _type: "directory",
+              type: "directory",
               name: "composables",
               gitIgnore: false,
               pathInProject: "./layers/core-ui/",
               children: [
                 {
-                  _type: "file",
+                  type: "file",
                   name: "useTheme.ts",
                   gitIgnore: false,
                   pathInProject: "./layers/core-ui/composables/",
@@ -1027,37 +1017,37 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
   // LAYERS
   // =========================
   {
-    _type: "directory",
+    type: "directory",
     name: "layers",
     pathInProject: "./",
     gitIgnore: false,
     children: [
       // -------- core-ui --------
       {
-        _type: "directory",
+        type: "directory",
         name: "core-ui",
         gitIgnore: false,
         pathInProject: "./layers/",
         children: [
           {
-            _type: "file",
+            type: "file",
             name: "nuxt.config.ts",
             pathInProject: "./layers/core-ui/",
             content: "layers/core-ui/nuxt.config.ts.ejs",
             children: [],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "assets",
             pathInProject: "./layers/core-ui/",
             children: [
               {
-                _type: "directory",
+                type: "directory",
                 name: "css",
                 pathInProject: "./layers/core-ui/assets/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "main.css",
                     pathInProject: "./layers/core-ui/assets/css/",
                     content: "layers/core-ui/assets/css/main.css.ejs",
@@ -1068,12 +1058,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "components",
             pathInProject: "./layers/core-ui/",
             children: [
               {
-                _type: "directory",
+                type: "directory",
                 name: "ui",
                 pathInProject: "./layers/core-ui/components/",
                 children: [],
@@ -1081,12 +1071,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "plugins",
             pathInProject: "./layers/core-ui/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "dayjs.ts",
                 pathInProject: "./layers/core-ui/plugins/",
                 content: "layers/core-ui/plugins/dayjs.ts.ejs",
@@ -1095,12 +1085,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "composables",
             pathInProject: "./layers/core-ui/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "useTheme.ts",
                 pathInProject: "./layers/core-ui/composables/",
                 content: "layers/core-ui/composables/useTheme.ts.ejs",
@@ -1113,34 +1103,34 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
 
       // -------- core-app --------
       {
-        _type: "directory",
+        type: "directory",
         name: "core-app",
         gitIgnore: false,
         pathInProject: "./layers/",
         children: [
           {
-            _type: "file",
+            type: "file",
             name: "nuxt.config.ts",
             pathInProject: "./layers/core-app/",
             content: "layers/core-app/nuxt.config.ts.ejs",
             children: [],
           },
           {
-            _type: "file",
+            type: "file",
             name: "app.vue",
             pathInProject: "./layers/core-app/",
             content: "layers/core-app/app.vue.ejs",
             children: [],
           },
           {
-            _type: "file",
+            type: "file",
             name: "error.vue",
             pathInProject: "./layers/core-app/",
             content: "layers/core-app/error.vue.ejs",
             children: [],
           },
           {
-            _type: "file",
+            type: "file",
             name: "app.config.ts",
             pathInProject: "./layers/core-app/",
             content: "layers/core-app/app.config.ts.ejs",
@@ -1148,17 +1138,17 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "assets",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "directory",
+                type: "directory",
                 name: "css",
                 pathInProject: "./layers/core-app/assets/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "main.css",
                     pathInProject: "./layers/core-app/assets/css/",
                     content: "layers/core-app/assets/css/main.css.ejs",
@@ -1167,7 +1157,7 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
                 ],
               },
               {
-                _type: "directory",
+                type: "directory",
                 name: "images",
                 pathInProject: "./layers/core-app/assets/",
                 children: [],
@@ -1176,18 +1166,18 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "components",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "directory",
+                type: "directory",
                 name: "layout",
                 pathInProject: "./layers/core-app/components/",
                 children: [],
               },
               {
-                _type: "directory",
+                type: "directory",
                 name: "shared",
                 pathInProject: "./layers/core-app/components/",
                 children: [],
@@ -1196,19 +1186,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "composables",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "useFetchApi.ts",
                 pathInProject: "./layers/core-app/composables/",
                 content: "layers/core-app/composables/useFetchApi.ts.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "useAuth.ts",
                 pathInProject: "./layers/core-app/composables/",
                 content: "layers/core-app/composables/useAuth.ts.ejs",
@@ -1218,19 +1208,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "layouts",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "default.vue",
                 pathInProject: "./layers/core-app/layouts/",
                 content: "layers/core-app/layouts/default.vue.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "admin.vue",
                 pathInProject: "./layers/core-app/layouts/",
                 content: "layers/core-app/layouts/admin.vue.ejs",
@@ -1240,19 +1230,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "middleware",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "auth.global.ts",
                 pathInProject: "./layers/core-app/middleware/",
                 content: "layers/core-app/middleware/auth.global.ts.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "admin.ts",
                 pathInProject: "./layers/core-app/middleware/",
                 content: "layers/core-app/middleware/admin.ts.ejs",
@@ -1262,31 +1252,31 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "pages",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "index.vue",
                 pathInProject: "./layers/core-app/pages/",
                 content: "layers/core-app/pages/index.vue.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "about.vue",
                 pathInProject: "./layers/core-app/pages/",
                 content: "layers/core-app/pages/about.vue.ejs",
                 children: [],
               },
               {
-                _type: "directory",
+                type: "directory",
                 name: "admin",
                 pathInProject: "./layers/core-app/pages/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "index.vue",
                     pathInProject: "./layers/core-app/pages/admin/",
                     content: "layers/core-app/pages/admin/index.vue.ejs",
@@ -1295,7 +1285,7 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
                 ],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "[slug].vue",
                 pathInProject: "./layers/core-app/pages/",
                 content: "layers/core-app/pages/[slug].vue.ejs",
@@ -1305,12 +1295,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "plugins",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "axios.ts",
                 pathInProject: "./layers/core-app/plugins/",
                 content: "layers/core-app/plugins/axios.ts.ejs",
@@ -1320,19 +1310,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "public",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "robots.txt",
                 pathInProject: "./layers/core-app/public/",
                 content: "layers/core-app/public/robots.txt.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "favicon.ico",
                 pathInProject: "./layers/core-app/public/",
                 content: "layers/core-app/public/favicon.ico.ejs",
@@ -1342,17 +1332,17 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "server",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "directory",
+                type: "directory",
                 name: "api",
                 pathInProject: "./layers/core-app/server/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "health.get.ts",
                     pathInProject: "./layers/core-app/server/api/",
                     content: "layers/core-app/server/api/health.get.ts.ejs",
@@ -1361,12 +1351,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
                 ],
               },
               {
-                _type: "directory",
+                type: "directory",
                 name: "middleware",
                 pathInProject: "./layers/core-app/server/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "logs.ts",
                     pathInProject: "./layers/core-app/server/middleware/",
                     content: "layers/core-app/server/middleware/logs.ts.ejs",
@@ -1375,12 +1365,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
                 ],
               },
               {
-                _type: "directory",
+                type: "directory",
                 name: "services",
                 pathInProject: "./layers/core-app/server/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "db.ts",
                     pathInProject: "./layers/core-app/server/services/",
                     content: "layers/core-app/server/services/db.ts.ejs",
@@ -1392,19 +1382,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "stores",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "user.store.ts",
                 pathInProject: "./layers/core-app/stores/",
                 content: "layers/core-app/stores/user.store.ts.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "settings.store.ts",
                 pathInProject: "./layers/core-app/stores/",
                 content: "layers/core-app/stores/settings.store.ts.ejs",
@@ -1414,12 +1404,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "types",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "global.d.ts",
                 pathInProject: "./layers/core-app/types/",
                 content: "layers/core-app/types/global.d.ts.ejs",
@@ -1429,19 +1419,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
           },
 
           {
-            _type: "directory",
+            type: "directory",
             name: "utils",
             pathInProject: "./layers/core-app/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "formatDate.ts",
                 pathInProject: "./layers/core-app/utils/",
                 content: "layers/core-app/utils/formatDate.ts.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "validators.ts",
                 pathInProject: "./layers/core-app/utils/",
                 content: "layers/core-app/utils/validators.ts.ejs",
@@ -1454,32 +1444,32 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
 
       // -------- auth --------
       {
-        _type: "directory",
+        type: "directory",
         name: "auth",
         gitIgnore: false,
         pathInProject: "./layers/",
         children: [
           {
-            _type: "file",
+            type: "file",
             name: "nuxt.config.ts",
             pathInProject: "./layers/auth/",
             content: "layers/auth/nuxt.config.ts.ejs",
             children: [],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "pages",
             pathInProject: "./layers/auth/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "login.vue",
                 pathInProject: "./layers/auth/pages/",
                 content: "layers/auth/pages/login.vue.ejs",
                 children: [],
               },
               {
-                _type: "file",
+                type: "file",
                 name: "register.vue",
                 pathInProject: "./layers/auth/pages/",
                 content: "layers/auth/pages/register.vue.ejs",
@@ -1488,12 +1478,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "stores",
             pathInProject: "./layers/auth/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "auth.store.ts",
                 pathInProject: "./layers/auth/stores/",
                 content: "layers/auth/stores/auth.store.ts.ejs",
@@ -1502,12 +1492,12 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "composables",
             pathInProject: "./layers/auth/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "useAuth.ts",
                 pathInProject: "./layers/auth/composables/",
                 content: "layers/auth/composables/useAuth.ts.ejs",
@@ -1516,17 +1506,17 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "server",
             pathInProject: "./layers/auth/",
             children: [
               {
-                _type: "directory",
+                type: "directory",
                 name: "api",
                 pathInProject: "./layers/auth/server/",
                 children: [
                   {
-                    _type: "file",
+                    type: "file",
                     name: "auth.login.post.ts",
                     pathInProject: "./layers/auth/server/api/",
                     content: "layers/auth/server/api/auth.login.post.ts.ejs",
@@ -1545,31 +1535,31 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
   // APPS
   // =========================
   {
-    _type: "directory",
+    type: "directory",
     name: "apps",
     gitIgnore: false,
     pathInProject: "./",
     children: [
       {
-        _type: "directory",
+        type: "directory",
         name: "web",
         gitIgnore: false,
         pathInProject: "./apps/",
         children: [
           {
-            _type: "file",
+            type: "file",
             name: "nuxt.config.ts",
             pathInProject: "./apps/web/",
             content: "apps/web/nuxt.config.ts.ejs",
             children: [],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "pages",
             pathInProject: "./apps/web/",
             children: [
               {
-                _type: "file",
+                type: "file",
                 name: "index.vue",
                 pathInProject: "./apps/web/pages/",
                 content: "apps/web/pages/index.vue.ejs",
@@ -1578,19 +1568,19 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
             ],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "server",
             pathInProject: "./apps/web/",
             children: [],
           },
           {
-            _type: "directory",
+            type: "directory",
             name: "public",
             pathInProject: "./apps/web/",
             children: [],
           },
           {
-            _type: "file",
+            type: "file",
             name: "package.json",
             pathInProject: "./apps/web/",
             content: "apps/web/package.json.ejs",
@@ -1605,21 +1595,21 @@ export const ARCHITECTURE_NUXT_EJS_MOCK: IDirectory[] = [
   // ROOT WORKSPACE
   // =========================
   {
-    _type: "file",
+    type: "file",
     name: "pnpm-workspace.yaml",
     pathInProject: "./",
     content: "root/pnpm-workspace.yaml.ejs",
     children: [],
   },
   {
-    _type: "file",
+    type: "file",
     name: "package.json",
     pathInProject: "./",
     content: "root/package.json.ejs",
     children: [],
   },
   {
-    _type: "file",
+    type: "file",
     name: ".gitignore",
     pathInProject: "./",
     content: "root/.gitignore.ejs",

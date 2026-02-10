@@ -1,8 +1,6 @@
 import path from "node:path";
 
-import { IAppConfig } from "@/types/config.interface.js";
-
-export const defaultconfig: IAppConfig = {
+export const defaultconfig: Record<string, unknown> = {
   cliFolder: {
     name: ".cli-local",
     path: path.join(process.cwd(), "/.cli-local"),
@@ -47,14 +45,23 @@ export const defaultconfig: IAppConfig = {
     saveOnExecute: true,
   },
   tree: {
-    exclude: ["node_modules", ".git", "dist", ".vscode", ".doc"],
+    exclude: [
+      ".git",
+      "dist",
+      ".doc",
+      "old_cli",
+      ".vscode",
+      "node_modules",
+      "project-test",
+      "output",
+    ],
     pathIn: process.cwd(),
     pathOut: "./tree",
     analysis: {
       enabled: false,
-      extensions: [".ts", ".js"],
+      extensions: [".ts", ".js", ".php"],
       save: true,
-      maxLevel: 32,
+      maxLevel: 0,
     },
     output: [
       {

@@ -35,11 +35,8 @@ export type ServiceName =
  */
 export interface ICliConfig {
   templatesPath: string;
-
   globalTemplatesPath: string;
-
   logLevel: "debug" | "info" | "warn" | "error" | "silent";
-
   theme: "default" | "minimal";
 }
 

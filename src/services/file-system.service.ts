@@ -13,10 +13,7 @@ import { BaseService } from "./base-service.service.js";
 export type ReaddirOptions = Parameters<typeof fs.readdir>[1];
 export type StatDirectory = Stats;
 
-export class FileSystemService
-  extends BaseService
-  implements IFileSystemService
-{
+export class FileSystemService extends BaseService implements IFileSystemService {
   readonly serviceName = "FileSystemService";
 
   public excludedDirs = [
@@ -68,10 +65,7 @@ export class FileSystemService
     }
   }
 
-  public async readDirWithFileTypes(
-    dirPath: string,
-    options?: ReaddirOptions,
-  ): Promise<Dirent[]> {
+  public async readDirWithFileTypes(dirPath: string, options?: ReaddirOptions): Promise<Dirent[]> {
     this.cli.path.validatePath(dirPath, "dirPath");
     try {
       const entries = await fs.readdir(dirPath, {
@@ -103,13 +97,15 @@ export class FileSystemService
     }
   }
 
-  public statDirectory(dirPath: string): Promise<Stats> {
+  public async statDirectory(dirPath: string): Promise<Stats> {
     this.cli.path.validatePath(dirPath, "dirPath");
     try {
-      return fs.stat(dirPath);
+      return await fs.stat(dirPath);
     } catch (error) {
-      if (error instanceof Error)
-        throw new Error(`Failed to write file: ${dirPath}: ${error.message}`);
+      if (error instanceof Error) {
+        throw new Error(`Failed to read directory: ${dirPath}: ${error.message}`);
+      }
+      throw error;
     }
   }
 
@@ -130,8 +126,7 @@ export class FileSystemService
       await fs.ensureFile(filePath);
     } catch (error) {
       // this.cli.errorHandler.handle(error, `Failed to write file: ${filePath}`);
-      if (error instanceof Error)
-        throw new Error(`Failed to write file: ${filePath}`);
+      if (error instanceof Error) throw new Error(`Failed to write file: ${filePath}`);
     }
   }
   public async appendFile(filePath: string, content: string): Promise<void> {
@@ -169,9 +164,9 @@ export class FileSystemService
     try {
       await fs.outputFile(cleanPath, content);
     } catch (error) {
-      throw new Error(`Failed to write file: ${filePath}: ${error.message}`);
-      // this.cli.errorHandler.handle(error, `Failed to write file: ${cleanPath}`);
-      //    throw new Error(`Failed to write file: ${filePath}`);
+      const message = `Failed to write file: ${filePath}`;
+      // this.cli.errorHandler.handle(error, message);
+      throw error instanceof Error ? error : new Error(message);
     }
   }
 

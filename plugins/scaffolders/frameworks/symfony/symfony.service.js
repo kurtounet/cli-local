@@ -74,10 +74,10 @@ export default class SymfonyPlugin {
       data,
     );
 
-    // const targetPath = await this.ctx.renderTemplateString(
-    //   blueprint.target,
-    //   data,
-    // );
+    const targetPath = await this.ctx.renderTemplateString(
+      blueprint.target,
+      data,
+    );
 
     let fileName;
     if (blueprint.filename) {
@@ -88,7 +88,7 @@ export default class SymfonyPlugin {
       fileName = `${blueprint.type}${blueprint.suffix}.php`;
     }
 
-    const destination = `./output/${blueprint.target}/${fileName}`;
+    const destination = `./output/${targetPath}/${fileName}`;
 
     await this.ctx.fs.writeAsync(destination, content);
     this.ctx.log.info(`✓ Fichier généré : ${destination}`);

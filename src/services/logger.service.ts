@@ -9,12 +9,9 @@ export class LoggerService extends BaseService implements ILoggerService {
   init(): Promise<void> {
     return Promise.resolve();
   }
+
   info(message: string, meta?: object): void {
-    console.log(
-      chalk.blue("ℹ"),
-      message,
-      meta ? chalk.gray(JSON.stringify(meta)) : "",
-    );
+    console.log(chalk.blue("ℹ"), message, meta ? chalk.gray(JSON.stringify(meta)) : "");
   }
 
   success(message: string): void {
@@ -22,19 +19,19 @@ export class LoggerService extends BaseService implements ILoggerService {
   }
 
   warn(message: string, meta?: object): void {
-    console.warn(chalk.yellow("⚠"), chalk.yellow(message), meta || "");
+    console.warn(chalk.yellow("⚠"), chalk.yellow(message), meta ?? "");
   }
 
   error(message: string, error?: Error): void {
     console.error(chalk.red("✖"), chalk.red.bold(message));
-    if (error && this.config.logLevel === "debug") {
+    if (error && this.cli.config.logLevel === "debug") {
       console.error(chalk.gray(error.stack));
     }
   }
 
   debug(message: string, meta?: object): void {
-    if (this.config.logLevel === "debug") {
-      console.log(chalk.magenta("⚙ [DEBUG]"), message, meta || "");
+    if (this.cli.config.logLevel === "debug") {
+      console.log(chalk.magenta("⚙ [DEBUG]"), message, meta ?? "");
     }
   }
 }

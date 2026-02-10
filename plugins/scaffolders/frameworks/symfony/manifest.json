@@ -1,9 +1,14 @@
 {
   "id": "symfony",
-  "name": "Symfony Generator",
-  "templateDir": "./templates",
-  "service": "symfony.service.js",
+  "name": "Symfony Scaffolder",
+  "type": "scaffolder",
+  "service": "index.js",
+  "templateDir": "templates",
   "blueprints": [
+    {
+      "name": "controller",
+      "template": "controller/controller.php.ejs"
+    },
     {
       "type": "resource",
       "scope": "entity",
@@ -32,7 +37,7 @@
       "type": "provider-collection",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-      "template": "collection-provider.php.ejs",
+      "template": "api-platform/state/collection-provider.php.ejs",
       "suffix": "CollectionProvider",
       "platform": "api-platform"
     },
@@ -40,7 +45,7 @@
       "type": "processor",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-      "template": "processor.php.ejs",
+      "template": "api-platform/state/processor.php.ejs",
       "suffix": "CreateProcessor",
       "platform": "api-platform"
     },
@@ -48,7 +53,7 @@
       "type": "processor",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-      "template": "update-processor.php.ejs",
+      "template": "api-platform/state/update-processor.php.ejs",
       "suffix": "UpdateProcessor",
       "platform": "api-platform"
     },
@@ -56,7 +61,7 @@
       "type": "processor",
       "scope": "entity",
       "target": "src/ApiResource/States/<%= entity.namePascalCase %>",
-      "template": "delete-processor.php.ejs",
+      "template": "api-platform/state/delete-processor.php.ejs",
       "suffix": "DeleteProcessor",
       "platform": "api-platform"
     },
@@ -64,7 +69,7 @@
       "type": "entity",
       "scope": "entity",
       "target": "src/Entity",
-      "template": "entity.php.ejs",
+      "template": "entity/entity.php.ejs",
       "suffix": "",
       "platform": "symfony"
     },
@@ -72,7 +77,7 @@
       "type": "repository",
       "scope": "entity",
       "target": "src/Repository",
-      "template": "repository.php.ejs",
+      "template": "repository/repository.php.ejs",
       "suffix": "Repository",
       "platform": "symfony"
     },
@@ -80,7 +85,7 @@
       "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-      "template": "dto.php.ejs",
+      "template": "api-platform/dto/item-dto.php.ejs",
       "suffix": "ItemDto",
       "platform": "api-platform"
     },
@@ -88,7 +93,7 @@
       "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-      "template": "collection-item-dto.php.ejs",
+      "template": "api-platform/dto/collection-item-dto.php.ejs",
       "suffix": "CollectionItemDto",
       "platform": "api-platform"
     },
@@ -96,7 +101,7 @@
       "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-      "template": "create-dto.php.ejs",
+      "template": "api-platform/dto/create-dto.php.ejs",
       "suffix": "CreateDto",
       "platform": "api-platform"
     },
@@ -104,7 +109,7 @@
       "type": "dto",
       "scope": "entity",
       "target": "src/ApiResource/Dtos/<%= entity.namePascalCase %>",
-      "template": "update-dto.php.ejs",
+      "template": "api-platform/dto/update-dto.php.ejs",
       "suffix": "UpdateDto",
       "platform": "api-platform"
     },
@@ -112,7 +117,7 @@
       "type": "controller",
       "scope": "entity",
       "target": "src/Controller",
-      "template": "controller.php.ejs",
+      "template": "controller/controller.php.ejs",
       "suffix": "Controller",
       "platform": "symfony"
     },
@@ -120,7 +125,7 @@
       "type": "service",
       "scope": "entity",
       "target": "src/Service",
-      "template": "service.php.ejs",
+      "template": "service/service.php.ejs",
       "suffix": "Service",
       "platform": "symfony"
     },
@@ -128,7 +133,7 @@
       "type": "test",
       "scope": "entity",
       "target": "tests/Controller",
-      "template": "test.php.ejs",
+      "template": "test/test.php.ejs",
       "suffix": "ControllerTest",
       "platform": "symfony"
     },
@@ -136,7 +141,7 @@
       "type": "service",
       "scope": "project",
       "target": "src/ApiResource/Services",
-      "template": "services/iri-from-resource.php.ejs",
+      "template": "api-platform/service/iri-from-resource.php.ejs",
       "suffix": "",
       "platform": "api-platform"
     },
@@ -144,7 +149,7 @@
       "type": "command",
       "scope": "project",
       "target": "src/Command",
-      "template": "commands/crud-all.php.ejs",
+      "template": "command/crud-all.php.ejs",
       "suffix": "",
       "platform": "symfony"
     },

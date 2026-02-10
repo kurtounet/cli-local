@@ -18,6 +18,8 @@
     "lint:html": "eslint src/**/*.ts --format html -o lint-report.html",
     "lint:compact": "eslint src/**/*.ts --format compact -o lint-report.txt",
     "format": "prettier --write .",
+    "pl:b": "npx tsc -p tsconfig.plugins.json && node scripts/copy-plugin-assets.js",
+    "pl:b:w": "npx tsc -p tsconfig.plugins.json --watch",
     "test": "vitest"
   },
   "keywords": [],
@@ -31,6 +33,7 @@
     "@types/inquirer": "^9.0.9",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^25.0.10",
+    "esbuild-plugin-tsconfig-paths": "^1.0.2",
     "eslint": "^9.39.2",
     "eslint-formatter-compact": "^9.0.1",
     "eslint-plugin-jsdoc": "^62.5.2",

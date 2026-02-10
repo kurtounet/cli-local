@@ -9,37 +9,175 @@
 ├── 📄 .prettierignore
 ├── 📄 eslint-formatter.js
 ├── 📄 eslint.config.mjs
-├── 📁 output
-│   └── 📁 src
-│       ├── 📁 ApiResource
-│       │   ├── 📁 Mapper
-│       │   │   ├── 📄 PostMapper.php
-│       │   │   └── 📄 UserMapper.php
-│       │   ├── 📁 Resources
-│       │   │   ├── 📄 PostResource.php
-│       │   │   └── 📄 UserResource.php
-│       │   └── 📁 States
-│       │       ├── 📄 PostProcessor.php
-│       │       ├── 📄 PostProvider.php
-│       │       ├── 📄 UserProcessor.php
-│       │       └── 📄 UserProvider.php
-│       ├── 📁 Dto
-│       │   ├── 📄 PostDto.php
-│       │   └── 📄 UserDto.php
-│       ├── 📁 Entity
-│       │   ├── 📄 Post.php
-│       │   └── 📄 User.php
-│       └── 📁 Repository
-│           ├── 📄 PostRepository.php
-│           └── 📄 UserRepository.php
 ├── 📄 package-lock.json
 ├── 📄 package.json
 ├── 📁 plugins
+│   ├── 📁 plugins-src
+│   │   └── 📁 scaffolders
+│   │       └── 📁 frameworks
+│   │           ├── 📁 commun
+│   │           │   └── 📁 interfaces
+│   │           │       └── 📄 data-bag.interface.js
+│   │           ├── 📁 interfaces
+│   │           │   └── 📄 data-bag.interface.js
+│   │           └── 📁 symfony
+│   │               ├── 📄 index.js
+│   │               └── 📁 interfaces
+│   │                   └── 📄 data-bag.interface.js
+│   ├── 📁 scaffolders
+│   │   └── 📁 frameworks
+│   │       └── 📁 symfony
+│   │           └── 📄 index.js
+│   └── 📁 src
+│       ├── 📁 commands
+│       │   ├── 📄 BaseCommand.js
+│       │   └── 📄 generate.command.js
+│       ├── 📁 features
+│       │   ├── 📁 commun
+│       │   │   ├── 📄 architecture.interface.js
+│       │   │   ├── 📄 database.interface.js
+│       │   │   ├── 📄 framework.interface.js
+│       │   │   ├── 📄 member-info.interface.js
+│       │   │   └── 📄 projet.interface.js
+│       │   └── 📁 project
+│       │       └── 📁 interfaces
+│       │           ├── 📄 project-command.interface.js
+│       │           ├── 📄 project-service.interface.js
+│       │           └── 📄 task-service.interface.js
+│       ├── 📁 services
+│       │   ├── 📄 base-service.service.js
+│       │   └── 📄 file-system.service.js
+│       └── 📁 types
+│           ├── 📄 cli-options.type.js
+│           ├── 📄 command.interface.js
+│           ├── 📁 commun
+│           │   ├── 📄 database.interface.js
+│           │   ├── 📄 file-node.interface.js
+│           │   ├── 📄 member-info.interface.js
+│           │   └── 📄 sdk-context.interface.js
+│           ├── 📄 config.interface.js
+│           ├── 📄 context.interface.js
+│           ├── 📄 plugin.interface.js
+│           └── 📁 services
+│               ├── 📄 ai-service.interface.js
+│               ├── 📄 architecture-service.interface.js
+│               ├── 📄 ast-service.interface.js
+│               ├── 📄 base-service.interface.js
+│               ├── 📄 case-service.interface.js
+│               ├── 📄 config-service.interface.js
+│               ├── 📄 data-manager-service.interface.js
+│               ├── 📄 error-handler.interface.js
+│               ├── 📄 file-system.interface.js
+│               ├── 📄 generator.interface.js
+│               ├── 📄 git-service.interface.js
+│               ├── 📄 logger-service.interface.js
+│               ├── 📄 path-service.interface.js
+│               ├── 📄 plugin-service.interface.js
+│               ├── 📄 prompt-service.interface.js
+│               ├── 📄 services-container.interface.js
+│               ├── 📄 shell-service.interface.js
+│               ├── 📄 state-service.interface.js
+│               ├── 📄 task-manager-service.interface.js
+│               ├── 📄 template.interface.js
+│               └── 📄 tool-service.interface.js
+├── 📁 plugins-src
 │   ├── 📄 index.json
 │   ├── 📁 scaffolders
 │   │   ├── 📁 cli
 │   │   │   ├── 📁 command
 │   │   │   ├── 📁 plugin
+│   │   │   │   ├── 📄 blueprint.ejs
+│   │   │   │   ├── 📄 initial.template.ejs
+│   │   │   │   ├── 📄 manifest.json.ejs
+│   │   │   │   └── 📄 service.js.ejs
+│   │   │   └── 📁 service
+│   │   └── 📁 frameworks
+│   │       ├── 📁 .cli-local
+│   │       │   ├── 📄 config-project.json
+│   │       │   ├── 📄 entities.json
+│   │       │   ├── 📄 mcd.json
+│   │       │   └── 📄 mcd.mdj
+│   │       ├── 📁 angular
+│   │       ├── 📁 commun
+│   │       │   └── 📁 interfaces
+│   │       │       └── 📄 data-bag.interface.ts
+│   │       └── 📁 symfony
+│   │           ├── 📁 .cli-local
+│   │           │   ├── 📄 config-project.json
+│   │           │   ├── 📄 entities.json
+│   │           │   ├── 📄 mcd.json
+│   │           │   └── 📄 mcd.mdj
+│   │           ├── 📄 .mclprc.json
+│   │           ├── 📄 bag-data.json
+│   │           ├── 📄 bag-data.json.txt
+│   │           ├── 📄 generate-bag-data.cjs
+│   │           ├── 📄 index.js
+│   │           ├── 📄 index.ts
+│   │           ├── 📄 manifest.json
+│   │           ├── 📄 symfony.service.js
+│   │           ├── 📁 templates
+│   │           │   ├── 📁 api-platform
+│   │           │   │   ├── 📁 dto
+│   │           │   │   │   ├── 📄 collection-item-dto.php.ejs
+│   │           │   │   │   ├── 📄 create-dto.php.ejs
+│   │           │   │   │   ├── 📄 dto.php.ejs
+│   │           │   │   │   └── 📄 update-dto.php.ejs
+│   │           │   │   ├── 📁 mapper
+│   │           │   │   │   ├── 📄 mapper-logic.php.ejs
+│   │           │   │   │   ├── 📄 mapper-resolve-iri.php.ejs
+│   │           │   │   │   ├── 📄 mapper-to-iri-list.php.ejs
+│   │           │   │   │   └── 📄 mapper.php.ejs
+│   │           │   │   ├── 📁 resource
+│   │           │   │   │   └── 📄 resource.php.ejs
+│   │           │   │   └── 📁 state
+│   │           │   │       ├── 📄 collection-provider.php.ejs
+│   │           │   │       ├── 📄 delete-processor.php.ejs
+│   │           │   │       ├── 📄 processor.php.ejs
+│   │           │   │       ├── 📄 prodiver.php.ejs
+│   │           │   │       ├── 📄 provider.php.ejs
+│   │           │   │       └── 📄 update-processor.php.ejs
+│   │           │   ├── 📁 command
+│   │           │   │   └── 📄 crud-all.php.ejs
+│   │           │   ├── 📁 controller
+│   │           │   │   └── 📄 controller.php.ejs
+│   │           │   ├── 📁 entity
+│   │           │   │   ├── 📄 entity-accessor-relation.php.ejs
+│   │           │   │   ├── 📄 entity-relation.php.ejs
+│   │           │   │   └── 📄 entity.php.ejs
+│   │           │   ├── 📁 env
+│   │           │   │   └── 📄 env.local.ejs
+│   │           │   ├── 📁 repository
+│   │           │   │   └── 📄 repository.php.ejs
+│   │           │   ├── 📁 service
+│   │           │   │   ├── 📄 iri-from-resource.php.ejs
+│   │           │   │   └── 📄 service.php.ejs
+│   │           │   └── 📁 test
+│   │           │       └── 📄 test.php.ejs
+│   │           ├── 📄 test-generator.js
+│   │           └── 📁 utils
+│   │               ├── 📄 convert.js
+│   │               └── 📄 mapping.js
+│   └── 📁 tools
+│       └── 📁 architecture
+│           ├── 📄 architecture.service.js
+│           └── 📄 manifest.json
+├── 📁 plugins-src_1
+│   ├── 📁 scaffolders
+│   │   └── 📁 frameworks
+│   │       └── 📁 symfony
+│   │           └── 📄 index.ts
+│   └── 📁 tools
+├── 📁 plugins_or
+│   ├── 📄 index.js
+│   ├── 📄 index.json
+│   ├── 📁 scaffolders
+│   │   ├── 📁 cli
+│   │   │   ├── 📁 command
+│   │   │   ├── 📁 plugin
+│   │   │   │   ├── 📄 blueprint.ejs
+│   │   │   │   ├── 📄 initial.template.ejs
+│   │   │   │   ├── 📄 manifest.json.ejs
+│   │   │   │   └── 📄 service.js.ejs
 │   │   │   └── 📁 service
 │   │   └── 📁 frameworks
 │   │       ├── 📁 .cli-local
@@ -49,39 +187,56 @@
 │   │       │   └── 📄 mcd.mdj
 │   │       ├── 📁 angular
 │   │       └── 📁 symfony
+│   │           ├── 📁 .cli-local
+│   │           │   ├── 📄 config-project.json
+│   │           │   ├── 📄 entities.json
+│   │           │   ├── 📄 mcd.json
+│   │           │   └── 📄 mcd.mdj
+│   │           ├── 📄 .mclprc.json
+│   │           ├── 📄 bag-data.json
+│   │           ├── 📄 bag-data.json.txt
+│   │           ├── 📄 generate-bag-data.cjs
 │   │           ├── 📄 index.js
 │   │           ├── 📄 manifest.json
 │   │           ├── 📄 symfony.service.js
 │   │           ├── 📁 templates
-│   │           │   ├── 📄 collection-item-dto.php.ejs
-│   │           │   ├── 📄 collection-provider.php.ejs
-│   │           │   ├── 📁 commands
+│   │           │   ├── 📁 api-platform
+│   │           │   │   ├── 📁 dto
+│   │           │   │   │   ├── 📄 collection-item-dto.php.ejs
+│   │           │   │   │   ├── 📄 create-dto.php.ejs
+│   │           │   │   │   ├── 📄 dto.php.ejs
+│   │           │   │   │   └── 📄 update-dto.php.ejs
+│   │           │   │   ├── 📁 mapper
+│   │           │   │   │   ├── 📄 mapper-logic.php.ejs
+│   │           │   │   │   ├── 📄 mapper-resolve-iri.php.ejs
+│   │           │   │   │   ├── 📄 mapper-to-iri-list.php.ejs
+│   │           │   │   │   └── 📄 mapper.php.ejs
+│   │           │   │   ├── 📁 resource
+│   │           │   │   │   └── 📄 resource.php.ejs
+│   │           │   │   └── 📁 state
+│   │           │   │       ├── 📄 collection-provider.php.ejs
+│   │           │   │       ├── 📄 delete-processor.php.ejs
+│   │           │   │       ├── 📄 processor.php.ejs
+│   │           │   │       ├── 📄 prodiver.php.ejs
+│   │           │   │       ├── 📄 provider.php.ejs
+│   │           │   │       └── 📄 update-processor.php.ejs
+│   │           │   ├── 📁 command
 │   │           │   │   └── 📄 crud-all.php.ejs
-│   │           │   ├── 📄 controller.php.ejs
-│   │           │   ├── 📄 create-dto.php.ejs
-│   │           │   ├── 📄 delete-processor.php.ejs
-│   │           │   ├── 📄 dto.php.ejs
-│   │           │   ├── 📄 entity.php.ejs
-│   │           │   ├── 📁 env
-│   │           │   │   └── 📄 env.local.ejs
-│   │           │   ├── 📄 mapper.php.ejs
-│   │           │   ├── 📁 partials
+│   │           │   ├── 📁 controller
+│   │           │   │   └── 📄 controller.php.ejs
+│   │           │   ├── 📁 entity
 │   │           │   │   ├── 📄 entity-accessor-relation.php.ejs
 │   │           │   │   ├── 📄 entity-relation.php.ejs
-│   │           │   │   ├── 📄 mapper-logic.php.ejs
-│   │           │   │   ├── 📄 mapper-resolve-iri.php.ejs
-│   │           │   │   └── 📄 mapper-to-iri-list.php.ejs
-│   │           │   ├── 📄 processor.php.ejs
-│   │           │   ├── 📄 prodiver.php.ejs
-│   │           │   ├── 📄 provider.php.ejs
-│   │           │   ├── 📄 repository.php.ejs
-│   │           │   ├── 📄 resource.php.ejs
-│   │           │   ├── 📄 service.php.ejs
-│   │           │   ├── 📁 services
-│   │           │   │   └── 📄 iri-from-resource.php.ejs
-│   │           │   ├── 📄 test.php.ejs
-│   │           │   ├── 📄 update-dto.php.ejs
-│   │           │   └── 📄 update-processor.php.ejs
+│   │           │   │   └── 📄 entity.php.ejs
+│   │           │   ├── 📁 env
+│   │           │   │   └── 📄 env.local.ejs
+│   │           │   ├── 📁 repository
+│   │           │   │   └── 📄 repository.php.ejs
+│   │           │   ├── 📁 service
+│   │           │   │   ├── 📄 iri-from-resource.php.ejs
+│   │           │   │   └── 📄 service.php.ejs
+│   │           │   └── 📁 test
+│   │           │       └── 📄 test.php.ejs
 │   │           ├── 📄 test-generator.js
 │   │           └── 📁 utils
 │   │               ├── 📄 convert.js
@@ -90,17 +245,17 @@
 │       └── 📁 architecture
 │           ├── 📄 architecture.service.js
 │           └── 📄 manifest.json
-├── 📄 rapport-perso.txt
 ├── 📁 scripts
 │   └── 📄 test-generation.ts
 ├── 📁 src
 │   ├── 📁 assets
 │   │   └── 📄 messages.ts
 │   ├── 📁 commands
-│   │   ├── 📄 BaseCommand.ts
 │   │   ├── 📄 ai.command.ts
 │   │   ├── 📄 app.command.ts
+│   │   ├── 📄 BaseCommand.ts
 │   │   ├── 📄 doc.command.ts
+│   │   ├── 📄 generate.action.ts
 │   │   ├── 📄 generate.command.ts
 │   │   ├── 📄 list-command.help.md
 │   │   ├── 📄 mcp.command.ts
@@ -120,12 +275,17 @@
 │   │   ├── 📄 .gitignore
 │   │   ├── 📁 commun
 │   │   │   ├── 📄 .gitignore
+│   │   │   ├── 📄 architecture.interface.js
 │   │   │   ├── 📄 architecture.interface.ts
+│   │   │   ├── 📄 database.interface.js
 │   │   │   ├── 📄 database.interface.ts
 │   │   │   ├── 📄 file-node.interface.ts
+│   │   │   ├── 📄 framework.interface.js
 │   │   │   ├── 📄 framework.interface.ts
+│   │   │   ├── 📄 member-info.interface.js
 │   │   │   ├── 📄 member-info.interface.ts
 │   │   │   ├── 📄 package-json.model.ts
+│   │   │   ├── 📄 projet.interface.js
 │   │   │   └── 📄 projet.interface.ts
 │   │   ├── 📁 parserMdj
 │   │   │   ├── 📁 models
@@ -163,8 +323,11 @@
 │   │   │   │   └── 📄 config.ts
 │   │   │   ├── 📁 interfaces
 │   │   │   │   ├── 📄 file-node.interface.ts
+│   │   │   │   ├── 📄 project-command.interface.js
 │   │   │   │   ├── 📄 project-command.interface.ts
+│   │   │   │   ├── 📄 project-service.interface.js
 │   │   │   │   ├── 📄 project-service.interface.ts
+│   │   │   │   ├── 📄 task-service.interface.js
 │   │   │   │   └── 📄 task-service.interface.ts
 │   │   │   └── 📁 services
 │   │   │       ├── 📄 project.service.ts
@@ -732,11 +895,11 @@
 │   │       │   │       │   │   │   └── 📄 auth.global.ts.ejs
 │   │       │   │       │   │   ├── 📄 nuxt.config.ts.ejs
 │   │       │   │       │   │   ├── 📁 pages
-│   │       │   │       │   │   │   ├── 📄 [slug].vue.ejs
 │   │       │   │       │   │   │   ├── 📄 about.vue.ejs
 │   │       │   │       │   │   │   ├── 📁 admin
 │   │       │   │       │   │   │   │   └── 📄 index.vue.ejs
-│   │       │   │       │   │   │   └── 📄 index.vue.ejs
+│   │       │   │       │   │   │   ├── 📄 index.vue.ejs
+│   │       │   │       │   │   │   └── 📄 [slug].vue.ejs
 │   │       │   │       │   │   ├── 📁 plugins
 │   │       │   │       │   │   │   └── 📄 axios.ts.ejs
 │   │       │   │       │   │   ├── 📁 public
@@ -774,8 +937,8 @@
 │   │       │   │   ├── 📁 commands
 │   │       │   │   │   └── 📄 symfony.command.ts
 │   │       │   │   ├── 📁 config
+│   │       │   │   │   ├── 📄 index.ts
 │   │       │   │   │   ├── 📄 symfony-architecture.mock.ts
-│   │       │   │   │   ├── 📄 symfony-config-ini.mock.ts
 │   │       │   │   │   ├── 📄 symfony-dependencies.mock.ts
 │   │       │   │   │   ├── 📄 symfony-environments.mock.ts
 │   │       │   │   │   ├── 📄 symfony-initiale-architecture-project.mock.ts
@@ -931,11 +1094,11 @@
 │   │           └── 📄 rename_files.py
 │   ├── 📄 index.ts
 │   ├── 📁 mcp
-│   │   ├── 📄 McpCommand.ts.txt
 │   │   ├── 📄 mcp-commands.ts.txt
 │   │   ├── 📄 mcp-process-utils.ts
 │   │   ├── 📄 mcp-server.ts
-│   │   └── 📄 mcp-server.ts.txt
+│   │   ├── 📄 mcp-server.ts.txt
+│   │   └── 📄 McpCommand.ts.txt
 │   ├── 📁 plugins
 │   │   ├── 📄 architect.plugin.js
 │   │   ├── 📁 blague
@@ -948,28 +1111,24 @@
 │   │   │   ├── 📄 manifest.json
 │   │   │   ├── 📄 symfony.service.js
 │   │   │   └── 📁 templates
+│   │   ├── 📄 tasks.db
 │   │   ├── 📄 task_manager.data.json
 │   │   ├── 📄 task_manager.plugin.js
 │   │   ├── 📄 task_manager_cli.plugin.js
 │   │   ├── 📄 task_manager_sql_lite.plugin.js
-│   │   ├── 📄 tasks.db
 │   │   ├── 📄 test.plugin.js
 │   │   └── 📄 weather.plugin.js
 │   ├── 📁 services
-│   │   ├── 📁 __tests__
-│   │   │   ├── 📄 case-service.test.ts
-│   │   │   ├── 📄 file-system.service.spec.ts
-│   │   │   ├── 📄 logger-service.test.ts.txt
-│   │   │   ├── 📄 services-container.test.ts
-│   │   │   └── 📄 shell-service.spec.ts
 │   │   ├── 📄 ai.service.ts
 │   │   ├── 📄 architecture.service.ts
 │   │   ├── 📄 ast.service.ts
 │   │   ├── 📄 base-generator.service.ts
+│   │   ├── 📄 base-service.service.js
 │   │   ├── 📄 base-service.service.ts
 │   │   ├── 📄 case.service.ts
 │   │   ├── 📄 config.service.ts
 │   │   ├── 📄 data-manager.service.ts
+│   │   ├── 📄 file-system.service.js
 │   │   ├── 📄 file-system.service.ts
 │   │   ├── 📄 generate-dto.service.ts
 │   │   ├── 📄 generator.service.ts
@@ -983,11 +1142,16 @@
 │   │   ├── 📄 services-container.ts.txt
 │   │   ├── 📄 shell.service.ts
 │   │   ├── 📄 state.service.ts
-│   │   ├── 📄 task-manager.service.ts
 │   │   ├── 📄 template.factory.ts
 │   │   ├── 📄 template.service.ts
 │   │   ├── 📄 test-error-handler.ts
-│   │   └── 📄 tool.service.ts
+│   │   ├── 📄 tool.service.ts
+│   │   └── 📁 __tests__
+│   │       ├── 📄 case-service.test.ts
+│   │       ├── 📄 file-system.service.spec.ts
+│   │       ├── 📄 logger-service.test.ts.txt
+│   │       ├── 📄 services-container.test.ts
+│   │       └── 📄 shell-service.spec.ts
 │   ├── 📁 templates
 │   │   ├── 📄 class.ts.txt
 │   │   ├── 📄 manifest.ejs
@@ -995,49 +1159,82 @@
 │   │   └── 📄 service.ejs
 │   ├── 📁 test
 │   └── 📁 types
+│       ├── 📄 cli-options.type.js
 │       ├── 📄 cli-options.type.ts
+│       ├── 📄 command.interface.js
 │       ├── 📄 command.interface.ts
 │       ├── 📁 commun
+│       │   ├── 📄 database.interface.js
 │       │   ├── 📄 database.interface.ts
+│       │   ├── 📄 file-node.interface.js
 │       │   ├── 📄 file-node.interface.ts
+│       │   ├── 📄 member-info.interface.js
 │       │   ├── 📄 member-info.interface.ts
+│       │   ├── 📄 sdk-context.interface.js
 │       │   └── 📄 sdk-context.interface.ts
+│       ├── 📄 config.interface.js
 │       ├── 📄 config.interface.ts
+│       ├── 📄 context.interface.js
 │       ├── 📄 context.interface.ts
+│       ├── 📄 plugin.interface.js
 │       ├── 📄 plugin.interface.ts
 │       └── 📁 services
+│           ├── 📄 ai-service.interface.js
 │           ├── 📄 ai-service.interface.ts
+│           ├── 📄 architecture-service.interface.js
 │           ├── 📄 architecture-service.interface.ts
+│           ├── 📄 ast-service.interface.js
 │           ├── 📄 ast-service.interface.ts
+│           ├── 📄 base-service.interface.js
 │           ├── 📄 base-service.interface.ts
+│           ├── 📄 case-service.interface.js
 │           ├── 📄 case-service.interface.ts
+│           ├── 📄 config-service.interface.js
 │           ├── 📄 config-service.interface.ts
+│           ├── 📄 data-manager-service.interface.js
 │           ├── 📄 data-manager-service.interface.ts
+│           ├── 📄 error-handler.interface.js
 │           ├── 📄 error-handler.interface.ts
+│           ├── 📄 file-system.interface.js
 │           ├── 📄 file-system.interface.ts
+│           ├── 📄 generator.interface.js
 │           ├── 📄 generator.interface.ts
+│           ├── 📄 git-service.interface.js
 │           ├── 📄 git-service.interface.ts
+│           ├── 📄 logger-service.interface.js
 │           ├── 📄 logger-service.interface.ts
+│           ├── 📄 path-service.interface.js
 │           ├── 📄 path-service.interface.ts
+│           ├── 📄 plugin-service.interface.js
 │           ├── 📄 plugin-service.interface.ts
+│           ├── 📄 prompt-service.interface.js
 │           ├── 📄 prompt-service.interface.ts
+│           ├── 📄 services-container.interface.js
 │           ├── 📄 services-container.interface.ts
+│           ├── 📄 shell-service.interface.js
 │           ├── 📄 shell-service.interface.ts
+│           ├── 📄 state-service.interface.js
 │           ├── 📄 state-service.interface.ts
+│           ├── 📄 task-manager-service.interface.js
 │           ├── 📄 task-manager-service.interface.ts
+│           ├── 📄 template.interface.js
 │           ├── 📄 template.interface.ts
+│           ├── 📄 tool-service.interface.js
 │           └── 📄 tool-service.interface.ts
 ├── 📁 tests
 │   ├── 📄 cli-e2e.test.ts
 │   ├── 📄 setup.ts
 │   └── 📄 utils.ts
 ├── 📁 tree
+│   ├── 📁 cli-local-poo
 │   ├── 📄 doc.md
 │   ├── 📄 tree.json
 │   ├── 📄 tree.md
 │   └── 📄 tree.yaml
+├── 📄 tsconfig.cli.json
 ├── 📄 tsconfig.json
+├── 📄 tsconfig.plugins.json
 ├── 📄 tsup.config.ts
 └── 📄 vite.config.js
 
-Summary: 236 directories, 805 files
+Summary: 293 directories, 945 files

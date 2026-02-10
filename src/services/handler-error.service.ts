@@ -4,10 +4,7 @@ import { IHandlerErrorService } from "@/types/services/error-handler.interface.j
 
 import { BaseService } from "./base-service.service.js";
 
-export class HandlerErrorService
-  extends BaseService
-  implements IHandlerErrorService
-{
+export class HandlerErrorService extends BaseService implements IHandlerErrorService {
   readonly serviceName = "HandlerErrorService";
 
   constructor(cli: IAppContext) {
@@ -43,14 +40,10 @@ export class HandlerErrorService
       const err: Error =
         error instanceof Error
           ? error
-          : new Error(
-              typeof error === "string" ? error : JSON.stringify(error),
-            );
+          : new Error(typeof error === "string" ? error : JSON.stringify(error));
 
       const isCliError = err instanceof CliError;
-      const message = isCliError
-        ? err.message
-        : `An unexpected error occurred: ${err.message}`;
+      const message = isCliError ? err.message : `An unexpected error occurred: ${err.message}`;
       const exitCode = isCliError ? err.exitCode : 1;
 
       // 2️⃣ Logger SAFE avec protection totale
@@ -77,18 +70,13 @@ export class HandlerErrorService
    * @param contextMessage - contexte de l'erreur
    * @param message - message d'erreur
    */
-  private safeLogError(
-    contextMessage: string | undefined,
-    message: string,
-  ): void {
+  private safeLogError(contextMessage: string | undefined, message: string): void {
     try {
       const logger = this.cli?.logger;
 
       // Tentative d'utilisation du logger configuré
       if (logger && typeof logger.error === "function") {
-        const finalMessage = contextMessage
-          ? `${contextMessage}: ${message}`
-          : message;
+        const finalMessage = contextMessage ? `${contextMessage}: ${message}` : message;
         logger.error(finalMessage);
         return;
       }
@@ -98,9 +86,7 @@ export class HandlerErrorService
     }
 
     // Fallback : utilisation de console.error
-    const finalMessage = contextMessage
-      ? `${contextMessage}: ${message}`
-      : message;
+    const finalMessage = contextMessage ? `${contextMessage}: ${message}` : message;
     console.error("❌", finalMessage);
   }
 
@@ -140,9 +126,7 @@ export class HandlerErrorService
           return this.cli.config.logLevel;
         }
       } catch {
-        this.cli.logger.warn(
-          "⚠️  Failed to get log level from this.cli.config.logLevel",
-        );
+        this.cli.logger.warn("⚠️  Failed to get log level from this.cli.config.logLevel");
       }
 
       // Méthode 2 : Via une variable d'environnement
@@ -192,9 +176,7 @@ export class HandlerErrorService
    */
   public isProperlyConfigured(): boolean {
     try {
-      return !!(
-        this.cli?.logger && typeof this.cli.logger.error === "function"
-      );
+      return !!(this.cli?.logger && typeof this.cli.logger.error === "function");
     } catch {
       return false;
     }

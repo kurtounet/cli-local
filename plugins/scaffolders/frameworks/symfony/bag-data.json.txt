@@ -1,0 +1,141 @@
+{
+  "id": "symfony",
+  "name": "Symfony Generator",
+  "templateDir": "./templates",
+  "service": "symfony.service.js",
+  "bag": {
+    "scope": {
+      "project": {
+        "env": {
+          "APP_SECRET": "APP_SECRET_DEFAULT_VALUE"
+        },
+        "db": {
+          "url": "mysql://root:@localhost:3306/my_database"
+        },
+        "mailer": {
+          "dsn": "null"
+        },
+        "cors": {
+          "allow_origin": "null"
+        },
+        "jwt": {
+          "passphrase": "some_jwt_passphrase"
+        }
+      },
+      "entity": {
+        "namePascalCase": "Article",
+        "nameKebabCase": "article",
+        "nameSnakeCase": "article",
+        "namePluralCamelCase": "articles",
+        "nameCamelCase": "article",
+        "tableName": "article",
+        "columns": [
+          {
+            "phpType": "int",
+            "name": "id",
+            "nameCamelCase": "id",
+            "namePascalCase": "Id",
+            "foreignKey": false,
+            "ormType": "bigint",
+            "nullable": false
+          },
+          {
+            "phpType": "string",
+            "name": "author",
+            "nameCamelCase": "author",
+            "namePascalCase": "Author",
+            "foreignKey": false,
+            "ormType": "string",
+            "nullable": true
+          }
+        ],
+        "relationships": [
+          {
+            "nameCamelCase": "relatedEntity",
+            "namePascalCase": "RelatedEntity",
+            "targetPascalCase": "RelatedEntity",
+            "relationType": "ManyToOne",
+            "targetPascalCaseSingular": "RelatedEntity",
+            "mappedBy": "owningEntity",
+            "ownerPascalCase": "OwningEntity",
+            "nullable": true,
+            "inversedBy": "inverseSide"
+          }
+        ]
+      }
+    }
+  },
+  "templateDefinitions": {
+    "api-platform": {
+      "dto": {
+        "_files": [
+          "api-platform/dto/collection-item-dto.php.ejs",
+          "api-platform/dto/create-dto.php.ejs",
+          "api-platform/dto/dto.php.ejs",
+          "api-platform/dto/update-dto.php.ejs"
+        ]
+      },
+      "mapper": {
+        "_files": [
+          "api-platform/mapper/mapper-logic.php.ejs",
+          "api-platform/mapper/mapper-resolve-iri.php.ejs",
+          "api-platform/mapper/mapper-to-iri-list.php.ejs",
+          "api-platform/mapper/mapper.php.ejs"
+        ]
+      },
+      "resource": {
+        "_files": [
+          "api-platform/resource/resource.php.ejs"
+        ]
+      },
+      "state": {
+        "_files": [
+          "api-platform/state/collection-provider.php.ejs",
+          "api-platform/state/delete-processor.php.ejs",
+          "api-platform/state/processor.php.ejs",
+          "api-platform/state/prodiver.php.ejs",
+          "api-platform/state/provider.php.ejs",
+          "api-platform/state/update-processor.php.ejs"
+        ]
+      }
+    },
+    "command": {
+      "_files": [
+        "command/crud-all.php.ejs"
+      ]
+    },
+    "controller": {
+      "_files": [
+        "controller/controller.php.ejs"
+      ]
+    },
+    "entity": {
+      "_files": [
+        "entity/entity-accessor-relation.php.ejs",
+        "entity/entity-relation.php.ejs",
+        "entity/entity.php.ejs"
+      ]
+    },
+    "env": {
+      "_files": [
+        "env/env.local.ejs"
+      ]
+    },
+    "repository": {
+      "_files": [
+        "repository/repository.php.ejs"
+      ]
+    },
+    "service": {
+      "_files": [
+        "service/iri-from-resource.php.ejs",
+        "service/service.php.ejs"
+      ]
+    },
+    "test": {
+      "_files": [
+        "test/test.php.ejs"
+      ]
+    }
+  }
+}

@@ -2,16 +2,12 @@
 
 namespace App\Repository;
 
-use App\Entity\<%= entity.namePascalCase %>;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-
-/**
- * @extends ServiceEntityRepository<<%= entity.namePascalCase %>>
- */
-class <%= entity.namePascalCase %>Repository extends ServiceEntityRepository
-{
-    public function __construct(ManagerRegistry $registry)
+use App\Entity\<%= entity.namePascalCase %>; use
+Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository; use
+Doctrine\Persistence\ManagerRegistry; /** * @extends ServiceEntityRepository<<%=
+entity.namePascalCase %>> */ class <%= entity.namePascalCase %>Repository extends
+ServiceEntityRepository
+{public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, <%= entity.namePascalCase %>::class);
     }
@@ -23,7 +19,8 @@ class <%= entity.namePascalCase %>Repository extends ServiceEntityRepository
     //    {
     //        return $this->createQueryBuilder('a')
     //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
+    //            ->setParameter('val',
+  $value)
     //            ->orderBy('a.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
@@ -32,12 +29,8 @@ class <%= entity.namePascalCase %>Repository extends ServiceEntityRepository
     //    }
 
     //    public function findOneBySomeField($value): ?<%= entity.namePascalCase %>
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    // {
+    // return $this->createQueryBuilder('a') // ->andWhere('a.exampleField = :val') //
+    ->setParameter('val', $value) // ->getQuery() // ->getOneOrNullResult() // ; //
+  }
 }

@@ -2,6 +2,7 @@ import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IGetEntityJson } from "@/features/parserMdj/models/entity-json.model.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
+import { IBagData } from "@/types/commun/data-bag.interface.js";
 import { IPackPlugin, IPluginManifest, IPluginModule } from "@/types/plugin.interface.js";
 
 import { BaseCommand } from "./BaseCommand.js";
@@ -113,17 +114,18 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
 
     // 2. Chargement du plugin via PluginService
     const pack = (await this.cli.plugin.load(pluginId, type)) as IPackPlugin;
-
+    console.warn(bagData);
     return {
       instance: pack.instance,
       manifest: pack.manifest,
       pluginDir: pack.pluginDir,
-      data: {
-        project,
-        entitiesJson,
-        entities: entitiesJson?.entities ?? [],
-        blueprints: pack.manifest.blueprints ?? [],
-      },
+      data: (await bagData).bag.scope,
+      // data: {
+      //   project,
+      //   entitiesJson,
+      //   entities: entitiesJson?.entities ?? [],
+      //   blueprints: pack.manifest.blueprints ?? [],
+      // },
     };
   }
 
@@ -132,13 +134,17 @@ export class PluginCommand extends BaseCommand<IPluginOptions> {
       instance: IPluginModule;
       manifest: IPluginManifest;
       pluginDir: string;
-      data: unknown;
+      data: IBagData;
     };
 
     this.cli.logger.info(`🚀 Exécution de : ${manifest.name} (v${manifest.version ?? "1.0.0"})`);
 
     // On passe les options CLI (force, dry-run) et les données projet au plugin
-    await instance.execute(options, data);
+    await instance.execute(options, {
+      manifest,
+      pluginDir,
+      data,
+    });
 
     this.cli.logger.success(`✨ Plugin ${manifest.id} terminé avec succès !`);
   }

@@ -1,0 +1,14 @@
+// plugins-src/symfony/index.ts
+export default class SymfonyPlugin {
+    sdk;
+    constructor(sdk) {
+        this.sdk = sdk;
+    }
+    async execute(blueprint, options) {
+        const data = { className: options.name || "Default" };
+        // Ton PluginService utilisera ce chemin pour EJS
+        const content = await this.sdk.render(this.sdk.pluginDir, "templates", "controller.ejs", data);
+        await this.sdk.fs.writeAsync(`./src/${data.className}.php`, content);
+        this.sdk.log.success("Fichier généré !");
+    }
+}

@@ -23,6 +23,7 @@ export class PluginService extends BaseService implements IPluginService {
   readonly serviceName = "PluginService";
 
   private pluginsBaseDir = this.cli.path.join(process.cwd(), "plugins");
+  private bagDataFile = this.cli.path.join(process.cwd(), ".cli-local", "bag-data.json");
   private pluginsIndexJsonPath = this.cli.path.join(this.pluginsBaseDir, "index.json");
   private pluginsIndexJson!: IPluginsIndexJson;
   private pluginsManifest!: IPluginManifest;
@@ -319,54 +320,32 @@ export class PluginService extends BaseService implements IPluginService {
       config: this.cli.config as any,
     };
   }
-
-  /**
-   * Maps an entity from entities.json format to bag-data.json entity scope format.
-   * @param entityData - The raw entity object from entities.json.
-   * @returns The mapped entity object.
-   */
-  public mapEntityForBagScope(entityData: IEntityDefinition) {
-    if (!entityData) {
-      return {};
+  public async buildBagData(
+    configProjectData: IProjectConfig,
+    entitiesData: IGetEntityJson,
+  ): Promise<IBagData> {
+    let bagData!: IBagData;
+    if (this.cli.fileSystem.exists(this.bagDataFile)) {
+      const file = await this.cli.fileSystem.readFile(this.bagDataFile);
+      bagData = JSON.parse(file) as IBagData;
     }
 
-    return {
-      namePascalCase: entityData.namePascalCase,
-      nameKebabCase: entityData.nameKebabCase,
-      nameSnakeCase: entityData.nameKebabCase.replace(/-/g, "_"), // Assuming kebab-case to snake_case
-      namePluralCamelCase: entityData.namePluralCamelCase || `${entityData.nameCamelCase}s`, // Simple pluralization if not provided
-      nameCamelCase: entityData.nameCamelCase,
-      tableName: entityData.tableName,
-      columns: (entityData.columns || []).map((col) => ({
-        phpType:
-          col.typeTypeScript === "number" && col.typeDoctrine === "float"
-            ? "float"
-            : col.typeTypeScript, // Adjust based on common PHP types
-        name: col.name,
-        nameCamelCase: col.name.replace(/_([a-z])/g, (g) => g[1].toUpperCase()), // snake_case to camelCase
-        namePascalCase: col.name
-          .split("_")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(""), // snake_case to PascalCase
-        foreignKey: col.foreignKey,
-        ormType: col.typeDoctrine,
-        nullable: col.nullable,
-      })),
-      relationships: (entityData.relationships || []).map((rel) => ({
-        nameCamelCase: rel.relationName, // Or derive from target
-        namePascalCase: rel.relationName.charAt(0).toUpperCase() + rel.relationName.slice(1),
-        targetPascalCase: rel.target.charAt(0).toUpperCase() + rel.target.slice(1),
-        relationType: rel.relationType,
-        targetPascalCaseSingular: rel.target.charAt(0).toUpperCase() + rel.target.slice(1), // Assuming target is singular
-        mappedBy: rel.mappedBy || "", // Needs to be derived or provided
-        ownerPascalCase: rel.ownerPascalCase || "", // Needs to be derived or provided
-        nullable: true, // Default to true or derive
-        inversedBy: rel.inversedBy || "", // Needs to be derived or provided
-      })),
-    };
-  }
-
-  public async buildBagData(configProjectData: IProjectConfig, entitiesData: IGetEntityJson) {
+    return bagData;
+    // const existingBagData: IBagData = {
+    //   id: "symfony",
+    //   name: "Symfony Generator",
+    //   templateDir: "./templates",
+    //   version: "1.0.0",
+    //   template: "symfony",
+    //   service: "symfony.service.js",
+    //   bag: {
+    //     scope: {
+    //       project: {},
+    //       entities: {},
+    //     },
+    //   },
+    // };
+    /*
     const existingBagData: IBagData = {
       id: "symfony",
       name: "Symfony Generator",
@@ -438,8 +417,52 @@ export class PluginService extends BaseService implements IPluginService {
       console.log("bag-data.json a été mis à jour avec succès.");
     } catch (error) {
       console.error("Erreur lors de l'écriture de bag-data.json :", error.message);
-    }
+    }*/
   }
+
+  /* 
+  public mapEntityForBagScope(entityData: IEntityDefinition) {
+    if (!entityData) {
+      return {};
+    }
+
+    return {
+      namePascalCase: entityData.namePascalCase,
+      nameKebabCase: entityData.nameKebabCase,
+      nameSnakeCase: entityData.nameKebabCase.replace(/-/g, "_"), // Assuming kebab-case to snake_case
+      namePluralCamelCase: entityData.namePluralCamelCase || `${entityData.nameCamelCase}s`, // Simple pluralization if not provided
+      nameCamelCase: entityData.nameCamelCase,
+      tableName: entityData.tableName,
+      columns: (entityData.columns || []).map((col) => ({
+        phpType:
+          col.typeTypeScript === "number" && col.typeDoctrine === "float"
+            ? "float"
+            : col.typeTypeScript, // Adjust based on common PHP types
+        name: col.name,
+        nameCamelCase: col.name.replace(/_([a-z])/g, (g) => g[1].toUpperCase()), // snake_case to camelCase
+        namePascalCase: col.name
+          .split("_")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(""), // snake_case to PascalCase
+        foreignKey: col.foreignKey,
+        ormType: col.typeDoctrine,
+        nullable: col.nullable,
+      })),
+      relationships: (entityData.relationships || []).map((rel) => ({
+        nameCamelCase: rel.relationName, // Or derive from target
+        namePascalCase: rel.relationName.charAt(0).toUpperCase() + rel.relationName.slice(1),
+        targetPascalCase: rel.target.charAt(0).toUpperCase() + rel.target.slice(1),
+        relationType: rel.relationType,
+        targetPascalCaseSingular: rel.target.charAt(0).toUpperCase() + rel.target.slice(1), // Assuming target is singular
+        mappedBy: rel.mappedBy || "", // Needs to be derived or provided
+        ownerPascalCase: rel.ownerPascalCase || "", // Needs to be derived or provided
+        nullable: true, // Default to true or derive
+        inversedBy: rel.inversedBy || "", // Needs to be derived or provided
+      })),
+    };
+  }
+
+  
 
   buildProjectData(configProjectData: IProjectConfig) {
     const symfonyFramework = configProjectData.frameworks?.find((f) => f.name === "symfony");
@@ -450,7 +473,7 @@ export class PluginService extends BaseService implements IPluginService {
       cors: { allow_origin: "null" },
       jwt: configProjectData.jwt = configProjectData.jwt || {
           passphrase: "some_jwt_passphrase",
-        };,
+        };
     };
     if (configProjectData?.projectName) {
       project = {
@@ -486,5 +509,5 @@ export class PluginService extends BaseService implements IPluginService {
       }
     }
   }
-  buildEntityData() {}
+   */
 }

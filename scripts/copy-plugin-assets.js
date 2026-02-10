@@ -24,7 +24,10 @@ async function copyPluginAssets() {
 
         // 2. Exclure si le nom du fichier ou dossier est dans la liste d'exclusion
         if (
-          excludeList.some((exclude) => relativePath.startsWith(exclude) || fileName === exclude)
+          excludeList.some(
+            (exclude) =>
+              relativePath.startsWith(exclude) || fileName === exclude,
+          )
         ) {
           return false;
         }

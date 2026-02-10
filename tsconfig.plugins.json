@@ -1,27 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "ES2022",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "rootDir": "plugins-src",
-        "outDir": "plugins",
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "plugins-src/*"
-            ]
-        },
-        "skipLibCheck": true,
-        "strictNullChecks": true,
-        "noImplicitAny": true,
-        "strict": false,
-        "esModuleInterop": true,
-        "isolatedModules": true
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "plugins-src",
+    "outDir": "plugins",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["plugins-src/*"]
     },
-    "include": [
-        "plugins-src/**/*.ts"
-    ],
-    "exclude": [
-        "plugins"
-    ]
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "isolatedModules": true
+  },
+  "include": ["plugins-src/**/*.ts"],
+  "exclude": ["plugins"]
 }

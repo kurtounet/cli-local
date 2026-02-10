@@ -4,95 +4,39 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": [
-      "ESNext"
-    ],
-    "types": [
-      "node"
-    ],
+    "lib": ["ESNext"],
+    "types": ["node"],
     //* Chemins & Structure */
     "rootDir": "src",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@commands/*": [
-        "src/commands/*"
-      ],
-      "@features/*": [
-        "src/features/*"
-      ],
-      "@mcp/*": [
-        "src/mcp/*"
-      ],
-      "@project/*": [
-        "src/features/project/*"
-      ],
-      "@parsersMdj/*": [
-        "src/features/parsersMdj/*"
-      ],
-      "@frameworks/*": [
-        "src/features/frameworks/*"
-      ],
-      "@angular/*": [
-        "src/features/frameworks/angular/*"
-      ],
-      "@electron/*": [
-        "src/features/frameworks/electron/*"
-      ],
-      "@nestjs/*": [
-        "src/features/frameworks/nestjs/*"
-      ],
-      "@nitro/*": [
-        "src/features/frameworks/nitro/*"
-      ],
-      "@nuxt/*": [
-        "src/features/frameworks/nuxt/*"
-      ],
-      "@symfony/*": [
-        "src/features/frameworks/symfony/*"
-      ],
-      "@vue/*": [
-        "src/features/frameworks/vue/*"
-      ],
-      "@frameworks-models/*": [
-        "src/features/frameworks/models/*"
-      ],
-      "@frameworks-services/*": [
-        "src/features/frameworks/services/*"
-      ],
-      "@constants/*": [
-        "src/constants/*"
-      ],
-      "@helpers/*": [
-        "src/helpers/*"
-      ],
-      "@mocks/*": [
-        "src/mocks/*"
-      ],
-      "@templates/*": [
-        "src/templates/*"
-      ],
-      "@services/*": [
-        "src/services/*"
-      ],
-      "@models/*": [
-        "src/models/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@utils/file-utils": [
-        "src/utils/file-utils"
-      ],
-      "@utils/stringUtils": [
-        "src/utils/string-utils"
-      ],
-      "@utils/execute-command": [
-        "src/utils/execute-command"
-      ]
+      "@/*": ["src/*"],
+      "@commands/*": ["src/commands/*"],
+      "@features/*": ["src/features/*"],
+      "@mcp/*": ["src/mcp/*"],
+      "@project/*": ["src/features/project/*"],
+      "@parsersMdj/*": ["src/features/parsersMdj/*"],
+      "@frameworks/*": ["src/features/frameworks/*"],
+      "@angular/*": ["src/features/frameworks/angular/*"],
+      "@electron/*": ["src/features/frameworks/electron/*"],
+      "@nestjs/*": ["src/features/frameworks/nestjs/*"],
+      "@nitro/*": ["src/features/frameworks/nitro/*"],
+      "@nuxt/*": ["src/features/frameworks/nuxt/*"],
+      "@symfony/*": ["src/features/frameworks/symfony/*"],
+      "@vue/*": ["src/features/frameworks/vue/*"],
+      "@frameworks-models/*": ["src/features/frameworks/models/*"],
+      "@frameworks-services/*": ["src/features/frameworks/services/*"],
+      "@constants/*": ["src/constants/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@mocks/*": ["src/mocks/*"],
+      "@templates/*": ["src/templates/*"],
+      "@services/*": ["src/services/*"],
+      "@models/*": ["src/models/*"],
+      "@utils/*": ["src/utils/*"],
+      "@utils/file-utils": ["src/utils/file-utils"],
+      "@utils/stringUtils": ["src/utils/string-utils"],
+      "@utils/execute-command": ["src/utils/execute-command"]
     },
     //* Rigueur & Qualité */
     "strictNullChecks": true,
@@ -109,11 +53,6 @@
     "declaration": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

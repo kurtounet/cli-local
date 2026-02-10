@@ -39,7 +39,9 @@ import { IDirectory } from "@/features/commun/architecture.interface.js";
  *
  * @param path
  */
-export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(path: string): IDirectory[] {
+export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(
+  path: string,
+): IDirectory[] {
   const directory: string[] = [
     "assets",
     "components",
@@ -73,7 +75,15 @@ export function ARCHITECTURE_DIRECTORY_COMMUN_NUXT_MOCK(path: string): IDirector
  */
 export function ARCHITECTURE_DIRECTORY_PROJECT_NUXT_MOCK(): IDirectory[] {
   const path = "./app";
-  const directory: string[] = ["app", "layers", "content", "modules", "public", "server", "shared"];
+  const directory: string[] = [
+    "app",
+    "layers",
+    "content",
+    "modules",
+    "public",
+    "server",
+    "shared",
+  ];
   return [
     ...directory.map((item) => ({
       type: "directory",

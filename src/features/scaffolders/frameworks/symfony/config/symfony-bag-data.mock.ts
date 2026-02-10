@@ -1,4 +1,8 @@
-import { IBagData, IEntityDefinition, IProjectBag } from "@/types/commun/data-bag.interface.js";
+import {
+  IBagData,
+  IEntityDefinition,
+  IProjectBag,
+} from "@/types/commun/data-bag.interface.js";
 
 /* 
  "id": "symfony",

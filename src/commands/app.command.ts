@@ -77,7 +77,11 @@ export class AppCommand extends BaseCommand {
     }
   }
 
-  public async handlerInit(format: string, projectPath: string, config: IAppConfig): Promise<void> {
+  public async handlerInit(
+    format: string,
+    projectPath: string,
+    config: IAppConfig,
+  ): Promise<void> {
     let fileName = "";
     let content = "";
     switch (format) {

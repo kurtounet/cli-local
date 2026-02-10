@@ -164,7 +164,11 @@ export class PathService extends BaseService implements IPathService {
    */
   public isChildOf(parent: string, child: string): boolean {
     const relative = path.relative(parent, child);
-    return relative.length > 0 && !relative.startsWith("..") && !path.isAbsolute(relative);
+    return (
+      relative.length > 0 &&
+      !relative.startsWith("..") &&
+      !path.isAbsolute(relative)
+    );
   }
 
   /**

@@ -11,7 +11,11 @@ export class LoggerService extends BaseService implements ILoggerService {
   }
 
   info(message: string, meta?: object): void {
-    console.log(chalk.blue("ℹ"), message, meta ? chalk.gray(JSON.stringify(meta)) : "");
+    console.log(
+      chalk.blue("ℹ"),
+      message,
+      meta ? chalk.gray(JSON.stringify(meta)) : "",
+    );
   }
 
   success(message: string): void {

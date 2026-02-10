@@ -37,7 +37,9 @@ export class ConfigService extends BaseService implements IConfigService {
       const result = await explorer.search(projectPath);
 
       if (!result) {
-        console.warn("Aucun fichier de configuration trouvé. Création du fichier par défaut.");
+        console.warn(
+          "Aucun fichier de configuration trouvé. Création du fichier par défaut.",
+        );
         return await this.initConfigFile(projectPath);
       }
 
@@ -50,7 +52,10 @@ export class ConfigService extends BaseService implements IConfigService {
     }
   }
 
-  public async initConfigFile(projectPath: string, dataFrom?: IAppConfig): Promise<IAppConfig> {
+  public async initConfigFile(
+    projectPath: string,
+    dataFrom?: IAppConfig,
+  ): Promise<IAppConfig> {
     const fileName = `.${this.moduleName}rc.json`;
     const data = dataFrom ?? this.defaults;
 
@@ -58,7 +63,10 @@ export class ConfigService extends BaseService implements IConfigService {
       this.configData = data;
       console.log(`Génération du fichier de configuration : ${fileName}`);
 
-      await this.cli.fileSystem.writeFile(fileName, JSON.stringify(data, null, 2));
+      await this.cli.fileSystem.writeFile(
+        fileName,
+        JSON.stringify(data, null, 2),
+      );
 
       return this.configData as IAppConfig;
     } catch (error) {

@@ -10,11 +10,18 @@ import { StatDirectory } from "./file-system.service.js";
 export class ToolService extends BaseService implements IToolService {
   readonly serviceName = "ToolService";
 
-  public generateAsciiTree(node: IDirectory, viewContent = false, prefix = ""): string {
+  public generateAsciiTree(
+    node: IDirectory,
+    viewContent = false,
+    prefix = "",
+  ): string {
     let fileCount = 0;
     let dirCount = 0;
 
-    const buildTree = (currentNode: IDirectory, currentPrefix: string): string => {
+    const buildTree = (
+      currentNode: IDirectory,
+      currentPrefix: string,
+    ): string => {
       let localMd = "";
       const currentChildren = currentNode.children ?? [];
 
@@ -51,7 +58,10 @@ export class ToolService extends BaseService implements IToolService {
     let fileCount = 0;
     let dirCount = 0;
 
-    const buildYaml = (currentNode: IDirectory, currentPrefix: string): string => {
+    const buildYaml = (
+      currentNode: IDirectory,
+      currentPrefix: string,
+    ): string => {
       let localYaml = "";
       const children = currentNode.children ?? [];
 
@@ -80,7 +90,11 @@ export class ToolService extends BaseService implements IToolService {
     return yaml + stats;
   }
 
-  public generateAsciiTreeMetadata(node: IDirectory, prefix = "", viewContent = false): string {
+  public generateAsciiTreeMetadata(
+    node: IDirectory,
+    prefix = "",
+    viewContent = false,
+  ): string {
     let md = "";
     const children = node.children ?? [];
 
@@ -99,7 +113,9 @@ export class ToolService extends BaseService implements IToolService {
       if (child.metadata?.length) {
         child.metadata.forEach((meta) => {
           const args =
-            meta.arguments?.map((arg: IMemberInfo) => `${arg.name}: ${arg.type}`).join(", ") ?? "";
+            meta.arguments
+              ?.map((arg: IMemberInfo) => `${arg.name}: ${arg.type}`)
+              .join(", ") ?? "";
           const metaLine = `${childPrefix}└── ⚙️ [${meta.type}] ${meta.name}(${args})`;
 
           if (viewContent) this.cli.logger.info(metaLine);
@@ -126,7 +142,10 @@ export class ToolService extends BaseService implements IToolService {
     return outputPath;
   }
 
-  async createDirectoryStructure(parentPath: string, nodes: IDirectory[]): Promise<void> {
+  async createDirectoryStructure(
+    parentPath: string,
+    nodes: IDirectory[],
+  ): Promise<void> {
     for (const node of nodes) {
       if (node.type === "directory") {
         const newPath = this.cli.path.join(parentPath, node.name);
@@ -138,7 +157,9 @@ export class ToolService extends BaseService implements IToolService {
             await this.createDirectoryStructure(newPath, node.children);
           }
         } catch (err: any) {
-          this.cli.logger.error(`✗ Erreur lors de la création de ${newPath}: ${err.message}`);
+          this.cli.logger.error(
+            `✗ Erreur lors de la création de ${newPath}: ${err.message}`,
+          );
         }
       }
     }
@@ -157,14 +178,18 @@ export class ToolService extends BaseService implements IToolService {
 
     // 2. Vérification des exclusions (Dossiers ignorés)
     const isExcluded =
-      config?.excludedDirs.includes(name) ?? this.cli.fileSystem.excludedDirs.includes(name);
+      config?.excludedDirs.includes(name) ??
+      this.cli.fileSystem.excludedDirs.includes(name);
 
     if (isExcluded) return null;
 
     // 3. Récupération des stats réelles
-    const stats: StatDirectory = await this.cli.fileSystem.statDirectory(dirPath);
+    const stats: StatDirectory =
+      await this.cli.fileSystem.statDirectory(dirPath);
     const isDirectory = stats.isDirectory();
-    const extension = isDirectory ? "" : this.cli.path.getExtension(name).toLowerCase();
+    const extension = isDirectory
+      ? ""
+      : this.cli.path.getExtension(name).toLowerCase();
 
     // 4. Initialisation de l'objet (Correction : pas de '?' dans les clés de valeur)
 
@@ -186,7 +211,8 @@ export class ToolService extends BaseService implements IToolService {
 
     // 5. Cas Dossier : Exploration récursive
     if (isDirectory && !reachLimit) {
-      const childrenNames = await this.cli.fileSystem.readDirWithFileTypes(dirPath);
+      const childrenNames =
+        await this.cli.fileSystem.readDirWithFileTypes(dirPath);
 
       const childrenResults = await Promise.all(
         childrenNames.map((childName) =>
@@ -201,10 +227,15 @@ export class ToolService extends BaseService implements IToolService {
       );
 
       // Filtrage des dossiers exclus qui retournent null
-      item.children = childrenResults.filter((child): child is IDirectory => child !== null);
+      item.children = childrenResults.filter(
+        (child): child is IDirectory => child !== null,
+      );
 
       // Calcul de la taille cumulée du dossier
-      item.size = item.children.reduce((acc, child) => acc + (child.size || 0), 0);
+      item.size = item.children.reduce(
+        (acc, child) => acc + (child.size || 0),
+        0,
+      );
     }
     // 6. Cas Fichier : Analyse des métadonnées (AST)
     else if (!isDirectory && withMetadata) {
@@ -240,7 +271,10 @@ export class ToolService extends BaseService implements IToolService {
     });
   }
 
-  private async getContentForFile(node: IDirectory, fullPath: string): Promise<string> {
+  private async getContentForFile(
+    node: IDirectory,
+    fullPath: string,
+  ): Promise<string> {
     if (node.content) return node.content;
     if (fullPath.endsWith(this.TS_EXTENSION)) {
       return await this.applyTemplate(node.name);
@@ -253,7 +287,10 @@ export class ToolService extends BaseService implements IToolService {
    * @param node
    * @param currentPath
    */
-  public async buildPhysicalTree(node: IDirectory, currentPath: string): Promise<void> {
+  public async buildPhysicalTree(
+    node: IDirectory,
+    currentPath: string,
+  ): Promise<void> {
     const fullPath = this.cli.path.join(currentPath, node.name);
 
     if (node.type === "directory") {

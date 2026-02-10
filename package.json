@@ -17,6 +17,8 @@
     "lint:txt": "eslint src/**/*.ts --format stylish -o lint-report.txt",
     "lint:html": "eslint src/**/*.ts --format html -o lint-report.html",
     "lint:compact": "eslint src/**/*.ts --format compact -o lint-report.txt",
+    "lint:ejs": "ejslint **/*.ejs",
+    "lint:ejs:symfony": "ejslint plugins/scaffolders/frameworks/symfony/**/*.ejs",
     "format": "prettier --write .",
     "pl:b": "npx tsc -p tsconfig.plugins.json && node scripts/copy-plugin-assets.js",
     "pl:b:w": "npx tsc -p tsconfig.plugins.json --watch",

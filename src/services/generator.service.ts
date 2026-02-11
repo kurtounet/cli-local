@@ -1,7 +1,6 @@
 import * as fs from "fs";
-import path from "path";
 
-import { IGenerateOptions } from "@/commands/GenerateCommand.js";
+import { IGenerateOptions } from "@/commands/generate.command.js";
 import { IGeneratorService } from "@/types/services/generator.interface.js";
 
 import { BaseService } from "./base-service.service.js";
@@ -14,18 +13,10 @@ export class GeneratorService extends BaseService implements IGeneratorService {
   private folder = "";
   private targetPath = "";
 
-  public async newComponent(
-    type: string,
-    name: string,
-    options: IGenerateOptions,
-  ): Promise<void> {
+  public async newComponent(type: string, name: string, options: IGenerateOptions): Promise<void> {
     this.fileName = this.getFileName(type, name);
     this.folder = this.getTargetFolder(type);
-    this.targetPath = this.cli.path.join(
-      this.cli.rootPath,
-      this.folder,
-      this.fileName,
-    );
+    this.targetPath = this.cli.path.join(this.cli.rootPath, this.folder, this.fileName);
 
     switch (type) {
       case "service":
@@ -51,9 +42,7 @@ export class GeneratorService extends BaseService implements IGeneratorService {
     }
 
     if (options.dryRun) {
-      this.cli.logger.info(
-        `[DRY-RUN] Créerait le fichier : ${this.targetPath}`,
-      );
+      this.cli.logger.info(`[DRY-RUN] Créerait le fichier : ${this.targetPath}`);
       return;
     }
   }
@@ -145,31 +134,14 @@ init(): Promise<void>
 
   private scaffoldFramework(frameworkName: string) {
     const name = frameworkName.toLowerCase();
-    const baseDir = this.cli.path.join(
-      process.cwd(),
-      "src/features/frameworks",
-      name,
-    );
+    const baseDir = this.cli.path.join(process.cwd(), "src/features/frameworks", name);
 
     // 1. Création de l'arborescence
-    const dirs = [
-      "services",
-      "templates",
-      "config",
-      "models",
-      "mocks",
-      "utils",
-    ];
-    dirs.forEach((dir) =>
-      fs.mkdirSync(this.cli.path.join(baseDir, dir), { recursive: true }),
-    );
+    const dirs = ["services", "templates", "config", "models", "mocks", "utils"];
+    dirs.forEach((dir) => fs.mkdirSync(this.cli.path.join(baseDir, dir), { recursive: true }));
 
     // 2. Création d'un Template d'Exemple (Hello World)
-    const templatePath = this.cli.path.join(
-      baseDir,
-      "templates",
-      `${name}-example.template.ts`,
-    );
+    const templatePath = this.cli.path.join(baseDir, "templates", `${name}-example.template.ts`);
     const templateContent = `
 import { IEntityJson } from '../../../types';
 

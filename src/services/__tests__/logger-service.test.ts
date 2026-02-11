@@ -32,7 +32,7 @@ describe("LoggerService", () => {
         expect(service.success(input)).toBe(expected);
       },
     );
-    /*
+    
     it.each([
       ["hello world", "hello_world"],
       ["camelCase", "camel_case"],
@@ -67,7 +67,7 @@ describe("LoggerService", () => {
         expect(service.slugify(input)).toBe("cest-lete-a-noel");
       });
     });
-*/
+ 
     //     it("devrait retourner une chaîne vide si l'entrée est invalide", () => {
     //       expect(service.slugify("!!!")).toBe("");
     //     });

@@ -1,5 +1,5 @@
-import { IServicesContainer } from "@/types/services-container.interface.js";
-import { IBaseService } from "@/types/base-service.interface.js";
+import { IBaseService } from "@/types/services/base-service.interface.js";
+import { IServicesContainer } from "@/types/services/services-container.interface.js";
 
 /**
  * Conteneur de services (Service Container)
@@ -21,10 +21,8 @@ export class ServicesContainer implements IServicesContainer {
 
   /**
    * Enregistre un service dans le conteneur
-   *
    * @param name - Nom unique du service (utilisé pour la récupération)
    * @param service - Instance du service à enregistrer
-   *
    * @example
    * container.register("LoggerService", new LoggerService(context));
    */
@@ -32,14 +30,16 @@ export class ServicesContainer implements IServicesContainer {
     this.services.set(name, service);
   }
 
+  public has(name: string): boolean {
+    return this.services.has(name);
+  }
+
   /**
    * Récupère un service par son nom avec typage fort
-   *
    * @template T - Type du service attendu (doit étendre IBaseService)
    * @param name - Nom du service à récupérer
    * @returns L'instance du service typée
    * @throws Error si le service n'existe pas dans le conteneur
-   *
    * @example
    * const logger = container.get<LoggerService>("LoggerService");
    * logger.info("Message de log");
@@ -57,9 +57,7 @@ export class ServicesContainer implements IServicesContainer {
   /**
    * Récupère tous les services enregistrés dans le conteneur
    * Utile pour des opérations globales comme l'initialisation ou le nettoyage
-   *
    * @returns Tableau contenant toutes les instances de services
-   *
    * @example
    * const allServices = container.getAll();
    * console.log(`${allServices.length} services enregistrés`);
@@ -76,9 +74,7 @@ export class ServicesContainer implements IServicesContainer {
    *
    * L'ordre d'initialisation n'est pas garanti. Si des services ont des
    * dépendances entre eux, ils doivent gérer cela via le contexte partagé.
-   *
    * @throws Error si l'initialisation d'un service échoue
-   *
    * @example
    * await container.initializeAll();
    * console.log("Tous les services sont prêts");

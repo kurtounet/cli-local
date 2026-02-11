@@ -1,8 +1,8 @@
-import path from "path";
 import ejs from "ejs";
 
-import { BaseService } from "./base-service.service.js";
 import { ITemplateService } from "@/types/services/template.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class TemplateService extends BaseService implements ITemplateService {
   readonly serviceName = "TemplateService";
@@ -17,20 +17,37 @@ export class TemplateService extends BaseService implements ITemplateService {
     pluginDir: string,
     templateDir: string,
     templateName: string,
-    data: any,
-  ): Promise<any> {
-    const cacheKey = `${pluginDir}:${templateName}`;
+    data: Record<string, unknown>,
+    options = {},
+  ): Promise<string> {
+    // this.cli.logger.success(`[Template] Plugin chargé.${pluginDir}/${templateDir}/${templateName}`);
+
+    const templateNameWithExtension = templateName.endsWith(".ejs")
+      ? templateName
+      : templateName + ".ejs";
+    const cacheKey = `${pluginDir}:${templateNameWithExtension}`;
     let compiled = this.cache.get(cacheKey);
 
     if (!compiled) {
-      const fullPath = path.join(pluginDir, templateDir, templateName);
-      if (!this.cli.fileSystem.exists(fullPath)) throw new Error(`Template manquante: ${fullPath}`);
+      const fullPath = this.cli.path.join(
+        pluginDir,
+        templateDir,
+        templateNameWithExtension,
+      );
+      if (!this.cli.fileSystem.exists(fullPath))
+        throw new Error(`Template manquante: ${fullPath}`);
 
+      const compileOptions = {
+        filename: fullPath, // ← CRITIQUE pour que les includes fonctionnent
+        async: true, // ← Pour supporter await dans les templates
+        ...options,
+      };
       const content = await this.cli.fileSystem.readFile(fullPath);
-      compiled = ejs.compile(content);
+
+      compiled = ejs.compile(content, compileOptions);
       this.cache.set(cacheKey, compiled);
     }
 
-    return compiled(data);
+    return await compiled(data);
   }
 }

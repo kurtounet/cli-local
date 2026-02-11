@@ -4,21 +4,42 @@ export const WARNING = "warning";
 export const INFO = "info";
 export const DEBUG = "debug";
 
+/**
+ *
+ * @param projectName
+ */
 export function messageInitProject(projectName: string): string {
   return `🔨🔨🔨🔨🔨 INITIALISATION DU PROJET ${projectName.toUpperCase()} 🔨🔨🔨🔨🔨`;
 }
+/**
+ *
+ * @param frameworkName
+ */
 export function messageInstallationFramework(frameworkName: string): string {
   return `🔨🔨🔨🔨🔨 INSTALLATION DU FRAMEWORK ${frameworkName.toUpperCase()} 🔨🔨🔨🔨🔨`;
 }
+/**
+ *
+ */
 export function messageCreateBranch(): string {
   return `🔨🔨🔨🔨🔨 CREATION DES BRANCHES 🔨🔨🔨🔨🔨`;
 }
+/**
+ *
+ */
 export function messageCreateArchitecture(): string {
   return `🔨🔨🔨🔨🔨 CREATION DE L'ARCHITECTURE 🔨🔨🔨🔨🔨`;
 }
+/**
+ *
+ */
 export function messageCreateFolderCli(): string {
   return `🔨🔨🔨🔨🔨 CREATION DU DOSSIER POUR LA CLI  🔨🔨🔨🔨🔨`;
 }
+/**
+ *
+ * @param filename
+ */
 export function messageCreateFile(filename: string): string {
   return `🔨🔨🔨🔨🔨 CREATION DU DOSSIER POUR LA CLI  🔨🔨🔨🔨🔨`;
 }

@@ -1,5 +1,6 @@
-import { BaseService } from "./base-service.service.js";
 import { IStateService } from "@/types/services/state-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class StateService extends BaseService implements IStateService {
   readonly serviceName = "StateService";

@@ -1,10 +1,12 @@
 export default class TaskManagerCliPlugin {
   static definition = {
-    /* ... ton schema ... */
+    name: "task_manager_cli_plugin",
+    description: "Gestionnaire avec persistance SQLite locale et backup MySQL.",
+    // ... même schéma que précédemment ...
   };
 
   async execute(args, context) {
-    const { action, description, user, taskId } = args[0];
+    const { action, description, user, taskId } = args;
 
     // On récupère le service via le contexte injecté par la CLI
     const db = context.db;
@@ -21,7 +23,7 @@ export default class TaskManagerCliPlugin {
 
       case "update":
         await db.query("UPDATE tasks SET status = ? WHERE id = ?", [
-          args[0].status,
+          args.status,
           taskId,
         ]);
         return { success: true, message: "Statut mis à jour." };

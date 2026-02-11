@@ -10,7 +10,7 @@ export class CliError extends Error {
   constructor(
     public readonly message: string,
     public readonly code: ErrorCode = ErrorCode.INTERNAL_ERROR,
-    public readonly exitCode: number = 1,
+    public readonly exitCode = 1,
   ) {
     super(message);
     this.name = "CliError";

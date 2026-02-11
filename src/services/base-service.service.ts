@@ -12,9 +12,9 @@ export abstract class BaseService {
   //   return this.cli.logger;
   // }
   // Un raccourci propre pour tes commandes
-  protected get config() {
-    return this.cli.configService.defaults;
-  }
+  // protected get config() {
+  //   return this.cli.configService.defaults;
+  // }
   // protected get config(): ICliConfig {
   //   return this.cli.config;
   // }

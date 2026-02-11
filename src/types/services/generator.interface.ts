@@ -1,4 +1,5 @@
-import { IGenerateOptions } from "@/commands/GenerateCommand.js";
+import { IGenerateOptions } from "@/commands/generate.command.js";
+
 import { IBaseService } from "./base-service.interface.js";
 
 /**

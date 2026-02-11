@@ -10,7 +10,11 @@ export class SymfonyPlugin {
     for (const entity of entitiesJson.entities) {
       for (const blueprint of manifest.blueprints) {
         // Utilisation de la Factory (que la CLI fournit au plugin)
-        const content = this.ctx.templateFactory.render(manifest.id, blueprint.type, entity);
+        const content = this.ctx.templateFactory.render(
+          manifest.id,
+          blueprint.type,
+          entity,
+        );
         const fileName = `${entity.name}${blueprint.suffix}.php`;
         const destination = `${config.projectPath}/${blueprint.target}/${fileName}`;
 
@@ -19,6 +23,10 @@ export class SymfonyPlugin {
     }
 
     // Exécution des commandes post-génération
-    this.ctx.shell.executeSyncSpawn("composer", ["dump-autoload"], config.projectPath);
+    this.ctx.shell.executeSyncSpawn(
+      "composer",
+      ["dump-autoload"],
+      config.projectPath,
+    );
   }
 }

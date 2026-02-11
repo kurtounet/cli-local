@@ -1,5 +1,6 @@
-import { BaseService } from "./base-service.service.js";
 import { IDataManagerService } from "@/types/services/data-manager-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 export class DataManagerService
   extends BaseService

@@ -5,7 +5,7 @@ export interface IProjectCommand {
   path: string;
   starUml: string;
   framework?: string;
-  frontends: Array<string>;
-  backends: Array<string>;
-  databases: Array<string>;
+  frontends: string[];
+  backends: string[];
+  databases: string[];
 }

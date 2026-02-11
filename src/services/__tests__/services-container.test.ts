@@ -1,19 +1,21 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { ServicesContainer } from "../services-container.js";
+import { beforeEach, describe, expect, it } from "vitest";
+
 import { IBaseService } from "@/types/base-service.interface.js";
+
+import { ServicesContainer } from "../services-container.js";
 
 // Mock des services pour le test
 class MockService1 implements IBaseService {
-  name: string = "MockService1";
-  initCalled: boolean = false;
+  name = "MockService1";
+  initCalled = false;
   async init(): Promise<void> {
     this.initCalled = true;
   }
 }
 
 class MockService2 implements IBaseService {
-  name: string = "MockService2";
-  initCalled: boolean = false;
+  name = "MockService2";
+  initCalled = false;
   async init(): Promise<void> {
     this.initCalled = true;
   }

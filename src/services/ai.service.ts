@@ -1,10 +1,9 @@
-import { IAppContext } from "@/types/context.interface.js";
+import { pathToFileURL } from "node:url";
 
-import * as fs from "node:fs/promises";
-import * as path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
-import { BaseService } from "./base-service.service.js";
+import { IAppContext } from "@/types/context.interface.js";
 import { IAiService } from "@/types/services/ai-service.interface.js";
+
+import { BaseService } from "./base-service.service.js";
 
 /**
  * Service gérant les interactions avec l'IA et le système de plugins dynamiques.
@@ -13,20 +12,18 @@ import { IAiService } from "@/types/services/ai-service.interface.js";
 export class AiService extends BaseService implements IAiService {
   readonly serviceName = "AiService";
 
-  private get pluginsPath(): string {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    return path.join(__dirname, "..", "plugins");
+  public get pluginsPath(): string {
+    return this.cli.path.resolve(process.cwd(), "src", "plugins");
   }
   // private genAI: GoogleGenerativeAI;
   private model: unknown;
 
-  constructor(public cli: IAppContext) {
-    super(cli);
+  constructor(protected cli: IAppContext) {
     // Récupère ta clé API depuis les variables d'environnement
     const apiKey = process.env.GEMINI_API_KEY ?? "";
     // this.genAI = new GoogleGenerativeAI(apiKey);
     // this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    super(cli);
   }
   public init(): Promise<void> {
     // Si tu n'as rien à initialiser pour l'instant :
@@ -52,10 +49,10 @@ export class AiService extends BaseService implements IAiService {
     `;
 
     // 2. Logique de décision (Simulée ici jusqu'à l'ajout de la clé API)
-    console.log(`[MCP HOST] Analyse du prompt : "${prompt}"`);
+    console.error(`[MCP HOST] Analyse du prompt : "${prompt}"`);
 
     if (prompt.includes("analyse")) {
-      return await this.executeTool("architect"); // Exécution dynamique
+      return (await this.executeTool("architect")) as string; // Exécution dynamique
     }
 
     return "Réponse IA traitée via MCP.";
@@ -63,19 +60,19 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Charge et exécute un plugin JavaScript de manière dynamique.
-   * @param {string} name - Le nom du plugin (avec ou sans l'extension .plugin.js).
-   * @param {any[]} [args=[]] - Les arguments à passer à la méthode execute du plugin.
-   * @returns {Promise<any>} Le résultat de l'exécution du plugin.
+   * @param name - Le nom du plugin (avec ou sans l'extension .plugin.js).
+   * @param [args] - Les arguments à passer à la méthode execute du plugin.
+   * @returns Le résultat de l'exécution du plugin.
    * @throws {Error} Si le fichier est introuvable ou si l'export par défaut est manquant.
    */
-  async executeTool(name: string, args: unknown[] = []): Promise<unknown> {
+  async executeTool(name: string, args: unknown = {}): Promise<unknown> {
     const fileName = name.endsWith(".plugin.js") ? name : `${name}.plugin.js`;
-    const pluginPath = path.join(this.pluginsPath, fileName);
+    const pluginPath = this.cli.path.join(this.pluginsPath, fileName);
 
     try {
       const fileUrl = pathToFileURL(pluginPath).href;
       // 'update' timestamp utilisé pour forcer le rechargement du module (cache-busting)
-      const module: string = await import(`${fileUrl}?update=${Date.now()}`);
+      const module: any = await import(`${fileUrl}?update=${Date.now()}`);
 
       if (!module.default) {
         throw new Error(
@@ -83,20 +80,20 @@ export class AiService extends BaseService implements IAiService {
         );
       }
 
-      const plugin = new module.default() as unknown;
+      const plugin = new module.default();
 
       /**
-       * * Injection du SDK (Context)
+       * Injection du SDK (Context)
        * Permet au plugin d'accéder aux capacités de la CLI sans imports circulaires.       *
        */
       return await plugin.execute(args, {
         ai: this,
         fs: fs,
         log: (msg: string) =>
-          console.log(`[PLUGIN:${name.toUpperCase()}] ${msg}`),
+          console.error(`[PLUGIN:${name.toUpperCase()}] ${msg}`),
       });
-    } catch (error: any) {
-      throw new Error(`Erreur d'exécution [${name}]: ${error.message}`);
+    } catch (error: unknown) {
+      throw new Error(`Erreur d'exécution [${name}]: ${error}`);
     }
   }
 
@@ -108,7 +105,7 @@ export class AiService extends BaseService implements IAiService {
    */
   async executeToolMCP(name: string, args: unknown[] = []): Promise<unknown> {
     const fileName = name.endsWith(".plugin.js") ? name : `${name}.plugin.js`;
-    const pluginPath = path.join(this.pluginsPath, fileName);
+    const pluginPath = this.cli.path.join(this.pluginsPath, fileName);
 
     try {
       const fileUrl = pathToFileURL(pluginPath).href;
@@ -121,54 +118,130 @@ export class AiService extends BaseService implements IAiService {
         ai: this,
         fs: fs,
         log: (msg: string) =>
-          console.log(`[MCP:TOOL:${name.toUpperCase()}] ${msg}`),
+          console.error(`[MCP:TOOL:${name.toUpperCase()}] ${msg}`),
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       throw new Error(`Erreur MCP Tool [${name}]: ${error.message}`);
     }
   }
 
   /**
    * Demande à l'IA de concevoir le code source d'un nouveau plugin.
-   * @param {string} prompt - Description textuelle de ce que le plugin doit accomplir.
-   * @returns {Promise<string>} Le code JavaScript source généré, prêt à être sauvegardé.
+   * @param prompt - Description textuelle de ce que le plugin doit accomplir.
+   * @returns Le nom du plugin créé.
    */
   async generatePlugin(prompt: string): Promise<string> {
-    const systemContext = `
-      Tu es un agent de développement autonome.
-      Génère un plugin ESM pour Node.js.
-      SDK disponible : context.ai, context.fs, context.log.
-      Format: export default class { async execute(args, context) { ... } }
-      Tâche : ${prompt}
-    `;
+    // 1. Extraction du nom et description
+    const nameMatch = /nomm[ée]\s+['"]?([a-z0-9-_]+)['"]?/i.exec(prompt);
+    const pluginId = nameMatch ? nameMatch[1] : `plugin_${Date.now()}`;
+    const pluginName = pluginId
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase());
 
-    // Retourne le contexte pour le moment (simulation)
-    return `// Plugin auto-généré\nexport default class GeneratedPlugin {\n  async execute(args, context) {\n    context.log("Exécuté");\n  }\n}`;
+    const className =
+      pluginId
+        .split(/[-_]/)
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join("") + "Plugin";
+
+    const description =
+      prompt
+        .replace(/nomm[ée]\s+['"]?([a-z0-9-_]+)['"]?/i, "")
+        .replace(/\s+/, " ")
+        .trim() || prompt;
+
+    // 2. Préparation des chemins
+    const pluginDir = this.cli.path.join(this.pluginsPath, pluginId);
+    await this.cli.fileSystem.mkdir(pluginDir, { recursive: true });
+
+    const serviceFileName = `${pluginId}.service.js`;
+
+    // 3. Import dynamique de EJS
+    const ejsModule = await import("ejs");
+    // @ts-ignore
+    const ejs = ejsModule.default || ejsModule;
+
+    // 4. Rendu et écriture du Manifest
+    const manifestTemplatePath = this.cli.path.resolve(
+      process.cwd(),
+      "src",
+      "templates",
+      "manifest.ejs",
+    );
+    const manifestContent = await this.cli.fileSystem.readFile(
+      manifestTemplatePath,
+      "utf-8",
+    );
+    const manifestCode = ejs.render(manifestContent, {
+      pluginId,
+      pluginName,
+      serviceFileName,
+    });
+    await this.cli.fileSystem.writeFile(
+      this.cli.path.join(pluginDir, "manifest.json"),
+      manifestCode,
+    );
+
+    // 5. Rendu et écriture du Service
+    const serviceTemplatePath = this.cli.path.resolve(
+      process.cwd(),
+      "src",
+      "templates",
+      "service.ejs",
+    );
+    const serviceContent =
+      await this.cli.fileSystem.readFile(serviceTemplatePath);
+    const serviceCode = ejs.render(serviceContent, {
+      className,
+      pluginName: pluginId,
+    });
+    await this.cli.fileSystem.writeFile(
+      this.cli.path.join(pluginDir, serviceFileName),
+      serviceCode,
+    );
+
+    return pluginId;
   }
 
   /**
-   * Enregistre un nouveau plugin sur le système de fichiers.
-   * @param {string} name - Le nom de l'outil à créer.
-   * @param {string} code - Le code source JavaScript du plugin.
-   * @returns {Promise<void>}
+   * Enregistre un nouveau plugin (Legacy - n'est plus utilisé par le workflow auto)
+   * @param name
+   * @param code
    */
   async savePlugin(name: string, code: string): Promise<void> {
-    await fs.mkdir(this.pluginsPath, { recursive: true });
-    const fileName = name.endsWith(".plugin.js") ? name : `${name}.plugin.js`;
-    const filePath = path.join(this.pluginsPath, fileName);
-    await fs.writeFile(filePath, code, "utf-8");
+    // Gardé pour compatibilité si nécessaire, mais generatePlugin fait le travail maintenant.
+    console.warn("savePlugin est déprécié pour le nouveau format de plugins.");
   }
 
   /**
    * Analyse le dossier plugins et retourne la liste des outils disponibles.
-   * @returns {Promise<string[]>} Tableau contenant les noms des plugins (sans extension).
+   * @returns Tableau contenant les noms des plugins (sans extension).
    */
   async listTools(): Promise<string[]> {
     try {
-      const files = await fs.readdir(this.pluginsPath);
-      return files
-        .filter((file) => file.endsWith(".plugin.js"))
-        .map((file) => file.replace(".plugin.js", ""));
+      const entries = await this.cli.fileSystem.readDirWithFileTypes(
+        this.pluginsPath,
+      );
+      const toolNames: string[] = [];
+
+      for (const entry of entries) {
+        if (entry.isFile() && entry.name.endsWith(".plugin.js")) {
+          toolNames.push(entry.name.replace(".plugin.js", ""));
+        } else if (entry.isDirectory()) {
+          const manifestPath = this.cli.path.join(
+            this.pluginsPath,
+            entry.name,
+            "manifest.json",
+          );
+          try {
+            await fs.access(manifestPath);
+            toolNames.push(entry.name);
+          } catch {
+            // Pas de manifest, pas un plugin
+          }
+        }
+      }
+      return toolNames;
     } catch {
       return [];
     }
@@ -176,33 +249,25 @@ export class AiService extends BaseService implements IAiService {
 
   /**
    * Lit le contenu d'un fichier de manière asynchrone.
-   * @param {string} targetPath - Chemin relatif ou absolu du fichier.
-   * @returns {Promise<string>} Le contenu textuel du fichier.
+   * @param targetPath - Chemin relatif ou absolu du fichier.
+   * @returns Le contenu textuel du fichier.
    */
   async readFile(targetPath: string): Promise<string> {
-    return await fs.readFile(path.resolve(targetPath), "utf-8");
+    return await this.cli.fileSystem.readFile(
+      this.cli.path.resolve(targetPath),
+    );
   }
 
   /**
    * Écrit du contenu dans un fichier, crée les répertoires si nécessaire.
-   * @param {string} targetPath - Chemin de destination.
-   * @param {string} content - Texte à écrire.
-   * @returns {Promise<void>}
+   * @param targetPath - Chemin de destination.
+   * @param content - Texte à écrire.
    */
   async writeFile(targetPath: string, content: string): Promise<void> {
-    const fullPath = path.resolve(targetPath);
-    await fs.mkdir(path.dirname(fullPath), { recursive: true });
-    await fs.writeFile(fullPath, content, "utf-8");
+    const fullPath = this.cli.path.resolve(targetPath);
+    await this.cli.fileSystem.createDirectory(
+      this.cli.path.getDirectory(fullPath),
+    );
+    await this.cli.fileSystem.writeFile(fullPath, content);
   }
-
-  /**
-   * Envoie un message à l'IA et récupère sa réponse textuelle.
-   * @param {string} prompt - La question ou l'instruction à envoyer à l'IA.
-   * @returns {Promise<string>} La réponse générée par le modèle.
-   */
-  /*
-  async chat(prompt: string): Promise<string> {
-    // TODO: Implémenter l'appel API réel (Gemini/OpenAI)
-    return `response de l'IA: ${prompt}`;
-  }*/
 }

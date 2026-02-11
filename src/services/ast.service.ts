@@ -1,97 +1,188 @@
 import ts from "typescript";
-import { BaseService } from "./base-service.service.js";
+
 import { IMemberInfo } from "@/types/commun/member-info.interface.js";
 import { IAstService } from "@/types/services/ast-service.interface.js";
 
-/**
- * Interface représentant les membres extraits du code source.
- */
+import { BaseService } from "./base-service.service.js";
 
 export class AstService extends BaseService implements IAstService {
   readonly serviceName = "AstService";
-  // init(): Promise<void> {
-  //   return Promise.resolve();
-  // }
 
-  /**
-   * Analyse le code source d'un fichier TypeScript/JavaScript pour extraire
-   * la structure des classes, méthodes et fonctions.
-   * @param filePath - Le chemin du fichier (utilisé par le parseur pour le contexte).
-   * @param sourceCode - Le contenu textuel du fichier à analyser.
-   * @returns Un tableau d'objets IMemberInfo.
-   */
   public analyzeFileMetadata(
     filePath: string,
     sourceCode: string,
   ): IMemberInfo[] {
     const members: IMemberInfo[] = [];
 
-    // Création de l'Arbre de Syntaxe Abstraite (AST)
     const sourceFile = ts.createSourceFile(
       filePath,
       sourceCode,
       ts.ScriptTarget.Latest,
-      true, // Assure la capture des commentaires et du texte original
+      true, // Nécessaire pour capturer les commentaires
     );
 
     /**
-     * Helper pour extraire les noms des paramètres et leurs types.
+     * Extrait la description JSDoc associée à un nœud.
+     * @param node - ts.Node
+     * @returns Retourne la description
      */
-    const getParams = (
-      node: ts.FunctionDeclaration | ts.MethodDeclaration | ts.ArrowFunction,
-    ): string[] => {
-      return node.parameters.map((p) => {
-        const name = p.name.getText(sourceFile);
-        const type = p.type ? `: ${p.type.getText(sourceFile)}` : "";
-        return `${name}${type}`;
-      });
+    const getDocumentation = (node: ts.Node): string => {
+      const jsDoc = (node as any).jsDoc as ts.JSDoc[];
+      if (jsDoc && jsDoc.length > 0) {
+        // On récupère le texte du dernier commentaire JSDoc
+        const comment = jsDoc[jsDoc.length - 1].comment;
+        if (typeof comment === "string") {
+          return comment.replace(/\r?\n|\r/g, " ").trim();
+        } else if (Array.isArray(comment)) {
+          return comment
+            .map((c) => c.text)
+            .join(" ")
+            .trim();
+        }
+      }
+      return "";
     };
 
     /**
-     * Parcours récursif des nœuds de l'AST.
+     * Extrait les paramètres (nom, type, optionnel).
+     * @param node - ts.SignatureDeclaration
+     * @returns Retourne un tableau de paramètres
+     */
+    const getParams = (node: ts.SignatureDeclaration): unknown[] => {
+      if (!node.parameters) return [];
+      return node.parameters.map((param) => ({
+        name: param.name.getText(sourceFile),
+        type: param.type ? param.type.getText(sourceFile) : "any",
+        optional: !!(param.questionToken ?? param.initializer),
+        isRest: !!param.dotDotDotToken,
+      }));
+    };
+
+    /**
+     * Détermine la visibilité (public, private, protected).
+     * @param node - ts.Node
+     * @returns Retourne la visibilité
+     */
+    const getVisibility = (
+      node: ts.Node,
+    ): "public" | "private" | "protected" => {
+      const modifiers = ts.canHaveModifiers(node)
+        ? ts.getModifiers(node)
+        : undefined;
+      if (!modifiers) return "public";
+
+      if (modifiers.some((m) => m.kind === ts.SyntaxKind.PrivateKeyword))
+        return "private";
+      if (modifiers.some((m) => m.kind === ts.SyntaxKind.ProtectedKeyword))
+        return "protected";
+      return "public";
+    };
+
+    /**
+     * Visite un nœud et extrait les membres.
+     * @param node - ts.Node
      */
     const visit = (node: ts.Node) => {
-      // 1. Détection des fonctions classiques (ex: function maFonction()...)
+      // --- 1. FONCTIONS GLOBALES ---
       if (ts.isFunctionDeclaration(node) && node.name) {
         members.push({
           name: node.name.text,
           type: "function",
+          visibility: "public",
+          description: getDocumentation(node),
+          returnType: node.type ? node.type.getText(sourceFile) : "void",
           arguments: getParams(node),
         });
       }
-
-      // 2. Détection des fonctions fléchées affectées à des variables (ex: const f = () => ...)
-      if (
+      // --- 2. FONCTIONS FLÉCHÉES (const f = () => ...) ---
+      else if (
         ts.isVariableDeclaration(node) &&
         node.initializer &&
-        ts.isArrowFunction(node.initializer)
+        ts.isArrowFunction(node.initializer) &&
+        ts.isIdentifier(node.name)
       ) {
-        if (ts.isIdentifier(node.name)) {
-          members.push({
-            name: node.name.text,
-            type: "function",
-            arguments: getParams(node.initializer),
-          });
-        }
+        // Pour les variables, la JSDoc est souvent sur le VariableStatement (parent du parent)
+        const docNode = node.parent.parent;
+        members.push({
+          name: node.name.text,
+          type: "function",
+          visibility: "public",
+          description: getDocumentation(docNode),
+          returnType: node.initializer.type
+            ? node.initializer.type.getText(sourceFile)
+            : "any",
+          arguments: getParams(node.initializer),
+        });
       }
 
-      // 3. Détection des classes et de leurs méthodes membres
+      // --- 3. CLASSES ---
       if (ts.isClassDeclaration(node) && node.name) {
         const className = node.name.text;
-        members.push({ name: className, type: "class", arguments: [] });
+        members.push({
+          name: className,
+          type: "class",
+          visibility: "public",
+          description: getDocumentation(node),
+          arguments: [],
+        });
 
         node.members.forEach((member) => {
           if (ts.isMethodDeclaration(member) && member.name) {
             members.push({
               name: `${className}.${member.name.getText(sourceFile)}`,
               type: "method",
+              visibility: getVisibility(member),
+              description: getDocumentation(member),
+              returnType: member.type
+                ? member.type.getText(sourceFile)
+                : "void",
               arguments: getParams(member),
             });
           }
         });
       }
 
-      // Continue l'exploration dans les enfants du nœud actuel
+      // --- 4. INTERFACES ---
+      if (ts.isInterfaceDeclaration(node) && node.name) {
+        const interfaceName = node.name.text;
+        members.push({
+          name: interfaceName,
+          type: "interface",
+          visibility: "public",
+          description: getDocumentation(node),
+          arguments: [],
+        });
+
+        node.members.forEach((member) => {
+          if (member.name) {
+            const memberName = member.name.getText(sourceFile);
+            const commonData = {
+              name: `${interfaceName}.${memberName}`,
+              visibility: "public" as const,
+              description: getDocumentation(member),
+              returnType: (member as any).type
+                ? (member as any).type.getText(sourceFile)
+                : "any",
+            };
+
+            if (ts.isMethodDeclaration(member)) {
+              members.push({
+                ...commonData,
+                type: "method",
+                arguments: getParams(member),
+              });
+            } else if (ts.isPropertySignature(member)) {
+              const isFunc = member.type && ts.isFunctionTypeNode(member.type);
+              members.push({
+                ...commonData,
+                type: isFunc ? "method" : "property",
+                arguments: isFunc ? getParams(member.type as any) : [],
+              });
+            }
+          }
+        });
+      }
+
       ts.forEachChild(node, visit);
     };
 

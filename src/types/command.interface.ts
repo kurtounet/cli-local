@@ -66,9 +66,9 @@ export interface ICommand<TOptions extends AnyOptions = AnyOptions> {
 /**
  * Interface pour une classe de commande (instanciation dynamique)
  */
-export interface ICommandClass<TOptions extends AnyOptions = AnyOptions> {
-  new (context: IAppContext): ICommand<TOptions>;
-}
+export type ICommandClass<TOptions extends AnyOptions = AnyOptions> = new (
+  context: IAppContext,
+) => ICommand<TOptions>;
 
 /**
  * Interface représentant une option de commande CLI

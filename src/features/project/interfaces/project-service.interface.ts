@@ -1,6 +1,7 @@
-import { IProjectCommand } from "./project-command.interface.js";
 import { IProjectConfig } from "@/features/commun/projet.interface.js";
 import { IBaseService } from "@/types/services/base-service.interface.js";
+
+import { IProjectCommand } from "./project-command.interface.js";
 
 /**
  * Interface définissant les capacités du service de gestion de la configuration spécifique au projet.
@@ -10,7 +11,7 @@ import { IBaseService } from "@/types/services/base-service.interface.js";
 export interface IProjectService extends IBaseService {
   serviceName: string;
   init(): Promise<void>;
-  newProject(project: IProjectCommand): Promise<IProjectConfig>;
+  newProject(project: IProjectCommand): IProjectConfig;
   generateProject(project: IProjectConfig): Promise<string>;
   loadFileCliLocal(path: string): Promise<any>;
   loadProject(path: string): Promise<void>;

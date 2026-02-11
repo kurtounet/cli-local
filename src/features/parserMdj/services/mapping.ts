@@ -1,3 +1,7 @@
+/**
+ *
+ * @param sqlType
+ */
 export function sqlToTypeScript(sqlType: string): string {
   const mapping: Record<string, string> = {
     // Types numériques
@@ -48,6 +52,10 @@ export function sqlToTypeScript(sqlType: string): string {
   return mapping[sqlType.toLowerCase()] || "any";
 }
 
+/**
+ *
+ * @param sqlType
+ */
 export function sqlToZodType(sqlType: string): string {
   const mapping: Record<string, string> = {
     // Types numériques

@@ -1,6 +1,6 @@
 import js from "@eslint/js";
 import globals from "globals";
-import css from "@eslint/css";
+// import css from "@eslint/css";
 import json from "@eslint/json";
 import jsdoc from "eslint-plugin-jsdoc";
 import markdown from "@eslint/markdown";
@@ -12,11 +12,17 @@ export default defineConfig([
   // --- 1. IGNORES GLOBAUX (doit être au début) ---
   {
     ignores: [
+      ".cli-local/**",
+      ".doc/**",
       "dist/**",
       "bin/**",
       "node_modules/**",
+      "old_cli/**",
+      "output/**",
+      "plugins/**",
+      "project-test/**",
+      "tree/**",
       "package-lock.json",
-      ".doc/**",
     ],
   },
 
@@ -76,6 +82,7 @@ export default defineConfig([
       "jsdoc/check-values": "error",
       "jsdoc/check-tag-names": "warn",
       "jsdoc/require-hyphen-before-param-description": ["warn", "always"],
+      "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_" },
@@ -103,12 +110,12 @@ export default defineConfig([
   },
 
   // --- 6. STYLING (CSS) ---
-  {
-    files: ["**/*.css"],
-    plugins: { css },
-    language: "css/css",
-    rules: {
-      "css/no-duplicate-imports": "error",
-    },
-  },
+  // {
+  //   files: ["**/*.css"],
+  //   plugins: { css },
+  //   language: "css/css",
+  //   rules: {
+  //     "css/no-duplicate-imports": "error",
+  //   },
+  // },
 ]);

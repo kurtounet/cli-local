@@ -1,0 +1,6 @@
+{
+  "id": "blague",
+  "name": "Blague",
+  "service": "blague.service.js",
+  "type": "tool"
+}

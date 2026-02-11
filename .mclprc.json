@@ -37,27 +37,29 @@
       "database": "task_backup"
     }
   ],
+  "doc": {
+    "pathIn": "I:\\cli\\cli-local-poo",
+    "pathOut": "./.doc",
+    "saveOnExecute": true
+  },
   "tree": {
     "exclude": [
       ".git",
       "dist",
       ".doc",
-      "output",
-      ".vscode",
       "old_cli",
+      ".vscode",
+      "node_modules",
       "project-test",
-      "node_modules"
+      "output"
     ],
     "pathIn": "I:\\cli\\cli-local-poo",
     "pathOut": "./tree",
     "analysis": {
       "enabled": false,
-      "extensions": [
-        ".ts",
-        ".js"
-      ],
+      "extensions": [".ts", ".js", ".php"],
       "save": true,
-      "maxLevel": 32
+      "maxLevel": 0
     },
     "output": [
       {

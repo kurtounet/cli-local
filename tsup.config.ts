@@ -7,9 +7,14 @@ export default defineConfig({
   splitting: false,
   sourcemap: true,
   clean: true, // Nettoie le dossier dist à chaque build
+  // esbuildOptions(options) {
+  //   options.alias = {
+  //     "@": "./src",
+  //   };
+  // },
   minify: true, // Réduit la taille du fichier final
   shims: true, // Activer les shims pour les modules externes
-  tsconfig: "tsconfig.json",
+  tsconfig: "tsconfig.cli.json",
   banner: {
     js: `#!/usr/bin/env node
 import { createRequire } from 'module';

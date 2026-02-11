@@ -1,4 +1,4 @@
-import { IDirectory } from "../frameworks/models/framework-commun.model.js";
+import { IDirectory } from "./architecture.interface.js";
 import { IConfigDatabase } from "./database.interface.js";
 
 export interface IConfigFramework {

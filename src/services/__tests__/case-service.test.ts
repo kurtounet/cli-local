@@ -1,6 +1,8 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { CaseService } from "../case.service.js";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { IAppContext } from "@/types/context.interface.js";
+
+import { CaseService } from "../case.service.js";
 
 describe("CaseService", () => {
   let service: CaseService;
@@ -66,7 +68,7 @@ describe("CaseService", () => {
     describe("slugify", () => {
       it("devrait supprimer les accents et les caractères spéciaux", () => {
         const input =
-          `"C'est l'été à Noël ?` + "`" + `!.,:;/\@#$%^&* _ - + = < > ~ ' "`;
+          `"C'est l'été à Noël ?` + "`" + `!.,:;/\\@#$%^&* _ - + = < > ~ ' "`;
         // normalize + replace devraient transformer ça en :
         // "c-est-l-ete-a-noel"
         expect(service.slugify(input)).toBe("cest-lete-a-noel");

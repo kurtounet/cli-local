@@ -1,0 +1,19 @@
+import path from "path";
+
+export default class <%- className %> {
+  constructor(ctx) {
+    this.ctx = ctx;
+  }
+
+  async execute(args) {
+    this.ctx.log(`Exécution du plugin <%- pluginName %>...`);
+    
+    // Logique du plugin
+    // args contient les arguments passés
+    
+    return {
+      success: true,
+      message: "Plugin <%- pluginName %> exécuté avec succès !"
+    };
+  }
+}

@@ -33,7 +33,7 @@ export interface IendJson {
 
 export interface IRelationsEntity {
   id: string;
-  relationships: Array<IRelation>;
+  relationships: IRelation[];
 }
 
 export interface IRelation {
@@ -115,9 +115,9 @@ export interface IProjectJson {
 
 export interface IGetEntityJson {
   entities: IEntityJson[];
-  "dictionary-columns": { [k: string]: IColumnJson };
-  "dictionary-entities-json": { [k: string]: IEntityJson };
+  "dictionary-columns": Record<string, IColumnJson>;
+  "dictionary-entities-json": Record<string, IEntityJson>;
   "dictionary-entities-pivot": IEntityJson[];
-  "dictionary-relationships": { [k: string]: IRelation };
-  "dictionary-entities-relationships": { [k: string]: IRelationsEntity };
+  "dictionary-relationships": Record<string, IRelation>;
+  "dictionary-entities-relationships": Record<string, IRelationsEntity>;
 }

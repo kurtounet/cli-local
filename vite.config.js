@@ -11,6 +11,7 @@ export default defineConfig({
       "**/tests/**", // Exclure les fichiers de données pour les tests
       "**/*.manual.test.ts", // Exclure des tests que tu veux lancer à la main
       "src/types/**", // Pas besoin de chercher des tests là-dedans
+      "**/project-test/**", // Pas besoin de chercher des tests là-dedans
     ],
   },
 });

@@ -1,12 +1,14 @@
 import { Command } from "commander";
-import { IAppContext } from "../types/context.interface.js";
+
+import { AnyOptions } from "@/types/cli-options.type.js";
+
+import { HandlerErrorService } from "../services/handler-error.service.js";
 import {
-  ICommandClass,
   ICommand,
+  ICommandClass,
   ICommandOption,
 } from "../types/command.interface.js";
-import { HandlerErrorService } from "../services/handler-error.service.js";
-import { AnyOptions } from "@/types/cli-options.type.js";
+import { IAppContext } from "../types/context.interface.js";
 
 /**
  * Classe principale de l'application CLI
@@ -41,9 +43,7 @@ export class App {
 
   /**
    * Enregistre une commande dans l'application CLI
-   *
    * @param CommandClass - Classe de commande à instancier et enregistrer
-   *
    * @example
    * app.registerCommand(GenerateCommand);
    * // Permet ensuite d'utiliser : mclp generate service User
@@ -138,16 +138,13 @@ export class App {
    * Point d'entrée principal après l'enregistrement de toutes les commandes
    */
   public async run(): Promise<void> {
-    const errorHandler = this.cli.services.get<HandlerErrorService>(
-      "HandlerErrorService",
-    );
     await this.cli.config.load(process.cwd());
+    const errorHandler = this.cli.errorHandler; // || this.cli.services.get<HandlerErrorService>("HandlerErrorService");
     try {
       // Parse les arguments du processus (process.argv)
       await this.program.parseAsync(process.argv);
     } catch (error) {
       // En cas d'erreur fatale, on utilise le gestionnaire d'erreurs
-
       if (errorHandler) {
         errorHandler.handle(
           error as Error,

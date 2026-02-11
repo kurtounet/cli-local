@@ -26,7 +26,7 @@ function wouldCreateCycle(taskId, newDeps, allTasks) {
 }
 
 async function loadTasks(context) {
-  const dataPath = path.join(getDirname(), DATA_FILE);
+  const dataPath = this.cli.path.join(getDirname(), DATA_FILE);
   try {
     const data = await context.fs.readFile(dataPath, "utf8");
     return JSON.parse(data);
@@ -36,7 +36,7 @@ async function loadTasks(context) {
 }
 
 async function saveTasks(context, data) {
-  const dataPath = path.join(getDirname(), DATA_FILE);
+  const dataPath = this.cli.path.join(getDirname(), DATA_FILE);
   await context.fs.writeFile(dataPath, JSON.stringify(data, null, 2));
 }
 
@@ -102,7 +102,7 @@ export default class TaskManagerPlugin {
         tags,
         dependsOn,
         search,
-      } = args[0];
+      } = args;
       const data = await loadTasks(context);
       let { tasks, taskIdCounter } = data;
 

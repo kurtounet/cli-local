@@ -8,9 +8,13 @@ export abstract class BaseGenerator {
   protected abstract getSuffix(): string;
 
   public generate(name: string): void {
-    const folderPath = path.join(process.cwd(), "src", this.getFolder());
+    const folderPath = this.cli.path.join(
+      process.cwd(),
+      "src",
+      this.getFolder(),
+    );
     const fileName = `${name.toLowerCase()}.${this.getSuffix()}.ts`;
-    const fullPath = path.join(folderPath, fileName);
+    const fullPath = this.cli.path.join(folderPath, fileName);
 
     // 1. Créer le dossier s'il n'existe pas
     if (!fs.existsSync(folderPath)) {

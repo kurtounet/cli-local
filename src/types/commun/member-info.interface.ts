@@ -1,5 +1,8 @@
 export interface IMemberInfo {
-  type: "class" | "function" | "method";
   name: string;
-  arguments: string[];
+  type: "function" | "class" | "method" | "interface" | "property";
+  visibility: "public" | "private" | "protected";
+  description?: string;
+  returnType?: string;
+  arguments: any[];
 }

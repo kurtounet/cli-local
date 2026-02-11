@@ -1,25 +1,26 @@
-import { AiService } from "@/services/ai.service.js";
+import { ProjectService } from "@/features/project/services/project.service.js";
+import { TaskService } from "@/features/project/services/task.service.js";
+import { ArchitectureService } from "@/services/architecture.service.js";
 import { AstService } from "@/services/ast.service.js";
-import { ToolService } from "@/services/tool.service.js";
 import { CaseService } from "@/services/case.service.js";
 import { ConfigService } from "@/services/config.service.js";
-import { StateService } from "@/services/state.service.js";
-import { LoggerService } from "@/services/logger.service.js";
-import { PromptService } from "@/services/prompt.service.js";
-import { PluginService } from "@/services/plugin.service.js";
-import { TemplateService } from "@/services/template.service.js";
-import { GeneratorService } from "@/services/generator.service.js";
+import { DataManagerService } from "@/services/data-manager.service.js";
 import { FileSystemService } from "@/services/file-system.service.js";
+import { GeneratorService } from "@/services/generator.service.js";
+import { GitService } from "@/services/git.service.js";
+import { HandlerErrorService } from "@/services/handler-error.service.js";
+import { LoggerService } from "@/services/logger.service.js";
+import { PathService } from "@/services/path.service.js";
+import { PluginService } from "@/services/plugin.service.js";
+import { PromptService } from "@/services/prompt.service.js";
+import { ShellService } from "@/services/shell.service.js";
+import { StateService } from "@/services/state.service.js";
+import { TemplateService } from "@/services/template.service.js";
+import { ToolService } from "@/services/tool.service.js";
+import { IBaseService } from "@/types/services/base-service.interface.js";
+
 import { ServicesContainer } from "../services/services-container.js";
 import { IAppContext, ICliConfig } from "../types/context.interface.js";
-import { DataManagerService } from "@/services/data-manager.service.js";
-import { HandlerErrorService } from "@/services/handler-error.service.js";
-import { ArchitectureService } from "@/services/architecture.service.js";
-import { IBaseService } from "@/types/services/base-service.interface.js";
-import { ProjectService } from "@/features/project/services/project.service.js";
-import { ShellService } from "@/services/shell.service.js";
-import { GitService } from "@/services/git.service.js";
-import { TaskService } from "@/features/project/services/task.service.js";
 
 /**
  * Builder pour la construction du contexte de l'application
@@ -59,10 +60,11 @@ export class AppContextBuilder {
     // L'ordre d'instanciation n'est pas critique car les dépendances sont résolues
     // via le contexte partagé
 
-    cli.ai = new AiService(cli);
+    // cli.ai = new AiService(cli);
     cli.git = new GitService(cli);
     cli.ast = new AstService(cli);
     cli.task = new TaskService(cli);
+    cli.path = new PathService(cli);
     cli.case = new CaseService(cli);
     cli.tool = new ToolService(cli);
     cli.state = new StateService(cli);
@@ -104,12 +106,13 @@ export class AppContextBuilder {
      * Le nom de service est utilisé pour la récupération via services.get<T>(name)
      */
     const serviceEntries: readonly [string, IBaseService][] = [
-      ["AiService", ctx.ai],
+      // ["AiService", ctx.ai],
       ["GitService", ctx.git],
       ["AstService", ctx.ast],
       ["CaseService", ctx.case],
       ["ToolService", ctx.tool],
       ["TaskService", ctx.task],
+      ["PathService", ctx.path],
       ["ShellService", ctx.shell],
       ["StateService", ctx.state],
       ["LoggerService", ctx.logger],

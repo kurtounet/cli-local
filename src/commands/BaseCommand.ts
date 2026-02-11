@@ -1,11 +1,11 @@
 // BaseCommand.ts
-import type { IAppContext } from "@/types/context.interface.js";
-import type { ICommand, ICommandOption } from "@/types/command.interface.js";
 import type {
   AnyOptions,
   MaybePromise,
   OptionKey,
 } from "@/types/cli-options.type.js";
+import type { ICommand, ICommandOption } from "@/types/command.interface.js";
+import type { IAppContext } from "@/types/context.interface.js";
 
 /**
  * Classe de base abstraite pour toutes les commandes de la CLI
@@ -118,7 +118,7 @@ export abstract class BaseCommand<
     _args: string[],
     _options: TOptions,
   ): MaybePromise<void> {
-    this.logger.info(`beforeExecute: Exécutant la commande ${this.name}`);
+    // this.logger.debug(`beforeExecute: Exécutant la commande ${this.name}`);
     return Promise.resolve();
   }
 
@@ -126,7 +126,7 @@ export abstract class BaseCommand<
     _args: string[],
     _options: TOptions,
   ): MaybePromise<void> {
-    this.logger.info(`afterExecute : Commande ${this.name} terminée.`);
+    // this.logger.debug(`afterExecute : Commande ${this.name} terminée.`);
     return Promise.resolve();
   }
 

@@ -1,8 +1,11 @@
 import path from "node:path";
-import { BaseCommand } from "./BaseCommand.js";
+
+import { EMOJI } from "@/assets/messages.js";
 import { FilesystemError, ValidationError } from "@/errors/cli-errors.js";
 import { AnyOptions } from "@/types/cli-options.type.js";
 import { ICommandOption } from "@/types/command.interface.js";
+
+import { BaseCommand } from "./BaseCommand.js";
 
 export interface ITreeOptions extends AnyOptions {
   code?: boolean;
@@ -17,16 +20,23 @@ export interface ITreeOptions extends AnyOptions {
 
 export class TreeCommand extends BaseCommand<ITreeOptions> {
   public name = "tree";
-  public description = `Génère l'arborescence du dossier <pathIn> en json, md ou yaml
+  public description = `Génère l'arborescence du dossier [pathIn] en json, md ou yaml
+  
+Commandes disponibles:
+  mclp tree <type> [pathIn] [pathOut] [options]
+  
+${EMOJI.info}  type: json, md, yaml, all
+  pathIn: chemin du dossier à analyser (défaut: cwd ".")
+  pathOut: chemin du dossier de sortie (défaut: cwd ".")
+  Configurable dans tree de .mclprc.json.
 `;
   public arguments = "<type> [pathIn] [pathOut]";
   public aliases = ["t"];
 
   // Ajout de "yaml" dans les extensions autorisées
-  private readonly extensions = ["json", "md", "yaml"];
+  private readonly extensions = ["json", "md", "yaml", "all", "create"];
 
   public options: ICommandOption[] = [
-    // ... tes options restent identiques
     {
       flags: "-a, --all",
       description: "Générer l'arborescence en json, yaml, md",
@@ -70,6 +80,12 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       defaultValue: ".",
     },
     {
+      flags: "-e, --exclude <path>",
+      description: "Exclure un dossier",
+      type: "string",
+      defaultValue: "",
+    },
+    {
       flags: "-f, --force",
       description: "Écraser les fichiers existants",
       type: "boolean",
@@ -81,6 +97,18 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       type: "boolean",
       defaultValue: false,
     },
+    // {
+    //   flags: "-v, --verbose",
+    //   description: "Afficher les détails de la création",
+    //   type: "boolean",
+    //   defaultValue: false,
+    // },
+    {
+      flags: "-h, --help",
+      description: "Afficher l'aide",
+      type: "boolean",
+      defaultValue: false,
+    },
   ];
 
   async execute(args: string[], options: ITreeOptions): Promise<void> {
@@ -88,22 +116,16 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
     const config = this.cli.config.current
       ? this.cli.config.current
       : this.cli.config.current;
-    // console.log(config.tree.analysis.maxLevel);
-    // console.log(this.hasOption(options, "level"));
-    // console.log(this.getOption(options, "level", 25));
-    // FUSION DES PRIORITÉS :
-    // 1. Option CLI (si l'utilisateur tape --level 2)
-    // 2. Sinon, Config du fichier (.mclprc.json)
-    // 3. Sinon, les defaults du service
-    let level = this.hasOption(options, "level")
+
+    const level = this.hasOption(options, "level")
       ? this.getOption(options, "level", 0)
       : config.tree.analysis.maxLevel;
-    let save =
+    const save =
       config.tree.analysis.save ?? this.getOption(options, "save", false);
-    let excludedDirs = config.tree.exclude;
-    let analyzeExtensions = config.tree.analysis.enabled
+    const excludedDirs = config.tree.exclude;
+    const analyzeExtensions = config.tree.analysis.enabled
       ? config.tree.analysis.extensions
-      : null;
+      : [];
 
     this.validateArgs(
       args,
@@ -111,13 +133,13 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       "Usage: mclp tree <type> <pathIn> [pathOut] [options]",
     );
 
-    let view = this.hasOption(options, "view");
-    let force = this.hasOption(options, "force");
-
-    let dryRun = this.hasOption(options, "dryRun");
-    let metadata = this.hasOption(options, "metadata");
-    let output = config.tree.pathOut ?? this.getOption(options, "output", "./");
-    let pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
+    const view = this.hasOption(options, "view");
+    const force = this.hasOption(options, "force");
+    const dryRun = this.hasOption(options, "dryRun");
+    const metadata = this.hasOption(options, "metadata");
+    const output =
+      config.tree.pathOut ?? this.getOption(options, "output", "./");
+    const pathIn = config.tree.pathIn ?? this.getOption(options, "pathIn", ".");
     const [type, ...pathArgs] = args;
 
     if (!this.extensions.includes(type)) {
@@ -127,14 +149,10 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
     }
 
     try {
-      // const pathIn = path.resolve(pathArgs[0] ?? ".");
       const argOut =
         pathArgs[1] && pathArgs[1] !== "." ? pathArgs[1] : undefined;
       const pathOut = path.resolve(argOut ?? output ?? pathIn);
       const fileName = path.resolve(pathOut, `tree.${type}`);
-      // console.log(
-      //   `pathIn: ${pathIn} pathOut: ${pathOut} fileName: ${fileName} save: ${save} level: ${level} type: ${type} force: ${force} dryRun: ${dryRun}`,
-      // );
 
       if (!this.cli.fileSystem.exists(pathIn)) {
         throw new FilesystemError(`Le dossier '${pathIn}' n'existe pas.`);
@@ -143,7 +161,7 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
       this.cli.logger.info(`Processing: ${pathIn} -> ${fileName} (${type})`);
 
       // Récupération de l'objet tree (données brutes)
-      const tree = await this.cli.fileSystem.getDirectoryTree(
+      const tree = await this.cli.tool.getDirectoryTree(
         pathIn,
         0,
         level,
@@ -154,7 +172,7 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
         },
       );
 
-      if (!tree)
+      if (!tree?.children)
         throw new FilesystemError(`Le dossier '${pathIn}' est vide ou exclu.`);
 
       // SWITCH pour déterminer le contenu selon le type
@@ -171,6 +189,10 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
           break;
         case "all":
           content = this.cli.tool.generateYamlTree(tree, view);
+          break;
+        case "create":
+          // await this.cli.tool.buildPhysicalTree(tree, pathOut);
+          await this.cli.tool.createDirectoryStructure(pathOut, tree.children);
           break;
       }
 
@@ -196,11 +218,14 @@ export class TreeCommand extends BaseCommand<ITreeOptions> {
         }
 
         await this.cli.fileSystem.writeFile(`${fileName}`, content);
+        this.cli.logger.success(content);
         this.cli.logger.success(`Fichier généré: ${fileName}`);
       }
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : String(error);
-      this.cli.logger.error(message);
+      this.cli.errorHandler.handle(
+        error,
+        `Une erreur est survenue lors de la génération de l'arborescence`,
+      );
     }
   }
 }

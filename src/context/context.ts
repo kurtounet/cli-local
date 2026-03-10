@@ -140,15 +140,11 @@ export class AppContextBuilder {
    * @returns Configuration par défaut
    */
   private getDefaultConfig(): ICliConfig {
-    return {
-      /** Chemin local des templates du projet */
-      templatesPath: "./templates",
-      /** Chemin global des templates partagés (home directory) */
-      globalTemplatesPath: "~/.scrofolder",
-      /** Niveau de log (debug, info, warn, error) */
-      logLevel: "debug",
-      /** Thème de la CLI */
+    return {      
+      logLevel: "debug",      
       theme: "default",
+      templatesPath: "./templates",      
+      globalTemplatesPath: "~/.scrofolder",      
     };
   }
 }

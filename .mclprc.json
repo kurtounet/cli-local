@@ -56,8 +56,12 @@
     "pathIn": "I:\\cli\\cli-local-poo",
     "pathOut": "./tree",
     "analysis": {
-      "enabled": false,
-      "extensions": [".ts", ".js", ".php"],
+      "enabled": true,
+      "extensions": [
+        ".ts",
+        ".js",
+        ".php"
+      ],
       "save": true,
       "maxLevel": 0
     },

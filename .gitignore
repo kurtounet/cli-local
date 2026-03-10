@@ -8,3 +8,4 @@ project-test/*
 plugins/*
 plugins-src/*
 plugins_or/*
+test/*
